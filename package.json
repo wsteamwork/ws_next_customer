@@ -1,9 +1,9 @@
 {
   "name": "ws_next_customer",
   "scripts": {
-    "dev": "next",
+    "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "next start"
+    "start": "cross-env NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.2.1",
@@ -46,7 +46,9 @@
     "@types/next-seo": "^1.10.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.3",
     "url-loader": "^1.1.2"
   }
