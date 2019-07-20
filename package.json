@@ -29,6 +29,8 @@
     "next-compose-plugins": "^2.2.0",
     "next-routes": "^1.4.2",
     "next-seo": "^1.12.0",
+    "node-sass": "^4.12.0",
+    "nprogress": "^0.2.0",
     "numeral": "^2.0.6",
     "react": "^16.8.6",
     "react-cookie": "^4.0.1",
