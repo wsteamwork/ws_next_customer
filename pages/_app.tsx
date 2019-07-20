@@ -3,6 +3,7 @@ import App, { Container } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
+import ProviderGlobal from '@/utils/ProviderGlobal';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -40,7 +41,9 @@ class MyApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} />
+        <ProviderGlobal>
+          <Component {...pageProps} />
+        </ProviderGlobal>
       </Container>
     );
   }

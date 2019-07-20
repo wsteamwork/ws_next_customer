@@ -12,7 +12,9 @@ const Home: NextPage = () => (
 
     <div style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <h1>Hello NextJS 😄</h1>
-      <Link href="/about">About</Link>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
     </div>
   </div>
 );
