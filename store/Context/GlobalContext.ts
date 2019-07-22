@@ -1,10 +1,7 @@
-import { createContext } from "react";
-import { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+import { createContext } from 'react';
+import { WithWidth } from '@material-ui/core/withWidth';
+import { WithRouterProps } from 'next/dist/client/with-router';
 
-export const GlobalContext = createContext<IGlobalContext>(
-  null as IGlobalContext
-);
+export const GlobalContext = createContext<IGlobalContext>(null as IGlobalContext);
 
-export interface IGlobalContext {
-  width: Breakpoint;
-}
+export interface IGlobalContext extends WithWidth, WithRouterProps {}

@@ -5,6 +5,11 @@
                 "next/babel",
             ]
         },
+        "production": {
+            "presets": [
+                "next/babel"
+            ]
+        },
     },
     "plugins": [
         [
@@ -23,6 +28,12 @@
                     "@/utils": "./utils/",
                     "@/static": "./static/",
                 }
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
             }
         ]
     ]
