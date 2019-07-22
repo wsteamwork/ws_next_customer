@@ -1,12 +1,12 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App, { Container, AppProps, AppContext } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
 import ProviderGlobal from '@/utils/ProviderGlobal';
 
-class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+class MyApp extends App<AppProps> {
+  static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
