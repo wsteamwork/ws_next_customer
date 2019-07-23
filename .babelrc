@@ -27,6 +27,7 @@
                     "@/types": "./types/",
                     "@/utils": "./utils/",
                     "@/static": "./static/",
+                    "@/translations": "./translations/",
                 }
             }
         ],

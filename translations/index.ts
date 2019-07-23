@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-import en from './en.json';
-import vi from './vi.json';
+import home_vi from './home/home-vi.json';
+import home_en from './home/home-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -26,10 +26,10 @@ i18n
     fallbackLng: 'vi',
     resources: {
       en: {
-        en
+        home: home_en
       },
       vi: {
-        vi
+        home: home_vi
       }
     },
 
@@ -37,11 +37,11 @@ i18n
     ns: ['common'],
     defaultNS: 'common',
 
-    debug: true,
+    // debug: true,
 
-    //   cache: {
-    //  enabled: true
-    // },
+    cache: {
+      enabled: true
+    },
 
     interpolation: {
       escapeValue: false // not needed for react as it does escape per default to prevent xss!
