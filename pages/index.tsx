@@ -36,7 +36,7 @@ const Home: NextPage = () => {
           onClick={handleChangeVN}
           color="primary"
           variant="contained"
-          style={{ marginLeft: '2%' }}>
+          style={{ marginLeft: '2%', color: 'white' }}>
           VN
         </Button>
         <Button onClick={handleChangeEN} color="primary" variant="contained">
