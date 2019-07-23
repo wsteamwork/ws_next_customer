@@ -38,7 +38,7 @@
       ],
       "@/static/*": [
         "static/*"
-      ],
+      ]
     },
     "typeRoots": [
       "./node_modules/@types"

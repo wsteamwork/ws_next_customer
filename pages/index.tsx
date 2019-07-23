@@ -18,4 +18,5 @@ const Home: NextPage = () => (
     </div>
   </div>
 );
+
 export default Home;
