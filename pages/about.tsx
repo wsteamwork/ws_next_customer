@@ -1,12 +1,7 @@
-import React, { useEffect, useContext } from 'react';
-import { NextPage, NextPageContext } from 'next';
-import { ProfileContext, IProfileContext } from '@/store/Context/Profile/ProfileContext';
+import React from 'react';
+import { NextPage } from 'next';
 
 const About: NextPage = () => {
-  const { state, dispatch } = useContext<IProfileContext>(ProfileContext);
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
   return <h1>Hello Westay Team 😃</h1>;
 };
 

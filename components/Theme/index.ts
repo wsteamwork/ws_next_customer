@@ -3,6 +3,7 @@ import Orange from '@material-ui/core/colors/orange';
 import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import { TypographyOptions, FontStyleOptions } from '@material-ui/core/styles/createTypography';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
+import mainColor from '@/styles/constants/colors';
 
 interface PaletteExtra extends PaletteOptions {
   button: any;
@@ -24,14 +25,13 @@ const options: ThemeCustom = {
   },
   palette: {
     primary: {
-      // main: Blue[600],
-      main: '#ff9800'
+      main: mainColor.primary
     },
     secondary: {
       main: '#fff'
     },
     error: {
-      main: Red[600]
+      main: mainColor.error
     },
     button: {
       nav: '64px'
