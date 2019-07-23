@@ -1,7 +1,7 @@
 import React, { FC, Suspense, useReducer } from 'react';
 import { compose } from 'recompose';
 import withWidth from '@material-ui/core/withWidth';
-import { CookiesProvider, withCookies } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie';
 import { withRouter } from 'next/router';
 import {
   GlobalContext,
@@ -44,6 +44,5 @@ const ProviderGlobal: FC<IProps> = (props) => {
 
 export default compose<IProps, any>(
   withWidth(),
-  withRouter,
-  withCookies
+  withRouter
 )(ProviderGlobal);

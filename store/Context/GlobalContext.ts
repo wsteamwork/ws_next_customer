@@ -8,7 +8,7 @@ export const GlobalContext = createContext<IGlobalContext>(null as IGlobalContex
 
 export interface IGlobalContext extends WithWidth, WithRouterProps {
   state: GlobalState;
-  dispatch: Dispatch<any>;
+  dispatch: Dispatch<GlobalAction>;
 }
 
 export type GlobalState = {
