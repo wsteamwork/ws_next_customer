@@ -4,7 +4,10 @@ import { MediaIndexRes } from '@/types/Requests/Media/MediaIndexResponse';
 import { CityRes } from '@/types/Requests/Cities/CityResponse';
 import { DistrictRes } from '@/types/Requests/Districts/DistrictResponse';
 import { PlaceIndexResponse } from '@/types/Requests/Places/PlaceIndexResponse';
-import { RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexResponse';
+import {
+  RoomReviewIndexResponse,
+  UserReviewRes
+} from '@/types/Requests/Rooms/RoomReviewIndexResponse';
 
 export interface RoomIndexRes {
   id: number;
@@ -58,7 +61,7 @@ export interface RoomIndexRes {
   price_hour_discount: number;
   settings: Settings;
   details: TransformerInclude<RoomDetails[]>;
-  user: TransformerInclude<User>;
+  user: TransformerInclude<UserReviewRes>;
   comforts: TransformerInclude<ComfortIndexRes[]>;
   media: TransformerInclude<MediaIndexRes[]>;
   city: TransformerInclude<CityRes>;
@@ -78,33 +81,6 @@ export interface RoomDetails {
 
 export interface RoomScheduleRes {
   blocks: string[];
-}
-
-export interface User {
-  id: number;
-  uuid: string;
-  name: string;
-  gender: number;
-  gender_txt: string;
-  birthday: string;
-  address: string;
-  description: string;
-  job: string;
-  city_id: number | null;
-  district_id: number | null;
-  emergency_contact: string;
-  avatar: string;
-  avatar_url: string;
-  level: number;
-  level_txt: string;
-  vip: number;
-  vip_txt: string;
-  point: number;
-  money: number;
-  status: number;
-  status_txt: string;
-  subcribe: number;
-  settings?: any | null;
 }
 
 export interface NumberRoomCity {

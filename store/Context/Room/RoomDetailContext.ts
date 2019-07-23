@@ -7,9 +7,7 @@ import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingRespo
 import { updateObject } from '../utility';
 import { NextRouter } from 'next/router';
 
-export const RoomDetailsContext = createContext<IRoomDetailsContext | any>(
-  null as IRoomDetailsContext
-);
+export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);
 
 export interface IRoomDetailsContext {
   state: RoomDetailsState;

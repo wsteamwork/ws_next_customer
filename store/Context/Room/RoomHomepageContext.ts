@@ -6,11 +6,9 @@ import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams, RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
-import { AxiosResponse } from 'axios';
 import { fetchRoom } from './RoomListContext';
 
-
-export const RoomHomepageContext = createContext<IRoomHomepageContext | any>(
+export const RoomHomepageContext = createContext<IRoomHomepageContext>(
   null as IRoomHomepageContext
 );
 

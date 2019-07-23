@@ -17,7 +17,7 @@ export const MIN_PRICE = 0;
 export const MAX_PRICE = 10000000;
 export const STEP_PRICE = 10000;
 
-export const RoomIndexContext = createContext<IRoomIndexContext | any>(null as IRoomIndexContext);
+export const RoomIndexContext = createContext<IRoomIndexContext>(null as IRoomIndexContext);
 
 export interface IRoomIndexContext {
   state: RoomIndexState;
