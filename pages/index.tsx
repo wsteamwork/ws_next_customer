@@ -1,5 +1,5 @@
-import React from 'react';
-import { NextPage } from 'next';
+import React, { useContext, useEffect, useReducer } from 'react';
+import { NextPage, NextPageContext } from 'next';
 import NextHead from '@/components/NextHead';
 import Link from 'next/link';
 
