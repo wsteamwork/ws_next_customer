@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useContext } from 'react';
+import { createContext, Dispatch, Reducer } from 'react';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
 import { updateObject } from '@/store/Context/utility';
@@ -8,6 +8,8 @@ import { BookingIndexParams } from '@/types/Requests/Booking/BookingRequests';
 //ts-ignore
 import qs from 'query-string';
 import { AxiosError } from 'axios';
+
+export const ProfileContext = createContext<IProfileContext | any>(null);
 
 export interface IProfileContext {
   state: ProfileState;
@@ -31,10 +33,13 @@ export type ProfileState = {
 
 export const ProfileStateInit: ProfileState = {
   profile: null,
-  bookings: []
+  bookings: [],
 };
 
-export const ProfileReducer = (state: ProfileState, action: ProfileAction) => {
+export const ProfileReducer: Reducer<ProfileState, ProfileAction> = (
+  state: ProfileState,
+  action: ProfileAction
+) => {
   switch (action.type) {
     case 'setData':
       return updateObject<ProfileState>(state, {
