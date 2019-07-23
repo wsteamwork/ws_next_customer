@@ -1,6 +1,6 @@
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { createContext, Dispatch } from 'react';
+import { createContext, Dispatch,Reducer } from 'react';
 import { formatTime } from '@/utils/mixins';
 import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
@@ -8,14 +8,14 @@ import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingRespo
 import { axios } from '@/utils/axiosInstance';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 
-export const BookingDetailContext = createContext<IBookingFormContext | any>(null);
+export const BookingDetailContext = createContext<IBookingDetailContext | any>(null);
 
-export interface IBookingFormContext {
-  state: BookingFormState;
-  dispatch: Dispatch<BookingFormAction>;
+export interface IBookingDetailContext {
+  state: BookingDetailState;
+  dispatch: Dispatch<BookingDetailAction>;
 }
 
-export type BookingFormState = {
+export type BookingDetailState = {
   readonly room: RoomIndexRes | null;
   readonly price?: BookingPriceCalculatorRes | null;
   readonly coupon: string;
@@ -24,13 +24,13 @@ export type BookingFormState = {
   readonly profile: ProfileInfoRes | null;
 };
 
-export type BookingFormAction = { type: 'setRoom', room?: RoomIndexRes, price: BookingPriceCalculatorRes }
+export type BookingDetailAction = { type: 'setRoom', room: RoomIndexRes, price: BookingPriceCalculatorRes }
   | { type: 'setCoupon', coupon: string, discount: number }
   | { type: 'removeCoupon' }
   | { type: 'setProfile', profile: ProfileInfoRes }
   | { type: 'setSuccess', success: boolean }
 
-export const BookingFormStateInit: BookingFormState = {
+export const BookingDetailStateInit: BookingDetailState = {
   room: null,
   coupon: '',
   discount: 0,
@@ -39,7 +39,7 @@ export const BookingFormStateInit: BookingFormState = {
   success: false,
 };
 
-export interface IBookingFormParams {
+export interface IBookingDetailParams {
   checkin: string;
   checkout: string;
   checkin_hour: number;
@@ -52,29 +52,29 @@ export interface IBookingFormParams {
   instant_book: number;
 }
 
-export const BookingFormReducer = (state: BookingFormState, action: BookingFormAction): BookingFormState => {
+export const BookingDetailReducer:Reducer<BookingDetailState,BookingDetailAction> = (state: BookingDetailState, action: BookingDetailAction): BookingDetailState => {
   switch (action.type) {
     case 'setRoom':
-      return updateObject<BookingFormState>(state, {
+      return updateObject<BookingDetailState>(state, {
         room: action.room,
         price: action.price,
       });
     case 'setCoupon':
-      return updateObject<BookingFormState>(state, {
+      return updateObject<BookingDetailState>(state, {
         coupon: action.coupon,
         discount: action.discount,
       });
     case 'removeCoupon':
-      return updateObject<BookingFormState>(state, {
+      return updateObject<BookingDetailState>(state, {
         coupon: '',
         discount: 0,
       });
     case 'setProfile':
-      return updateObject<BookingFormState>(state, {
+      return updateObject<BookingDetailState>(state, {
         profile: action.profile,
       });
     case 'setSuccess':
-      return updateObject<BookingFormState>(state, {
+      return updateObject<BookingDetailState>(state, {
         success: action.success,
       });
     default:
@@ -82,7 +82,7 @@ export const BookingFormReducer = (state: BookingFormState, action: BookingFormA
   }
 };
 
-export const priceCalculate = async (params: IBookingFormParams) => {
+export const priceCalculate = async (params: IBookingDetailParams) => {
   let additional_fee = 0;
   let discount       = 0;
   let CI             = '';
@@ -110,7 +110,7 @@ export const priceCalculate = async (params: IBookingFormParams) => {
     return res.data;
 };
 
-export const getRoomBookingForm = async (params: IBookingFormParams) => {
+export const getRoomBookingDetail = async (params: IBookingDetailParams) => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(`rooms/${params.hosting_id}?include=details,media`);
 
   return res.data;
