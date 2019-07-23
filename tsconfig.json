@@ -38,6 +38,9 @@
       ],
       "@/static/*": [
         "static/*"
+      ],
+      "@/translations/*": [
+        "translations/*"
       ]
     },
     "typeRoots": [
