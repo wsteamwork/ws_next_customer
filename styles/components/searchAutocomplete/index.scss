@@ -1,0 +1,91 @@
+@import "../../shared/colors.scss";
+
+.searchAutocomplete {
+  width: 80%;
+  margin: 0 auto;
+
+  .root {
+    padding: 2px 0px;
+    display: flex;
+    align-items: center;
+    margin-top: 1%;
+    border: 1px solid #ddd;
+  }
+
+  .input {
+    margin-left: 8px;
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .divider {
+    width: 1;
+    height: 28px;
+  }
+
+  .iconButton {
+    padding: 5px;
+  }
+
+  .searchResponse {
+    height: 60vh;
+    margin-top: 1%;
+    border: 1px solid #ddd;
+    border-radius: 5;
+    overflow: hidden;
+    overflow-y: auto;
+
+    .title {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .viewTitle {
+      background-color: #f8f7f7;
+      padding: 4px 5px;
+    }
+
+    .itemSearchResponse {
+      border-top: 1px solid #ddd;
+      padding: 8px 6px;
+
+      &:hover {
+        background-color: #f8f7f7;
+        cursor: pointer;
+      }
+
+      .citySearchResponse {
+        padding: 2px 6px;
+        border-radius: 10px;
+        border: 1px solid $primary;
+        color: $primary;
+      }
+
+      .right {
+        text-align: right;
+      }
+
+      .left {
+        text-align: left;
+      }
+
+      .name {
+        font-size: 1rem;
+        font-weight: 600;
+        width: 97%;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .desc {
+        margin-top: 7px;
+
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
