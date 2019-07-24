@@ -15,13 +15,14 @@ export interface ThemeCustom extends ThemeOptions {
 }
 
 const options: ThemeCustom = {
+  spacing: 8,
   props: {
     MuiButtonBase: {
       disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {
-    fontFamily: 'Nunito Sans, sans-serif'
+    fontFamily: 'Montserrat, sans-serif'
   },
   palette: {
     primary: {

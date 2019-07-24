@@ -174,7 +174,8 @@ export const getRooms = async (
 
 export const newRoomLocation = (params: RoomUrlParams): Partial<BaseRouter> => {
   return {
-    pathname: `/rooms?${qs.stringify(params)}`
+    pathname: `/rooms`,
+    asPath: `?${qs.stringify(params)}`
   };
 };
 
