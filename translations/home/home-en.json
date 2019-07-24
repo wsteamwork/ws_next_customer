@@ -1,3 +1,11 @@
 {
-    "example": "Hello NextJS"
+    "SearchAutocomplete": {
+        "toGo": "Where do you want to go?",
+        "city": "City",
+        "district": "District",
+        "accommodation": "Accommodation",
+        "room": "Room",
+        "searchResults": "Search Results",
+        "noResult": "No result is found"
+    }
 }

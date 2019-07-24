@@ -9,15 +9,20 @@ import {
   ClickAwayListener,
   Fade
 } from '@material-ui/core';
-import ListResSearch from './ListResSearch';
 import { axios } from '@/utils/axiosInstance';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { useTranslation } from 'react-i18next';
+
+import dynamic from 'next/dynamic';
+
+const ListResSearch = dynamic(() => import('./ListResSearch'));
 
 const SearchAutocomplete: FC = (props) => {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState<SearchSuggestRes>({});
+  const { t } = useTranslation();
 
   const hanldeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -29,9 +34,14 @@ const SearchAutocomplete: FC = (props) => {
     getDataSearch('');
   }, []);
 
-  const getDataSearch = async (value: string) => {
+  const getDataSearch = async (value: string): Promise<any> => {
     const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
     setData(res.data.data[0]);
+  };
+
+  const handleEmptyText = () => {
+    setSearchText('');
+    getDataSearch('');
   };
 
   return (
@@ -46,20 +56,17 @@ const SearchAutocomplete: FC = (props) => {
             value={searchText}
             onChange={hanldeChange}
             className="input"
-            placeholder="Bạn muốn tới đâu?"
+            placeholder={t('home:SearchAutocomplete:toGo')}
           />
 
           <Fade in={!!searchText}>
-            <IconButton
-              onClick={() => setSearchText('')}
-              className="iconButton"
-              aria-label="Search">
+            <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
               <Close fontSize="small" />
             </IconButton>
           </Fade>
         </Paper>
         <Collapse in={open} timeout={500}>
-          {data && <ListResSearch item={data}></ListResSearch>}
+          <ListResSearch item={data}></ListResSearch>
         </Collapse>
       </div>
     </ClickAwayListener>
