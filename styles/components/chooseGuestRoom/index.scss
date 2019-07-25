@@ -3,6 +3,14 @@
   height: 50px;
   position: relative;
 
+  .viewAction {
+    position: absolute;
+    top: 53px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
   .input {
     font-size: 0.9rem;
     font-weight: 600;
