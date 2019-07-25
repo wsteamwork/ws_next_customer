@@ -13,10 +13,9 @@ const persistConfig: PersistConfig = {
   blacklist: ['v_animate', 'booking', 'searchNavMobile']
 };
 
-const persistedReducer: Reducer<ReducersList, ReducresActions> = persistReducer(
-  persistConfig,
-  rootReducer
-);
+const persistedReducer: Reducer<ReducersList, ReducresActions> = process.browser
+  ? persistReducer(persistConfig, rootReducer)
+  : rootReducer;
 
 export const store: Store<ReducersList, ReducresActions> = createStore(
   persistedReducer,
