@@ -4,7 +4,6 @@ import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMui
 import { TypographyOptions, FontStyleOptions } from '@material-ui/core/styles/createTypography';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
 import mainColor from '@/styles/constants/colors';
-
 interface PaletteExtra extends PaletteOptions {
   button: any;
 }
@@ -25,11 +24,16 @@ const options: ThemeCustom = {
     fontFamily: 'Montserrat, sans-serif'
   },
   palette: {
+    text: {
+      primary: mainColor.titleText,
+      secondary: mainColor.subTitleText,
+      disabled: mainColor.blurText
+    },
     primary: {
       main: mainColor.primary
     },
     secondary: {
-      main: '#fff'
+      main: mainColor.backgroundWhite
     },
     error: {
       main: mainColor.error

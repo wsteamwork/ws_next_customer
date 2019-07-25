@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Paper, Grid } from '@material-ui/core';
+import React, { FC, useEffect } from 'react';
+import { Paper, Grid, List } from '@material-ui/core';
 import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { useTranslation } from 'react-i18next';
 import Lottie, { Options } from 'react-lottie';
@@ -10,7 +10,8 @@ import dynamic from 'next/dynamic';
 const ItemSeach = dynamic(() => import('./ItemSeach'));
 
 interface IProps {
-  item: SearchSuggestRes;
+  data: SearchSuggestRes;
+  suggestionSelected(value: string): void;
 }
 
 const defaultOptions: Options = {
@@ -20,8 +21,30 @@ const defaultOptions: Options = {
 };
 
 const ListResSearch: FC<IProps> = (props) => {
-  const { item } = props;
+  const { data, suggestionSelected } = props;
   const { t } = useTranslation();
+
+  useEffect(() => {
+    console.log('data', data);
+  });
+
+  const renderSuggestions = () => {
+    if (Array.isArray(data))
+      return (
+        <Grid className="noResult">
+          {/* <Lottie options={defaultOptions} height="50%" width="50%"></Lottie> */}
+          <p>{t('home:SearchAutocomplete:noResult')}</p>
+        </Grid>
+      );
+    return (
+      <List>
+        {data.city && data.city.map((i, index) => <ItemSeach key={index} item={i} suggestionSelected={suggestionSelected}></ItemSeach>)}
+        {data.district &&
+          data.district.map((i, index) => <ItemSeach key={index} item={i} suggestionSelected={suggestionSelected}></ItemSeach>)}
+        {data.room && data.room.map((i, index) => <ItemSeach key={index} item={i} suggestionSelected={suggestionSelected}></ItemSeach>)}
+      </List>
+    );
+  };
 
   return (
     <LazyLoad>
@@ -29,20 +52,7 @@ const ListResSearch: FC<IProps> = (props) => {
         <Grid className="viewTitle">
           <p className="title">{t('home:SearchAutocomplete:searchResults')}</p>
         </Grid>
-
-        {Array.isArray(item) ? (
-          <Grid className="notResult">
-            <Lottie options={defaultOptions} height="50%" width="50%"></Lottie>
-            <p>{t('home:SearchAutocomplete:noResult')}</p>
-          </Grid>
-        ) : (
-          <Grid>
-            {item.city && item.city.map((i, index) => <ItemSeach key={index} item={i}></ItemSeach>)}
-            {item.district &&
-              item.district.map((i, index) => <ItemSeach key={index} item={i}></ItemSeach>)}
-            {item.room && item.room.map((i, index) => <ItemSeach key={index} item={i}></ItemSeach>)}
-          </Grid>
-        )}
+        {renderSuggestions()}
       </Paper>
     </LazyLoad>
   );

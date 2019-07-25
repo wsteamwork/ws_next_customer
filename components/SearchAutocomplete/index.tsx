@@ -24,9 +24,8 @@ const SearchAutocomplete: FC = (props) => {
   const [data, setData] = useState<SearchSuggestRes>({});
   const { t } = useTranslation();
 
-  const hanldeChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
-
     getDataSearch(e.target.value);
   };
 
@@ -44,17 +43,23 @@ const SearchAutocomplete: FC = (props) => {
     getDataSearch('');
   };
 
+  const suggestionSelected = (value) => {
+    setSearchText(value);
+    getDataSearch(value);
+    setOpen(false);
+  };
+
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div className="searchAutocomplete">
         <Paper className="root" elevation={0} onClick={() => setOpen(true)}>
           <IconButton className="iconButton" aria-label="Menu">
-            <PinDropRounded></PinDropRounded>
+            <PinDropRounded />
           </IconButton>
           <Divider className="divider" />
           <InputBase
             value={searchText}
-            onChange={hanldeChange}
+            onChange={handleChangeInput}
             className="input"
             placeholder={t('home:SearchAutocomplete:toGo')}
           />
@@ -65,8 +70,8 @@ const SearchAutocomplete: FC = (props) => {
             </IconButton>
           </Fade>
         </Paper>
-        <Collapse in={open} timeout={500}>
-          <ListResSearch item={data}></ListResSearch>
+        <Collapse in={open} timeout={300}>
+          <ListResSearch data={data} suggestionSelected={suggestionSelected}></ListResSearch>
         </Collapse>
       </div>
     </ClickAwayListener>
