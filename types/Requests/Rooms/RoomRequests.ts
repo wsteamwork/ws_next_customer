@@ -49,7 +49,7 @@ export interface MapCoords {
 
 export interface RoomUrlParams {
   name?: string;
-  city_id?: string;
+  city_id?: string | number;
   district_id?: string;
   number_of_rooms?: string;
   rent_type?: string;

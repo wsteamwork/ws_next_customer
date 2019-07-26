@@ -6,6 +6,8 @@ import { Grid } from '@material-ui/core';
 import DateRangeSearch from '@/components/DateRangeSearch';
 import ChooseGuestRoom from '@/components/ChooseGuestRoom';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import Footer from '@/components/Layout/Footer';
+import HostBecome from '@/components/Shared/HostBecome';
 
 const Home: NextPage = () => {
   return (
@@ -28,6 +30,12 @@ const Home: NextPage = () => {
         <Grid item xs={12} md={2}>
           <ButtonGlobal width="100%">Tìm kiếm</ButtonGlobal>
         </Grid>
+      </Grid>
+
+      <Grid style={{ marginTop: '100px' }}>
+        <HostBecome></HostBecome>
+
+        <Footer></Footer>
       </Grid>
     </div>
   );
