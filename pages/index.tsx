@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import NextHead from '@/components/NextHead';
-import SearchAutocomplete from '@/components/SearchAutocomplete';
+import SearchAutoSuggestion from '@/components/SearchAutoSuggestion';
 import { Grid } from '@material-ui/core';
 import DateRangeSearch from '@/components/DateRangeSearch';
 import ChooseGuestRoom from '@/components/ChooseGuestRoom';
@@ -17,13 +17,13 @@ const Home: NextPage = () => {
 
       <Grid container spacing={2} style={{ height: '65px' }}>
         <Grid item xs={12} md={4}>
-          <SearchAutocomplete></SearchAutocomplete>
+          <SearchAutoSuggestion />
         </Grid>
         <Grid item xs={12} md={4}>
-          <DateRangeSearch></DateRangeSearch>
+          <DateRangeSearch />
         </Grid>
         <Grid item xs={12} md={2}>
-          <ChooseGuestRoom></ChooseGuestRoom>
+          <ChooseGuestRoom />
         </Grid>
         <Grid item xs={12} md={2}>
           <ButtonGlobal width="100%">Tìm kiếm</ButtonGlobal>
