@@ -1,14 +1,9 @@
 import React, { FC, useState, ChangeEvent, useEffect } from 'react';
 import { PinDropRounded, Close, SearchRounded } from '@material-ui/icons';
 import {
-  Collapse,
   IconButton,
-  Divider,
-  InputBase,
   Paper,
-  ClickAwayListener,
   Fade,
-  ListItem,
   Grid,
   List,
   TextField,
@@ -36,7 +31,10 @@ import Popular from '@material-ui/icons/WhatshotRounded';
 interface Iprops {
   classes?: any;
 }
-const ListResSearch = dynamic(() => import('./ListResSearch'));
+//TODO: 
+// - Convert JS-CSS to External CSS
+// - Make component customizable
+// - Refactor refactor
 
 const styles: any = (theme: ThemeCustom) =>
   createStyles({
@@ -104,16 +102,13 @@ const styles: any = (theme: ThemeCustom) =>
     }
   });
 
-const SearchAutocomplete: FC<Iprops> = (props: Iprops) => {
+const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   const { classes } = props;
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState<string>('');
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   console.log(data);
-  // });
 
   const getDataSearch = async (value: string): Promise<any> => {
     const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
@@ -137,7 +132,7 @@ const SearchAutocomplete: FC<Iprops> = (props: Iprops) => {
   };
 
   const onSuggestionsClearRequested = () => {
-    //setData([]);
+    setData([]);
   };
 
   const getSuggestionValue = (suggestion: any) => {
@@ -264,7 +259,7 @@ const SearchAutocomplete: FC<Iprops> = (props: Iprops) => {
   return (
     <Autosuggest
       {...autosuggestProps}
-      alwaysRenderSuggestions={true}
+      //alwaysRenderSuggestions={true}
       inputProps={{
         id: 'search-autosuggest-simple',
         value: searchText,
@@ -305,4 +300,4 @@ const SearchAutocomplete: FC<Iprops> = (props: Iprops) => {
   );
 };
 
-export default compose<Iprops, any>(withStyles(styles))(SearchAutocomplete);
+export default compose<Iprops, any>(withStyles(styles))(SearchAutoSuggestion);
