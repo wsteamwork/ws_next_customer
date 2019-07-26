@@ -25,14 +25,14 @@ const ChooseGuestRoom: FC = () => {
     <ClickAwayListener onClickAway={() => setOpen(false)}>
       <div className="chooseGuestRoom">
         <Grid container className="root" onClick={() => setOpen(true)}>
-          <Grid item xs={1}>
+          <span className="flex_columCenter">
             <FontAwesomeIcon icon={faPersonBooth} size="1x"></FontAwesomeIcon>
-          </Grid>
-
-          <InputBase value={valueInput} className="input" placeholder={'Chọn sô phòng & người'} />
+            <InputBase value={valueInput} className="input" placeholder={'Chọn sô phòng & người'} />
+          </span>
         </Grid>
 
         <Collapse in={open} className="viewAction">
+          <span className="arrow-up arrow"></span>
           <ActionChoose setOpen={setOpen}></ActionChoose>
         </Collapse>
       </div>
