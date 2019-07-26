@@ -1,0 +1,64 @@
+.chooseGuestRoom {
+  width: 100%;
+  height: 50px;
+  position: relative;
+
+  .viewAction {
+    position: absolute;
+    top: 53px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .root {
+    padding-left: 10px;
+    border-radius: 4px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+
+    p {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  }
+
+  .actions {
+    margin-top: 1%;
+    height: 160px;
+    // width: 310px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+
+    p {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .centerCustom {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+    }
+
+    .item {
+      padding: 15px 10px;
+    }
+
+    .icon {
+      padding: 2px;
+    }
+  }
+}

@@ -1,14 +1,12 @@
 @import "../../shared/colors.scss";
 
 .searchAutocomplete {
-  width: 80%;
   margin: 0 auto;
 
   .root {
-    padding: 2px 0px;
+    padding: 0.8% 0px;
     display: flex;
     align-items: center;
-    margin-top: 1%;
     border: 1px solid #ddd;
   }
 

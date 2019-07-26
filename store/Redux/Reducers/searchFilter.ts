@@ -26,6 +26,7 @@ export type SearchFilterAction =
   | { type: 'SET_BOOKING_TYPE'; bookingType: number }
   | { type: 'SET_NAV_BOOKING_TYPE'; bookingType: number }
   | { type: 'SET_NAV_GUESTS'; guestsCount: number }
+  | { type: 'SET_NUMBER_ROOM'; roomsCount: number }
   | { type: 'SET_ROOM_RECENTLY'; roomRecently: number[] }
   | { type: 'SET_SEARCH_TEXT'; searchText: string }
   | { type: 'SET_SEARCH_CITY'; city_id: number | undefined }
@@ -35,8 +36,8 @@ const init: SearchFilterState = {
   city_id: undefined,
   district_id: undefined,
   searchText: '',
-  guestsCount: 1,
-  roomsCount: 1,
+  guestsCount: 0,
+  roomsCount: 0,
   bookingType: 2,
   startDate: undefined,
   endDate: undefined,
@@ -108,6 +109,11 @@ const reducer: Reducer<SearchFilterState, SearchFilterAction> = (
       return updateObject(state, {
         district_id: action.district_id
       });
+    case 'SET_NUMBER_ROOM': {
+      return updateObject(state, {
+        roomsCount: action.roomsCount
+      });
+    }
     default:
       return state;
   }

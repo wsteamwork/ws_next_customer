@@ -13,7 +13,6 @@ import { axios } from '@/utils/axiosInstance';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { useTranslation } from 'react-i18next';
-
 import dynamic from 'next/dynamic';
 
 const ListResSearch = dynamic(() => import('./ListResSearch'));
@@ -65,7 +64,7 @@ const SearchAutocomplete: FC = (props) => {
             </IconButton>
           </Fade>
         </Paper>
-        <Collapse in={open} timeout={500}>
+        <Collapse in={open} timeout={500} style={{ position: 'absolute' }}>
           <ListResSearch item={data}></ListResSearch>
         </Collapse>
       </div>
