@@ -18,7 +18,7 @@ const options: ThemeCustom = {
   spacing: 8,
   props: {
     MuiButtonBase: {
-      disableRipple: true // No more ripple, on the whole application 💣!
+      // disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {

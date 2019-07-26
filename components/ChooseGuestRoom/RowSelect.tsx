@@ -23,7 +23,7 @@ const RowSelect: FC<Iprops> = (props) => {
 
   return (
     <Grid container className="item">
-      <Grid item xs={8} className="title">
+      <Grid item xs={8} className="flex_columCenter">
         <p>
           <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp; {title}
         </p>
