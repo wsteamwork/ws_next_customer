@@ -1,28 +1,29 @@
 @import "./hostBecome.scss";
 
 .buttonGlobal {
-  background: linear-gradient(to right, #ef9d43, #e75516);
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  text-decoration: none;
   border: 0;
-  border-radius: 3px;
-  box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: none;
-  color: white;
-  background-size: 300% 100%;
-  -moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
-  -webkit-transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
-  height: 50px;
-  width: auto;
-  padding: 0px 30px;
+  box-shadow: 0 4px 10px 0 rgba(252, 104, 110, 0.75);
+  text-transform: none !important;
+  background-size: 200% 100% !important;
+
+  @include xs {
+    font-size: 14px !important
+  }
+
+  @include sm {
+    font-size: 15px !important
+  }
 
   &:hover {
-    -moz-transition: all 0.4s ease-in-out;
-    -o-transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    background-size: 100%;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-position: 100%;
   }
 }

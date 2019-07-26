@@ -1,14 +1,7 @@
 import React, { Fragment, FC } from 'react';
-import Grid, { GridSize, GridSpacing } from '@material-ui/core/Grid/Grid';
+import Grid, { GridSize, GridSpacing, GridProps } from '@material-ui/core/Grid/Grid';
 
-interface IProps {
-  xs: GridSize;
-  md?: GridSize;
-  lg?: GridSize;
-  xl?: GridSize;
-  sm?: GridSize;
-  spacing?: GridSpacing;
-  className?: string;
+interface IProps extends Partial<GridProps> {
   classNameItem?: string;
 }
 
@@ -20,14 +13,14 @@ const GridContainer: FC<IProps> = (props) => {
         justify="center"
         alignContent="center"
         className={props.className}
-        spacing={props.spacing ? props!.spacing : 0}>
+        spacing={props.spacing || 0}>
         <Grid
           item
           xs={props.xs}
-          sm={props.sm || props.xs}
-          md={props.md || props.xs}
-          lg={props.lg || props.xs}
-          xl={props.xl || props.xs}
+          sm={props.sm}
+          md={props.md}
+          lg={props.lg}
+          xl={props.xl}
           className={props.classNameItem}>
           {props.children}
         </Grid>
