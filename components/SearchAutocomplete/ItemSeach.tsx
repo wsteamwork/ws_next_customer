@@ -1,18 +1,16 @@
 import React, { FC } from 'react';
 import { Grid, ListItem } from '@material-ui/core';
 import {
-  CityEntity,
-  DistrictEntity,
-  RoomEntity,
+
   IS_SEARCH_CITY,
   IS_SEARCH_DISTRICT
 } from '@/types/Requests/Search/SearchResponse';
 import { useTranslation } from 'react-i18next';
 
-type CheckType = CityEntity | DistrictEntity | RoomEntity;
+// type CheckType = CityEntity | DistrictEntity | RoomEntity;
 
 interface IProps {
-  item: CheckType;
+  item: any;
   suggestionSelected(value: string): void;
 }
 
