@@ -24,6 +24,18 @@ const options: ThemeCustom = {
     body1: {
       fontSize: 14
     },
+    h1: {
+      fontSize: 18,
+      color: mainColor.titleText,
+      fontWeight: 600,
+      lineHeight: '22px'
+    },
+    subtitle1: {
+      color: mainColor.blurText,
+      textTransform: 'uppercase',
+      fontSize: 13,
+      fontWeight: 600
+    },
     fontSize: 14,
     fontWeightRegular: fontWeight.medium,
     fontFamily: 'Quicksand, sans-serif'

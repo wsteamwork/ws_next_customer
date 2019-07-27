@@ -39,16 +39,25 @@ const RoomCard: FC<Iprops> = (props) => {
             <Link className="infoLink">
               <Grid className="info">
                 <Grid className="roomType-city">
-                  <Typography>{room.room_type_txt}</Typography>
+                  <Typography variant="subtitle1">
+                    {room.room_type_txt} * {room.city.data.name}
+                  </Typography>
                 </Grid>
-                <Grid className="name">{room.details.data[0].name}</Grid>
-                <Grid className="price">{numeral(room.price_day).format('0,0')}đ</Grid>
+                <Typography variant="h1" className="name">
+                  {room.details.data[0].name}
+                </Typography>
+                <Grid className="price">
+                  {numeral(room.price_day).format('0,0')}đ/ngày
+                  <Typography className="hourPrice">{room.price_hour && `${numeral(room.price_hour).format('0,0')}đ/4 giờ`}</Typography>
+                </Grid>
 
                 {room.total_review > 3 ? (
                   <Grid className="review">
                     <StarIcon className="starIcon" />
                     <Typography className="rating text">{`${room.avg_rating}`}</Typography>
-                    <Typography className="totalReview text">{`(${room.total_review})`}</Typography>
+                    <Typography
+                      variant="subtitle1"
+                      className="totalReview text">{`(${room.total_review})`}</Typography>
                   </Grid>
                 ) : (
                   ''

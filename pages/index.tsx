@@ -65,11 +65,11 @@ const Home: NextPage = () => {
         </Grid>
 
         {roomsHot ? (
-          <Fragment>
+          <Grid>
             {roomsHot.slice(0, 4).map((room, index) => (
               <RoomCard key={index} room={room} />
             ))}
-          </Fragment>
+          </Grid>
         ) : (
           'loading'
         )}
