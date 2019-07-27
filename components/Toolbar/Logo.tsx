@@ -1,4 +1,3 @@
-import { ThemeCustom } from '@/components/Theme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import React, { ComponentType,FunctionComponent } from 'react';
@@ -6,12 +5,13 @@ import { compose } from 'recompose';
 import Link from 'next/link';
 // @ts-ignore
 import logo from '@/static/images/Logo-westay.png';
+import { Theme } from '@material-ui/core';
 
 interface IProps {
   classes?: any
 }
 
-const styles: any = (theme: ThemeCustom) => createStyles({
+const styles: any = (theme: Theme) => createStyles({
   img: {
     cursor:'pointer',
     [theme!.breakpoints!.up!('md')]: {

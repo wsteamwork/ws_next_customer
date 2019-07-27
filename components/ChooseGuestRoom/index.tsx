@@ -1,7 +1,7 @@
 import React, { useState, FC, useMemo, memo } from 'react';
 import { Grid, InputBase } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPersonBooth } from '@fortawesome/free-solid-svg-icons';
+import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
@@ -35,8 +35,13 @@ const ChooseGuestRoom: FC = () => {
       <div className="chooseGuestRoom">
         <Grid container className="root" onClick={() => setOpen(true)}>
           <span className="flex_columCenter">
-            <FontAwesomeIcon icon={faPersonBooth} size="1x"></FontAwesomeIcon>
-            <InputBase value={valueInput} className="input" placeholder={'Chọn sô phòng & người'} />
+            <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>
+            <InputBase
+              readOnly
+              value={valueInput}
+              className="input"
+              placeholder={'Phòng & người'}
+            />
           </span>
         </Grid>
       </div>

@@ -21,7 +21,6 @@ import parse from 'autosuggest-highlight/parse';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT } from '@/types/Requests/Search/SearchResponse';
-import { ThemeCustom } from '../Theme';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/styles';
@@ -36,7 +35,7 @@ interface Iprops {
 // - Make component customizable
 // - Refactor refactor
 
-const styles: any = (theme: ThemeCustom) =>
+const styles: any = (theme: Theme) =>
   createStyles({
     container: {
       width: '80%',

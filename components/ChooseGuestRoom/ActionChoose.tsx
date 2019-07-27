@@ -41,8 +41,7 @@ const ActionChoose: FC<IProps> = (props) => {
             fontSize="14px"
             background="white"
             textColor="#000"
-            onClick={() => setOpen(false)}
-            boxShadow="none">
+            onClick={() => setOpen(false)}>
             {t('home:chooseGuestRoom:close')}
           </ButtonGlobal>
         </Grid>

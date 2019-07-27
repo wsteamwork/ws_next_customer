@@ -1,9 +1,7 @@
-import { ThemeCustom } from '@/components/Theme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import React, { Fragment, FunctionComponent, MouseEvent, useState, useRef } from 'react';
 import { compose } from 'recompose';
-import GridContainer from '@/components/Layout/GridContainer';
 import {
   MenuItem,
   AppBar,
@@ -19,15 +17,13 @@ import {
   SwipeableDrawer,
   ListItemIcon,
   Popover,
-  ClickAwayListener
+  ClickAwayListener,
+  Theme
 } from '@material-ui/core';
 import to from '@/utils/to';
 import * as animation from '@/store/Redux/Actions/animationTypes';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  AnimationState,
-  AnimationAction
-} from '@/store/Redux/Reducers/global-animation';
+import { AnimationState, AnimationAction } from '@/store/Redux/Reducers/global-animation';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
 import { withCookies } from 'react-cookie';
@@ -47,6 +43,7 @@ import { SearchNavAction, SearchNavState } from '@/store/Redux/Reducers/searchNa
 import { SearchFilterState } from '@/store/Redux/Reducers/searchFilter';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
+import GridContainer from '../Layout/Grid/Container';
 // import { ISideDrawerProps } from "@/components/ToolBar/SideDrawer";
 // import { SearchFilterState } from "@/store/reducers/searchFilter";
 // import { SearchNavAction, SearchNavState } from "@/store/reducers/searchNav";
@@ -70,121 +67,122 @@ interface ILocalProps extends IProps {
   handleToggleDrawer(openDrawer: boolean): void;
 }
 
-const styles: any = (theme: ThemeCustom) => createStyles({
-  root: {
-    flexGrow: 1
-  },
-  containter: {
-    zIndex: 1100,
-    borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
-  },
-  grow: {
-    flexGrow: 1,
-    marginLeft: "20px",
-    [theme.breakpoints.only("xs")]: {
-      marginLeft: 0
-    }
-  },
-  centerLogo: {
-    justifyContent: "center"
-  },
-  button: {
-    // height: theme!.palette!.button.nav,
-    fontSize: '.875rem',
-    letterSpacing: '.2px',
-    borderRadius: 8,
-    textTransform: "inherit",
-    padding: '8px 20px',
-    "&:hover": {
-      color: Orange[500],
-      backgroundColor: "#f9f9f9",
-      borderRadius: "8px",
+const styles: any = (theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1
     },
-    "&:focus": {
-      color: Orange[500],
-      backgroundColor: "#f9f9f9",
-      borderRadius: "8px",
-    }
-  },
-  buttonMerchantSite: {
-    height: "unset",
-    textTransform: "capitalize",
-    color: Orange[500],
-    borderRadius: 8,
-    fontWeight: 700,
-    boxShadow: "0 1px 5px rgba(0, 0, 0, 0.15)",
-    marginRight: 16,
-    MozTransition: "all 0.5s",
-    WebkitTransition: "all 0.5s",
-    transition: "all 0.5s",
-    "&:hover": {
-      color: Orange[500],
-      backgroundColor: "#f9f9f9",
-      boxShadow: "none"
-    }
-  },
-  link: {
-    textTransform: "inherit",
-    "&:hover": {
-      backgroundColor: "rgba(0,0,0,0)",
-      color: blue[500]
-    }
-  },
-  menuButton: {
-    marginLeft: -28,
-    marginRight: 20
-  },
-  drawer: {
-    [theme.breakpoints.only("xs")]: {
-      width: "80%"
+    containter: {
+      zIndex: 1100,
+      borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
     },
-    width: "60%"
-  },
-  Popper: {
-    zIndex: 999999
-  },
-  support: {
-    top: "3em"
-  },
-  listSupport: {
-    listStyle: "none"
-  },
-  roomType: {
-    color: "rgb(118, 118, 118)",
-    overflow: "hidden",
-    fontSize: "1em",
-    padding: "0.3em 0.5em",
-    borderRadius: "4px",
-    border: "1px solid #ffa726",
-    whiteSpace: "normal",
-    textOverflow: "ellipsis",
-    letterSpacing: "normal",
-    textAlign: "center"
-  },
-  fab: {
-    margin: 8
-  },
-  rightIcon: {
-    // marginLeft: theme.spacing
-    marginLeft: 8
-  },
-  textSpan: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+    grow: {
+      flexGrow: 1,
+      marginLeft: '20px',
+      [theme.breakpoints.only('xs')]: {
+        marginLeft: 0
+      }
+    },
+    centerLogo: {
+      justifyContent: 'center'
+    },
+    button: {
+      // height: theme!.palette!.button.nav,
+      fontSize: '.875rem',
+      letterSpacing: '.2px',
+      borderRadius: 8,
+      textTransform: 'inherit',
+      padding: '8px 20px',
+      '&:hover': {
+        color: Orange[500],
+        backgroundColor: '#f9f9f9',
+        borderRadius: '8px'
+      },
+      '&:focus': {
+        color: Orange[500],
+        backgroundColor: '#f9f9f9',
+        borderRadius: '8px'
+      }
+    },
+    buttonMerchantSite: {
+      height: 'unset',
+      textTransform: 'capitalize',
+      color: Orange[500],
+      borderRadius: 8,
+      fontWeight: 700,
+      boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
+      marginRight: 16,
+      MozTransition: 'all 0.5s',
+      WebkitTransition: 'all 0.5s',
+      transition: 'all 0.5s',
+      '&:hover': {
+        color: Orange[500],
+        backgroundColor: '#f9f9f9',
+        boxShadow: 'none'
+      }
+    },
+    link: {
+      textTransform: 'inherit',
+      '&:hover': {
+        backgroundColor: 'rgba(0,0,0,0)',
+        color: blue[500]
+      }
+    },
+    menuButton: {
+      marginLeft: -28,
+      marginRight: 20
+    },
+    drawer: {
+      [theme.breakpoints.only('xs')]: {
+        width: '80%'
+      },
+      width: '60%'
+    },
+    Popper: {
+      zIndex: 999999
+    },
+    support: {
+      top: '3em'
+    },
+    listSupport: {
+      listStyle: 'none'
+    },
+    roomType: {
+      color: 'rgb(118, 118, 118)',
+      overflow: 'hidden',
+      fontSize: '1em',
+      padding: '0.3em 0.5em',
+      borderRadius: '4px',
+      border: '1px solid #ffa726',
+      whiteSpace: 'normal',
+      textOverflow: 'ellipsis',
+      letterSpacing: 'normal',
+      textAlign: 'center'
+    },
+    fab: {
+      margin: 8
+    },
+    rightIcon: {
+      // marginLeft: theme.spacing
+      marginLeft: 8
+    },
+    textSpan: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  });
 
 const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
   const {
-          classes,
-          cookies,
-          filter,
-          handleOpenSearchMobile,
-          searchNavMobile,
-          handleToggleDrawer,
-          hiddenListCitySearch
-        } = props;
+    classes,
+    cookies,
+    filter,
+    handleOpenSearchMobile,
+    searchNavMobile,
+    handleToggleDrawer,
+    hiddenListCitySearch
+  } = props;
 
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
@@ -234,90 +232,71 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
 
   return (
     <Fragment>
-      <GridContainer
-        xs = {12}
-        sm = {12}
-        md = {12}
-        lg = {12}
-        xl = {10}
-        classNameItem = {classes.containter}
-      >
+      <GridContainer xs={12} xl={10} classNameItem={classes.containter}>
         <AppBar
-          elevation = {0}
-          position = 'static'
-          color = 'secondary'
-          style = {{ backgroundColor: '#fffffff0' }}
-        >
-          <Toolbar className = {hiddenListCitySearch ? classes.centerLogo : null}>
+          elevation={0}
+          position="static"
+          color="secondary"
+          style={{ backgroundColor: '#fffffff0' }}>
+          <Toolbar className={hiddenListCitySearch ? classes.centerLogo : null}>
             <Hidden smDown>
               <Logo />
-              <div className = {classes.grow} />
+              <div className={classes.grow} />
               <Button
-                href = 'https://merchant.westay.vn'
+                href="https://merchant.westay.vn"
                 // color = 'inherit'
-                className = {classes.buttonMerchantSite}
-                name = 'merchant-site'
-                size = 'large'
-              >
+                className={classes.buttonMerchantSite}
+                name="merchant-site"
+                size="large">
                 {t('home:beComeHost')}
               </Button>
 
               <Button
-                onClick = {() => setOpen(!open)}
-                buttonRef = {userRefButton}
-                name = 'support'
-                color = 'inherit'
-                className = {classes.button}
-                size = 'large'
-              >
+                onClick={() => setOpen(!open)}
+                buttonRef={userRefButton}
+                name="support"
+                color="inherit"
+                className={classes.button}
+                size="large">
                 {t('home:contact')}
               </Button>
 
               <Popover
-                open = {open}
-                anchorEl = {userRefButton.current}
-                anchorOrigin = {{
+                open={open}
+                anchorEl={userRefButton.current}
+                anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'center'
                 }}
-                transformOrigin = {{
+                transformOrigin={{
                   vertical: 'top',
                   horizontal: 'center'
-                }}
-              >
-                <ClickAwayListener onClickAway = {handleClose}>
+                }}>
+                <ClickAwayListener onClickAway={handleClose}>
                   <Paper>
                     <MenuList>
-                      <MenuItem
-                        onClick = {() => Hotline('tel:0916374057')}
-                        component = 'li'>
+                      <MenuItem onClick={() => Hotline('tel:0916374057')} component="li">
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
                         Hotline 1: 0916 374 057
                       </MenuItem>
                       <Divider />
-                      <MenuItem
-                        onClick = {() => Hotline('tel:0946746417')}
-                        component = {'li'}>
+                      <MenuItem onClick={() => Hotline('tel:0946746417')} component={'li'}>
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
                         Hotline 2: 0946 746 417
                       </MenuItem>
                       <Divider />
-                      <MenuItem
-                        onClick = {() => Hotline('tel:0917041849')}
-                      >
+                      <MenuItem onClick={() => Hotline('tel:0917041849')}>
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
                         {t('home:supportMerchant')}: 0917 041 849
                       </MenuItem>
                       <Divider />
-                      <MenuItem
-                        onClick = {() => Hotline('mailto:info@westay.org')}
-                      >
+                      <MenuItem onClick={() => Hotline('mailto:info@westay.org')}>
                         <ListItemIcon>
                           <EmailIcon />
                         </ListItemIcon>
@@ -330,49 +309,39 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
               {cookies.get('_token') ? (
                 <Fragment>
                   <Button
-                    buttonRef = {userRefButton}
-                    color = 'inherit'
-                    className = {classes.button}
-                    onClick = {() => setMenuStatus(!menuStatus)}
-                    style = {{ backgroundColor: 'transparent' }}
-                    size = 'large'
-                  >
+                    buttonRef={userRefButton}
+                    color="inherit"
+                    className={classes.button}
+                    onClick={() => setMenuStatus(!menuStatus)}
+                    style={{ backgroundColor: 'transparent' }}
+                    size="large">
                     <Avatar>
                       <People />
                     </Avatar>
                   </Button>
                   <Popper
-                    open = {menuStatus}
-                    anchorEl = {userRefButton.current}
+                    open={menuStatus}
+                    anchorEl={userRefButton.current}
                     transition
-                    className = {classes.Popper}
-                  >
+                    className={classes.Popper}>
                     {({ TransitionProps, placement }) => (
                       <Grow
                         {...TransitionProps}
-                        style = {{
-                          transformOrigin:
-                            placement === 'bottom'
-                              ? 'center top'
-                              : 'center bottom',
+                        style={{
+                          transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
                           minWidth: 300
-                        }}
-                      >
-                        <Paper elevation = {1}>
-                          <ClickAwayListener onClickAway = {closeMenu}>
+                        }}>
+                        <Paper elevation={1}>
+                          <ClickAwayListener onClickAway={closeMenu}>
                             <MenuList>
-                              <MenuItem
-                                name = 'profile'
-                                onClick = {closeMenu}
-                                {...to('/profile')}
-                              >
+                              <MenuItem name="profile" onClick={closeMenu} {...to('/profile')}>
                                 <ListItemIcon>
                                   <AccountCircleOutlined />
                                 </ListItemIcon>
                                 Thông tin cá nhân
                               </MenuItem>
                               <Divider />
-                              <MenuItem onClick = {logoutTrigger} component='li'>
+                              <MenuItem onClick={logoutTrigger} component="li">
                                 <ListItemIcon>
                                   <PowerSettingsNewRounded />
                                 </ListItemIcon>
@@ -389,49 +358,48 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
               ) : (
                 <Fragment>
                   <Button
-                    name = 'sign-in'
-                    color = 'inherit'
-                    className = {classes.button}
-                    onClick = {loginButtonClick}
-                    size = 'large'
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
                   >
                     {t('home:signIn')}
                   </Button>
                   <Button
-                    name = 'sign-up'
-                    color = 'inherit'
-                    className = {classes.button}
-                    onClick = {signUpButtonClick}
-                    size = 'large'
+                    name="sign-up"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={signUpButtonClick}
+                    size="large"
                     // onMouseOver={() => SignUpForm.preload()}
                   >
                     {t('home:signUp')}
                   </Button>
 
-                  <SwitchLanguage/>
+                  <SwitchLanguage />
                 </Fragment>
               )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
-              <div className = {classes.grow} />
-              <IconMenu onClick = {() => handleToggleDrawer(true)} />
+              <div className={classes.grow} />
+              <IconMenu onClick={() => handleToggleDrawer(true)} />
 
               <Fragment>
                 <div>
                   <SwipeableDrawer
                     disableSwipeToOpen
-                    open = {searchNavMobile.openDrawer}
-                    onOpen = {() => handleToggleDrawer(true)}
-                    onClose = {() => handleToggleDrawer(false)}
-                    ModalProps = {{
+                    open={searchNavMobile.openDrawer}
+                    onOpen={() => handleToggleDrawer(true)}
+                    onClose={() => handleToggleDrawer(false)}
+                    ModalProps={{
                       keepMounted: true // Better open performance on mobile.
                     }}
-                    classes = {{
+                    classes={{
                       paper: classes.drawer
-                    }}
-                  >
+                    }}>
                     {/*<SideDrawer setOpen={handleToggleDrawer} />*/}
                   </SwipeableDrawer>
                 </div>
@@ -455,9 +423,7 @@ const mapStateToProps = (state: ReducersList) => {
   };
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<AnimationAction | SearchNavAction>
-) => {
+const mapDispatchToProps = (dispatch: Dispatch<AnimationAction | SearchNavAction>) => {
   return {
     handleLoginButton: (status: boolean) =>
       dispatch({
@@ -491,4 +457,3 @@ export default compose<IProps, any>(
   withCookies,
   withStyles(styles)
 )(NavHeader);
-
