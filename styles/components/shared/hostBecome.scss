@@ -1,7 +1,7 @@
 .hostBecome {
   padding: 30px 30px;
   margin-bottom: 50px;
-  background: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516) !important;
+  background: radial-gradient( circle farthest-corner at 10% 20%, rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );
 
   @include xs {
     padding: 10px 10px;

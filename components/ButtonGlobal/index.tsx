@@ -18,13 +18,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       background: (props) =>
         props.background
           ? checkTypeBackground(props.background)
-          : `linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516)`,
-      borderRadius: (props) => props.borderRadius || 3,
-      boxShadow: (props) => props.boxShadow || '0 4px 10px 0 rgba(252, 104, 110, 0.75)',
+          : `radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );`,
+      borderRadius: (props) => props.borderRadius || 4,
       fontWeight: 700,
       fontSize: (props) => props.fontSize || '17px',
       color: (props) => props.textColor || 'white',
-      height: (props) => props.height || '50px',
+      height: (props) => props.height || '45px',
       width: (props) => props.width || 'auto',
       padding: (props) => props.padding || '0 30px'
     }
