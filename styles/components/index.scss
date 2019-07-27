@@ -1,7 +1,6 @@
 @import "./searchAutocomplete/index.scss";
 @import "./dateRangeSearch/index.scss";
 @import "./chooseGuestRoom/index.scss";
-@import "./roomCard/index.scss";
 
 .flex_columCenter {
   align-items: center;
@@ -33,6 +32,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
+
   border-top: 20px solid #ddd;
 }
 
