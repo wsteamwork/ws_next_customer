@@ -2,10 +2,10 @@ import React, { FC, Fragment } from 'react';
 import { compose } from 'recompose';
 import { ThemeCustom } from '../Theme';
 import { createStyles, withStyles } from '@material-ui/styles';
-import { Grid, Link, Typography } from '@material-ui/core';
+import { Grid, Link, Typography, Tooltip } from '@material-ui/core';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import numeral from 'numeral';
-
+import StarIcon from '@material-ui/icons/StarRounded';
 interface Iprops {
   classes?: any;
   room: RoomIndexRes;
@@ -20,14 +20,14 @@ const RoomCard: FC<Iprops> = (props) => {
     <Fragment>
       <Grid className="roomCard">
         <Grid className="roomCard__wrapper">
-          <Grid className="roomCard__mediaContainer">
-            <Grid className="roomCard__backContainer">
-              <Grid className="roomCard__frontContainer">
+          <Grid className="mediaContainer">
+            <Grid className="backContainer">
+              <Grid className="frontContainer">
                 <Link>
-                  <Grid className="roomCard__mediaWrapper">
+                  <Grid className="mediaWrapper">
                     <img
                       src={`https://s3-ap-southeast-1.amazonaws.com/westay-img/sm/${room.media.data[0].image}`}
-                      className="roomCard__media"
+                      className="media"
                       alt={``}
                     />
                   </Grid>
@@ -35,16 +35,24 @@ const RoomCard: FC<Iprops> = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid className="roomCard__infoContainer">
-            <Link className="roomCard__infoLink">
-              <Grid className="roomCard__infoWrapper">
-                <Grid className="">
+          <Grid className="infoContainer">
+            <Link className="infoLink">
+              <Grid className="info">
+                <Grid className="roomType-city">
                   <Typography>{room.room_type_txt}</Typography>
                 </Grid>
-                <Grid className="">
-                {room.details.data[0].name}</Grid>
-                <Grid className="">{numeral(room.price_day).format('0,0')}đ</Grid>
-                <Grid className=""></Grid>
+                <Grid className="name">{room.details.data[0].name}</Grid>
+                <Grid className="price">{numeral(room.price_day).format('0,0')}đ</Grid>
+
+                {room.total_review > 3 ? (
+                  <Grid className="review">
+                    <StarIcon className="starIcon" />
+                    <Typography className="rating text">{`${room.avg_rating}`}</Typography>
+                    <Typography className="totalReview text">{`(${room.total_review})`}</Typography>
+                  </Grid>
+                ) : (
+                  ''
+                )}
               </Grid>
             </Link>
           </Grid>

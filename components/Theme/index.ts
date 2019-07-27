@@ -4,6 +4,7 @@ import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMui
 import { TypographyOptions, FontStyleOptions } from '@material-ui/core/styles/createTypography';
 import { PaletteOptions } from '@material-ui/core/styles/createPalette';
 import mainColor from '@/styles/constants/colors';
+import fontWeight from '@/styles/constants/fontWeight';
 interface PaletteExtra extends PaletteOptions {
   button: any;
 }
@@ -14,14 +15,18 @@ export interface ThemeCustom extends ThemeOptions {
 }
 
 const options: ThemeCustom = {
-  spacing: 8,
   props: {
     MuiButtonBase: {
       // disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {
-    fontFamily: 'Montserrat, sans-serif'
+    body1: {
+      fontSize: 14
+    },
+    fontFamily: 'Montserrat, sans-serif',
+    fontSize: 14,
+    fontWeightRegular: fontWeight.medium
   },
   palette: {
     text: {
