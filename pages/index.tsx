@@ -1,14 +1,18 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, Fragment } from 'react';
 import { NextPage, NextPageContext } from 'next';
 import NextHead from '@/components/NextHead';
 import Link from 'next/link';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
 import Button from '@material-ui/core/Button';
 import { useCookies } from 'react-cookie';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import GridContainer from '@/components/Layout/GridContainer';
+import CardIntro from '@/components/Cards/CardIntro';
+import { Grid } from '@material-ui/core';
 
 const Home: NextPage = () => {
   const { t, i18n }: UseTranslationResponse = useTranslation();
-  const [cookies, setCookie, removeCookie] = useCookies(['initLanguage']);
+  const [cookies, setCookie, removeCookie]  = useCookies(['initLanguage']);
 
   const handleChangeVN = () => {
     i18n.changeLanguage('vi');
@@ -21,29 +25,15 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div>
+    <Fragment>
       <NextHead
-        title="Nextjs Demo"
-        description="Welcome to Nextjs"
-        url="https://nextjs.org/"></NextHead>
+        title = 'Nextjs Demo'
+        description = 'Welcome to Nextjs'
+        url = 'https://nextjs.org/' />
 
-      <div>
-        <h1>{t('home:example')} 😄</h1>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-        <Button
-          onClick={handleChangeVN}
-          color="primary"
-          variant="contained"
-          style={{ marginLeft: '2%', color: 'white' }}>
-          VN
-        </Button>
-        <Button onClick={handleChangeEN} color="primary" variant="contained">
-          EN
-        </Button>
-      </div>
-    </div>
+      <NavHeader />
+
+    </Fragment>
   );
 };
 

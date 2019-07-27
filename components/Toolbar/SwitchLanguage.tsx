@@ -1,0 +1,135 @@
+import theme, { ThemeCustom } from '@/components/Theme';
+import createStyles from '@material-ui/core/styles/createStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { Fragment, FunctionComponent, useState, MouseEvent } from 'react';
+import { compose } from 'recompose';
+import { UseTranslationResponse, useTranslation } from 'react-i18next';
+import { useCookies } from 'react-cookie';
+import { Chip, Avatar, MenuItem, ListItemIcon, ListItemText, Fade, Slide, Button } from '@material-ui/core';
+import Menu, { MenuProps } from '@material-ui/core/Menu';
+import IconLanguage from '@material-ui/icons/LanguageRounded';
+
+// @ts-ignore
+import flagVN from '@/static/images/flagVN.svg';
+// @ts-ignore
+import flagEN from '@/static/images/flagEN.svg';
+
+interface IProps {
+  classes?: any
+}
+
+const styles: any = (theme: ThemeCustom) => createStyles({
+  chip:{
+    backgroundColor:'#f1f1f1',
+    fontWeight: 600,
+    cursor:'pointer',
+  },
+  img:{
+    width:24,
+    height:24,
+    marginLeft:4,
+  },
+  btnSwitch:{
+    '&:hover':{
+      backgroundColor:'transparent'
+    },
+  }
+});
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #ebeef5',
+    boxShadow:'0 2px 12px 0 rgba(0,0,0,.1)',
+  },
+})((props: MenuProps) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    TransitionComponent={Fade}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles(theme => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
+
+const SwitchLanguage: FunctionComponent<IProps> = (props) => {
+  const { classes } = props;
+  const { t, i18n }: UseTranslationResponse = useTranslation();
+  const [cookiesLanguage, setCookieLanguage, removeCookieLanguage] = useCookies(['initLanguage']);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  function handleSwitch(event: MouseEvent<HTMLElement>) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  const handleChangeVN = () => {
+    i18n.changeLanguage('vi');
+    setCookieLanguage('initLanguage', 'vi');
+    // reload browser
+    process.browser && location.reload();
+  };
+
+  const handleChangeEN = () => {
+    i18n.changeLanguage('en');
+    setCookieLanguage('initLanguage', 'en');
+    //reload browser
+    process.browser && location.reload();
+  };
+
+  return (
+    <Fragment>
+      <Button onClick={handleSwitch} className={classes.btnSwitch}>
+        <Chip avatar={<Avatar src={cookiesLanguage.initLanguage === 'vi' ? flagVN : flagEN} className={classes.img} />}
+              label={t('home:currency')}
+              // onDelete={handleSwitch}
+              // deleteIcon={<IconLanguage />}
+              className={classes.chip}/>
+      </Button>
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem onClick={handleChangeVN}>
+          <ListItemIcon>
+            <Avatar src={flagVN} className={classes.img} />
+          </ListItemIcon>
+          <ListItemText primary="Tiếng Việt - VND" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={handleChangeEN}>
+          <ListItemIcon>
+            <Avatar src={flagEN} className={classes.img} />
+          </ListItemIcon>
+          <ListItemText primary="English - USD" />
+        </StyledMenuItem>
+      </StyledMenu>
+    </Fragment>
+  );
+};
+
+export default compose<IProps, any>(
+  withStyles(styles),
+)(SwitchLanguage);

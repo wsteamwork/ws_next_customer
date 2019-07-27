@@ -1,3 +1,8 @@
 {
-    "example": "Hello NextJS"
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "beComeHost": "Merchant channel",
+    "contact" : "Contact",
+    "supportMerchant" : "Support merchant",
+    "currency" : "USD"
 }
