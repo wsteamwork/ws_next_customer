@@ -1,25 +1,7 @@
 .chooseGuestRoom {
   width: 100%;
-  height: 50px;
+  height: 45px;
   position: relative;
-
-  .viewAction {
-    position: absolute;
-    top: 53px;
-    z-index: 999;
-    background-color: white;
-    left: 30px;
-    // right: 0;
-    // left: 0;
-    // bottom: 0;
-    width: 320px;
-
-    .arrow {
-      position: absolute;
-      top: -2px;
-      left: 8px;
-    }
-  }
 
   .input {
     font-size: 0.9rem;
@@ -41,12 +23,9 @@
     }
   }
 
-  .actions {
-    // margin-top: 1%;
-    height: 160px;
-    // width: 310px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+  &__actions {
+    height: 150px;
+    width: 310px;
 
     p {
       font-size: 0.9rem;
@@ -65,11 +44,11 @@
     }
 
     .item {
-      padding: 15px 10px;
+      padding: 10px 10px;
     }
 
     .icon {
-      padding: 2px;
+      padding: 4px;
     }
   }
 }

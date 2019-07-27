@@ -1,5 +1,5 @@
 import React, { Fragment, FC } from 'react';
-import Grid, { GridSize, GridSpacing, GridProps } from '@material-ui/core/Grid/Grid';
+import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
 
 interface IProps extends Partial<GridProps> {
   classNameItem?: string;

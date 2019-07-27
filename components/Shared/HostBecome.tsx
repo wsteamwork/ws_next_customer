@@ -1,5 +1,4 @@
 import React, { FC, useContext, useMemo, memo } from 'react';
-import GridContainer from '../Layout/Grid/Container';
 import { Grid } from '@material-ui/core';
 import LazyLoad from 'react-lazyload';
 import ButtonGlobal from '../ButtonGlobal';
@@ -24,32 +23,30 @@ const HostBecome: FC = () => {
 
   return (
     <LazyLoad>
-      <GridContainer xs={12} sm={12} md={10}>
-        <Grid container className="hostBecome">
-          <Grid item xs={7}>
-            <h3 className="title">Trở thành chủ nhà</h3>
-            <Grid>
-              <p className="desc">{desc}</p>
-            </Grid>
-
-            <Grid className="hostBecome__button">
-              <a href="https://merchant.westay.vn/" target="__blank">
-                <ButtonGlobal background="#000" className="hostBecome__buttonGlobal">
-                  Trở thành chủ nhà
-                </ButtonGlobal>
-              </a>
-            </Grid>
+      <Grid container className="hostBecome">
+        <Grid item xs={7}>
+          <h3 className="title">Trở thành chủ nhà</h3>
+          <Grid>
+            <p className="desc">{desc}</p>
           </Grid>
 
-          <Grid item xs={5} className="flex_center">
-            <img
-              className="hostBecome__image"
-              src="./static/images/cta-img2.png"
-              alt="Trở thành chủ nhà"
-            />
+          <Grid className="hostBecome__button">
+            <a href="https://merchant.westay.vn/" target="__blank">
+              <ButtonGlobal background="#000" className="hostBecome__buttonGlobal">
+                Trở thành chủ nhà
+              </ButtonGlobal>
+            </a>
           </Grid>
         </Grid>
-      </GridContainer>
+
+        <Grid item xs={5} className="flex_center">
+          <img
+            className="hostBecome__image"
+            src="./static/images/cta-img2.png"
+            alt="Trở thành chủ nhà"
+          />
+        </Grid>
+      </Grid>
     </LazyLoad>
   );
 };

@@ -20,12 +20,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
           ? checkTypeBackground(props.background)
           : `linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516)`,
       borderRadius: (props) => props.borderRadius || 3,
+      boxShadow: (props) => props.boxShadow || '0 4px 10px 0 rgba(252, 104, 110, 0.75)',
       fontWeight: 700,
       fontSize: (props) => props.fontSize || '17px',
-      color: (props) => props.color || 'white',
+      color: (props) => props.textColor || 'white',
       height: (props) => props.height || '50px',
       width: (props) => props.width || 'auto',
-      padding: (props) => props.padding || '0 30px',
+      padding: (props) => props.padding || '0 30px'
     }
   })
 );
@@ -37,6 +38,8 @@ interface IProps extends ButtonProps {
   fontSize?: string | number;
   borderRadius?: string | number;
   padding?: string | number;
+  textColor?: string;
+  boxShadow?: string;
 }
 
 const ButtonGlobal: FC<IProps> = (props) => {

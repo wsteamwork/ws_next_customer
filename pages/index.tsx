@@ -8,6 +8,8 @@ import ChooseGuestRoom from '@/components/ChooseGuestRoom';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import Footer from '@/components/Layout/Footer';
 import HostBecome from '@/components/Shared/HostBecome';
+import GridContainer from '@/components/Layout/Grid/Container';
+import CustomPopper from '@/components/CustomPopper';
 
 const Home: NextPage = () => {
   return (
@@ -33,8 +35,27 @@ const Home: NextPage = () => {
       </Grid>
 
       <Grid style={{ marginTop: '100px' }}>
-        <HostBecome></HostBecome>
+        <GridContainer xs={12} sm={12} md={10}>
+          <CustomPopper
+            placement="bottom"
+            trigger="click"
+            animation="scale"
+            appendTo="parent"
+            theme="light-border"
+            aria={null}
+            arrow={true}
+            inertia={true}
+            interactive={true}
+            content={
+              <div style={{ background: 'white' }}>
+                <strong>Hello</strong>
+              </div>
+            }>
+            <span>Tippy</span>
+          </CustomPopper>
 
+          <HostBecome></HostBecome>
+        </GridContainer>
         <Footer></Footer>
       </Grid>
     </div>

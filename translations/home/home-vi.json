@@ -7,5 +7,9 @@
         "room": "Phòng",
         "searchResults": "Kết quả tìm kiếm",
         "noResult": "Không tìm thấy kết quả nào"
+    },
+    "chooseGuestRoom": {
+        "close": "Đóng",
+        "apply": "Áp dụng"
     }
 }
