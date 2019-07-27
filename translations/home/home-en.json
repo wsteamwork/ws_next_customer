@@ -7,5 +7,9 @@
         "room": "Room",
         "searchResults": "Search Results",
         "noResult": "No result is found"
+    },
+    "chooseGuestRoom": {
+        "close": "Close",
+        "apply": "Apply"
     }
 }

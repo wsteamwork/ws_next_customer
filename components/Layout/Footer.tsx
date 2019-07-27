@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 
 interface IProps {}
-const facebookUrl = 'https://www.facebook.com/westay.org';
+const facebookUrl = 'https://www.facebook.com/westay.vn/';
 const instagramUrl = 'https://www.instagram.com/westay_stayhappytogether/';
 
 const Footer: FC<IProps> = (props) => {
@@ -39,7 +39,9 @@ const Footer: FC<IProps> = (props) => {
                     {t('layout:footer:ecommerce')}
                   </p>{' '}
                   <p className="padding_top">
-                    <a href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=41005">
+                    <a
+                      href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=41005"
+                      target="_blank">
                       <img
                         alt="https://westay.vn"
                         src="http://online.gov.vn/seals/dlxOBO9dxLmirYHstOPHmA==.jpgx"
@@ -68,6 +70,7 @@ const Footer: FC<IProps> = (props) => {
                   <h5 className="linksListGroupTitle">
                     <a
                       style={{ textDecoration: 'none', color: 'white' }}
+                      target="_blank"
                       href="https://blog.westay.vn">
                       {t('layout:footer:channel')}
                     </a>
@@ -76,6 +79,7 @@ const Footer: FC<IProps> = (props) => {
                     <li>
                       <a
                         style={{ textDecoration: 'none', color: 'white' }}
+                        target="_blank"
                         href="https://blog.westay.vn/o-dau">
                         {t('layout:footer:where')}
                       </a>
@@ -83,6 +87,7 @@ const Footer: FC<IProps> = (props) => {
                     <li>
                       <a
                         style={{ textDecoration: 'none', color: 'white' }}
+                        target="_blank"
                         href="https://blog.westay.vn/choi-gi">
                         {t('layout:footer:playWhat')}
                       </a>
@@ -90,6 +95,7 @@ const Footer: FC<IProps> = (props) => {
                     <li>
                       <a
                         style={{ textDecoration: 'none', color: 'white' }}
+                        target="_blank"
                         href="https://blog.westay.vn/an-gi">
                         {t('layout:footer:eatWhat')}
                       </a>
@@ -136,7 +142,7 @@ const Footer: FC<IProps> = (props) => {
                       </a>
                     </div>
                   </li>
-                  <li style={{ marginBottom: 8 }}>
+                  <li style={{ marginBottom: 7 }}>
                     <FontAwesomeIcon icon={faEnvelope} size="1x" color="#fff"></FontAwesomeIcon>
                     <a
                       style={{ textDecoration: 'none', color: 'white', marginLeft: '7px' }}
