@@ -102,7 +102,7 @@ const styles: any = (theme: ThemeCustom) =>
     }
   });
 
-const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
+const SearchAutoSuggestion: FC<Iprops> = (props) => {
   const { classes } = props;
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState<string>('');
