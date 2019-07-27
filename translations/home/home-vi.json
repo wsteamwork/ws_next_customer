@@ -11,5 +11,11 @@
     "chooseGuestRoom": {
         "close": "Đóng",
         "apply": "Áp dụng"
-    }
+    },
+    "signUp": "Đăng kí",
+    "signIn": "Đăng nhập",
+    "beComeHost": "Kênh chủ nhà",
+    "contact" : "Liên hệ",
+    "supportMerchant" : "Hỗ trợ chủ nhà",
+    "currency" : "VND"
 }

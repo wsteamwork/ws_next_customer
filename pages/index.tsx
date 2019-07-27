@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { NextPage } from 'next';
 import NextHead from '@/components/NextHead';
 import SearchAutoSuggestion from '@/components/SearchAutoSuggestion';
@@ -10,15 +10,18 @@ import Footer from '@/components/Layout/Footer';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
 import CustomPopper from '@/components/CustomPopper';
+import NavHeader from '@/components/Toolbar/NavHeader';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Fragment>
       <NextHead
-        title="Nextjs Demo"
-        description="Welcome to Nextjs"
-        url="https://nextjs.org/"></NextHead>
+        title='Nextjs Demo'
+        description='Welcome to Nextjs'
+        url='https://nextjs.org/'
+      />
 
+      <NavHeader />
       <Grid container spacing={2} style={{ height: '65px' }}>
         <Grid item xs={12} md={4}>
           <SearchAutoSuggestion />
@@ -58,7 +61,8 @@ const Home: NextPage = () => {
         </GridContainer>
         <Footer></Footer>
       </Grid>
-    </div>
+
+    </Fragment>
   );
 };
 

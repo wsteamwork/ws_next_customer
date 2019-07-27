@@ -11,5 +11,10 @@
     "chooseGuestRoom": {
         "close": "Close",
         "apply": "Apply"
-    }
+    },
+    "signUp": "Sign up",
+    "beComeHost": "Merchant channel",
+    "contact" : "Contact",
+    "supportMerchant" : "Support merchant",
+    "currency" : "USD"
 }
