@@ -24,9 +24,9 @@ const options: ThemeCustom = {
     body1: {
       fontSize: 14
     },
-    fontFamily: 'Montserrat, sans-serif',
     fontSize: 14,
-    fontWeightRegular: fontWeight.medium
+    fontWeightRegular: fontWeight.medium,
+    fontFamily: 'Quicksand, sans-serif'
   },
   palette: {
     text: {
