@@ -1,0 +1,38 @@
+.hostBecome {
+  padding: 30px 30px;
+  margin-bottom: 50px;
+  background: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516) !important;
+
+  .title {
+    @include xs {
+      font-size: 20px;
+    }
+
+    font-size: 30px;
+    color: white;
+    padding: 10px 0px;
+  }
+
+  .desc {
+    @include xs {
+      font-size: 15px;
+    }
+
+    font-size: 17px;
+    color: white;
+    padding: 5px 0px 5px 0px;
+  }
+
+  &__image {
+    height: 220px;
+    width: 260px;
+  }
+
+  &__button {
+    @include xs {
+      text-align: center;
+    }
+
+    padding: 20px 0px;
+  }
+}
