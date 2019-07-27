@@ -5,6 +5,8 @@ const cookies = new Cookies();
 
 import home_vi from './home/home-vi.json';
 import home_en from './home/home-en.json';
+import layout_vi from './layout/layout-vi.json';
+import layout_en from './layout/layout-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -26,10 +28,12 @@ i18n
     fallbackLng: 'vi',
     resources: {
       en: {
-        home: home_en
+        home: home_en,
+        layout: layout_en
       },
       vi: {
-        home: home_vi
+        home: home_vi,
+        layout: layout_vi
       }
     },
 

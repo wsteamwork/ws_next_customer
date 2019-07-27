@@ -6,7 +6,10 @@ import { Theme } from '@material-ui/core';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
-      background: `linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516)`,
+      background: (props) =>
+        props.linear
+          ? `linear-gradient(to right, ${props.linear.join(',')})`
+          : `linear-gradient(to right, #ef9d43, #e75516)`,
       border: 0,
       borderRadius: 3,
       boxShadow: '0 4px 15px 0 rgba(252, 104, 110, 0.75)',

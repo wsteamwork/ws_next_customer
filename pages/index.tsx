@@ -15,6 +15,9 @@ import {
   RoomHotReducer,
   RoomHomepageState
 } from '@/store/Context/Room/RoomHomepageContext';
+import Footer from '@/components/Layout/Footer';
+import HostBecome from '@/components/Shared/HostBecome';
+
 const Home: NextPage = () => {
   const [state, dispatch] = useReducer(RoomHotReducer, RoomHotStateInit);
   const { roomsHot } = state;
@@ -69,7 +72,14 @@ const Home: NextPage = () => {
       ) : (
         'loading'
       )}
+      <Grid style={{ marginTop: '100px' }}>
+        <HostBecome></HostBecome>
+
+        <Footer></Footer>
+      </Grid>
     </RoomHomepageContext.Provider>
+      
+    
   );
 };
 

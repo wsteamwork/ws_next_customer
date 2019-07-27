@@ -1,0 +1,24 @@
+{
+    "footer": {
+        "help": "Help",
+        "nameCompany": "WESTAY JOINT STOCK COMPANY",
+        "contact": "Contact phone number:",
+        "business": "Business areas:",
+        "ecommerce": "E-commerce trading floor",
+        "domain": "Domain address:",
+        "typeWeb": "Website type:",
+        "rengulations": "Regulations for electronic trading platform",
+        "termsOfUse" : "Terms of use",
+        "private": "Privacy policy",
+        "channel": "The infomation channel",
+        "where": "Where",
+        "playWhat": "What play",
+        "eatWhat": "Eat what",
+        "travelGuide": "Travel guide",
+        "contactUs": "Contact us",
+        "forHomeowners": "For homeowners",
+        "address": "102 Thai Thinh, Dong Da, Hanoi",
+        "socialNetwork": "Social Network",
+        "rights": "Westay Company has full rights"
+    }
+}
