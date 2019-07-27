@@ -21,7 +21,7 @@ const options: ThemeCustom = {
     }
   },
   typography: {
-    fontFamily: 'Montserrat, sans-serif'
+    fontFamily: 'Quicksand, sans-serif'
   },
   palette: {
     text: {
