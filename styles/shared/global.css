@@ -1,12 +1,12 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-family: "Montserrat", sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Montserrat Alternates, "Quicksand", sans-serif !important;
+;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 
 a {
     text-decoration: none;

@@ -14,6 +14,7 @@ const NextHead: FC<IProps> = (props) => (
     <title>{props.title}</title>
     <meta name="description" content={props.description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,500,700|Quicksand:300,400,500,600,700&display=swap&subset=vietnamese" rel="stylesheet" />
     <link rel="icon" sizes="192x192" href="/static/touch-icon.png" />
     <link rel="apple-touch-icon" href="/static/touch-icon.png" />
     <link rel="mask-icon" href="/static/favicon-mask.svg" color="#49B882" />

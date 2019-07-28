@@ -10,10 +10,10 @@ const mainColor = {
   pending: '#FFC87D',
 
   // For text only
-  titleText: '#020433',
+  titleText: '#484848',
   subTitleText: '#FFA712', //for attributes ( such as type of rooms, number of guest, beds...)
   secondaryText: '#484848',
-  blurText: '#95A0B6',
+  blurText: '#767676',
 
   // Background
   backgroundPrimary: '#F7F9FF',

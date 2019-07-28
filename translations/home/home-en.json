@@ -16,5 +16,6 @@
     "beComeHost": "Merchant channel",
     "contact" : "Contact",
     "supportMerchant" : "Support merchant",
-    "currency" : "USD"
+    "currency" : "USD",
+    "review": "Reviews"
 }

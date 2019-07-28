@@ -1,15 +1,37 @@
-import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import mainColor from '@/styles/constants/colors';
+import fontWeight from '@/styles/constants/fontWeight';
+import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { TypographyOptions, FontStyleOptions } from '@material-ui/core/styles/createTypography';
+import { PaletteOptions } from '@material-ui/core/styles/createPalette';
+interface PaletteExtra extends PaletteOptions {
+  button: any;
+}
 
-const options: ThemeOptions = {
-  spacing: 8,
+export interface ThemeCustom extends ThemeOptions {
+  palette?: PaletteExtra;
+  typography?: TypographyOptions | FontStyleOptions;
+}
+
+const options: ThemeCustom = {
   props: {
     MuiButtonBase: {
       // disableRipple: true // No more ripple, on the whole application 💣!
     }
   },
   typography: {
-    fontFamily: 'Montserrat, sans-serif'
+    body1: {
+      fontSize: 14
+    },
+    h1: {
+      color: mainColor.titleText
+    },
+    subtitle1: {
+      color: mainColor.blurText
+    },
+    fontWeightRegular: fontWeight.medium,
+    // fontFamily: 'Quicksand, sans-serif'
+    fontFamily:
+      'Circular, -apple-system, BlinkMacSystemFont, Montserrat Alternates, "Quicksand", sans-serif !important'
   },
   palette: {
     text: {
@@ -25,6 +47,9 @@ const options: ThemeOptions = {
     },
     error: {
       main: mainColor.error
+    },
+    button: {
+      nav: '64px'
     }
   }
 };

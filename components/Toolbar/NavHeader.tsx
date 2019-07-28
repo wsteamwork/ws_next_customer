@@ -49,6 +49,7 @@ import GridContainer from '../Layout/Grid/Container';
 // import { SearchNavAction, SearchNavState } from "@/store/reducers/searchNav";
 // import ListCitySearch, { TransitionCustom } from "@/views/Rooms/Filter/ListCitySearch";
 // import ForgetPasswordForm from "../Forms/ForgetPasswordForm";
+import ButtonGlobal from '@/components/ButtonGlobal';
 
 interface IProps {
   classes?: any;
@@ -105,12 +106,13 @@ const styles: any = (theme: Theme) =>
       }
     },
     buttonMerchantSite: {
-      height: 'unset',
+      height: '40px',
       textTransform: 'capitalize',
       color: Orange[500],
       borderRadius: 8,
-      fontWeight: 700,
-      boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
+      fontFamily: 'Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important',
+      fontWeight: 600,
+      // boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
       marginRight: 16,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
@@ -242,14 +244,14 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
             <Hidden smDown>
               <Logo />
               <div className={classes.grow} />
-              <Button
+              <ButtonGlobal
                 href="https://merchant.westay.vn"
                 // color = 'inherit'
                 className={classes.buttonMerchantSite}
                 name="merchant-site"
                 size="large">
                 {t('home:beComeHost')}
-              </Button>
+              </ButtonGlobal>
 
               <Button
                 onClick={() => setOpen(!open)}
@@ -356,31 +358,31 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                   </Popper>
                 </Fragment>
               ) : (
-                <Fragment>
-                  <Button
-                    name="sign-in"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={loginButtonClick}
-                    size="large"
+                  <Fragment>
+                    <Button
+                      name="sign-in"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={loginButtonClick}
+                      size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                  >
-                    {t('home:signIn')}
-                  </Button>
-                  <Button
-                    name="sign-up"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={signUpButtonClick}
-                    size="large"
+                    >
+                      {t('home:signIn')}
+                    </Button>
+                    <Button
+                      name="sign-up"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={signUpButtonClick}
+                      size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                  >
-                    {t('home:signUp')}
-                  </Button>
+                    >
+                      {t('home:signUp')}
+                    </Button>
 
-                  <SwitchLanguage />
-                </Fragment>
-              )}
+                    <SwitchLanguage />
+                  </Fragment>
+                )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
