@@ -10,7 +10,7 @@ interface Iprops {
 
 const Login: NextPage<Iprops> = (props) => {
   const { cookies } = props;
-  
+
   const login = () => {
     axios.post('login', { username: 'test@westay.vn', password: '123456' }).then((res) => {
       const data: LoginRes = res.data;

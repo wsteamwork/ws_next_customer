@@ -46,7 +46,6 @@ const Home: NextPage = () => {
 
     <RoomHomepageContext.Provider value={{ state, dispatch }}>
       <Fragment>
-
         {/* <div> */}
         <NextHead
           title='Nextjs Demo'
@@ -105,7 +104,6 @@ const Home: NextPage = () => {
         </Grid>
         {/* </div> */}
       </Fragment>
-
     </RoomHomepageContext.Provider>
   );
 };
