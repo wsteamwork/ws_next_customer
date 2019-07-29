@@ -34,9 +34,9 @@ type ReturnUseCheckBox = {
 };
 
 export const useRoomTypeChecbox = (
-  setOpen: Dispatch<SetStateAction<boolean>>,
-  dataClick: RoomType[],
-  setDataClick: Dispatch<SetStateAction<RoomType[]>>
+  setOpen?: Dispatch<SetStateAction<boolean>>,
+  dataClick?: RoomType[],
+  setDataClick?: Dispatch<SetStateAction<RoomType[]>>
 ): ReturnUseCheckBox => {
   const { dispatch, state } = useContext(RoomIndexContext);
   const { roomTypes } = state;

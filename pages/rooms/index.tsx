@@ -29,7 +29,7 @@ const Rooms: NextPage = () => {
         url="/rooms"></NextHead>
       <NavHeader></NavHeader>
 
-      <GridContainer xs={12} md={9} className="searchRooms">
+      <GridContainer xs={11} md={9} className="searchRooms">
         <Grid container spacing={1}>
           <Grid item xs={12} md={5}>
             <SearchAutoSuggestion />
@@ -43,7 +43,7 @@ const Rooms: NextPage = () => {
         </Grid>
       </GridContainer>
 
-      <GridContainer xs={12} md={9} className="filterRooms">
+      <GridContainer xs={11} md={9} className="filterRooms">
         <Grid container spacing={2}>
           <Grid item className="displayWebkit">
             <ChooseRoomGuest></ChooseRoomGuest>
