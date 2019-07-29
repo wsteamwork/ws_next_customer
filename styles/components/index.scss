@@ -1,9 +1,10 @@
-@import "./searchAutocomplete/index.scss";
+@import "./searchAutoSuggestion/index.scss";
 @import "./dateRangeSearch/index.scss";
 @import "./chooseGuestRoom/index.scss";
 @import "./roomCard/index.scss";
 @import "./layout/footer.scss";
 @import "./shared/index.scss";
+@import "./listRoom/index.scss";
 
 .flex_columCenter {
   align-items: center;
@@ -55,4 +56,11 @@
   border-bottom: 10px solid transparent;
 
   border-right: 10px solid #ddd;
+}
+
+.tooltip {
+  font-size: 0.8rem;
+  max-width: 200px;
+  padding: 5px;
+  background-color: #ff9800;
 }

@@ -18,6 +18,7 @@ import {
   RoomHotStateInit,
   RoomHotReducer
 } from '@/store/Context/Room/RoomHomepageContext';
+import ListRoom from '@/components/ListRoom';
 
 const Home: NextPage = () => {
   const [state, dispatch] = useReducer(RoomHotReducer, RoomHotStateInit);
@@ -43,15 +44,10 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-
     <RoomHomepageContext.Provider value={{ state, dispatch }}>
       <Fragment>
         {/* <div> */}
-        <NextHead
-          title='Nextjs Demo'
-          description='Welcome to Nextjs'
-          url='https://nextjs.org/'
-        />
+        <NextHead title="Nextjs Demo" description="Welcome to Nextjs" url="https://nextjs.org/" />
 
         <NavHeader />
         <Grid container spacing={2} style={{ height: '65px' }}>
@@ -68,15 +64,18 @@ const Home: NextPage = () => {
             <ButtonGlobal width="100%">Tìm kiếm</ButtonGlobal>
           </Grid>
         </Grid>
-        {roomsHot ? (
+        {/* {roomsHot ? (
           <GridContainer xs={12} sm={10}>
             {roomsHot.slice(0, 5).map((room, index) => (
               <RoomCard isHomepage={true} key={index} room={room} />
             ))}
           </GridContainer>
         ) : (
-            'loading'
-          )}
+          'loading'
+        )} */}
+        <GridContainer xs={12} sm={10}>
+          <ListRoom roomData={roomsHot} />
+        </GridContainer>
 
         <Grid style={{ marginTop: '100px' }}>
           <GridContainer xs={12} sm={12} md={10}>
