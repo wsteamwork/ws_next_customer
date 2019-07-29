@@ -154,7 +154,7 @@ const DateRangeSearch: FC = () => {
                   <Grid item xs={9}>
                     <InputBase
                       ref={refEndDate}
-                      placeholder="Ngày đến"
+                      placeholder="Ngày đi"
                       fullWidth
                       className="input"
                       inputProps={{ style: { padding: 0 } }}

@@ -21,6 +21,7 @@ import CheckboxList from '@/components/Home/CheckboxList';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import ListRoom from '@/components/ListRoom';
+import MetroGridImage from '@/components/Layout/MetroGridImage';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
 
   return (
     <RoomHomepageContext.Provider value={{ state, dispatch }}>
+      {/* <Fragment> */}
       <NextHead title="Nextjs Demo" description="Welcome to Nextjs" url="https://nextjs.org/" />
       <NavHeader />
 
@@ -86,6 +88,8 @@ const Home: NextPage = () => {
         </Grid>
       </GridContainer>
 
+      <MetroGridImage />
+
       <GridContainer xs={12} sm={10}>
         <ListRoom roomData={roomsHot} />
       </GridContainer>
@@ -96,7 +100,8 @@ const Home: NextPage = () => {
         </GridContainer>
         <FooterComponent></FooterComponent>
       </Grid>
-    </RoomHomepageContext.Provider>
+      {/* </Fragment> */}
+    </RoomHomepageContext.Provider >
   );
 };
 

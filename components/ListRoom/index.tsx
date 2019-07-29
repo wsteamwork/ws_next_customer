@@ -15,7 +15,7 @@ import { compose } from 'recompose';
 import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Grid from '@material-ui/core/Grid';
+import { Theme, Typography, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
@@ -92,6 +92,9 @@ const ListRoom: FC<Iprops> = (props) => {
   return (
     <Fragment>
       <Grid container className="listRoomContainer">
+        <Typography variant='h5'>
+          Phòng nổi bật
+        </Typography>
         {roomData ? (
           <Slider {...setting}>
             {_.map(roomData, (room, index) => (
