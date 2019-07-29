@@ -21,7 +21,7 @@ const styles: any = (theme: Theme) =>
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       objectFit: 'cover',
-      borderRadius: 8,
+      borderRadius: 4,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
@@ -36,7 +36,7 @@ const styles: any = (theme: Theme) =>
     imgGradientLeftBottom: {
       position: 'relative',
       overflow: 'hidden',
-      borderRadius: 8,
+      borderRadius: 4,
       width: '100%',
       height: '100%',
       MozTransition: 'all 0.5s',
@@ -62,14 +62,14 @@ const styles: any = (theme: Theme) =>
         opacity: 0.8
       },
       '&:hover': {
-        MsTransform: 'scale(1.02)' /* IE 9 */,
-        WebkitTransform: 'scale(1.02)' /* Safari 3-8 */,
-        transform: 'scale(1.02)'
+        MsTransform: 'scale(1.01)' /* IE 9 */,
+        WebkitTransform: 'scale(1.01)' /* Safari 3-8 */,
+        transform: 'scale(1.01)'
       },
       '&:hover > image': {
-        MsTransform: 'scale(1.02)' /* IE 9 */,
-        WebkitTransform: 'scale(1.02)' /* Safari 3-8 */,
-        transform: 'scale(1.02)'
+        MsTransform: 'scale(1.01)' /* IE 9 */,
+        WebkitTransform: 'scale(1.01)' /* Safari 3-8 */,
+        transform: 'scale(1.01)'
       }
     },
     imgGradientToTop: {

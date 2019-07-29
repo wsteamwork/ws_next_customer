@@ -18,6 +18,7 @@ import {
   RoomHotStateInit,
   RoomHotReducer
 } from '@/store/Context/Room/RoomHomepageContext';
+import MetroGridImage from '@/components/Layout/MetroGridImage';
 
 const Home: NextPage = () => {
   const [state, dispatch] = useReducer(RoomHotReducer, RoomHotStateInit);
@@ -98,10 +99,13 @@ const Home: NextPage = () => {
               <span>Tippy</span>
             </CustomPopper>
 
+            <MetroGridImage/>
+
             <HostBecome></HostBecome>
           </GridContainer>
           <Footer></Footer>
         </Grid>
+
         {/* </div> */}
       </Fragment>
     </RoomHomepageContext.Provider>
