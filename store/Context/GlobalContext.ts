@@ -13,12 +13,16 @@ export interface IGlobalContext extends WithWidth, WithRouterProps {
 
 export type GlobalState = {
   readonly profile: ProfileInfoRes;
+  readonly overlay: boolean;
 };
 
-export type GlobalAction = { type: 'setProfile'; payload: ProfileInfoRes };
+export type GlobalAction =
+  | { type: 'setProfile'; payload: ProfileInfoRes }
+  | { type: 'setOverlay'; payload: boolean };
 
 export const GlobalStateInit: GlobalState = {
-  profile: null
+  profile: null,
+  overlay: false
 };
 
 export const GlobalReducer: Reducer<GlobalState, GlobalAction> = (
@@ -27,9 +31,9 @@ export const GlobalReducer: Reducer<GlobalState, GlobalAction> = (
 ): GlobalState => {
   switch (action.type) {
     case 'setProfile':
-      return updateObject<GlobalState>(state, {
-        profile: action.payload
-      });
+      return updateObject<GlobalState>(state, { profile: action.payload });
+    case 'setOverlay':
+      return updateObject<GlobalState>(state, { overlay: action.payload });
     default:
       state;
   }

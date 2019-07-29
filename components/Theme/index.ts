@@ -1,18 +1,9 @@
 import mainColor from '@/styles/constants/colors';
 import fontWeight from '@/styles/constants/fontWeight';
 import createMuiTheme, { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-import { TypographyOptions, FontStyleOptions } from '@material-ui/core/styles/createTypography';
-import { PaletteOptions } from '@material-ui/core/styles/createPalette';
-interface PaletteExtra extends PaletteOptions {
-  button: any;
-}
 
-export interface ThemeCustom extends ThemeOptions {
-  palette?: PaletteExtra;
-  typography?: TypographyOptions | FontStyleOptions;
-}
-
-const options: ThemeCustom = {
+const options: ThemeOptions = {
+  spacing: 8,
   props: {
     MuiButtonBase: {
       // disableRipple: true // No more ripple, on the whole application 💣!
@@ -47,9 +38,6 @@ const options: ThemeCustom = {
     },
     error: {
       main: mainColor.error
-    },
-    button: {
-      nav: '64px'
     }
   }
 };

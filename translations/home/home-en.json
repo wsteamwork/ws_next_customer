@@ -17,5 +17,13 @@
     "contact" : "Contact",
     "supportMerchant" : "Support merchant",
     "currency" : "USD",
-    "review": "Reviews"
+    "review": "Reviews",
+    "searchComponent": {
+        "enjoy": "Book a Homestay right away to enjoy",
+        "search": "Search",
+        "guestUpper": "Guest",
+        "guest": "guest",
+        "room": "room",
+        "roomUpper": "Room"
+    }
 }

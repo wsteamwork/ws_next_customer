@@ -30,7 +30,9 @@ export type SearchFilterAction =
   | { type: 'SET_ROOM_RECENTLY'; roomRecently: number[] }
   | { type: 'SET_SEARCH_TEXT'; searchText: string }
   | { type: 'SET_SEARCH_CITY'; city_id: number | undefined }
-  | { type: 'SET_SEARCH_DISTRICT'; district_id: number | undefined };
+  | { type: 'SET_SEARCH_DISTRICT'; district_id: number | undefined }
+  | { type: 'SET_START_DATE'; payload: string }
+  | { type: 'SET_END_DATE'; payload: string };
 
 const init: SearchFilterState = {
   city_id: undefined,
@@ -82,38 +84,25 @@ const reducer: Reducer<SearchFilterState, SearchFilterAction> = (
     case 'CHANGE_DATE':
       return changeDate(state, action);
     case 'SET_BOOKING_TYPE':
-      return updateObject(state, {
-        bookingType: action.bookingType
-      });
+      return updateObject(state, { bookingType: action.bookingType });
     case 'SET_NAV_BOOKING_TYPE':
-      return updateObject(state, {
-        bookingType: action.bookingType
-      });
+      return updateObject(state, { bookingType: action.bookingType });
     case 'SET_NAV_GUESTS':
-      return updateObject(state, {
-        guestsCount: action.guestsCount
-      });
+      return updateObject(state, { guestsCount: action.guestsCount });
     case 'SET_ROOM_RECENTLY':
-      return updateObject(state, {
-        roomRecently: action.roomRecently
-      });
+      return updateObject(state, { roomRecently: action.roomRecently });
     case 'SET_SEARCH_TEXT':
-      return updateObject(state, {
-        searchText: action.searchText
-      });
+      return updateObject(state, { searchText: action.searchText });
     case 'SET_SEARCH_CITY':
-      return updateObject(state, {
-        city_id: action.city_id
-      });
+      return updateObject(state, { city_id: action.city_id });
     case 'SET_SEARCH_DISTRICT':
-      return updateObject(state, {
-        district_id: action.district_id
-      });
-    case 'SET_NUMBER_ROOM': {
-      return updateObject(state, {
-        roomsCount: action.roomsCount
-      });
-    }
+      return updateObject(state, { district_id: action.district_id });
+    case 'SET_NUMBER_ROOM':
+      return updateObject(state, { roomsCount: action.roomsCount });
+    case 'SET_START_DATE':
+      return updateObject(state, { startDate: action.payload });
+    case 'SET_END_DATE':
+      return updateObject(state, { endDate: action.payload });
     default:
       return state;
   }

@@ -7,7 +7,10 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -ms-flex: 0 1 auto;
+  margin: 0;
+  padding: 0;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -23,8 +26,8 @@ body {
 }
 
 a {
-  display: block;
-  color: $secondaryText !important;
+  // display: block;
+  // color: $secondaryText !important;
   text-decoration: none;
   &:hover {
     text-decoration: none !important;

@@ -3,10 +3,10 @@ import Grid from '@material-ui/core/Grid';
 
 import GridContainer from '@/components/Layout/Grid/Container';
 import { NextPage } from 'next';
-import Footer from '@/components/Layout/Footer';
 import NextHead from '@/components/NextHead';
 import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import FooterComponent from '@/components/Layout/FooterComponent';
 
 interface IProps {}
 
@@ -21,18 +21,10 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
         url="./static/images/Logo-westay.png"
         description={t('layout:footer:termsOfUse')}></NextHead>
 
+      <NavHeader></NavHeader>
+
       <GridContainer xs={9}>
         <Grid container style={{ paddingBottom: '50px' }}>
-          <Link href="/">
-            <div className="logoWestay">
-              <img
-                src="/static/images/Logo-westay.png"
-                className="logo"
-                alt="Westay homestay cho người việt"
-              />
-            </div>
-          </Link>
-
           <div className="termsOfConditions">
             <h1>Điều khoản sử dụng</h1>
             <h2 className="ql-align-justify">
@@ -793,7 +785,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
           </div>
         </Grid>
       </GridContainer>
-      <Footer></Footer>
+      <FooterComponent></FooterComponent>
     </Grid>
   );
 };

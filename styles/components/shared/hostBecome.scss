@@ -1,7 +1,7 @@
 .hostBecome {
   padding: 30px 30px;
   margin-bottom: 50px;
-  background: radial-gradient( circle farthest-corner at 10% 20%, rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );
+  background: radial-gradient(circle farthest-corner at 10% 20%, rgba(253, 193, 104, 1) 0%, rgba(251, 128, 128, 1) 90%);
 
   @include xs {
     padding: 10px 10px;
@@ -21,7 +21,6 @@
     // padding: 10px 0px;
   }
 
-
   .desc {
     @include xs {
       font-size: 13px;
@@ -39,7 +38,6 @@
   }
 
   &__image {
-
     @include xs {
       height: 130px;
       width: auto;
@@ -63,7 +61,6 @@
   }
 
   &__buttonGlobal {
-
     @include xs {
       height: 37px !important;
       padding: 5px !important;
@@ -71,7 +68,7 @@
     }
 
     &:hover {
-      background: #000 !important
+      background: #000 !important;
     }
   }
 }

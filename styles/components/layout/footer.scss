@@ -119,37 +119,11 @@ $background_footer: #333;
 }
 
 .termsAndConditions {
-  .logoWestay {
-    width: 100%;
-    margin-top: 25px;
-    margin-bottom: 40px;
-    text-align: center;
-    cursor: pointer;
-  }
+  .termsOfConditions {
+    padding: 30px 0px;
 
-  .logo {
-    @include md {
-      height: 45px;
+    * {
+      padding: 10px 0px;
     }
-
-    @include lg {
-      height: 45px;
-    }
-
-    @include xl {
-      height: 45px;
-    }
-
-    @include sm {
-      height: 45px;
-    }
-
-    @include xs {
-      height: 30px;
-    }
-  }
-
-  .termsOfConditions * {
-    padding: 10px 0px;
   }
 }

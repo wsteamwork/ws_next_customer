@@ -9,6 +9,7 @@ const GridContainer: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Grid
+        onClick={props.onClick}
         container
         justify="center"
         alignContent="center"

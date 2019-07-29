@@ -4,7 +4,6 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
 import 'tippy.js/themes/light-border.css';
-import 'typeface-montserrat';
 import ProviderGlobal from '@/utils/ProviderGlobal';
 
 class MyApp extends App<AppProps> {

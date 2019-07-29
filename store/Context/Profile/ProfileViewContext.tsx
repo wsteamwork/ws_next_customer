@@ -72,7 +72,6 @@ export const getDataViewProfile = (
   Promise.all([getProfileById(id), getRoomMerchantById(id)])
     .then((res) => {
       const [user, userRooms] = res;
-      console.log(user, userRooms);
       dispatch({
         type: 'setData',
         profile: user.data,

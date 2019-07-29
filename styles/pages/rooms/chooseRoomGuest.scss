@@ -1,0 +1,19 @@
+.chooseRoomGuest {
+  background: white;
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $primary;
+    color: white;
+  }
+}
+
+.haveResult {
+  background-color: $primary;
+  color: white;
+}

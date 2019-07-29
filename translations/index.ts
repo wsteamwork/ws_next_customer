@@ -7,6 +7,8 @@ import home_vi from './home/home-vi.json';
 import home_en from './home/home-en.json';
 import layout_vi from './layout/layout-vi.json';
 import layout_en from './layout/layout-en.json';
+import rooms_vi from './rooms/rooms-vi.json';
+import rooms_en from './rooms/room-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -29,11 +31,13 @@ i18n
     resources: {
       en: {
         home: home_en,
-        layout: layout_en
+        layout: layout_en,
+        rooms: rooms_en
       },
       vi: {
         home: home_vi,
-        layout: layout_vi
+        layout: layout_vi,
+        rooms: rooms_vi
       }
     },
 
