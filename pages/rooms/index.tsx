@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { NextPage } from 'next';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
@@ -31,14 +31,11 @@ const Rooms: NextPage = () => {
 
       <GridContainer xs={12} md={9} className="searchRooms">
         <Grid container spacing={1}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <SearchAutoSuggestion />
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={5}>
             <DateRangeSearch />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <ChooseGuestRoom />
           </Grid>
           <Grid item xs={12} md={2}>
             <ButtonGlobal width="100%">{t('home:searchComponent:search')}</ButtonGlobal>
