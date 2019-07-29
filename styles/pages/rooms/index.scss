@@ -1,0 +1,37 @@
+@import "./chooseRoomGuest.scss";
+@import "./kindOfRoom.scss";
+
+.searchRooms {
+  background-color: #484848;
+  padding: 5px 0px;
+
+  @include xs {
+    background-color: white;
+  }
+
+  @include sm {
+    background-color: white;
+  }
+
+  &__title {
+    font-size: 18px;
+
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+}
+
+.displayWebkit {
+  display: -webkit-box !important;
+}
+
+.filterRooms {
+  background: white;
+  padding: 7px 0px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}

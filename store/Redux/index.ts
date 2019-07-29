@@ -10,7 +10,7 @@ export const windowExist = process.browser;
 const persistConfig: PersistConfig = {
   key: 'root',
   storage,
-  blacklist: ['v_animate', 'booking', 'searchNavMobile']
+  blacklist: ['v_animate', 'booking', 'searchNavMobile', 'searchFilter']
 };
 
 const persistedReducer: Reducer<ReducersList, ReducresActions> = process.browser

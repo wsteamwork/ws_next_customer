@@ -161,7 +161,6 @@ export const getRooms = async (
     type_room: !!params.room_type ? params.room_type : undefined,
     page
   };
-  // console.log(query)
   if (coords) {
     query = updateObject(query, coords);
   }

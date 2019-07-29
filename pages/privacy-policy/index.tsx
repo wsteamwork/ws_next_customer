@@ -2,10 +2,10 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { NextPage } from 'next';
-import Footer from '@/components/Layout/Footer';
 import { useTranslation } from 'react-i18next';
 import NextHead from '@/components/NextHead';
-import Link from 'next/link';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import FooterComponent from '@/components/Layout/FooterComponent';
 
 // @ts-ignore
 const PrivacyPolicy: NextPage = (props) => {
@@ -18,17 +18,10 @@ const PrivacyPolicy: NextPage = (props) => {
         url="./static/images/Logo-westay.png"
         description={t('layout:footer:private')}></NextHead>
 
+      <NavHeader></NavHeader>
+
       <GridContainer xs={9}>
         <Grid container>
-          <Link href="/">
-            <div className="logoWestay">
-              <img
-                src="/static/images/Logo-westay.png"
-                className="logo"
-                alt="Westay homestay cho người việt"
-              />
-            </div>
-          </Link>
           <div className="termsOfConditions">
             <h1>Chính sách quyền riêng tư</h1>
             <p dir="ltr">
@@ -569,7 +562,7 @@ const PrivacyPolicy: NextPage = (props) => {
           </div>
         </Grid>
       </GridContainer>
-      <Footer></Footer>
+      <FooterComponent></FooterComponent>
     </Grid>
   );
 };

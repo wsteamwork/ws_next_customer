@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: (props) => (props.textColor ? props.textColor : 'white'),
       height: (props) => props.height || '45px',
       width: (props) => props.width || 'auto',
-      padding: (props) => props.padding || '0 30px'
+      padding: (props) => props.padding || '0px 20px'
     }
   })
 );
@@ -50,7 +50,8 @@ const ButtonGlobal: FC<IProps> = (props) => {
     href,
     size,
     variant,
-    onClick
+    onClick,
+    style
   } = props;
   const classes = useStyles(props);
 
@@ -65,6 +66,7 @@ const ButtonGlobal: FC<IProps> = (props) => {
       size={size}
       variant={variant}
       onClick={onClick}
+      style={style}
       className={classNames(classes.root, 'buttonGlobal', props.className)}>
       {props.children}
     </Button>

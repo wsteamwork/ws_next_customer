@@ -18,5 +18,13 @@
     "contact" : "Liên hệ",
     "supportMerchant" : "Hỗ trợ chủ nhà",
     "currency" : "VND",
-    "review": "Đánh giá"
+    "review": "Đánh giá",
+    "searchComponent": {
+        "enjoy": "Đặt phòng Homestay ngay để tận hưởng",
+        "search": "Tìm kiếm",
+        "guestUpper": "Người",
+        "guest": "người",
+        "room": "phòng",
+        "roomUpper": "Phòng"
+    }
 }

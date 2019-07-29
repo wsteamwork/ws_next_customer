@@ -1,0 +1,79 @@
+.searchHome {
+  position: relative;
+
+  &__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+
+    @include xs {
+      height: 50vh;
+    }
+
+    @include sm {
+      height: 50vh;
+    }
+
+    @include md {
+      height: 50vh;
+    }
+  }
+
+  &__opa {
+    background: white;
+    opacity: 0.7;
+    width: 100%;
+    height: 160px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    border-radius: 4px;
+
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+
+  &__searchCenter {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+  }
+
+  &__content {
+    padding: 15px 0px 8px;
+  }
+
+  &__title {
+    h3 {
+      font-size: 18px;
+    }
+
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+
+  &__checkbox {
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+}

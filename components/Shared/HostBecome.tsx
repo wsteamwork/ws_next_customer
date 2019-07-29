@@ -31,11 +31,13 @@ const HostBecome: FC = () => {
           </Grid>
 
           <Grid className="hostBecome__button">
-            <a href="https://merchant.westay.vn/" target="__blank">
-              <ButtonGlobal background="#000" className="hostBecome__buttonGlobal">
-                Trở thành chủ nhà
-              </ButtonGlobal>
-            </a>
+            <ButtonGlobal
+              href="https://merchant.westay.vn/"
+              padding="0px 30px"
+              background="#000"
+              className="hostBecome__buttonGlobal">
+              Trở thành chủ nhà
+            </ButtonGlobal>
           </Grid>
         </Grid>
 

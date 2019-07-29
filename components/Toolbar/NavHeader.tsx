@@ -74,7 +74,7 @@ const styles: any = (theme: Theme) =>
       flexGrow: 1
     },
     containter: {
-      zIndex: 1100,
+      zIndex: 4,
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
     },
     grow: {
@@ -108,9 +108,10 @@ const styles: any = (theme: Theme) =>
     buttonMerchantSite: {
       height: '40px',
       textTransform: 'capitalize',
-      color: Orange[500],
+      color: 'white',
       borderRadius: 8,
-      fontFamily: 'Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important',
+      fontFamily:
+        'Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important',
       fontWeight: 600,
       // boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
       marginRight: 16,
@@ -118,7 +119,7 @@ const styles: any = (theme: Theme) =>
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
       '&:hover': {
-        color: Orange[500],
+        // color: Orange[500],
         backgroundColor: '#f9f9f9',
         boxShadow: 'none'
       }
@@ -247,6 +248,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
               <ButtonGlobal
                 href="https://merchant.westay.vn"
                 // color = 'inherit'
+                padding="0px 20px"
                 className={classes.buttonMerchantSite}
                 name="merchant-site"
                 size="large">
@@ -358,31 +360,31 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                   </Popper>
                 </Fragment>
               ) : (
-                  <Fragment>
-                    <Button
-                      name="sign-in"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={loginButtonClick}
-                      size="large"
+                <Fragment>
+                  <Button
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                    >
-                      {t('home:signIn')}
-                    </Button>
-                    <Button
-                      name="sign-up"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={signUpButtonClick}
-                      size="large"
+                  >
+                    {t('home:signIn')}
+                  </Button>
+                  <Button
+                    name="sign-up"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={signUpButtonClick}
+                    size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                    >
-                      {t('home:signUp')}
-                    </Button>
+                  >
+                    {t('home:signUp')}
+                  </Button>
 
-                    <SwitchLanguage />
-                  </Fragment>
-                )}
+                  <SwitchLanguage />
+                </Fragment>
+              )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
