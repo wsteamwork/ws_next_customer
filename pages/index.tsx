@@ -20,6 +20,7 @@ import DateRangeSearch from '@/components/Home/DateRangeSearch';
 import CheckboxList from '@/components/Home/CheckboxList';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
+import ListRoom from '@/components/ListRoom';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -85,15 +86,9 @@ const Home: NextPage = () => {
         </Grid>
       </GridContainer>
 
-      {roomsHot ? (
-        <GridContainer xs={12} sm={10}>
-          {roomsHot.slice(0, 5).map((room, index) => (
-            <RoomCard isHomepage={true} key={index} room={room} />
-          ))}
-        </GridContainer>
-      ) : (
-          'loading'
-        )}
+      <GridContainer xs={12} sm={10}>
+        <ListRoom roomData={roomsHot} />
+      </GridContainer>
 
       <Grid style={{ marginTop: '100px' }}>
         <GridContainer xs={12} sm={12} md={10}>

@@ -1,0 +1,76 @@
+.listRoomContainer {
+  display: block !important;
+  .arrowIcon {
+    width: 15px;
+    height: 15px;
+  }
+  // Override Slick CSS
+  .slick-prev:before,
+  .slick-next:before {
+    display: none;
+  }
+  .slick-prev.slick-disabled,
+  .slick-next.slick-disabled {
+    opacity: 0;
+  }
+  .slick-next.slick-disabled {
+    -webkit-transform: translate(20px, -50%);
+    transform: translate(20px, -50%);
+  }
+  .slick-prev.slick-disabled {
+    -webkit-transform: translate(-20px, -50%);
+    transform: translate(-20px, -50%);
+  }
+  .slick-prev:hover,
+  .slick-prev:focus,
+  .slick-next:hover,
+  .slick-next:focus {
+    color: inherit;
+    background: white;
+  }
+  .slick-next,
+  .slick-prev {
+    transition: all 300ms ease-in-out 0ms;
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0ms;
+  }
+
+  // End Override Slick CSS
+
+  .nextArrow {
+    top: 30%;
+    width: 34px;
+    height: 34px;
+    min-height: 13px;
+    right: -1.2%;
+    display: inline-block !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    position: absolute;
+    touch-action: manipulation !important;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px !important;
+    background: white;
+    &:hover {
+      background: white;
+    }
+  }
+  .prevArrow {
+    z-index: 1;
+    top: 30%;
+    width: 34px;
+    height: 34px;
+    min-height: 13px;
+    left: -1.2%;
+    display: inline-block !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    position: absolute;
+    touch-action: manipulation !important;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px !important;
+    background: white;
+  }
+}

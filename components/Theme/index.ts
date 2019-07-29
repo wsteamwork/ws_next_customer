@@ -20,7 +20,7 @@ const options: ThemeOptions = {
       color: mainColor.blurText
     },
     fontWeightRegular: fontWeight.medium,
-    // fontFamily: 'Quicksand, sans-serif'
+
     fontFamily:
       'Circular, -apple-system, BlinkMacSystemFont, Montserrat Alternates, "Quicksand", sans-serif !important'
   },

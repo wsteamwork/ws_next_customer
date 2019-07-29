@@ -30,7 +30,7 @@ import Popular from '@material-ui/icons/WhatshotRounded';
 interface Iprops {
   classes?: any;
 }
-//TODO: 
+//TODO:
 // - Convert JS-CSS to External CSS
 // - Make component customizable
 // - Refactor refactor
@@ -38,18 +38,24 @@ interface Iprops {
 const styles: any = (theme: Theme) =>
   createStyles({
     container: {
-      width: '80%',
-      margin: '0 auto'
+      margin: '0 auto',
+      height: '100%',
+      border: '1px solid #ddd',
+      borderRadius: 4,
+      background: '#fff',
     },
     suggestionsContainerOpen: {
       position: 'absolute',
       zIndex: 10000,
       maxHeight: 192,
       overflowY: 'scroll',
-      borderTop: '1px solid #EBEBEB',
-      width: '80%',
+      borderTop: '1px solid #ddd',
+      width: '80%'
     },
-
+    textFieldRoot: {
+      color: '#fff',
+      height: '100%'
+    },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
       zIndex: 1,
@@ -58,7 +64,7 @@ const styles: any = (theme: Theme) =>
       top: 46,
       maxHeight: 322,
       overflowY: 'scroll',
-      borderTop: '1px solid #EBEBEB'
+      borderTop: '1px solid #ddd'
     },
     suggestion: {
       display: 'block'
@@ -98,6 +104,9 @@ const styles: any = (theme: Theme) =>
     right: {
       textAlign: 'right',
       fontSize: 14
+    },
+    startAdornment: {
+      marginLeft: 8
     }
   });
 
@@ -107,7 +116,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   const [searchText, setSearchText] = useState<string>('');
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
-
 
   const getDataSearch = async (value: string): Promise<any> => {
     const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
@@ -158,10 +166,12 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     return (
       <TextField
         fullWidth
+        classes={{ root: classes.textFieldRoot }}
         placeholder={t('home:SearchAutocomplete:toGo')}
+        inputProps={{ root: classes.textFieldRoot }}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
+            <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
               <SearchRounded />
             </InputAdornment>
           ),
@@ -214,35 +224,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
           </Grid>
         </Grid>
       </MenuItem>
-      // <ListItem className="itemSearchResponse">
-      //   <Grid container>
-      //     <Grid item xs={7} className="left">
-      //       {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (
-      //         <span key={index}>{part.text}</span>
-      //       ))}
-      //       {/* <p className="name">{suggestion.name}</p> */}
-      //     </Grid>
-      //     <Grid item xs={5} className="right">
-      //       <span className="citySearchResponse">
-      //         {suggestion.type === IS_SEARCH_CITY
-      //           ? t('home:SearchAutocomplete:city')
-      //           : suggestion.type === IS_SEARCH_DISTRICT
-      //           ? t('home:SearchAutocomplete:district')
-      //           : t('home:SearchAutocomplete:room')}
-      //       </span>
-      //     </Grid>
-      //   </Grid>
-
-      //   <Grid container className="desc">
-      //     <Grid item className="right">
-      //       {suggestion.number_room !== 0 && suggestion.number_room! && (
-      //         <p>
-      //           {suggestion.number_room} {t('home:SearchAutocomplete:accommodation')}
-      //         </p>
-      //       )}
-      //     </Grid>
-      //   </Grid>
-      // </ListItem>
     );
   };
 

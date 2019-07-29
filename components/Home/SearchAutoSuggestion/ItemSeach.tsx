@@ -29,8 +29,8 @@ const ItemSeach: FC<IProps> = (props) => {
             {item.type === IS_SEARCH_CITY
               ? t('home:SearchAutocomplete:city')
               : item.type === IS_SEARCH_DISTRICT
-              ? t('home:SearchAutocomplete:district')
-              : t('home:SearchAutocomplete:room')}
+                ? t('home:SearchAutocomplete:district')
+                : t('home:SearchAutocomplete:room')}
           </span>
         </Grid>
       </Grid>

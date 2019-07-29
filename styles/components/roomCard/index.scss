@@ -1,10 +1,14 @@
 .roomCard {
-  width: 20%;
-  display: inline-block;
+  &:focus {
+    outline: none;
+  }
   &__wrapper {
     width: 100% !important;
     height: 100% !important;
     padding: 8px;
+    &:focus {
+      outline: none;
+    }
 
     .mediaContainer {
       width: 100% !important;
@@ -53,10 +57,17 @@
         display: block;
         color: rgb(72, 72, 72);
         text-decoration: none;
+        .iconWrapper {
+          display: inline-block !important;
+          vertical-align: bottom;
+          width: 25px;
+          height: 25px;
+          margin-right: 5px;
+        }
+        .instantBookIcon {
+          color: #fa991c;
+        }
         .info {
-          .name {
-            font-weight: 700;
-          }
           .price {
             margin-top: 5px;
             display: flex;
@@ -64,6 +75,27 @@
               margin-left: 6px;
             }
           }
+          .roomCard__type {
+            color: #fa991c !important;
+
+            text-transform: uppercase !important;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important;
+
+            font-size: 12px !important;
+            font-weight: 700 !important;
+          }
+          .roomCard__name {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            line-height: 1.5 !important;
+            margin-bottom: 0;
+            display: -webkit-box;
+            max-height: 46px;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
           .review {
             display: flex;
             margin-top: 2px;
@@ -85,25 +117,6 @@
               font-size: 14px;
               font-weight: 500;
             }
-          }
-
-          .roomCard__type {
-            // color: #FA991C !important;
-            background: radial-gradient( circle farthest-corner at 10% 20%,  rgba(250,153,28,1) 0%, rgba(255,0,0,1) 95% );
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase !important;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important;
-
-
-            font-size: 12px !important;
-            font-weight: 600 !important;
-          }
-          .roomCard__name {
-            font-size: 1rem !important;
-            font-weight: 600 !important;
-            line-height: 1.5 !important;
           }
         }
       }
