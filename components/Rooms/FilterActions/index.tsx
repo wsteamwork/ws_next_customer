@@ -10,8 +10,8 @@ import FilterRoom from './FilterRoom';
 
 const FilterActions: FC = () => {
   return (
-    <GridContainer xs={11} md={10} className="filterRooms" classNameItem="filterRooms__overlay">
-      <Grid container spacing={1} className="displayWebkit__overflow">
+    <GridContainer xs={11} md={10} className="filterRooms">
+      <Grid container spacing={1} >
         <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
           <ChooseRoomGuest></ChooseRoomGuest>
         </Grid>

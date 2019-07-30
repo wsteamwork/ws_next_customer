@@ -1,6 +1,7 @@
 @import "./chooseRoomGuest.scss";
 @import "./kindOfRoom.scss";
 @import "./filterRooms.scss";
+@import "./priceRange.scss";
 
 .searchRooms {
   background-color: #484848;
@@ -34,15 +35,15 @@
 .displayWebkit {
   display: -webkit-box !important;
 
-  &__overflow {
-    display: -webkit-box !important;
-    overflow-y: hidden;
-    overflow-x: auto;
+  // &__overflow {
+  //   display: -webkit-box !important;
+  //   overflow-y: hidden;
+  //   overflow-x: auto;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  //   }
+  // }
 }
 
 .filterRooms {
@@ -69,6 +70,9 @@
   }
 
   &__bookByHourt {
+    @include md {
+      display: none !important;
+    }
   }
 
   &__fastBooking {
