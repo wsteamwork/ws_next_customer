@@ -1,19 +1,24 @@
-import React, { FC, Dispatch, SetStateAction, useState, useEffect } from 'react';
+import React, { FC, Dispatch, SetStateAction, memo } from 'react';
 import { Grid, FormGroup, FormControlLabel } from '@material-ui/core';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
-import { axios } from '@/utils/axiosInstance';
-import { getRoomType, useRoomTypeChecbox } from './context';
+import { useRoomTypeChecbox, RoomType } from './context';
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
+  dataClick: RoomType[];
+  setDataClick: Dispatch<SetStateAction<RoomType[]>>;
 }
 
 const ActionSelect: FC<IProps> = (props) => {
-  const { setOpen } = props;
+  const { setOpen, dataClick, setDataClick } = props;
   const { t } = useTranslation();
-  const [data, handleChange, dataClick, handleSubmit] = useRoomTypeChecbox(setOpen);
+  const { data, handleChange, handleSubmit, handleClose } = useRoomTypeChecbox(
+    setOpen,
+    dataClick,
+    setDataClick
+  );
 
   return (
     <Grid className="kindOfRoom__actions">
@@ -39,7 +44,7 @@ const ActionSelect: FC<IProps> = (props) => {
             fontSize="14px"
             background="white"
             textColor="#000"
-            onClick={() => setOpen(false)}>
+            onClick={handleClose}>
             {t('home:chooseGuestRoom:close')}
           </ButtonGlobal>
         </Grid>
@@ -53,4 +58,4 @@ const ActionSelect: FC<IProps> = (props) => {
   );
 };
 
-export default ActionSelect;
+export default memo(ActionSelect);

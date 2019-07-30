@@ -16,15 +16,27 @@ const ChooseGuestRoom: FC = () => {
   const numberGuest = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
   const numberRoom = useSelector<ReducersList, number>((state) => state.searchFilter.roomsCount);
 
-  const valueInput = useMemo(() => {
+  const valueInput = useMemo<string>(() => {
     if (numberGuest !== 0 && numberRoom !== 0) {
       return `${numberGuest} ${t('home:searchComponent:guest')} & ${numberRoom} ${t(
+        'home:searchComponent:room'
+      )}`;
+    } else if (numberGuest !== 0) {
+      return `${numberGuest} ${t('home:searchComponent:guest')} & 0 ${t(
+        'home:searchComponent:room'
+      )}`;
+    } else if (numberRoom !== 0) {
+      return `0 ${t('home:searchComponent:guest')} & ${numberRoom} ${t(
         'home:searchComponent:room'
       )}`;
     }
 
     return '';
   }, [numberGuest, numberRoom]);
+
+  const hanldeClose = () => {
+    setOpen(false);
+  };
 
   return (
     <CustomPopper
@@ -34,9 +46,9 @@ const ChooseGuestRoom: FC = () => {
       trigger="click"
       isVisible={open}
       theme="light-border"
-      onHide={() => setOpen(false)}
+      onHide={hanldeClose}
       interactive
-      content={<ActionChoose setOpen={setOpen}></ActionChoose>}>
+      content={<ActionChoose open={open} setOpen={setOpen}></ActionChoose>}>
       <Paper elevation={0} className="chooseGuestRoom">
         <Grid container className="root" onClick={() => setOpen(true)}>
           <span className="flex_columCenter">

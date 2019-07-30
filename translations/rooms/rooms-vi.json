@@ -1,5 +1,11 @@
 {
     "searchRooms": {
-        "roomsType": "Loại phòng"
+        "roomsType": "Loại phòng",
+        "priceRange": "Khoảng giá",
+        "fastBooking": "Đặt phòng nhanh",
+        "fastPayment": "Có thể thanh toán trực tiếp",
+        "filterRooms": "Bộ lọc",
+        "bookByHour": "Theo giờ",
+        "descBookByHour": "Bạn có thể đặt phòng theo giờ, tối thiểu là 4h"
     }
 }

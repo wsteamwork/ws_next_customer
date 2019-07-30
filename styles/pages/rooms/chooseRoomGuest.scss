@@ -1,15 +1,21 @@
 .chooseRoomGuest {
   background: white;
-  padding: 8px 15px;
   border: 1px solid #ddd;
   border-radius: 3px;
   font-weight: 600;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $primary;
     color: white;
+  }
+
+  &__removeIcon {
+    padding-right: 10px;
+  }
+
+  &__actions {
+    padding: 8px 10px;
   }
 }
 

@@ -1,4 +1,12 @@
-import React, { FC, useState, Dispatch, SetStateAction, memo } from 'react';
+import React, {
+  FC,
+  useState,
+  Dispatch,
+  SetStateAction,
+  memo,
+  MouseEventHandler,
+  useEffect
+} from 'react';
 import { Grid } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { faUserFriends, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
@@ -12,16 +20,28 @@ const RowSelect = dynamic(() => import('./RowSelect'));
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
+  open: boolean;
+  checkRemove?: boolean;
 }
 
 const ActionChoose: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { setOpen } = props;
+  const { setOpen, open, checkRemove } = props;
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const numberGuest = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
   const numberRoom = useSelector<ReducersList, number>((state) => state.searchFilter.roomsCount);
   const [guest, setGuest] = useState(numberGuest);
   const [room, setRoom] = useState(numberRoom);
+
+  useEffect(() => {
+    !open && hanldeClose();
+  }, [open, checkRemove]);
+
+  const hanldeClose = () => {
+    setOpen(false);
+    setGuest(numberGuest);
+    setRoom(numberRoom);
+  };
 
   const hanleSubmit = () => {
     setOpen(false);
@@ -49,7 +69,7 @@ const ActionChoose: FC<IProps> = (props) => {
             fontSize="14px"
             background="white"
             textColor="#000"
-            onClick={() => setOpen(false)}>
+            onClick={hanldeClose}>
             {t('home:chooseGuestRoom:close')}
           </ButtonGlobal>
         </Grid>

@@ -40,7 +40,9 @@ export type RoomIndexAction =
       roomTypesFilter?: number[];
       ratingLists?: number[];
       sorts?: number;
-    };
+    }
+  | { type: 'setInstantBook'; payload: number }
+  | { type: 'setRentType'; payload: number };
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
@@ -54,6 +56,8 @@ export type RoomIndexState = {
   readonly meta: Pagination | null;
   readonly isLoadMore: boolean;
   readonly isMapOpen: boolean;
+  readonly instant_book: number;
+  readonly rent_type: number;
 };
 
 export const RoomIndexStateInit: RoomIndexState = {
@@ -70,7 +74,9 @@ export const RoomIndexStateInit: RoomIndexState = {
   sorts: null,
   meta: null,
   isLoadMore: false,
-  isMapOpen: true
+  isMapOpen: true,
+  instant_book: 0,
+  rent_type: 2
 };
 
 export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
@@ -88,33 +94,19 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
         price: action.price
       });
     case 'setMeta':
-      return updateObject<RoomIndexState>(state, {
-        meta: action.meta
-      });
+      return updateObject<RoomIndexState>(state, { meta: action.meta });
     case 'setLoadMore':
-      return updateObject<RoomIndexState>(state, {
-        isLoadMore: action.isLoadMore
-      });
+      return updateObject<RoomIndexState>(state, { isLoadMore: action.isLoadMore });
     case 'setMapOpen':
-      return updateObject<RoomIndexState>(state, {
-        isMapOpen: action.isMapOpen
-      });
+      return updateObject<RoomIndexState>(state, { isMapOpen: action.isMapOpen });
     case 'setRating':
-      return updateObject<RoomIndexState>(state, {
-        ratingLists: action.ratingLists
-      });
+      return updateObject<RoomIndexState>(state, { ratingLists: action.ratingLists });
     case 'setComforts':
-      return updateObject<RoomIndexState>(state, {
-        comforts: action.comforts
-      });
+      return updateObject<RoomIndexState>(state, { comforts: action.comforts });
     case 'setAmenitiesFilter':
-      return updateObject<RoomIndexState>(state, {
-        amenities: action.amenities
-      });
+      return updateObject<RoomIndexState>(state, { amenities: action.amenities });
     case 'setRoomTypes':
-      return updateObject<RoomIndexState>(state, {
-        roomTypes: action.roomTypes
-      });
+      return updateObject<RoomIndexState>(state, { roomTypes: action.roomTypes });
     case 'setFilter':
       return updateObject(state, {
         roomTypesFilter: !action.roomTypesFilter ? state.roomTypesFilter : action.roomTypesFilter,
@@ -123,6 +115,10 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
         rooms: [],
         sorts: action.sorts
       });
+    case 'setInstantBook':
+      return updateObject(state, { instant_book: action.payload });
+    case 'setRentType':
+      return updateObject(state, { rent_type: action.payload });
     default:
       return state;
   }

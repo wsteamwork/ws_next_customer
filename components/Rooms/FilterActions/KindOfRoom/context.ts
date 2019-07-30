@@ -16,10 +16,6 @@ export interface RoomType {
   value: string;
 }
 
-export interface RoomTypeCheckbox extends RoomType {
-  checked: boolean;
-}
-
 export const getRoomType = async (
   setData: Dispatch<SetStateAction<RoomType[]>>
 ): Promise<RoomType[]> => {
@@ -28,12 +24,25 @@ export const getRoomType = async (
   return res.data;
 };
 
+type ReturnUseCheckBox = {
+  data: RoomType[];
+  handleChange: (
+    item: RoomType
+  ) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  handleSubmit: MouseEventHandler;
+  handleClose: MouseEventHandler;
+  handleRemove: MouseEventHandler;
+  roomTypes: RoomType[];
+};
+
 export const useRoomTypeChecbox = (
-  setOpen: Dispatch<SetStateAction<boolean>>
-): [RoomType[], Function, RoomType[], MouseEventHandler] => {
+  setOpen?: Dispatch<SetStateAction<boolean>>,
+  dataClick?: RoomType[],
+  setDataClick?: Dispatch<SetStateAction<RoomType[]>>
+): ReturnUseCheckBox => {
+  const { dispatch, state } = useContext(RoomIndexContext);
+  const { roomTypes } = state;
   const [data, setData] = useState<RoomType[]>([]);
-  const [dataClick, setDataClick] = useState<RoomType[]>([]);
-  const { dispatch } = useContext(RoomIndexContext);
 
   useEffect(() => {
     getRoomType(setData);
@@ -56,5 +65,16 @@ export const useRoomTypeChecbox = (
     setOpen(false);
   };
 
-  return [data, handleChange, dataClick, handleSubmit];
+  const handleClose = () => {
+    setOpen(false);
+    setDataClick(roomTypes);
+  };
+
+  const handleRemove = () => {
+    setOpen(false);
+    dispatch({ type: 'setRoomTypes', roomTypes: [] });
+    setDataClick([]);
+  };
+
+  return { data, handleChange, handleSubmit, handleClose, handleRemove, roomTypes };
 };

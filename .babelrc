@@ -28,6 +28,7 @@
                     "@/utils": "./utils/",
                     "@/static": "./static/",
                     "@/translations": "./translations/",
+                    "@/routes": "./routes/",
                 }
             }
         ],
