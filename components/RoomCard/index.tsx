@@ -7,6 +7,7 @@ import numeral from 'numeral';
 import StarIcon from '@material-ui/icons/StarRounded';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 interface Iprops {
   classes?: any;
   room: RoomIndexRes;
@@ -29,7 +30,7 @@ const RoomCard: FC<Iprops> = (props) => {
                 <Link href={`/room/${room.id}`} target="_blank">
                   <Grid className="mediaWrapper">
                     <img
-                      src={`https://s3-ap-southeast-1.amazonaws.com/westay-img/sm/${room.media.data[0].image}`}
+                      src={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
                       className="media"
                       alt={``}
                     />

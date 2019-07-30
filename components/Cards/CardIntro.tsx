@@ -1,18 +1,19 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles, { CSSProperties } from '@material-ui/core/styles/withStyles';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import React, { Fragment, FunctionComponent, useMemo } from 'react';
-import { compose } from 'recompose';
-import { Grid, Typography, Theme } from '@material-ui/core';
+import { Typography, Theme, makeStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { ICardIntro } from '@/types/Interfaces/Components/Card';
 import GridContainer from '../Layout/Grid/Container';
 
 interface IProps extends ICardIntro {
   classes?: any;
-  showPrice: boolean;
+  showPrice?: boolean;
+  recommendedPrice?: string;
+  subTitle?:boolean;
 }
 
-const styles: any = (theme: Theme) =>
+const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     imgSize: {
       maxHeight: '100%',
@@ -39,6 +40,7 @@ const styles: any = (theme: Theme) =>
       borderRadius: 4,
       width: '100%',
       height: '100%',
+      maxHeight:(props)=>props.imgHeight,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
@@ -89,13 +91,20 @@ const styles: any = (theme: Theme) =>
     boxTitle: {
       position: 'absolute',
       zIndex: 1,
-      bottom: '10%',
-      left: '7%'
+      bottom: theme.spacing(2),
+      left: theme.spacing(3),
+      width:'85%',
     },
     title: {
       color: '#fff',
       fontWeight: 900,
       // fontSize:'1.075rem',
+      textShadow: '1px 1px 4px #000000'
+    },
+    subTitle:{
+      color: '#fff',
+      fontWeight: 500,
+      fontSize:'0.775rem',
       textShadow: '1px 1px 4px #000000'
     },
     boxPrice: {
@@ -113,14 +122,16 @@ const styles: any = (theme: Theme) =>
       fontSize: '0.75rem',
       textAlign: 'right'
     }
-  });
+  })
+);
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
-  const { classes, customClasses, imgHeight, maxHeight, imgAlt, imgSrc, title, showPrice } = props;
+  const classes = useStyles(props);
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,subTitle,recommendedPrice } = props;
 
   const imgStyles = useMemo<CSSProperties>(
     () => ({
-      maxHeight: imgHeight ? imgHeight : maxHeight,
+      maxHeight: imgHeight,
       height: imgHeight ? imgHeight : undefined
     }),
     [imgHeight]
@@ -140,15 +151,20 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
           style={imgStyles}
           className={classNames(classes.imgSize, customClasses.image)}
         />
-        <div className={classes.boxTitle}>
+        <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
             {title}
           </Typography>
+          {subTitle ? (
+            <Typography variant="subtitle2" className={classes.subTitle}>
+              {subTitle}
+            </Typography>
+          ) : ''}
         </div>
         {showPrice ? (
           <div className={classes.boxPrice}>
             <Typography variant="subtitle2" className={classes.price}>
-              Chỉ từ <br /> 1.2tr
+              Chỉ từ <br /> {recommendedPrice} VND/đêm
             </Typography>
           </div>
         ) : (
@@ -165,7 +181,9 @@ CardIntro.defaultProps = {
   imgAlt: 'Westay - Homestay cho người Việt',
   imgSrc: './static/images/room_demo.jpg',
   title: '',
-  showPrice: false
+  showPrice: false,
+  recommendedPrice:'',
+  subTitle:false,
 };
 
-export default compose<IProps, any>(withStyles(styles))(CardIntro);
+export default CardIntro;

@@ -12,9 +12,7 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import RoomCard from '@/components/RoomCard';
 import {
   RoomHomepageContext,
-  getRoomHot,
-  RoomHotStateInit,
-  RoomHotReducer
+  getRoomHot, RoomHomepageStateInit, RoomHomepageReducer, getRoomsHomepage
 } from '@/store/Context/Room/RoomHomepageContext';
 import DateRangeSearch from '@/components/Home/DateRangeSearch';
 import CheckboxList from '@/components/Home/CheckboxList';
@@ -22,25 +20,19 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import ListRoom from '@/components/ListRoom';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
+import BlogContainer from '@/components/Layout/BlogContainer';
+import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
-  const [state, dispatch] = useReducer(RoomHotReducer, RoomHotStateInit);
+  const [state, dispatch] = useReducer(RoomHomepageReducer, RoomHomepageStateInit);
+
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-  const { roomsHot } = state;
+  const { roomsHot,roomsCity,apartments } = state;
+
 
   useEffect(() => {
-    getRoomHot()
-      .then((data) => {
-        const roomData = data.data;
-        dispatch({
-          type: 'setRoomHot',
-          rooms: roomData
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    getRoomsHomepage(dispatch)
   }, []);
 
   const handleOverlay = () => {
@@ -88,18 +80,20 @@ const Home: NextPage = () => {
         </Grid>
       </GridContainer>
 
-      <MetroGridImage />
-
       <GridContainer xs={12} sm={10}>
+        <SliderTypeApartment/>
+        <MetroGridImage />
+
         <ListRoom roomData={roomsHot} />
       </GridContainer>
 
-      <Grid style={{ marginTop: '100px' }}>
-        <GridContainer xs={12} sm={12} md={10}>
-          <HostBecome></HostBecome>
-        </GridContainer>
-        <FooterComponent></FooterComponent>
-      </Grid>
+      <HostBecome/>
+
+      <GridContainer xs={12} sm={10}>
+        <BlogContainer/>
+      </GridContainer>
+
+      <FooterComponent/>
       {/* </Fragment> */}
     </RoomHomepageContext.Provider >
   );

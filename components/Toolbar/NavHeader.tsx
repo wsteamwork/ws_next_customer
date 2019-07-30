@@ -297,7 +297,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
-                        {t('home:supportMerchant')}: 0917 041 849
+                        {t('home:supportHost')}: 0917 041 849
                       </MenuItem>
                       <Divider />
                       <MenuItem onClick={() => Hotline('mailto:info@westay.org')}>
