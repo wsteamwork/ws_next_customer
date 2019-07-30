@@ -5,7 +5,7 @@ interface IProps extends TippyProps {}
 
 const CustomPopper: FC<IProps> = (props) => {
   return (
-    <Tippy content="Tooltip" duration={300} theme="light-border" {...props}>
+    <Tippy content="Tooltip" maxWidth="100%" duration={300} theme="light-border" {...props}>
       {props.children}
     </Tippy>
   );

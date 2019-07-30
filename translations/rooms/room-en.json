@@ -1,5 +1,11 @@
 {
     "searchRooms": {
-        "roomsType": "Type of accommodation"
+        "roomsType": "Type of accommodation",
+        "priceRange": "Price Range",
+        "fastBooking": "Fast Booking",
+        "fastPayment": "Direct payment is possible",
+        "filterRooms": "Filter",
+        "bookByHour": "Book by hour",
+        "descBookByHour": "You can book by hour, at least 4 hours"
     }
 }

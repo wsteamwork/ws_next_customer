@@ -50,6 +50,7 @@ const KindOfRoom: FC = () => {
         <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
           <FontAwesomeIcon icon={faBuilding} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
           <p>{t('rooms:searchRooms:roomsType')}</p>
+          {checkRoomTypes && <p>&nbsp;({roomTypes.length})</p>}
         </span>
         {checkRoomTypes && (
           <span onClick={handleRemove} className="chooseRoomGuest__removeIcon">

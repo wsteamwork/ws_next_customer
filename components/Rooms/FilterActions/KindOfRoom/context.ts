@@ -26,7 +26,9 @@ export const getRoomType = async (
 
 type ReturnUseCheckBox = {
   data: RoomType[];
-  handleChange: Function;
+  handleChange: (
+    item: RoomType
+  ) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   handleSubmit: MouseEventHandler;
   handleClose: MouseEventHandler;
   handleRemove: MouseEventHandler;
