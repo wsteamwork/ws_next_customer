@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react';
 import { DateRangePicker, FocusedInputShape } from 'react-dates';
 import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
 import momemt, { Moment } from 'moment';
+import { Paper } from '@material-ui/core';
+import RenderDay from './RenderDay';
 
 interface DateRange {
   startDate: Moment | null;
@@ -21,23 +22,33 @@ const DateRangeSingle: FC = (props) => {
     setFocued(forcus);
   };
 
+  const onNextMonthClick = (newCurrentMonth: Moment) => {};
+
+  const _renderDayContents = (day: Moment) => <RenderDay day={day} />;
+
   return (
-    <DateRangePicker
-      numberOfMonths={1}
-      startDateId="startDate"
-      endDateId="endDate"
-      startDate={date.startDate}
-      endDate={date.endDate}
-      onDatesChange={onDatesChange}
-      focusedInput={focused}
-      onFocusChange={onFocusChange}
-      //   isDayBlocked = {blockingDate}
-      //   isOutsideRange = {isOutSideRange}
-      minimumNights={0}
-      noBorder={true}
-      displayFormat="ddd, DD/MM/YYYY"
-      readOnly
-    />
+    <Paper>
+      <DateRangePicker
+        transitionDuration={300}
+        numberOfMonths={1}
+        startDateId="startDate"
+        endDateId="endDate"
+        startDate={date.startDate}
+        endDate={date.endDate}
+        onDatesChange={onDatesChange}
+        focusedInput={focused}
+        onFocusChange={onFocusChange}
+        //   isDayBlocked = {blockingDate}
+        //   isOutsideRange = {isOutSideRange}
+        onNextMonthClick={onNextMonthClick}
+        renderDayContents={_renderDayContents}
+        hideKeyboardShortcutsPanel
+        minimumNights={1}
+        noBorder={true}
+        displayFormat="ddd, DD/MM/YYYY"
+        readOnly
+      />
+    </Paper>
   );
 };
 
