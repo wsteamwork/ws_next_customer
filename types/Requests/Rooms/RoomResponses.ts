@@ -91,6 +91,13 @@ export interface NumberRoomCity {
   average_price: number;
 }
 
+export interface TypeApartment {
+  id: number,
+  value: string,
+  status: number,
+  image:string
+}
+
 export interface Merchant {
   id: number;
   uuid: string;

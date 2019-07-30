@@ -54,7 +54,8 @@ const styles: any = (theme: Theme) =>
     },
     textFieldRoot: {
       color: '#fff',
-      height: '100%'
+      height: '100%',
+      justifyContent:'center'
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',

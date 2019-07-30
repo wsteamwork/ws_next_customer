@@ -33,7 +33,12 @@ interface Iprops {
 const useStyles = makeStyles<Iprops>((theme: any) =>
   createStyles({
     root: {
-      display: 'block'
+      display: 'block',
+      marginTop:theme.spacing(7)
+    },
+    title:{
+      marginBottom:theme.spacing(3),
+      fontWeight:900,
     }
   })
 );
@@ -91,8 +96,8 @@ const ListRoom: FC<Iprops> = (props) => {
   };
   return (
     <Fragment>
-      <Grid container className="listRoomContainer">
-        <Typography variant='h5'>
+      <Grid container className={classNames(classes.root, "listRoomContainer")}>
+        <Typography variant='h5' className={classes.title}>
           Phòng nổi bật
         </Typography>
         {roomData ? (
