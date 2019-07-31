@@ -21,9 +21,12 @@ const RenderDay: FC<Iprops> = (props) => {
   const date = day.format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY);
 
   return (
-    <Grid>
-      <p>{day.date()}</p>
-      {dataPriceByDay[date] && <p>{numeral(dataPriceByDay[date].price_day).format('0.0a')}</p>}
+    <Grid className="dayContents">
+      {day.date()}
+      <br></br>
+      {dataPriceByDay[date] && (
+        <span className="dayContents__price">{dataPriceByDay[date].price_day / 1000000}TR</span>
+      )}
     </Grid>
   );
 };
