@@ -74,3 +74,20 @@ export const arrayFilterCheckBoxEvent = <E extends HTMLInputElement>(
 export const selfMemo = <T = any>(value: T): T => {
   return useMemo(() => value, [value]);
 };
+
+export const formatPrice = (
+  price: number,
+): string => {
+  try {
+    let format = '';
+    if(price >= 1000000) {
+      format = (price/1000000).toFixed(2) + 'tr '; 
+    }
+    else {
+      format = (price/1000).toFixed(0) + 'k ' 
+    }
+    return format;
+  } catch (e) {
+    console.error(e);
+  }
+};

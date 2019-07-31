@@ -7,5 +7,8 @@
         "filterRooms": "Bộ lọc",
         "bookByHour": "Theo giờ",
         "descBookByHour": "Bạn có thể đặt phòng theo giờ, tối thiểu là 4h"
-    }
+    },
+    "visitedRoom" : "Phòng đã xem",
+    "night" : "đêm",
+    "hour" : "giờ"
 }
