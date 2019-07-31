@@ -4,7 +4,7 @@ import Select, { SelectProps } from '@material-ui/core/Select';
 import { Theme, FormControl, MenuItem, Paper, InputBase } from '@material-ui/core';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 
-const BootstrapInput = withStyles((theme: Theme) =>
+export const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
     root: {
       'label + &': {

@@ -19,14 +19,14 @@
     h3 {
       padding: 15px 0px;
     }
+  }
+  
+  &__actions {
+    height: 50px;
+    border-top: 1px solid #ddd;
+  }
 
-    &__actions {
-      height: 50px;
-      border-top: 1px solid #ddd;
-    }
-
-    &__item {
-      border-bottom: 1px solid #ddd;
-    }
+  &__item {
+    border-bottom: 1px solid #ddd;
   }
 }

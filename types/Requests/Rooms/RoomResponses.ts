@@ -79,7 +79,7 @@ export interface RoomDetails {
   note: string;
 }
 
-export interface RoomScheduleRes {
+export type RoomScheduleRes = {
   blocks: string[];
 }
 

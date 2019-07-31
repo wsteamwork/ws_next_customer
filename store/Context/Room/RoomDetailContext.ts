@@ -6,8 +6,12 @@ import _ from 'lodash';
 import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { updateObject } from '../utility';
 import { NextRouter } from 'next/router';
+import { PriceByDayRes, BodyRequestPriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import moment from 'moment';
 
 export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);
+
+export const DEFAULT_FORMAT_DATE_PRICE_BY_DAY = 'YYYY-MM-DD';
 
 export interface IRoomDetailsContext {
   state: RoomDetailsState;
@@ -16,14 +20,21 @@ export interface IRoomDetailsContext {
 
 export type RoomDetailsState = {
   readonly room: RoomIndexRes | null;
-  readonly roomRecommend: RoomIndexRes[] | [];
+  readonly roomRecommend: RoomIndexRes[];
   readonly schedule: string[];
   readonly bookingType: number;
   readonly price?: BookingPriceCalculatorRes;
+  readonly priceByDay: PriceByDayRes[];
 };
 
 export type RoomDetailsAction =
-  | { type: 'setDetails'; room: RoomIndexRes; recommend: RoomIndexRes[]; schedule: string[] }
+  | {
+      type: 'setDetails';
+      room: RoomIndexRes;
+      recommend: RoomIndexRes[];
+      schedule: string[];
+      priceByDay: PriceByDayRes[];
+    }
   | { type: 'setBookingType'; bookingType: number }
   | { type: 'setPrice'; price: BookingPriceCalculatorRes };
 
@@ -31,7 +42,8 @@ export const RoomDetailsStateInit: RoomDetailsState = {
   room: null,
   roomRecommend: [],
   schedule: [],
-  bookingType: 2
+  bookingType: 2,
+  priceByDay: []
 };
 
 export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = (
@@ -43,7 +55,8 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
       return updateObject<RoomDetailsState>(state, {
         room: action.room,
         schedule: action.schedule,
-        roomRecommend: action.recommend
+        roomRecommend: action.recommend,
+        priceByDay: action.priceByDay
       });
     case 'setBookingType':
       return updateObject<RoomDetailsState>(state, {
@@ -58,49 +71,55 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
   }
 };
 
-export const getRoom = async (idRoom: number) => {
+export const getRoom = async (idRoom: any): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
     `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user`
   );
+
   return res.data.data;
 };
 
-const getRoomRecommend = async (idRoom: number) => {
+const getRoomRecommend = async (idRoom: any): Promise<RoomIndexRes[]> => {
   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
     `rooms/room_recommend/${idRoom}?include=media,details,city,district`
   );
+
   return res.data.data;
 };
 
-const getRoomSchedule = async (id: number) => {
-  const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${id}`);
-  return res.data;
+const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
+  const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`);
+  return res.data.data.blocks;
 };
 
-export const getData = (id: number, dispatch: Dispatch<RoomDetailsAction>, router: NextRouter) => {
-  if (isNaN(id)) router.push('/');
-  const pathName = window.location.pathname;
-  let isMerchant = false;
-  //console.log(window.location.pathname);
-  if (pathName.indexOf('preview-room') !== -1) {
-    isMerchant = true;
+const getPriceByDay = async (idRoom: any): Promise<PriceByDayRes[]> => {
+  const body: BodyRequestPriceByDayRes = {
+    date_start: moment().format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY),
+    date_end: moment()
+      .endOf('month')
+      .format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY)
+  };
+
+  const res: AxiosRes<PriceByDayRes[]> = await axios.get(`rooms/calendar-props/${idRoom}`);
+
+  return res.data.data;
+};
+
+export const getDataRoom = async (dispatch: Dispatch<RoomDetailsAction>, router: NextRouter) => {
+  const { id } = router.query;
+
+  try {
+    const res = await Promise.all([
+      getRoom(id),
+      getRoomRecommend(id),
+      getRoomSchedule(id),
+      getPriceByDay(id)
+    ]);
+
+    const [room, recommend, schedule, priceByDay] = res;
+
+    dispatch({ type: 'setDetails', room, recommend, schedule, priceByDay });
+  } catch (error) {
+    console.log(error);
   }
-  Promise.all([getRoom(id), getRoomSchedule(id), getRoomRecommend(id)])
-    .then((res) => {
-      const [room, schedule, roomRecommend] = res;
-      // console.log(!isMerchant, room.status !== 1);
-      if (!isMerchant && room.status !== 1) {
-        router.push('/404');
-      }
-      dispatch({
-        type: 'setDetails',
-        room: room,
-        recommend: roomRecommend,
-        schedule: _.sortBy(schedule.data.blocks)
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      router.push('/404');
-    });
 };

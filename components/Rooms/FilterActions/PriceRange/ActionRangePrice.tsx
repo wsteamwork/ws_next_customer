@@ -28,6 +28,7 @@ import {
 import { WithStyles } from '@material-ui/styles';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
+import numeral from 'numeral';
 
 interface IProps extends WithStyles<typeof styles> {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -151,9 +152,9 @@ const ActionRangePrice: FC<IProps> = (props) => {
               Tối thiểu
             </InputLabel>
             <InputBase
+              readOnly
               id="min-price-filter"
-              value={price.min}
-              type="number"
+              value={numeral(price.min).format('0,0')}
               onChange={handleChange('min')}
               fullWidth
               classes={{
@@ -174,9 +175,9 @@ const ActionRangePrice: FC<IProps> = (props) => {
               Tối đa
             </InputLabel>
             <InputBase
+              readOnly
               id="max-price-filter"
-              value={price.max}
-              type="number"
+              value={numeral(price.max).format('0,0')}
               onChange={handleChange('max')}
               fullWidth
               classes={{
