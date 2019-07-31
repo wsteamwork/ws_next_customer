@@ -87,7 +87,7 @@
     }
 
     &__right {
-      text-align: center;
+      text-align: right;
     }
 
     &__tooltip {
@@ -112,6 +112,16 @@
         color: $success;
       }
     }
+  }
+}
+
+.totalPrice__detailsPrice {
+  padding: 10px 0px;
+  width: 200px;
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 }
 

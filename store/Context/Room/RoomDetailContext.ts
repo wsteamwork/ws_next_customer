@@ -12,10 +12,10 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { GlobalContext } from '../GlobalContext';
 import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
+import qs from 'query-string';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 
 export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);
-
-export const DEFAULT_FORMAT_DATE_PRICE_BY_DAY = 'YYYY-MM-DD';
 
 export interface IRoomDetailsContext {
   state: RoomDetailsState;
@@ -27,7 +27,7 @@ export type RoomDetailsState = {
   readonly roomRecommend: RoomIndexRes[];
   readonly schedule: string[];
   readonly bookingType: number;
-  readonly price?: BookingPriceCalculatorRes;
+  readonly dataCalculate: BookingPriceCalculatorRes | null;
   readonly priceByDay: PriceByDayRes[];
 };
 
@@ -40,14 +40,16 @@ export type RoomDetailsAction =
       priceByDay: PriceByDayRes[];
     }
   | { type: 'setBookingType'; bookingType: number }
-  | { type: 'setPrice'; price: BookingPriceCalculatorRes };
+  | { type: 'setDataCalculdate'; payload: BookingPriceCalculatorRes }
+  | { type: 'updatePriceDay'; payload: PriceByDayRes[] };
 
 export const RoomDetailsStateInit: RoomDetailsState = {
   room: null,
   roomRecommend: [],
   schedule: [],
   bookingType: 2,
-  priceByDay: []
+  priceByDay: [],
+  dataCalculate: null
 };
 
 export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = (
@@ -63,12 +65,12 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
         priceByDay: action.priceByDay
       });
     case 'setBookingType':
+      return updateObject<RoomDetailsState>(state, { bookingType: action.bookingType });
+    case 'setDataCalculdate':
+      return updateObject<RoomDetailsState>(state, { dataCalculate: action.payload });
+    case 'updatePriceDay':
       return updateObject<RoomDetailsState>(state, {
-        bookingType: action.bookingType
-      });
-    case 'setPrice':
-      return updateObject<RoomDetailsState>(state, {
-        price: action.price
+        priceByDay: action.payload
       });
     default:
       return state;
@@ -96,15 +98,19 @@ const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
   return res.data.data.blocks;
 };
 
-const getPriceByDay = async (idRoom: any): Promise<PriceByDayRes[]> => {
-  const body: BodyRequestPriceByDayRes = {
-    date_start: moment().format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY),
-    date_end: moment()
-      .endOf('month')
-      .format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY)
-  };
+export const getPriceByDay = async (
+  idRoom: any,
+  date_start: string = moment().format(DEFAULT_DATE_FORMAT),
+  date_end: string = moment()
+    .add(12, 'month')
+    .endOf('month')
+    .format(DEFAULT_DATE_FORMAT)
+): Promise<PriceByDayRes[]> => {
+  const query: BodyRequestPriceByDayRes = { date_start, date_end };
 
-  const res: AxiosRes<PriceByDayRes[]> = await axios.get(`rooms/calendar-props/${idRoom}`);
+  const res: AxiosRes<PriceByDayRes[]> = await axios.get(
+    `rooms/calendar-props/${idRoom}?${qs.stringify(query)}`
+  );
 
   return res.data.data;
 };
@@ -143,8 +149,9 @@ export const useCalculatePrice = (): ReturnCalculate => {
   const guestsCount = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
   const bookingType = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const [loading, setLoading] = useState(false);
-  const [dataCalculate, setDataCalculate] = useState<BookingPriceCalculatorRes>(null);
   const { router } = useContext(GlobalContext);
+  const { dispatch, state } = useContext(RoomDetailsContext);
+  const { dataCalculate } = state;
 
   const numberDay: number = useMemo<number>(() => {
     if (startDate && endDate) {
@@ -152,6 +159,9 @@ export const useCalculatePrice = (): ReturnCalculate => {
       const endValue = moment(endDate);
 
       return Math.abs(startValue.diff(endValue, 'days'));
+    }
+    if (startDate === endDate) {
+      return 1;
     }
 
     return 0;
@@ -184,9 +194,10 @@ export const useCalculatePrice = (): ReturnCalculate => {
       );
 
       setLoading(false);
-      setDataCalculate(res.data.data);
+      dispatch({ type: 'setDataCalculdate', payload: res.data.data });
     } catch (error) {
       setLoading(false);
+      dispatch({ type: 'setDataCalculdate', payload: null });
     }
   };
 

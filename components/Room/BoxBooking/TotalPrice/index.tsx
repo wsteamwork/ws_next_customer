@@ -7,6 +7,7 @@ import numeral from 'numeral';
 import { useCalculatePrice } from '@/store/Context/Room/RoomDetailContext';
 import Lottie from 'react-lottie';
 import animationData from '@/assets/lottie/simple-loading.json';
+import DetailsPriceDay from './DetailsPriceDay';
 
 const defaultOptions = {
   loop: true,
@@ -16,8 +17,6 @@ const defaultOptions = {
 
 const TotalPrice = () => {
   const { checkData, numberDay, loading, dataCalculate } = useCalculatePrice();
-
-  console.log(dataCalculate);
 
   return (
     checkData && (
@@ -39,7 +38,10 @@ const TotalPrice = () => {
             <Grid>
               <Grid container className="totalPrice__original">
                 <Grid item xs={6}>
-                  <p className="totalPrice__left">Giá {numberDay} đêm</p>
+                  <p className="totalPrice__left">
+                    Giá {numberDay} đêm{' '}
+                    <DetailsPriceDay dataCalculate={dataCalculate}></DetailsPriceDay>
+                  </p>
                 </Grid>
                 <Grid item xs={6}>
                   <p className="totalPrice__right">
