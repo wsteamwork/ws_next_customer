@@ -1,4 +1,4 @@
-import {BaseGetRequestParams} from '@/types/Requests/RequestTemplate';
+import { BaseGetRequestParams } from '@/types/Requests/RequestTemplate';
 
 export interface BookingCreateReq {
   name: string;
@@ -29,15 +29,15 @@ export interface BookingCreateReq {
   exchange_rate?: number;
   money_received?: number;
   confirm?: number;
-  booking_purpose?: number
+  booking_purpose?: number;
 }
 
 export interface BookingPriceCalculatorReq {
   room_id: number;
   checkin: string;
   checkout: string;
-  additional_fee: number;
-  price_discount: number;
+  additional_fee?: number;
+  price_discount?: number;
   coupon?: string;
   number_of_guests: number;
   booking_type: number;
@@ -56,6 +56,6 @@ export interface BookingPayment {
 }
 
 export interface BookingIndexParams extends BaseGetRequestParams {
-  status?: number
-  size?: number
+  status?: number;
+  size?: number;
 }

@@ -1,15 +1,12 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import mainColor from '@/styles/constants/colors';
 import CustomPopper from '@/components/CustomPopper';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import Link from 'next/link';
 
 const CancellationPolicy: FC = () => {
-  const { router } = useContext(GlobalContext);
-  console.log(router);
-
   return (
     <Grid className="cancellationPolicy">
       <Grid container>
@@ -22,10 +19,10 @@ const CancellationPolicy: FC = () => {
             Chính sách hủy phòng
           </p>
         </Grid>
-        <Grid item xs={5}>
-          <CustomPopper content={<div>aaa</div>}>
-            <p>Chi tiết</p>
-          </CustomPopper>
+        <Grid item xs={5} className="cancellationPolicy__details">
+          <Link href="/terms-and-conditions">
+            <a>Chi tiết</a>
+          </Link>
         </Grid>
       </Grid>
     </Grid>

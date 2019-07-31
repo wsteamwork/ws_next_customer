@@ -24,34 +24,34 @@ const HostBecome: FC = () => {
 
   return (
     <LazyLoad>
-        <Grid container justify='center' className="hostBecome">
-          <Grid container item xs={10}>
-            <Grid item xs={8}>
-              <h3 className="title">Trở thành chủ nhà</h3>
-              <Grid>
-                <p className="desc">{desc}</p>
-              </Grid>
-
-              <Grid className="hostBecome__button">
-                <ButtonGlobal
-                  href="https://merchant.westay.vn/"
-                  padding="0px 30px"
-                  background="#000"
-                  className="hostBecome__buttonGlobal">
-                  Trở thành chủ nhà
-                </ButtonGlobal>
-              </Grid>
+      <Grid container justify="center" className="hostBecome">
+        <Grid container item xs={12} sm={11} md={10}>
+          <Grid item xs={8}>
+            <h3 className="title">Trở thành chủ nhà</h3>
+            <Grid>
+              <p className="desc">{desc}</p>
             </Grid>
 
-            <Grid item xs={4} className="flex_center">
-              <img
-                className="hostBecome__image"
-                src="./static/images/cta-img2.png"
-                alt="Trở thành chủ nhà"
-              />
+            <Grid className="hostBecome__button">
+              <ButtonGlobal
+                href="https://merchant.westay.vn/"
+                padding="0px 30px"
+                background="#000"
+                className="hostBecome__buttonGlobal">
+                Trở thành chủ nhà
+              </ButtonGlobal>
             </Grid>
           </Grid>
+
+          <Grid item xs={4} className="flex_center">
+            <img
+              className="hostBecome__image"
+              src="./static/images/cta-img2.png"
+              alt="Trở thành chủ nhà"
+            />
+          </Grid>
         </Grid>
+      </Grid>
     </LazyLoad>
   );
 };

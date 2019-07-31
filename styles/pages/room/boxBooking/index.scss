@@ -3,10 +3,6 @@
   width: 450px;
   height: auto;
   border-radius: 2px;
-  padding: 10px 0px;
-  //   display: flex;
-  //   justify-content: space-around;
-  //   flex-direction: column;
 
   * {
     font-family: "Montserrat", sans-serif !important;
@@ -14,9 +10,6 @@
 
   &__padding {
     padding: 0px 30px;
-    // display: flex;
-    // justify-content: space-around;
-    // flex-direction: column;
   }
 
   .dayContents {
@@ -30,7 +23,7 @@
     //   font-family: "Montserrat", sans-serif !important;
 
     &__price {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
     }
   }
@@ -96,10 +89,13 @@
     &__right {
       text-align: center;
     }
+
+    &__tooltip {
+      font-size: 20px;
+    }
   }
 
   &__buttonSubmit {
-    padding: 0px 10px;
     margin-top: 20px;
   }
 
@@ -107,6 +103,15 @@
     margin-top: 15px;
     padding: 10px 30px;
     border-top: 1px solid #ddd;
+
+    &__details {
+      text-align: right;
+      cursor: pointer;
+
+      a {
+        color: $success;
+      }
+    }
   }
 }
 
@@ -116,7 +121,7 @@
   &__guest {
     font-size: 0.9rem;
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     font-family: "Montserrat", sans-serif !important;
   }
 

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, Reducer } from 'react';
+import { createContext, Dispatch, Reducer, useEffect, useMemo, useState, useContext } from 'react';
 import { RoomIndexRes, RoomScheduleRes } from '@/types/Requests/Rooms/RoomResponses';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
@@ -8,6 +8,10 @@ import { updateObject } from '../utility';
 import { NextRouter } from 'next/router';
 import { PriceByDayRes, BodyRequestPriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { GlobalContext } from '../GlobalContext';
+import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
 
 export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);
 
@@ -122,4 +126,69 @@ export const getDataRoom = async (dispatch: Dispatch<RoomDetailsAction>, router:
   } catch (error) {
     console.log(error);
   }
+};
+
+type ReturnCalculate = {
+  numberDay: number;
+  checkData: boolean;
+  loading: boolean;
+  dataCalculate: BookingPriceCalculatorRes;
+};
+
+export const useCalculatePrice = (): ReturnCalculate => {
+  const startDate = useSelector<ReducersList, string | null>(
+    (state) => state.searchFilter.startDate
+  );
+  const endDate = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
+  const guestsCount = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
+  const bookingType = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
+  const [loading, setLoading] = useState(false);
+  const [dataCalculate, setDataCalculate] = useState<BookingPriceCalculatorRes>(null);
+  const { router } = useContext(GlobalContext);
+
+  const numberDay: number = useMemo<number>(() => {
+    if (startDate && endDate) {
+      const startValue = moment(startDate);
+      const endValue = moment(endDate);
+
+      return Math.abs(startValue.diff(endValue, 'days'));
+    }
+
+    return 0;
+  }, [endDate, startDate]);
+
+  const checkData = useMemo<boolean>(() => {
+    return !!startDate && !!endDate && guestsCount !== 0;
+  }, [endDate, startDate, guestsCount]);
+
+  useEffect(() => {
+    checkData && getcalculatePrice();
+  }, [checkData, endDate, startDate, guestsCount]);
+
+  const getcalculatePrice = async () => {
+    setLoading(true);
+
+    const body: BookingPriceCalculatorReq = {
+      room_id: parseInt(router.query.id as string, 10),
+      checkin: startDate,
+      checkout: endDate,
+      coupon: '',
+      number_of_guests: guestsCount,
+      booking_type: bookingType
+    };
+
+    try {
+      const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
+        'bookings/calculate-price-with-specific-day-price',
+        body
+      );
+
+      setLoading(false);
+      setDataCalculate(res.data.data);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  return { numberDay, checkData, loading, dataCalculate };
 };

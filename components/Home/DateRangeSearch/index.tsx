@@ -32,8 +32,10 @@ type Field = 'startValue' | 'endValue';
 
 const DateRangeSearch: FC = () => {
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-  const startDate = useSelector<ReducersList, string>((state) => state.searchFilter.startDate);
-  const endDate = useSelector<ReducersList, string>((state) => state.searchFilter.endDate);
+  const startDate = useSelector<ReducersList, string | null>(
+    (state) => state.searchFilter.startDate
+  );
+  const endDate = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
   const [startValue, setStartValue] = useState(startDate ? moment(startDate) : null);
   const [endValue, setEndValue] = useState(endDate ? moment(endDate) : null);
   const refEndDate = useRef(null);
