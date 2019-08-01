@@ -20,13 +20,14 @@ import ListRoom from '@/components/ListRoom';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
+import InputGlobal from '@/components/InputGlobal';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomHomepageReducer, RoomHomepageStateInit);
 
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-  const { roomsHot} = state;
+  const { roomsHot } = state;
 
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const Home: NextPage = () => {
             <Grid container spacing={1} className="searchHome__content">
               <Grid item xs={12} md={4}>
                 <SearchAutoSuggestion />
+
               </Grid>
               <Grid item xs={12} md={4}>
                 <DateRangeSearch />
@@ -71,7 +73,7 @@ const Home: NextPage = () => {
             </Grid>
 
             <Grid className="searchHome__checkbox">
-              <CheckboxList/>
+              <CheckboxList />
             </Grid>
           </GridContainer>
           <GridContainer xs={12} md={10} classNameItem="searchHome__opa"></GridContainer>
@@ -79,19 +81,20 @@ const Home: NextPage = () => {
       </GridContainer>
 
       <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-        <SliderTypeApartment/>
+        <SliderTypeApartment />
         <MetroGridImage />
 
         <ListRoom roomData={roomsHot} />
       </GridContainer>
+      <InputGlobal label="Tên"></InputGlobal>
 
-      <HostBecome/>
+      <HostBecome />
 
       <GridContainer xs={11} sm={10}>
-        <BlogContainer/>
+        <BlogContainer />
       </GridContainer>
 
-      <FooterComponent/>
+      <FooterComponent />
       {/* </Fragment> */}
     </RoomHomepageContext.Provider >
   );
