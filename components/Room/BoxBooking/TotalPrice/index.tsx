@@ -1,13 +1,14 @@
-import React, { memo } from 'react';
+import React, { memo, FC } from 'react';
 import { Grid, Tooltip } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import mainColor from '@/styles/constants/colors';
 import numeral from 'numeral';
-import { useCalculatePrice } from '@/store/Context/Room/RoomDetailContext';
 import Lottie from 'react-lottie';
 import animationData from '@/assets/lottie/simple-loading.json';
 import DetailsPriceDay from './DetailsPriceDay';
+import { useTranslation } from 'react-i18next';
+import { useCalculatePrice } from './context';
 
 const defaultOptions = {
   loop: true,
@@ -15,8 +16,9 @@ const defaultOptions = {
   animationData: animationData
 };
 
-const TotalPrice = () => {
-  const { checkData, numberDay, loading, dataCalculate } = useCalculatePrice();
+const TotalPrice: FC = () => {
+  const { checkData, numberDay, loading, dataCalculate, error } = useCalculatePrice();
+  const { t } = useTranslation();
 
   return (
     checkData && (
@@ -33,58 +35,64 @@ const TotalPrice = () => {
               <Lottie options={defaultOptions} height="40px" width="100%"></Lottie>
             </Grid>
           </Grid>
-        ) : (
-          dataCalculate && (
-            <Grid>
-              <Grid container className="totalPrice__original">
-                <Grid item xs={6}>
-                  <p className="totalPrice__left">
-                    Giá {numberDay} đêm{' '}
-                    <DetailsPriceDay dataCalculate={dataCalculate}></DetailsPriceDay>
-                  </p>
-                </Grid>
-                <Grid item xs={6}>
-                  <p className="totalPrice__right">
-                    {numeral(dataCalculate.price_original).format('0,0')} VND
-                  </p>
-                </Grid>
+        ) : dataCalculate && !error ? (
+          <Grid>
+            <Grid container className="totalPrice__original">
+              <Grid item xs={6}>
+                <p className="totalPrice__left">
+                  {t('room:boxBooking:price')} {numberDay} {t('room:boxBooking:day')}{' '}
+                  <DetailsPriceDay
+                    numberDay={numberDay}
+                    dataCalculate={dataCalculate}></DetailsPriceDay>
+                </p>
               </Grid>
-              <Grid container className="totalPrice__service">
-                <Grid item xs={6}>
-                  <p className="totalPrice__left">
-                    Phí dịch vụ{' '}
-                    <Tooltip
-                      disableFocusListener
-                      disableTouchListener
-                      title={<p className="totalPrice__tooltip">Phí dịch vụ và phí khác</p>}
-                      placement="top">
-                      <span>
-                        <FontAwesomeIcon
-                          icon={faQuestionCircle}
-                          size="1x"
-                          color={mainColor.primary}></FontAwesomeIcon>
-                      </span>
-                    </Tooltip>
-                  </p>
-                </Grid>
-                <Grid item xs={6}>
-                  <p className="totalPrice__right">
-                    {numeral(dataCalculate.service_fee).format('0,0')} VND
-                  </p>
-                </Grid>
-              </Grid>
-              <Grid container className="totalPrice__total">
-                <Grid item xs={6}>
-                  <p className="totalPrice__left">Tổng cộng</p>
-                </Grid>
-                <Grid item xs={6}>
-                  <p className="totalPrice__right">
-                    {numeral(dataCalculate.total_fee).format('0,0')} VND
-                  </p>
-                </Grid>
+              <Grid item xs={6}>
+                <p className="totalPrice__right">
+                  {numeral(dataCalculate.price_original).format('0,0')} VND
+                </p>
               </Grid>
             </Grid>
-          )
+            <Grid container className="totalPrice__service">
+              <Grid item xs={6}>
+                <p className="totalPrice__left">
+                  {t('room:boxBooking:serviceFee')}{' '}
+                  <Tooltip
+                    disableFocusListener
+                    disableTouchListener
+                    title={
+                      <p className="totalPrice__tooltip">{t('room:boxBooking:otherService')}</p>
+                    }
+                    placement="top">
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faQuestionCircle}
+                        size="1x"
+                        color={mainColor.primary}></FontAwesomeIcon>
+                    </span>
+                  </Tooltip>
+                </p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="totalPrice__right">
+                  {numeral(dataCalculate.service_fee).format('0,0')} VND
+                </p>
+              </Grid>
+            </Grid>
+            <Grid container className="totalPrice__total">
+              <Grid item xs={6}>
+                <p className="totalPrice__left">{t('room:boxBooking:total')}</p>
+              </Grid>
+              <Grid item xs={6}>
+                <p className="totalPrice__right">
+                  {numeral(dataCalculate.total_fee).format('0,0')} VND
+                </p>
+              </Grid>
+            </Grid>
+          </Grid>
+        ) : (
+          <Grid className="totalPrice__error">
+            <p>{error}</p>
+          </Grid>
         )}
       </Grid>
     )

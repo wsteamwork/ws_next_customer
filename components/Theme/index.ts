@@ -22,7 +22,7 @@ const options: ThemeOptions = {
     fontWeightRegular: fontWeight.medium,
 
     fontFamily:
-      'Circular, -apple-system, BlinkMacSystemFont, Montserrat Alternates, "Quicksand", sans-serif !important'
+      'Circular, -apple-system, BlinkMacSystemFont, Montserrat Alternates, "Quicksand", sans-serif'
   },
   palette: {
     text: {

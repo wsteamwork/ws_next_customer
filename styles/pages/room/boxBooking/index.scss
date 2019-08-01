@@ -1,15 +1,24 @@
 .boxBooking {
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
-  width: 450px;
+  width: 400px;
   height: auto;
   border-radius: 2px;
+
+  &__chooseBooking {
+    margin-top: 20px;
+
+    label > span {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
 
   * {
     font-family: "Montserrat", sans-serif !important;
   }
 
   &__padding {
-    padding: 0px 30px;
+    padding: 0px 20px;
   }
 
   .dayContents {
@@ -93,6 +102,10 @@
     &__tooltip {
       font-size: 20px;
     }
+
+    &__error {
+      color: red;
+    }
   }
 
   &__buttonSubmit {
@@ -115,13 +128,35 @@
   }
 }
 
-.totalPrice__detailsPrice {
-  padding: 10px 0px;
-  width: 200px;
+.totalPriceRoom {
+  width: 170px;
+
+  &__title {
+    // border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px 0px;
+  }
+
+  &__priceDay {
+    padding: 5px 0px;
+    border-top: 1px solid #ddd;
+  }
+
+  &__textLeft {
+    text-align: left !important;
+  }
+
+  &__textRight {
+    text-align: right !important;
+  }
 
   p {
     font-size: 0.8rem;
     font-weight: 600;
+  }
+
+  &__widthBig {
+    width: 230px;
   }
 }
 
@@ -133,6 +168,32 @@
     color: #000;
     font-weight: 500;
     font-family: "Montserrat", sans-serif !important;
+  }
+
+  &__input {
+    > div {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+    }
+  }
+}
+
+.selectHours {
+  margin-top: 20px !important;
+
+  &__guest {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif !important;
+  }
+
+  &__maxHeight {
+    max-width: 300px;
   }
 
   &__input {

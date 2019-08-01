@@ -1,14 +1,15 @@
 import { useState, useContext, Dispatch, memo, useEffect } from 'react';
 import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction, DateRange } from '@/store/Redux/Reducers/searchFilter';
+import { DateRange } from '@/store/Redux/Reducers/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import moment, { Moment } from 'moment';
 import { FocusedInputShape } from 'react-dates';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { DEFAULT_DATE_TIME_FORMAT, DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import * as _ from 'lodash';
-interface DataChangePriceByDay {
+import { BookingAction } from '@/store/Redux/Reducers/booking';
+export interface DataChangePriceByDay {
   [key: string]: PriceByDayRes;
 }
 
@@ -33,11 +34,11 @@ interface ReturnUseDateRange {
 }
 
 export const useDateRange = (): ReturnUseDateRange => {
-  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-  const dateStart = useSelector<ReducersList, string | null>(
-    (state) => state.searchFilter.startDate
-  );
-  const dateEnd = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
+  const dispatch = useDispatch<Dispatch<BookingAction>>();
+  const dateStart = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
+  const dateEnd = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
+  const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
+
   const [date, setDate] = useState<DateRange>({
     startDate: dateStart ? moment(dateStart) : moment(),
     endDate: dateEnd ? moment(dateEnd) : null
@@ -53,18 +54,34 @@ export const useDateRange = (): ReturnUseDateRange => {
   };
 
   const onClose = (date: DateRange) => {
-    if (date.startDate) {
+    if (
+      (bookingType === 1 && !!date.startDate) ||
+      date.startDate.format(DEFAULT_DATE_TIME_FORMAT) ===
+        date.startDate.format(DEFAULT_DATE_TIME_FORMAT)
+    ) {
       dispatch({
-        type: 'SET_START_DATE',
-        payload: date.startDate.format(DEFAULT_DATE_TIME_FORMAT)
+        type: 'SET_CHECK_IN',
+        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
       });
-    }
 
-    if (date.endDate) {
       dispatch({
-        type: 'SET_END_DATE',
-        payload: date.endDate.format(DEFAULT_DATE_TIME_FORMAT)
+        type: 'SET_CHECK_OUT',
+        payload: date.startDate.add(4, 'hour').format(DEFAULT_DATE_FORMAT)
       });
+    } else {
+      if (date.startDate) {
+        dispatch({
+          type: 'SET_CHECK_IN',
+          payload: date.startDate.format(DEFAULT_DATE_TIME_FORMAT)
+        });
+      }
+
+      if (date.endDate) {
+        dispatch({
+          type: 'SET_CHECK_OUT',
+          payload: date.endDate.format(DEFAULT_DATE_TIME_FORMAT)
+        });
+      }
     }
   };
 
@@ -92,7 +109,7 @@ export const useDateRange = (): ReturnUseDateRange => {
         .subtract(1, 'days')
         .diff(day, 'days') < 0;
 
-    let isBookingHour = false;
+    let isBookingHour = bookingType === 1;
 
     if (focused === 'endDate' && !!date.startDate) {
       let checkOnlyOneDay =
@@ -101,7 +118,7 @@ export const useDateRange = (): ReturnUseDateRange => {
       let onlyOneDay = isBookingHour && checkOnlyOneDay;
       let pastDayBlocked = day.diff(date.startDate, 'days') < 0;
       let chainBlocked = maxDate ? day.diff(moment(maxDate), 'days') > 0 : false;
-      return pastDayBlocked || isBlocked || onlyOneDay || chainBlocked;
+      return pastDayBlocked || isBlocked || onlyOneDay || chainBlocked || is12MothNext;
     }
 
     return isBlocked || is12MothNext;

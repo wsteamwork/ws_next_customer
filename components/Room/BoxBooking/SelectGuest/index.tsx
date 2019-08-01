@@ -4,19 +4,21 @@ import { KeyboardArrowDown } from '@material-ui/icons';
 import { Select, MenuItem, Grid } from '@material-ui/core';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { useTranslation } from 'react-i18next';
+import { BookingAction } from '@/store/Redux/Reducers/booking';
 
 const SelectGuest = () => {
-  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-  const guestsCount = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
+  const dispatch = useDispatch<Dispatch<BookingAction>>();
+  const guestsCount = useSelector<ReducersList, number>((state) => state.booking.numberOfGuest);
   const { state } = useContext(RoomDetailsContext);
   const { room } = state;
   const [value, setValue] = useState<number>(guestsCount !== 0 ? guestsCount : 1);
+  const { t } = useTranslation();
 
   const onChange = (event: ChangeEvent<{ name?: string; value: number }>) => {
     setValue(event.target.value);
-    dispatch({ type: 'SET_NAV_GUESTS', guestsCount: event.target.value });
+    dispatch({ type: 'SET_NUMBER_OF_GUEST', payload: event.target.value });
   };
 
   const arrMenuItem = (x: number, y: number): any[] => {
@@ -26,7 +28,9 @@ const SelectGuest = () => {
     while (i <= z) {
       arr.push(
         <MenuItem key={i} value={i}>
-          <p className="selectGuest__guest">{i} khách</p>
+          <p className="selectGuest__guest">
+            {i} {t('room:boxBooking:guest')}
+          </p>
         </MenuItem>
       );
       i++;
