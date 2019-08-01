@@ -54,8 +54,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         position: 'absolute',
         bottom: 0,
         // backgroundImage: 'linear-gradient(to top,#000, transparent)',
-        backgroundImage: `linear-gradient(to left bottom, #000000, #3b3b3b, #777777,transparent,transparent, transparent, transparent)`,
-        opacity: 0.67,
+        backgroundImage: `linear-gradient(to left bottom, #1976d2,#81b5e9, transparent,transparent,transparent, transparent, transparent)`,
+        opacity: 0.7,
         content: `''`,
         width: '100%',
         height: '100%'
