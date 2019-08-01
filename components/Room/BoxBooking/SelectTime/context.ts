@@ -25,21 +25,23 @@ export const useCheckBookingTypeHour = (): [boolean] => {
 export const getAvailablecCheckout = async (
   date: string,
   id: any,
-  dispatch: Dispatch<BookingAction>
+  dispatch: Dispatch<BookingAction>,
+  checkOutHour: string
 ): Promise<string[]> => {
   const body = { checkin: date };
   try {
     const res: AxiosRes<string[]> = await axios.post(`rooms/available-checkout-time/${id}`, body);
     dispatch({ type: 'SET_AVAILABLE_CHECKOUT', payload: res.data.data });
+    !checkOutHour && dispatch({ type: 'SET_CHECK_OUT_HOUR', payload: res.data.data[0] });
     return res.data.data;
   } catch (error) {
-    console.log(error.response);
+    // console.log(error.response);
   }
 };
 
 interface ReturnMinBookByHourCheckin {
   valueStart: string;
-  checkInHour: string;
+  startDate: string;
   available_hour: string[];
   dispatch: Dispatch<BookingAction>;
 }
@@ -47,9 +49,8 @@ interface ReturnMinBookByHourCheckin {
 export const useMinBookByHourCheckin = (): ReturnMinBookByHourCheckin => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();
   const startDate = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
-  const endDate = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
-  const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
   const checkInHour = useSelector<ReducersList, string>((state) => state.booking.checkInHour);
+  const checkOutHour = useSelector<ReducersList, string>((state) => state.booking.checkOutHour);
   const { state } = useContext(RoomDetailsContext);
   const { priceByDay } = state;
   const { router } = useContext(GlobalContext);
@@ -71,25 +72,31 @@ export const useMinBookByHourCheckin = (): ReturnMinBookByHourCheckin => {
     return [];
   }, [startDate, dataPriceByDay]);
 
-  const valueStart = useMemo<string>(() => {
+  useEffect(() => {
     if (available_hour.length > 0) {
-      dispatch({ type: 'SET_CHECK_IN_HOUR', payload: available_hour[0] });
-
-      return available_hour[0];
+      !checkInHour && dispatch({ type: 'SET_CHECK_IN_HOUR', payload: available_hour[0] });
     }
-
-    return '12:00:00';
   }, [available_hour]);
 
+  const valueStart = useMemo<string>(() => {
+    if (!!checkInHour) {
+      return checkInHour;
+    } else if (available_hour.length > 0) {
+      return available_hour[0];
+    }
+    return '';
+  }, [available_hour, checkInHour]);
+
   useEffect(() => {
-    if (valueStart !== '12:00:00') {
+    if (!!valueStart) {
       getAvailablecCheckout(
         `${moment(startDate).format(DEFAULT_DATE_FORMAT)} ${checkInHour}`,
         router.query.id,
-        dispatch
+        dispatch,
+        checkOutHour
       );
     }
   }, [valueStart, checkInHour]);
 
-  return { valueStart, checkInHour, available_hour, dispatch };
+  return { valueStart, startDate, available_hour, dispatch };
 };

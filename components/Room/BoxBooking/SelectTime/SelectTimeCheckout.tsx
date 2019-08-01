@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactNode, Dispatch, memo, FC } from 'react';
+import React, { ChangeEvent, ReactNode, Dispatch, memo, FC, useMemo } from 'react';
 import { Select, MenuItem } from '@material-ui/core';
 import { MenuProps } from '.';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,24 +14,35 @@ const SelectTimeCheckout: FC = () => {
   );
   const checkOutHour = useSelector<ReducersList, string>((state) => state.booking.checkOutHour);
 
+  const checkValue = useMemo<string>(() => {
+    if (!!checkOutHour) {
+      return checkOutHour;
+    } else {
+      return availableCheckoutTime[0];
+    }
+  }, [checkOutHour, availableCheckoutTime]);
+
   const onChange = (event: ChangeEvent<{ name?: string; value: string }>, child: ReactNode) => {
     dispatch({ type: 'SET_CHECK_OUT_HOUR', payload: event.target.value });
   };
 
-  return (
-    <Select
-      MenuProps={MenuProps}
-      onChange={onChange}
-      input={<BootstrapInput fullWidth className="selectHours__input" />}
-      displayEmpty
-      value={checkOutHour || availableCheckoutTime[0]}
-      IconComponent={KeyboardArrowDown}>
-      {availableCheckoutTime.map((item, index) => (
-        <MenuItem key={index} value={item}>
-          <p className="selectHours__guest">{item}</p>
-        </MenuItem>
-      ))}
-    </Select>
+  return useMemo(
+    () => (
+      <Select
+        MenuProps={MenuProps}
+        onChange={onChange}
+        input={<BootstrapInput fullWidth className="selectHours__input" />}
+        displayEmpty
+        value={checkValue || ''}
+        IconComponent={KeyboardArrowDown}>
+        {availableCheckoutTime.map((item, index) => (
+          <MenuItem key={index} value={item}>
+            <p className="selectHours__guest">{item}</p>
+          </MenuItem>
+        ))}
+      </Select>
+    ),
+    [checkValue, availableCheckoutTime]
   );
 };
 

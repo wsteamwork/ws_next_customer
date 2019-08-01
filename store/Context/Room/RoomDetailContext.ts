@@ -101,7 +101,7 @@ export const getPriceByDay = async (
   idRoom: any,
   date_start: string = moment().format(DEFAULT_DATE_FORMAT),
   date_end: string = moment()
-    .add(12, 'month')
+    .add(6, 'month')
     .endOf('month')
     .format(DEFAULT_DATE_FORMAT)
 ): Promise<PriceByDayRes[]> => {

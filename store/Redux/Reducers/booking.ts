@@ -2,7 +2,7 @@ import { Moment } from 'moment';
 import { Reducer } from 'redux';
 import { updateObject } from '@/store/Context/utility';
 import moment from 'moment';
-import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 
 export type DateRange = {
   startDate: Moment | null;
@@ -34,7 +34,7 @@ const init: BookingState = {
   roomID: null,
   numberOfGuest: 1,
   bookingType: 2,
-  startDate: moment().format(DEFAULT_DATE_TIME_FORMAT),
+  startDate: moment().format(DEFAULT_DATE_FORMAT),
   endDate: null,
   checkInHour: null,
   checkOutHour: null,

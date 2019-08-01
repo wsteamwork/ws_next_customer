@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useContext, memo, Dispatch } from 'react';
+import React, { ChangeEvent, useState, useContext, memo, Dispatch, useMemo } from 'react';
 import { BootstrapInput } from '@/components/SelectGlobal';
 import { KeyboardArrowDown } from '@material-ui/icons';
 import { Select, MenuItem, Grid } from '@material-ui/core';
@@ -38,19 +38,21 @@ const SelectGuest = () => {
     return arr;
   };
 
-  return (
-    room && (
-      <Grid className="selectGuest">
-        <Select
-          onChange={onChange}
-          input={<BootstrapInput fullWidth className="selectGuest__input" />}
-          displayEmpty
-          value={value}
-          IconComponent={KeyboardArrowDown}>
-          {arrMenuItem(room.max_additional_guest, room.max_guest)}
-        </Select>
-      </Grid>
-    )
+  return useMemo(
+    () =>
+      room && (
+        <Grid className="selectGuest">
+          <Select
+            onChange={onChange}
+            input={<BootstrapInput fullWidth className="selectGuest__input" />}
+            displayEmpty
+            value={value}
+            IconComponent={KeyboardArrowDown}>
+            {arrMenuItem(room.max_additional_guest, room.max_guest)}
+          </Select>
+        </Grid>
+      ),
+    [t, room, value]
   );
 };
 

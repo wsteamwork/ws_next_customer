@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, Dispatch } from 'react';
+import React, { FC, ChangeEvent, Dispatch, useMemo } from 'react';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import { Grid, FormControlLabel } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,15 +17,18 @@ const ChooseBookingType: FC = () => {
     }
   };
 
-  return (
-    <Grid className="boxBooking__chooseBooking">
-      <FormControlLabel
-        control={
-          <CustomCheckbox checked={bookingType === 1} onChange={handleChange} value="checkedA" />
-        }
-        label="Đặt theo giờ"
-      />
-    </Grid>
+  return useMemo(
+    () => (
+      <Grid className="boxBooking__chooseBooking">
+        <FormControlLabel
+          control={
+            <CustomCheckbox checked={bookingType === 1} onChange={handleChange} value="checkedA" />
+          }
+          label="Đặt theo giờ"
+        />
+      </Grid>
+    ),
+    [bookingType]
   );
 };
 

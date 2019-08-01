@@ -22,6 +22,8 @@ export const useCalculatePrice = (): ReturnCalculate => {
   const endDate = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
   const guestsCount = useSelector<ReducersList, number>((state) => state.booking.numberOfGuest);
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
+  const checkInHour = useSelector<ReducersList, string>((state) => state.booking.checkInHour);
+  const checkOutHour = useSelector<ReducersList, string>((state) => state.booking.checkOutHour);
   const [loading, setLoading] = useState(false);
   const { router } = useContext(GlobalContext);
   const { dispatch, state } = useContext(RoomDetailsContext);
@@ -35,7 +37,7 @@ export const useCalculatePrice = (): ReturnCalculate => {
       const startValue = moment(startDate);
       const endValue = moment(endDate);
 
-      return Math.abs(startValue.diff(endValue, 'days'));
+      return Math.abs(endValue.diff(startValue, 'days') + 1);
     }
 
     return 0;
@@ -47,15 +49,15 @@ export const useCalculatePrice = (): ReturnCalculate => {
 
   useEffect(() => {
     checkData && getcalculatePrice();
-  }, [checkData, endDate, startDate, guestsCount, bookingType]);
+  }, [checkData, endDate, startDate, guestsCount, bookingType, checkInHour, checkOutHour]);
 
   const getcalculatePrice = async () => {
     setLoading(true);
 
     const body: BookingPriceCalculatorReq = {
       room_id: parseInt(router.query.id as string, 10),
-      checkin: startDate,
-      checkout: endDate,
+      checkin: bookingType === 2 ? startDate : `${startDate} ${checkInHour}`,
+      checkout: bookingType === 2 ? endDate : `${endDate} ${checkOutHour}`,
       coupon: '',
       number_of_guests: guestsCount,
       booking_type: bookingType

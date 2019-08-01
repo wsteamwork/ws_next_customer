@@ -1,4 +1,4 @@
-import { useState, useContext, Dispatch, memo, useEffect } from 'react';
+import { useState, useContext, Dispatch, memo, useEffect, useMemo } from 'react';
 import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import { useDispatch, useSelector } from 'react-redux';
 import { DateRange } from '@/store/Redux/Reducers/searchFilter';
@@ -33,8 +33,50 @@ interface ReturnUseDateRange {
   focused?: FocusedInputShape | null;
 }
 
-export const useDateRange = (): ReturnUseDateRange => {
+const useCheckDate = (date: DateRange) => {
+  const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
   const dispatch = useDispatch<Dispatch<BookingAction>>();
+
+  useEffect(() => {
+    if (bookingType === 1 && !!date.endDate && !!date.startDate) {
+      dispatch({
+        type: 'SET_CHECK_IN',
+        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+      });
+
+      dispatch({
+        type: 'SET_CHECK_OUT',
+        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+      });
+    } else if (!!date.startDate && !!date.endDate) {
+      if (date.startDate.format(DEFAULT_DATE_FORMAT) === date.endDate.format(DEFAULT_DATE_FORMAT)) {
+        dispatch({
+          type: 'SET_CHECK_IN',
+          payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+        });
+
+        dispatch({
+          type: 'SET_CHECK_OUT',
+          payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+        });
+      } else {
+        dispatch({
+          type: 'SET_CHECK_IN',
+          payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+        });
+
+        dispatch({
+          type: 'SET_CHECK_OUT',
+          payload: date.endDate.format(DEFAULT_DATE_FORMAT)
+        });
+      }
+    }
+  }, [bookingType, date]);
+
+  return {};
+};
+
+export const useDateRange = (): ReturnUseDateRange => {
   const dateStart = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const dateEnd = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
@@ -43,6 +85,9 @@ export const useDateRange = (): ReturnUseDateRange => {
     startDate: dateStart ? moment(dateStart) : moment(),
     endDate: dateEnd ? moment(dateEnd) : null
   });
+
+  const {} = useCheckDate(date);
+
   const [focused, setFocued] = useState<FocusedInputShape | null>(null);
   const { state } = useContext(RoomDetailsContext);
   const { schedule } = state;
@@ -54,35 +99,7 @@ export const useDateRange = (): ReturnUseDateRange => {
   };
 
   const onClose = (date: DateRange) => {
-    if (
-      (bookingType === 1 && !!date.startDate) ||
-      date.startDate.format(DEFAULT_DATE_TIME_FORMAT) ===
-        date.startDate.format(DEFAULT_DATE_TIME_FORMAT)
-    ) {
-      dispatch({
-        type: 'SET_CHECK_IN',
-        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
-      });
-
-      dispatch({
-        type: 'SET_CHECK_OUT',
-        payload: date.startDate.add(4, 'hour').format(DEFAULT_DATE_FORMAT)
-      });
-    } else {
-      if (date.startDate) {
-        dispatch({
-          type: 'SET_CHECK_IN',
-          payload: date.startDate.format(DEFAULT_DATE_TIME_FORMAT)
-        });
-      }
-
-      if (date.endDate) {
-        dispatch({
-          type: 'SET_CHECK_OUT',
-          payload: date.endDate.format(DEFAULT_DATE_TIME_FORMAT)
-        });
-      }
-    }
+    setDate(date);
   };
 
   const onFocusChange = (forcus: FocusedInputShape | null) => {
@@ -104,7 +121,7 @@ export const useDateRange = (): ReturnUseDateRange => {
     let isBlocked = _.indexOf(schedule, day.format(DEFAULT_DATE_FORMAT)) !== -1;
     let is12MothNext =
       moment()
-        .add(12, 'month')
+        .add(6, 'month')
         .endOf('month')
         .subtract(1, 'days')
         .diff(day, 'days') < 0;
