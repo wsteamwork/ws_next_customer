@@ -14,7 +14,7 @@
     },
     "signUp": "Sign up",
     "signIn": "Sign in",
-    "beComeHost": "Merchant channel",
+    "merchantChannel": "Merchant channel",
     "contact" : "Contact",
     "supportHost" : "Support host",
     "currency" : "USD",
@@ -26,5 +26,8 @@
         "guest": "guest",
         "room": "room",
         "roomUpper": "Room"
-    }
+    },
+    "topDestinations" : "Top Destinations",
+    "beComeAHost" : "Be Come A Host",
+    "topHomestay" : "Top Homestay"
 }

@@ -50,6 +50,7 @@ import GridContainer from '../Layout/Grid/Container';
 // import ListCitySearch, { TransitionCustom } from "@/views/Rooms/Filter/ListCitySearch";
 // import ForgetPasswordForm from "../Forms/ForgetPasswordForm";
 import ButtonGlobal from '@/components/ButtonGlobal';
+import SideDrawer from '@/components/Toolbar/SideDrawer';
 
 interface IProps {
   classes?: any;
@@ -252,7 +253,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                 className={classes.buttonMerchantSite}
                 name="merchant-site"
                 size="large">
-                {t('home:beComeHost')}
+                {t('home:merchantChannel')}
               </ButtonGlobal>
 
               <Button
@@ -404,7 +405,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                     classes={{
                       paper: classes.drawer
                     }}>
-                    {/*<SideDrawer setOpen={handleToggleDrawer} />*/}
+                    <SideDrawer setOpen={handleToggleDrawer} />
                   </SwipeableDrawer>
                 </div>
               </Fragment>

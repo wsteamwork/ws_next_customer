@@ -9,10 +9,8 @@ import FooterComponent from '@/components/Layout/FooterComponent';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import RoomCard from '@/components/RoomCard';
 import {
-  RoomHomepageContext,
-  getRoomHot, RoomHomepageStateInit, RoomHomepageReducer, getRoomsHomepage
+  RoomHomepageContext, RoomHomepageStateInit, RoomHomepageReducer, getRoomsHomepage
 } from '@/store/Context/Room/RoomHomepageContext';
 import DateRangeSearch from '@/components/Home/DateRangeSearch';
 import CheckboxList from '@/components/Home/CheckboxList';
@@ -28,7 +26,7 @@ const Home: NextPage = () => {
   const [state, dispatch] = useReducer(RoomHomepageReducer, RoomHomepageStateInit);
 
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-  const { roomsHot,roomsCity,apartments } = state;
+  const { roomsHot} = state;
 
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const Home: NextPage = () => {
       <GridContainer xs={12} classNameItem="searchHome">
         <img
           src="./static/images/background.svg"
-          alt="Background home"
+          alt="Westay - HomeStay cho người Việt"
           className="searchHome__image"
         />
         <Grid onClick={handleOverlay}>
@@ -73,14 +71,14 @@ const Home: NextPage = () => {
             </Grid>
 
             <Grid className="searchHome__checkbox">
-              <CheckboxList></CheckboxList>
+              <CheckboxList/>
             </Grid>
           </GridContainer>
           <GridContainer xs={12} md={10} classNameItem="searchHome__opa"></GridContainer>
         </Grid>
       </GridContainer>
 
-      <GridContainer xs={12} sm={10}>
+      <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
         <SliderTypeApartment/>
         <MetroGridImage />
 
@@ -89,7 +87,7 @@ const Home: NextPage = () => {
 
       <HostBecome/>
 
-      <GridContainer xs={12} sm={10}>
+      <GridContainer xs={11} sm={10}>
         <BlogContainer/>
       </GridContainer>
 
