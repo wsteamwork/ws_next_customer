@@ -54,16 +54,16 @@ const Home: NextPage = () => {
         />
         <Grid onClick={handleOverlay}>
           <GridContainer xs={11} md={9} classNameItem="searchHome__searchCenter">
-            {/* <Grid className="searchHome__title">
+            <Grid className="searchHome__title">
               <h3>{t('home:searchComponent:enjoy')}</h3>
-            </Grid> */}
+            </Grid>
 
             <Grid container spacing={1} className="searchHome__content">
               <Grid item xs={12} md={4}>
-                {/* <SearchAutoSuggestion /> */}
+                <SearchAutoSuggestion />
 
               </Grid>
-              {/* <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={4}>
                 <DateRangeSearch />
                 </Grid>
               <Grid item xs={12} md={2}>
@@ -71,30 +71,28 @@ const Home: NextPage = () => {
                 </Grid>
                 <Grid item xs={12} md={2}>
                 <ButtonGlobal width="100%">{t('home:searchComponent:search')}</ButtonGlobal>
-              </Grid> */}
+              </Grid>
             </Grid>
 
-            {/* <Grid className="searchHome__checkbox">
+            <Grid className="searchHome__checkbox">
               <CheckboxList></CheckboxList>
-            </Grid> */}
+            </Grid>
           </GridContainer>
-          {/* <GridContainer xs={12} md={10} classNameItem="searchHome__opa"></GridContainer> */}
+          <GridContainer xs={12} md={10} classNameItem="searchHome__opa"></GridContainer>
         </Grid>
       </GridContainer>
 
-      {/* <GridContainer xs={12} sm={10}>
+      <GridContainer xs={12} sm={10}>
         <SliderTypeApartment/>
         <MetroGridImage />
         
         <ListRoom roomData={roomsHot} />
-      </GridContainer> */}
+      </GridContainer>
       <InputGlobal label="Tên"></InputGlobal>
 
-      {/* <HostBecome/> */}
+      <HostBecome/>
 
-     /
-
-      {/* <FooterComponent/> */}
+      <FooterComponent/>
       {/* </Fragment> */}
     </RoomHomepageContext.Provider >
   );
