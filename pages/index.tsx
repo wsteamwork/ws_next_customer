@@ -9,7 +9,6 @@ import FooterComponent from '@/components/Layout/FooterComponent';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import RoomCard from '@/components/RoomCard';
 import {
   RoomHomepageContext,
   getRoomHot,
@@ -25,6 +24,8 @@ import ListRoom from '@/components/ListRoom';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
+import InputGlobal from '@/components/InputGlobal';
+import RoomCard from '@/components/RoomCard';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ const Home: NextPage = () => {
       <GridContainer xs={12} classNameItem="searchHome">
         <img
           src="./static/images/background.svg"
-          alt="Background home"
+          alt="Westay - HomeStay cho người Việt"
           className="searchHome__image"
         />
         <Grid onClick={handleOverlay}>
@@ -64,6 +65,7 @@ const Home: NextPage = () => {
             <Grid container spacing={1} className="searchHome__content">
               <Grid item xs={12} md={4}>
                 <SearchAutoSuggestion />
+
               </Grid>
               <Grid item xs={12} md={4}>
                 <DateRangeSearch />
@@ -77,14 +79,14 @@ const Home: NextPage = () => {
             </Grid>
 
             <Grid className="searchHome__checkbox">
-              <CheckboxList></CheckboxList>
+              <CheckboxList />
             </Grid>
           </GridContainer>
           <GridContainer xs={12} md={10} classNameItem="searchHome__opa"></GridContainer>
         </Grid>
       </GridContainer>
 
-      <GridContainer xs={12} sm={10}>
+      <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
         <SliderTypeApartment />
         <MetroGridImage />
 
@@ -94,10 +96,11 @@ const Home: NextPage = () => {
           title={'Phòng nổi bật'}
           render={renderRoom}></ListRoom>
       </GridContainer>
+      <InputGlobal label="Tên"></InputGlobal>
 
       <HostBecome />
 
-      <GridContainer xs={12} sm={10}>
+      <GridContainer xs={11} sm={10}>
         <BlogContainer />
       </GridContainer>
 

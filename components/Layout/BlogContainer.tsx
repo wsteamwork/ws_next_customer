@@ -11,7 +11,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root:{
-      marginTop:theme.spacing(7)
+      marginTop:theme.spacing(8)
     },
     title:{
       marginBottom:theme.spacing(3),
@@ -31,13 +31,13 @@ const BlogContainer: FC<IProps> = (props) => {
       </Typography>
       <Grid container spacing={2} justify='flex-start'>
         <Grid item xs={4} sm={3}>
-          <CardIntro imgHeight={200} title='Villa' showPrice={false}/>
+          <CardIntro imgHeight={200} title='Villa'/>
         </Grid>
         <Grid item xs={4} sm={3}>
-          <CardIntro imgHeight={200} title='Villa' showPrice={false}/>
+          <CardIntro imgHeight={200} title='Villa'/>
         </Grid>
         <Grid item xs={4} sm={3}>
-          <CardIntro imgHeight={200} title='Villa' showPrice={false}/>
+          <CardIntro imgHeight={200} title='Villa'/>
         </Grid>
       </Grid>
     </Grid>

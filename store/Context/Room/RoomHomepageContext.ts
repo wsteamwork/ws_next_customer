@@ -67,7 +67,7 @@ export const RoomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
 
 export const getRoomHot = async (): Promise<RoomIndexRes[]> => {
   const query: Partial<RoomIndexGetParams> = {
-    include: 'details,media,city,district',
+    include: 'details,media,city,district,merchant',
     hot: 1,
     limit: 10
   };

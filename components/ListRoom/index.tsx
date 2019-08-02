@@ -1,7 +1,5 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 import React, {
-  ComponentType,
   Fragment,
   useContext,
   useEffect,
@@ -13,7 +11,6 @@ import React, {
   ReactNode,
   ReactElement
 } from 'react';
-import { compose } from 'recompose';
 
 import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -23,10 +20,10 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { makeStyles } from '@material-ui/styles';
-// import { Theme } from '@material-ui/core';
 import RoomCard from '../RoomCard';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
+import { useTranslation } from 'react-i18next';
 
 type Iprops<T> = {
   classes?: any;
@@ -40,7 +37,7 @@ const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
     root: {
       display: 'block',
-      marginTop: theme.spacing(7)
+      marginTop: theme.spacing(8)
     },
     title: {
       marginBottom: theme.spacing(3),
@@ -52,7 +49,7 @@ const useStyles = makeStyles<Theme, any>((theme: Theme) =>
 const ListRoom = <T extends any>(props: Iprops<T>) => {
   const { roomData, title, usingSlider, render } = props;
   const classes = useStyles({});
-
+  const { t } = useTranslation();
   const setting: Settings = {
     dots: false,
     infinite: false,
@@ -63,6 +60,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
     mobileFirst: true,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1920,
@@ -91,6 +89,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           slidesToShow: 1,
           touchThreshold: 1000,
           arrows: false,
+          lazyLoad: false,
           centerMode: true,
           initialSlide: 1,
           centerPadding: '40px'

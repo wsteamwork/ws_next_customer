@@ -14,7 +14,7 @@
     },
     "signUp": "Đăng kí",
     "signIn": "Đăng nhập",
-    "beComeHost": "Kênh chủ nhà",
+    "merchantChannel": "Kênh chủ nhà",
     "contact" : "Liên hệ",
     "supportHost" : "Hỗ trợ chủ nhà",
     "currency" : "VND",
@@ -26,5 +26,8 @@
         "guest": "người",
         "room": "phòng",
         "roomUpper": "Phòng"
-    }
+    },
+    "topDestinations" : "Điểm đến hấp dẫn",
+    "beComeAHost" : "Trở thành chủ nhà",
+    "topHomestay" : "Phòng nổi bật"
 }
