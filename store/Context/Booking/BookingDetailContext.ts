@@ -1,6 +1,6 @@
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { createContext, Dispatch,Reducer } from 'react';
+import { createContext, Dispatch, Reducer } from 'react';
 import { formatTime } from '@/utils/mixins';
 import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
@@ -8,7 +8,9 @@ import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingRespo
 import { axios } from '@/utils/axiosInstance';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 
-export const BookingDetailContext = createContext<IBookingDetailContext | any>(null);
+export const BookingDetailContext = createContext<IBookingDetailContext>(
+  null as IBookingDetailContext
+);
 
 export interface IBookingDetailContext {
   state: BookingDetailState;
@@ -24,11 +26,12 @@ export type BookingDetailState = {
   readonly profile: ProfileInfoRes | null;
 };
 
-export type BookingDetailAction = { type: 'setRoom', room: RoomIndexRes, price: BookingPriceCalculatorRes }
-  | { type: 'setCoupon', coupon: string, discount: number }
+export type BookingDetailAction =
+  | { type: 'setRoom'; room: RoomIndexRes; price: BookingPriceCalculatorRes }
+  | { type: 'setCoupon'; coupon: string; discount: number }
   | { type: 'removeCoupon' }
-  | { type: 'setProfile', profile: ProfileInfoRes }
-  | { type: 'setSuccess', success: boolean }
+  | { type: 'setProfile'; profile: ProfileInfoRes }
+  | { type: 'setSuccess'; success: boolean };
 
 export const BookingDetailStateInit: BookingDetailState = {
   room: null,
@@ -36,7 +39,7 @@ export const BookingDetailStateInit: BookingDetailState = {
   discount: 0,
   price: null,
   profile: null,
-  success: false,
+  success: false
 };
 
 export interface IBookingDetailParams {
@@ -52,30 +55,33 @@ export interface IBookingDetailParams {
   instant_book: number;
 }
 
-export const BookingDetailReducer:Reducer<BookingDetailState,BookingDetailAction> = (state: BookingDetailState, action: BookingDetailAction): BookingDetailState => {
+export const BookingDetailReducer: Reducer<BookingDetailState, BookingDetailAction> = (
+  state: BookingDetailState,
+  action: BookingDetailAction
+): BookingDetailState => {
   switch (action.type) {
     case 'setRoom':
       return updateObject<BookingDetailState>(state, {
         room: action.room,
-        price: action.price,
+        price: action.price
       });
     case 'setCoupon':
       return updateObject<BookingDetailState>(state, {
         coupon: action.coupon,
-        discount: action.discount,
+        discount: action.discount
       });
     case 'removeCoupon':
       return updateObject<BookingDetailState>(state, {
         coupon: '',
-        discount: 0,
+        discount: 0
       });
     case 'setProfile':
       return updateObject<BookingDetailState>(state, {
-        profile: action.profile,
+        profile: action.profile
       });
     case 'setSuccess':
       return updateObject<BookingDetailState>(state, {
-        success: action.success,
+        success: action.success
       });
     default:
       return state;
@@ -84,9 +90,9 @@ export const BookingDetailReducer:Reducer<BookingDetailState,BookingDetailAction
 
 export const priceCalculate = async (params: IBookingDetailParams) => {
   let additional_fee = 0;
-  let discount       = 0;
-  let CI             = '';
-  let CO             = '';
+  let discount = 0;
+  let CI = '';
+  let CO = '';
   try {
     CI = formatTime(params.checkin, params.checkin_hour, params.checkin_minute);
     CO = formatTime(params.checkout, params.checkout_hour, params.checkout_minute);
@@ -101,17 +107,22 @@ export const priceCalculate = async (params: IBookingDetailParams) => {
     additional_fee: additional_fee,
     number_of_guests: params.number_guests,
     booking_type: params.booking_type,
-    price_discount: discount,
+    price_discount: discount
   };
 
-  const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post('bookings/price-calculator', data);
-//   const info: AxiosRes<RoomIndexRes>                  = await axios.get(`rooms/${params.hosting_id}?include=details,media`);
+  const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
+    'bookings/price-calculator',
+    data
+  );
+  //   const info: AxiosRes<RoomIndexRes>                  = await axios.get(`rooms/${params.hosting_id}?include=details,media`);
 
-    return res.data;
+  return res.data;
 };
 
 export const getRoomBookingDetail = async (params: IBookingDetailParams) => {
-  const res: AxiosRes<RoomIndexRes> = await axios.get(`rooms/${params.hosting_id}?include=details,media`);
+  const res: AxiosRes<RoomIndexRes> = await axios.get(
+    `rooms/${params.hosting_id}?include=details,media`
+  );
 
   return res.data;
 };

@@ -1,0 +1,16 @@
+{
+    "boxBooking": {
+        "bookNow": "Đặt ngay",
+        "guest": "khách",
+        "day": "ngày",
+        "hours": "giờ",
+        "cancellationPolicy": "Chính sách hủy phòng",
+        "details": "Chi tiết",
+        "basePrice": "Phân tích giá cơ sở",
+        "avgDay": "Giá trung bình mỗi ngày:",
+        "price": "Giá",
+        "serviceFee": "Phí dịch vụ",
+        "otherService": "Phí dịch vụ và phí khác",
+        "total": "Tổng cộng"
+    }
+}

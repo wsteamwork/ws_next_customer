@@ -8,10 +8,10 @@ import { updateObject } from '../utility';
 import { NextRouter } from 'next/router';
 import { PriceByDayRes, BodyRequestPriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import moment from 'moment';
+import qs from 'query-string';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 
 export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);
-
-export const DEFAULT_FORMAT_DATE_PRICE_BY_DAY = 'YYYY-MM-DD';
 
 export interface IRoomDetailsContext {
   state: RoomDetailsState;
@@ -23,8 +23,9 @@ export type RoomDetailsState = {
   readonly roomRecommend: RoomIndexRes[];
   readonly schedule: string[];
   readonly bookingType: number;
-  readonly price?: BookingPriceCalculatorRes;
+  readonly dataCalculate: BookingPriceCalculatorRes | null;
   readonly priceByDay: PriceByDayRes[];
+  readonly error: string | null;
 };
 
 export type RoomDetailsAction =
@@ -36,14 +37,18 @@ export type RoomDetailsAction =
       priceByDay: PriceByDayRes[];
     }
   | { type: 'setBookingType'; bookingType: number }
-  | { type: 'setPrice'; price: BookingPriceCalculatorRes };
+  | { type: 'setDataCalculdate'; payload: BookingPriceCalculatorRes }
+  | { type: 'updatePriceDay'; payload: PriceByDayRes[] }
+  | { type: 'setError'; payload: string };
 
 export const RoomDetailsStateInit: RoomDetailsState = {
   room: null,
   roomRecommend: [],
   schedule: [],
   bookingType: 2,
-  priceByDay: []
+  priceByDay: [],
+  dataCalculate: null,
+  error: null
 };
 
 export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = (
@@ -59,13 +64,13 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
         priceByDay: action.priceByDay
       });
     case 'setBookingType':
-      return updateObject<RoomDetailsState>(state, {
-        bookingType: action.bookingType
-      });
-    case 'setPrice':
-      return updateObject<RoomDetailsState>(state, {
-        price: action.price
-      });
+      return updateObject<RoomDetailsState>(state, { bookingType: action.bookingType });
+    case 'setDataCalculdate':
+      return updateObject<RoomDetailsState>(state, { dataCalculate: action.payload });
+    case 'updatePriceDay':
+      return updateObject<RoomDetailsState>(state, { priceByDay: action.payload });
+    case 'setError':
+      return updateObject<RoomDetailsState>(state, { error: action.payload });
     default:
       return state;
   }
@@ -92,15 +97,19 @@ const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
   return res.data.data.blocks;
 };
 
-const getPriceByDay = async (idRoom: any): Promise<PriceByDayRes[]> => {
-  const body: BodyRequestPriceByDayRes = {
-    date_start: moment().format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY),
-    date_end: moment()
-      .endOf('month')
-      .format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY)
-  };
+export const getPriceByDay = async (
+  idRoom: any,
+  date_start: string = moment().format(DEFAULT_DATE_FORMAT),
+  date_end: string = moment()
+    .add(6, 'month')
+    .endOf('month')
+    .format(DEFAULT_DATE_FORMAT)
+): Promise<PriceByDayRes[]> => {
+  const query: BodyRequestPriceByDayRes = { date_start, date_end };
 
-  const res: AxiosRes<PriceByDayRes[]> = await axios.get(`rooms/calendar-props/${idRoom}`);
+  const res: AxiosRes<PriceByDayRes[]> = await axios.get(
+    `rooms/calendar-props/${idRoom}?${qs.stringify(query)}`
+  );
 
   return res.data.data;
 };
