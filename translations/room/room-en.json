@@ -11,6 +11,11 @@
         "price": "Price",
         "serviceFee": "Service fee",
         "otherService": "Other service fees and charges",
-        "total": "Total"
+        "total": "Total",
+        "detailsService": "Service fees and other surcharges",
+        "chargeAddGuest": "Charge additional gust",
+        "chargeAddHour": "Charge additional hour",
+        "setByHour": "Set by hour",
+        "average": "Avarge"
     }
 }

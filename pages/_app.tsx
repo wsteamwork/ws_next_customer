@@ -5,6 +5,8 @@ import NProgress from 'nprogress';
 import '@/styles/index.scss';
 import 'tippy.js/themes/light-border.css';
 import ProviderGlobal from '@/utils/ProviderGlobal';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 class MyApp extends App<AppProps> {
   static async getInitialProps({ Component, ctx }: AppContext) {
@@ -21,6 +23,11 @@ class MyApp extends App<AppProps> {
     Router.events.on('routeChangeStart', this.handleRouteChangeStart);
     Router.events.on('routeChangeStart', this.handleRouteChangeEnd);
     Router.events.on('routeChangeError', this.handleRouteChangeEnd);
+
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
   }
 
   componentWillUnmount() {
@@ -43,6 +50,7 @@ class MyApp extends App<AppProps> {
     return (
       <Container>
         <ProviderGlobal>
+          <CssBaseline></CssBaseline>
           <Component {...pageProps} />
         </ProviderGlobal>
       </Container>

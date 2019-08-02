@@ -11,6 +11,11 @@
         "price": "Giá",
         "serviceFee": "Phí dịch vụ",
         "otherService": "Phí dịch vụ và phí khác",
-        "total": "Tổng cộng"
+        "total": "Tổng cộng",
+        "detailsService": "Phí dịch vụ và phụ thu khác",
+        "chargeAddGuest": "Phí thu thêm người",
+        "chargeAddHour": "Phí thu thêm giờ",
+        "setByHour": "Đặt theo giờ",
+        "average": "Trung bình"
     }
 }
