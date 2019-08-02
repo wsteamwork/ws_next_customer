@@ -86,8 +86,6 @@ const Home: NextPage = () => {
 
         <ListRoom roomData={roomsHot} />
       </GridContainer>
-      <InputGlobal label="Tên"></InputGlobal>
-
       <HostBecome />
 
       <GridContainer xs={11} sm={10}>
