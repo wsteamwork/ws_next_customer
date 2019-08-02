@@ -96,8 +96,6 @@ const Home: NextPage = () => {
           title={'Phòng nổi bật'}
           render={renderRoom}></ListRoom>
       </GridContainer>
-      <InputGlobal label="Tên"></InputGlobal>
-
       <HostBecome />
 
       <GridContainer xs={11} sm={10}>
