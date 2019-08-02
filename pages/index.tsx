@@ -42,7 +42,7 @@ const Home: NextPage = () => {
     dispatchGlobal({ type: 'setOverlay', payload: true });
   };
 
-  const renderRoom = room => <RoomCard room={room} isHomepage={true} />
+  const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
 
   return (
     <RoomHomepageContext.Provider value={{ state, dispatch }}>
@@ -65,7 +65,6 @@ const Home: NextPage = () => {
             <Grid container spacing={1} className="searchHome__content">
               <Grid item xs={12} md={4}>
                 <SearchAutoSuggestion />
-
               </Grid>
               <Grid item xs={12} md={4}>
                 <DateRangeSearch />
@@ -89,11 +88,11 @@ const Home: NextPage = () => {
       <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
         <SliderTypeApartment />
         <MetroGridImage />
-
         <ListRoom
           roomData={roomsHot}
           usingSlider={true}
           title={'Phòng nổi bật'}
+          spacing={8}
           render={renderRoom}></ListRoom>
       </GridContainer>
       <HostBecome />

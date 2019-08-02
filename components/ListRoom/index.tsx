@@ -24,6 +24,7 @@ import RoomCard from '../RoomCard';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 import { useTranslation } from 'react-i18next';
+import { GridSpacing } from '@material-ui/core/Grid';
 
 type Iprops<T> = {
   classes?: any;
@@ -31,12 +32,12 @@ type Iprops<T> = {
   title?: string;
   usingSlider?: boolean;
   render?: (room: T) => ReactNode;
+  spacing?: GridSpacing;
 };
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
     root: {
-      display: 'block',
       marginTop: theme.spacing(8)
     },
     title: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles<Theme, any>((theme: Theme) =>
 );
 
 const ListRoom = <T extends any>(props: Iprops<T>) => {
-  const { roomData, title, usingSlider, render } = props;
+  const { roomData, title, usingSlider, render, spacing } = props;
   const classes = useStyles({});
   const { t } = useTranslation();
   const setting: Settings = {
@@ -104,13 +105,21 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
   };
 
   const renderRooms = useMemo(
-    () => _.map(roomData, (room, index) => <div key={index}>{render(room)}</div>),
+    () =>
+      _.map(roomData, (room, index) => (
+        <Grid item key={index}>
+          {render(room)}
+        </Grid>
+      )),
     [roomData]
   );
 
   return (
     <Fragment>
-      <Grid container className={classNames(classes.root, 'listRoomContainer')}>
+      <Grid
+        container
+        spacing={spacing ? spacing : 0}
+        className={classNames(classes.root, 'listRoomContainer')}>
         {title != '' && (
           <Typography variant="h5" className={classes.title}>
             {title}

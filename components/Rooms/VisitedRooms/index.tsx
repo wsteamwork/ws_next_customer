@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import VisitedRoom from '../Rooms/VisitedRoom';
+import VisitedRoom from './VisitedRoom';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -20,7 +20,7 @@ interface IProps {
   visitedRoom: RoomIndexRes[];
 }
 
-const VisitedRoomBox: FC<IProps> = (props) => {
+const VisitedRooms: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { visitedRoom } = props;
@@ -36,4 +36,4 @@ const VisitedRoomBox: FC<IProps> = (props) => {
   );
 };
 
-export default VisitedRoomBox;
+export default VisitedRooms;

@@ -18,6 +18,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
 import ListRoom from '@/components/ListRoom';
 import RoomCardListing from '@/components/Rooms/RoomCardListing';
+import VisitedRooms from '@/components/Rooms/VisitedRooms';
 
 const Rooms: NextPage = () => {
   const { t } = useTranslation();
@@ -77,7 +78,27 @@ const Rooms: NextPage = () => {
       </GridContainer>
       <FilterActions></FilterActions>
       <GridContainer xs={11} md={10} xl={9}>
-        {rooms && <ListRoom roomData={rooms} usingSlider={false} title={''} render={renderRoom} />}
+        <Grid
+          container
+          justify="center"
+          alignContent="center"
+          spacing={8}
+          style={{ marginTop: '48px' }}>
+          <Grid item sm={4}>
+            <VisitedRooms visitedRoom={rooms} />
+          </Grid>
+          <Grid item lg={8} md={8} sm={12} xs={12}>
+            {rooms && (
+              <ListRoom
+                roomData={rooms}
+                usingSlider={false}
+                title={''}
+                spacing={2}
+                render={renderRoom}
+              />
+            )}
+          </Grid>
+        </Grid>
       </GridContainer>
     </RoomIndexContext.Provider>
   );
