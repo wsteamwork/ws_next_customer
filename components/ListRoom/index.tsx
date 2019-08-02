@@ -77,22 +77,27 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 3,
-          autoplay: true,
-          centerMode: false,
-          arrows: false
+          slidesToShow: 1.9,
+          touchThreshold: 5000,
+          arrows: false,
+          lazyLoad: false,
+          centerMode: true,
+          initialSlide: 0,
+          centerPadding: '24%',
+          slidesToScroll: 2
         }
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
-          touchThreshold: 1000,
+          touchThreshold: 5000,
+          slidesToShow: 1.2,
+          centerPadding: '12%',
           arrows: false,
           lazyLoad: false,
           centerMode: true,
-          initialSlide: 1,
-          centerPadding: '40px'
+          initialSlide: 0,
+          slidesToScroll: 1
         }
       }
     ]
