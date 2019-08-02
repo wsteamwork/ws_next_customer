@@ -10,5 +10,6 @@
     },
     "visitedRoom" : "Visited Room",
     "night" : "night",
-    "hour" : "hour"
+    "hour" : "hour",
+    "verified" : "Verified"
 }

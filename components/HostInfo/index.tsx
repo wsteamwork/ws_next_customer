@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Merchant } from '@/types/Requests/Rooms/RoomResponses';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -62,6 +63,7 @@ interface IProps {
 }
 
 const HostInfo: FC<IProps> = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles(props);
   const { merchant, countRoom } = props;
   return (
@@ -88,7 +90,7 @@ const HostInfo: FC<IProps> = (props) => {
                 </Typography>
                 <Typography variant="subtitle1" className={classes.certificate}>
                   <FontAwesomeIcon className={classes.icon} icon={faCheckCircle}></FontAwesomeIcon>
-                  Verified
+                  {t('rooms:verified')}
                 </Typography>
               </Grid>
           </Grid>
