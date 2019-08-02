@@ -9,15 +9,12 @@ import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 interface Iprops {
-  classes?: any;
   room: RoomIndexRes;
   isHomepage: boolean | false;
 }
 
-const styles: any = (theme: Theme) => createStyles({});
-
 const RoomCard: FC<Iprops> = (props) => {
-  const { classes, room, isHomepage } = props;
+  const { room, isHomepage } = props;
   const { t }: UseTranslationResponse = useTranslation();
 
   return (
@@ -64,10 +61,10 @@ const RoomCard: FC<Iprops> = (props) => {
                   {isHomepage ? (
                     ''
                   ) : (
-                      <Typography className="hourPrice">
-                        {room.price_hour && `${numeral(room.price_hour).format('0,0')}đ/4 giờ`}
-                      </Typography>
-                    )}
+                    <Typography className="hourPrice">
+                      {room.price_hour && `${numeral(room.price_hour).format('0,0')}đ/4 giờ`}
+                    </Typography>
+                  )}
                 </Grid>
 
                 {room.total_review > 3 ? (
@@ -76,11 +73,11 @@ const RoomCard: FC<Iprops> = (props) => {
                     <Typography className="rating text">{`${room.avg_rating}`}</Typography>
                     <Typography variant="subtitle1" className="totalReview text">{` (${
                       room.total_review
-                      } ${t('home:review')})`}</Typography>
+                    } ${t('home:review')})`}</Typography>
                   </Grid>
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
               </Grid>
             </Link>
           </Grid>
@@ -90,4 +87,4 @@ const RoomCard: FC<Iprops> = (props) => {
   );
 };
 
-export default compose<Iprops, any>(withStyles(styles))(RoomCard);
+export default RoomCard;

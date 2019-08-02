@@ -8,7 +8,10 @@ import React, {
   useState,
   lazy,
   Suspense,
-  FC
+  FC,
+  useMemo,
+  ReactNode,
+  ReactElement
 } from 'react';
 import { compose } from 'recompose';
 
@@ -25,30 +28,34 @@ import RoomCard from '../RoomCard';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 
-interface Iprops {
+type Iprops<T> = {
   classes?: any;
-  roomData: RoomIndexRes[];
-}
+  roomData: T[];
+  title?: string;
+  usingSlider?: boolean;
+  render?: (room: T) => ReactNode;
+};
 
-const useStyles = makeStyles<Iprops>((theme: any) =>
+const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
     root: {
       display: 'block',
-      marginTop:theme.spacing(7)
+      marginTop: theme.spacing(7)
     },
-    title:{
-      marginBottom:theme.spacing(3),
-      fontWeight:900,
+    title: {
+      marginBottom: theme.spacing(3),
+      fontWeight: 900
     }
   })
 );
 
-const ListRoom: FC<Iprops> = (props) => {
-  const { roomData } = props;
-  const classes = useStyles(props);
+const ListRoom = <T extends any>(props: Iprops<T>) => {
+  const { roomData, title, usingSlider, render } = props;
+  const classes = useStyles({});
+
   const setting: Settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     slidesToShow: 5,
     speed: 800,
     lazyLoad: 'ondemand',
@@ -60,13 +67,13 @@ const ListRoom: FC<Iprops> = (props) => {
       {
         breakpoint: 1920,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 5
         }
       },
       {
         breakpoint: 1366,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 4
         }
       },
       {
@@ -81,36 +88,39 @@ const ListRoom: FC<Iprops> = (props) => {
       {
         breakpoint: 600,
         settings: {
-          // variableWidth: true,
           slidesToShow: 1,
-          // autoplay: true,
-          // autoplaySpeed: 5000,
           touchThreshold: 1000,
           arrows: false,
           centerMode: true,
           initialSlide: 1,
-          centerPadding: "40px"
+          centerPadding: '40px'
         }
       }
     ]
   };
+
+  const renderRooms = useMemo(
+    () => _.map(roomData, (room, index) => <div key={index}>{render(room)}</div>),
+    [roomData]
+  );
+
   return (
     <Fragment>
-      <Grid container className={classNames(classes.root, "listRoomContainer")}>
-        <Typography variant='h5' className={classes.title}>
-          Phòng nổi bật
-        </Typography>
+      <Grid container className={classNames(classes.root, 'listRoomContainer')}>
+        {title != '' && (
+          <Typography variant="h5" className={classes.title}>
+            {title}
+          </Typography>
+        )}
         {roomData ? (
-          <Slider {...setting}>
-            {_.map(roomData, (room, index) => (
-              <div key={index}>
-                <RoomCard isHomepage={true} room={room} />
-              </div>
-            ))}
-          </Slider>
+          usingSlider ? (
+            <Slider {...setting}>{renderRooms}</Slider>
+          ) : (
+            <Fragment>{renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );

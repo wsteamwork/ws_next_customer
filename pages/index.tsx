@@ -12,7 +12,10 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import RoomCard from '@/components/RoomCard';
 import {
   RoomHomepageContext,
-  getRoomHot, RoomHomepageStateInit, RoomHomepageReducer, getRoomsHomepage
+  getRoomHot,
+  RoomHomepageStateInit,
+  RoomHomepageReducer,
+  getRoomsHomepage
 } from '@/store/Context/Room/RoomHomepageContext';
 import DateRangeSearch from '@/components/Home/DateRangeSearch';
 import CheckboxList from '@/components/Home/CheckboxList';
@@ -28,16 +31,17 @@ const Home: NextPage = () => {
   const [state, dispatch] = useReducer(RoomHomepageReducer, RoomHomepageStateInit);
 
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-  const { roomsHot,roomsCity,apartments } = state;
-
+  const { roomsHot, roomsCity, apartments } = state;
 
   useEffect(() => {
-    getRoomsHomepage(dispatch)
+    getRoomsHomepage(dispatch);
   }, []);
 
   const handleOverlay = () => {
     dispatchGlobal({ type: 'setOverlay', payload: true });
   };
+
+  const renderRoom = room => <RoomCard room={room} isHomepage={true} />
 
   return (
     <RoomHomepageContext.Provider value={{ state, dispatch }}>
@@ -81,21 +85,25 @@ const Home: NextPage = () => {
       </GridContainer>
 
       <GridContainer xs={12} sm={10}>
-        <SliderTypeApartment/>
+        <SliderTypeApartment />
         <MetroGridImage />
 
-        <ListRoom roomData={roomsHot} />
+        <ListRoom
+          roomData={roomsHot}
+          usingSlider={true}
+          title={'Phòng nổi bật'}
+          render={renderRoom}></ListRoom>
       </GridContainer>
 
-      <HostBecome/>
+      <HostBecome />
 
       <GridContainer xs={12} sm={10}>
-        <BlogContainer/>
+        <BlogContainer />
       </GridContainer>
 
-      <FooterComponent/>
+      <FooterComponent />
       {/* </Fragment> */}
-    </RoomHomepageContext.Provider >
+    </RoomHomepageContext.Provider>
   );
 };
 

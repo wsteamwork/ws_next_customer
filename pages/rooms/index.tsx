@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
 import { Grid } from '@material-ui/core';
 import NavHeader from '@/components/Toolbar/NavHeader';
@@ -11,19 +11,41 @@ import { useTranslation } from 'react-i18next';
 import {
   RoomIndexContext,
   RoomIndexReducer,
-  RoomIndexStateInit
+  RoomIndexStateInit,
+  getRooms
 } from '@/store/Context/Room/RoomListContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
+import ListRoom from '@/components/ListRoom';
+import RoomCardListing from '@/components/Rooms/RoomCardListing';
 
 const Rooms: NextPage = () => {
   const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
-  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
+  const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
+  const { rooms } = state;
+
+  useEffect(() => {
+    getRooms(router)
+      .then((data) => {
+        console.log(data);
+        const roomData = data.data;
+        const pagination = data.meta;
+        dispatch({
+          type: 'setRooms',
+          rooms: roomData,
+          meta: pagination
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const handleOverlay = () => {
     dispatchGlobal({ type: 'setOverlay', payload: true });
   };
+  const renderRoom = (room) => <RoomCardListing room={room} />;
 
   return (
     <RoomIndexContext.Provider value={{ state, dispatch }}>
@@ -53,8 +75,10 @@ const Rooms: NextPage = () => {
           </Grid>
         </Grid>
       </GridContainer>
-
       <FilterActions></FilterActions>
+      <GridContainer xs={11} md={10} xl={9}>
+        {rooms && <ListRoom roomData={rooms} usingSlider={false} title={''} render={renderRoom} />}
+      </GridContainer>
     </RoomIndexContext.Provider>
   );
 };

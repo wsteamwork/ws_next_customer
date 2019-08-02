@@ -28,7 +28,7 @@ const MetroGridImage: FC<IProps> = (props) => {
   const {state}= useContext<IRoomHomepageContext>(RoomHomepageContext);
 
   const {roomsCity} = state;
-  console.log(roomsCity);
+  // console.log(roomsCity);
 
   return roomsCity && (
     <Grid className={classes.root}>
