@@ -15,6 +15,7 @@ import NavBottomBook from '@/components/Room/NavBottomBook';
 import NextHead from '@/components/NextHead';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
+import EmptyRoomCalenda from '@/components/Room/EmptyRoomCalenda';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -42,7 +43,9 @@ const Room: NextPage = () => {
 
       <GridContainer lg={10}>
         <Grid container spacing={1}>
-          <Grid item xs={12} lg={9}></Grid>
+          <Grid item xs={12} lg={9}>
+            <EmptyRoomCalenda></EmptyRoomCalenda>
+          </Grid>
 
           <Hidden mdDown>
             <Grid item sm={12} md={11} lg={3}>

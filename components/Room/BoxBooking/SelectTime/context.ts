@@ -74,7 +74,7 @@ export const useMinBookByHourCheckin = (): ReturnMinBookByHourCheckin => {
 
   useEffect(() => {
     if (available_hour.length > 0) {
-      !checkInHour && dispatch({ type: 'SET_CHECK_IN_HOUR', payload: available_hour[0] });
+      dispatch({ type: 'SET_CHECK_IN_HOUR', payload: available_hour[0] });
     }
   }, [available_hour]);
 

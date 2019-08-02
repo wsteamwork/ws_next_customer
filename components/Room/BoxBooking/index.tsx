@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
-import DateRangeSingle from './DateRangeSingle';
 import PriceDetail from './PriceDetail';
 import SelectGuest from './SelectGuest';
 import TotalPrice from './TotalPrice';
@@ -8,6 +7,7 @@ import CancellationPolicy from './CancellationPolicy';
 import SubmitBooking from './SubmitBooking';
 import ChooseBookingType from './ChooseBookingType';
 import SelectTime from './SelectTime';
+import DateRangeSingle from './DateRangeSingle';
 
 const BoxBooking: FC = () => {
   return (

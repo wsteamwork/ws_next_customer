@@ -9,6 +9,7 @@ import animationData from '@/assets/lottie/simple-loading.json';
 import DetailsPriceDay from './DetailsPriceDay';
 import { useTranslation } from 'react-i18next';
 import { useCalculatePrice } from './context';
+import DetailsPriceService from './DetailsPriceService';
 
 const defaultOptions = {
   loop: true,
@@ -56,20 +57,7 @@ const TotalPrice: FC = () => {
               <Grid item xs={6}>
                 <p className="totalPrice__left">
                   {t('room:boxBooking:serviceFee')}{' '}
-                  <Tooltip
-                    disableFocusListener
-                    disableTouchListener
-                    title={
-                      <p className="totalPrice__tooltip">{t('room:boxBooking:otherService')}</p>
-                    }
-                    placement="top">
-                    <span>
-                      <FontAwesomeIcon
-                        icon={faQuestionCircle}
-                        size="1x"
-                        color={mainColor.primary}></FontAwesomeIcon>
-                    </span>
-                  </Tooltip>
+                  <DetailsPriceService dataCalculate={dataCalculate}></DetailsPriceService>
                 </p>
               </Grid>
               <Grid item xs={6}>

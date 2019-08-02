@@ -136,7 +136,7 @@
 }
 
 .totalPriceRoom {
-  width: 180px;
+  width: 170px;
 
   &__title {
     // border-bottom: 1px solid #ddd;
@@ -163,7 +163,35 @@
   }
 
   &__widthBig {
-    width: 230px;
+    width: 240px;
+  }
+}
+
+.detailsFeeService {
+  width: 230px;
+
+  &__title {
+    // border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px 0px;
+  }
+
+  &__priceDay {
+    padding: 5px 0px;
+    border-top: 1px solid #ddd;
+  }
+
+  &__textLeft {
+    text-align: left !important;
+  }
+
+  &__textRight {
+    text-align: right !important;
+  }
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 }
 
@@ -211,6 +239,28 @@
       display: flex;
       align-items: center;
       padding-left: 30px;
+    }
+  }
+}
+
+.emptyRoomCalenda {
+  &__monthText {
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  .dayContents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    &__price {
+      font-size: 9px;
+      font-weight: 700;
     }
   }
 }

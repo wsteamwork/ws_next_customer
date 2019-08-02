@@ -4,9 +4,11 @@ import { Grid, FormControlLabel } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { useTranslation } from 'react-i18next';
 
 const ChooseBookingType: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();
+  const { t } = useTranslation();
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
@@ -24,11 +26,11 @@ const ChooseBookingType: FC = () => {
           control={
             <CustomCheckbox checked={bookingType === 1} onChange={handleChange} value="checkedA" />
           }
-          label="Đặt theo giờ"
+          label={t('room:boxBooking:setByHour')}
         />
       </Grid>
     ),
-    [bookingType]
+    [bookingType, t]
   );
 };
 

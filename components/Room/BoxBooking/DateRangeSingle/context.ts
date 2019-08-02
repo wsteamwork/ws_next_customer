@@ -22,31 +22,20 @@ export const changeDataPriceByDay = (data: PriceByDayRes[]): DataChangePriceByDa
   }, {});
 };
 
-interface ReturnUseDateRange {
-  date: DateRange;
-  onDatesChange: (arg: DateRange) => void;
-  onClose?: (final: DateRange) => void;
-  onFocusChange: (arg: FocusedInputShape | null) => void;
-  isDayBlocked?: (day: Moment) => boolean;
-  isOutsideRange?: (day: Moment) => boolean;
-  onNextMonthClick?: (newCurrentMonth: Moment) => void;
-  focused?: FocusedInputShape | null;
-}
-
-const useCheckDate = (date: DateRange) => {
+const useCheckDate = (date: DateRange, dateSingle: Moment) => {
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
   const dispatch = useDispatch<Dispatch<BookingAction>>();
 
   useEffect(() => {
-    if (bookingType === 1 && !!date.endDate && !!date.startDate) {
+    if (bookingType === 1 && !!dateSingle) {
       dispatch({
         type: 'SET_CHECK_IN',
-        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+        payload: dateSingle.format(DEFAULT_DATE_FORMAT)
       });
 
       dispatch({
         type: 'SET_CHECK_OUT',
-        payload: date.startDate.format(DEFAULT_DATE_FORMAT)
+        payload: dateSingle.format(DEFAULT_DATE_FORMAT)
       });
     } else if (!!date.startDate && !!date.endDate) {
       if (date.startDate.format(DEFAULT_DATE_FORMAT) === date.endDate.format(DEFAULT_DATE_FORMAT)) {
@@ -71,25 +60,50 @@ const useCheckDate = (date: DateRange) => {
         });
       }
     }
-  }, [bookingType, date]);
+  }, [bookingType, date, dateSingle]);
 
   return {};
 };
+
+interface ReturnUseDateRange {
+  date: DateRange;
+  onDatesChange?: (arg: DateRange) => void;
+  onChangeDateSingle?: (date: Moment) => void;
+  dateSingle?: Moment;
+  onClose?: (final: DateRange) => void;
+  onFocusChange: (arg: FocusedInputShape | null) => void;
+  isDayBlocked?: (day: Moment) => boolean;
+  isOutsideRange?: (day: Moment) => boolean;
+  onNextMonthClick?: (newCurrentMonth: Moment) => void;
+  focused?: FocusedInputShape | null;
+}
 
 export const useDateRange = (): ReturnUseDateRange => {
   const dateStart = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const dateEnd = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
-
   const [date, setDate] = useState<DateRange>({
     startDate: dateStart ? moment(dateStart) : moment(),
     endDate: dateEnd ? moment(dateEnd) : null
   });
-  const {} = useCheckDate(date);
+
+  const [dateSingle, setDateSingle] = useState<Moment | null>(
+    dateStart ? moment(dateStart) : moment()
+  );
+
+  const onChangeDateSingle = (date: Moment) => {
+    setDateSingle(date);
+  };
+
+  const {} = useCheckDate(date, dateSingle);
 
   useEffect(() => {
     if (!!dateStart) {
       setDate({ ...date, startDate: moment(dateStart) });
+    }
+
+    if (!!dateSingle) {
+      setDateSingle(moment(dateStart));
     }
 
     if (!!dateEnd) {
@@ -158,6 +172,8 @@ export const useDateRange = (): ReturnUseDateRange => {
     isDayBlocked,
     isOutsideRange,
     onNextMonthClick,
-    focused
+    focused,
+    onChangeDateSingle,
+    dateSingle
   };
 };
