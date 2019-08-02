@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/server/index.js"
+    "start": "cross-env NODE_ENV=production node dist/server/index.js",
+    "ready": "pm2 start dist/server/index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
