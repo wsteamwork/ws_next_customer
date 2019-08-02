@@ -1,6 +1,19 @@
 .boxBooking {
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
-  width: 400px;
+
+  @include xs {
+    box-shadow: none;
+  }
+
+  @include sm {
+    box-shadow: none;
+  }
+
+  @include md {
+    box-shadow: none;
+  }
+
+  width: 100%;
   height: auto;
   border-radius: 2px;
 
@@ -11,10 +24,6 @@
       font-size: 16px;
       font-weight: 500;
     }
-  }
-
-  * {
-    font-family: "Montserrat", sans-serif !important;
   }
 
   &__padding {
@@ -29,7 +38,6 @@
 
     font-size: 14px;
     font-weight: bold;
-    //   font-family: "Montserrat", sans-serif !important;
 
     &__price {
       font-size: 9px;
@@ -43,7 +51,6 @@
     margin-top: 20px;
 
     &__monthText {
-      // font-family: "Montserrat", sans-serif !important;
       font-size: 19px;
       font-weight: 800;
     }
@@ -129,7 +136,7 @@
 }
 
 .totalPriceRoom {
-  width: 170px;
+  width: 180px;
 
   &__title {
     // border-bottom: 1px solid #ddd;

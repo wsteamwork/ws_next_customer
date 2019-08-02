@@ -43,7 +43,7 @@ const DetailsPriceDay: FC<IProps> = (props) => {
               ))
             ) : (
               <Grid className="totalPriceRoom__priceDay" container>
-                <Grid item xs={8} className="totalPriceRoom__textLeft">
+                <Grid item xs={9} className="totalPriceRoom__textLeft">
                   <p>{t('room:boxBooking:avgDay')}</p>
                 </Grid>
                 <Grid item xs={3} className="totalPriceRoom__textRight">

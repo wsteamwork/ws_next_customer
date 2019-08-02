@@ -1,13 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useContext, useState, useMemo, useEffect } from 'react';
+import { useContext, useState, useMemo, useEffect, Dispatch } from 'react';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import moment from 'moment';
 import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
 import { AxiosRes, AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
+import { BookingAction } from '@/store/Redux/Reducers/booking';
 
 type ReturnCalculate = {
   numberDay: number;
@@ -18,6 +19,7 @@ type ReturnCalculate = {
 };
 
 export const useCalculatePrice = (): ReturnCalculate => {
+  const dispatchRedux = useDispatch<Dispatch<BookingAction>>();
   const startDate = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const endDate = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
   const guestsCount = useSelector<ReducersList, number>((state) => state.booking.numberOfGuest);
@@ -72,12 +74,14 @@ export const useCalculatePrice = (): ReturnCalculate => {
       setLoading(false);
       dispatch({ type: 'setDataCalculdate', payload: res.data.data });
       dispatch({ type: 'setError', payload: null });
+      dispatchRedux({ type: 'SET_DATA_CALCULATE', payload: res.data.data });
     } catch (error) {
       const result: AxiosErrorCustom<{ errors: string; exception: string }> = error;
 
       setLoading(false);
       dispatch({ type: 'setError', payload: result.response.data.data.exception });
       dispatch({ type: 'setDataCalculdate', payload: null });
+      dispatchRedux({ type: 'SET_DATA_CALCULATE', payload: null });
     }
   };
 

@@ -85,8 +85,17 @@ export const useDateRange = (): ReturnUseDateRange => {
     startDate: dateStart ? moment(dateStart) : moment(),
     endDate: dateEnd ? moment(dateEnd) : null
   });
-
   const {} = useCheckDate(date);
+
+  useEffect(() => {
+    if (!!dateStart) {
+      setDate({ ...date, startDate: moment(dateStart) });
+    }
+
+    if (!!dateEnd) {
+      setDate({ ...date, endDate: moment(dateEnd) });
+    }
+  }, [dateStart, dateEnd]);
 
   const [focused, setFocued] = useState<FocusedInputShape | null>(null);
   const { state } = useContext(RoomDetailsContext);

@@ -3,6 +3,7 @@ import { Reducer } from 'redux';
 import { updateObject } from '@/store/Context/utility';
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 
 export type DateRange = {
   startDate: Moment | null;
@@ -10,7 +11,6 @@ export type DateRange = {
 };
 
 export type BookingState = {
-  readonly roomID: number | null;
   readonly numberOfGuest: number;
   readonly bookingType: number;
   readonly startDate: string | null;
@@ -18,6 +18,7 @@ export type BookingState = {
   readonly checkInHour: string | null;
   readonly checkOutHour: string | null;
   readonly availableCheckoutTime: string[];
+  readonly dataCalculate: BookingPriceCalculatorRes | null;
 };
 
 export type BookingAction =
@@ -27,18 +28,18 @@ export type BookingAction =
   | { type: 'SET_CHECK_OUT_HOUR'; payload: string }
   | { type: 'SET_BOOKING_TYPE'; payload: number }
   | { type: 'SET_NUMBER_OF_GUEST'; payload: number }
-  | { type: 'SET_ROOM_ID'; payload: number }
-  | { type: 'SET_AVAILABLE_CHECKOUT'; payload: string[] };
+  | { type: 'SET_AVAILABLE_CHECKOUT'; payload: string[] }
+  | { type: 'SET_DATA_CALCULATE'; payload: BookingPriceCalculatorRes };
 
 const init: BookingState = {
-  roomID: null,
   numberOfGuest: 1,
   bookingType: 2,
   startDate: moment().format(DEFAULT_DATE_FORMAT),
   endDate: null,
   checkInHour: null,
   checkOutHour: null,
-  availableCheckoutTime: []
+  availableCheckoutTime: [],
+  dataCalculate: null
 };
 
 const reducer: Reducer<BookingState, BookingAction> = (
@@ -58,10 +59,10 @@ const reducer: Reducer<BookingState, BookingAction> = (
       return updateObject(state, { checkOutHour: action.payload });
     case 'SET_NUMBER_OF_GUEST':
       return updateObject(state, { numberOfGuest: action.payload });
-    case 'SET_ROOM_ID':
-      return updateObject(state, { roomID: action.payload });
     case 'SET_AVAILABLE_CHECKOUT':
       return updateObject(state, { availableCheckoutTime: action.payload });
+    case 'SET_DATA_CALCULATE':
+      return updateObject(state, { dataCalculate: action.payload });
     default:
       return state;
   }

@@ -90,7 +90,7 @@ export const useMinBookByHourCheckin = (): ReturnMinBookByHourCheckin => {
   useEffect(() => {
     if (!!valueStart) {
       getAvailablecCheckout(
-        `${moment(startDate).format(DEFAULT_DATE_FORMAT)} ${checkInHour}`,
+        `${moment(startDate).format(DEFAULT_DATE_FORMAT)} ${valueStart}`,
         router.query.id,
         dispatch,
         checkOutHour
