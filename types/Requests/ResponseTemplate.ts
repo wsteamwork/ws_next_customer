@@ -1,5 +1,5 @@
-import {AxiosResponse, AxiosRequestConfig} from 'axios';
-import {isArray} from 'util';
+import { AxiosResponse, AxiosRequestConfig } from 'axios';
+import { isArray } from 'util';
 
 export interface BaseResponse<T = any> {
   code: number;
@@ -31,6 +31,7 @@ export interface AxiosErrorCustom<T = any> extends Error {
   code?: string;
   request?: any;
   response?: AxiosRes<T>;
+  isAxiosError?: boolean;
 }
 
 /**
@@ -43,25 +44,23 @@ export interface Pagination {
     per_page: number;
     current_page: number;
     total_pages: number;
-    links: {
-      next: string;
-      previous: string;
-    } | any
-  }
+    links:
+      | {
+          next: string;
+          previous: string;
+        }
+      | any;
+  };
 }
 
-export interface AxiosRes<T> extends AxiosResponse<BaseResponse<T>> {
+export interface AxiosRes<T> extends AxiosResponse<BaseResponse<T>> {}
 
-}
-
-export interface AxiosValidateError<T, E = any> extends AxiosRes<ErrorValidate<T, E>> {
-
-}
+export interface AxiosValidateError<T, E = any> extends AxiosRes<ErrorValidate<T, E>> {}
 
 type PartialType<E, T = any> = {
   [P in keyof E]: T;
-}
+};
 
 export type AddExtraType<Interface, Type> = {
-  [I in keyof Interface] : Interface[I] | Type
-}
+  [I in keyof Interface]: Interface[I] | Type;
+};

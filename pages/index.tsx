@@ -1,26 +1,26 @@
 import React, { useEffect, useReducer, memo, useContext } from 'react';
 import { NextPage } from 'next';
 import NextHead from '@/components/NextHead';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import { Grid } from '@material-ui/core';
-import ChooseGuestRoom from '@/components/Home/ChooseGuestRoom';
-import ButtonGlobal from '@/components/ButtonGlobal';
 import FooterComponent from '@/components/Layout/FooterComponent';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import {
-  RoomHomepageContext, RoomHomepageStateInit, RoomHomepageReducer, getRoomsHomepage
+  RoomHomepageContext,
+  getRoomHot,
+  RoomHomepageStateInit,
+  RoomHomepageReducer,
+  getRoomsHomepage
 } from '@/store/Context/Room/RoomHomepageContext';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import CheckboxList from '@/components/Home/CheckboxList';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import ListRoom from '@/components/ListRoom';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
-import InputGlobal from '@/components/InputGlobal';
+import SearchComponent from '@/components/SearchComponent';
+import CheckboxList from '@/components/Home/CheckboxList';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
 
 
   useEffect(() => {
-    getRoomsHomepage(dispatch)
+    getRoomsHomepage(dispatch);
   }, []);
 
   const handleOverlay = () => {
@@ -56,21 +56,7 @@ const Home: NextPage = () => {
               <h3>{t('home:searchComponent:enjoy')}</h3>
             </Grid>
 
-            <Grid container spacing={1} className="searchHome__content">
-              <Grid item xs={12} md={4}>
-                <SearchAutoSuggestion />
-
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <DateRangeSearch />
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <ChooseGuestRoom />
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <ButtonGlobal width="100%">{t('home:searchComponent:search')}</ButtonGlobal>
-              </Grid>
-            </Grid>
+            <SearchComponent className="searchHome__content"></SearchComponent>
 
             <Grid className="searchHome__checkbox">
               <CheckboxList />
@@ -94,7 +80,7 @@ const Home: NextPage = () => {
 
       <FooterComponent />
       {/* </Fragment> */}
-    </RoomHomepageContext.Provider >
+    </RoomHomepageContext.Provider>
   );
 };
 

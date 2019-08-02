@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Typography, Grid, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
 import { IRoomHomepageContext, RoomHomepageContext } from '@/store/Context/Room/RoomHomepageContext';
-import numeral  from 'numeral';
+import numeral from 'numeral';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import Slider, { Settings } from 'react-slick';
 import NextArrow from '@/components/ListRoom/NextArrow';
@@ -17,26 +17,26 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    root:{
-      marginTop:theme.spacing(8),
+    root: {
+      marginTop: theme.spacing(8),
     },
-    title:{
-      marginBottom:theme.spacing(3),
-      fontWeight:900,
+    title: {
+      marginBottom: theme.spacing(3),
+      fontWeight: 900,
     },
-    paddingGrid:{
-      padding:4,
+    paddingGrid: {
+      padding: 4,
     }
   })
 );
 
 const MetroGridImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {t} = useTranslation();
-  const {state}= useContext<IRoomHomepageContext>(RoomHomepageContext);
-  const {width}= useContext<IGlobalContext>(GlobalContext);
+  const { t } = useTranslation();
+  const { state } = useContext<IRoomHomepageContext>(RoomHomepageContext);
+  const { width } = useContext<IGlobalContext>(GlobalContext);
 
-  const {roomsCity} = state;
+  const { roomsCity } = state;
 
   const setting: Settings = {
     dots: false,
@@ -95,7 +95,7 @@ const MetroGridImage: FC<IProps> = (props) => {
   return roomsCity && (
     <Grid className={classes.root}>
       <Typography variant='h5' className={classes.title}>
-       {t('home:topDestinations')}
+        {t('home:topDestinations')}
       </Typography>
       <Hidden smDown>
         <Grid container>
@@ -103,17 +103,17 @@ const MetroGridImage: FC<IProps> = (props) => {
             <Grid container direction='column'>
               <Grid item className={classes.paddingGrid}>
                 <CardIntro title={roomsCity[0].name_city} imgSrc={roomsCity[0].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')} imgHeight={width === 'xl' ? 280 : 250} />
+                  recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')} imgHeight={width === 'xl' ? 280 : 250} />
               </Grid>
               <Grid item >
                 <Grid container direction='row'>
                   <Grid item xs={6} className={classes.paddingGrid}>
                     <CardIntro title={roomsCity[1].name_city} imgSrc={roomsCity[1].image} showPrice={true}
-                               recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
+                      recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
                   </Grid>
                   <Grid item xs={6} className={classes.paddingGrid}>
                     <CardIntro title={roomsCity[2].name_city} imgSrc={roomsCity[2].image} showPrice={true}
-                               recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
+                      recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
                   </Grid>
                 </Grid>
               </Grid>
@@ -123,17 +123,17 @@ const MetroGridImage: FC<IProps> = (props) => {
             <Grid container item xs={6}>
               <Grid item xs={12} className={classes.paddingGrid}>
                 <CardIntro title={roomsCity[3].name_city} imgSrc={roomsCity[3].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')} imgHeight={width === 'xl' ? 280 : 250} />
+                  recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')} imgHeight={width === 'xl' ? 280 : 250} />
               </Grid>
               <Grid item xs={12} className={classes.paddingGrid}>
                 <CardIntro title={roomsCity[4].name_city} imgSrc={roomsCity[4].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
+                  recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')} imgHeight={width === 'xl' ? 230 : 200} />
               </Grid>
             </Grid>
             <Grid container item xs={6}>
               <Grid item xs={12} className={classes.paddingGrid}>
                 <CardIntro title={roomsCity[5].name_city} imgSrc={roomsCity[5].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')} imgHeight={width === 'xl' ? 518 : 458}/>
+                  recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')} imgHeight={width === 'xl' ? 518 : 458} />
                 {/* +8px la khoang cach padding*/}
               </Grid>
             </Grid>
@@ -147,7 +147,7 @@ const MetroGridImage: FC<IProps> = (props) => {
             {_.map(roomsCity, (room, i) => (
               <div className={classes.paddingGrid} key={i}>
                 <CardIntro title={roomsCity[i].name_city} imgSrc={roomsCity[i].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')} imgHeight={290} />
+                  recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')} imgHeight={290} />
               </div>
             ))}
           </Slider>

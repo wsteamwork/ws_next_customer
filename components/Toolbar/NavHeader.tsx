@@ -111,8 +111,7 @@ const styles: any = (theme: Theme) =>
       textTransform: 'capitalize',
       color: 'white',
       borderRadius: 8,
-      fontFamily:
-        'Circular, -apple-system, BlinkMacSystemFont, Quicksand, "Montserrat Alternates", sans-serif !important',
+      fontFamily: 'Montserrat Alternates, Quicksand, sans-serif',
       fontWeight: 600,
       // boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
       marginRight: 16,

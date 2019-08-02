@@ -1,12 +1,10 @@
 import React, { FC, useContext, useMemo } from 'react';
-import {
-  RoomDetailsContext,
-  DEFAULT_FORMAT_DATE_PRICE_BY_DAY
-} from '@/store/Context/Room/RoomDetailContext';
+import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { changeDataPriceByDay } from './context';
 import { Grid } from '@material-ui/core';
 import { Moment } from 'moment';
 import numeral from 'numeral';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 
 interface Iprops {
   day: Moment;
@@ -18,7 +16,7 @@ const RenderDay: FC<Iprops> = (props) => {
   const { priceByDay } = state;
   const dataPriceByDay = useMemo(() => changeDataPriceByDay(priceByDay), [priceByDay]);
 
-  const date = day.format(DEFAULT_FORMAT_DATE_PRICE_BY_DAY);
+  const date = day.format(DEFAULT_DATE_FORMAT);
 
   return (
     <Grid className="dayContents">

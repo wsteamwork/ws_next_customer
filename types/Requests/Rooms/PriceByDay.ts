@@ -3,6 +3,7 @@ export interface PriceByDayRes {
   price_day: number;
   price_hour: number;
   blocked: boolean;
+  available_hour?: (string)[];
 }
 
 export interface BodyRequestPriceByDayRes {
