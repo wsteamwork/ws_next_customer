@@ -22,7 +22,7 @@ import Link from '@material-ui/core/Link';
 import { windowExist } from '@/store/Redux';
 import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 import SvgCustom from '@/components/Custom/SvgCustom';
-
+ 
 interface Iprops {
   classes?: any;
   room?: RoomIndexRes;

@@ -95,9 +95,8 @@ const MetroGridImage: FC<IProps> = (props) => {
   //     }
   //   ]
   // };
-
   const renderCity = (city) => (
-    <div className={classes.paddingGrid} >
+    <div className={classes.paddingGrid}>
       <CardIntro
         title={city.name_city}
         imgSrc={city.image}
@@ -150,8 +149,6 @@ const MetroGridImage: FC<IProps> = (props) => {
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-            <Grid container item xs={6}>
               <Grid container item xs={6}>
                 <Grid item xs={12} className={classes.paddingGrid}>
                   <CardIntro
@@ -194,7 +191,7 @@ const MetroGridImage: FC<IProps> = (props) => {
             {_.map(roomsCity, (room, i) => (
               <div className={classes.paddingGrid} key={i}>
                 <CardIntro title={roomsCity[i].name_city} imgSrc={roomsCity[i].image} showPrice={true}
-                           recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')} imgHeight={290} />
+                  recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')} imgHeight={290} />
               </div>
             ))}
           </Slider>

@@ -1,0 +1,16 @@
+{
+    "boxBooking": {
+        "bookNow": "Book Now",
+        "guest": "guest",
+        "day": "day",
+        "hours": "hours",
+        "cancellationPolicy": "Cancellation policy",
+        "details": "Details",
+        "basePrice": "Base price analysis",
+        "avgDay": "Average price per day",
+        "price": "Price",
+        "serviceFee": "Service fee",
+        "otherService": "Other service fees and charges",
+        "total": "Total"
+    }
+}

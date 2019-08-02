@@ -38,6 +38,7 @@
     "rc-calendar": "^9.15.4",
     "react": "^16.8.6",
     "react-autosuggest": "^9.4.3",
+    "react-content-loader": "^4.2.2",
     "react-cookie": "^4.0.1",
     "react-dates": "^20.2.5",
     "react-dom": "^16.8.6",

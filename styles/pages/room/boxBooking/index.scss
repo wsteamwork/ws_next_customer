@@ -1,22 +1,33 @@
 .boxBooking {
   box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
-  width: 450px;
+
+  @include xs {
+    box-shadow: none;
+  }
+
+  @include sm {
+    box-shadow: none;
+  }
+
+  @include md {
+    box-shadow: none;
+  }
+
+  width: 100%;
   height: auto;
   border-radius: 2px;
-  padding: 10px 0px;
-  //   display: flex;
-  //   justify-content: space-around;
-  //   flex-direction: column;
 
-  * {
-    font-family: "Montserrat", sans-serif !important;
+  &__chooseBooking {
+    margin-top: 20px;
+
+    label > span {
+      font-size: 16px;
+      font-weight: 500;
+    }
   }
 
   &__padding {
-    padding: 0px 30px;
-    // display: flex;
-    // justify-content: space-around;
-    // flex-direction: column;
+    padding: 0px 20px;
   }
 
   .dayContents {
@@ -27,10 +38,9 @@
 
     font-size: 14px;
     font-weight: bold;
-    //   font-family: "Montserrat", sans-serif !important;
 
     &__price {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
     }
   }
@@ -41,7 +51,6 @@
     margin-top: 20px;
 
     &__monthText {
-      // font-family: "Montserrat", sans-serif !important;
       font-size: 19px;
       font-weight: 800;
     }
@@ -94,12 +103,19 @@
     }
 
     &__right {
-      text-align: center;
+      text-align: right;
+    }
+
+    &__tooltip {
+      font-size: 20px;
+    }
+
+    &__error {
+      color: red;
     }
   }
 
   &__buttonSubmit {
-    padding: 0px 10px;
     margin-top: 20px;
   }
 
@@ -107,6 +123,47 @@
     margin-top: 15px;
     padding: 10px 30px;
     border-top: 1px solid #ddd;
+
+    &__details {
+      text-align: right;
+      cursor: pointer;
+
+      a {
+        color: $success;
+      }
+    }
+  }
+}
+
+.totalPriceRoom {
+  width: 180px;
+
+  &__title {
+    // border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px 0px;
+  }
+
+  &__priceDay {
+    padding: 5px 0px;
+    border-top: 1px solid #ddd;
+  }
+
+  &__textLeft {
+    text-align: left !important;
+  }
+
+  &__textRight {
+    text-align: right !important;
+  }
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &__widthBig {
+    width: 230px;
   }
 }
 
@@ -116,8 +173,34 @@
   &__guest {
     font-size: 0.9rem;
     color: #000;
-    font-weight: 600;
+    font-weight: 500;
     font-family: "Montserrat", sans-serif !important;
+  }
+
+  &__input {
+    > div {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+    }
+  }
+}
+
+.selectHours {
+  margin-top: 20px !important;
+
+  &__guest {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif !important;
+  }
+
+  &__maxHeight {
+    max-width: 300px;
   }
 
   &__input {
