@@ -15,6 +15,7 @@
         "detailsService": "Service fees and other surcharges",
         "chargeAddGuest": "Charge additional gust",
         "chargeAddHour": "Charge additional hour",
-        "setByHour": "Set by hour"
+        "setByHour": "Set by hour",
+        "average": "Avarge"
     }
 }

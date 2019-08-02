@@ -14,9 +14,10 @@ const PriceDetail: FC = () => {
       room && (
         <Grid container className="priceDetail">
           {!!dataCalculate && dataCalculate.days > 5 ? (
-            <Grid className="priceDetail__priceDay flex_center">
+            <Grid className="priceDetail__avg">
               <p>
-                Trung bình {numeral(room.price_day).format('0,0')} VND/ {t('room:boxBooking:day')}
+                {t('room:boxBooking:average')} {numeral(room.price_day).format('0,0')} VND/{' '}
+                {t('room:boxBooking:day')}
               </p>
             </Grid>
           ) : (

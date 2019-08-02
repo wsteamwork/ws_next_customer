@@ -59,6 +59,16 @@
   .priceDetail {
     border-bottom: 1px solid #ddd;
 
+    &__avg {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 10px 0px;
+    }
+
     &__priceDay {
       font-size: 1rem;
       font-weight: 600;
