@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import App, { Container, AppProps, AppContext } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
 import 'tippy.js/themes/light-border.css';
 import ProviderGlobal from '@/utils/ProviderGlobal';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, windowExist } from '@/store/Redux';
 
 class MyApp extends App<AppProps> {
   static async getInitialProps({ Component, ctx }: AppContext) {
@@ -50,8 +50,11 @@ class MyApp extends App<AppProps> {
     return (
       <Container>
         <ProviderGlobal>
-          {/* <CssBaseline></CssBaseline> */}
-          <Component {...pageProps} />
+          <PersistGate
+            persistor={persistor}
+            loading={windowExist === false ? <Component {...pageProps} /> : null}>
+            <Component {...pageProps} />
+          </PersistGate>
         </ProviderGlobal>
       </Container>
     );
