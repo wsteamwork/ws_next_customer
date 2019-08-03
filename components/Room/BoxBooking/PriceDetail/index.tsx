@@ -21,12 +21,13 @@ const PriceDetail: FC = () => {
               </p>
             </Grid>
           ) : (
-              <Grid container>
-                <Grid item xs={6} className="priceDetail__priceDay flex_center">
-                  <p>
-                    {numeral(room.price_day).format('0,0')} VND/ {t('room:boxBooking:day')}
-                  </p>
-                </Grid>
+            <Grid container>
+              <Grid item xs={6} className="priceDetail__priceDay flex_center">
+                <p>
+                  {numeral(room.price_day).format('0,0')} VND/ {t('room:boxBooking:day')}
+                </p>
+              </Grid>
+              {room.price_hour !== 0 && (
                 <Grid item xs={6} className="priceDetail__priceHour flex_center">
                   {room.price_hour !== 0 && (
                     <p>
@@ -34,8 +35,9 @@ const PriceDetail: FC = () => {
                     </p>
                   )}
                 </Grid>
-              </Grid>
-            )}
+              )}
+            </Grid>
+          )}
         </Grid>
       ),
     [t, room, dataCalculate]

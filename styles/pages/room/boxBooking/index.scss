@@ -70,13 +70,13 @@
     }
 
     &__priceDay {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
       padding: 10px 0px;
     }
 
     &__priceHour {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
       padding: 10px 0px;
       border-left: 1px solid #ddd;
@@ -212,7 +212,6 @@
     font-size: 0.9rem;
     color: #000;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif !important;
   }
 
   &__input {
@@ -234,7 +233,6 @@
     font-size: 0.9rem;
     color: #000;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif !important;
   }
 
   &__maxHeight {

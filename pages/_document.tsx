@@ -17,6 +17,7 @@ class MyDocument extends Document {
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
+          <meta property="fb:app_id" content="331750437466885" />
           <link
             href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,500,700|Quicksand:300,400,500,600,700&display=swap&subset=vietnamese"
             rel="stylesheet"

@@ -50,7 +50,7 @@ class MyApp extends App<AppProps> {
     return (
       <Container>
         <ProviderGlobal>
-          <CssBaseline></CssBaseline>
+          {/* <CssBaseline></CssBaseline> */}
           <Component {...pageProps} />
         </ProviderGlobal>
       </Container>
