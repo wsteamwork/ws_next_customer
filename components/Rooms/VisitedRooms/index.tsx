@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core';
+import { Theme, Grid } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import VisitedRoom from './VisitedRoom';
@@ -25,14 +25,16 @@ const VisitedRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { visitedRoom } = props;
   return (
-    <Paper>
+    <Grid>
       <Typography variant="h5" className={classes.label}>
         {t('rooms:visitedRoom')}
       </Typography>
-      {visitedRoom.slice(0, 4).map((room, index) => (
-        <VisitedRoom key={index} room={room}></VisitedRoom>
-      ))}
-    </Paper>
+      <Paper elevation={0}>
+        {visitedRoom.slice(0, 4).map((room, index) => (
+          <VisitedRoom key={index} room={room}></VisitedRoom>
+        ))}
+      </Paper>
+    </Grid>
   );
 };
 

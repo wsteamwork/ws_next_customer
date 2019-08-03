@@ -1,6 +1,6 @@
 import React, { useReducer, useContext, useEffect } from 'react';
 import { NextPage } from 'next';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden, Paper, Button } from '@material-ui/core';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
@@ -82,18 +82,36 @@ const Rooms: NextPage = () => {
           container
           justify="center"
           alignContent="center"
-          spacing={8}
+          spacing={4}
           style={{ marginTop: '48px' }}>
-          <Grid item sm={4}>
-            <VisitedRooms visitedRoom={rooms} />
-          </Grid>
-          <Grid item lg={8} md={8} sm={12} xs={12}>
+          <Hidden smDown>
+            <Grid item sm={4}>
+              <Paper
+                elevation={0}
+                style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
+                // onClick={onMapClick}`
+                classes={{
+                  root: 'mapPaper'
+                }}>
+                <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+                {/* <img src="./static/images/map-vector.jpg" alt="map-vector" /> */}
+                {/* <Button variant="text" fullWidth style={{ fontWeight: 700 }}>
+                  Xem bản đồ
+                </Button> */}
+              </Paper>
+
+              <VisitedRooms visitedRoom={rooms} />
+            </Grid>
+          </Hidden>
+
+          <Grid item lg={8} md={8} sm={12} xs={12} style={{ marginTop: '-64px' }}>
             {rooms && (
               <ListRoom
+                customClass="listRoomContainerWithoutSlickCustom"
                 roomData={rooms}
                 usingSlider={false}
                 title={''}
-                spacing={2}
+                spacing={1}
                 render={renderRoom}
               />
             )}

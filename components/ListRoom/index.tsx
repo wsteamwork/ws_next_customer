@@ -33,6 +33,7 @@ type Iprops<T> = {
   usingSlider?: boolean;
   render?: (room: T) => ReactNode;
   spacing?: GridSpacing;
+  customClass?: string;
 };
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
@@ -48,7 +49,14 @@ const useStyles = makeStyles<Theme, any>((theme: Theme) =>
 );
 
 const ListRoom = <T extends any>(props: Iprops<T>) => {
-  const { roomData, title, usingSlider, render, spacing } = props;
+  const {
+    roomData,
+    title,
+    usingSlider,
+    render,
+    spacing,
+    customClass = 'listRoomContainer'
+  } = props;
   const classes = useStyles({});
   const { t } = useTranslation();
   const setting: Settings = {
@@ -119,7 +127,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
       <Grid
         container
         spacing={spacing ? spacing : 0}
-        className={classNames(classes.root, 'listRoomContainer')}>
+        className={classNames(classes.root, customClass)}>
         {title != '' && (
           <Typography variant="h5" className={classes.title}>
             {title}

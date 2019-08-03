@@ -1,4 +1,3 @@
-
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import React, { ComponentType, Fragment, useEffect } from 'react';
@@ -24,8 +23,8 @@ interface TextProps {
 const styles: any = (theme: Theme) =>
   createStyles({
     marker: {
-      width: '1rem',
-      height: '1rem'
+      width: 18,
+      height: 18
     },
     box: {
       display: 'flex',
@@ -36,8 +35,8 @@ const styles: any = (theme: Theme) =>
       border: '1px rgba(0,0,0,0.75) solid'
     },
     size: {
-      width: 26,
-      height: 26
+      width: 30,
+      height: 30
     },
     circle: {
       borderRadius: '50%'

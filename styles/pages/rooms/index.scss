@@ -81,3 +81,30 @@
   &__filterRoom {
   }
 }
+
+.mapPaper {
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 120px;
+  //background: url(../../../static/images/map-vector.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  background-position: 0px;
+  background-position-y: -421px;
+  background-position-x: -198px;
+  background-size: initial;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-bottom: 24px;
+
+  .watchMapButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

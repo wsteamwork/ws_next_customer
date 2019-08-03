@@ -15,14 +15,16 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Hidden from '@material-ui/core/Hidden/Hidden';
 import LazyLoad from 'react-lazyload';
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+//import '@/styles/PageProfile/StylePageProfile.scss';
 import StarIcon from '@material-ui/icons/StarRounded';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import Link from '@material-ui/core/Link';
 import { windowExist } from '@/store/Redux';
 import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 import SvgCustom from '@/components/Custom/SvgCustom';
- 
+
 interface Iprops {
   classes?: any;
   room?: RoomIndexRes;
@@ -44,29 +46,29 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const totalComfort = room.comforts.data.length - 4;
 
   return (
-    <Fragment>
-      <Paper elevation={0} className="roomCardListing">
-        <Grid container className="roomCardListing__wrapper" spacing={0}>
-          <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-            <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-              <Slider {...settings}>
-                {room.media.data.length > 0 ? (
-                  _.map(room.media.data, (o) => (
-                    <img
-                      key={o.image}
-                      src={`https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/${o.image}`}
-                      className="imgSize"
-                      alt={`Westay - Homestay cho người việt`}
-                    />
-                  ))
-                ) : (
-                  <img src="./static/images/background.svg" className="imgSize" />
-                )}
-              </Slider>
-            </LazyLoad>
-          </Grid>
-          <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
-            <Grid container className="cardWrapper">
+    <Paper elevation={0} className="roomCardListing">
+      <Grid container className="roomCardListing__wrapper" spacing={0}>
+        <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
+          <LazyLoad offset={windowExist ? window.innerHeight : 0}>
+            <Slider {...settings}>
+              {room.media.data.length > 0 ? (
+                _.map(room.media.data, (o) => (
+                  <img
+                    key={o.image}
+                    src={`https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/${o.image}`}
+                    className="imgSize"
+                    alt={`Westay - Homestay cho người việt`}
+                  />
+                ))
+              ) : (
+                <img src="./static/images/background.svg" className="imgSize" />
+              )}
+            </Slider>
+          </LazyLoad>
+        </Grid>
+        <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
+          <Grid className="cardWrapper">
+            <Grid container className="cardContainer">
               <Link href={`/room/${room.id}`} target="_blank" className="boxLink">
                 <Grid className="boxTitle">
                   <Grid>
@@ -88,7 +90,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <span className="dotAmenties">.</span>
                     </Hidden>
 
-                    <span className="address}">
+                    <span className="address">
                       {room.district.data.name}, {room.city.data.name}
                     </span>
                   </Grid>
@@ -109,7 +111,6 @@ const RoomCardListing: FC<Iprops> = (props) => {
                   </Grid>
                   <Grid>
                     <ul className="ul">
-                      '{' '}
                       {_.filter(room.comforts.data, (o, i) => {
                         return (
                           o.id === 20 || // air conditioner
@@ -125,7 +126,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             placement="bottom"
                             classes={{ tooltip: 'tooltip' }}>
                             <li key={o.id} className="list">
-                              ' <SvgCustom icon={o.icon} />
+                              <SvgCustom icon={o.icon} />
                             </li>
                           </Tooltip>
                         ))}
@@ -157,9 +158,9 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       classes={{ tooltip: 'tooltip' }}
                       title={room.avg_rating_txt}
                       placement="top">
-                      <span className="avgRating">{`${formatMoney(room.avg_rating, 1)}`}</span>
+                      <span className="avgRating">{room.avg_rating}</span>
                     </Tooltip>
-                    <span className="totalReview">{`(${formatMoney(room.total_review)})`}</span>
+                    <span className="totalReview">{room.total_review}</span>
                     {/* <span className='totalRev'iewText}>{`${
                           room.avg_rating_txt
                           }`}</span> */}
@@ -181,17 +182,16 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="dayPrice">
                         {room.is_discount === 1 ? (
                           <span className="discountPriceText">
-                            {`${formatMoney(room.price_day, 0)}`}
+                            {numeral(room.price_day).format('0,0')}
                             ₫/ngày
                           </span>
                         ) : (
                           ''
                         )}
                         <Typography className="priceText" variant={typoVariant}>
-                          {`${formatMoney(
-                            room.is_discount === 1 ? room.price_day_discount : room.price_day,
-                            0
-                          )}`}
+                          {numeral(
+                            room.is_discount === 1 ? room.price_day_discount : room.price_day
+                          ).format('0,0')}
                           ₫/ngày
                         </Typography>
                       </Grid>
@@ -204,17 +204,16 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="hourPrice">
                         {room.is_discount === 1 ? (
                           <span className="discountPriceText">
-                            {`${formatMoney(room.price_hour, 0)}`}
+                            {numeral(room.price_hour).format('0,0')}
                             ₫/4 giờ
                           </span>
                         ) : (
                           ''
                         )}
                         <Typography className="priceText" variant={typoVariant}>
-                          {`${formatMoney(
-                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour,
-                            0
-                          )}`}
+                          {numeral(
+                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                          ).format('0,0')}
                           ₫/4 giờ
                         </Typography>
                       </Grid>
@@ -227,8 +226,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
             </Grid>
           </Grid>
         </Grid>
-      </Paper>
-    </Fragment>
+      </Grid>
+    </Paper>
   );
 };
 
