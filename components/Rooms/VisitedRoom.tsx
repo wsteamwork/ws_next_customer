@@ -89,7 +89,7 @@ const VisitedRoom: FC<IProps> = (props) => {
                 <Typography className={classes.roomName}>{room.details.data[0].name}</Typography>
               </a>
             </Link>
-            <Hidden xsDown>
+            <Hidden xsDown implementation="css">
               <Grid className={classes.price}>
                 {room.rent_type !== 1 ? (
                   <Typography variant="subtitle1" className={classes.priceDay}>

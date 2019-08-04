@@ -1,18 +1,11 @@
-import React, { useEffect, useReducer, memo, useContext } from 'react';
-import { NextPage } from 'next';
+import React, { useEffect, useReducer, useContext, useMemo, Fragment } from 'react';
+import { NextPage, NextPageContext } from 'next';
 import NextHead from '@/components/NextHead';
 import { Grid } from '@material-ui/core';
 import FooterComponent from '@/components/Layout/FooterComponent';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import {
-  RoomHomepageContext,
-  getRoomHot,
-  RoomHomepageStateInit,
-  RoomHomepageReducer,
-  getRoomsHomepage
-} from '@/store/Context/Room/RoomHomepageContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import ListRoom from '@/components/ListRoom';
@@ -21,27 +14,30 @@ import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import SearchComponent from '@/components/SearchComponent';
 import CheckboxList from '@/components/Home/CheckboxList';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { useSelector } from 'react-redux';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
-  const [state, dispatch] = useReducer(RoomHomepageReducer, RoomHomepageStateInit);
-
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-  const { roomsHot } = state;
-
-
-  useEffect(() => {
-    getRoomsHomepage(dispatch);
-  }, []);
+  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.roomHomepage.roomsHot
+  );
 
   const handleOverlay = () => {
     dispatchGlobal({ type: 'setOverlay', payload: true });
   };
 
   return (
-    <RoomHomepageContext.Provider value={{ state, dispatch }}>
-      {/* <Fragment> */}
-      <NextHead title="Nextjs Demo" description="Welcome to Nextjs" url="https://nextjs.org/" />
+    <Fragment>
+      <NextHead
+        title="Nextjs Demo"
+        description="Welcome to Nextjs"
+        ogImage="/static/favicon.ico"
+        url="https://nextjs.org/"
+      />
       <NavHeader />
 
       <GridContainer xs={12} classNameItem="searchHome">
@@ -79,9 +75,21 @@ const Home: NextPage = () => {
       </GridContainer>
 
       <FooterComponent />
-      {/* </Fragment> */}
-    </RoomHomepageContext.Provider>
+    </Fragment>
   );
 };
 
-export default memo(Home);
+Home.getInitialProps = async (ctx: NextContextPage) => {
+  try {
+    const res = await getRoomsHomepage();
+    ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
+    ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
+    ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
+  } catch (error) {
+    console.log(error.respose);
+  }
+
+  return {};
+};
+
+export default Home;

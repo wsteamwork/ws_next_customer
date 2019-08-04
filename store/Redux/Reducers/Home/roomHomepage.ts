@@ -6,7 +6,6 @@ import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams, RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
-import { fetchRoom } from './RoomListContext';
 
 export const RoomHomepageContext = createContext<IRoomHomepageContext>(
   null as IRoomHomepageContext
@@ -44,7 +43,7 @@ export const RoomHomepageStateInit: RoomHomepageState = {
 };
 
 export const RoomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (
-  state: RoomHomepageState,
+  state: RoomHomepageState = RoomHomepageStateInit,
   action: RoomHomepageAction
 ): RoomHomepageState => {
   switch (action.type) {

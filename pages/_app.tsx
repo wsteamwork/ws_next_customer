@@ -1,15 +1,26 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import App, { Container, AppProps, AppContext } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
 import 'tippy.js/themes/light-border.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProviderGlobal from '@/utils/ProviderGlobal';
 import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, windowExist } from '@/store/Redux';
+import { Provider } from 'react-redux';
+import withRedux, { NextJSContext } from 'next-redux-wrapper';
+import { makeStore } from '@/store/Redux';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 
-class MyApp extends App<AppProps> {
-  static async getInitialProps({ Component, ctx }: AppContext) {
+interface NextContextApp extends NextJSContext, AppContext {}
+interface IProps extends AppProps {
+  isServer: boolean;
+  store: any;
+}
+
+class MyApp extends App<IProps> {
+  static async getInitialProps({ Component, ctx }: NextContextApp) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -45,20 +56,22 @@ class MyApp extends App<AppProps> {
   };
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, isServer, store } = this.props;
 
     return (
       <Container>
         <ProviderGlobal>
-          <PersistGate
-            persistor={persistor}
-            loading={windowExist === false ? <Component {...pageProps} /> : null}>
-            <Component {...pageProps} />
-          </PersistGate>
+          <Provider store={store}>
+            <PersistGate
+              persistor={store.__persistor}
+              loading={!process.browser ? <Component {...pageProps} /> : null}>
+              <Component {...pageProps} />
+            </PersistGate>
+          </Provider>
         </ProviderGlobal>
       </Container>
     );
   }
 }
 
-export default MyApp;
+export default withRedux(makeStore)(MyApp);

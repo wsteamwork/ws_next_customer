@@ -20,6 +20,7 @@ const Error500: NextPage = (props) => {
       <NextHead
         title="500 Internal Server Error - Westay.org"
         description="Opps 500error"
+        ogImage="/static/favicon.ico"
         url="/"></NextHead>
 
       <Grid container>

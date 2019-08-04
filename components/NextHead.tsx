@@ -5,7 +5,7 @@ interface IProps {
   title: string;
   description: string;
   url: string;
-  ogImage?: string;
+  ogImage: string;
 }
 
 const NextHead: FC<IProps> = (props) => (

@@ -360,31 +360,31 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                   </Popper>
                 </Fragment>
               ) : (
-                  <Fragment>
-                    <Button
-                      name="sign-in"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={loginButtonClick}
-                      size="large"
+                <Fragment>
+                  <Button
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                    >
-                      {t('home:signIn')}
-                    </Button>
-                    <Button
-                      name="sign-up"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={signUpButtonClick}
-                      size="large"
+                  >
+                    {t('home:signIn')}
+                  </Button>
+                  <Button
+                    name="sign-up"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={signUpButtonClick}
+                    size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                    >
-                      {t('home:signUp')}
-                    </Button>
+                  >
+                    {t('home:signUp')}
+                  </Button>
 
-                    <SwitchLanguage />
-                  </Fragment>
-                )}
+                  <SwitchLanguage />
+                </Fragment>
+              )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
