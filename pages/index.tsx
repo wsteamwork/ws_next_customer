@@ -21,6 +21,7 @@ import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import SearchComponent from '@/components/SearchComponent';
 import CheckboxList from '@/components/Home/CheckboxList';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ const Home: NextPage = () => {
 
       <GridContainer xs={12} classNameItem="searchHome">
         <img
-          src="./static/images/background.svg"
+          src={`${IMAGE_STORAGE_LG}background.jpg`}
           alt="Westay - HomeStay cho người Việt"
           className="searchHome__image"
         />
@@ -74,7 +75,7 @@ const Home: NextPage = () => {
       </GridContainer>
       <HostBecome />
 
-      <GridContainer xs={11} sm={10}>
+      <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
         <BlogContainer />
       </GridContainer>
 

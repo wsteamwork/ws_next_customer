@@ -10,7 +10,8 @@ interface IProps extends ICardIntro {
   classes?: any;
   showPrice?: boolean;
   recommendedPrice?: string;
-  subTitle?:boolean;
+  subTitle?: string;
+  showSubTitle?:boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -76,11 +77,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     imgGradientToTop: {
       '&:after': {
-        backgroundImage: 'linear-gradient(to top,#000, transparent)',
+        backgroundImage: 'linear-gradient(to top,#1976d2, transparent)',
         height: '50%'
       },
       '&:hover:after': {
-        opacity: 0.8
+        opacity: 0.85
       },
       '&:hover > image': {
         MsTransform: 'scale(1.02)' /* IE 9 */,
@@ -113,7 +114,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       right: 0,
       zIndex: 1,
       padding: theme.spacing(1 / 2), // 1=8px
-      width: '35%',
+      width: '50%',
       height: '35%'
     },
     price: {
@@ -127,7 +128,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
   const classes = useStyles(props);
-  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,subTitle,recommendedPrice } = props;
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,showSubTitle,recommendedPrice,subTitle } = props;
 
   const imgStyles = useMemo<CSSProperties>(
     () => ({
@@ -155,7 +156,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
             {title}
           </Typography>
-          {subTitle ? (
+          {showSubTitle ? (
             <Typography variant="subtitle2" className={classes.subTitle}>
               {subTitle}
             </Typography>
@@ -164,7 +165,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
         {showPrice ? (
           <div className={classes.boxPrice}>
             <Typography variant="subtitle2" className={classes.price}>
-              Chỉ từ <br /> {recommendedPrice} VND/đêm
+              Chỉ từ <br /> {recommendedPrice}/đêm
             </Typography>
           </div>
         ) : (
@@ -177,13 +178,14 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
 
 CardIntro.defaultProps = {
   customClasses: {},
-  imgHeight: 0,
+  imgHeight: 200,
   imgAlt: 'Westay - Homestay cho người Việt',
   imgSrc: './static/images/room_demo.jpg',
   title: '',
   showPrice: false,
   recommendedPrice:'',
-  subTitle:false,
+  showSubTitle:false,
+  subTitle:''
 };
 
 export default CardIntro;

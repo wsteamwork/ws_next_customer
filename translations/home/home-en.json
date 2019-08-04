@@ -14,7 +14,10 @@
     },
     "signUp": "Sign up",
     "signIn": "Sign in",
-    "merchantChannel": "Merchant channel",
+    "logout": "Logout",
+    "profile": "Profile",
+    "policyTerms": "Policy & Terms",
+    "merchantChannel": "Become a host",
     "contact" : "Contact",
     "supportHost" : "Support host",
     "currency" : "USD",
@@ -28,6 +31,15 @@
         "roomUpper": "Room"
     },
     "topDestinations" : "Top Destinations",
-    "beComeAHost" : "Be Come A Host",
-    "topHomestay" : "Top Homestay"
+    "beComeAHost" : "Become a host",
+    "topHomestay" : "Top Homestay",
+    "blogContainer":{
+        "where": "Stunning Homestay",
+        "journey":"Journeys",
+        "whatPlay":"What play",
+        "blog":"Blog",
+        "titleJourney": "Share travel experiences",
+        "titleWhere": "Discover beautiful places together",
+        "titlePlay": "Find out about strange and interesting games"
+    }
 }

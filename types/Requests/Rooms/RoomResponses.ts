@@ -87,8 +87,8 @@ export interface NumberRoomCity {
   city_id: number;
   name_city: string;
   image: string;
-  total_rooms: string;
-  average_price: number;
+  total_rooms: number;
+  average_price: string;
 }
 
 export interface TypeApartment {

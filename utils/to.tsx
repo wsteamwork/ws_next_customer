@@ -1,5 +1,5 @@
-import Link  from 'next/link';
+import Link, { LinkProps } from 'next/link';
 
-const to = (to) => ({ to, component: Link as any });
+const to = (to:LinkProps) => ({ to, component: Link as any });
 
 export default to;
