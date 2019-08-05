@@ -66,7 +66,7 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async () => {
-  console.log('aaaa');
+  // console.log('aaaa');
 
   return {};
 };

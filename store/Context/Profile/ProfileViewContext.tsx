@@ -18,10 +18,10 @@ export interface IProfileViewContext {
 
 export type ProfileViewAction =
   | {
-      type: 'setData';
-      profile: ProfileViewInfoRes;
-      userRooms: RoomIndexRes[];
-    }
+    type: 'setData';
+    profile: ProfileViewInfoRes;
+    userRooms: RoomIndexRes[];
+  }
   | { type: 'setUserRooms'; rooms: RoomIndexRes[] };
 
 export type ProfileViewState = {
@@ -34,7 +34,7 @@ export const ProfileViewStateInit: ProfileViewState = {
   userRooms: []
 };
 
-export const ProfileViewReducer: Reducer<ProfileViewState,ProfileViewAction> = (state: ProfileViewState, action: ProfileViewAction) => {
+export const ProfileViewReducer: Reducer<ProfileViewState, ProfileViewAction> = (state: ProfileViewState, action: ProfileViewAction) => {
   switch (action.type) {
     case 'setData':
       return updateObject<ProfileViewState>(state, {
@@ -79,7 +79,7 @@ export const getDataViewProfile = (
       });
     })
     .catch((err: AxiosError) => {
-      console.log(err);
+      console.log('Profile view context: ' + err);
       router.push('/404');
     });
 };
