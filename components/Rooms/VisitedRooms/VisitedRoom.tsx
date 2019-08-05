@@ -14,7 +14,7 @@ import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || '26rem',
+      maxWidth: (props) => props.maxWidth || '100rem',
       border: (props) => props.border || '1px soild #ddd',
       borderRadius: (props) => props.borderRadius || '4px',
       cursor: 'pointer',
@@ -53,7 +53,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     }
   })
 );
- 
+
 interface IProps {
   maxWidth?: string | number;
   fontSize?: string | number;
@@ -96,15 +96,15 @@ const VisitedRoom: FC<IProps> = (props) => {
                     {formatPrice(room.price_day)} /{t('rooms:night')}
                   </Typography>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
                 {room.rent_type !== 2 ? (
                   <Typography variant="subtitle1" className={classes.priceHour}>
                     {formatPrice(room.price_hour)} /4{t('rooms:hour')}
                   </Typography>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </Grid>
             </Hidden>
           </Grid>
