@@ -4,7 +4,7 @@ import { Theme, Grid, Typography, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
 import { useTranslation } from 'react-i18next';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Slider, { Settings } from 'react-slick';
 import NextArrow from '@/components/ListRoom/NextArrow';
 import PrevArrow from '@/components/ListRoom/PrevArrow';
@@ -98,56 +98,56 @@ const BlogContainer: FC<IProps> = (props) => {
       <Hidden smDown implementation="css">
         <Grid container spacing={2} justify='flex-start'>
           <Grid item xs={4}>
-            <Link href='https://blog.westay.vn/cam-nang-du-lich'>
+            <a href='https://blog.westay.vn/cam-nang-du-lich'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')} />
               </a>
-            </Link>
+            </a>
           </Grid>
           <Grid item xs={4}>
-            <Link href='https://blog.westay.vn/o-dau'>
+            <a href='https://blog.westay.vn/o-dau'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')} />
               </a>
-            </Link>
+            </a>
           </Grid>
           <Grid item xs={4}>
-            <Link href='https://blog.westay.vn/choi-gi'>
+            <a href='https://blog.westay.vn/choi-gi'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')} />
               </a>
-            </Link>
+            </a>
           </Grid>
         </Grid>
       </Hidden>
       <Hidden smUp implementation="css">
         <Slider {...setting}>
           <div className={classes.paddingItem}>
-            <Link href='https://blog.westay.vn/cam-nang-du-lich'>
+            <a href='https://blog.westay.vn/cam-nang-du-lich'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')} />
               </a>
-            </Link>
+            </a>
           </div>
           <div className={classes.paddingItem}>
-            <Link href='https://blog.westay.vn/o-dau'>
+            <a href='https://blog.westay.vn/o-dau'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')} />
               </a>
-            </Link>
+            </a>
           </div>
           <div className={classes.paddingItem}>
-            <Link href='https://blog.westay.vn/choi-gi'>
+            <a href='https://blog.westay.vn/choi-gi'>
               <a>
                 <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
                   title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')} />
               </a>
-            </Link>
+            </a>
           </div>
         </Slider>
       </Hidden>

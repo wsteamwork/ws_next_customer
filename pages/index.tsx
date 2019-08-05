@@ -78,7 +78,7 @@ const Home: NextPage = () => {
       <HostBecome />
 
       <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-        {/* <BlogContainer /> */}
+        <BlogContainer />
       </GridContainer>
 
       <FooterComponent />
