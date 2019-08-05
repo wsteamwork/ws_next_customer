@@ -87,6 +87,7 @@ const Home: NextPage = () => {
 };
 
 Home.getInitialProps = async (ctx: NextContextPage) => {
+  console.log('Come')
   try {
     const res = await getRoomsHomepage();
     ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
