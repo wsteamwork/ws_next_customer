@@ -86,7 +86,7 @@ const Rooms: NextPage = () => {
           spacing={4}
           style={{ marginTop: '48px' }}>
           <Hidden smDown>
-            <Grid item sm={4}>
+            <Grid item sm={4} xl={3}>
               <Paper
                 elevation={0}
                 style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
