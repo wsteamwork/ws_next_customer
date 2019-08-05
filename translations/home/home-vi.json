@@ -12,8 +12,12 @@
         "close": "Đóng",
         "apply": "Áp dụng"
     },
+    "home": "Trang chủ",
     "signUp": "Đăng kí",
     "signIn": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "profile": "Thông tin cá nhân",
+    "policyTerms": "Chính sách & Điều khoản",
     "merchantChannel": "Kênh chủ nhà",
     "contact" : "Liên hệ",
     "supportHost" : "Hỗ trợ chủ nhà",
@@ -28,6 +32,16 @@
         "roomUpper": "Phòng"
     },
     "topDestinations" : "Điểm đến hấp dẫn",
-    "beComeAHost" : "Trở thành chủ nhà",
-    "topHomestay" : "Phòng nổi bật"
+    "becomeAHost" : "Trở thành chủ nhà",
+    "topHomestay" : "Phòng nổi bật",
+    "blogContainer":{
+        "where": "Ở đâu",
+        "journey":"Cẩm nang du lịch",
+        "whatPlay":"Chơi gì",
+        "blog":"Khám phá và trải nghiệm",
+        "titleJourney": "Cùng chia sẻ những trải nghiệm du lịch",
+        "titleWhere": "Cùng khám phá những địa điểm tuyệt đẹp",
+        "titlePlay": "Cùng tìm hiểu những trò chơi độc lạ - thú vị"
+    }
+
 }

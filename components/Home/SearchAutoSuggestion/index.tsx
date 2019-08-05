@@ -43,6 +43,7 @@ const styles: any = (theme: Theme) =>
       border: '1px solid #ddd',
       borderRadius: 4,
       background: '#fff',
+      position:'relative'
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -50,12 +51,16 @@ const styles: any = (theme: Theme) =>
       maxHeight: 192,
       overflowY: 'scroll',
       borderTop: '1px solid #ddd',
-      width: '80%'
+      width: '100%',
+      marginTop:theme.spacing(1)
     },
     textFieldRoot: {
       color: '#fff',
       height: '100%',
-      justifyContent:'center'
+      justifyContent:'center',
+      [theme.breakpoints.down!("sm")]: {
+        padding: '8px 0'
+      }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -167,7 +172,10 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     return (
       <TextField
         fullWidth
-        classes={{ root: classes.textFieldRoot }}
+        classes={{
+          root: classes.textFieldRoot,
+          input: classes.textFieldRoot,
+        }}
         placeholder={t('home:SearchAutocomplete:toGo')}
         inputProps={{ root: classes.textFieldRoot }}
         InputProps={{
@@ -205,9 +213,9 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
           <Grid item xs={7} md={7} className={classes.left}>
             <div>
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
-                <HomeIcon className={classes.searchIcon} />
+                <LocationIcon className={classes.searchIcon} />
               ) : (
-                  <LocationIcon className={classes.searchIcon} />
+                  <HomeIcon className={classes.searchIcon} />
                 )}
             </div>
             <div className={classes.suggestionText}>

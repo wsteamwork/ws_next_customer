@@ -9,6 +9,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import * as animation from "@/store/Redux/Actions/animationTypes";
 import to from '@/utils/to';
+import { useTranslation } from 'react-i18next';
 
 
 export interface ISideDrawerProps {
@@ -85,7 +86,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
   const {handleLoginButton, setOpen, cookies, handleRegisterButton } = props;
   const {router} = useContext(GlobalContext);
   const isLogin = !!cookies.get("_token");
-
+  const {t} = useTranslation();
 
   const logoutTrigger = () => {
     cookies.remove("_token", {
@@ -109,7 +110,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             onClick={() => setOpen(false)}
           >
             <ListItemText
-              primary="Trở thành chủ nhà"
+              primary={t('home:becomeAHost')}
               classes={{
                 primary: classes.becomeHost,
                 root: classes.listItem
@@ -141,7 +142,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
                 onClick={() => setOpen(false)}
               >
                 <ListItemText
-                  primary="Trang chủ"
+                  primary={t('home:home')}
                   classes={{
                     primary: classes.text
                   }}
@@ -153,13 +154,13 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
                 }}
                 button
                 onClick={() => setOpen(false)}
-                {...to("/profile")}
+                href="/profile"
               >
                 {/* <ListItemIcon>
                 <AccountCircle />
               </ListItemIcon> */}
                 <ListItemText
-                  primary="Thông tin cá nhân"
+                  primary={t('home:profile')}
                   classes={{
                     primary: classes.text
                   }}
@@ -182,7 +183,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
               <AccountCircle />
             </ListItemIcon> */}
                 <ListItemText
-                  primary="Đăng nhập"
+                  primary={t('home:signIn')}
                   classes={{
                     primary: classes.text
                   }}
@@ -202,7 +203,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
               <AccountCircle />
             </ListItemIcon> */}
                 <ListItemText
-                  primary="Đăng ký"
+                  primary={t('home:signUp')}
                   classes={{
                     primary: classes.text
                   }}
@@ -223,27 +224,30 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             }}
           >
             <ListItemText
-              primary="Cẩm nang du lịch"
+              primary={t('home:blogContainer:blog')}
               classes={{
                 primary: classes.text
               }}
             />
           </ListItem>
+
           <ListItem
             button
+            component="a"
             onClick={() => setOpen(false)}
-            {...to("/terms-and-conditions")}
+            href="/terms-and-conditions"
             classes={{
               gutters: classes.listItemGutters
             }}
           >
             <ListItemText
-              primary="Chính sách & Điều khoản"
+              primary={t('home:policyTerms')}
               classes={{
                 primary: classes.text
               }}
             />
           </ListItem>
+
           <Divider />
 
           <ListItem
@@ -273,7 +277,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             <ListItemText
               primary={
                 <span>
-                  Dành cho chủ nhà <br />
+                  {t('home:supportHost')} <br />
                   <span className={classes.hotline}>0917 041 849</span>
                 </span>
               }
@@ -290,7 +294,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
               }}
             >
               <ListItemText
-                primary="Đăng xuất"
+                primary={t('home:logout')}
                 onClick={logoutTrigger}
                 classes={{
                   primary: classes.signOut

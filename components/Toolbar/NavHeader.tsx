@@ -338,7 +338,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                         <Paper elevation={1}>
                           <ClickAwayListener onClickAway={closeMenu}>
                             <MenuList>
-                              <MenuItem name="profile" onClick={closeMenu} {...to('/profile')}>
+                              <MenuItem name="profile" onClick={closeMenu} {...to({href:"/profile"})}>
                                 <ListItemIcon>
                                   <AccountCircleOutlined />
                                 </ListItemIcon>
@@ -404,7 +404,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
                     classes={{
                       paper: classes.drawer
                     }}>
-                    {/* <SideDrawer setOpen={handleToggleDrawer} /> */}
+                     <SideDrawer setOpen={handleToggleDrawer} />
                   </SwipeableDrawer>
                 </div>
               </Fragment>

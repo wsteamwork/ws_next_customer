@@ -4,7 +4,7 @@
   background: radial-gradient(circle farthest-corner at 10% 20%, rgba(253, 193, 104, 1) 0%, rgba(251, 128, 128, 1) 90%);
 
   @include xs {
-    padding: 10px 10px;
+    padding: 20px;
   }
 
   .title {
@@ -54,7 +54,7 @@
 
   &__button {
     @include xs {
-      padding: 15px 0px;
+      padding: 15px 0px 0px;
     }
 
     padding: 30px 0px;
