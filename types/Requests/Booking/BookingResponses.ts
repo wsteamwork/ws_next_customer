@@ -57,6 +57,7 @@ export interface BookingPriceCalculatorRes {
   checkin: number;
   checkout: number;
   room_id: number;
+  room_avatar: string;
   service_fee: number;
   charge_additional_guest: number;
   charge_additional_hour: number;

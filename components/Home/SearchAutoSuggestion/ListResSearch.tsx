@@ -1,10 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Paper, Grid, List } from '@material-ui/core';
 import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { useTranslation } from 'react-i18next';
 import Lottie, { Options } from 'react-lottie';
 import simpleLoading from '@/assets/lottie/simple-loading.json';
-import LazyLoad from 'react-lazyload';
 import dynamic from 'next/dynamic';
 
 const ItemSeach = dynamic(() => import('./ItemSeach'));
@@ -51,14 +50,12 @@ const ListResSearch: FC<IProps> = (props) => {
   };
 
   return (
-    <LazyLoad>
-      <Paper elevation={0} className="searchResponse">
-        <Grid className="viewTitle">
-          <p className="title">{t('home:SearchAutocomplete:searchResults')}</p>
-        </Grid>
-        {renderSuggestions()}
-      </Paper>
-    </LazyLoad>
+    <Paper elevation={0} className="searchResponse">
+      <Grid className="viewTitle">
+        <p className="title">{t('home:SearchAutocomplete:searchResults')}</p>
+      </Grid>
+      {renderSuggestions()}
+    </Paper>
   );
 };
 

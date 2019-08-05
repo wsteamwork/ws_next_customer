@@ -1,25 +1,36 @@
-import { applyMiddleware, createStore, Reducer, Store } from 'redux';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore, PersistConfig, Persistor } from 'redux-persist';
+import { applyMiddleware, createStore } from 'redux';
+import { PersistConfig } from 'redux-persist';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import thunk from 'redux-thunk';
-import rootReducer, { ReducersList, ReducresActions } from '@/store/Redux/Reducers/index';
+import rootReducer from '@/store/Redux/Reducers/index';
+import { MakeStore } from 'next-redux-wrapper';
 
-export const windowExist = process.browser;
+export const windowExist = process.browser && typeof window !== undefined;
 
-const persistConfig: PersistConfig = {
-  key: 'root',
-  storage,
-  blacklist: ['v_animate', 'booking', 'searchNavMobile', 'searchFilter']
+const makeConfiguredStore = (reducer, initialState) =>
+  createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
+
+export const makeStore: MakeStore = (initialState, { isServer }) => {
+  if (isServer) {
+    initialState = initialState || {};
+
+    return makeConfiguredStore(rootReducer, initialState);
+  } else {
+    // we need it only on client side
+    const { persistStore, persistReducer } = require('redux-persist');
+    const storage = require('redux-persist/lib/storage').default;
+
+    const persistConfig: PersistConfig = {
+      key: 'root',
+      storage,
+      blacklist: ['searchFilter', 'roomHomepage']
+    };
+
+    const persistedReducer = persistReducer(persistConfig, rootReducer);
+    const store: any = makeConfiguredStore(persistedReducer, initialState);
+
+    store.__persistor = persistStore(store); // Nasty hack
+
+    return store;
+  }
 };
-
-const persistedReducer: Reducer<ReducersList, ReducresActions> = process.browser
-  ? persistReducer(persistConfig, rootReducer)
-  : rootReducer;
-
-export const store: Store<ReducersList, ReducresActions> = createStore(
-  persistedReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-);
-
-export const persistor: Persistor = persistStore(store);

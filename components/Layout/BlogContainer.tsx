@@ -15,26 +15,26 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    root:{
-      marginTop:theme.spacing(8)
+    root: {
+      marginTop: theme.spacing(8)
     },
-    boxTitle:{
-      textAlign:'center'
+    boxTitle: {
+      textAlign: 'center'
     },
-    title:{
-      marginBottom:theme.spacing(3),
-      fontWeight:900,
+    title: {
+      marginBottom: theme.spacing(3),
+      fontWeight: 900,
     },
-    paddingItem:{
-      padding:theme.spacing(1/2)
+    paddingItem: {
+      padding: theme.spacing(1 / 2)
     }
   })
 );
 
 const BlogContainer: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
-  const {t} = useTranslation();
+  const { } = props;
+  const { t } = useTranslation();
 
   const setting: Settings = {
     dots: false,
@@ -95,57 +95,57 @@ const BlogContainer: FC<IProps> = (props) => {
       <Typography variant='h5' className={classes.title}>
         {t('home:blogContainer:blog')}
       </Typography>
-      <Hidden smDown>
+      <Hidden smDown implementation="css">
         <Grid container spacing={2} justify='flex-start'>
           <Grid item xs={4}>
             <Link href='https://blog.westay.vn/cam-nang-du-lich'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')} />
               </a>
             </Link>
           </Grid>
           <Grid item xs={4}>
             <Link href='https://blog.westay.vn/o-dau'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')} />
               </a>
             </Link>
           </Grid>
           <Grid item xs={4}>
             <Link href='https://blog.westay.vn/choi-gi'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')} />
               </a>
             </Link>
           </Grid>
         </Grid>
       </Hidden>
-      <Hidden smUp>
+      <Hidden smUp implementation="css">
         <Slider {...setting}>
           <div className={classes.paddingItem}>
             <Link href='https://blog.westay.vn/cam-nang-du-lich'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}cam_nang_du_lich_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:journey')} subTitle={t('home:blogContainer:titleJourney')} />
               </a>
             </Link>
           </div>
           <div className={classes.paddingItem}>
             <Link href='https://blog.westay.vn/o-dau'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}o_dau_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:where')} subTitle={t('home:blogContainer:titleWhere')} />
               </a>
             </Link>
           </div>
           <div className={classes.paddingItem}>
             <Link href='https://blog.westay.vn/choi-gi'>
               <a>
-                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{boxTitle:classes.boxTitle}} showSubTitle={true}
-                           title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')}/>
+                <CardIntro imgSrc={`${IMAGE_STORAGE_LG}choi_gi_1.jpg`} imgHeight={300} customClasses={{ boxTitle: classes.boxTitle }} showSubTitle={true}
+                  title={t('home:blogContainer:whatPlay')} subTitle={t('home:blogContainer:titlePlay')} />
               </a>
             </Link>
           </div>

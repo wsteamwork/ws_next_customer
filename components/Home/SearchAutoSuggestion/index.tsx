@@ -19,7 +19,6 @@ import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import dynamic from 'next/dynamic';
-import LazyLoad from 'react-lazyload';
 import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT } from '@/types/Requests/Search/SearchResponse';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { compose } from 'recompose';

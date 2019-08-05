@@ -1,0 +1,79 @@
+.bookingInfoDetail {
+  .paperCustom {
+    padding: 1rem;
+    box-shadow: none !important;
+  }
+
+  .card {
+    display: flex;
+    border-radius: 2px;
+  }
+
+  .cover {
+    @include xs {
+      width: 180px;
+    }
+
+    @include sm {
+      width: 180px;
+    }
+
+    @include md {
+      width: 130px;
+    }
+
+    @include lg {
+      width: 100px;
+    }
+
+    @include xl {
+      width: 100px;
+    }
+
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .timeCheck {
+    border-top: 1px solid #ddd;
+  }
+
+  .dividerMargin {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .gridInfo {
+    position: sticky;
+    top: 0;
+  }
+
+  .flexCenter {
+    display: flex;
+  }
+
+  .fontLow {
+    font-size: 0.9rem;
+  }
+
+  .fontLowTitle {
+    font-size: 0.9rem;
+    // color: #999;
+  }
+
+  .spaceTop {
+    margin-top: 8px;
+  }
+
+  .paperCustomOuter {
+    padding: 15px;
+    margin-bottom: 1rem;
+    background: #f2fbf7;
+    box-shadow: none !important;
+  }
+}
+
+
+.settingBooking {
+    width: 320px;
+}

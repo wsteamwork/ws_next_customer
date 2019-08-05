@@ -19,6 +19,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
       <NextHead
         title={t('layout:footer:termsOfUse')}
         url="./static/images/Logo-westay.png"
+        ogImage="/static/favicon.ico"
         description={t('layout:footer:termsOfUse')}></NextHead>
 
       <NavHeader></NavHeader>

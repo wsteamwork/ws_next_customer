@@ -53,6 +53,7 @@ const Rooms: NextPage = () => {
       <NextHead
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
+        ogImage="/static/favicon.ico"
         url="/rooms"></NextHead>
       <NavHeader></NavHeader>
 

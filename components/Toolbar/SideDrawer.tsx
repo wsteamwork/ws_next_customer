@@ -1,54 +1,43 @@
-import React, { Fragment, FC, memo, Dispatch, useContext } from 'react';
+import React, { Fragment, FC, memo, Dispatch, useContext, SetStateAction } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, ListItemText, ListItem, Divider, List } from '@material-ui/core';
-import { compose } from "recompose";
+import { compose } from 'recompose';
 import { withCookies, Cookies } from 'react-cookie';
-import { connect } from 'react-redux';
-import { AnimationAction } from '@/store/Redux/Reducers/global-animation';
-import { ReducersList } from '@/store/Redux/Reducers';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import * as animation from "@/store/Redux/Actions/animationTypes";
 import to from '@/utils/to';
 import { useTranslation } from 'react-i18next';
 
-
-export interface ISideDrawerProps {
+interface IProps {
   classes?: any;
-  setOpen(value: boolean): void;
-}
-
-interface IProps extends ISideDrawerProps{
+  setOpen: Dispatch<SetStateAction<boolean>>;
   cookies: Cookies;
-
-  handleLoginButton(status: boolean): void;
-  handleRegisterButton(status: boolean): void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     list: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      height: "100%"
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      height: '100%'
     },
     img: {
-      width: "100%",
-      backgroundPosition: "center",
+      width: '100%',
+      backgroundPosition: 'center',
       maxHeight: 200,
-      backgroundSize: "cover",
-      objectFit: "cover",
-      backgroundRepeat: "no-repeat"
+      backgroundSize: 'cover',
+      objectFit: 'cover',
+      backgroundRepeat: 'no-repeat'
     },
     signOut: {
-      color: "#FFA712",
+      color: '#FFA712',
       fontSize: 16,
-      lineHeight: "22px",
-      letterSpacing: "normal",
+      lineHeight: '22px',
+      letterSpacing: 'normal',
       fontWeight: 600,
-      display: "block",
-      position: "relative",
-      textDecoration: "none"
+      display: 'block',
+      position: 'relative',
+      textDecoration: 'none'
     },
     listItem: {
       padding: 0
@@ -59,41 +48,41 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     text: {
       fontSize: 16,
-      lineHeight: "22px",
-      letterSpacing: "normal",
+      lineHeight: '22px',
+      letterSpacing: 'normal',
       fontWeight: 600,
-      display: "block",
-      position: "relative",
-      textDecoration: "none"
+      display: 'block',
+      position: 'relative',
+      textDecoration: 'none'
     },
     hotline: {
       fontWeight: 800
     },
     becomeHost: {
-      textAlign: "center",
-      padding: "12px 20px",
-      color: " #FFFFFF",
-      background: "linear-gradient(to right, #FFC54D, #FFA712)",
-      boxShadow: "none",
+      textAlign: 'center',
+      padding: '12px 20px',
+      color: ' #FFFFFF',
+      background: 'linear-gradient(to right, #FFC54D, #FFA712)',
+      boxShadow: 'none',
       fontWeight: 800,
-      borderRadius: "100px !important"
-    },
+      borderRadius: '100px !important'
+    }
   })
 );
 
-const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
+const SideDrawer: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {handleLoginButton, setOpen, cookies, handleRegisterButton } = props;
-  const {router} = useContext(GlobalContext);
-  const isLogin = !!cookies.get("_token");
-  const {t} = useTranslation();
+  const { setOpen, cookies } = props;
+  const { router } = useContext(GlobalContext);
+  const isLogin = !!cookies.get('_token');
+  const { t } = useTranslation();
 
   const logoutTrigger = () => {
-    cookies.remove("_token", {
-      path: "/"
+    cookies.remove('_token', {
+      path: '/'
     });
     setOpen(false);
-    router.push("/");
+    router.push('/');
   };
 
   return (
@@ -107,8 +96,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             component="a"
             href="https://merchant.westay.vn"
             button
-            onClick={() => setOpen(false)}
-          >
+            onClick={() => setOpen(false)}>
             <ListItemText
               primary={t('home:becomeAHost')}
               classes={{
@@ -139,8 +127,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
                 component="a"
                 href="/"
                 button
-                onClick={() => setOpen(false)}
-              >
+                onClick={() => setOpen(false)}>
                 <ListItemText
                   primary={t('home:home')}
                   classes={{
@@ -168,49 +155,45 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
               </ListItem>
             </Fragment>
           ) : (
-            <Fragment>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button
-                onClick={() => {
-                  setOpen(false);
-                  handleLoginButton(true);
-                }}
-              >
-                {/* <ListItemIcon>
+              <Fragment>
+                <ListItem
+                  classes={{
+                    gutters: classes.listItemGutters
+                  }}
+                  button
+                  onClick={() => {
+                    setOpen(false);
+                  }}>
+                  {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                <ListItemText
-                  primary={t('home:signIn')}
+                  <ListItemText
+                    primary={t('home:signIn')}
+                    classes={{
+                      primary: classes.text
+                    }}
+                  />
+                </ListItem>
+                <ListItem
                   classes={{
-                    primary: classes.text
+                    gutters: classes.listItemGutters
                   }}
-                />
-              </ListItem>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button
-                onClick={() => {
-                  setOpen(false);
-                  handleRegisterButton(true);
-                }}
-              >
-                {/* <ListItemIcon>
+                  button
+                  onClick={() => {
+                    setOpen(false);
+                  }}>
+                  {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                <ListItemText
-                  primary={t('home:signUp')}
-                  classes={{
-                    primary: classes.text
-                  }}
-                />
-              </ListItem>
-            </Fragment>
-          )}
+                  <ListItemText
+                    primary={t('home:signUp')}
+                    classes={{
+                      primary: classes.text
+                    }}
+                  />
+                </ListItem>
+              </Fragment>
+            )}
         </div>
 
         <div className="bottom">
@@ -221,8 +204,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             href="https://blog.westay.vn/"
             classes={{
               gutters: classes.listItemGutters
-            }}
-          >
+            }}>
             <ListItemText
               primary={t('home:blogContainer:blog')}
               classes={{
@@ -238,8 +220,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             href="/terms-and-conditions"
             classes={{
               gutters: classes.listItemGutters
-            }}
-          >
+            }}>
             <ListItemText
               primary={t('home:policyTerms')}
               classes={{
@@ -253,15 +234,12 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
           <ListItem
             classes={{
               gutters: classes.listItemGutters
-            }}
-          >
+            }}>
             <ListItemText
               primary={
                 <span>
                   Hotline <br />
-                  <span className={classes.hotline}>
-                    0916 374 057 - 0946 746 417
-                  </span>
+                  <span className={classes.hotline}>0916 374 057 - 0946 746 417</span>
                 </span>
               }
               classes={{
@@ -272,8 +250,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
           <ListItem
             classes={{
               gutters: classes.listItemGutters
-            }}
-          >
+            }}>
             <ListItemText
               primary={
                 <span>
@@ -291,8 +268,7 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
             <ListItem
               classes={{
                 gutters: classes.listItemGutters
-              }}
-            >
+              }}>
               <ListItemText
                 primary={t('home:logout')}
                 onClick={logoutTrigger}
@@ -302,45 +278,15 @@ const SideDrawer: FC<ISideDrawerProps> = (props:IProps) => {
               />
             </ListItem>
           ) : (
-            ""
-          )}
+              ''
+            )}
         </div>
       </List>
     </Fragment>
   );
 };
 
-const mapStateToProps = (state: ReducersList) => {
-  return {
-    animation: state.v_animate
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnimationAction>) => {
-  return {
-    /**
-     * Toggle Login Form
-     * @param {boolean} status
-     * @returns {{type: string; status: boolean}}
-     */
-    handleLoginButton: (status: boolean) =>
-      dispatch({
-        type: animation.LOGIN_BUTTON_CLICK,
-        status: status
-      }),
-    handleRegisterButton: (status: boolean) =>
-      dispatch({
-        type: animation.SIGN_UP_BUTTON_CLICK,
-        status: status
-      })
-  };
-};
-
-export default compose<ISideDrawerProps, any>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+export default compose<IProps, any>(
   withCookies,
   memo
 )(SideDrawer);

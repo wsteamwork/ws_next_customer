@@ -35,7 +35,9 @@ const Room: NextPage = () => {
       <NextHead
         title={room.details.data[0].name}
         description={room.details.data[0].description}
-        url={`${IMAGE_STORAGE_LG}/${room.media.data[0]}`}></NextHead>
+        url={`${IMAGE_STORAGE_LG}/${room.media.data[0]}`}
+        ogImage={`${IMAGE_STORAGE_LG}/${room.media.data[0]}`}></NextHead>
+
       <NavHeader></NavHeader>
       {/* <GridContainer xs={11} md={10}>
         <SearchComponent></SearchComponent>
@@ -61,6 +63,12 @@ const Room: NextPage = () => {
       </GridContainer>
     </RoomDetailsContext.Provider>
   );
+};
+
+Room.getInitialProps = async () => {
+  console.log('aaaa');
+
+  return {};
 };
 
 export default Room;

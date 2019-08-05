@@ -1,15 +1,18 @@
-import React, { FC, ChangeEvent, Dispatch, useMemo } from 'react';
+import React, { FC, ChangeEvent, Dispatch, useMemo, useContext } from 'react';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import { Grid, FormControlLabel } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/booking';
 import { useTranslation } from 'react-i18next';
+import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 
 const ChooseBookingType: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();
   const { t } = useTranslation();
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
+  const { state } = useContext(RoomDetailsContext);
+  const { room } = state;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
@@ -20,16 +23,22 @@ const ChooseBookingType: FC = () => {
   };
 
   return useMemo(
-    () => (
-      <Grid className="boxBooking__chooseBooking">
-        <FormControlLabel
-          control={
-            <CustomCheckbox checked={bookingType === 1} onChange={handleChange} value="checkedA" />
-          }
-          label={t('room:boxBooking:setByHour')}
-        />
-      </Grid>
-    ),
+    () =>
+      !!room &&
+      room.price_hour !== 0 && (
+        <Grid className="boxBooking__chooseBooking">
+          <FormControlLabel
+            control={
+              <CustomCheckbox
+                checked={bookingType === 1}
+                onChange={handleChange}
+                value="checkedA"
+              />
+            }
+            label={t('room:boxBooking:setByHour')}
+          />
+        </Grid>
+      ),
     [bookingType, t]
   );
 };

@@ -4,13 +4,26 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 // import '@/styles/index.scss';
 import 'tippy.js/themes/light-border.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProviderGlobal from '@/utils/ProviderGlobal';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import withRedux, { NextJSContext } from 'next-redux-wrapper';
+import { makeStore } from '@/store/Redux';
+import { config } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 
+interface NextContextApp extends NextJSContext, AppContext { }
+interface IProps extends AppProps {
+  isServer: boolean;
+  store: any;
+}
 
-class MyApp extends App<AppProps> {
-  static async getInitialProps({ Component, ctx }: AppContext) {
+class MyApp extends App<IProps> {
+  static async getInitialProps({ Component, ctx, router }: any) {
     let pageProps = {};
+
+    ctx.router = router;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -45,17 +58,22 @@ class MyApp extends App<AppProps> {
   };
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, isServer, store } = this.props;
 
     return (
       <Container>
         <ProviderGlobal>
-          <CssBaseline></CssBaseline>
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <PersistGate
+              persistor={store.__persistor}
+              loading={!process.browser ? <Component {...pageProps} /> : null}>
+              <Component {...pageProps} />
+            </PersistGate>
+          </Provider>
         </ProviderGlobal>
       </Container>
     );
   }
 }
 
-export default MyApp;
+export default withRedux(makeStore)(MyApp);
