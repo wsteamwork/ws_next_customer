@@ -17,7 +17,6 @@ import { Provider } from 'react-redux';
 import { store, persistor } from '@/store/Redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import classNames from 'classnames';
-
 interface IProps extends Partial<IGlobalContext> {}
 
 const ProviderGlobal: FC<IProps> = (props) => {

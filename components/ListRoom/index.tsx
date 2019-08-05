@@ -1,7 +1,15 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import React, {
   Fragment,
-  FC
+  useContext,
+  useEffect,
+  useState,
+  lazy,
+  Suspense,
+  FC,
+  useMemo,
+  ReactNode,
+  ReactElement
 } from 'react';
 
 import Slider, { Settings } from 'react-slick';
@@ -16,29 +24,41 @@ import RoomCard from '../RoomCard';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 import { useTranslation } from 'react-i18next';
+import { GridSpacing } from '@material-ui/core/Grid';
 
-interface Iprops {
+type Iprops<T> = {
   classes?: any;
-  roomData: RoomIndexRes[];
-}
+  roomData: T[];
+  title?: string;
+  usingSlider?: boolean;
+  render?: (room: T) => ReactNode;
+  spacing?: GridSpacing;
+  customClass?: string;
+};
 
-const useStyles = makeStyles<Iprops>((theme: any) =>
+const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
     root: {
-      display: 'block',
-      marginTop:theme.spacing(8)
+      marginTop: theme.spacing(8)
     },
-    title:{
-      marginBottom:theme.spacing(3),
-      fontWeight:900,
+    title: {
+      marginBottom: theme.spacing(3),
+      fontWeight: 900
     }
   })
 );
 
-const ListRoom: FC<Iprops> = (props) => {
-  const { roomData } = props;
-  const classes = useStyles(props);
-  const {t} = useTranslation();
+const ListRoom = <T extends any>(props: Iprops<T>) => {
+  const {
+    roomData,
+    title,
+    usingSlider,
+    render,
+    spacing,
+    customClass = 'listRoomContainer'
+  } = props;
+  const classes = useStyles({});
+  const { t } = useTranslation();
   const setting: Settings = {
     dots: false,
     infinite: true,
@@ -47,60 +67,79 @@ const ListRoom: FC<Iprops> = (props) => {
     lazyLoad: 'ondemand',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    touchThreshold: 10,
+    touchThreshold: 1000000,
     mobileFirst: true,
+    centerPadding: '20%',
     swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1920,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 5
         }
       },
       {
         breakpoint: 1366,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 4
         }
       },
       {
         breakpoint: 960,
         settings: {
-          slidesToShow: 3,
-          autoplay: true,
-          centerMode: false,
-          arrows: false
+          slidesToShow: 1.9,
+          // touchThreshold: 5000,
+          arrows: false,
+          lazyLoad: false,
+          centerMode: true,
+          initialSlide: 0,
+          centerPadding: '24%',
+          slidesToScroll: 2
         }
       },
       {
         breakpoint: 600,
         settings: {
-          touchThreshold: 5000,
+          // touchThreshold: 1000,
           slidesToShow: 1.2,
-          centerPadding: "12%",
+          centerPadding: '12%',
           arrows: false,
           lazyLoad: false,
           centerMode: true,
           initialSlide: 0,
-          slidesToScroll: 1,
+          slidesToScroll: 1
         }
       }
     ]
   };
+
+  const renderRooms = useMemo(
+    () =>
+      _.map(roomData, (room, index) => (
+        <Grid item key={index}>
+          {render(room)}
+        </Grid>
+      )),
+    [roomData]
+  );
+
   return (
     <Fragment>
-      <Grid container className={classNames(classes.root, "listRoomContainer")}>
-        <Typography variant='h5' className={classes.title}>
-          {t('home:topHomestay')}
-        </Typography>
+      <Grid
+        container
+        spacing={spacing ? spacing : 0}
+        className={classNames(classes.root, customClass)}>
+        {title != '' && (
+          <Typography variant="h5" className={classes.title}>
+            {title}
+          </Typography>
+        )}
         {roomData ? (
-          <Slider {...setting}>
-            {_.map(roomData, (room, index) => (
-              <div key={index}>
-                <RoomCard isHomepage={true} room={room} />
-              </div>
-            ))}
-          </Slider>
+          usingSlider ? (
+            <Slider {...setting}>{renderRooms}</Slider>
+          ) : (
+              <Fragment>{renderRooms}</Fragment>
+            )
         ) : (
             ''
           )}

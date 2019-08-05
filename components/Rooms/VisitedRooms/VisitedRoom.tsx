@@ -53,7 +53,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     }
   })
 );
-
+ 
 interface IProps {
   maxWidth?: string | number;
   fontSize?: string | number;

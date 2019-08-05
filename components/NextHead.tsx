@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-
+import '@/styles/index.scss';
 interface IProps {
   title: string;
   description: string;
@@ -18,6 +18,9 @@ const NextHead: FC<IProps> = (props) => (
     <meta name="twitter:site" content={props.url} />
     <meta name="twitter:image" content={props.ogImage} />
     <meta property="og:image" content={props.ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" />
   </Head>
 );
 
