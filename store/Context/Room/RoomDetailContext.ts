@@ -129,6 +129,6 @@ export const getDataRoom = async (dispatch: Dispatch<RoomDetailsAction>, router:
 
     dispatch({ type: 'setDetails', room, recommend, schedule, priceByDay });
   } catch (error) {
-    console.log('Error RoomDetail Context: ' + error);
+    // console.log('Error RoomDetail Context: ' + error);
   }
 };

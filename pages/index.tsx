@@ -93,7 +93,7 @@ Home.getInitialProps = async (ctx: NextContextPage) => {
     ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
     ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
   } catch (error) {
-    console.log('Error homepage: ' + error.response);
+    // console.log('Error homepage: ' + error.response);
   }
 
   return {};

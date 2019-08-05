@@ -79,7 +79,7 @@ export const getDataViewProfile = (
       });
     })
     .catch((err: AxiosError) => {
-      console.log('Profile view context: ' + err);
+      // console.log('Profile view context: ' + err);
       router.push('/404');
     });
 };

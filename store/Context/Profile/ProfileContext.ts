@@ -68,7 +68,7 @@ export const getProfile = async (token?: any) => {
     const res: AxiosRes<ProfileInfoRes> = await axios.get('profile?include=city,district', headers);
     return res.data;
   } catch (err) {
-    console.log('Err Profile Context 1: ' + err.response);
+    // console.log('Err Profile Context 1: ' + err.response);
   }
 };
 
@@ -100,6 +100,6 @@ export const getDataProfile = (
       });
     })
     .catch((err: AxiosError) => {
-      console.log('Error Profile Context: ' + err);
+      // console.log('Error Profile Context: ' + err);
     });
 };
