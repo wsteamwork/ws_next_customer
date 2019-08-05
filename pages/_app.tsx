@@ -21,6 +21,7 @@ interface IProps extends AppProps {
 
 class MyApp extends App<IProps> {
   static async getInitialProps({ Component, ctx, router }: any) {
+    console.log('__app');
     let pageProps = {};
 
     ctx.router = router;
