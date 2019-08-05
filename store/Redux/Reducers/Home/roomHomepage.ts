@@ -1,32 +1,17 @@
-import { createContext, Dispatch, Reducer } from 'react';
+import { Reducer } from 'react';
 import { RoomIndexRes, NumberRoomCity, TypeApartment } from '@/types/Requests/Rooms/RoomResponses';
 import qs from 'query-string';
-import { AxiosRes, BaseResponse } from '@/types/Requests/ResponseTemplate';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import { RoomIndexGetParams, RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
+import { RoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
-
-export const RoomHomepageContext = createContext<IRoomHomepageContext>(
-  null as IRoomHomepageContext
-);
-
-export interface IRoomHomepageContext {
-  state: RoomHomepageState;
-  dispatch: Dispatch<RoomHomepageAction>;
-}
 
 export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
   | { type: 'setRoomCity'; rooms: NumberRoomCity[] }
   | { type: 'setRoomNew'; rooms: RoomIndexRes[] }
-  | { type: 'setApartment'; rooms: TypeApartment[] }
-  | {
-      type: 'setRoomsHomepage';
-      hot: RoomIndexRes[];
-      city: NumberRoomCity[];
-      apartment: TypeApartment[];
-    };
+  | { type: 'setApartment'; rooms: TypeApartment[] };
 
 export type RoomHomepageState = {
   readonly roomsHot: RoomIndexRes[];
@@ -35,24 +20,18 @@ export type RoomHomepageState = {
   readonly apartments: TypeApartment[];
 };
 
-export const RoomHomepageStateInit: RoomHomepageState = {
+export const init: RoomHomepageState = {
   roomsHot: [],
   roomsCity: null,
   roomsNew: [],
   apartments: []
 };
 
-export const RoomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (
-  state: RoomHomepageState = RoomHomepageStateInit,
+export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (
+  state: RoomHomepageState = init,
   action: RoomHomepageAction
 ): RoomHomepageState => {
   switch (action.type) {
-    case 'setRoomsHomepage':
-      return updateObject<RoomHomepageState>(state, {
-        roomsHot: action.hot,
-        roomsCity: action.city,
-        apartments: action.apartment
-      });
     case 'setRoomHot':
       return updateObject<RoomHomepageState>(state, { roomsHot: action.rooms });
     case 'setRoomCity':

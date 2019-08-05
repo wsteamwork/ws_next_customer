@@ -21,15 +21,9 @@ import {
   Theme
 } from '@material-ui/core';
 import to from '@/utils/to';
-import * as animation from '@/store/Redux/Actions/animationTypes';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { AnimationState, AnimationAction } from '@/store/Redux/Reducers/global-animation';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
 import { withCookies } from 'react-cookie';
-import Loadable from 'react-loadable';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import Cookies from 'universal-cookie';
 import Logo from '@/components/Toolbar/Logo';
 import People from '@material-ui/icons/PersonRounded';
@@ -38,38 +32,18 @@ import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import IconMenu from '@material-ui/icons/Menu';
-import * as types from '@/store/Redux/Actions/types';
-import { SearchNavAction, SearchNavState } from '@/store/Redux/Reducers/searchNav';
-import { SearchFilterState } from '@/store/Redux/Reducers/searchFilter';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
-// import { ISideDrawerProps } from "@/components/ToolBar/SideDrawer";
-// import { SearchFilterState } from "@/store/reducers/searchFilter";
-// import { SearchNavAction, SearchNavState } from "@/store/reducers/searchNav";
-// import ListCitySearch, { TransitionCustom } from "@/views/Rooms/Filter/ListCitySearch";
-// import ForgetPasswordForm from "../Forms/ForgetPasswordForm";
 import ButtonGlobal from '@/components/ButtonGlobal';
-import SideDrawer from '@/components/Toolbar/SideDrawer';
 
 interface IProps {
   classes?: any;
   hiddenListCitySearch?: boolean;
-}
-
-interface ILocalProps extends IProps {
-  animation: AnimationState;
   cookies: Cookies;
-  filter: SearchFilterState;
-  searchNavMobile: SearchNavState;
-
-  handleLoginButton(status: boolean): void;
-  handleSignUpAnimation(status: boolean): void;
-  handleOpenSearchMobile(openSearch: boolean): void;
-  handleToggleDrawer(openDrawer: boolean): void;
 }
 
-const styles: any = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1
@@ -176,16 +150,8 @@ const styles: any = (theme: Theme) =>
     }
   });
 
-const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
-  const {
-    classes,
-    cookies,
-    filter,
-    handleOpenSearchMobile,
-    searchNavMobile,
-    handleToggleDrawer,
-    hiddenListCitySearch
-  } = props;
+const NavHeader: FunctionComponent<IProps> = (props) => {
+  const { classes, cookies, hiddenListCitySearch } = props;
 
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
@@ -211,26 +177,14 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
 
   const loginButtonClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    props.handleLoginButton(true);
   };
 
   const signUpButtonClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    props.handleSignUpAnimation(true);
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event: any) => {
-    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleCloseSearchMobile = () => {
-    handleOpenSearchMobile(false);
   };
 
   return (
@@ -389,15 +343,15 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
             <Hidden mdUp>
               <Logo />
               <div className={classes.grow} />
-              <IconMenu onClick={() => handleToggleDrawer(true)} />
+              <IconMenu onClick={() => setOpenDrawer(true)} />
 
               <Fragment>
                 <div>
                   <SwipeableDrawer
                     disableSwipeToOpen
-                    open={searchNavMobile.openDrawer}
-                    onOpen={() => handleToggleDrawer(true)}
-                    onClose={() => handleToggleDrawer(false)}
+                    open={openDrawer}
+                    onOpen={() => setOpenDrawer(true)}
+                    onClose={() => setOpenDrawer(false)}
                     ModalProps={{
                       keepMounted: true // Better open performance on mobile.
                     }}
@@ -419,45 +373,7 @@ const NavHeader: FunctionComponent<IProps> = (props: ILocalProps) => {
   );
 };
 
-const mapStateToProps = (state: ReducersList) => {
-  return {
-    animation: state.v_animate,
-    filter: state.searchFilter,
-    searchNavMobile: state.searchNavMobile
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<AnimationAction | SearchNavAction>) => {
-  return {
-    handleLoginButton: (status: boolean) =>
-      dispatch({
-        type: animation.LOGIN_BUTTON_CLICK,
-        status: status
-      }),
-    handleSignUpAnimation: (status: boolean) =>
-      dispatch({
-        type: animation.SIGN_UP_BUTTON_CLICK,
-        status: status
-      }),
-    handleOpenSearchMobile: (openSearch: boolean) => {
-      dispatch({
-        type: types.TOGGLE_SEARCH_NAV_MOBILE,
-        openSearch: openSearch
-      });
-    },
-    handleToggleDrawer: (openDrawer: boolean) =>
-      dispatch({
-        type: types.TOGGLE_DRAWER,
-        openDrawer
-      })
-  };
-};
-
 export default compose<IProps, any>(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
   withCookies,
   withStyles(styles)
 )(NavHeader);

@@ -1,5 +1,5 @@
-import React, { useEffect, useReducer, useContext, useMemo, Fragment } from 'react';
-import { NextPage, NextPageContext } from 'next';
+import React, { useContext, Fragment } from 'react';
+import { NextPage } from 'next';
 import NextHead from '@/components/NextHead';
 import { Grid } from '@material-ui/core';
 import FooterComponent from '@/components/Layout/FooterComponent';

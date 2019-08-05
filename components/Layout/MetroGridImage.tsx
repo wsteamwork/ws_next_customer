@@ -90,103 +90,106 @@ const MetroGridImage: FC = (props) => {
     ]
   };
 
+
   return (
-    <Grid className={classes.root}>
-      <Typography variant="h5" className={classes.title}>
-        {t('home:topDestinations')}
-      </Typography>
-      <Hidden smDown implementation="css">
-        <Grid container>
-          <Grid item xs={6}>
-            <Grid container direction="column">
-              <Grid item className={classes.paddingGrid}>
-                <CardIntro
-                  title={roomsCity[0].name_city}
-                  imgSrc={roomsCity[0].image}
-                  showPrice={true}
-                  recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')}
-                  imgHeight={width === 'xl' ? 280 : 250}
-                />
-              </Grid>
-              <Grid item>
-                <Grid container direction="row">
-                  <Grid item xs={6} className={classes.paddingGrid}>
-                    <CardIntro
-                      title={roomsCity[1].name_city}
-                      imgSrc={roomsCity[1].image}
-                      showPrice={true}
-                      recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')}
-                      imgHeight={width === 'xl' ? 230 : 200}
-                    />
-                  </Grid>
-                  <Grid item xs={6} className={classes.paddingGrid}>
-                    <CardIntro
-                      title={roomsCity[2].name_city}
-                      imgSrc={roomsCity[2].image}
-                      showPrice={true}
-                      recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')}
-                      imgHeight={width === 'xl' ? 230 : 200}
-                    />
+    roomsCity && (
+      <Grid className={classes.root}>
+        <Typography variant="h5" className={classes.title}>
+          {t('home:topDestinations')}
+        </Typography>
+        <Hidden smDown implementation="css">
+          <Grid container>
+            <Grid item xs={6}>
+              <Grid container direction="column">
+                <Grid item className={classes.paddingGrid}>
+                  <CardIntro
+                    title={roomsCity[0].name_city}
+                    imgSrc={roomsCity[0].image}
+                    showPrice={true}
+                    recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')}
+                    imgHeight={width === 'xl' ? 280 : 250}
+                  />
+                </Grid>
+                <Grid item>
+                  <Grid container direction="row">
+                    <Grid item xs={6} className={classes.paddingGrid}>
+                      <CardIntro
+                        title={roomsCity[1].name_city}
+                        imgSrc={roomsCity[1].image}
+                        showPrice={true}
+                        recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')}
+                        imgHeight={width === 'xl' ? 230 : 200}
+                      />
+                    </Grid>
+                    <Grid item xs={6} className={classes.paddingGrid}>
+                      <CardIntro
+                        title={roomsCity[2].name_city}
+                        imgSrc={roomsCity[2].image}
+                        showPrice={true}
+                        recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')}
+                        imgHeight={width === 'xl' ? 230 : 200}
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid container item xs={6}>
             <Grid container item xs={6}>
-              <Grid item xs={12} className={classes.paddingGrid}>
-                <CardIntro
-                  title={roomsCity[3].name_city}
-                  imgSrc={roomsCity[3].image}
-                  showPrice={true}
-                  recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')}
-                  imgHeight={width === 'xl' ? 280 : 250}
-                />
+              <Grid container item xs={6}>
+                <Grid item xs={12} className={classes.paddingGrid}>
+                  <CardIntro
+                    title={roomsCity[3].name_city}
+                    imgSrc={roomsCity[3].image}
+                    showPrice={true}
+                    recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')}
+                    imgHeight={width === 'xl' ? 280 : 250}
+                  />
+                </Grid>
+                <Grid item xs={12} className={classes.paddingGrid}>
+                  <CardIntro
+                    title={roomsCity[4].name_city}
+                    imgSrc={roomsCity[4].image}
+                    showPrice={true}
+                    recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')}
+                    imgHeight={width === 'xl' ? 230 : 200}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} className={classes.paddingGrid}>
-                <CardIntro
-                  title={roomsCity[4].name_city}
-                  imgSrc={roomsCity[4].image}
-                  showPrice={true}
-                  recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')}
-                  imgHeight={width === 'xl' ? 230 : 200}
-                />
+              <Grid container item xs={6}>
+                <Grid item xs={12} className={classes.paddingGrid}>
+                  <CardIntro
+                    title={roomsCity[5].name_city}
+                    imgSrc={roomsCity[5].image}
+                    showPrice={true}
+                    recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')}
+                    imgHeight={width === 'xl' ? 518 : 458}
+                  />
+                  {/* +8px la khoang cach padding*/}
+                </Grid>
               </Grid>
             </Grid>
-            <Grid container item xs={6}>
-              <Grid item xs={12} className={classes.paddingGrid}>
-                <CardIntro
-                  title={roomsCity[5].name_city}
-                  imgSrc={roomsCity[5].image}
-                  showPrice={true}
-                  recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')}
-                  imgHeight={width === 'xl' ? 518 : 458}
-                />
-                {/* +8px la khoang cach padding*/}
-              </Grid>
-            </Grid>
           </Grid>
-        </Grid>
-      </Hidden>
+        </Hidden>
 
-      <Hidden mdUp implementation="css">
-        <div>
-          <Slider {...setting}>
-            {_.map(roomsCity, (room, i) => (
-              <div className={classes.paddingGrid} key={i}>
-                <CardIntro
-                  title={roomsCity[i].name_city}
-                  imgSrc={roomsCity[i].image}
-                  showPrice={true}
-                  recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')}
-                  imgHeight={290}
-                />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </Hidden>
-    </Grid>
+        <Hidden mdUp implementation="css">
+          <div>
+            <Slider {...setting}>
+              {_.map(roomsCity, (room, i) => (
+                <div className={classes.paddingGrid} key={i}>
+                  <CardIntro
+                    title={roomsCity[i].name_city}
+                    imgSrc={roomsCity[i].image}
+                    showPrice={true}
+                    recommendedPrice={numeral(roomsCity[i].average_price).format('0,0')}
+                    imgHeight={290}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
+        </Hidden>
+      </Grid>
+    )
   );
 };
 

@@ -20,8 +20,10 @@ interface IProps extends AppProps {
 }
 
 class MyApp extends App<IProps> {
-  static async getInitialProps({ Component, ctx }: NextContextApp) {
+  static async getInitialProps({ Component, ctx, router }: any) {
     let pageProps = {};
+
+    ctx.router = router;
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
