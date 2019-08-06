@@ -91,19 +91,14 @@ const VisitedRoom: FC<IProps> = (props) => {
             </Link>
             <Hidden xsDown implementation="css">
               <Grid className={classes.price}>
-                {room.rent_type !== 1 ? (
-                  <Typography variant="subtitle1" className={classes.priceDay}>
-                    {formatPrice(room.price_day)} /{t('rooms:night')}
-                  </Typography>
-                ) : (
-                  ''
-                )}
-                {room.rent_type !== 2 ? (
+                <Typography variant="subtitle1" className={classes.priceDay}>
+                  {formatPrice(room.price_day)} /{t('rooms:night')}
+                </Typography>
+
+                {room.price_hour !== 0 && (
                   <Typography variant="subtitle1" className={classes.priceHour}>
                     {formatPrice(room.price_hour)} /4{t('rooms:hour')}
                   </Typography>
-                ) : (
-                  ''
                 )}
               </Grid>
             </Hidden>
