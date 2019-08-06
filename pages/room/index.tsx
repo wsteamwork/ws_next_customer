@@ -10,12 +10,13 @@ import {
 } from '@/store/Context/Room/RoomDetailContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid, Hidden, Paper, Typography } from '@material-ui/core';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NextHead from '@/components/NextHead';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import EmptyRoomCalenda from '@/components/Room/EmptyRoomCalenda';
+import BoxImage from '@/components/Room/BoxImage';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -44,6 +45,15 @@ const Room: NextPage = () => {
       </GridContainer> */}
 
       <GridContainer lg={10}>
+
+        <Paper>
+          <Typography variant={'h3'}>
+            demo cai gi do
+          </Typography>
+        </Paper>
+
+        <BoxImage/>
+
         <Grid container spacing={1}>
           <Grid item xs={12} lg={9}>
             <EmptyRoomCalenda></EmptyRoomCalenda>
