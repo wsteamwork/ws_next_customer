@@ -10,13 +10,14 @@ import {
 } from '@/store/Context/Room/RoomDetailContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid, Hidden, Paper, Typography } from '@material-ui/core';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NextHead from '@/components/NextHead';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 // import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar';
 import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
+import BoxImage from '@/components/Room/BoxImage';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -45,6 +46,7 @@ const Room: NextPage = () => {
       </GridContainer> */}
 
       <GridContainer xs={11} lg={10}>
+        <BoxImage />
         <Grid container spacing={1}>
           <Grid item xs={12} lg={9}>
             <BoxRoomDetail></BoxRoomDetail>
@@ -67,8 +69,6 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async () => {
-  console.log('aaaa');
-
   return {};
 };
 
