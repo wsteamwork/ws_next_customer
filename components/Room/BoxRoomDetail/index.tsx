@@ -36,33 +36,33 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const BoxRoomDetail: FC<IProps> = (props) => {
   const classes = useStyles(props);
   return (
     <Fragment>
       <Paper className={classes.paper}>
-      <Grid container className={classes.root}>
-        <Grid item md={11} lg={12}>
-          <Grid container spacing={1} className={classes.wapper}>
-            <Grid item xs={11} sm={7} md={9}>
-              <RoomBasic></RoomBasic>
+        <Grid container className={classes.root}>
+          <Grid item md={11} lg={12}>
+            <Grid container spacing={1} className={classes.wapper}>
+              <Grid item xs={11} sm={7} md={9}>
+                <RoomBasic></RoomBasic>
+              </Grid>
+              <Grid className={classes.hostInfo} item xs={12} sm={5} md={3}>
+                <HostInfo></HostInfo>
+              </Grid>
             </Grid>
-            <Grid className={classes.hostInfo} item xs={12} sm={5} md={3}>
-              <HostInfo></HostInfo>
-            </Grid>
-          </Grid>
-          <Grid container spacing={1} className={classes.wapper}>
-            <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
-              <RoomDescription></RoomDescription>
-              <RoomAmenities></RoomAmenities>
+            <Grid container spacing={1} className={classes.wapper}>
+              <Grid item xs={11} sm={12} md={11} lg={12} xl={12}>
+                <RoomDescription></RoomDescription>
+                <RoomAmenities></RoomAmenities>
 
-              <BoxMap/>
+                <BoxMap />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
       </Paper>
     </Fragment>
   );
