@@ -107,6 +107,7 @@ export interface Merchant {
   birthday: string;
   avatar: string;
   avatar_url: string;
+  number_room: number;
 }
 
 export interface Settings {

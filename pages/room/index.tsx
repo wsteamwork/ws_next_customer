@@ -16,6 +16,7 @@ import NextHead from '@/components/NextHead';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import EmptyRoomCalenda from '@/components/Room/EmptyRoomCalenda';
+import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -43,10 +44,11 @@ const Room: NextPage = () => {
         <SearchComponent></SearchComponent>
       </GridContainer> */}
 
-      <GridContainer lg={10}>
+      <GridContainer xs={11} lg={10}>
         <Grid container spacing={1}>
           <Grid item xs={12} lg={9}>
             <EmptyRoomCalenda></EmptyRoomCalenda>
+            <BoxRoomDetail></BoxRoomDetail>
           </Grid>
 
           <Hidden mdDown>

@@ -17,11 +17,11 @@ const EmptyRoomCalenda = () => {
 
   return useMemo(
     () => (
-      <Grid className="emptyRoomCalenda">
+      <Grid className="EmptyRoomCalenda">
         <DayPickerRangeController
           startDate={!!dateStart ? moment(dateStart) : moment()}
           endDate={!!dateEnd ? moment(dateEnd) : null}
-          onDatesChange={() => {}}
+          onDatesChange={() => { }}
           focusedInput={null}
           onFocusChange={null}
           isDayBlocked={isDayBlocked}
