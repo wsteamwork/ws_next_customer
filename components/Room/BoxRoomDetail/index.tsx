@@ -6,6 +6,8 @@ import RoomDescription from './RoomDescription/index';
 import RoomAmenities from './RoomAmenities/index';
 import Grid from '@material-ui/core/Grid';
 import HostInfo from '@/components/HostInfo/index';
+import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar';
+import RoomReview from './RoomReview/index';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -46,16 +48,18 @@ const BoxRoomDetail: FC<IProps> = (props) => {
         <Grid item md={11} lg={12}>
           <Grid container spacing={1} className={classes.wapper}>
             <Grid item xs={11} sm={7} md={9}>
-              <RoomBasic></RoomBasic>
+              <RoomBasic />
             </Grid> 
             <Grid className={classes.hostInfo} item xs={12} sm={5} md={3}>
-              <HostInfo></HostInfo>
+              <HostInfo />
             </Grid>
           </Grid>
           <Grid container spacing={1} className={classes.wapper}>
             <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
-              <RoomDescription></RoomDescription>
-              <RoomAmenities></RoomAmenities>
+              <RoomDescription />
+              <RoomAmenities />
+              <EmptyRoomCalendar />
+              <RoomReview />
             </Grid>
           </Grid>
         </Grid>
