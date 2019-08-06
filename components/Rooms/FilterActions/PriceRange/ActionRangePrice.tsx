@@ -29,18 +29,21 @@ import { WithStyles } from '@material-ui/styles';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import numeral from 'numeral';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 
 interface IProps extends WithStyles<typeof styles> {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const usePriceEffect = (price: Range, setPrice: Dispatch<Range>, state: RoomIndexState) => {
-  useEffect(() => {
-    if (!_.isEqual(state.price, price)) {
-      setPrice(state.price);
-    }
-  }, [state.price]);
-};
+// export const usePriceEffect = (price: Range, setPrice: Dispatch<Range>, state: RoomIndexState) => {
+//   const { price_day_from, price_day_to } = state;
+
+//   useEffect(() => {
+//     if (!_.isEqual(state.price, price)) {
+//       setPrice({ max: price_day_to, min: price_day_from });
+//     }
+//   }, [price_day_from, price_day_to]);
+// };
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -82,7 +85,8 @@ const styles = (theme: Theme) =>
 const ActionRangePrice: FC<IProps> = (props) => {
   const { classes, setOpen } = props;
   const { t } = useTranslation();
-  const { state, dispatch } = useContext(RoomIndexContext);
+  const { state, dispatch } = useContext(RoomFilterContext);
+  const { price_day_from, price_day_to } = state;
 
   const [price, setPrice] = useState<Range>({
     min: MIN_PRICE,
@@ -122,15 +126,15 @@ const ActionRangePrice: FC<IProps> = (props) => {
 
   const handleClose = () => {
     setOpen(false);
-    setPrice(state.price);
+    setPrice({ max: price_day_to, min: price_day_from });
   };
 
   const hanldeSubmit = () => {
     setOpen(false);
-    dispatch({ type: 'setPrices', price });
+    dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
   };
 
-  usePriceEffect(price, setPrice, state);
+  // usePriceEffect(price, setPrice, state);
 
   return (
     <Fragment>

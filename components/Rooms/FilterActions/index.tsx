@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Grid } from '@material-ui/core';
 import ChooseRoomGuest from './ChooseRoomGuest';
-import KindOfRoom from './KindOfRoom';
+import RoomType from './RoomType';
 import PriceRange from './PriceRange';
 import BookByHour from './BookByHour';
 import FastBooking from './FastBooking';
@@ -11,12 +11,12 @@ import FilterRoom from './FilterRoom';
 const FilterActions: FC = () => {
   return (
     <GridContainer xs={11} md={10} className="filterRooms">
-      <Grid container spacing={1} >
+      <Grid container spacing={1}>
         <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
           <ChooseRoomGuest></ChooseRoomGuest>
         </Grid>
-        <Grid item className="displayWebkit filterRooms__kindOfRoom">
-          <KindOfRoom></KindOfRoom>
+        <Grid item className="displayWebkit filterRooms__roomType">
+          <RoomType></RoomType>
         </Grid>
         <Grid item className="displayWebkit filterRooms__priceRange">
           <PriceRange></PriceRange>

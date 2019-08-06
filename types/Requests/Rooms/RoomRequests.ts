@@ -35,7 +35,6 @@ export interface RoomIndexGetParams extends BaseGetRequestParams, Partial<MapCoo
   recommend?: string;
   page?: number;
   standard_point?: string;
-  type_room?: string;
   city_id?: string | number;
   district_id?: string | number;
 }
@@ -50,12 +49,12 @@ export interface MapCoords {
 export interface RoomUrlParams {
   name?: string;
   city_id?: string | number;
-  district_id?: string;
-  number_of_rooms?: string;
-  rent_type?: string;
+  district_id?: number | string;
+  number_of_rooms?: number;
+  rent_type?: number;
   check_in?: string;
   check_out?: string;
-  number_of_guests?: string;
+  number_of_guests?: number;
   price_day_from?: string;
   price_day_to?: string;
   instant?: string;

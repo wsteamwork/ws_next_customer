@@ -5,6 +5,7 @@ import { ComfortIndexRes } from '@/types/Requests/Comforts/ComfortResponses';
 import { Dispatch, SetStateAction } from 'react';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { Instance } from 'tippy.js';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 
 export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 
@@ -51,7 +52,7 @@ export const useFilterRoom = (
   setOpen: Dispatch<SetStateAction<boolean>>
 ): ReturnUseFilterRoom => {
   const [data, setData] = useState<ResDataFilter>([]);
-  const { state, dispatch } = useContext(RoomIndexContext);
+  const { state, dispatch } = useContext(RoomFilterContext);
   const { amenities } = state;
 
   useEffect(() => {

@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         description="Welcome to Nextjs"
         ogImage="/static/favicon.ico"
         url="https://nextjs.org/"
-      />
+      /> 
       <NavHeader />
 
       <GridContainer xs={12} classNameItem="searchHome">
