@@ -6,6 +6,7 @@ import RoomDescription from './RoomDescription/index';
 import RoomAmenities from './RoomAmenities/index';
 import Grid from '@material-ui/core/Grid';
 import HostInfo from '@/components/HostInfo/index';
+import BoxMap from '@/components/Room/BoxMap';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       justifyContent: 'center',
     },
     wapper: {
-      paddingTop: theme.spacing(2), 
+      paddingTop: theme.spacing(2),
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
       [theme.breakpoints.down('xs')]: {
@@ -47,7 +48,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
           <Grid container spacing={1} className={classes.wapper}>
             <Grid item xs={11} sm={7} md={9}>
               <RoomBasic></RoomBasic>
-            </Grid> 
+            </Grid>
             <Grid className={classes.hostInfo} item xs={12} sm={5} md={3}>
               <HostInfo></HostInfo>
             </Grid>
@@ -56,6 +57,8 @@ const BoxRoomDetail: FC<IProps> = (props) => {
             <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
               <RoomDescription></RoomDescription>
               <RoomAmenities></RoomAmenities>
+
+              <BoxMap/>
             </Grid>
           </Grid>
         </Grid>
