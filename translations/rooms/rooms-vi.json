@@ -11,5 +11,15 @@
     "visitedRoom" : "Phòng đã xem",
     "night" : "đêm",
     "hour" : "giờ",
-    "verified" : "Đã xác minh"
+    "verified" : "Đã xác minh",
+    "description" : "Thông tin căn hộ",
+    "amenities" : "Tiện ích",
+    "amenitiesLower" : "tiện ích",
+    "guests" : "khách",
+    "rooms" : "phòng ngủ",
+    "bathrooms" : "phòng tắm",
+    "beds" : "giường",
+    "readLess" : "Thu gọn",
+    "readMore" : "Xem thêm"
+
 }

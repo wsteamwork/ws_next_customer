@@ -15,7 +15,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     name: {
       fontWeight: 900,
-      margin: '1.5rem 0 0.4rem 0'
+      [theme.breakpoints.down('xs')]: {
+        margin: '1.5rem 0 0.4rem 0',
+      }
     },
     icon: {
       marginBottom: 10
@@ -62,13 +64,11 @@ const RoomDescription: FC<IProps> = (props) => {
       <Grid container className={classes.root}>
         <Grid item xs={12}>
           <Typography variant="h5" className={classes.name}>
-            Thông tin căn hộ
+          {t('rooms:description')}
           </Typography>
-          <div className="testDes">
-            {ReactHtmlParser(room.details.data[0].description, {
-              transform: transformHtmlContent
-            })}
-          </div>
+          {ReactHtmlParser(room.details.data[0].description, {
+            transform: transformHtmlContent
+          })}
         </Grid>
         {isOpen ? (
           <Fragment>
@@ -83,12 +83,12 @@ const RoomDescription: FC<IProps> = (props) => {
               })}
             </Grid>
             <Button onClick={toggle} className={classes.button} size="small">
-              Thu gọn
+            {t('rooms:readLess')}
             </Button>
           </Fragment>
         ) : (
           <Button onClick={toggle} className={classes.button} size="small">
-            &#8230; Xem thêm
+            &#8230; {t('rooms:readMore')}
           </Button>
         )}
       </Grid>

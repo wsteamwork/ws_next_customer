@@ -106,7 +106,7 @@ const RoomAmenities: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Typography variant="h5" className={classes.name}>
-        Tiện ích
+      {t('rooms:amenities')}
       </Typography>
       <Grid container spacing={3} className={classes.rowMargin}>
         {_.map(getRenderedItems(), (o, i) => (
@@ -129,13 +129,13 @@ const RoomAmenities: FC<IProps> = (props) => {
           <Grid item xs={2} className={classes.buttonLess}>
             <Button onClick={toggle} className={classes.button} size="small">
               <AddIcon className={classes.iconPlus} />
-              {MORE_ITEMS} <Hidden xsDown>tiện ích</Hidden>
+              {MORE_ITEMS} <Hidden xsDown>{t('rooms:amenitiesLower')}</Hidden>
             </Button>
           </Grid>
         ) : (
           <Grid item xs={2} className={classes.buttonLess}>
             <Button onClick={toggle} className={classes.readLess} size="small">
-              Thu gọn
+            {t('rooms:readLess')}
             </Button>
           </Grid>
         )}
