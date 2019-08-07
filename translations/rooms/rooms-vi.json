@@ -20,6 +20,8 @@
     "bathrooms" : "phòng tắm",
     "beds" : "giường",
     "readLess" : "Thu gọn",
-    "readMore" : "Xem thêm"
+    "readMore" : "Xem thêm",
+    "emptyCalender" : "Lịch trống phòng",
+    "review" : "Đánh giá"
 
 }

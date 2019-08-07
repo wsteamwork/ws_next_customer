@@ -20,5 +20,7 @@
     "bathrooms" : "bathrooms",
     "beds" : "beds",
     "readLess" : "Read less",
-    "readMore" : "Read more"
+    "readMore" : "Read more",
+    "emptyCalender" : "Calendar",
+    "review" : "Reviews"
 }
