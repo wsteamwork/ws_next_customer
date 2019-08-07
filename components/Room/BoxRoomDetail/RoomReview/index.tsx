@@ -5,9 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
 import { IRoomDetailsContext, RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
+import ItemReview from '../ItemReview/index';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    
+    name: {
+      fontWeight: 900,
+      margin: '1rem 0 1rem 0'
+    }
   })
 );
 
@@ -21,11 +26,14 @@ const RoomReview: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Grid container className={classes.root}>
+      <Grid container>
         <Grid item xs={12}>
-        <Typography variant="h5" className={classes.name}>
-          {t('rooms:description')}
+          <Typography variant="h5" className={classes.name}>
+            {t('rooms:review')}
           </Typography>
+        </Grid>
+        <Grid item xs>
+          <ItemReview />
         </Grid>
       </Grid>
     </Fragment>
