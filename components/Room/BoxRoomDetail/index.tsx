@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const BoxRoomDetail: FC<IProps> = (props) => {
   const classes = useStyles(props);
