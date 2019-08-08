@@ -3,10 +3,14 @@ import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { Grid } from '@material-ui/core';
 import numeral from 'numeral';
 import { useTranslation } from 'react-i18next';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { useSelector } from 'react-redux';
 
 const PriceDetail: FC = () => {
   const { state } = useContext(RoomDetailsContext);
-  const { room, dataCalculate } = state;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const { dataCalculate } = state;
   const { t } = useTranslation();
 
   return useMemo(

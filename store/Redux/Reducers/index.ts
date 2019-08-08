@@ -1,37 +1,50 @@
-import searchFilterRDC, {
+import reducerSearch, {
   SearchFilterState,
   SearchFilterAction
-} from '@/store/Redux/Reducers/searchFilter';
+} from '@/store/Redux/Reducers/Search/searchFilter';
 import { combineReducers, Reducer, Store } from 'redux';
-import bookingReducer, { BookingState, BookingAction } from '@/store/Redux/Reducers/booking';
 import { RoomHomepageState, RoomHomepageAction, roomHomepageReducer } from './Home/roomHomepage';
 import { NextPageContext } from 'next';
-import { NextRouter } from 'next/router';
+import { Router } from 'next/router';
+import reuderBooking, { BookingState, BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { RoomReducerState, RoomReducerAction, roomReducer } from './Room/roomReducer';
+import { BookState, BookActions, bookReducer } from './Book/book';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
   booking: Reducer<BookingState, BookingAction>;
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
+  roomPage: Reducer<RoomReducerState, RoomReducerAction>;
+  book: Reducer<BookState, BookActions>;
 };
 
 export type ReducersList = {
   searchFilter: SearchFilterState;
   booking: BookingState;
   roomHomepage: RoomHomepageState;
+  roomPage: RoomReducerState;
+  book: BookState;
 };
 
-export type ReducresActions = SearchFilterAction | RoomHomepageAction | BookingAction;
+export type ReducresActions =
+  | SearchFilterAction
+  | RoomHomepageAction
+  | BookingAction
+  | RoomReducerAction
+  | BookActions;
 
 const reducers: ReducersType = {
-  searchFilter: searchFilterRDC,
-  booking: bookingReducer,
-  roomHomepage: roomHomepageReducer
+  searchFilter: reducerSearch,
+  booking: reuderBooking,
+  roomHomepage: roomHomepageReducer,
+  roomPage: roomReducer,
+  book: bookReducer
 };
 
 export interface NextContextPage extends NextPageContext {
   store: Store<ReducersList, ReducresActions>;
   isServer: boolean;
-  router: NextRouter;
+  router: Router;
 }
 
 const rootReducer = combineReducers(reducers);

@@ -3,12 +3,13 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useMemo, Dispatch, useContext, useEffect } from 'react';
 import { axios } from '@/utils/axiosInstance';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { DataChangePriceByDay, changeDataPriceByDay } from '../DateRangeSingle/context';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import moment from 'moment';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 
 export const useCheckBookingTypeHour = (): [boolean] => {
   const startDate = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
@@ -51,8 +52,10 @@ export const useMinBookByHourCheckin = (): ReturnMinBookByHourCheckin => {
   const startDate = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const checkInHour = useSelector<ReducersList, string>((state) => state.booking.checkInHour);
   const checkOutHour = useSelector<ReducersList, string>((state) => state.booking.checkOutHour);
-  const { state } = useContext(RoomDetailsContext);
-  const { priceByDay } = state;
+  const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
+    (state) => state.roomPage.priceByDay
+  );
+
   const { router } = useContext(GlobalContext);
   const dataPriceByDay = useMemo<DataChangePriceByDay>(() => changeDataPriceByDay(priceByDay), [
     priceByDay

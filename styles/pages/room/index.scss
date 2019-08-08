@@ -1,2 +1,28 @@
 @import "./boxBooking/index.scss";
 @import "./navBottomBook/index.scss";
+
+.roomPage {
+  &__boxBooking {
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__boxBookingMoblie {
+    @include lg {
+      display: none !important;
+    }
+
+    @include xl {
+      display: none !important;
+    }
+  }
+}

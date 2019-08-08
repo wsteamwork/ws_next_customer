@@ -138,11 +138,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           usingSlider ? (
             <Slider {...setting}>{renderRooms}</Slider>
           ) : (
-              <Fragment>{renderRooms}</Fragment>
-            )
+            <Fragment>{renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );

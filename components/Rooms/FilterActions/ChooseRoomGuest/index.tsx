@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import classNames from 'classnames';
-import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 // import QuickBookIcon from "@material-ui/icons/OfflineBoltRounded";
 
 const ChooseRoomGuest: FC = () => {
