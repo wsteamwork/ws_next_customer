@@ -16,6 +16,7 @@ export type RoomReducerState = {
   readonly roomRecommend: RoomIndexRes[];
   readonly schedule: string[];
   readonly priceByDay: PriceByDayRes[];
+  readonly error: boolean;
 };
 
 export type RoomReducerAction =
@@ -23,13 +24,15 @@ export type RoomReducerAction =
   | { type: 'setRoomRecommend'; payload: RoomIndexRes[] }
   | { type: 'setSchedule'; payload: string[] }
   | { type: 'setPriceByDay'; payload: PriceByDayRes[] }
-  | { type: 'addPriceByDay'; payload: PriceByDayRes[] };
+  | { type: 'addPriceByDay'; payload: PriceByDayRes[] }
+  | { type: 'setErrorSSRRoompage'; payload: boolean };
 
 export const init: RoomReducerState = {
   room: null,
   roomRecommend: [],
   schedule: [],
-  priceByDay: []
+  priceByDay: [],
+  error: false
 };
 
 export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
@@ -47,6 +50,8 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
       return updateObject(state, { priceByDay: action.payload });
     case 'addPriceByDay':
       return updateObject(state, { priceByDay: [...state.priceByDay, ...action.payload] });
+    case 'setErrorSSRRoompage':
+      return updateObject(state, { error: action.payload });
     default:
       return state;
   }
@@ -93,7 +98,7 @@ export const getPriceByDay = async (
 export const getDataRoom = async (
   dispatch: Dispatch<ReducresActions>,
   router: NextRouter
-): Promise<RoomReducerState> => {
+): Promise<Omit<RoomReducerState, 'error'>> => {
   const { id } = router.query;
 
   try {
@@ -110,9 +115,11 @@ export const getDataRoom = async (
     dispatch({ type: 'setRoomRecommend', payload: roomRecommend });
     dispatch({ type: 'setSchedule', payload: schedule });
     dispatch({ type: 'setPriceByDay', payload: priceByDay });
+    dispatch({ type: 'setErrorSSRRoompage', payload: false });
 
     return { room, schedule, priceByDay, roomRecommend };
   } catch (error) {
+    dispatch({ type: 'setErrorSSRRoompage', payload: true });
     // console.log(error.response);
   }
 };
