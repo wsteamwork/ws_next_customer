@@ -5,15 +5,19 @@ import { Grid } from '@material-ui/core';
 import { Moment } from 'moment';
 import numeral from 'numeral';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 
 interface Iprops {
   day: Moment;
 }
 
 const RenderDay: FC<Iprops> = (props) => {
-  const { state } = useContext(RoomDetailsContext);
+  const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
+    (state) => state.roomPage.priceByDay
+  );
   const { day } = props;
-  const { priceByDay } = state;
   const dataPriceByDay = useMemo(() => changeDataPriceByDay(priceByDay), [priceByDay]);
 
   const date = day.format(DEFAULT_DATE_FORMAT);

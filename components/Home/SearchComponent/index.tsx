@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react';
 import { Grid } from '@material-ui/core';
-import SearchAutoSuggestion from '../Home/SearchAutoSuggestion';
-import DateRangeSearch from '../Home/DateRangeSearch';
-import ChooseGuestRoom from '../Home/ChooseGuestRoom';
-import ButtonGlobal from '../ButtonGlobal';
 import { useTranslation } from 'react-i18next';
+import SearchAutoSuggestion from '../SearchAutoSuggestion';
+import DateRangeSearch from '../DateRangeSearch';
+import ChooseGuestRoom from '../ChooseGuestRoom';
+import ButtonGlobal from '@/components/ButtonGlobal';
 
 interface IProps {
   className?: string;

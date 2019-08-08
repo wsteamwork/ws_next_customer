@@ -51,7 +51,8 @@ const ButtonGlobal: FC<IProps> = (props) => {
     size,
     variant,
     onClick,
-    style
+    style,
+    type
   } = props;
   const classes = useStyles(props);
 
@@ -67,6 +68,7 @@ const ButtonGlobal: FC<IProps> = (props) => {
       variant={variant}
       onClick={onClick}
       style={style}
+      type={type}
       className={classNames(classes.root, 'buttonGlobal', props.className)}>
       {props.children}
     </Button>

@@ -1,4 +1,3 @@
-import { ProfileInfoRes } from './../../types/Requests/Profile/ProfileResponse';
 import { createContext, Dispatch, Reducer } from 'react';
 import { WithWidth } from '@material-ui/core/withWidth';
 import { WithRouterProps } from 'next/dist/client/with-router';
@@ -12,16 +11,12 @@ export interface IGlobalContext extends WithWidth, WithRouterProps {
 }
 
 export type GlobalState = {
-  readonly profile: ProfileInfoRes;
   readonly overlay: boolean;
 };
 
-export type GlobalAction =
-  | { type: 'setProfile'; payload: ProfileInfoRes }
-  | { type: 'setOverlay'; payload: boolean };
+export type GlobalAction = { type: 'setOverlay'; payload: boolean };
 
 export const GlobalStateInit: GlobalState = {
-  profile: null,
   overlay: false
 };
 
@@ -30,8 +25,6 @@ export const GlobalReducer: Reducer<GlobalState, GlobalAction> = (
   action: GlobalAction
 ): GlobalState => {
   switch (action.type) {
-    case 'setProfile':
-      return updateObject<GlobalState>(state, { profile: action.payload });
     case 'setOverlay':
       return updateObject<GlobalState>(state, { overlay: action.payload });
     default:

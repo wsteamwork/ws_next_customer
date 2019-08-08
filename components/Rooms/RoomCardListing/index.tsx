@@ -122,6 +122,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         .sort((a, b) => a.id - b.id)
                         .map((o, i) => (
                           <Tooltip
+                            key={i}
                             title={o.details.data[0].name}
                             placement="bottom"
                             classes={{ tooltip: 'tooltip' }}>

@@ -15,6 +15,9 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import numeral from 'numeral';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const Transition = forwardRef<HTMLElement, SlideProps>((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
@@ -22,9 +25,8 @@ const Transition = forwardRef<HTMLElement, SlideProps>((props, ref) => (
 
 const NavBottomBook: FC = (props) => {
   const [openDialog, setOpenDialog] = useState(false);
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { width } = useContext(GlobalContext);
-  const { state } = useContext(RoomDetailsContext);
-  const { room } = state;
 
   if (room === null) {
     return <ContentPlaceHolder />;

@@ -45,7 +45,7 @@ const init: SearchFilterState = {
   roomRecently: []
 };
 
-const reducer: Reducer<SearchFilterState, SearchFilterAction> = (
+const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
   state: SearchFilterState = init,
   action: SearchFilterAction
 ): SearchFilterState => {
@@ -75,4 +75,4 @@ const reducer: Reducer<SearchFilterState, SearchFilterAction> = (
   }
 };
 
-export default reducer;
+export default reducerSearch;

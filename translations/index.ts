@@ -11,6 +11,10 @@ import rooms_vi from './rooms/rooms-vi.json';
 import rooms_en from './rooms/room-en.json';
 import room_vi from './room/room-vi.json';
 import room_en from './room/room-en.json';
+import book_en from './book/book-en.json';
+import book_vi from './book/book-vi.json';
+import payment_vi from './payment/payment-vi.json';
+import payment_en from './payment/payment-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -35,13 +39,17 @@ i18n
         home: home_en,
         layout: layout_en,
         rooms: rooms_en,
-        room: room_en
+        room: room_en,
+        book: book_en,
+        payment: payment_en
       },
       vi: {
         home: home_vi,
         layout: layout_vi,
         rooms: rooms_vi,
-        room: room_vi
+        room: room_vi,
+        book: book_vi,
+        payment: payment_vi
       }
     },
 

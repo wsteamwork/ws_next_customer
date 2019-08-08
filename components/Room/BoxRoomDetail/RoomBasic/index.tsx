@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -60,7 +60,7 @@ const RoomBasic: FC<IProps> = (props) => {
     }
     return arr;
   };
-  return (
+  return room && (
     <Grid container>
       <Grid item xs={12}>
         <Grid container spacing={3}>

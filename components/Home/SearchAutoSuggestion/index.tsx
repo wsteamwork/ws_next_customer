@@ -42,7 +42,7 @@ const styles: any = (theme: Theme) =>
       border: '1px solid #ddd',
       borderRadius: 4,
       background: '#fff',
-      position:'relative'
+      position: 'relative'
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -51,13 +51,13 @@ const styles: any = (theme: Theme) =>
       overflowY: 'scroll',
       borderTop: '1px solid #ddd',
       width: '100%',
-      marginTop:theme.spacing(1)
+      marginTop: theme.spacing(1)
     },
     textFieldRoot: {
       color: '#fff',
       height: '100%',
-      justifyContent:'center',
-      [theme.breakpoints.down!("sm")]: {
+      justifyContent: 'center',
+      [theme.breakpoints.down!('sm')]: {
         padding: '8px 0'
       }
     },
@@ -167,16 +167,12 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => { }, ref, ...other } = inputProps;
+    const { inputRef = () => {}, ref, ...other } = inputProps;
     return (
       <TextField
         fullWidth
-        classes={{
-          root: classes.textFieldRoot,
-          input: classes.textFieldRoot,
-        }}
+        classes={{ root: classes.textFieldRoot }}
         placeholder={t('home:SearchAutocomplete:toGo')}
-        inputProps={{ root: classes.textFieldRoot }}
         InputProps={{
           startAdornment: (
             <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
@@ -214,8 +210,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                  <HomeIcon className={classes.searchIcon} />
-                )}
+                <HomeIcon className={classes.searchIcon} />
+              )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (

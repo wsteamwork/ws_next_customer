@@ -6,13 +6,14 @@ import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const SelectGuest = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();
   const guestsCount = useSelector<ReducersList, number>((state) => state.booking.numberOfGuest);
-  const { state } = useContext(RoomDetailsContext);
-  const { room } = state;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+
   const [value, setValue] = useState<number>(guestsCount !== 0 ? guestsCount : 1);
   const { t } = useTranslation();
 

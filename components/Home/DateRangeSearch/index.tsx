@@ -12,7 +12,7 @@ import 'moment/locale/en-gb';
 import { Grid, Paper, InputBase } from '@material-ui/core';
 import { CalendarToday } from '@material-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 

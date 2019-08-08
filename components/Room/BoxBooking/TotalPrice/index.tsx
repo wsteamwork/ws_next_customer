@@ -72,10 +72,10 @@ const TotalPrice: FC = () => {
               </Grid>
             </Grid>
             <Grid container className="totalPrice__total">
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <p className="totalPrice__left">{t('room:boxBooking:total')}</p>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={7}>
                 <p className="totalPrice__right">
                   {numeral(dataCalculate.total_fee).format('0,0')} VND
                 </p>

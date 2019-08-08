@@ -29,7 +29,6 @@ const Rooms: NextPage = () => {
   useEffect(() => {
     getRooms(router)
       .then((data) => {
-        console.log(data);
         const roomData = data.data;
         const pagination = data.meta;
         dispatch({
