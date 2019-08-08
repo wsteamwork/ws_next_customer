@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
-import '@/styles/index.scss';
 interface IProps {
   title: string;
   description: string;
@@ -23,12 +22,5 @@ const NextHead: FC<IProps> = (props) => (
     {/* <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" /> */}
   </Head>
 );
-
-NextHead.defaultProps = {
-  description: '',
-  url: '',
-  ogImage: '',
-  title: ''
-};
 
 export default NextHead;

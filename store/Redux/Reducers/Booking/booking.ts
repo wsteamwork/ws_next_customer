@@ -42,7 +42,7 @@ const init: BookingState = {
   dataCalculate: null
 };
 
-const reducer: Reducer<BookingState, BookingAction> = (
+const reuderBooking: Reducer<BookingState, BookingAction> = (
   state: BookingState = init,
   action: BookingAction
 ): BookingState => {
@@ -68,4 +68,4 @@ const reducer: Reducer<BookingState, BookingAction> = (
   }
 };
 
-export default reducer;
+export default reuderBooking;

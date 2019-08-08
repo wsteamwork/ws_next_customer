@@ -11,7 +11,7 @@ import { Grid } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { faUserFriends, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';

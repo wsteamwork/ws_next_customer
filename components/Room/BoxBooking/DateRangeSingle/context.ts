@@ -1,14 +1,14 @@
 import { useState, useContext, Dispatch, memo, useEffect, useMemo } from 'react';
 import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import { useDispatch, useSelector } from 'react-redux';
-import { DateRange } from '@/store/Redux/Reducers/searchFilter';
+import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import moment, { Moment } from 'moment';
 import { FocusedInputShape } from 'react-dates';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { DEFAULT_DATE_TIME_FORMAT, DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import * as _ from 'lodash';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 export interface DataChangePriceByDay {
   [key: string]: PriceByDayRes;
 }
@@ -112,8 +112,7 @@ export const useDateRange = (): ReturnUseDateRange => {
   }, [dateStart, dateEnd]);
 
   const [focused, setFocued] = useState<FocusedInputShape | null>(null);
-  const { state } = useContext(RoomDetailsContext);
-  const { schedule } = state;
+  const schedule = useSelector<ReducersList, string[]>((state) => state.roomPage.schedule);
 
   const [maxDate, setMaxDate] = useState<string | undefined>(undefined);
 

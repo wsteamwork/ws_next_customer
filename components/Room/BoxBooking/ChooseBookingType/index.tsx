@@ -3,16 +3,16 @@ import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import { Grid, FormControlLabel } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 import { useTranslation } from 'react-i18next';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const ChooseBookingType: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();
   const { t } = useTranslation();
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
-  const { state } = useContext(RoomDetailsContext);
-  const { room } = state;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {

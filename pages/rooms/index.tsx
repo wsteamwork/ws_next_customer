@@ -1,22 +1,15 @@
 import React, { useReducer, useContext, useEffect, Fragment } from 'react';
 import { NextPage } from 'next';
-import { Grid, Hidden, Paper, Button } from '@material-ui/core';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
-import ListRoom from '@/components/ListRoom';
-import RoomCardListing from '@/components/Rooms/RoomCardListing';
-import VisitedRooms from '@/components/Rooms/VisitedRooms';
-import SearchComponent from '@/components/SearchComponent';
 import RoomListing from '@/components/Rooms/RoomListing';
 import { RoomFilterContext, RoomFilterStateInit, RoomFilterReducer } from '@/store/Context/Room/RoomFilterContext';
 import { RoomIndexReducer, getRooms, RoomIndexContext, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import SearchComponent from '@/components/Home/SearchComponent';
 
 const Rooms: NextPage = () => {
   const { t } = useTranslation();
@@ -28,7 +21,6 @@ const Rooms: NextPage = () => {
   useEffect(() => {
     getRooms(router)
       .then((data) => {
-        console.log(data);
         const roomData = data.data;
         const pagination = data.meta;
         dispatch({
@@ -64,7 +56,7 @@ const Rooms: NextPage = () => {
             md={10}
             classNameItem="searchRooms__overlay"
             className="searchRooms">
-            <SearchComponent></SearchComponent>
+            <SearchComponent />
           </GridContainer>
           <FilterActions></FilterActions>
           <RoomListing />

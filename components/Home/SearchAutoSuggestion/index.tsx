@@ -28,7 +28,7 @@ import LocationIcon from '@material-ui/icons/LocationOnRounded';
 import Popular from '@material-ui/icons/WhatshotRounded';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { connect } from 'react-redux';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Dispatch } from 'redux';
 
 interface Iprops {
@@ -195,7 +195,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => {}, ref, ...other } = inputProps;
+    const { inputRef = () => { }, ref, ...other } = inputProps;
     return (
       <TextField
         fullWidth
@@ -204,7 +204,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
           input: classes.textFieldRoot
         }}
         placeholder={t('home:SearchAutocomplete:toGo')}
-        inputProps={{ root: classes.textFieldRoot }}
         InputProps={{
           startAdornment: (
             <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
@@ -242,8 +241,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                <HomeIcon className={classes.searchIcon} />
-              )}
+                  <HomeIcon className={classes.searchIcon} />
+                )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (

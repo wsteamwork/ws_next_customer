@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BootstrapInput } from '@/components/SelectGlobal';
 import { KeyboardArrowDown } from '@material-ui/icons';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 
 const SelectTimeCheckout: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();

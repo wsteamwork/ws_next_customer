@@ -1,20 +1,16 @@
 import React, { FC, memo, useContext } from 'react';
 import { Grid } from '@material-ui/core';
-import SearchAutoSuggestion from '../Home/SearchAutoSuggestion';
-import DateRangeSearch from '../Home/DateRangeSearch';
-import ChooseGuestRoom from '../Home/ChooseGuestRoom';
-import ButtonGlobal from '../ButtonGlobal';
 import { useTranslation } from 'react-i18next';
-import { Formik, FormikActions } from 'formik';
-import { RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
+import SearchAutoSuggestion from '../SearchAutoSuggestion';
+import DateRangeSearch from '../DateRangeSearch';
+import ChooseGuestRoom from '../ChooseGuestRoom';
+import ButtonGlobal from '@/components/ButtonGlobal';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { ReducersType } from '@/store/Redux/Reducers';
-import { SearchFilterState } from '@/store/Redux/Reducers/searchFilter';
-import { newRoomLocation } from '@/store/Context/Room/RoomListContext';
+import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import qs from 'query-string';
-import { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
+import { ParsedUrlQueryInput } from 'querystring';
 import Router from 'next/router';
 
 interface IProps {

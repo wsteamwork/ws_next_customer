@@ -8,7 +8,8 @@ import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingRespo
 import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
 import { AxiosRes, AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
-import { BookingAction } from '@/store/Redux/Reducers/booking';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 
 type ReturnCalculate = {
   numberDay: number;
@@ -58,8 +59,18 @@ export const useCalculatePrice = (): ReturnCalculate => {
 
     const body: BookingPriceCalculatorReq = {
       room_id: parseInt(router.query.id as string, 10),
-      checkin: bookingType === 2 ? startDate : `${startDate} ${checkInHour}`,
-      checkout: bookingType === 2 ? endDate : `${endDate} ${checkOutHour}`,
+      checkin:
+        bookingType === 2
+          ? moment(startDate)
+              .set({ hour: 14, minute: 0, second: 0, millisecond: 0 })
+              .format(DEFAULT_DATE_TIME_FORMAT)
+          : `${startDate} ${checkInHour}`,
+      checkout:
+        bookingType === 2
+          ? moment(endDate)
+              .set({ hour: 12, minute: 0, second: 0, millisecond: 0 })
+              .format(DEFAULT_DATE_TIME_FORMAT)
+          : `${endDate} ${checkOutHour}`,
       coupon: '',
       number_of_guests: guestsCount,
       booking_type: bookingType
