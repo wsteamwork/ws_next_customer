@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';

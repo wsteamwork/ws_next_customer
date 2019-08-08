@@ -4,7 +4,7 @@ import mainColor from '@/styles/constants/colors';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 
 interface IProps {
   updateBookingType: (type: number) => void;

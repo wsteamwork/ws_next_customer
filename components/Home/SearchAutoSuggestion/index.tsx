@@ -28,7 +28,7 @@ import LocationIcon from '@material-ui/icons/LocationOnRounded';
 import Popular from '@material-ui/icons/WhatshotRounded';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { connect } from 'react-redux';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Dispatch } from 'redux';
 
 interface Iprops {

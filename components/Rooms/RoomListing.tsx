@@ -14,7 +14,7 @@ import {
   IRoomIndexContext
 } from '@/store/Context/Room/RoomListContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { SearchFilterState } from '@/store/Redux/Reducers/searchFilter';
+import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { IRoomFilterContext, RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import Router from 'next/router';
 import _ from 'lodash';
