@@ -52,11 +52,9 @@ const Home: NextPage = () => {
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />
         </GridContainer>
-
-        <FooterComponent />
       </GridContainer>
+      <FooterComponent />
     </Fragment>
-
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -8,8 +8,9 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { IRoomDetailsContext, RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
-import Hidden from '@material-ui/core/Hidden';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -24,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         maxWidth: 'none !important',
         border: '1px solid #fff !important',
-        borderRadius: '0 !important',
+        borderRadius: '0 !important'
       },
       [theme.breakpoints.up('md')]: {
         maxWidth: '15rem !important'
@@ -77,7 +78,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       [theme.breakpoints.down('xs')]: {
         paddingRight: 5
-      },
+      }
     },
     certificate: {
       color: '#08C299',
@@ -86,7 +87,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       [theme.breakpoints.down('xs')]: {
         marginLeft: 15
-      },
+      }
     }
   })
 );
@@ -101,48 +102,53 @@ interface IProps {
 const HostInfo: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { state } = useContext<IRoomDetailsContext>(RoomDetailsContext);
-  const { room } = state;
-  const merchant = room.merchant.data;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+
+  const merchant = !!room && room.merchant.data;
+
   return (
-    <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={3}>
-          <Link href={`/users/${merchant.id}`}>
-            <a>
-              <Avatar
-                alt={merchant.avatar}
-                src="/static/images/room_demo.jpg"
-                className={classes.avatar}
-              />
-            </a>
-          </Link>
-        </Grid>
-        <Grid item xs={9}>
-          <Grid item xs className={classes.content}>
+    room && (
+      <Paper className={classes.paper}>
+        <Grid container>
+          <Grid item xs={3}>
             <Link href={`/users/${merchant.id}`}>
-              <a className={classes.link}>
-                <Typography className={classes.userName}>{merchant.name}</Typography>
+              <a>
+                <Avatar
+                  alt={merchant.avatar}
+                  src="/static/images/room_demo.jpg"
+                  className={classes.avatar}
+                />
               </a>
             </Link>
-            <Grid container className={classes.price}>
-              <Grid item sm={3} md={3} lg={3}>
-                <Typography variant="subtitle1" className={classes.icon}>
-                  <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
-                  {merchant.number_room}
-                </Typography>
-              </Grid>
-              <Grid item sm={9} md={9} lg={9}>
-                <Typography variant="subtitle1" className={classes.certificate}>
-                  <FontAwesomeIcon className={classes.icon} icon={faCheckCircle}></FontAwesomeIcon>
-                  {t('rooms:verified')}
-                </Typography>
+          </Grid>
+          <Grid item xs={9}>
+            <Grid item xs className={classes.content}>
+              <Link href={`/users/${merchant.id}`}>
+                <a className={classes.link}>
+                  <Typography className={classes.userName}>{merchant.name}</Typography>
+                </a>
+              </Link>
+              <Grid container className={classes.price}>
+                <Grid item sm={3} md={3} lg={3}>
+                  <Typography variant="subtitle1" className={classes.icon}>
+                    <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
+                    {merchant.number_room}
+                  </Typography>
+                </Grid>
+                <Grid item sm={9} md={9} lg={9}>
+                  <Typography variant="subtitle1" className={classes.certificate}>
+                    <FontAwesomeIcon
+                      className={classes.icon}
+                      icon={faCheckCircle}></FontAwesomeIcon>
+                    {t('rooms:verified')}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+    )
   );
 };
 

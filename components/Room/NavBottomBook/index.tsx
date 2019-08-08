@@ -12,7 +12,6 @@ import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import GridContainer from '@/components/Layout/Grid/Container';
 import BoxBooking from '../BoxBooking';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import numeral from 'numeral';
 import { useSelector } from 'react-redux';

@@ -32,7 +32,6 @@ const ChooseMethodPayment = () => {
   //   console.log(value);
 
   const handleChange = (event: ChangeEvent<{}>, value: string) => {
-    console.log(value);
     setValue(value);
   };
 

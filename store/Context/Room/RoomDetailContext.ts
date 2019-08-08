@@ -26,6 +26,7 @@ export type RoomDetailsState = {
   readonly dataCalculate: BookingPriceCalculatorRes | null;
   readonly priceByDay: PriceByDayRes[];
   readonly error: string | null;
+  readonly currentDate: string;
 };
 
 export type RoomDetailsAction =
@@ -39,7 +40,8 @@ export type RoomDetailsAction =
   | { type: 'setBookingType'; bookingType: number }
   | { type: 'setDataCalculdate'; payload: BookingPriceCalculatorRes }
   | { type: 'updatePriceDay'; payload: PriceByDayRes[] }
-  | { type: 'setError'; payload: string };
+  | { type: 'setError'; payload: string }
+  | { type: 'setCurrentDate'; payload: string };
 
 export const RoomDetailsStateInit: RoomDetailsState = {
   room: null,
@@ -48,7 +50,10 @@ export const RoomDetailsStateInit: RoomDetailsState = {
   bookingType: 2,
   priceByDay: [],
   dataCalculate: null,
-  error: null
+  error: null,
+  currentDate: moment()
+    .add(5, 'month')
+    .format(DEFAULT_DATE_FORMAT)
 };
 
 export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = (
@@ -71,6 +76,8 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
       return updateObject<RoomDetailsState>(state, { priceByDay: action.payload });
     case 'setError':
       return updateObject<RoomDetailsState>(state, { error: action.payload });
+    case 'setCurrentDate':
+      return updateObject<RoomDetailsState>(state, { currentDate: action.payload });
     default:
       return state;
   }
@@ -101,7 +108,7 @@ export const getPriceByDay = async (
   idRoom: any,
   date_start: string = moment().format(DEFAULT_DATE_FORMAT),
   date_end: string = moment()
-    .add(6, 'month')
+    .add(1, 'month')
     .endOf('month')
     .format(DEFAULT_DATE_FORMAT)
 ): Promise<PriceByDayRes[]> => {

@@ -175,7 +175,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     if (method === 'enter') {
       e.preventDefault();
     }
-    console.log(suggestion);
 
     switch (suggestion.type) {
       case 1:
@@ -198,7 +197,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => { }, ref, ...other } = inputProps;
+    const { inputRef = () => {}, ref, ...other } = inputProps;
     return (
       <TextField
         fullWidth
@@ -245,8 +244,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                  <HomeIcon className={classes.searchIcon} />
-                )}
+                <HomeIcon className={classes.searchIcon} />
+              )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (

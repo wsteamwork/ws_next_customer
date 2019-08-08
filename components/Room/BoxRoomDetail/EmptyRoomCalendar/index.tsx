@@ -20,13 +20,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 interface IProps {
-  classes?: any
+  classes?: any;
 }
 
 const EmptyRoomCalendar: FC<IProps> = (props) => {
   const dateStart = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const dateEnd = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
-  const { isDayBlocked, isOutsideRange } = useDateRange();
+  const { isDayBlocked, isOutsideRange, onNextMonthClick } = useDateRange();
   const { width } = useContext(GlobalContext);
   const _renderDayContents = (day: Moment) => <RenderDay day={day} />;
   const { t } = useTranslation();
@@ -43,6 +43,7 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
             startDate={!!dateStart ? moment(dateStart) : moment()}
             endDate={!!dateEnd ? moment(dateEnd) : null}
             onDatesChange={() => {}}
+            // onNextMonthClick={onNextMonthClick}
             focusedInput={null}
             onFocusChange={null}
             isDayBlocked={isDayBlocked}
