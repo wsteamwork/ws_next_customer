@@ -18,5 +18,23 @@
         "setByHour": "Set by hour",
         "average": "Avarge"
     },
-    "map": "Map"
+    "map": "Map",
+    "changeSearch": "Change search",
+    "visitedRoom" : "Visited Room",
+    "night" : "night",
+    "hour" : "hour",
+    "verified" : "Verified",
+    "description" : "Description",
+    "amenities": "Amenities",
+    "amenitiesLower" : "amenities",
+    "guests" : "guests",
+    "rooms" : "rooms",
+    "bathrooms" : "bathrooms",
+    "beds" : "beds",
+    "readLess" : "Read less",
+    "readMore" : "Read more",
+    "emptyCalender" : "Calendar",
+    "review" : "Reviews",
+    "lookingFor": "You are looking for:",
+    "cancel": "Cancel"
 }

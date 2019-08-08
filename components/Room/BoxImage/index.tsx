@@ -126,8 +126,8 @@ const BoxImage: FC<IProps> = (props) => {
   return (
     <GridContainer xs={12} className={classes.root}>
       <Parallax
-        bgImage = {`${IMAGE_STORAGE_LG}o_dau_1.jpg`}
-        strength = {500}
+        bgImage = {`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
+        strength = {300}
         bgClassName = {classes.img}
         className = {classes.parallaxContainer}
         contentClassName = {classes.contentParallax}

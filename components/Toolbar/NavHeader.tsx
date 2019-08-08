@@ -189,7 +189,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
 
   return (
     <Fragment>
-      <GridContainer xs={12} xl={10} classNameItem={classes.containter}>
+      <GridContainer xs={12} xl={12} classNameItem={classes.containter}>
         <AppBar
           elevation={0}
           position="static"

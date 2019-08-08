@@ -31,14 +31,9 @@ const Home: NextPage = () => {
         ogImage="/static/favicon.ico"
         url="https://nextjs.org/"
       />
-      <NavHeader />
 
       <GridContainer xs={12} classNameItem="searchHome">
-        <img
-          src={`${IMAGE_STORAGE_LG}background.jpg`}
-          alt="Westay - HomeStay cho người Việt"
-          className="searchHome__image"
-        />
+
         <NavHeader />
 
         <SearchHome></SearchHome>

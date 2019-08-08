@@ -8,8 +8,6 @@ import {
   RoomDetailsContext
 } from '@/store/Context/Room/RoomDetailContext';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
-import BoxImage from '@/components/Room/BoxImage';
 import { Grid } from '@material-ui/core';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NextHead from '@/components/NextHead';
@@ -18,6 +16,9 @@ import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
+import BoxImage from '@/components/Room/BoxImage';
+import BoxSearch from '@/components/Room/BoxSearch';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -38,7 +39,8 @@ const Room: NextPage = () => {
         <SearchComponent></SearchComponent>
       </GridContainer> */}
 
-      <GridContainer xs={11} lg={10} classNameItem="roomPage">
+      <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
+        <BoxSearch />
         <BoxImage />
         <Grid container spacing={1}>
           <Grid item xs={12} lg={9}>

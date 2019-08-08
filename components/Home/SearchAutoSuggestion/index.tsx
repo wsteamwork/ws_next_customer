@@ -68,7 +68,7 @@ const styles: any = (theme: Theme) =>
       justifyContent: 'center',
       [theme.breakpoints.down!('sm')]: {
         padding: '8px 0'
-      }
+      },
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -121,6 +121,9 @@ const styles: any = (theme: Theme) =>
     },
     startAdornment: {
       marginLeft: 8
+    },
+    inputCustom: {
+      height: '1.8875em'
     }
   });
 
@@ -205,6 +208,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
         }}
         placeholder={t('home:SearchAutocomplete:toGo')}
         InputProps={{
+          classes: { input: classes.inputCustom },
           startAdornment: (
             <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
               <SearchRounded />
