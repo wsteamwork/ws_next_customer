@@ -65,3 +65,23 @@
   padding: 5px;
   background-color: #ff9800;
 }
+
+.readmore {
+  span > span {
+    color: #08C299 !important;
+  }
+}
+
+.slides {
+  position: relative;
+  .slick-prev, .slick-next {
+    position: absolute;
+    top: 50%;
+  }
+  .slick-prev {
+    left: 5%;
+  }
+  .slick-next {
+    right: 5%;
+  }
+}
