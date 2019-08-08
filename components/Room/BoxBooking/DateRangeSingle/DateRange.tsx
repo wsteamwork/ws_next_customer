@@ -24,31 +24,34 @@ const DateRange: FC = (props) => {
     <p className="datePickerBooking__monthText">{day.format('MMMM YYYY')}</p>
   );
 
-  return (
-    <Grid className="datePickerBooking">
-      <DateRangePicker
-        transitionDuration={300}
-        numberOfMonths={1}
-        startDateId="startDate"
-        endDateId="endDate"
-        startDate={date.startDate}
-        endDate={date.endDate}
-        onDatesChange={onDatesChange}
-        // onClose={onClose}
-        focusedInput={focused}
-        onFocusChange={onFocusChange}
-        isDayBlocked={isDayBlocked}
-        isOutsideRange={isOutsideRange}
-        // renderMonthText={_renderMonthText}
-        onNextMonthClick={onNextMonthClick}
-        renderDayContents={_renderDayContents}
-        hideKeyboardShortcutsPanel
-        minimumNights={0}
-        noBorder={true}
-        displayFormat="ddd, DD/MM/YYYY"
-        readOnly
-      />
-    </Grid>
+  return useMemo(
+    () => (
+      <Grid className="datePickerBooking">
+        <DateRangePicker
+          transitionDuration={300}
+          numberOfMonths={1}
+          startDateId="startDate"
+          endDateId="endDate"
+          startDate={date.startDate}
+          endDate={date.endDate}
+          onDatesChange={onDatesChange}
+          // onClose={onClose}
+          focusedInput={focused}
+          onFocusChange={onFocusChange}
+          isDayBlocked={isDayBlocked}
+          isOutsideRange={isOutsideRange}
+          // renderMonthText={_renderMonthText}
+          onNextMonthClick={onNextMonthClick}
+          renderDayContents={_renderDayContents}
+          hideKeyboardShortcutsPanel
+          minimumNights={0}
+          noBorder={true}
+          displayFormat="ddd, DD/MM/YYYY"
+          readOnly
+        />
+      </Grid>
+    ),
+    [date, focused, isDayBlocked]
   );
 };
 
