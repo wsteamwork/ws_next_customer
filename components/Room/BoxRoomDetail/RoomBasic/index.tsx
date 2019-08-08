@@ -99,7 +99,9 @@ const RoomBasic: FC<IProps> = (props) => {
                 <FontAwesomeIcon icon={faBed}></FontAwesomeIcon>
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                <Typography variant={'body2'}>{room.number_bed} {t('rooms:beds')}</Typography>
+                <Typography variant={'body2'}>
+                  {room.number_bed} {t('rooms:beds')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -109,7 +111,9 @@ const RoomBasic: FC<IProps> = (props) => {
                 <FontAwesomeIcon icon={faBath}></FontAwesomeIcon>
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                <Typography variant={'body2'}>{room.bathroom} {t('rooms:bathrooms')}</Typography>
+                <Typography variant={'body2'}>
+                  {room.bathroom} {t('rooms:bathrooms')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -119,7 +123,9 @@ const RoomBasic: FC<IProps> = (props) => {
                 <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                <Typography variant={'body2'}>{room.number_room} {t('rooms:rooms')}</Typography>
+                <Typography variant={'body2'}>
+                  {room.number_room} {t('rooms:rooms')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
