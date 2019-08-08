@@ -68,7 +68,7 @@ const styles: any = (theme: Theme) =>
       justifyContent: 'center',
       [theme.breakpoints.down!('sm')]: {
         padding: '8px 0'
-      },
+      }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -201,10 +201,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     return (
       <TextField
         fullWidth
-        classes={{
-          root: classes.textFieldRoot,
-          input: classes.textFieldRoot
-        }}
+        classes={{ root: classes.textFieldRoot }}
         placeholder={t('home:SearchAutocomplete:toGo')}
         InputProps={{
           classes: { input: classes.inputCustom },
