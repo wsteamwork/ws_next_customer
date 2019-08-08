@@ -1,5 +1,5 @@
 @import "./chooseRoomGuest.scss";
-@import "./kindOfRoom.scss";
+@import "./roomType.scss";
 @import "./filterRooms.scss";
 @import "./priceRange.scss";
 
@@ -7,7 +7,7 @@
   background-color: #484848;
   padding: 5px 0px;
 
-  &__overley {
+  &__overlay {
     z-index: 101;
   }
 
@@ -60,9 +60,6 @@
     display: none !important;
   }
 
-  &__kindOfRoom {
-  }
-
   &__priceRange {
     @include md {
       display: none !important;
@@ -73,12 +70,6 @@
     @include md {
       display: none !important;
     }
-  }
-
-  &__fastBooking {
-  }
-
-  &__filterRoom {
   }
 }
 

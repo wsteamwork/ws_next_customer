@@ -10,6 +10,7 @@ import MetroGridImage from '@/components/Layout/MetroGridImage';
 import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import RoomCard from '@/components/RoomCard';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
@@ -22,14 +23,21 @@ const Home: NextPage = () => {
   );
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
 
-  return useMemo(
-    () => (
-      <Fragment>
-        <NextHead
-          title="Nextjs Demo"
-          description="Welcome to Nextjs"
-          ogImage="/static/favicon.ico"
-          url="https://nextjs.org/"
+  return (
+    <Fragment>
+      <NextHead
+        title="Nextjs Demo"
+        description="Welcome to Nextjs"
+        ogImage="/static/favicon.ico"
+        url="https://nextjs.org/"
+      />
+      <NavHeader />
+
+      <GridContainer xs={12} classNameItem="searchHome">
+        <img
+          src={`${IMAGE_STORAGE_LG}background.jpg`}
+          alt="Westay - HomeStay cho người Việt"
+          className="searchHome__image"
         />
         <NavHeader />
 
@@ -51,9 +59,9 @@ const Home: NextPage = () => {
         </GridContainer>
 
         <FooterComponent />
-      </Fragment>
-    ),
-    [roomsHot]
+      </GridContainer>
+    </Fragment>
+
   );
 };
 

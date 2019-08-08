@@ -26,57 +26,22 @@ export interface IRoomIndexContext {
 
 export type RoomIndexAction =
   | { type: 'setRooms'; rooms: RoomIndexRes[]; meta?: Pagination | null }
-  | { type: 'setPrices'; price: Range }
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoadMore'; isLoadMore: boolean }
-  | { type: 'setMapOpen'; isMapOpen: boolean }
-  | { type: 'setRating'; ratingLists: number[] }
-  | { type: 'setComforts'; comforts: ComfortIndexRes[] }
-  | { type: 'setRoomTypes'; roomTypes: TypeSelect[] }
-  | { type: 'setAmenitiesFilter'; amenities: number[] }
-  | {
-      type: 'setFilter';
-      amenities?: number[];
-      roomTypesFilter?: number[];
-      ratingLists?: number[];
-      sorts?: number;
-    }
-  | { type: 'setInstantBook'; payload: number }
-  | { type: 'setRentType'; payload: number };
+  | { type: 'setMapOpen'; isMapOpen: boolean };
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
-  readonly comforts: ComfortIndexRes[];
-  readonly roomTypes: TypeSelect[];
-  readonly sorts: any;
-  readonly price: Range;
-  readonly ratingLists: number[];
-  readonly amenities: number[];
-  readonly roomTypesFilter: number[];
   readonly meta: Pagination | null;
   readonly isLoadMore: boolean;
   readonly isMapOpen: boolean;
-  readonly instant_book: number;
-  readonly rent_type: number;
 };
 
 export const RoomIndexStateInit: RoomIndexState = {
-  price: {
-    min: MIN_PRICE,
-    max: MAX_PRICE
-  },
-  roomTypes: [],
-  comforts: [],
   rooms: [],
-  amenities: [],
-  ratingLists: [],
-  roomTypesFilter: [],
-  sorts: null,
   meta: null,
   isLoadMore: false,
   isMapOpen: true,
-  instant_book: 0,
-  rent_type: 2
 };
 
 export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
@@ -89,36 +54,16 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
         rooms: action.rooms,
         meta: action.meta || null
       });
-    case 'setPrices':
-      return updateObject<RoomIndexState>(state, {
-        price: action.price
-      });
     case 'setMeta':
       return updateObject<RoomIndexState>(state, { meta: action.meta });
     case 'setLoadMore':
-      return updateObject<RoomIndexState>(state, { isLoadMore: action.isLoadMore });
-    case 'setMapOpen':
-      return updateObject<RoomIndexState>(state, { isMapOpen: action.isMapOpen });
-    case 'setRating':
-      return updateObject<RoomIndexState>(state, { ratingLists: action.ratingLists });
-    case 'setComforts':
-      return updateObject<RoomIndexState>(state, { comforts: action.comforts });
-    case 'setAmenitiesFilter':
-      return updateObject<RoomIndexState>(state, { amenities: action.amenities });
-    case 'setRoomTypes':
-      return updateObject<RoomIndexState>(state, { roomTypes: action.roomTypes });
-    case 'setFilter':
-      return updateObject(state, {
-        roomTypesFilter: !action.roomTypesFilter ? state.roomTypesFilter : action.roomTypesFilter,
-        amenities: !action.amenities ? state.amenities : action.amenities,
-        ratingLists: !action.ratingLists ? state.ratingLists : action.ratingLists,
-        rooms: [],
-        sorts: action.sorts
+      return updateObject<RoomIndexState>(state, {
+        isLoadMore: action.isLoadMore
       });
-    case 'setInstantBook':
-      return updateObject(state, { instant_book: action.payload });
-    case 'setRentType':
-      return updateObject(state, { rent_type: action.payload });
+    case 'setMapOpen':
+      return updateObject<RoomIndexState>(state, {
+        isMapOpen: action.isMapOpen
+      });
     default:
       return state;
   }
@@ -154,7 +99,7 @@ export const getRooms = async (
     sort_price_day: params.lowest_price === null ? 0 : 1,
     standard_point: params.rating ? _.split(params.rating, ',')[0] : undefined,
     comfort_lists: !!params.amenities ? params.amenities : undefined,
-    type_room: !!params.room_type ? params.room_type : undefined,
+    room_type: !!params.room_type ? params.room_type : undefined,
     page
   };
   if (coords) {
@@ -170,7 +115,7 @@ export const getRooms = async (
 export const newRoomLocation = (params: RoomUrlParams): Partial<BaseRouter> => {
   return {
     pathname: `/rooms`,
-    asPath: `?${qs.stringify(params)}`
+    asPath: `/rooms?${qs.stringify(params)}`
   };
 };
 
@@ -200,21 +145,21 @@ export const fetchRoomType = async () => {
  * Load filter and room type
  * @param {React.Dispatch<RoomIndexAction>} dispatch
  */
-export const loadFilter = (dispatch: Dispatch<RoomIndexAction>) => {
-  Promise.all([fetchComforts(), fetchRoomType()])
-    .then((res) => {
-      const [comfortsRes, roomTypes] = res;
-      dispatch({
-        type: 'setComforts',
-        comforts: comfortsRes.data
-      });
-      dispatch({
-        type: 'setRoomTypes',
-        roomTypes
-      });
-    })
-    .catch((err) => {});
-};
+// export const loadFilter = (dispatch: Dispatch<RoomIndexAction>) => {
+//   Promise.all([fetchComforts(), fetchRoomType()])
+//     .then((res) => {
+//       const [comfortsRes, roomTypes] = res;
+//       dispatch({
+//         type: 'setComforts',
+//         comforts: comfortsRes.data
+//       });
+//       dispatch({
+//         type: 'setRoomTypes',
+//         roomTypes
+//       });
+//     })
+//     .catch((err) => {});
+// };
 
 /**
  * Load more room when user scroll down

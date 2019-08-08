@@ -7,10 +7,11 @@ import { useTranslation } from 'react-i18next';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 
 const FastBooking: FC = () => {
   const { t } = useTranslation();
-  const { dispatch, state } = useContext(RoomIndexContext);
+  const { dispatch, state } = useContext(RoomFilterContext);
   const { instant_book } = state;
 
   const handleClick = () => {

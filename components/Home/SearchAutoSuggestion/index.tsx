@@ -26,8 +26,17 @@ import { withStyles } from '@material-ui/styles';
 import HomeIcon from '@material-ui/icons/HomeRounded';
 import LocationIcon from '@material-ui/icons/LocationOnRounded';
 import Popular from '@material-ui/icons/WhatshotRounded';
+import { ReducersType } from '@/store/Redux/Reducers';
+import { connect } from 'react-redux';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { Dispatch } from 'redux';
+
 interface Iprops {
   classes?: any;
+  filter: SearchFilterState;
+  updateSearchText: (searchText: string) => void;
+  updateSearchCity: (city_id: number | undefined) => void;
+  updateSearchDistrict: (district_id: number | undefined) => void;
 }
 //TODO:
 // - Convert JS-CSS to External CSS
@@ -116,8 +125,7 @@ const styles: any = (theme: Theme) =>
   });
 
 const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
-  const { classes } = props;
-  const [open, setOpen] = useState(false);
+  const { classes, updateSearchText, updateSearchDistrict, updateSearchCity } = props;
   const [searchText, setSearchText] = useState<string>('');
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
@@ -137,6 +145,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>, { newValue }: { newValue: any }) => {
     setSearchText(newValue);
+    // updateSearchText(newValue);
   };
 
   const onSuggestionsFetchRequested = ({ value }: { value: any }) => {
@@ -163,15 +172,37 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     if (method === 'enter') {
       e.preventDefault();
     }
-    setSearchText(suggestion.name);
+    console.log(suggestion);
+
+    switch (suggestion.type) {
+      case 1:
+        updateSearchText(suggestion.name);
+        updateSearchCity(suggestion.id);
+        updateSearchDistrict(undefined);
+
+        break;
+      case 2:
+        updateSearchText(suggestion.name);
+        updateSearchCity(undefined);
+        updateSearchDistrict(suggestion.id);
+        break;
+      case 3:
+        updateSearchText(suggestion.name);
+        updateSearchCity(undefined);
+        updateSearchDistrict(undefined);
+        break;
+    }
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => {}, ref, ...other } = inputProps;
+    const { inputRef = () => { }, ref, ...other } = inputProps;
     return (
       <TextField
         fullWidth
-        classes={{ root: classes.textFieldRoot }}
+        classes={{
+          root: classes.textFieldRoot,
+          input: classes.textFieldRoot
+        }}
         placeholder={t('home:SearchAutocomplete:toGo')}
         InputProps={{
           startAdornment: (
@@ -210,8 +241,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                <HomeIcon className={classes.searchIcon} />
-              )}
+                  <HomeIcon className={classes.searchIcon} />
+                )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (
@@ -261,27 +292,40 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
         </Paper>
       )}
     />
-    // <ClickAwayListener onClickAway={() => setOpen(false)}>
-    //   <div className="searchAutocomplete">
-    //     <Paper className="root" elevation={0} onClick={() => setOpen(true)}>
-    //       <IconButton className="iconButton" aria-label="Menu">
-    //         <PinDropRounded />
-    //       </IconButton>
-    //       <Divider className="divider" />
-    //
-
-    //       <Fade in={!!searchText}>
-    //         <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
-    //           <Close fontSize="small" />
-    //         </IconButton>
-    //       </Fade>
-    //     </Paper>
-    //     <Collapse in={open} timeout={300}>
-    //       <ListResSearch data={data} suggestionSelected={suggestionSelected}></ListResSearch>
-    //     </Collapse>
-    //   </div>
-    // </ClickAwayListener>
   );
 };
 
-export default compose<Iprops, any>(withStyles(styles))(SearchAutoSuggestion);
+const mapStateToProps = (state: ReducersType) => ({
+  filter: state.searchFilter
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<SearchFilterAction>) => {
+  return {
+    updateSearchText: (searchText: string) => {
+      dispatch({
+        type: 'SET_SEARCH_TEXT',
+        searchText: searchText
+      });
+    },
+    updateSearchCity: (city_id: number | undefined) => {
+      dispatch({
+        type: 'SET_SEARCH_CITY',
+        city_id: city_id
+      });
+    },
+    updateSearchDistrict: (district_id: number | undefined) => {
+      dispatch({
+        type: 'SET_SEARCH_DISTRICT',
+        district_id: district_id
+      });
+    }
+  };
+};
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withStyles(styles)
+)(SearchAutoSuggestion);

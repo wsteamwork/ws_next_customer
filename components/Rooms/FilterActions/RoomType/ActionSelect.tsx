@@ -3,12 +3,12 @@ import { Grid, FormGroup, FormControlLabel } from '@material-ui/core';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
-import { useRoomTypeChecbox, RoomType } from './context';
+import { useRoomTypeChecbox, RoomTypeData } from './context';
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
-  dataClick: RoomType[];
-  setDataClick: Dispatch<SetStateAction<RoomType[]>>;
+  dataClick: number[];
+  setDataClick: Dispatch<SetStateAction<number[]>>;
 }
 
 const ActionSelect: FC<IProps> = (props) => {
@@ -21,15 +21,15 @@ const ActionSelect: FC<IProps> = (props) => {
   );
 
   return (
-    <Grid className="kindOfRoom__actions">
+    <Grid className="roomType__actions">
       <FormGroup>
         {data.map((item, index) => (
           <FormControlLabel
             key={index}
             control={
               <CustomCheckbox
-                checked={dataClick.some((i) => i.id === item.id)}
-                onChange={handleChange(item)}
+                checked={dataClick.some((i) => i === item.id)}
+                onChange={handleChange(item.id)}
                 value="checkedA"
               />
             }

@@ -10,52 +10,51 @@ import {
 import { axios } from '@/utils/axiosInstance';
 import { AxiosResponse } from 'axios';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 
-export interface RoomType {
+export interface RoomTypeData {
   id: number;
   value: string;
 }
 
 export const getRoomType = async (
-  setData: Dispatch<SetStateAction<RoomType[]>>
-): Promise<RoomType[]> => {
-  const res: AxiosResponse<RoomType[]> = await axios.get('rooms/type');
+  setData: Dispatch<SetStateAction<RoomTypeData[]>>
+): Promise<RoomTypeData[]> => {
+  const res: AxiosResponse<RoomTypeData[]> = await axios.get('rooms/type');
   setData(res.data);
   return res.data;
 };
 
 type ReturnUseCheckBox = {
-  data: RoomType[];
-  handleChange: (
-    item: RoomType
-  ) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  data: RoomTypeData[];
+  handleChange: (item: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   handleSubmit: MouseEventHandler;
   handleClose: MouseEventHandler;
   handleRemove: MouseEventHandler;
-  roomTypes: RoomType[];
+  roomTypes: number[];
 };
 
 export const useRoomTypeChecbox = (
   setOpen?: Dispatch<SetStateAction<boolean>>,
-  dataClick?: RoomType[],
-  setDataClick?: Dispatch<SetStateAction<RoomType[]>>
+  dataClick?: number[],
+  setDataClick?: Dispatch<SetStateAction<number[]>>
 ): ReturnUseCheckBox => {
-  const { dispatch, state } = useContext(RoomIndexContext);
+  const { dispatch, state } = useContext(RoomFilterContext);
   const { roomTypes } = state;
-  const [data, setData] = useState<RoomType[]>([]);
+  const [data, setData] = useState<RoomTypeData[]>([]);
 
   useEffect(() => {
     getRoomType(setData);
   }, []);
 
-  const handleChange = (item: RoomType) => (
+  const handleChange = (item: number) => (
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
     if (checked === true) {
       setDataClick([...dataClick, item]);
     } else {
-      const dataCheckboxUnCheck = dataClick.filter((i) => i.id !== item.id);
+      const dataCheckboxUnCheck = dataClick.filter((i) => i !== item);
       setDataClick(dataCheckboxUnCheck);
     }
   };

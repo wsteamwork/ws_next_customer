@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import CustomPopper from '@/components/CustomPopper';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -6,17 +6,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+import { ReducersType } from '@/store/Redux/Reducers';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
-const BookByHour = () => {
+interface IProps {
+  filter: SearchFilterState;
+  updateBookingType: (type: number) => void;
+}
+
+const BookByHour: FC<IProps> = (props) => {
+  const { filter, updateBookingType } = props;
+  const { bookingType } = filter;
   const { t } = useTranslation();
   const { dispatch, state } = useContext(RoomIndexContext);
-  const { rent_type } = state;
 
   const handleClick = () => {
-    if (rent_type === 2) {
-      dispatch({ type: 'setRentType', payload: 1 });
+    if (bookingType === 2) {
+      updateBookingType(1);
     } else {
-      dispatch({ type: 'setRentType', payload: 2 });
+      updateBookingType(2);
     }
   };
 
@@ -33,13 +44,13 @@ const BookByHour = () => {
       <Grid
         onClick={handleClick}
         className={classNames('chooseRoomGuest', 'flex_columCenter', {
-          haveResult: rent_type === 1
+          haveResult: bookingType === 1
         })}>
         <span className="flex_columCenter chooseRoomGuest__actions">
           <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
           <p>{t('rooms:searchRooms:bookByHour')}</p>
         </span>
-        {rent_type === 1 && (
+        {bookingType === 1 && (
           <span className="chooseRoomGuest__removeIcon">
             <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
           </span>
@@ -49,4 +60,25 @@ const BookByHour = () => {
   );
 };
 
-export default BookByHour;
+const mapStateToProps = (state: ReducersType) => {
+  return {
+    filter: state.searchFilter
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<SearchFilterAction>) => {
+  return {
+    updateBookingType: (type: number) =>
+      dispatch({
+        type: 'SET_BOOKING_TYPE',
+        bookingType: type
+      })
+  };
+};
+
+export default compose<IProps, any>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(BookByHour);

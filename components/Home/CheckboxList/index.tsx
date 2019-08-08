@@ -1,7 +1,14 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC, useState, ChangeEvent, useEffect } from 'react';
 import { withStyles, Checkbox, FormGroup, FormControlLabel } from '@material-ui/core';
 import mainColor from '@/styles/constants/colors';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { SearchFilterAction } from '@/store/Redux/Reducers/searchFilter';
+
+interface IProps {
+  updateBookingType: (type: number) => void;
+}
 
 export const CustomCheckbox = withStyles({
   root: {
@@ -13,12 +20,21 @@ export const CustomCheckbox = withStyles({
   checked: {}
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-const CheckboxList: FC = () => {
+const CheckboxList: FC<IProps> = (props) => {
+  const { updateBookingType } = props;
   const [state, setState] = useState({
-    checkedA: false,
+    rentType: false,
     checkedB: false,
     checkedC: false
   });
+
+  useEffect(() => {
+    if (state.rentType) {
+      updateBookingType(1);
+    } else {
+      updateBookingType(2);
+    }
+  }, [state.rentType]);
 
   const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [name]: event.target.checked });
@@ -29,12 +45,12 @@ const CheckboxList: FC = () => {
       <FormControlLabel
         control={
           <CustomCheckbox
-            checked={state.checkedA}
-            onChange={handleChange('checkedA')}
-            value="checkedA"
+            checked={state.rentType}
+            onChange={handleChange('rentType')}
+            value="rentType"
           />
         }
-        label="Tôi đi công tác"
+        label="Thuê phòng theo giờ"
       />
       <FormControlLabel
         control={
@@ -44,7 +60,7 @@ const CheckboxList: FC = () => {
             value="checkedB"
           />
         }
-        label="Phù hợp với gia đình"
+        label="Tôi đi công tác"
       />
       <FormControlLabel
         control={
@@ -60,4 +76,17 @@ const CheckboxList: FC = () => {
   );
 };
 
-export default CheckboxList;
+const mapDispatchToProps = (dispatch: Dispatch<SearchFilterAction>) => {
+  return {
+    updateBookingType: (type: number) =>
+      dispatch({
+        type: 'SET_BOOKING_TYPE',
+        bookingType: type
+      })
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(CheckboxList);
