@@ -99,9 +99,9 @@ const useValidata = () => {
     guestName: Yup.string().when('isSomeOneElse', (status: boolean, schema: Yup.StringSchema) => {
       return status
         ? schema
-            .required(t('book:bookingForm:enterName'))
-            .min(2, t('book:bookingForm:min2character'))
-            .max(50, t('book:bookingForm:max50character'))
+          .required(t('book:bookingForm:enterName'))
+          .min(2, t('book:bookingForm:min2character'))
+          .max(50, t('book:bookingForm:max50character'))
         : schema;
     })
   });
@@ -187,260 +187,260 @@ const BookingForm: FC = () => {
             handleBlur,
             isSubmitting
           }: FormikProps<MyFormValues>) => (
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
-                  <Typography variant="body2" style={{ color: '#b9b8b8' }}>
-                    {t('book:bookingForm:rulesName')}
-                  </Typography>
-                </Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
+                    <Typography variant="body2" style={{ color: '#b9b8b8' }}>
+                      {t('book:bookingForm:rulesName')}
+                    </Typography>
+                  </Grid>
 
-                <Grid item xs={12} lg={6}>
-                  <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="firstName"
-                      name="firstName"
-                      label={t('book:bookingForm:firstName')}
-                      placeholder={t('book:bookingForm:placeFirstName')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.firstName}
-                    />
-                    <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="firstName"
+                        name="firstName"
+                        label={t('book:bookingForm:firstName')}
+                        placeholder={t('book:bookingForm:placeFirstName')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.firstName}
+                      />
+                      <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12} lg={6}>
-                  <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="lastName"
-                      name="lastName"
-                      label={t('book:bookingForm:lastName')}
-                      placeholder={t('book:bookingForm:placeLastName')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.lastName}
-                    />
-                    <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="lastName"
+                        name="lastName"
+                        label={t('book:bookingForm:lastName')}
+                        placeholder={t('book:bookingForm:placeLastName')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.lastName}
+                      />
+                      <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl error={!!(errors.email && touched.email)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="email-booking"
-                      name="email"
-                      label="Email"
-                      placeholder={t('book:bookingForm:placeEmail')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12}>
+                    <FormControl error={!!(errors.email && touched.email)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="email-booking"
+                        name="email"
+                        label="Email"
+                        placeholder={t('book:bookingForm:placeEmail')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                      />
+                      <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12} sm={6} md={6}>
-                  <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="phone-number"
-                      name="phone"
-                      label={t('book:bookingForm:phoneNumber')}
-                      placeholder={t('book:bookingForm:placePhone')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.phone}
-                    />
-                    <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="phone-number"
+                        name="phone"
+                        label={t('book:bookingForm:phoneNumber')}
+                        placeholder={t('book:bookingForm:placePhone')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.phone}
+                      />
+                      <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <FormControl>
-                    <FormControlLabel
-                      control={
-                        <CheckBoxCustom
-                          id="on-work"
-                          name="isWork"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          checked={values.isWork}
-                          value="1"
-                          color="primary"
-                        />
-                      }
-                      label={t('book:bookingForm:toWork')}
-                    />
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={6}>
+                    <FormControl>
+                      <FormControlLabel
+                        control={
+                          <CheckBoxCustom
+                            id="on-work"
+                            name="isWork"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            checked={values.isWork}
+                            value="1"
+                            color="primary"
+                          />
+                        }
+                        label={t('book:bookingForm:toWork')}
+                      />
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <FormControl>
-                    <FormControlLabel
-                      control={
-                        <CheckBoxCustom
-                          id="booking-for-someone"
-                          name="isSomeOneElse"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          checked={values.isSomeOneElse}
-                          value="1"
-                          color="primary"
-                        />
-                      }
-                      label={t('book:bookingForm:bookOther')}
-                    />
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={6}>
+                    <FormControl>
+                      <FormControlLabel
+                        control={
+                          <CheckBoxCustom
+                            id="booking-for-someone"
+                            name="isSomeOneElse"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            checked={values.isSomeOneElse}
+                            value="1"
+                            color="primary"
+                          />
+                        }
+                        label={t('book:bookingForm:bookOther')}
+                      />
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Collapse in={values.isSomeOneElse}>
-                    <Paper className="paperCustom grayPaper" elevation={0} square>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                          <Typography variant="h6">{t('book:bookingForm:infoRecevier')}</Typography>
+                  <Grid item xs={12}>
+                    <Collapse in={values.isSomeOneElse}>
+                      <Paper className="paperCustom grayPaper" elevation={0} square>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <Typography variant="h6">{t('book:bookingForm:infoRecevier')}</Typography>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <FormControl error={!!(errors.guestName && touched.guestName)} fullWidth>
+                              <TextField
+                                variant="outlined"
+                                id="guest-name"
+                                name="guestName"
+                                //   inputRef={guestNameRef}
+                                onChange={handleChange}
+                                label={t('book:bookingForm:fullName')}
+                                placeholder={t('book:bookingForm:placeFullName')}
+                                onBlur={handleBlur}
+                                value={values.guestName}
+                              />
+                              <FormHelperText>
+                                {touched.guestName ? errors.guestName : ''}
+                              </FormHelperText>
+                            </FormControl>
+                          </Grid>
                         </Grid>
+                      </Paper>
+                    </Collapse>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      name="addition-services"
+                      color="primary"
+                      style={{ paddingLeft: 0 }}
+                      onClick={toggleRequest}>
+                      {isRequest ? <Remove /> : <Add />}
+                      {t('book:bookingForm:specialRequirements')}
+                    </Button>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Collapse in={isRequest}>
+                      <Grid container spacing={3}>
                         <Grid item xs={12}>
-                          <FormControl error={!!(errors.guestName && touched.guestName)} fullWidth>
+                          <FormControl fullWidth>
                             <TextField
                               variant="outlined"
-                              id="guest-name"
-                              name="guestName"
-                              //   inputRef={guestNameRef}
+                              id="additional-note"
+                              name="additionalNote"
+                              multiline
+                              rows={5}
+                              label={t('book:bookingForm:otherRequirements')}
+                              placeholder={t('book:bookingForm:placeRequirements')}
                               onChange={handleChange}
-                              label={t('book:bookingForm:fullName')}
-                              placeholder={t('book:bookingForm:placeFullName')}
                               onBlur={handleBlur}
-                              value={values.guestName}
+                              value={values.additionalNote}
                             />
+                          </FormControl>
+                        </Grid>
+                      </Grid>
+                    </Collapse>
+                  </Grid>
+
+                  {room.instant_book === 1 && (
+                    <Grid item xs={12}>
+                      <Grid container>
+                        <Grid item>
+                          <FormControl
+                            error={!!(errors.paymentMethod && touched.paymentMethod)}
+                            component="fieldset">
+                            <Typography variant="h6">
+                              {t('book:bookingForm:choosePayment')}
+                            </Typography>
+                            <RadioGroup
+                              name="paymentMethod"
+                              onBlur={handleBlur}
+                              value={values.paymentMethod}
+                              onChange={handleChange}>
+                              <FormControlLabel
+                                value="payment1"
+                                control={<Radio color="primary" />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:directTransfer')}{' '}
+                                    <TooltipPayment></TooltipPayment>
+                                  </p>
+                                }
+                              />
+                              <FormControlLabel
+                                value="payment2"
+                                control={<Radio color="primary" />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:transferMoney')}{' '}
+                                    <a href="https://www.baokim.vn/" target="_blank">
+                                      Bảo Kim
+                                  </a>
+                                  </p>
+                                }
+                              />
+                            </RadioGroup>
                             <FormHelperText>
-                              {touched.guestName ? errors.guestName : ''}
+                              {touched.paymentMethod ? errors.paymentMethod : ''}
                             </FormHelperText>
                           </FormControl>
                         </Grid>
                       </Grid>
-                    </Paper>
-                  </Collapse>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Button
-                    name="addition-services"
-                    color="primary"
-                    style={{ paddingLeft: 0 }}
-                    onClick={toggleRequest}>
-                    {isRequest ? <Remove /> : <Add />}
-                    {t('book:bookingForm:specialRequirements')}
-                  </Button>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Collapse in={isRequest}>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12}>
-                        <FormControl fullWidth>
-                          <TextField
-                            variant="outlined"
-                            id="additional-note"
-                            name="additionalNote"
-                            multiline
-                            rows={5}
-                            label={t('book:bookingForm:otherRequirements')}
-                            placeholder={t('book:bookingForm:placeRequirements')}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.additionalNote}
-                          />
-                        </FormControl>
-                      </Grid>
                     </Grid>
-                  </Collapse>
-                </Grid>
+                  )}
 
-                {room.instant_book === 1 && (
                   <Grid item xs={12}>
-                    <Grid container>
+                    <Grid container justify="flex-end">
                       <Grid item>
-                        <FormControl
-                          error={!!(errors.paymentMethod && touched.paymentMethod)}
-                          component="fieldset">
-                          <Typography variant="h6">
-                            {t('book:bookingForm:choosePayment')}
-                          </Typography>
-                          <RadioGroup
-                            name="paymentMethod"
-                            onBlur={handleBlur}
-                            value={values.paymentMethod}
-                            onChange={handleChange}>
-                            <FormControlLabel
-                              value="payment1"
-                              control={<Radio color="primary" />}
-                              label={
-                                <p>
-                                  {t('book:bookingForm:directTransfer')}{' '}
-                                  <TooltipPayment></TooltipPayment>
-                                </p>
-                              }
-                            />
-                            <FormControlLabel
-                              value="payment2"
-                              control={<Radio color="primary" />}
-                              label={
-                                <p>
-                                  {t('book:bookingForm:transferMoney')}{' '}
-                                  <a href="https://www.baokim.vn/" target="_blank">
-                                    bảo kim
-                                  </a>
-                                </p>
-                              }
-                            />
-                          </RadioGroup>
-                          <FormHelperText>
-                            {touched.paymentMethod ? errors.paymentMethod : ''}
-                          </FormHelperText>
-                        </FormControl>
+                        <ButtonGlobal
+                          variant="contained"
+                          name="confirm-information"
+                          size="large"
+                          color="primary"
+                          disabled={!room || isSubmitting}
+                          type="submit">
+                          {room && !isSubmitting ? (
+                            t('book:bookingForm:confirmInfo')
+                          ) : (
+                              <SimpleLoader height="45px" width="100%"></SimpleLoader>
+                            )}
+                        </ButtonGlobal>
                       </Grid>
                     </Grid>
                   </Grid>
-                )}
 
-                <Grid item xs={12}>
-                  <Grid container justify="flex-end">
-                    <Grid item>
-                      <ButtonGlobal
-                        variant="contained"
-                        name="confirm-information"
-                        size="large"
-                        color="primary"
-                        disabled={!room || isSubmitting}
-                        type="submit">
-                        {room && !isSubmitting ? (
-                          t('book:bookingForm:confirmInfo')
-                        ) : (
-                          <SimpleLoader height="45px" width="100%"></SimpleLoader>
-                        )}
-                      </ButtonGlobal>
+                  <Grid item xs={12}>
+                    <Grid container justify="flex-end">
+                      <Grid item>
+                        <Typography variant="subtitle2" style={{ color: '#b3b3b3' }}>
+                          {t('book:bookingForm:notPayment')}
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <Grid container justify="flex-end">
-                    <Grid item>
-                      <Typography variant="subtitle2" style={{ color: '#b3b3b3' }}>
-                        {t('book:bookingForm:notPayment')}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </form>
-          )}
+              </form>
+            )}
         />
       </Paper>
       <Grid item xs={12}>
