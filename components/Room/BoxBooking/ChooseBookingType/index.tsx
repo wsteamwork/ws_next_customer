@@ -1,11 +1,10 @@
-import React, { FC, ChangeEvent, Dispatch, useMemo, useContext } from 'react';
+import React, { FC, ChangeEvent, Dispatch, useMemo } from 'react';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import { Grid, FormControlLabel } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 import { useTranslation } from 'react-i18next';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const ChooseBookingType: FC = () => {
@@ -16,9 +15,9 @@ const ChooseBookingType: FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
-      dispatch({ type: 'SET_BOOKING_TYPE', payload: 1 });
+      dispatch({ type: 'SET_TYPE_BOOKING', payload: 1 });
     } else {
-      dispatch({ type: 'SET_BOOKING_TYPE', payload: 2 });
+      dispatch({ type: 'SET_TYPE_BOOKING', payload: 2 });
     }
   };
 

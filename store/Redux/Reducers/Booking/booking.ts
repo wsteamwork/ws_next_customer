@@ -26,7 +26,7 @@ export type BookingAction =
   | { type: 'SET_CHECK_OUT'; payload: string }
   | { type: 'SET_CHECK_IN_HOUR'; payload: string }
   | { type: 'SET_CHECK_OUT_HOUR'; payload: string }
-  | { type: 'SET_BOOKING_TYPE'; payload: number }
+  | { type: 'SET_TYPE_BOOKING'; payload: number }
   | { type: 'SET_NUMBER_OF_GUEST'; payload: number }
   | { type: 'SET_AVAILABLE_CHECKOUT'; payload: string[] }
   | { type: 'SET_DATA_CALCULATE'; payload: BookingPriceCalculatorRes };
@@ -47,7 +47,7 @@ const reuderBooking: Reducer<BookingState, BookingAction> = (
   action: BookingAction
 ): BookingState => {
   switch (action.type) {
-    case 'SET_BOOKING_TYPE':
+    case 'SET_TYPE_BOOKING':
       return updateObject(state, { bookingType: action.payload });
     case 'SET_CHECK_IN':
       return updateObject(state, { startDate: action.payload });

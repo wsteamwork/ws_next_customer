@@ -31,16 +31,9 @@ const Home: NextPage = () => {
         ogImage="/static/favicon.ico"
         url="https://nextjs.org/"
       />
+
       <NavHeader />
-
       <GridContainer xs={12} classNameItem="searchHome">
-        <img
-          src={`${IMAGE_STORAGE_LG}background.jpg`}
-          alt="Westay - HomeStay cho người Việt"
-          className="searchHome__image"
-        />
-        <NavHeader />
-
         <SearchHome></SearchHome>
 
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
@@ -57,11 +50,9 @@ const Home: NextPage = () => {
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />
         </GridContainer>
-
-        <FooterComponent />
       </GridContainer>
+      <FooterComponent />
     </Fragment>
-
   );
 };
 

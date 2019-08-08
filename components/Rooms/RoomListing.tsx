@@ -76,7 +76,6 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
       }
     });
 
-    console.log(query);
     Router.push({
       pathname: '/rooms',
       query

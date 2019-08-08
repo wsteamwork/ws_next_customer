@@ -22,7 +22,8 @@ export type RoomReducerAction =
   | { type: 'setRoom'; payload: RoomIndexRes }
   | { type: 'setRoomRecommend'; payload: RoomIndexRes[] }
   | { type: 'setSchedule'; payload: string[] }
-  | { type: 'setPriceByDay'; payload: PriceByDayRes[] };
+  | { type: 'setPriceByDay'; payload: PriceByDayRes[] }
+  | { type: 'addPriceByDay'; payload: PriceByDayRes[] };
 
 export const init: RoomReducerState = {
   room: null,
@@ -44,6 +45,8 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
       return updateObject(state, { schedule: action.payload });
     case 'setPriceByDay':
       return updateObject(state, { priceByDay: action.payload });
+    case 'addPriceByDay':
+      return updateObject(state, { priceByDay: [...state.priceByDay, ...action.payload] });
     default:
       return state;
   }

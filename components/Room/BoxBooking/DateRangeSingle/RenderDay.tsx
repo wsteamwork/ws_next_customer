@@ -1,9 +1,7 @@
-import React, { FC, useContext, useMemo } from 'react';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
+import React, { FC, useMemo } from 'react';
 import { changeDataPriceByDay } from './context';
 import { Grid } from '@material-ui/core';
 import { Moment } from 'moment';
-import numeral from 'numeral';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';

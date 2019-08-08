@@ -4,7 +4,6 @@ import { useMemo, Dispatch, useContext, useEffect } from 'react';
 import { axios } from '@/utils/axiosInstance';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { DataChangePriceByDay, changeDataPriceByDay } from '../DateRangeSingle/context';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
