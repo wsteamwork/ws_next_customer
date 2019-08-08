@@ -12,6 +12,7 @@ import BoxMap from '../BoxMap/index';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
+      boxShadow: 'none',
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(10),
       [theme.breakpoints.down('md')]: {

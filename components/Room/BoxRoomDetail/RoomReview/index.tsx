@@ -11,6 +11,8 @@ import Slider, { Settings } from 'react-slick';
 import _ from 'lodash';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import NextArrowSlider from './NextArrowSlider';
+import PrevArrowSlider from './PrevArrowSlider';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
@@ -30,18 +32,26 @@ const RoomReview: FC<IProps> = (props) => {
   const setting: Settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 1.5,
-    speed: 800,
+    slidesToShow: 2,
+    speed: 500,
     arrows: true,
     lazyLoad: 'ondemand',
+    nextArrow: <NextArrowSlider />,
+    prevArrow: <PrevArrowSlider />,
     touchThreshold: 1000000,
     mobileFirst: true,
-    centerPadding: '20%',
+    // centerPadding: '25%',
     swipeToSlide: true,
     className: 'slides',
     responsive: [
       {
         breakpoint: 1920,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 1440,
         settings: {
           slidesToShow: 2
         }
@@ -53,9 +63,21 @@ const RoomReview: FC<IProps> = (props) => {
         }
       },
       {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        }
+      },
+      {
         breakpoint: 960,
         settings: {
-          slidesToShow: 1.9,
+          slidesToShow: 1,
           arrows: true,
           lazyLoad: false,
           centerMode: true,
@@ -67,7 +89,7 @@ const RoomReview: FC<IProps> = (props) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1,
           centerPadding: '12%',
           arrows: true,
           lazyLoad: false,
@@ -84,27 +106,35 @@ const RoomReview: FC<IProps> = (props) => {
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h5" className={classes.name}>
-            {t('rooms:review')}
+            {t('rooms:review')}({room.total_review})
           </Typography>
         </Grid>
         <Grid container item xs>
-          <Grid item xs={3}>
+          <Grid item xs={3} sm={3} md={4} lg={4}>
             <RatingDetail />
           </Grid>
-          <Grid item xs={9}>
-            <div>
-              <Slider {...setting}>
-              {_.map(room.reviews.data, (obj, i) =>
-                obj.status === 1 ? (
-                  <div>
-                    <ReviewItem review={obj}/>
-                    </div>
-                ) : (
-                  ''
-                )
-              )}
-              </Slider>
-            </div>
+          <Grid item xs={9} sm={9} md={7} lg={7}>
+            {room.reviews.data.length > 1 ? (
+              <div>
+                <Slider {...setting}>
+                  {_.map(room.reviews.data, (obj, i) =>
+                    obj.status === 1 ? (
+                      <div key={i}>
+                        <ReviewItem review={obj} />
+                      </div>
+                    ) : (
+                      ''
+                    )
+                  )}
+                </Slider>
+              </div>
+
+            ):(
+              <ReviewItem review={room.reviews.data[0]} />
+            )}
+          </Grid>
+          <Grid item md={1} lg={1}>
+            
           </Grid>
         </Grid>
       </Grid>

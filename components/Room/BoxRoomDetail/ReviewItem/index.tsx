@@ -13,7 +13,7 @@ import { deepOrange } from '@material-ui/core/colors';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || 'auto',
+      maxWidth: (props) => props.maxWidth || '25rem',
       cursor: 'pointer',
       overflow: 'hidden',
       boxShadow: 'none',
@@ -52,7 +52,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginRight: 3
     },
     review: {
-      marginTop: '0.7rem'
+      marginTop: '0.7rem',
+      paddingRight: '1rem',
     }
   })
 );
@@ -93,7 +94,7 @@ const ReviewItem: FC<IProps> = (props) => {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={2} sm={3} md={3} lg={3}>
           {review.user.data.avatar_url !== '' ? (
             <Avatar
               alt="Avatar"
@@ -104,7 +105,7 @@ const ReviewItem: FC<IProps> = (props) => {
             <Avatar className={classes.avatar}>N</Avatar>
           )}
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item xs={10} sm={9} md={9} lg={9}>
           <Grid item xs className={classes.content}>
             <Typography className={classes.userName}>
               {review.user.data
@@ -121,7 +122,7 @@ const ReviewItem: FC<IProps> = (props) => {
         <Grid container className={classes.review}>
           <Grid item xs={12}>
             <Typography variant="body1" className={'readmore'}>
-              <ReadMoreAndLess charLimit={88} readMoreText="Read more" readLessText="">
+              <ReadMoreAndLess charLimit={70} readMoreText="Read more" readLessText="">
                 {review.comment ? review.comment: 'Chưa nhận xét về căn hộ'}
               </ReadMoreAndLess>
             </Typography>
