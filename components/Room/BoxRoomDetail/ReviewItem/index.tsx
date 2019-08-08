@@ -9,7 +9,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import ReadMoreAndLess from 'react-read-more-less';
 import { RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexResponse';
-import { deepOrange } from '@material-ui/core/colors';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -97,7 +97,11 @@ const ReviewItem: FC<IProps> = (props) => {
           {review.user.data.avatar_url !== '' ? (
             <Avatar
               alt="Avatar"
-              src={review.user.data.avatar_url !== '' ? review.user.data.avatar_url : './static/images/default_avatar.png'}
+              src={
+                review.user.data.avatar_url !== ''
+                  ? review.user.data.avatar_url
+                  : './static/images/default_avatar.png'
+              }
               className={classes.avatar}
             />
           ) : (
@@ -119,12 +123,10 @@ const ReviewItem: FC<IProps> = (props) => {
           </Grid>
         </Grid>
         <Grid container className={classes.review}>
-          <Grid item xs={12}>
-            <Typography variant="body1" className={'readmore'}>
-              <ReadMoreAndLess charLimit={88} readMoreText="Read more" readLessText="">
-                {review.comment ? review.comment: 'Chưa nhận xét về căn hộ'}
-              </ReadMoreAndLess>
-            </Typography>
+          <Grid item xs={12} className={'readmore'}>
+            <ReadMoreAndLess charLimit={88} readMoreText="Read more" readLessText="">
+              {review.comment ? review.comment : 'Chưa nhận xét về căn hộ'}
+            </ReadMoreAndLess>
           </Grid>
         </Grid>
       </Grid>

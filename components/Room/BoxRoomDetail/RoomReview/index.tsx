@@ -1,32 +1,35 @@
-import React, { FC, Fragment, useContext } from 'react';
+import React, { FC, Fragment } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
-import { IRoomDetailsContext, RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import ReviewItem from '../ReviewItem/index';
 import RatingDetail from '../RatingDetail/index';
 import Slider, { Settings } from 'react-slick';
 import _ from 'lodash';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { useSelector } from 'react-redux';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
       fontWeight: 900,
       margin: '1rem 0 1rem 0'
-    },
+    }
   })
 );
 
-interface IProps { }
+interface IProps {}
 
 const RoomReview: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { state } = useContext<IRoomDetailsContext>(RoomDetailsContext);
-  const { room } = state;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+
   const setting: Settings = {
     dots: false,
     infinite: true,
@@ -94,14 +97,9 @@ const RoomReview: FC<IProps> = (props) => {
           <Grid item xs={9}>
             <div>
               <Slider {...setting}>
-                {_.map(room.reviews.data, (obj, i) =>
-                  obj.status === 1 ? (
-                    <div>
-                      <ReviewItem review={obj} />
-                    </div>
-                  ) : (
-                      ''
-                    )
+                {_.map(
+                  room.reviews.data,
+                  (obj, i) => obj.status === 1 && <ReviewItem key={i} review={obj} />
                 )}
               </Slider>
             </div>

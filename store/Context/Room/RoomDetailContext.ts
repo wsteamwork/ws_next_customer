@@ -1,14 +1,8 @@
 import { createContext, Dispatch, Reducer } from 'react';
-import { RoomIndexRes, RoomScheduleRes } from '@/types/Requests/Rooms/RoomResponses';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
 import _ from 'lodash';
 import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { updateObject } from '../utility';
-import { NextRouter } from 'next/router';
-import { PriceByDayRes, BodyRequestPriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import moment from 'moment';
-import qs from 'query-string';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 
 export const RoomDetailsContext = createContext<IRoomDetailsContext>(null as IRoomDetailsContext);

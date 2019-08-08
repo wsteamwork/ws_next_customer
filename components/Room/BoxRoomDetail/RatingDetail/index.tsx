@@ -1,4 +1,4 @@
-import React, { FC, useContext, Fragment } from 'react';
+import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -7,8 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { IRoomDetailsContext, RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import _ from 'lodash';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { useSelector } from 'react-redux';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -36,8 +39,8 @@ interface IProps {}
 const RatingDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { state } = useContext<IRoomDetailsContext>(RoomDetailsContext);
-  const { room } = state;
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+
   const arrRating = [
     {
       name: 'Sạch sẽ',
