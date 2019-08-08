@@ -1,6 +1,6 @@
 import React, { FC, useState, forwardRef } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Button, Typography } from '@material-ui/core';
+import { Theme, Button, Typography, Grid } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Parallax } from 'react-parallax';
 import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
@@ -102,7 +102,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const {} = props;
   const [openDialog, setOpenDialog] = useState(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
@@ -112,11 +112,11 @@ const BoxImage: FC<IProps> = (props) => {
 
   const images = room
     ? _.map(room.media.data, (o) => {
-      return {
-        original: `${IMAGE_STORAGE_LG}${o.image}`,
-        thumbnail: `${IMAGE_STORAGE_SM}${o.image}`
-      };
-    })
+        return {
+          original: `${IMAGE_STORAGE_LG}${o.image}`,
+          thumbnail: `${IMAGE_STORAGE_SM}${o.image}`
+        };
+      })
     : [];
 
   if (room === null) {
@@ -130,8 +130,7 @@ const BoxImage: FC<IProps> = (props) => {
         strength={300}
         bgClassName={classes.img}
         className={classes.parallaxContainer}
-        contentClassName={classes.contentParallax}
-      >
+        contentClassName={classes.contentParallax}>
         <div className={classes.insideParalax}>
           <Button variant="contained" className={classes.button} onClick={handleClick}>
             <img
@@ -154,20 +153,29 @@ const BoxImage: FC<IProps> = (props) => {
         className={classes.dialog}
         open={openDialog}
         onClose={handleClick}>
-        <DialogTitle className={classes.dialogTitle}>
-          <Typography variant="h4" className={classes.roomName}>
-            {room.details.data[0].name}
-          </Typography>
+        <Grid>
+          <DialogTitle className={classes.dialogTitle}>
+            <Grid>
+              <Typography variant="h4" className={classes.roomName}>
+                {room.details.data[0].name}
+              </Typography>
 
-          <IconButton className={classes.btClose} aria-label="Close" onClick={handleClick}>
-            <CloseIcon className={classes.iconClose} />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent className={classes.dialogContent}>
-          <GridContainer xs={11} sm={11} md={11} lg={10} xl={9}>
-            <ImageGallery items={images} lazyLoad={true} showPlayButton={false} showIndex={true} />
-          </GridContainer>
-        </DialogContent>
+              <IconButton className={classes.btClose} aria-label="Close" onClick={handleClick}>
+                <CloseIcon className={classes.iconClose} />
+              </IconButton>
+            </Grid>
+          </DialogTitle>
+          <DialogContent className={classes.dialogContent}>
+            <GridContainer xs={11} sm={11} md={11} lg={10} xl={9}>
+              <ImageGallery
+                items={images}
+                lazyLoad={true}
+                showPlayButton={false}
+                showIndex={true}
+              />
+            </GridContainer>
+          </DialogContent>
+        </Grid>
       </Dialog>
     </GridContainer>
   );
