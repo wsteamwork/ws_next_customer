@@ -71,6 +71,6 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "components/Room/BoxRoomDetail/RoomBasic"
   ]
 }

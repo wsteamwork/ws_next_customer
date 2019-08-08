@@ -98,7 +98,7 @@ interface IProps {
   borderRadius?: string | number;
 }
 
-const HostInfo: FC<IProps> = (props) => {
+const ItemReview: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { state } = useContext<IRoomDetailsContext>(RoomDetailsContext);
@@ -146,4 +146,4 @@ const HostInfo: FC<IProps> = (props) => {
   );
 };
 
-export default HostInfo;
+export default ItemReview;

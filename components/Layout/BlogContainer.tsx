@@ -95,7 +95,7 @@ const BlogContainer: FC<IProps> = (props) => {
       <Typography variant='h5' className={classes.title}>
         {t('home:blogContainer:blog')}
       </Typography>
-      <Hidden smDown implementation="css">
+      <Hidden xsDown implementation="css">
         <Grid container spacing={2} justify='flex-start'>
           <Grid item xs={4}>
             <Link href='https://blog.westay.vn/cam-nang-du-lich'>
