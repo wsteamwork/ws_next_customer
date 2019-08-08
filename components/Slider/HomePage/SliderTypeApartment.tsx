@@ -33,7 +33,7 @@ const SliderTypeApartment: FC = (props) => {
   const setting: Settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow:1.5,
     speed: 800,
     lazyLoad: 'ondemand',
     nextArrow: <NextArrow />,

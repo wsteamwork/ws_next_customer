@@ -4,10 +4,15 @@ import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
-import ItemReview from '../ItemReview/index';
+import ReviewItem from '../ReviewItem/index';
+import RatingDetail from '../RatingDetail/index';
+import Slider, { Settings } from 'react-slick';
+import _ from 'lodash';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { useSelector } from 'react-redux';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -25,6 +30,58 @@ const RoomReview: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
+  const setting: Settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1.5,
+    speed: 800,
+    arrows: true,
+    lazyLoad: 'ondemand',
+    touchThreshold: 1000000,
+    mobileFirst: true,
+    centerPadding: '20%',
+    swipeToSlide: true,
+    className: 'slides',
+    responsive: [
+      {
+        breakpoint: 1920,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 1.9,
+          arrows: true,
+          lazyLoad: false,
+          centerMode: true,
+          initialSlide: 0,
+          centerPadding: '24%',
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1.2,
+          centerPadding: '12%',
+          arrows: true,
+          lazyLoad: false,
+          centerMode: true,
+          initialSlide: 0,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
     <Fragment>
       <Grid container>
@@ -33,8 +90,20 @@ const RoomReview: FC<IProps> = (props) => {
             {t('rooms:review')}
           </Typography>
         </Grid>
-        <Grid item xs>
-          <ItemReview />
+        <Grid container item xs>
+          <Grid item xs={3}>
+            <RatingDetail />
+          </Grid>
+          <Grid item xs={9}>
+            <div>
+              <Slider {...setting}>
+                {_.map(
+                  room.reviews.data,
+                  (obj, i) => obj.status === 1 && <ReviewItem key={i} review={obj} />
+                )}
+              </Slider>
+            </div>
+          </Grid>
         </Grid>
       </Grid>
     </Fragment>

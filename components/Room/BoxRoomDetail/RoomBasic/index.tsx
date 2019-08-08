@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -73,14 +73,16 @@ const RoomBasic: FC<IProps> = (props) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <div>
-                <span>{arrMenuItem(room.avg_rating)}</span>
-                <span>
-                  {room.avg_rating} &#8208; {room.avg_rating_txt}
-                </span>
-              </div>
+          <Grid item xs={6} sm={6} md={3} lg={3}>
+            <Grid container>
+              <Grid item xs={2} sm={2}>
+                <FontAwesomeIcon icon={faBed}></FontAwesomeIcon>
+              </Grid>
+              <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                <Typography variant={'body2'}>
+                  {room.number_bed} {t('rooms:beds')}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
           <Grid container spacing={3}>

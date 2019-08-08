@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import HostInfo from '@/components/HostInfo/index';
 import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar';
 import RoomReview from './RoomReview/index';
+import BoxMap from '../BoxMap/index';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -68,8 +69,15 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   <EmptyRoomCalendar />
                 </div>
+              </Grid>
+            </Grid>
+            <Grid container spacing={1} className={classes.wapper}>
+              <Grid item xs={12}>
                 <div className={classes.rowMargin}>
                   <RoomReview />
+                </div>
+                <div className={classes.rowMargin}>
+                  <BoxMap />
                 </div>
               </Grid>
             </Grid>
