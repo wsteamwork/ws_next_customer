@@ -14,6 +14,8 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
+import NextArrowSlider from './NextArrowSlider';
+import PrevArrowSlider from './PrevArrowSlider';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomReview: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -50,27 +52,45 @@ const RoomReview: FC<IProps> = (props) => {
         }
       },
       {
+        breakpoint: 1440,
+        settings: {
+          slidesToShow: 2
+        }
+      },
+      {
         breakpoint: 1366,
         settings: {
           slidesToShow: 2
         }
       },
       {
-        breakpoint: 960,
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 1.9,
-          arrows: true,
-          lazyLoad: false,
-          centerMode: true,
-          initialSlide: 0,
-          centerPadding: '24%',
-          slidesToScroll: 2
+          slidesToShow: 1
         }
       },
       {
+        breakpoint: 960,
+        settings: {
+          slidesToShow: 1,
+          arrows: true,
+          lazyLoad: false,
+          centerMode: true,
+          // initialSlide: 0,
+          // centerPadding: '24%',
+          slidesToScroll: 2
+        }
+      },
+      // {
+      //   breakpoint: 768,
+      //   settings: {
+      //     slidesToShow: 1
+      //   }
+      // },
+      {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1,
           centerPadding: '12%',
           arrows: true,
           lazyLoad: false,
@@ -87,24 +107,38 @@ const RoomReview: FC<IProps> = (props) => {
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h5" className={classes.name}>
-            {t('rooms:review')}
+            {t('rooms:review')}({room.total_review})
           </Typography>
         </Grid>
-        <Grid container item xs>
-          <Grid item xs={3}>
-            <RatingDetail />
+        {room.total_review !== 0 ? (
+
+          <Grid container item xs>
+            <Grid item xs={3} sm={3} md={4} lg={4}>
+              <RatingDetail />
+            </Grid>
+            <Grid item xs={9} sm={9} md={7} lg={7}>
+              {/* {room.reviews.data.length > 1 ? (
+                <Slider {...setting}>
+                  {_.map(
+                    room.reviews.data,
+                    (obj, i) => obj.status === 1 && <ReviewItem key={i} review={obj} />
+                  )}
+                </Slider>
+              ) : (
+                  <ReviewItem review={room.reviews.data[0]} />
+                )} */}
+            </Grid>
           </Grid>
-          <Grid item xs={9}>
-            <div>
-              <Slider {...setting}>
-                {_.map(
-                  room.reviews.data,
-                  (obj, i) => obj.status === 1 && <ReviewItem key={i} review={obj} />
-                )}
-              </Slider>
-            </div>
-          </Grid>
-        </Grid>
+        ) : (
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography>
+                  Hiện tại chưa có đánh giá nào vê căn hộ. Vui lòng đặt phòng và là người đầu tiên cho chúng tôi biết cảm nhận của
+                  bạn.
+              </Typography>
+              </Grid>
+            </Grid>
+          )}
       </Grid>
     </Fragment>
   );
