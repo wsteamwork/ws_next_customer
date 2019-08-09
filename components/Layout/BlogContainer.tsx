@@ -45,7 +45,7 @@ const BlogContainer: FC<IProps> = (props) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
-    mobileFirst: true,
+
     centerPadding: "20%",
     swipeToSlide: true,
     responsive: [
@@ -67,7 +67,7 @@ const BlogContainer: FC<IProps> = (props) => {
           slidesToShow: 1.9,
           touchThreshold: 5000,
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           centerPadding: "24%",
@@ -81,7 +81,7 @@ const BlogContainer: FC<IProps> = (props) => {
           slidesToShow: 1.2,
           centerPadding: "12%",
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1,

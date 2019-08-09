@@ -1,8 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
-import createStyles from '@material-ui/core/styles/createStyles';
-import Button from '@material-ui/core/Button';
-import React, { ComponentType, Fragment, FC } from 'react';
-import { compose } from 'recompose';
+import React, { Fragment, FC } from 'react';
 import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 import Fab from '@material-ui/core/Fab';
 import classNames from 'classnames';
@@ -14,7 +10,7 @@ interface IProps {
 }
 
 const NextArrow: FC<IProps> = (props: CustomArrowProps) => {
-  const { classes, onClick } = props;
+  const { onClick } = props;
 
   return (
     <Fragment>

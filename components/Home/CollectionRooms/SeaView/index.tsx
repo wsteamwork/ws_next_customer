@@ -1,4 +1,4 @@
-import React, { Fragment,FC } from 'react';
+import React, { Fragment, FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Grid, Typography, Hidden } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -32,8 +32,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SeaView: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
-  const {t} = useTranslation();
+  const { } = props;
+  const { t } = useTranslation();
 
   const setting: Settings = {
     dots: false,
@@ -44,7 +44,7 @@ const SeaView: FC<IProps> = (props) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
-    mobileFirst: true,
+
     centerPadding: "20%",
     swipeToSlide: true,
     responsive: [
@@ -57,7 +57,7 @@ const SeaView: FC<IProps> = (props) => {
       {
         breakpoint: 1366,
         settings: {
-          slidesToShow:3,
+          slidesToShow: 3,
         }
       },
       {
@@ -67,7 +67,7 @@ const SeaView: FC<IProps> = (props) => {
           centerPadding: "12%",
           touchThreshold: 5000,
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1,
@@ -80,7 +80,7 @@ const SeaView: FC<IProps> = (props) => {
           slidesToShow: 1.2,
           centerPadding: "12%",
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1,

@@ -1,8 +1,4 @@
-import { withStyles } from '@material-ui/core/styles';
-import createStyles from '@material-ui/core/styles/createStyles';
-import Button from '@material-ui/core/Button';
 import React, { ComponentType, Fragment, FC } from 'react';
-import { compose } from 'recompose';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import { Fab } from '@material-ui/core';
 import { CustomArrowProps } from 'react-slick';
@@ -13,7 +9,7 @@ interface IProps {
 }
 
 const NextArrow: FC<IProps> = (props: CustomArrowProps) => {
-  const { classes, onClick } = props;
+  const { onClick } = props;
 
   return (
     <Fragment>

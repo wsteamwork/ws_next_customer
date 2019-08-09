@@ -68,7 +68,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 1000000,
-    mobileFirst: true,
+
     centerPadding: '20%',
     swipeToSlide: true,
     responsive: [
@@ -90,7 +90,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           slidesToShow: 1.9,
           // touchThreshold: 5000,
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           centerPadding: '24%',
@@ -104,7 +104,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           slidesToShow: 1.2,
           centerPadding: '12%',
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1
@@ -138,11 +138,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           usingSlider ? (
             <Slider {...setting}>{renderRooms}</Slider>
           ) : (
-            <Fragment>{renderRooms}</Fragment>
-          )
+              <Fragment>{renderRooms}</Fragment>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Fragment>
   );

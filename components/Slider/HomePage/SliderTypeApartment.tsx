@@ -39,7 +39,6 @@ const SliderTypeApartment: FC = (props) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
-    mobileFirst: true,
     centerPadding: '20%',
     swipeToSlide: true,
     responsive: [
@@ -61,12 +60,11 @@ const SliderTypeApartment: FC = (props) => {
           slidesToShow: 1.9,
           touchThreshold: 5000,
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           centerPadding: '24%',
-          slidesToScroll: 1,
-          infinite: false
+          slidesToScroll: 1
         }
       },
       {
@@ -76,7 +74,7 @@ const SliderTypeApartment: FC = (props) => {
           slidesToShow: 1.2,
           centerPadding: '12%',
           arrows: false,
-          lazyLoad: false,
+          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1
@@ -100,8 +98,8 @@ const SliderTypeApartment: FC = (props) => {
                   />
                 </Grid>
               ) : (
-                ''
-              )
+                  ''
+                )
             )}
           </Grid>
         </Hidden>
@@ -119,8 +117,8 @@ const SliderTypeApartment: FC = (props) => {
                     />
                   </div>
                 ) : (
-                  ''
-                )
+                    ''
+                  )
               )}
             </Slider>
           </div>
