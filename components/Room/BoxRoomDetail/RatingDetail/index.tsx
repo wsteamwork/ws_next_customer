@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginRight: 3
     },
     rowMargin: {
-      marginBottom: '2px'
+      marginBottom: 6
     }
   })
 );

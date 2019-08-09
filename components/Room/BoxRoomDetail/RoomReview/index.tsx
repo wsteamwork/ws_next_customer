@@ -18,7 +18,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     name: {
       fontWeight: 900,
       margin: '1rem 0 1rem 0'
-    },
+    }
   })
 );
 
@@ -42,7 +42,7 @@ const RoomReview: FC<IProps> = (props) => {
     mobileFirst: true,
     // centerPadding: '25%',
     swipeToSlide: true,
-    className: 'slides',
+    // className: 'slides',
     responsive: [
       {
         breakpoint: 1920,
@@ -65,13 +65,7 @@ const RoomReview: FC<IProps> = (props) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
+          slidesToShow: 1
         }
       },
       {
@@ -81,11 +75,17 @@ const RoomReview: FC<IProps> = (props) => {
           arrows: true,
           lazyLoad: false,
           centerMode: true,
-          initialSlide: 0,
-          centerPadding: '24%',
+          // initialSlide: 0,
+          // centerPadding: '24%',
           slidesToScroll: 2
         }
       },
+      // {
+      //   breakpoint: 768,
+      //   settings: {
+      //     slidesToShow: 1
+      //   }
+      // },
       {
         breakpoint: 600,
         settings: {
@@ -109,34 +109,42 @@ const RoomReview: FC<IProps> = (props) => {
             {t('rooms:review')}({room.total_review})
           </Typography>
         </Grid>
-        <Grid container item xs>
-          <Grid item xs={3} sm={3} md={4} lg={4}>
-            <RatingDetail />
+        {room.total_review !== 0 ? (
+          <Grid container item xs>
+            <Grid item xs={3} sm={3} md={4} lg={4}>
+              <RatingDetail />
+            </Grid>
+            <Grid item xs={9} sm={9} md={7} lg={7}>
+              {room.reviews.data.length > 1 ? (
+                <div>
+                  <Slider {...setting}>
+                    {_.map(room.reviews.data, (obj, i) =>
+                      obj.status === 1 ? (
+                        <div key={i}>
+                          <ReviewItem review={obj} />
+                        </div>
+                      ) : (
+                        ''
+                      )
+                    )}
+                  </Slider>
+                </div>
+              ) : (
+                <ReviewItem review={room.reviews.data[0]} />
+              )}
+            </Grid>
+            <Grid item xs sm md={1} lg={1}></Grid>
           </Grid>
-          <Grid item xs={9} sm={9} md={7} lg={7}>
-            {room.reviews.data.length > 1 ? (
-              <div>
-                <Slider {...setting}>
-                  {_.map(room.reviews.data, (obj, i) =>
-                    obj.status === 1 ? (
-                      <div key={i}>
-                        <ReviewItem review={obj} />
-                      </div>
-                    ) : (
-                      ''
-                    )
-                  )}
-                </Slider>
-              </div>
-
-            ):(
-              <ReviewItem review={room.reviews.data[0]} />
-            )}
+        ) : (
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography>
+                Hiện tại chưa có đánh giá nào vê căn hộ. Vui lòng đặt phòng và là người đầu tiên cho chúng tôi biết cảm nhận của
+                bạn.
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item md={1} lg={1}>
-            
-          </Grid>
-        </Grid>
+        )}
       </Grid>
     </Fragment>
   );
