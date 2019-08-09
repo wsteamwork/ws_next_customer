@@ -18,6 +18,7 @@ import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import SeaView from '@/components/Home/CollectionRooms/SeaView';
 import CityView from '@/components/Home/CollectionRooms/CityView';
+import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
@@ -47,9 +48,7 @@ const Home: NextPage = () => {
           title={'Phòng nổi bật'}
           render={renderRoom}></ListRoom>
 
-          <SeaView/>
-
-          <CityView/>
+          <CollectionViews/>
 
         </GridContainer>
         <HostBecome />
@@ -69,6 +68,7 @@ Home.getInitialProps = async (ctx: NextContextPage) => {
     ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
     ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
     ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
+    ctx.store.dispatch({ type: 'setCollections', collections: res.collections });
   } catch (error) {
     // console.log(error.respose);
   }

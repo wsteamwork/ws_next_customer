@@ -39,11 +39,12 @@ type Iprops<T> = {
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing(8)
+      // marginTop: theme.spacing(8)
     },
     title: {
       marginBottom: theme.spacing(3),
-      fontWeight: 900
+      fontWeight: 900,
+      marginTop: theme.spacing(8)
     }
   })
 );
