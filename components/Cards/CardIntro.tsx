@@ -11,7 +11,10 @@ interface IProps extends ICardIntro {
   showPrice?: boolean;
   recommendedPrice?: string;
   subTitle?: string;
+  titleContent?: string;
+  subTitleContent?: string;
   showSubTitle?:boolean;
+  showContent?:boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -122,13 +125,22 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 600,
       fontSize: '0.75rem',
       textAlign: 'right'
+    },
+    titleContent:{
+      minHeight:64,
+    },
+    noneBG:{
+      '&:after': {
+        backgroundImage: 'linear-gradient(to top,#1976d2, transparent)',
+        height: '0%'
+      },
     }
   })
 );
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
   const classes = useStyles(props);
-  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,showSubTitle,recommendedPrice,subTitle } = props;
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,showSubTitle,recommendedPrice,subTitle,showContent,titleContent,subTitleContent } = props;
 
   const imgStyles = useMemo<CSSProperties>(
     () => ({
@@ -143,8 +155,8 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
       <div
         className={
           showPrice
-            ? classes.imgGradientLeftBottom
-            : classNames(classes.imgGradientLeftBottom, classes.imgGradientToTop)
+            ? classNames(classes.imgGradientLeftBottom, title === '' ? classes.noneBG : '')
+            : classNames(classes.imgGradientLeftBottom, classes.imgGradientToTop, title === '' ? classes.noneBG : '')
         }>
         <img
           src={imgSrc}
@@ -172,6 +184,16 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
           ''
         )}
       </div>
+      {showContent ? (
+        <div>
+          <Typography variant='h6' className={classes.titleContent}>
+            {titleContent}
+          </Typography>
+          <Typography variant='body2'>
+            {subTitleContent}
+          </Typography>
+        </div>
+      ) : ''}
     </GridContainer>
   );
 };
@@ -182,10 +204,13 @@ CardIntro.defaultProps = {
   imgAlt: 'Westay - Homestay cho người Việt',
   imgSrc: './static/images/room_demo.jpg',
   title: '',
+  subTitle:'',
   showPrice: false,
   recommendedPrice:'',
   showSubTitle:false,
-  subTitle:''
+  showContent:false,
+  titleContent:'',
+  subTitleContent:'',
 };
 
 export default CardIntro;
