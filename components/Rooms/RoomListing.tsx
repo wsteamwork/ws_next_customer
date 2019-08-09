@@ -22,6 +22,7 @@ import 'rc-pagination/assets/index.css';
 import _ from 'lodash';
 import Link from 'next/link';
 import { updateRouter } from '@/store/Context/utility';
+import RoomCard from '../RoomCard';
 
 interface IProps {
   classes?: any;
