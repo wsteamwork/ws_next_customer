@@ -17,7 +17,7 @@ import { useTheme } from '@material-ui/core/styles';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || 'auto',
+      maxWidth: (props) => props.maxWidth || '23rem',
       cursor: 'pointer',
       overflow: 'hidden',
       boxShadow: 'none',
@@ -149,11 +149,6 @@ const ReviewItem: FC<IProps> = (props) => {
         </Grid>
         <Grid container className={classes.review}>
           <Grid item xs={12}>
-            {/* <Typography variant="body1" className={'readmore'}>
-              <ReadMoreAndLess charLimit={70} readMoreText="Read more" readLessText="">
-                {review.comment ? review.comment: 'Chưa nhận xét về căn hộ'}
-              </ReadMoreAndLess>
-            </Typography> */}
             {review.comment ? (
               review.comment.length > 90 ? (
                 <Fragment>
@@ -170,7 +165,7 @@ const ReviewItem: FC<IProps> = (props) => {
                     fullScreen={fullScreen}
                     aria-labelledby="responsive-dialog-title">
                     <Grid container className={classes.dialog}>
-                      <Grid item xs={3} sm={3} md={2} lg={2}>
+                      <Grid item xs={3} sm={2} md={2} lg={3}>
                         {review.user.data.avatar_url !== '' &&
                         review.user.data.avatar !== 'default_avatar.jpg' ? (
                           <Avatar
@@ -182,7 +177,7 @@ const ReviewItem: FC<IProps> = (props) => {
                           <Avatar className={classes.avatar}></Avatar>
                         )}
                       </Grid>
-                      <Grid container item xs={9} sm={9} md={10} lg={10}>
+                      <Grid container item xs={9} sm={10} md={10} lg={9}>
                         <Grid item xs className={classes.content}>
                           <Typography className={classes.userName}>
                             {review.user.data

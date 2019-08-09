@@ -13,11 +13,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import NextArrowSlider from './NextArrowSlider';
 import PrevArrowSlider from './PrevArrowSlider';
+import ListRoom from '@/components/ListRoom/index';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
       fontWeight: 900,
-      margin: '1rem 0 1rem 0'
+      marginBottom: '1rem'
     }
   })
 );
@@ -30,75 +31,85 @@ const RoomReview: FC<IProps> = (props) => {
   const { state } = useContext<IRoomDetailsContext>(RoomDetailsContext);
   const { room } = state;
   const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 2,
-    speed: 500,
-    arrows: true,
-    lazyLoad: 'ondemand',
-    nextArrow: <NextArrowSlider />,
-    prevArrow: <PrevArrowSlider />,
-    touchThreshold: 1000000,
-    mobileFirst: true,
-    // centerPadding: '25%',
-    swipeToSlide: true,
+    // dots: false,
+    // infinite: true,
+    // slidesToShow: 2,
+    // speed: 500,
+    // arrows: true,
+    // lazyLoad: 'ondemand',
+    // nextArrow: <NextArrowSlider />,
+    // prevArrow: <PrevArrowSlider />,
+    // touchThreshold: 1000000,
+    // mobileFirst: true,
+    // // centerPadding: '25%',
+    // swipeToSlide: true,
+
     // className: 'slides',
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1
-        }
-      },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1,
-          arrows: true,
-          lazyLoad: false,
-          centerMode: true,
-          // initialSlide: 0,
-          // centerPadding: '24%',
-          slidesToScroll: 2
-        }
-      },
-      // {
-      //   breakpoint: 768,
-      //   settings: {
-      //     slidesToShow: 1
-      //   }
-      // },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          centerPadding: '12%',
-          arrows: true,
-          lazyLoad: false,
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1
-        }
-      }
-    ]
+    // responsive: [
+    //   {
+    //     breakpoint: 1920,
+    //     settings: {
+    //       slidesToShow: 2
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 1440,
+    //     settings: {
+    //       slidesToShow: 2
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 1366,
+    //     settings: {
+    //       slidesToShow: 2
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
+    //       slidesToShow: 1
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 960,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       arrows: true,
+    //       lazyLoad: false,
+    //       centerMode: true,
+    //       // initialSlide: 0,
+    //       // centerPadding: '24%',
+    //       slidesToScroll: 1
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 768,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       arrows: true,
+    //       infinite: true,
+    //       slidesToScroll: 1,
+    //       swipeToSlide: true,
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 992,
+    //     settings: 'unslick',
+    //   },
+    //   {
+    //     breakpoint: 600,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       centerPadding: '12%',
+    //       arrows: true,
+    //       lazyLoad: false,
+    //       centerMode: true,
+    //       initialSlide: 0,
+    //       slidesToScroll: 1
+    //     }
+    //   }
+  // ]
+ 
   };
 
   return (

@@ -19,11 +19,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     iconHeartBlue: {
       color: '#08C299',
-      marginRight: 3
+      marginRight: 5
     },
     iconHeartWhite: {
       color: '#ddd',
-      marginRight: 3
+      marginRight: 5
     },
     rowMargin: {
       marginBottom: 6
@@ -88,10 +88,10 @@ const RatingDetail: FC<IProps> = (props) => {
     <Paper className={classes.paper}>
       {_.map(arrRating, (item, index) => (
         <Grid container key={index} className={classes.rowMargin}>
-          <Grid item xs={4}>
-            <Typography>{item.name}</Typography>
+          <Grid item xs={5}>
+            <Typography variant="subtitle1">{item.name}</Typography>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={7}>
             {arrMenuItem(item.rating)}
           </Grid>
         </Grid>
