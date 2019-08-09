@@ -8,7 +8,7 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import GridContainer from '@/components/Layout/Grid/Container';
 import LazyLoad from 'react-lazyload';
 
-interface IProps {}
+interface IProps { }
 
 const RoomListing: FC<IProps> = (props) => {
   const { state } = useContext(RoomIndexContext);

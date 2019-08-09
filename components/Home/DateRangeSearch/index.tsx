@@ -1,6 +1,6 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import React, { FC, useState, useRef, useMemo, memo, Dispatch } from 'react';
+import React, { FC, useState, useRef, useMemo, memo, Dispatch, useContext } from 'react';
 import DatePicker from 'rc-calendar/lib/Picker';
 import Calendar from 'rc-calendar';
 import Cookies from 'universal-cookie';
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
@@ -35,6 +36,7 @@ const DateRangeSearch: FC = () => {
   const startDate = useSelector<ReducersList, string | null>(
     (state) => state.searchFilter.startDate
   );
+  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
   const endDate = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
   const [startValue, setStartValue] = useState(startDate ? moment(startDate) : null);
   const [endValue, setEndValue] = useState(endDate ? moment(endDate) : null);
@@ -55,9 +57,9 @@ const DateRangeSearch: FC = () => {
     if (field === 'startValue') {
       setStartValue(value);
       refEndDate.current.click();
-      dispatch({ type: 'SET_START_DATE', payload: value.format(DEFAULT_DATE_TIME_FORMAT) });
     } else {
       setEndValue(value);
+      dispatch({ type: 'SET_START_DATE', payload: startValue.format(DEFAULT_DATE_TIME_FORMAT) });
       dispatch({ type: 'SET_END_DATE', payload: value.format(DEFAULT_DATE_TIME_FORMAT) });
     }
   };
@@ -103,8 +105,12 @@ const DateRangeSearch: FC = () => {
     />
   );
 
+  const handleOverlay = () => {
+    dispatchGlobal({ type: 'setOverlay', payload: true });
+  };
+
   return (
-    <Paper elevation={0} className="dateRangeSearch">
+    <Paper elevation={0} className="dateRangeSearch" onClick={handleOverlay}>
       <Grid container>
         <Grid item xs={5} className="calendar">
           <DatePicker

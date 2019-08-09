@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import classNames from 'classnames';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { updateRouter } from '@/store/Context/utility';
 // import QuickBookIcon from "@material-ui/icons/OfflineBoltRounded";
 
 const ChooseRoomGuest: FC = () => {
@@ -44,6 +45,7 @@ const ChooseRoomGuest: FC = () => {
   const handleRemove = () => {
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: 0 });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: 0 });
+    updateRouter(true, 'number_of_guests', 0, 'number_of_rooms', 0, 'page', 1);
     setOpen(false);
     setCheckRemove(!checkRemove);
   };

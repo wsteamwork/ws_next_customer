@@ -18,7 +18,7 @@ const MapRoomListing: FC = () => {
       long_max: bounds.ne.lng,
       long_min: bounds.sw.lng
     };
-    
+
     dispatch({ type: 'setCoords', payload: coords });
   };
 

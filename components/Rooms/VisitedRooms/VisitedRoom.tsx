@@ -14,7 +14,6 @@ import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || '26rem',
       border: (props) => props.border || '1px soild #ddd',
       borderRadius: (props) => props.borderRadius || '4px',
       cursor: 'pointer',

@@ -9,6 +9,7 @@ import numeral from 'numeral';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBillWaveAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateRouter } from '@/store/Context/utility';
 
 const PriceRange: FC = () => {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ const PriceRange: FC = () => {
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: MIN_PRICE, price_day_to: MAX_PRICE });
+    updateRouter(true, 'price_day_from', MIN_PRICE, 'price_day_to', MAX_PRICE);
   };
 
   return useMemo(

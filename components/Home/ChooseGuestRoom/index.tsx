@@ -1,4 +1,4 @@
-import React, { useState, FC, useMemo, memo } from 'react';
+import React, { useState, FC, useMemo, memo, useCallback } from 'react';
 import { Grid, InputBase, Paper } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
@@ -34,37 +34,40 @@ const ChooseGuestRoom: FC = () => {
     return '';
   }, [numberGuest, numberRoom]);
 
-  const hanldeClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
-  return (
-    <CustomPopper
-      arrow
-      placement="bottom"
-      duration={200}
-      trigger="click"
-      isVisible={open}
-      theme="light-border"
-      onHide={hanldeClose}
-      interactive
-      content={<ActionChoose open={open} setOpen={setOpen}></ActionChoose>}>
-      <Paper elevation={0} className="chooseGuestRoom">
-        <Grid container className="root" onClick={() => setOpen(true)}>
-          <span className="flex_columCenter">
-            <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>
-            <InputBase
-              readOnly
-              value={valueInput}
-              className="input"
-              placeholder={`${t('home:searchComponent:guestUpper')} & ${t(
-                'home:searchComponent:room'
-              )}`}
-            />
-          </span>
-        </Grid>
-      </Paper>
-    </CustomPopper>
+  return useMemo(
+    () => (
+      <CustomPopper
+        arrow
+        placement="bottom"
+        duration={200}
+        trigger="click"
+        isVisible={open}
+        theme="light-border"
+        onHide={handleClose}
+        interactive
+        content={<ActionChoose open={open} setOpen={setOpen}></ActionChoose>}>
+        <Paper elevation={0} className="chooseGuestRoom">
+          <Grid container className="root" onClick={() => setOpen(true)}>
+            <span className="flex_columCenter">
+              <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>
+              <InputBase
+                readOnly
+                value={valueInput}
+                className="input"
+                placeholder={`${t('home:searchComponent:guestUpper')} & ${t(
+                  'home:searchComponent:room'
+                )}`}
+              />
+            </span>
+          </Grid>
+        </Paper>
+      </CustomPopper>
+    ),
+    [open, valueInput]
   );
 };
 

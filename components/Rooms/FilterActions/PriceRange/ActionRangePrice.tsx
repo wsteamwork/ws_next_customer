@@ -30,6 +30,7 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import numeral from 'numeral';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateRouter } from '@/store/Context/utility';
 
 interface IProps extends WithStyles<typeof styles> {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -132,6 +133,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const hanldeSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
+    updateRouter(true, 'price_day_from', price.min, 'price_day_to', price.max, 'page', 1);
   };
 
   // usePriceEffect(price, setPrice, state);

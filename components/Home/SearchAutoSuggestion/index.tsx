@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, useEffect } from 'react';
+import React, { FC, useState, ChangeEvent, useEffect, useContext } from 'react';
 import { PinDropRounded, Close, SearchRounded } from '@material-ui/icons';
 import {
   IconButton,
@@ -8,7 +8,8 @@ import {
   List,
   TextField,
   InputAdornment,
-  MenuItem
+  MenuItem,
+  ClickAwayListener
 } from '@material-ui/core';
 import { axios } from '@/utils/axiosInstance';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
@@ -30,6 +31,7 @@ import { ReducersType } from '@/store/Redux/Reducers';
 import { connect } from 'react-redux';
 import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Dispatch } from 'redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface Iprops {
   classes?: any;
@@ -128,10 +130,11 @@ const styles: any = (theme: Theme) =>
   });
 
 const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
-  const { classes, updateSearchText, updateSearchDistrict, updateSearchCity } = props;
-  const [searchText, setSearchText] = useState<string>('');
+  const { classes, updateSearchText, updateSearchDistrict, updateSearchCity, filter } = props;
+  const [searchText, setSearchText] = useState<string>(filter.searchText);
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
+  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
 
   const getDataSearch = async (value: string): Promise<any> => {
     const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
@@ -148,7 +151,9 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>, { newValue }: { newValue: any }) => {
     setSearchText(newValue);
-    // updateSearchText(newValue);
+    updateSearchText(newValue);
+    updateSearchCity(undefined);
+    updateSearchDistrict(undefined);
   };
 
   const onSuggestionsFetchRequested = ({ value }: { value: any }) => {

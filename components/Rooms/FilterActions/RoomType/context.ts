@@ -11,6 +11,7 @@ import { axios } from '@/utils/axiosInstance';
 import { AxiosResponse } from 'axios';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateRouter } from '@/store/Context/utility';
 
 export interface RoomTypeData {
   id: number;
@@ -61,6 +62,7 @@ export const useRoomTypeChecbox = (
 
   const handleSubmit = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataClick });
+    updateRouter(false, 'room_type', dataClick, 'page', 1);
     setOpen(false);
   };
 
@@ -72,6 +74,7 @@ export const useRoomTypeChecbox = (
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setRoomTypes', roomTypes: [] });
+    updateRouter(false, 'room_type', '', 'page', 1);
     setDataClick([]);
   };
 

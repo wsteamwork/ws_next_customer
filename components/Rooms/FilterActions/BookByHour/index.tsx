@@ -11,6 +11,7 @@ import { ReducersType } from '@/store/Redux/Reducers';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { updateRouter } from '@/store/Context/utility';
 
 interface IProps {
   filter: SearchFilterState;
@@ -26,8 +27,10 @@ const BookByHour: FC<IProps> = (props) => {
   const handleClick = () => {
     if (bookingType === 2) {
       updateBookingType(1);
+      updateRouter(true, 'rent_type', 1, 'page', 1);
     } else {
       updateBookingType(2);
+      updateRouter(true, 'rent_type', 2, 'page', 1);
     }
   };
 

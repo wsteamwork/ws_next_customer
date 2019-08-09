@@ -20,7 +20,7 @@ export const useRefreshListing = (): ReturnUseRefresh => {
 
   const getData = async () => {
     try {
-      const res = await getRooms(router, 1, coords);
+      const res = await getRooms(router, coords);
       dispatchIndexRoom({ type: 'setRooms', rooms: res.data, meta: res.meta });
     } catch (error) {}
   };

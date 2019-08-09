@@ -33,7 +33,6 @@ const Home: NextPage = () => {
       />
 
       <GridContainer xs={12}>
-        <NavHeader />
 
         <SearchHome></SearchHome>
 

@@ -9,15 +9,18 @@
 
   position: relative;
   color: #484848;
-  height: 200px !important;
   border: 1px solid #ebebeb;
   border-radius: 4px;
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
-  }
 
   @include xs {
     height: 100%;
+  }
+  @include smUp {
+    height: 200px !important;
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
   }
 
   &__wrapper {
@@ -66,7 +69,13 @@
           cursor: pointer;
           font-weight: 500;
           .boxTitle {
-            margin-bottom: 5px;
+            @include smUp {
+              margin-bottom: 5px;
+            }
+
+            @include xs {
+              margin-bottom: 20px;
+            }
             //padding-right: 40px !important;
             .roomName {
               overflow: hidden;
@@ -154,14 +163,7 @@
             right: 0;
             bottom: 0;
             text-align: right;
-            @include sm {
-              position: absolute;
-            }
-            @include md {
-              position: absolute;
-            }
-
-            @include lg {
+            @include smUp {
               position: absolute;
             }
 

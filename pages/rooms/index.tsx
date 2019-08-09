@@ -6,6 +6,7 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
+import RoomListing from '@/components/Rooms/RoomListing';
 import {
   RoomFilterContext,
   RoomFilterStateInit,
@@ -24,10 +25,15 @@ const Rooms: NextPage = () => {
   const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
-  const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
-  const { isMapOpen } = state;
+  const { state: stateGlobal, dispatch: dispatchGlobal, router } = useContext(GlobalContext);
+  const { rooms, isMapOpen } = state;
 
   useEffect(() => {
+    console.log(stateGlobal);
+  }, [stateGlobal]);
+
+  useEffect(() => {
+    console.log(router);
     getRooms(router)
       .then((data) => {
         const roomData = data.data;
@@ -42,10 +48,6 @@ const Rooms: NextPage = () => {
         console.error(err);
       });
   }, []);
-
-  const handleOverlay = () => {
-    dispatchGlobal({ type: 'setOverlay', payload: true });
-  };
 
   return (
     <Fragment>
@@ -63,7 +65,6 @@ const Rooms: NextPage = () => {
             <div>
               {!isMapOpen && (
                 <GridContainer
-                  onClick={handleOverlay}
                   xs={11}
                   md={10}
                   classNameItem="searchRooms__overlay"
@@ -72,6 +73,7 @@ const Rooms: NextPage = () => {
                 </GridContainer>
               )}
               <FilterActions></FilterActions>
+              {/* <RoomListing /> */}
             </div>
             <MapAndListing></MapAndListing>
           </div>

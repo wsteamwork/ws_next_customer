@@ -72,7 +72,6 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
 
 export const getRooms = async (
   router: NextRouter,
-  page?: number,
   coords?: MapCoords
 ): Promise<BaseResponse<RoomIndexRes[]>> => {
   let params: RoomUrlParams = router.query;
@@ -91,12 +90,12 @@ export const getRooms = async (
     discount: params.discount === null ? 1 : undefined,
     price_day_from: params.price_day_from,
     price_day_to: params.price_day_to,
-    instant_book: typeof params.instant !== 'undefined' ? 1 : undefined,
+    instant_book: params.instant_book,
     sort_price_day: params.lowest_price === null ? 0 : 1,
     standard_point: params.rating ? _.split(params.rating, ',')[0] : undefined,
     comfort_lists: !!params.amenities ? params.amenities : undefined,
     room_type: !!params.room_type ? params.room_type : undefined,
-    page
+    page: params.page
   };
 
   if (coords) {
