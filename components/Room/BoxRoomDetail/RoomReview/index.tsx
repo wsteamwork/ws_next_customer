@@ -38,7 +38,7 @@ const RoomReview: FC<IProps> = (props) => {
     arrows: true,
     lazyLoad: 'ondemand',
     touchThreshold: 1000000,
-    mobileFirst: true,
+    // mobileFirst: true,
     centerPadding: '20%',
     swipeToSlide: true,
     className: 'slides',
@@ -60,7 +60,7 @@ const RoomReview: FC<IProps> = (props) => {
         settings: {
           slidesToShow: 1.9,
           arrows: true,
-          lazyLoad: false,
+          // lazyLoad: false,
           centerMode: true,
           initialSlide: 0,
           centerPadding: '24%',
@@ -73,7 +73,7 @@ const RoomReview: FC<IProps> = (props) => {
           slidesToShow: 1.2,
           centerPadding: '12%',
           arrows: true,
-          lazyLoad: false,
+          // lazyLoad: false,
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1

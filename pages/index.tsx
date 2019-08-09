@@ -32,8 +32,7 @@ const Home: NextPage = () => {
         url="https://nextjs.org/"
       />
 
-      <GridContainer xs={12} classNameItem="searchHome">
-
+      <GridContainer xs={12}>
         <NavHeader />
 
         <SearchHome></SearchHome>

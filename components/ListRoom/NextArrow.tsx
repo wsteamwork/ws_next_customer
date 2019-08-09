@@ -8,13 +8,10 @@ import Fab from '@material-ui/core/Fab';
 import classNames from 'classnames';
 import { CustomArrowProps } from 'react-slick';
 
-interface IProps {
-  classes?: any;
-  onClick?: any;
-}
+interface IProps extends CustomArrowProps {}
 
-const NextArrow: FC<IProps> = (props: CustomArrowProps) => {
-  const { classes, onClick } = props;
+const NextArrow: FC<IProps> = (props) => {
+  const { className, onClick } = props;
 
   return (
     <Fragment>
