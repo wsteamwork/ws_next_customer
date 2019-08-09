@@ -68,7 +68,6 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 1000000,
-    // mobileFirst: true,
     centerPadding: '20%',
     swipeToSlide: true,
     responsive: [

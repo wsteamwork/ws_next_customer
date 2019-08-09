@@ -39,7 +39,6 @@ const SliderTypeApartment: FC = (props) => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
-    // mobileFirst: true,
     centerPadding: '20%',
     swipeToSlide: true,
     responsive: [
@@ -65,8 +64,7 @@ const SliderTypeApartment: FC = (props) => {
           centerMode: true,
           initialSlide: 0,
           centerPadding: '24%',
-          slidesToScroll: 1,
-          infinite: false
+          slidesToScroll: 1
         }
       },
       {

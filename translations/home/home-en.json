@@ -41,5 +41,9 @@
         "titleJourney": "Share travel experiences",
         "titleWhere": "Discover beautiful places together",
         "titlePlay": "Find out about strange and interesting games"
+    },
+    "collectionRooms": {
+        "seaView": "Sea view",
+        "cityView": "City view"
     }
 }

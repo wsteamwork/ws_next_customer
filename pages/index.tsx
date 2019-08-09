@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
+import SeaView from '@/components/Home/CollectionRooms/SeaView';
+import CityView from '@/components/Home/CollectionRooms/CityView';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
@@ -40,10 +42,15 @@ const Home: NextPage = () => {
           <SliderTypeApartment />
           <MetroGridImage />
           <ListRoom
-            roomData={roomsHot}
-            usingSlider={true}
-            title={'Phòng nổi bật'}
-            render={renderRoom}></ListRoom>
+          roomData={roomsHot}
+          usingSlider={true}
+          title={'Phòng nổi bật'}
+          render={renderRoom}></ListRoom>
+
+          <SeaView/>
+
+          <CityView/>
+
         </GridContainer>
         <HostBecome />
 
