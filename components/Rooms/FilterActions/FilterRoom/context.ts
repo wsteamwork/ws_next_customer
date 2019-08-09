@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { Instance } from 'tippy.js';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateRouter } from '@/store/Context/utility';
 
 export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 
@@ -71,6 +72,7 @@ export const useFilterRoom = (
   const handleSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setAmenitiesFilter', amenities: dataClick });
+    updateRouter(false, 'amenities', dataClick, 'page', 1);
   };
 
   const handleClose = () => {

@@ -15,6 +15,7 @@ import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import { updateRouter } from '@/store/Context/utility';
 
 const RowSelect = dynamic(() => import('./RowSelect'));
 
@@ -34,10 +35,10 @@ const ActionChoose: FC<IProps> = (props) => {
   const [room, setRoom] = useState(numberRoom);
 
   useEffect(() => {
-    !open && hanldeClose();
+    !open && handleClose();
   }, [open, checkRemove]);
 
-  const hanldeClose = () => {
+  const handleClose = () => {
     setOpen(false);
     setGuest(numberGuest);
     setRoom(numberRoom);
@@ -47,6 +48,8 @@ const ActionChoose: FC<IProps> = (props) => {
     setOpen(false);
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: room });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: guest });
+    console.log(guest, room)
+    updateRouter(true, 'number_of_guests', guest, 'number_of_rooms', room);
   };
 
   return (
@@ -69,7 +72,7 @@ const ActionChoose: FC<IProps> = (props) => {
             fontSize="14px"
             background="white"
             textColor="#000"
-            onClick={hanldeClose}>
+            onClick={handleClose}>
             {t('home:chooseGuestRoom:close')}
           </ButtonGlobal>
         </Grid>

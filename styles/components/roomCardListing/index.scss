@@ -154,14 +154,7 @@
             right: 0;
             bottom: 0;
             text-align: right;
-            @include sm {
-              position: absolute;
-            }
-            @include md {
-              position: absolute;
-            }
-
-            @include lg {
+            @include smUp {
               position: absolute;
             }
 

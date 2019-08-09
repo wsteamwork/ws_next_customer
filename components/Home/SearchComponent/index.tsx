@@ -1,4 +1,4 @@
-import React, { FC, memo, useContext } from 'react';
+import React, { FC, memo, useContext, Fragment } from 'react';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import SearchAutoSuggestion from '../SearchAutoSuggestion';
@@ -16,10 +16,11 @@ import Router from 'next/router';
 interface IProps {
   className?: string;
   filter: SearchFilterState;
+  showGuestRoom: boolean;
 }
 
 const SearchComponent: FC<IProps> = (props) => {
-  const { className, filter } = props;
+  const { className, filter, showGuestRoom } = props;
   const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const {
     searchText,
@@ -34,6 +35,7 @@ const SearchComponent: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const applySearch = () => {
+    dispatchGlobal({ type: 'setOverlay', payload: false });
     const pushQuery: ParsedUrlQueryInput = {
       name: city_id === undefined && district_id === undefined ? searchText : '',
       number_of_rooms: roomsCount,
@@ -44,7 +46,7 @@ const SearchComponent: FC<IProps> = (props) => {
       city_id: city_id ? city_id : '',
       district_id: district_id ? district_id : ''
     };
-    dispatchGlobal({ type: 'setOverlay', payload: false });
+
     Router.push({
       pathname: '/rooms',
       query: pushQuery
@@ -53,15 +55,29 @@ const SearchComponent: FC<IProps> = (props) => {
 
   return (
     <Grid container spacing={1} className={className}>
-      <Grid item xs={12} md={4}>
-        <SearchAutoSuggestion />
-      </Grid>
-      <Grid item xs={12} md={4}>
-        <DateRangeSearch />
-      </Grid>
-      <Grid item xs={12} md={2}>
-        <ChooseGuestRoom />
-      </Grid>
+      {showGuestRoom ? (
+        <Fragment>
+          <Grid item xs={12} md={4}>
+            <SearchAutoSuggestion />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <DateRangeSearch />
+          </Grid>
+          <Grid item xs={12} md={2}>
+            <ChooseGuestRoom />
+          </Grid>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <Grid item xs={12} md={6}>
+            <SearchAutoSuggestion />
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <DateRangeSearch />
+          </Grid>
+        </Fragment>
+      )}
+
       <Grid item xs={12} md={2}>
         <ButtonGlobal padding="0px" width="100%" onClick={applySearch}>
           {t('home:searchComponent:search')}

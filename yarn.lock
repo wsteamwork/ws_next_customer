@@ -6057,7 +6057,7 @@ prop-types-exact@1.2.0, prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.7.2, prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.7.2, prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -6253,6 +6253,16 @@ rc-calendar@^9.15.4:
     rc-util "^4.1.1"
     react-lifecycles-compat "^3.0.4"
 
+rc-pagination@^1.20.5:
+  version "1.20.5"
+  resolved "https://registry.yarnpkg.com/rc-pagination/-/rc-pagination-1.20.5.tgz#b64395a702e9fc452e26d0e491ccf7d9345309f7"
+  integrity sha512-gnVAowVIbRilW6bXYWCEpTsrtmAWTpM3qO/bltYfqTVKxgb6/sDqjRvCksJGy/D81pYkEkKeA9foWsgUgbUsQw==
+  dependencies:
+    babel-runtime "6.x"
+    classnames "^2.2.6"
+    prop-types "^15.5.7"
+    react-lifecycles-compat "^3.0.4"
+
 rc-trigger@^2.2.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/rc-trigger/-/rc-trigger-2.6.5.tgz#140a857cf28bd0fa01b9aecb1e26a50a700e9885"
@@ -6441,6 +6451,13 @@ react-outside-click-handler@^1.2.0:
     document.contains "^1.0.1"
     object.values "^1.1.0"
     prop-types "^15.7.2"
+
+react-paginate@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-6.3.0.tgz#29cbb5d1645227f4e4f959b9d7f43cfae603f801"
+  integrity sha512-lT/ne7hZzctGDli4QzUAou0JjfZgxKmtl9/r30B5UVonICZIy1u0SrAkdlEZ5ubgzrOykBeCmxkTWi5IyPg4AQ==
+  dependencies:
+    prop-types "^15.6.1"
 
 react-parallax@^2.2.0:
   version "2.2.0"
