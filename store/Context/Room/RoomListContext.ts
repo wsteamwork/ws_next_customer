@@ -28,20 +28,23 @@ export type RoomIndexAction =
   | { type: 'setRooms'; rooms: RoomIndexRes[]; meta?: Pagination | null }
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoadMore'; isLoadMore: boolean }
-  | { type: 'setMapOpen'; isMapOpen: boolean };
+  | { type: 'setMapOpen'; isMapOpen: boolean }
+  | { type: 'setCoords'; payload: MapCoords | null };
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
   readonly meta: Pagination | null;
   readonly isLoadMore: boolean;
   readonly isMapOpen: boolean;
+  readonly coords: MapCoords | null;
 };
 
 export const RoomIndexStateInit: RoomIndexState = {
   rooms: [],
   meta: null,
   isLoadMore: false,
-  isMapOpen: true,
+  isMapOpen: false,
+  coords: null
 };
 
 export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
@@ -57,13 +60,11 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
     case 'setMeta':
       return updateObject<RoomIndexState>(state, { meta: action.meta });
     case 'setLoadMore':
-      return updateObject<RoomIndexState>(state, {
-        isLoadMore: action.isLoadMore
-      });
+      return updateObject<RoomIndexState>(state, { isLoadMore: action.isLoadMore });
     case 'setMapOpen':
-      return updateObject<RoomIndexState>(state, {
-        isMapOpen: action.isMapOpen
-      });
+      return updateObject<RoomIndexState>(state, { isMapOpen: action.isMapOpen });
+    case 'setCoords':
+      return updateObject<RoomIndexState>(state, { coords: action.payload });
     default:
       return state;
   }
@@ -75,11 +76,6 @@ export const getRooms = async (
   coords?: MapCoords
 ): Promise<BaseResponse<RoomIndexRes[]>> => {
   let params: RoomUrlParams = router.query;
-  // if (typeof router.pathname !== 'string') {
-  //   params = qs.parse(router.pathname);
-  // } else {
-  //   params = qs.parse(router.pathname);
-  // }
 
   let query: Partial<RoomIndexGetParams> = {
     include: 'details,media,city,district,comforts.details',
@@ -102,6 +98,7 @@ export const getRooms = async (
     room_type: !!params.room_type ? params.room_type : undefined,
     page
   };
+
   if (coords) {
     query = updateObject(query, coords);
   }
@@ -109,7 +106,9 @@ export const getRooms = async (
   const signature = coords ? 'rooms/room-lat-long' : 'rooms';
   const url = `${signature}?${qs.stringify(query)}`;
 
-  return fetchRoom(url);
+  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url);
+
+  return res.data;
 };
 
 export const newRoomLocation = (params: RoomUrlParams): Partial<BaseRouter> => {
@@ -117,11 +116,6 @@ export const newRoomLocation = (params: RoomUrlParams): Partial<BaseRouter> => {
     pathname: `/rooms`,
     asPath: `/rooms?${qs.stringify(params)}`
   };
-};
-
-export const fetchRoom = async (url: string) => {
-  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url);
-  return res.data;
 };
 
 export const fetchComforts = async () => {
@@ -139,57 +133,4 @@ export const fetchComforts = async () => {
 export const fetchRoomType = async () => {
   const res: AxiosResponse<TypeSelect[]> = await axios.get('rooms/type');
   return res.data;
-};
-
-/**
- * Load filter and room type
- * @param {React.Dispatch<RoomIndexAction>} dispatch
- */
-// export const loadFilter = (dispatch: Dispatch<RoomIndexAction>) => {
-//   Promise.all([fetchComforts(), fetchRoomType()])
-//     .then((res) => {
-//       const [comfortsRes, roomTypes] = res;
-//       dispatch({
-//         type: 'setComforts',
-//         comforts: comfortsRes.data
-//       });
-//       dispatch({
-//         type: 'setRoomTypes',
-//         roomTypes
-//       });
-//     })
-//     .catch((err) => {});
-// };
-
-/**
- * Load more room when user scroll down
- * @param {RoomIndexState} state
- * @param {React.Dispatch<RoomIndexAction>} dispatch
- */
-export const loadMoreRooms = (state: RoomIndexState, dispatch: Dispatch<RoomIndexAction>) => {
-  const { meta, rooms } = state;
-  if (meta !== null) {
-    let links = meta!.pagination.links;
-
-    if (!_.isArray(links) && links.next) {
-      fetchRoom(links.next)
-        .then((data) => {
-          const meta = data.meta;
-          const roomsNext = data.data;
-          const roomsUpdated = _.concat(rooms, roomsNext);
-
-          dispatch({
-            type: 'setRooms',
-            rooms: roomsUpdated,
-            meta: meta
-          });
-        })
-        .catch((err) => {});
-    } else {
-      dispatch({
-        type: 'setLoadMore',
-        isLoadMore: false
-      });
-    }
-  }
 };

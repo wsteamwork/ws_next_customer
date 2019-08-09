@@ -99,3 +99,75 @@
     right: 0;
   }
 }
+
+.roomListing {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: 100vh;
+
+  .mapRoomListing {
+    flex: 1;
+    position: relative;
+
+    * {
+      border-radius: 4px !important;
+      font-family: "Montserrat Alternates", "Quicksand", sans-serif;
+    }
+
+    .arrow_box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      p {
+        background: #fff;
+        padding: 5px 10px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          color: white;
+          background: $primary;
+          cursor: pointer;
+          z-index: 99999;
+        }
+      }
+    }
+
+    .arrow_box:after,
+    .arrow_box:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .arrow_box:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-top-color: #fff;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+    .arrow_box:before {
+      border-color: rgba(221, 221, 221, 0);
+      border-top-color: #ddd;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+  }
+}
+
+.mapRoom {
+  width: 280px;
+  text-align: left;
+  height: auto;
+}

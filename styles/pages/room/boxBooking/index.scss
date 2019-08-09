@@ -3,14 +3,17 @@
 
   @include xs {
     box-shadow: none;
+    height: 100%;
   }
 
   @include sm {
     box-shadow: none;
+    height: 100%;
   }
 
   @include md {
     box-shadow: none;
+    height: 100%;
   }
 
   width: 100%;

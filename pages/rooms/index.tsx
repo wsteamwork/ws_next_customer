@@ -6,17 +6,26 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
-import RoomListing from '@/components/Rooms/RoomListing';
-import { RoomFilterContext, RoomFilterStateInit, RoomFilterReducer } from '@/store/Context/Room/RoomFilterContext';
-import { RoomIndexReducer, getRooms, RoomIndexContext, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import {
+  RoomFilterContext,
+  RoomFilterStateInit,
+  RoomFilterReducer
+} from '@/store/Context/Room/RoomFilterContext';
+import {
+  RoomIndexReducer,
+  getRooms,
+  RoomIndexContext,
+  RoomIndexStateInit
+} from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
+import MapAndListing from '@/components/Rooms/MapAndListing';
 
 const Rooms: NextPage = () => {
   const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
-  const { rooms } = state;
+  const { isMapOpen } = state;
 
   useEffect(() => {
     getRooms(router)
@@ -45,21 +54,27 @@ const Rooms: NextPage = () => {
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         ogImage="/static/favicon.ico"
         url="/rooms"></NextHead>
+
+      <NavHeader></NavHeader>
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
-          <NavHeader></NavHeader>
-
-          <GridContainer
-            onClick={handleOverlay}
-            xs={11}
-            md={10}
-            classNameItem="searchRooms__overlay"
-            className="searchRooms">
-            <SearchComponent />
-          </GridContainer>
-          <FilterActions></FilterActions>
-          <RoomListing />
+          <div className="roomListing">
+            <div>
+              {!isMapOpen && (
+                <GridContainer
+                  onClick={handleOverlay}
+                  xs={11}
+                  md={10}
+                  classNameItem="searchRooms__overlay"
+                  className="searchRooms">
+                  <SearchComponent />
+                </GridContainer>
+              )}
+              <FilterActions></FilterActions>
+            </div>
+            <MapAndListing></MapAndListing>
+          </div>
         </RoomFilterContext.Provider>
       </RoomIndexContext.Provider>
     </Fragment>

@@ -994,6 +994,13 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
+"@types/google-map-react@^0.23.12":
+  version "0.23.12"
+  resolved "https://registry.yarnpkg.com/@types/google-map-react/-/google-map-react-0.23.12.tgz#bf50f54aea7e7fa0bb078dced494bf24b77fd471"
+  integrity sha512-Yf8SV5CgPPYdQvqGQGp0fq/m2MTkvDIUWh7z0tk/wxavg5uU6HuXOBE/si+8KtfrTiMf3IuT9Z8NV+hUydn88Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/helmet@^0.0.42":
   version "0.0.42"
   resolved "https://registry.yarnpkg.com/@types/helmet/-/helmet-0.0.42.tgz#845954fb171000c9b9caa367febf6769bd589eaa"
@@ -1146,6 +1153,13 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
+
+"@types/react-slick@^0.23.4":
+  version "0.23.4"
+  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.4.tgz#c97e2a9e7e3d1933c68593b8e82752fab1e8ce53"
+  integrity sha512-vXoIy4GUfB7/YgqubR4H7RALo+pRdMYCeLgWwV3MPwl5pggTlEkFBTF19R7u+LJc85uMqC7RfsbkqPLMQ4ab+A==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-transition-group@^2.0.16":
   version "2.9.2"
@@ -7652,6 +7666,7 @@ synchronous-promise@^2.0.6:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/synchronous-promise/-/synchronous-promise-2.0.9.tgz#b83db98e9e7ae826bf9c8261fd8ac859126c780a"
   integrity sha512-LO95GIW16x69LuND1nuuwM4pjgFGupg7pZ/4lU86AmchPKrhk0o2tpMU2unXRrqo81iAFe1YJ0nAGEVwsrZAgg==
+
 tapable@^0.2.7, tapable@~0.2.5:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.9.tgz#af2d8bbc9b04f74ee17af2b4d9048f807acd18a8"
