@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import ContentLoader from 'react-content-loader';
 
 interface IProps {
   type?: string;
+  duplicate?: number;
 }
 
 const Rooms = (props) => {
@@ -59,8 +60,8 @@ const SideBar = (props) => {
       break;
     }
     case 'desktop': {
-      height = '300';
-      width = '1060';
+      height = '620';
+      width = '300';
       break;
     }
     case 'large-screen': {
@@ -82,15 +83,11 @@ const SideBar = (props) => {
       primaryColor="#efefef"
       secondaryColor="#dad9d9"
       {...props}>
-      {props.imageType === 'circle' ? (
-        <circle cx="60" cy="45" r="30" />
-      ) : (
-        <rect x="5" y="0" rx="5" ry="5" width="340" height="232" />
-      )}
-
-      <rect x="370" y="0" rx="5" ry="5" width="670" height="40" />
-      <rect x="370" y="55" rx="5" ry="5" width="600" height="30" />
-      <rect x="370" y="100" rx="5" ry="5" width="400" height="30" />
+      <rect x="20" y="0" rx="5" ry="5" width="260" height="110" />
+      <rect x="20" y="178" rx="5" ry="5" width="260" height="85" />
+      <rect x="20" y="280" rx="5" ry="5" width="260" height="85" />
+      <rect x="17" y="380" rx="5" ry="5" width="260" height="85" />
+      <rect x="20" y="130" rx="5" ry="5" width="201" height="30" />
     </ContentLoader>
   );
 };
@@ -100,20 +97,31 @@ const RenderTypeLoading = (props) => {
     case 'rooms': {
       return <Rooms screen="desktop" key={props.i} />;
     }
-    case 'desktop': {
-      return <SideBar />;
+    case 'sideBar': {
+      return <SideBar screen="desktop" />;
+    }
+    default: {
+      return null;
     }
   }
 };
 
-const LoadingSkeleton: FC<IProps> = (props) => (
-  <div>
-    {Array(3)
-      .fill('')
-      .map((e, i) => (
-        <RenderTypeLoading type={props.type} key={i} />
-      ))}
-  </div>
-);
+const LoadingSkeleton: FC<IProps> = (props) => {
+  return (
+    <Fragment>
+      {props.duplicate ? (
+        <div>
+          {Array(props.duplicate)
+            .fill('')
+            .map((e, i) => (
+              <RenderTypeLoading type={props.type} key={i} />
+            ))}
+        </div>
+      ) : (
+        <RenderTypeLoading type={props.type} />
+      )}
+    </Fragment>
+  );
+};
 
 export default LoadingSkeleton;
