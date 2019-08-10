@@ -22,6 +22,18 @@
     "readLess" : "Thu gọn",
     "readMore" : "Xem thêm",
     "emptyCalender" : "Lịch trống phòng",
-    "review" : "Đánh giá"
+    "review" : "Đánh giá",
+    "cleanliness" : "Sạch sẽ",
+    "quality" : "Chất lượng",
+    "service": "Dịch vụ",
+    "valuable": "Đáng giá",
+    "rating": "Tổng quan",
+    "anonymous" : "Ẩn danh",
+    "close" : "Đóng",
+    "noComment" : "Chưa nhận xét về căn hộ",
+    "noReview" : "Hiện tại chưa có đánh giá về căn hộ. Vui lòng đặt phòng và là người đầu tiên cho chúng tôi biết cảm nhận của bạn.",
+    "contentRating1" : "Căn hộ này được đánh giá là ",
+    "contentRating2" : " dựa trên sự đánh giá của ",
+    "contentRating3" : " người đã từng đặt phòng."
 
 }

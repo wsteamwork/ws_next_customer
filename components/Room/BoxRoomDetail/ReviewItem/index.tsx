@@ -1,4 +1,5 @@
-import React, { FC, useState, MouseEvent, Fragment } from 'react';
+import React, { FC, useState, MouseEvent, Fragment, useContext } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -11,13 +12,13 @@ import { RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexR
 import Button from '@material-ui/core/Button/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import Orange from '@material-ui/core/colors/orange';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || 'auto',
+      maxWidth: (props) => props.maxWidth || '27rem',
       cursor: 'pointer',
       overflow: 'hidden',
       boxShadow: 'none',
@@ -74,6 +75,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     comment: {
       padding: '0 1rem 0 1rem'
+    },
+    marginAvatar: {
+      marginRight: 10
     }
   })
 );
@@ -90,6 +94,12 @@ const ReviewItem: FC<IProps> = (props) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
+  const { width } = useContext<IGlobalContext>(GlobalContext);
+  const limitStr = (): number => {
+    if (width === 'lg' || width === 'md') return 85;
+    else return 60;
+  };
+
   const arrMenuItem = (x: number): any[] => {
     let i = 1;
     let arr = [];
@@ -114,6 +124,7 @@ const ReviewItem: FC<IProps> = (props) => {
     }
     return arr;
   };
+
   const handleClickOpen = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpen(true);
@@ -126,21 +137,27 @@ const ReviewItem: FC<IProps> = (props) => {
   return (
     <Paper className={classes.paper}>
       <Grid container>
-        <Grid item xs={2} sm={3} md={3} lg={3}>
+        <Grid
+          item
+          xs={3}
+          sm={3}
+          md={2}
+          lg={2}
+          className={width == 'lg' ? classes.marginAvatar : ''}>
           {review.user.data.avatar !== '' && review.user.data.avatar !== 'default_avatar.jpg' ? (
             <Avatar alt="Avatar" src={review.user.data.avatar_url} className={classes.avatar} />
           ) : (
-              <Avatar className={classes.avatar}></Avatar>
-            )}
+            <Avatar className={classes.avatar}></Avatar>
+          )}
         </Grid>
-        <Grid container item xs={10} sm={9} md={9} lg={9}>
+        <Grid container item xs={9} sm={9} md={10} lg={9}>
           <Grid item xs className={classes.content}>
             <Typography className={classes.userName}>
               {review.user.data
                 ? review.user.data.name
                   ? review.user.data.name
-                  : 'Ẩn danh'
-                : 'Ẩn danh'}
+                  : t('rooms:anonymous')
+                : t('rooms:anonymous')}
             </Typography>
             <Grid container className={classes.price}>
               <Grid item>{arrMenuItem(review.avg_rating)}</Grid>
@@ -149,15 +166,10 @@ const ReviewItem: FC<IProps> = (props) => {
         </Grid>
         <Grid container className={classes.review}>
           <Grid item xs={12}>
-            {/* <Typography variant="body1" className={'readmore'}>
-              <ReadMoreAndLess charLimit={70} readMoreText="Read more" readLessText="">
-                {review.comment ? review.comment: 'Chưa nhận xét về căn hộ'}
-              </ReadMoreAndLess>
-            </Typography> */}
             {review.comment ? (
-              review.comment.length > 90 ? (
+              review.comment.length > limitStr() + 11 ? (
                 <Fragment>
-                  <span>{review.comment.substring(0, 90)}</span>
+                  <span>{review.comment.substring(0, limitStr())}</span>
                   <span>
                     <Button onClick={handleClickOpen} className={classes.button} size="small">
                       &#8230; {t('rooms:readMore')}
@@ -170,26 +182,26 @@ const ReviewItem: FC<IProps> = (props) => {
                     fullScreen={fullScreen}
                     aria-labelledby="responsive-dialog-title">
                     <Grid container className={classes.dialog}>
-                      <Grid item xs={3} sm={3} md={2} lg={2}>
+                      <Grid item xs={3} sm={2}>
                         {review.user.data.avatar_url !== '' &&
-                          review.user.data.avatar !== 'default_avatar.jpg' ? (
-                            <Avatar
-                              alt="Avatar"
-                              src={review.user.data.avatar_url}
-                              className={classes.avatar}
-                            />
-                          ) : (
-                            <Avatar className={classes.avatar}></Avatar>
-                          )}
+                        review.user.data.avatar !== 'default_avatar.jpg' ? (
+                          <Avatar
+                            alt="Avatar"
+                            src={review.user.data.avatar_url}
+                            className={classes.avatar}
+                          />
+                        ) : (
+                          <Avatar className={classes.avatar}></Avatar>
+                        )}
                       </Grid>
-                      <Grid container item xs={9} sm={9} md={10} lg={10}>
+                      <Grid container item xs={9} sm={10}>
                         <Grid item xs className={classes.content}>
                           <Typography className={classes.userName}>
                             {review.user.data
                               ? review.user.data.name
                                 ? review.user.data.name
-                                : 'Ẩn danh'
-                              : 'Ẩn danh'}
+                                : t('rooms:anonymous')
+                              : t('rooms:anonymous')}
                           </Typography>
                           <Grid container className={classes.price}>
                             <Grid item>{arrMenuItem(review.avg_rating)}</Grid>
@@ -204,7 +216,7 @@ const ReviewItem: FC<IProps> = (props) => {
                       <Grid item xs={12}>
                         <DialogActions>
                           <Button onClick={handleClose} color="primary" autoFocus>
-                            Đóng
+                          {t('rooms:close')}
                           </Button>
                         </DialogActions>
                       </Grid>
@@ -212,11 +224,11 @@ const ReviewItem: FC<IProps> = (props) => {
                   </Dialog>
                 </Fragment>
               ) : (
-                  review.comment
-                )
+                review.comment
+              )
             ) : (
-                'Chưa nhận xét về căn hộ'
-              )}
+              t('rooms:noComment')
+            )}
           </Grid>
         </Grid>
       </Grid>

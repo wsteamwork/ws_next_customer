@@ -22,5 +22,19 @@
     "readLess" : "Read less",
     "readMore" : "Read more",
     "emptyCalender" : "Calendar",
-    "review" : "Reviews"
+    "review" : "Reviews",
+    "cleanliness" : "Cleanliness",
+    "quality" : "Quality",
+    "service" : "Service",
+    "valuable" : "Valuable",
+    "rating" : "Rating",
+    "anonymous" : "Anonymous",
+    "close" : "Close",
+    "noComment" : "No comments",
+    "noReview" : "There is currently no reviews of the room. Please make a reservation and be the first to tell us how you feel.",
+    "contentRating1" : "This apartment is rated as",
+    "contentRating2" : " based on the rating of ",
+    "contentRating3" : " who had booked."
+
+
 }

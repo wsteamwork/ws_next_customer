@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState, useEffect } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -6,100 +6,49 @@ import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
 import ReviewItem from '../ReviewItem/index';
 import RatingDetail from '../RatingDetail/index';
-import Slider, { Settings } from 'react-slick';
 import _ from 'lodash';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-
-import NextArrowSlider from './NextArrowSlider';
-import PrevArrowSlider from './PrevArrowSlider';
+import Pagination from 'rc-pagination';
+import localeInfo from 'rc-pagination/lib/locale/vi_VN';
+import 'rc-pagination/assets/index.css';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900,
-      margin: '1rem 0 1rem 0'
+      fontWeight: 900
+    },
+    boxPagination: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    review: {
+      marginBottom: '2rem'
+    },
+    noComment: {
+      marginTop: 10
     }
   })
 );
 
-interface IProps { }
+interface IProps {}
 
 const RoomReview: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize] = useState<number>(4);
+  const [reviews, setReviews] = useState<any>(room.reviews.data);
 
-  const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1.5,
-    speed: 800,
-    arrows: true,
-    lazyLoad: 'ondemand',
-    touchThreshold: 1000000,
-    // mobileFirst: true,
-    centerPadding: '20%',
-    swipeToSlide: true,
-    className: 'slides',
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 2
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1
-        }
-      },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1,
-          arrows: true,
-          // lazyLoad: false,
-          centerMode: true,
-          // initialSlide: 0,
-          // centerPadding: '24%',
-          slidesToScroll: 2
-        }
-      },
-      // {
-      //   breakpoint: 768,
-      //   settings: {
-      //     slidesToShow: 1
-      //   }
-      // },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          centerPadding: '12%',
-          arrows: true,
-          // lazyLoad: false,
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1
-        }
-      }
-    ]
+  const indexOfLast = currentPage * pageSize;
+  const indexOfFirst = indexOfLast - pageSize;
+  const newData = reviews.slice(indexOfFirst, indexOfLast);
+
+  const ChangePage = (current: number) => {
+    setCurrentPage(current);
   };
 
   return (
@@ -111,34 +60,49 @@ const RoomReview: FC<IProps> = (props) => {
           </Typography>
         </Grid>
         {room.total_review !== 0 ? (
-
-          <Grid container item xs>
-            <Grid item xs={3} sm={3} md={4} lg={4}>
-              <RatingDetail />
-            </Grid>
-            <Grid item xs={9} sm={9} md={7} lg={7}>
-              {/* {room.reviews.data.length > 1 ? (
-                <Slider {...setting}>
-                  {_.map(
-                    room.reviews.data,
-                    (obj, i) => obj.status === 1 && <ReviewItem key={i} review={obj} />
-                  )}
-                </Slider>
-              ) : (
-                  <ReviewItem review={room.reviews.data[0]} />
-                )} */}
-            </Grid>
-          </Grid>
-        ) : (
-            <Grid container>
+          <Fragment>
+            <Grid container item xs={12}>
               <Grid item xs={12}>
-                <Typography>
-                  Hiện tại chưa có đánh giá nào vê căn hộ. Vui lòng đặt phòng và là người đầu tiên cho chúng tôi biết cảm nhận của
-                  bạn.
-              </Typography>
+                <RatingDetail />
               </Grid>
             </Grid>
-          )}
+            <Grid container>
+              <Grid container item xs={12}>
+                {_.map(newData, (obj, i) =>
+                  obj.status === 1 ? (
+                    <Grid key={i} item xs={12} sm={6} className={classes.review}>
+                      <ReviewItem review={obj} />
+                    </Grid>
+                  ) : (
+                    ''
+                  )
+                )}
+              </Grid>
+              {room.reviews.data.length > 4 ? (
+                <Grid item xs={12} className={classes.boxPagination}>
+                  <Pagination
+                    className="ant-pagination"
+                    total={reviews.length}
+                    locale={localeInfo}
+                    pageSize={pageSize}
+                    current={currentPage}
+                    onChange={ChangePage}
+                  />
+                </Grid>
+              ) : (
+                ''
+              )}
+            </Grid>
+          </Fragment>
+        ) : (
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography variant="body1" className={classes.noComment}>
+              {t('rooms:noReview')}
+              </Typography>
+            </Grid>
+          </Grid>
+        )}
       </Grid>
     </Fragment>
   );
