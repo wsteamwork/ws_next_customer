@@ -25,7 +25,8 @@ import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
-
+import ContentLoader from 'react-content-loader';
+import LoadingSkeleton from '../Loading/LoadingSkeleton';
 type Iprops<T> = {
   classes?: any;
   roomData: T[];
@@ -138,11 +139,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           usingSlider ? (
             <Slider {...setting}>{renderRooms}</Slider>
           ) : (
-              <Fragment>{renderRooms}</Fragment>
-            )
+            <Fragment>{renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );

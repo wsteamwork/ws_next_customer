@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, Fragment } from 'react';
 import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -23,6 +23,9 @@ import _ from 'lodash';
 import Link from 'next/link';
 import { updateRouter } from '@/store/Context/utility';
 import RoomCard from '../RoomCard';
+import ContentLoader from 'react-content-loader';
+import LoadingSkeleton from '../Loading/LoadingSkeleton';
+import NotFound from './Lotte/NotFound';
 
 interface IProps {
   classes?: any;
@@ -47,52 +50,11 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // const indexOfLast = currentPage * pageSize;
-  // const indexOfFirst = indexOfLast - pageSize;
-  // const paginatedRooms = rooms.slice(indexOfFirst, indexOfLast);
-
   const changePage = (current: number) => {
     console.log(current);
     setCurrentPage(current);
     updateRouter(true, 'page', current);
   };
-  // useEffect(() => {
-  //   let query = {};
-
-  //   const combinedFilter = { ...stateFilterRoom, ...filter };
-
-  //   Object.keys(combinedFilter).forEach((i) => {
-  //     if (!!combinedFilter[i]) {
-  //       if (Array.isArray(combinedFilter[i]) && combinedFilter[i].length > 0) {
-  //         if (i === 'roomTypes') {
-  //           query['room_type'] = combinedFilter[i];
-  //         } else {
-  //           query[i] = combinedFilter[i].join(',');
-  //         }
-  //       } else if (i === 'searchText') {
-  //         query['name'] = combinedFilter[i];
-  //       } else if (i === 'startDate') {
-  //         query['check_in'] = combinedFilter[i];
-  //       } else if (i === 'endDate') {
-  //         query['check_out'] = combinedFilter[i];
-  //       } else if (i === 'bookingType') {
-  //         query['rent_type'] = combinedFilter[i];
-  //       } else if (i === 'roomsCount') {
-  //         query['number_of_rooms'] = combinedFilter[i];
-  //       } else if (i === 'guestsCount') {
-  //         query['number_of_guests'] = combinedFilter[i];
-  //       } else if (!Array.isArray(combinedFilter[i])) {
-  //         query[i] = combinedFilter[i];
-  //       }
-  //     }
-  //   });
-
-  //   console.log(query);
-  //   Router.push({
-  //     pathname: '/rooms',
-  //     query
-  //   });
-  // }, [stateFilterRoom, filter]);
 
   useEffect(() => {
     setLoading(true);
@@ -114,6 +76,14 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
       .catch((err) => console.error(err));
   }, [router.query]);
 
+  useEffect(() => {
+    setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
+  }, [rooms, isLoading]);
+
+  useEffect(() => {
+    console.log(isEmpty);
+  });
+
   const renderRoom = (room) => <RoomCardListing room={room} />;
   return (
     <GridContainer xs={11} md={10} xl={9}>
@@ -123,45 +93,104 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
         alignContent="center"
         spacing={4}
         style={{ marginTop: '48px' }}>
-        <Hidden smDown>
-          <Grid item sm={4} lg={3}>
-            <Paper
-              elevation={0}
-              style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
-              classes={{
-                root: 'mapPaper'
-              }}>
-              <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
-            </Paper>
+        {meta ? (
+          <Hidden smDown>
+            <Grid item sm={4} lg={3}>
+              <Paper
+                elevation={0}
+                style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
+                classes={{
+                  root: 'mapPaper'
+                }}>
+                <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+              </Paper>
 
-            <VisitedRooms visitedRoom={rooms} />
+              <VisitedRooms visitedRoom={rooms} />
+            </Grid>
+          </Hidden>
+        ) : (
+          <Grid item sm={4} lg={3}>
+            <LoadingSkeleton type={'sideBar'} />
+          </Grid>
+        )}
+
+        <Grid item lg={9} md={8} sm={12} xs={12} style={{ marginTop: '-69px' }}>
+          {rooms.length !== 0 ? (
+            <Fragment>
+              <ListRoom
+                customClass="listRoomContainerWithoutSlickCustom"
+                roomData={rooms}
+                usingSlider={false}
+                title={''}
+                spacing={1}
+                render={renderRoom}
+              />
+              <Pagination
+                className="rooms-pagination"
+                total={meta.pagination.total}
+                locale={localeInfo}
+                pageSize={meta.pagination.per_page}
+                current={currentPage}
+                onChange={changePage}
+              />
+            </Fragment>
+          ) : !isEmpty ? (
+            <Grid style={{ marginTop: 64 }}>
+              <LoadingSkeleton type={'rooms'} duplicate={5} />
+            </Grid>
+          ) : (
+            ''
+          )}
+          {isEmpty ? <NotFound height={250} width={250} /> : ''}
+        </Grid>
+
+        {/* <Hidden smDown>
+          <Grid item sm={4} lg={3}>
+            {rooms && meta ? (
+              <Fragment>
+                <Paper
+                  elevation={0}
+                  style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
+                  classes={{
+                    root: 'mapPaper'
+                  }}>
+                  <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+                </Paper>
+
+                <VisitedRooms visitedRoom={rooms} />
+              </Fragment>
+            ) : (
+              <LoadingSkeleton type={'sideBar'} />
+            )}
           </Grid>
         </Hidden>
 
         <Grid item lg={9} md={8} sm={12} xs={12} style={{ marginTop: '-64px' }}>
-          {rooms && (
-            <ListRoom
-              customClass="listRoomContainerWithoutSlickCustom"
-              roomData={rooms}
-              usingSlider={false}
-              title={''}
-              spacing={1}
-              render={renderRoom}
-            />
-          )}
-          {meta ? (
-            <Pagination
-              className="rooms-pagination"
-              total={meta.pagination.total}
-              locale={localeInfo}
-              pageSize={meta.pagination.per_page}
-              current={currentPage}
-              onChange={changePage}
-            />
+          {rooms && meta ? (
+            <Fragment>
+              <ListRoom
+                customClass="listRoomContainerWithoutSlickCustom"
+                roomData={rooms}
+                usingSlider={false}
+                title={''}
+                spacing={1}
+                render={renderRoom}
+              />
+              <Pagination
+                className="rooms-pagination"
+                total={meta.pagination.total}
+                locale={localeInfo}
+                pageSize={meta.pagination.per_page}
+                current={currentPage}
+                onChange={changePage}
+              />
+            </Fragment>
           ) : (
-            ''
-          )}
-        </Grid>
+            <Grid style={{ marginTop: 64 }}>
+              <LoadingSkeleton type={'rooms'} duplicate={5} />
+            </Grid>
+          )} */}
+        {/* </Grid> */}
       </Grid>
     </GridContainer>
   );

@@ -5,7 +5,6 @@ import MapRoomListing from './MapRoomListing';
 
 const MapAndListing = () => {
   const { isMapOpen } = useRefreshListing();
-  console.log(isMapOpen);
   return useMemo(
     () => (!!isMapOpen ? <MapRoomListing></MapRoomListing> : <RoomListing></RoomListing>),
     [isMapOpen]
