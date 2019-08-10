@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, Fragment } from 'react';
 import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -23,6 +23,8 @@ import _ from 'lodash';
 import Link from 'next/link';
 import { updateRouter } from '@/store/Context/utility';
 import RoomCard from '../RoomCard';
+import ContentLoader from 'react-content-loader';
+import LoadingSkeleton from '../Loading/LoadingSkeleton';
 
 interface IProps {
   classes?: any;
@@ -125,42 +127,53 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
         style={{ marginTop: '48px' }}>
         <Hidden smDown>
           <Grid item sm={4} lg={3}>
-            <Paper
-              elevation={0}
-              style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
-              classes={{
-                root: 'mapPaper'
-              }}>
-              <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
-            </Paper>
+            {rooms && meta ? (
+              <Fragment>
+                <Paper
+                  elevation={0}
+                  style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
+                  classes={{
+                    root: 'mapPaper'
+                  }}>
+                  <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+                </Paper>
 
-            <VisitedRooms visitedRoom={rooms} />
+                <VisitedRooms visitedRoom={rooms} />
+              </Fragment>
+            ) : (
+              <Grid style={{ marginTop: 64 }}>
+                <LoadingSkeleton />
+              </Grid>
+            )}
           </Grid>
         </Hidden>
 
         <Grid item lg={9} md={8} sm={12} xs={12} style={{ marginTop: '-64px' }}>
-          {rooms && (
-            <ListRoom
-              customClass="listRoomContainerWithoutSlickCustom"
-              roomData={rooms}
-              usingSlider={false}
-              title={''}
-              spacing={1}
-              render={renderRoom}
-            />
-          )}
-          {meta ? (
-            <Pagination
-              className="rooms-pagination"
-              total={meta.pagination.total}
-              locale={localeInfo}
-              pageSize={meta.pagination.per_page}
-              current={currentPage}
-              onChange={changePage}
-            />
+          <Grid style={{ marginTop: 64 }}>
+            <LoadingSkeleton type={'rooms'} />
+          </Grid>
+          {/* {rooms && meta ? (
+            <Fragment>
+              <ListRoom
+                customClass="listRoomContainerWithoutSlickCustom"
+                roomData={rooms}
+                usingSlider={false}
+                title={''}
+                spacing={1}
+                render={renderRoom}
+              />
+              <Pagination
+                className="rooms-pagination"
+                total={meta.pagination.total}
+                locale={localeInfo}
+                pageSize={meta.pagination.per_page}
+                current={currentPage}
+                onChange={changePage}
+              />
+            </Fragment>
           ) : (
             ''
-          )}
+          )} */}
         </Grid>
       </Grid>
     </GridContainer>

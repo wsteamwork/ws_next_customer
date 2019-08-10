@@ -29,8 +29,8 @@ export const updateRouter = (
 ) => {
   const obj = {};
   if (notArray) {
-    console.log('param', param);
-    console.log('value', value);
+    // console.log('param', param);
+    // console.log('value', value);
     if (param2) obj[param2] = value2;
     if (param3) obj[param3] = value3;
     obj[param] = value;
@@ -40,7 +40,7 @@ export const updateRouter = (
   }
 
   const query = updateObject(Router.query, obj);
-  console.log('query', query);
+  // console.log('query', query);
 
   Router.push({
     pathname: '/rooms',

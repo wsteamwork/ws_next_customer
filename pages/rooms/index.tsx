@@ -29,11 +29,9 @@ const Rooms: NextPage = () => {
   const { rooms, isMapOpen } = state;
 
   useEffect(() => {
-    console.log(stateGlobal);
   }, [stateGlobal]);
 
   useEffect(() => {
-    console.log(router);
     getRooms(router)
       .then((data) => {
         const roomData = data.data;

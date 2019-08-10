@@ -8,6 +8,12 @@ const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 
 module.exports = withPlugins([[withSass], [withCss]], {
+  onDemandEntries: {
+    // period (in ms) where the server will keep pages in the buffer
+    maxInactiveAge: 25 * 1000,
+    // number of pages that should be kept simultaneously without being disposed
+    pagesBufferLength: 2,
+  },
   xPoweredBy: false,
   // target: 'serverless',
   webpack: (config, {}) => {
