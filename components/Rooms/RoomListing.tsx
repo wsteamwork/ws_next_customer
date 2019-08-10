@@ -25,7 +25,7 @@ import { updateRouter } from '@/store/Context/utility';
 import RoomCard from '../RoomCard';
 import ContentLoader from 'react-content-loader';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
-import NotFound from './NotFound';
+import NotFound from './Lotte/NotFound';
 
 interface IProps {
   classes?: any;

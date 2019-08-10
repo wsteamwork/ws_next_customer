@@ -24,6 +24,7 @@ import Link from '@material-ui/core/Link';
 import { windowExist } from '@/store/Redux';
 import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 import SvgCustom from '@/components/Custom/SvgCustom';
+import FavoriteAnimation from "@/components/Rooms/Lotte/FavoriteAnimation.jsx";
 
 interface Iprops {
   classes?: any;
@@ -65,6 +66,9 @@ const RoomCardListing: FC<Iprops> = (props) => {
               )}
             </Slider>
           </LazyLoad>
+          <Grid className="boxSave">
+            <FavoriteAnimation />
+          </Grid>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
