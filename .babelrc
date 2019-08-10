@@ -37,6 +37,14 @@
             {
                 "loose": true
             }
+        ],
+        [
+            "styled-jsx/babel",
+            {
+                "plugins": [
+                    "styled-jsx-plugin-sass"
+                ]
+            }
         ]
     ]
 }

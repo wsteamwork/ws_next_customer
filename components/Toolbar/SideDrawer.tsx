@@ -78,9 +78,7 @@ const SideDrawer: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const logoutTrigger = () => {
-    cookies.remove('_token', {
-      path: '/'
-    });
+    cookies.remove('_token', { path: '/' });
     setOpen(false);
     router.push('/');
   };
@@ -141,8 +139,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 }}
                 button
                 onClick={() => setOpen(false)}
-                href="/profile"
-              >
+                href="/profile">
                 {/* <ListItemIcon>
                 <AccountCircle />
               </ListItemIcon> */}
@@ -155,45 +152,45 @@ const SideDrawer: FC<IProps> = (props) => {
               </ListItem>
             </Fragment>
           ) : (
-              <Fragment>
-                <ListItem
-                  classes={{
-                    gutters: classes.listItemGutters
-                  }}
-                  button
-                  onClick={() => {
-                    setOpen(false);
-                  }}>
-                  {/* <ListItemIcon>
+            <Fragment>
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}
+                button
+                onClick={() => {
+                  setOpen(false);
+                }}>
+                {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                  <ListItemText
-                    primary={t('home:signIn')}
-                    classes={{
-                      primary: classes.text
-                    }}
-                  />
-                </ListItem>
-                <ListItem
+                <ListItemText
+                  primary={t('home:signIn')}
                   classes={{
-                    gutters: classes.listItemGutters
+                    primary: classes.text
                   }}
-                  button
-                  onClick={() => {
-                    setOpen(false);
-                  }}>
-                  {/* <ListItemIcon>
+                />
+              </ListItem>
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}
+                button
+                onClick={() => {
+                  setOpen(false);
+                }}>
+                {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                  <ListItemText
-                    primary={t('home:signUp')}
-                    classes={{
-                      primary: classes.text
-                    }}
-                  />
-                </ListItem>
-              </Fragment>
-            )}
+                <ListItemText
+                  primary={t('home:signUp')}
+                  classes={{
+                    primary: classes.text
+                  }}
+                />
+              </ListItem>
+            </Fragment>
+          )}
         </div>
 
         <div className="bottom">
@@ -278,8 +275,8 @@ const SideDrawer: FC<IProps> = (props) => {
               />
             </ListItem>
           ) : (
-              ''
-            )}
+            ''
+          )}
         </div>
       </List>
     </Fragment>

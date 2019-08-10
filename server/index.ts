@@ -1,6 +1,7 @@
 import express from 'express';
 import next from 'next';
 import compression from 'compression';
+import useragent from 'express-useragent';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import routes from '../routes';
@@ -13,8 +14,11 @@ const handle = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
   const server = express();
+
+  server.disable('x-powered-by');
   server.use(compression());
   server.use(helmet());
+  server.use(useragent.express());
 
   server.get('*', (req, res) => {
     return handle(req, res);

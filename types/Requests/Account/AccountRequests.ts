@@ -4,23 +4,24 @@ export interface LoginRequest {
 }
 
 export interface RegisterReq {
-  name: string
-  phone: string
-  email: string
-  password: string
-  password_confirmation: string
-  type: number
+  name: string;
+  phone: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  gender: number;
+  birthday: string;
 }
 
 export interface ForgetPasswordReq {
-  email: string
+  email: string;
 }
 
-
-
 interface Interface {
-  blocks: [{
-    start: string
-    end: string
-  }]
+  blocks: [
+    {
+      start: string;
+      end: string;
+    }
+  ];
 }

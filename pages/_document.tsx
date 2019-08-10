@@ -1,7 +1,8 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import Document, { Head, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 import theme from '@/components/Theme';
+import flush from 'styled-jsx/server';
 
 class MyDocument extends Document {
   static getInitialProps = async (ctx: DocumentContext) => {
@@ -41,12 +42,13 @@ class MyDocument extends Document {
     return {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
-      styles: [
-        <React.Fragment key="styles">
+      styles: (
+        <>
           {initialProps.styles}
           {sheets.getStyleElement()}
-        </React.Fragment>
-      ]
+          {flush() || null}
+        </>
+      )
     };
   };
 

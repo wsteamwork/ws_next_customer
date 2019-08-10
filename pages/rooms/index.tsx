@@ -1,9 +1,8 @@
-import React, { useReducer, useContext, useEffect, Fragment } from 'react';
+import React, { useReducer, useContext, Fragment } from 'react';
 import { NextPage } from 'next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
 import {
@@ -13,7 +12,6 @@ import {
 } from '@/store/Context/Room/RoomFilterContext';
 import {
   RoomIndexReducer,
-  getRooms,
   RoomIndexContext,
   RoomIndexStateInit
 } from '@/store/Context/Room/RoomListContext';
@@ -21,27 +19,10 @@ import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 
 const Rooms: NextPage = () => {
-  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
-  const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
+  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
   const { isMapOpen } = state;
-
-  useEffect(() => {
-    getRooms(router)
-      .then((data) => {
-        const roomData = data.data;
-        const pagination = data.meta;
-        dispatch({
-          type: 'setRooms',
-          rooms: roomData,
-          meta: pagination
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
 
   const handleOverlay = () => {
     dispatchGlobal({ type: 'setOverlay', payload: true });
