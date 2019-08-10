@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomReview: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -74,8 +74,8 @@ const RoomReview: FC<IProps> = (props) => {
                       <ReviewItem review={obj} />
                     </Grid>
                   ) : (
-                    ''
-                  )
+                      ''
+                    )
                 )}
               </Grid>
               {room.reviews.data.length > 4 ? (
@@ -90,19 +90,19 @@ const RoomReview: FC<IProps> = (props) => {
                   />
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
           </Fragment>
         ) : (
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography variant="body1" className={classes.noComment}>
-              {t('rooms:noReview')}
-              </Typography>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography variant="body1" className={classes.noComment}>
+                  {t('rooms:noReview')}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        )}
+          )}
       </Grid>
     </Fragment>
   );

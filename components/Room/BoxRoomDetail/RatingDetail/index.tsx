@@ -108,7 +108,7 @@ const StyledRating = withStyles({
   }
 })(Rating);
 
-interface IProps {}
+interface IProps { }
 
 const RatingDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();

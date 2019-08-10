@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       justifyContent: 'center'
     },
-    wapper: {
+    wrapper: {
       paddingTop: theme.spacing(2),
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
@@ -29,8 +29,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         justifyContent: 'space-around',
         padding: 0
       }
-    }, 
-    wapperBasic: {
+    },
+    wrapperBasic: {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(1),
       [theme.breakpoints.down('xs')]: {
@@ -58,7 +58,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
       <Paper className={classes.paper}>
         <Grid container className={classes.root}>
           <Grid item md={11} lg={12}>
-            <Grid container spacing={1} className={classes.wapperBasic}>
+            <Grid container spacing={1} className={classes.wrapperBasic}>
               <Grid item xs={11} sm={7} md={9}>
                 <RoomBasic />
               </Grid>
@@ -66,7 +66,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 <HostInfo />
               </Grid>
             </Grid>
-            <Grid container spacing={1} className={classes.wapper}>
+            <Grid container spacing={1} className={classes.wrapper}>
               <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
                 <div className={classes.rowMargin}>
                   <RoomDescription />
@@ -77,6 +77,10 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   <EmptyRoomCalendar />
                 </div>
+              </Grid>
+            </Grid>
+            <Grid container spacing={1} className={classes.wrapper}>
+              <Grid item xs={11} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   <RoomReview />
                 </div>
@@ -85,11 +89,9 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 </div>
               </Grid>
             </Grid>
-            {/* <Grid container spacing={1} className={classes.wapper}>
-              <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
-              </Grid>
-            </Grid> */}
+
           </Grid>
+
         </Grid>
       </Paper>
     </Fragment>

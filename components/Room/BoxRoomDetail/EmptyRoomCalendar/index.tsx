@@ -40,9 +40,10 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
         </Typography>
         <Grid className="EmptyRoomCalendar">
           <DayPickerRangeController
+            daySize={width === 'xl' || width === 'lg' ? 50 : (width === 'md' ? 40 : 38)}
             startDate={!!dateStart ? moment(dateStart) : moment()}
             endDate={!!dateEnd ? moment(dateEnd) : null}
-            onDatesChange={() => {}}
+            onDatesChange={() => { }}
             // onNextMonthClick={onNextMonthClick}
             focusedInput={null}
             onFocusChange={null}
