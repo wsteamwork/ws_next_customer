@@ -1,5 +1,5 @@
 import { Reducer } from 'react';
-import { RoomIndexRes, NumberRoomCity, TypeApartment } from '@/types/Requests/Rooms/RoomResponses';
+import { RoomIndexRes, NumberRoomCity, TypeApartment, Collections } from '@/types/Requests/Rooms/RoomResponses';
 import qs from 'query-string';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
@@ -11,20 +11,23 @@ export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
   | { type: 'setRoomCity'; rooms: NumberRoomCity[] }
   | { type: 'setRoomNew'; rooms: RoomIndexRes[] }
-  | { type: 'setApartment'; rooms: TypeApartment[] };
+  | { type: 'setApartment'; rooms: TypeApartment[] }
+  | { type: 'setCollections'; collections: Collections[] };
 
 export type RoomHomepageState = {
   readonly roomsHot: RoomIndexRes[];
   readonly roomsCity: NumberRoomCity[] | null;
   readonly roomsNew: RoomIndexRes[];
   readonly apartments: TypeApartment[];
+  readonly collections: Collections[];
 };
 
 export const init: RoomHomepageState = {
   roomsHot: [],
   roomsCity: null,
   roomsNew: [],
-  apartments: []
+  apartments: [],
+  collections: []
 };
 
 export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (
@@ -40,6 +43,8 @@ export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
       return updateObject<RoomHomepageState>(state, { roomsNew: action.rooms });
     case 'setApartment':
       return updateObject<RoomHomepageState>(state, { apartments: action.rooms });
+    case 'setCollections':
+      return updateObject<RoomHomepageState>(state, { collections: action.collections });
     default:
       return state;
   }
@@ -88,13 +93,23 @@ export const getApartments = async (): Promise<TypeApartment[]> => {
   return res.data.data;
 };
 
+export const getCollections = async (): Promise<Collections[]> => {
+  const url = `collections?include=details,rooms`;
+
+  const res: AxiosRes<Collections[]> = await axios.get(url);
+
+  return res.data.data;
+};
+
+// @ts-ignore
 export const getRoomsHomepage = async (): Promise<Omit<RoomHomepageState, 'roomsNew'>> => {
-  const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments()]);
-  const [roomsHot, roomsCity, apartments] = res;
+  const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(),getCollections()]);
+  const [roomsHot, roomsCity, apartments,collections] = res;
 
   return {
     roomsHot,
     roomsCity,
-    apartments
+    apartments,
+    collections
   };
 };

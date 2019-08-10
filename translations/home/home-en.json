@@ -43,6 +43,7 @@
         "titlePlay": "Find out about strange and interesting games"
     },
     "collectionRooms": {
+        "collectionViews": "Collection views",
         "seaView": "Sea view",
         "cityView": "City view"
     }

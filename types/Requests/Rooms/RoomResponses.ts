@@ -91,6 +91,24 @@ export interface NumberRoomCity {
   average_price: string;
 }
 
+export interface Collections {
+  id: number,
+  image:string,
+  status: number,
+  hot: number,
+  new: number,
+  details:TransformerInclude<CollectionsDetail[]>,
+  rooms:TransformerInclude<RoomIndexRes[]>
+}
+
+export interface CollectionsDetail {
+  id:number,
+  collection_id:number,
+  name:string,
+  description:string,
+  lang:string
+}
+
 export interface TypeApartment {
   id: number,
   value: string,
