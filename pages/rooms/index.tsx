@@ -1,9 +1,8 @@
-import React, { useReducer, useContext, useEffect, Fragment } from 'react';
+import React, { useReducer, useContext, Fragment, useEffect } from 'react';
 import { NextPage } from 'next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
 import RoomListing from '@/components/Rooms/RoomListing';
@@ -14,26 +13,20 @@ import {
 } from '@/store/Context/Room/RoomFilterContext';
 import {
   RoomIndexReducer,
-  getRooms,
   RoomIndexContext,
-  RoomIndexStateInit
+  RoomIndexStateInit,
+  getRooms
 } from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 
 const Rooms: NextPage = () => {
-  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { state: stateGlobal, dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const { rooms, isMapOpen } = state;
 
   useEffect(() => {
-    console.log(stateGlobal);
-  }, [stateGlobal]);
-
-  useEffect(() => {
-    console.log(router);
     getRooms(router)
       .then((data) => {
         const roomData = data.data;

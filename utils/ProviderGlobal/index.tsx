@@ -1,4 +1,4 @@
-import React, { FC, useReducer, memo } from 'react';
+import React, { FC, useReducer, memo, useEffect } from 'react';
 import { compose } from 'recompose';
 import { CookiesProvider } from 'react-cookie';
 import { withRouter } from 'next/router';
@@ -13,6 +13,12 @@ import i18n from '@/translations/index';
 import { MuiThemeProvider, useMediaQuery } from '@material-ui/core';
 import theme from '@/components/Theme';
 import classNames from 'classnames';
+import ReactGA from 'react-ga';
+
+const initializeReactGA = () => {
+  ReactGA.initialize('UA-134989606-1');
+  ReactGA.pageview(window.location.pathname + window.location.search);
+};
 
 function useWidth() {
   const keys = [...theme.breakpoints.keys].reverse();
@@ -25,14 +31,17 @@ function useWidth() {
   );
 }
 
-interface IProps extends Partial<IGlobalContext> { }
+interface IProps extends Partial<IGlobalContext> {}
 
 const ProviderGlobal: FC<IProps> = (props) => {
   const { router, children } = props;
   const width = useWidth();
-
   const [state, dispatch] = useReducer(GlobalReducer, GlobalStateInit);
   const { overlay } = state;
+
+  useEffect(() => {
+    initializeReactGA();
+  }, []);
 
   const handleOverlay = () => {
     dispatch({ type: 'setOverlay', payload: false });

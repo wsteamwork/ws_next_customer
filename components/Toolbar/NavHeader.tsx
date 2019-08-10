@@ -36,6 +36,7 @@ import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import Link from 'next/link';
 
 interface IProps {
   classes?: any;
@@ -170,9 +171,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
 
   const logoutTrigger = () => {
     window.location.reload();
-    cookies.remove('_token', {
-      path: '/'
-    });
+    cookies.remove('_token', { path: '/' });
   };
 
   const loginButtonClick = (e: MouseEvent<HTMLElement>) => {
@@ -292,7 +291,10 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                         <Paper elevation={1}>
                           <ClickAwayListener onClickAway={closeMenu}>
                             <MenuList>
-                              <MenuItem name="profile" onClick={closeMenu} {...to({ href: "/profile" })}>
+                              <MenuItem
+                                name="profile"
+                                onClick={closeMenu}
+                                {...to({ href: '/profile' })}>
                                 <ListItemIcon>
                                   <AccountCircleOutlined />
                                 </ListItemIcon>
@@ -314,31 +316,35 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                  <Fragment>
-                    <Button
-                      name="sign-in"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={loginButtonClick}
-                      size="large"
+                <Fragment>
+                  <Button
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                    >
-                      {t('home:signIn')}
-                    </Button>
+                  >
+                    {t('home:signIn')}
+                  </Button>
+
+                  {/* <Link href="/auth/signup"> */}
                     <Button
+                      href="/auth/signup"
                       name="sign-up"
                       color="inherit"
                       className={classes.button}
                       onClick={signUpButtonClick}
                       size="large"
-                    // onMouseOver={() => SignUpForm.preload()}
+                      // onMouseOver={() => SignUpForm.preload()}
                     >
                       {t('home:signUp')}
                     </Button>
+                  {/* </Link> */}
 
-                    <SwitchLanguage />
-                  </Fragment>
-                )}
+                  <SwitchLanguage />
+                </Fragment>
+              )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
