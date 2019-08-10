@@ -1,104 +1,195 @@
 import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { useSelector } from 'react-redux';
-
+import Rating from '@material-ui/lab/Rating';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: '20rem',
       cursor: 'pointer',
       overflow: 'hidden',
-      boxShadow: 'none'
+      boxShadow: 'none',
+      padding: '1.3rem 0'
     },
-    iconHeartBlue: {
-      color: '#08C299',
-      marginRight: 3
-    },
-    iconHeartWhite: {
-      color: '#ddd',
-      marginRight: 3
+    rating: {
+      alignSelf: 'center'
     },
     rowMargin: {
       marginBottom: 6
+    },
+    rowMargin2: {
+      margin: '10px 0'
+    },
+    boxMark: {
+      backgroundColor: '#fff',
+      borderRadius: '50%',
+      height: 90,
+      width: 90,
+      overflow: 'hidden',
+      position: 'relative',
+      border: 'double 9px transparent',
+      backgroundImage:
+        'linear-gradient(white, white), radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );',
+      backgroundOrigin: 'border-box',
+      backgroundClip: 'content-box, border-box'
+    },
+    Mark: {
+      backgroundColor: '#1ba0e2',
+      backgroundImage:
+        'radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );',
+      borderRadius: '50%',
+      width: '90%',
+      height: '90%',
+      textAlign: 'center',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      WebkitTransform: 'translateX(-50%) translateY(-50%)',
+      MozTransform: 'translateX(-50%) translateY(-50%)',
+      transform: 'translateX(-50%) translateY(-50%)'
+    },
+    TypoMark: {
+      color: '#fff',
+      fontSize: '1.7vw',
+      fontWeight: 500,
+      textAlign: 'center',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      WebkitTransform: 'translateX(-50%) translateY(-50%)',
+      MozTransform: 'translateX(-50%) translateY(-50%)',
+      transform: 'translateX(-50%) translateY(-50%)',
+      [theme!.breakpoints!.down!('md')]: {
+        fontSize: '3.5vw'
+      },
+      [theme!.breakpoints!.down!('sm')]: {
+        fontSize: '4.5vw'
+      },
+      [theme!.breakpoints!.down!('xs')]: {
+        fontSize: '8vw'
+      }
+    },
+    status: {
+      color: '#08C299',
+      fontWeight: 500,
+      fontSize: '1.2vw',
+      [theme!.breakpoints!.down!('md')]: {
+        fontSize: '2vw'
+      },
+      [theme!.breakpoints!.down!('sm')]: {
+        fontSize: '2.5vw',
+        paddingTop: 5
+      },
+      [theme!.breakpoints!.down!('xs')]: {
+        fontSize: '4.5vw',
+        paddingTop: 5
+      }
+    },
+    contentRating: {
+      alignItems: 'center'
+    },
+    ratingName: {
+      fontWeight: 700
     }
   })
 );
+const StyledRating = withStyles({
+  iconFilled: {
+    color: '#08C299'
+  }
+})(Rating);
 
-interface IProps { }
+interface IProps {}
 
 const RatingDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-
   const arrRating = [
     {
-      name: 'Sạch sẽ',
+      name: t('rooms:cleanliness'),
       rating: room.avg_cleanliness
     },
     {
-      name: 'Chất lượng',
+      name: t('rooms:quality'),
       rating: room.avg_quality
     },
     {
-      name: 'Dịch vụ',
+      name: t('rooms:service'),
       rating: room.avg_service
     },
     {
-      name: 'Đáng giá',
+      name: t('rooms:valuable'),
       rating: room.avg_valuable
     },
     {
-      name: 'Tổng quan',
+      name: t('rooms:rating'),
       rating: room.avg_rating
     }
   ];
-  const arrMenuItem = (x: number): any[] => {
-    let i = 1;
-    let arr = [];
-    let z = Math.round(x);
-    while (i <= 5) {
-      if (i <= z) {
-        arr.push(
-          <FontAwesomeIcon
-            key={i}
-            className={classes.iconHeartBlue}
-            icon={faHeart}></FontAwesomeIcon>
-        );
-      } else {
-        arr.push(
-          <FontAwesomeIcon
-            key={i}
-            className={classes.iconHeartWhite}
-            icon={faHeart}></FontAwesomeIcon>
-        );
-      }
-      i++;
-    }
-    return arr;
+  const arrMenuItem = (x: number): any => {
+    return (
+      <StyledRating
+        name="customized-color"
+        readOnly={true}
+        value={x}
+        precision={0.5}
+        max={5}
+        icon={<FavoriteIcon fontSize="inherit" />}
+      />
+    );
   };
   return (
     <Paper className={classes.paper}>
-      {_.map(arrRating, (item, index) => (
-        <Grid container key={index} className={classes.rowMargin}>
-          <Grid item xs={4}>
-            <Typography>{item.name}</Typography>
-          </Grid>
-          <Grid item xs={8}>
-            {arrMenuItem(item.rating)}
-          </Grid>
+      <Grid container>
+        <Grid item xs={12} sm={12} md={6} className={classes.rating}>
+          <div className={classes.rowMargin2}>
+            <Grid container className={classes.contentRating}>
+              <Grid item xs={4} sm={3} md={4} lg={4}>
+                <div className={classes.boxMark}>
+                  <div className={classes.Mark}>
+                    <Typography variant={'h5'} className={classes.TypoMark}>
+                      {room.avg_rating}
+                    </Typography>
+                  </div>
+                </div>
+              </Grid>
+              <Grid item xs={8} sm={7} md={7} lg={7}>
+                <Typography variant={'h5'} className={classes.status}>
+                  {room.avg_rating_txt}
+                </Typography>
+                <Typography>
+                  {t('rooms:contentRating1')} {room.avg_rating_txt}, {t('rooms:contentRating2')}
+                  {room.total_review} {t('rooms:contentRating3')}
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
         </Grid>
-      ))}
+        <Grid item xs={12} sm={12} md={6}>
+          {_.map(arrRating, (item, index) => (
+            <Grid container key={index} className={classes.rowMargin}>
+              <Grid item xs={4} sm={3} lg={4}>
+                <Typography variant={'body1'} className={classes.ratingName}>
+                  {item.name}
+                </Typography>
+              </Grid>
+              <Grid item xs={8} sm={9} lg={8}>
+                {arrMenuItem(item.rating)}
+              </Grid>
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
     </Paper>
   );
 };
