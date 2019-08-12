@@ -62,13 +62,13 @@ const RoomCardListing: FC<Iprops> = (props) => {
                   />
                 ))
               ) : (
-                <img src="./static/images/background.svg" className="imgSize" />
-              )}
+                  <img src="./static/images/background.svg" className="imgSize" />
+                )}
             </Slider>
           </LazyLoad>
-          <Grid className="boxSave">
+          {/* <Grid className="boxSave">
             <FavoriteAnimation />
-          </Grid>
+          </Grid> */}
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
@@ -110,8 +110,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} phòng tắm
                       </Fragment>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -146,8 +146,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                        ''
-                      )}
+                          ''
+                        )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -171,8 +171,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           }`}</span> */}
                   </Grid>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -180,8 +180,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">Giảm giá</Grid>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
@@ -191,8 +191,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             ₫/ngày
                           </span>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -201,30 +201,30 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         </Typography>
                       </Grid>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                      <Grid className="hourPrice">
-                        {room.is_discount === 1 ? (
-                          <span className="discountPriceText">
-                            {numeral(room.price_hour).format('0,0')}
-                            ₫/4 giờ
+                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                        <Grid className="hourPrice">
+                          {room.is_discount === 1 ? (
+                            <span className="discountPriceText">
+                              {numeral(room.price_hour).format('0,0')}
+                              ₫/4 giờ
                           </span>
-                        ) : (
-                          ''
-                        )}
-                        <Typography className="priceText" variant={typoVariant}>
-                          {numeral(
-                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                          ).format('0,0')}
-                          ₫/4 giờ
+                          ) : (
+                              ''
+                            )}
+                          <Typography className="priceText" variant={typoVariant}>
+                            {numeral(
+                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                            ).format('0,0')}
+                            ₫/4 giờ
                         </Typography>
-                      </Grid>
-                    ) : (
-                      ''
-                    )}
+                        </Grid>
+                      ) : (
+                        ''
+                      )}
                   </Grid>
                 </Grid>
               </Link>
