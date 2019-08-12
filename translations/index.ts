@@ -17,6 +17,8 @@ import payment_vi from './payment/payment-vi.json';
 import payment_en from './payment/payment-en.json';
 import auth_vi from './auth/auth-vi.json';
 import auth_en from './auth/auth-en.json';
+import user_vi from './user/user-vi.json';
+import user_en from './user/user-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -44,7 +46,8 @@ i18n
         room: room_en,
         book: book_en,
         payment: payment_en,
-        auth: auth_en
+        auth: auth_en,
+        user: user_en
       },
       vi: {
         home: home_vi,
@@ -53,7 +56,8 @@ i18n
         room: room_vi,
         book: book_vi,
         payment: payment_vi,
-        auth: auth_vi
+        auth: auth_vi,
+        user: user_vi
       }
     },
 

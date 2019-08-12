@@ -1,41 +1,25 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, {
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-  lazy,
-  Suspense,
-  FC,
-  useMemo,
-  ReactNode,
-  ReactElement
-} from 'react';
-
+import React, { Fragment, useMemo, ReactNode } from 'react';
 import Slider, { Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Theme, Typography, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { makeStyles } from '@material-ui/styles';
-import RoomCard from '../RoomCard';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
-import ContentLoader from 'react-content-loader';
-import LoadingSkeleton from '../Loading/LoadingSkeleton';
-type Iprops<T> = {
-  classes?: any;
+
+interface Iprops<T> extends Partial<Settings> {
   roomData: T[];
   title?: string;
   usingSlider?: boolean;
   render?: (room: T) => ReactNode;
   spacing?: GridSpacing;
   customClass?: string;
-};
+}
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
   createStyles({
@@ -57,10 +41,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     usingSlider,
     render,
     spacing,
-    customClass = 'listRoomContainer'
+    customClass = 'listRoomContainer',
+    ...propsSlick
   } = props;
   const classes = useStyles({});
-  const { t } = useTranslation();
+  
   const setting: Settings = {
     dots: false,
     infinite: true,
@@ -137,7 +122,9 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         )}
         {roomData ? (
           usingSlider ? (
-            <Slider {...setting}>{renderRooms}</Slider>
+            <Slider {...setting} {...propsSlick}>
+              {renderRooms}
+            </Slider>
           ) : (
             <Fragment>{renderRooms}</Fragment>
           )
