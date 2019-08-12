@@ -50,14 +50,10 @@ const Rooms: NextPage = () => {
             )}
             <Hidden smDown>
               <FilterActions></FilterActions>
-<<<<<<< HEAD
             </Hidden>
 
             {/* <RoomListing /> */}
 
-=======
-            </div>
->>>>>>> 892b961dfb0a7cdfb4457258e78a889801f2ac0b
             <MapAndListing></MapAndListing>
           </div>
         </RoomFilterContext.Provider>

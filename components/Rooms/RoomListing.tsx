@@ -27,10 +27,6 @@ const RoomListing: FC = (props) => {
     updateRouter(true, 'page', current);
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 892b961dfb0a7cdfb4457258e78a889801f2ac0b
   useEffect(() => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);

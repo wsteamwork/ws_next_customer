@@ -8,6 +8,7 @@ import BookByHour from './BookByHour';
 import FastBooking from './FastBooking';
 import FilterRoom from './FilterRoom';
 import SwitchMap from './SwitchMap';
+import InfoSearch from './InfoSearch';
 
 const FilterActions: FC = () => {
   return (
@@ -18,7 +19,7 @@ const FilterActions: FC = () => {
         }}>
         <GridContainer xs={11} md={10} className="filterRooms">
           <Grid container>
-            <Grid item xs={11} container spacing={1}>
+            <Grid item xs={10} container spacing={1}>
               <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
                 <ChooseRoomGuest></ChooseRoomGuest>
               </Grid>
@@ -38,8 +39,9 @@ const FilterActions: FC = () => {
                 <FilterRoom></FilterRoom>
               </Grid>
             </Grid>
-            <Grid item xs={1} container justify="flex-end">
-              <SwitchMap></SwitchMap>
+            <Grid item xs={2} container justify="flex-end">
+              {/* <SwitchMap></SwitchMap> */}
+              <InfoSearch />
             </Grid>
           </Grid>
         </GridContainer>
