@@ -47,8 +47,8 @@ const Room: NextPage = () => {
           description={ReactHtmlParser(room.details.data[0].description, {
             transform: transformHtmlContent
           })}
-          url={`${IMAGE_STORAGE_LG}${room.media.data[0]}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0]}`}>
+          url={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}>
         </NextHead>
       )}
 

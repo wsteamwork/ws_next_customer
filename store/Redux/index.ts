@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import { PersistConfig } from 'redux-persist';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import rootReducer from '@/store/Redux/Reducers/index';
 import { MakeStore } from 'next-redux-wrapper';
@@ -23,7 +23,7 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
     const persistConfig: PersistConfig = {
       key: 'root',
       storage,
-      blacklist: ['roomHomepage', 'roomPage', 'book']
+      blacklist: ['roomHomepage', 'roomPage', 'book', 'userProfile']
     };
 
     const persistedReducer = persistReducer(persistConfig, rootReducer);

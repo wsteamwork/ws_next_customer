@@ -15,11 +15,10 @@ const PrivacyPolicy: NextPage = (props) => {
     <Grid className="termsAndConditions">
       <NextHead
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
-        title={t('layout:footer:private')}
-        url="./static/images/Logo-westay.png"
-        ogImage="/static/favicon.ico"
-        description={t('layout:footer:private')}>
-      </NextHead>
+        title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
+        url="https://westay.vn/privacy-policy"
+        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       <NavHeader></NavHeader>
 

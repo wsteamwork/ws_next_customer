@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import FooterComponent from '@/components/Layout/FooterComponent';
 
-interface IProps { }
+interface IProps {}
 
 // @ts-ignore
 const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
@@ -18,11 +18,10 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
     <Grid className="termsAndConditions">
       <NextHead
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
-        title={t('layout:footer:termsOfUse')}
-        url="./static/images/Logo-westay.png"
-        ogImage="/static/favicon.ico"
-        description={t('layout:footer:termsOfUse')}>
-      </NextHead>
+        title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
+        url="https://westay.vn/terms-and-conditions"
+        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       <NavHeader></NavHeader>
 

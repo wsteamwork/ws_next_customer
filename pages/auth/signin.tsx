@@ -12,8 +12,7 @@ const Signin = () => {
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/signup"
-        ogImage="/static/favicon.ico">
-      </NextHead>
+        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       <NavHeader></NavHeader>
 

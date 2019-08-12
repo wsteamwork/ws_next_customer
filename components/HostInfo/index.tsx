@@ -123,7 +123,7 @@ const HostInfo: FC<IProps> = (props) => {
           </Grid>
           <Grid item xs={9}>
             <Grid item xs className={classes.content}>
-              <Link href={`/users/${merchant.id}`}>
+              <Link href={`/user/${merchant.id}`}>
                 <a className={classes.link}>
                   <Typography className={classes.userName}>{merchant.name}</Typography>
                 </a>

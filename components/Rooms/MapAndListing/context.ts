@@ -69,7 +69,7 @@ export const useRefreshListing = (): ReturnUseRefresh => {
       pathname: '/rooms',
       query
     });
-  }, [state, filter]);
+  }, [state, filter, isMapOpen]);
 
   return { isMapOpen };
 };
