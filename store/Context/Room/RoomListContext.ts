@@ -74,6 +74,7 @@ export const getRooms = async (
   router: NextRouter,
   coords?: MapCoords
 ): Promise<BaseResponse<RoomIndexRes[]>> => {
+  
   let params: RoomUrlParams = router.query;
 
   let query: Partial<RoomIndexGetParams> = {

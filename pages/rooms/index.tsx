@@ -17,6 +17,7 @@ import {
 } from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
+import { Hidden } from '@material-ui/core';
 
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -38,18 +39,21 @@ const Rooms: NextPage = () => {
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
-            <div>
-              {!isMapOpen && (
-                <GridContainer
-                  xs={11}
-                  md={10}
-                  classNameItem="searchRooms__overlay"
-                  className="searchRooms">
-                  <SearchComponent />
-                </GridContainer>
-              )}
+            {!isMapOpen && (
+              <GridContainer
+                xs={11}
+                md={10}
+                classNameItem="searchRooms__overlay"
+                className="searchRooms">
+                <SearchComponent />
+              </GridContainer>
+            )}
+            <Hidden smDown>
               <FilterActions></FilterActions>
-            </div>
+            </Hidden>
+
+            {/* <RoomListing /> */}
+
             <MapAndListing></MapAndListing>
           </div>
         </RoomFilterContext.Provider>

@@ -48,7 +48,6 @@ const ActionChoose: FC<IProps> = (props) => {
     setOpen(false);
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: room });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: guest });
-    console.log(guest, room)
     updateRouter(true, 'number_of_guests', guest, 'number_of_rooms', room);
   };
 

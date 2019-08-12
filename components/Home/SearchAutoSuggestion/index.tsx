@@ -279,7 +279,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   return (
     <Autosuggest
       {...autosuggestProps}
-      //alwaysRenderSuggestions={true}
+      // alwaysRenderSuggestions={true}
       inputProps={{
         id: 'search-autosuggest-simple',
         value: searchText,
