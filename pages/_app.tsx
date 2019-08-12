@@ -12,7 +12,7 @@ import withRedux, { NextJSContext } from 'next-redux-wrapper';
 import { makeStore } from '@/store/Redux';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 interface NextContextApp extends NextJSContext, AppContext { }
 interface IProps extends AppProps {
@@ -33,14 +33,14 @@ class MyApp extends App<IProps> {
     return { pageProps };
   }
 
-  initializeReactGA() {
-    ReactGA.initialize('UA-137177093-1');
-    ReactGA.pageview(
-      `/${window.location.pathname} + ${
-      window.location.search
-      }`
-    );
-  }
+  // initializeReactGA() {
+  //   ReactGA.initialize('UA-137177093-1');
+  //   ReactGA.pageview(
+  //     `/${window.location.pathname} + ${
+  //     window.location.search
+  //     }`
+  //   );
+  // }
 
   componentDidMount() {
     Router.events.on('routeChangeStart', this.handleRouteChangeStart);
@@ -69,7 +69,7 @@ class MyApp extends App<IProps> {
 
   render() {
     const { Component, pageProps, isServer, store } = this.props;
-    this.initializeReactGA();
+    // this.initializeReactGA();
 
     return (
       <Container>

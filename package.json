@@ -4,8 +4,7 @@
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
-    "ready": "pm2 start dist/server/index.js",
-    "prod": "pm2 start npm dist/server/index.js --start"
+    "ready": "pm2 start dist/server/index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
@@ -50,7 +49,7 @@
     "react-dates": "^20.2.5",
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
-    "react-ga": "^2.5.7",
+    "react-ga": "^2.6.0",
     "react-html-parser": "^2.0.2",
     "react-i18next": "^10.11.4",
     "react-image-gallery": "^0.8.18",
