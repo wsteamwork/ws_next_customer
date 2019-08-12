@@ -36,20 +36,18 @@ const Home: NextPage = () => {
       />
 
       <GridContainer xs={12}>
-
         <SearchHome></SearchHome>
 
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <SliderTypeApartment />
           <MetroGridImage />
           <ListRoom
-          roomData={roomsHot}
-          usingSlider={true}
-          title={'Phòng nổi bật'}
-          render={renderRoom}></ListRoom>
+            roomData={roomsHot}
+            usingSlider={true}
+            title={'Phòng nổi bật'}
+            render={renderRoom}></ListRoom>
 
-          <CollectionViews/>
-
+          <CollectionViews />
         </GridContainer>
         <HostBecome />
 
@@ -62,17 +60,8 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getInitialProps = async (ctx: NextContextPage) => {
-  try {
-    const res = await getRoomsHomepage();
-    ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
-    ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
-    ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
-    ctx.store.dispatch({ type: 'setCollections', collections: res.collections });
-  } catch (error) {
-    // console.log(error.respose);
-  }
-
+Home.getInitialProps = async ({ store }: NextContextPage) => {
+  const res = await getRoomsHomepage(store.dispatch);
   return {};
 };
 

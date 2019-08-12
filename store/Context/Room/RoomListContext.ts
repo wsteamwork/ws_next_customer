@@ -27,14 +27,14 @@ export interface IRoomIndexContext {
 export type RoomIndexAction =
   | { type: 'setRooms'; rooms: RoomIndexRes[]; meta?: Pagination | null }
   | { type: 'setMeta'; meta: Pagination }
-  | { type: 'setLoadMore'; isLoadMore: boolean }
+  | { type: 'setLoading'; isLoading: boolean }
   | { type: 'setMapOpen'; isMapOpen: boolean }
   | { type: 'setCoords'; payload: MapCoords | null };
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
   readonly meta: Pagination | null;
-  readonly isLoadMore: boolean;
+  readonly isLoading: boolean;
   readonly isMapOpen: boolean;
   readonly coords: MapCoords | null;
 };
@@ -42,7 +42,7 @@ export type RoomIndexState = {
 export const RoomIndexStateInit: RoomIndexState = {
   rooms: [],
   meta: null,
-  isLoadMore: false,
+  isLoading: false,
   isMapOpen: false,
   coords: null
 };
@@ -59,8 +59,8 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
       });
     case 'setMeta':
       return updateObject<RoomIndexState>(state, { meta: action.meta });
-    case 'setLoadMore':
-      return updateObject<RoomIndexState>(state, { isLoadMore: action.isLoadMore });
+    case 'setLoading':
+      return updateObject<RoomIndexState>(state, { isLoading: action.isLoading });
     case 'setMapOpen':
       return updateObject<RoomIndexState>(state, { isMapOpen: action.isMapOpen });
     case 'setCoords':

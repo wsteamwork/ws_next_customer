@@ -19,10 +19,15 @@ export const useRefreshListing = (): ReturnUseRefresh => {
   const filter = useSelector<ReducersList, SearchFilterState>((state) => state.searchFilter);
 
   const getData = async () => {
+    dispatchIndexRoom({ type: 'setLoading', isLoading: true });
+
     try {
       const res = await getRooms(router, coords);
       dispatchIndexRoom({ type: 'setRooms', rooms: res.data, meta: res.meta });
-    } catch (error) {}
+      dispatchIndexRoom({ type: 'setLoading', isLoading: false });
+    } catch (error) {
+      dispatchIndexRoom({ type: 'setLoading', isLoading: false });
+    }
   };
 
   useEffect(() => {
