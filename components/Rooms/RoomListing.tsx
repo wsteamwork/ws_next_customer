@@ -51,38 +51,14 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const changePage = (current: number) => {
-    console.log(current);
     setCurrentPage(current);
     updateRouter(true, 'page', current);
   };
 
-  useEffect(() => {
-    setLoading(true);
-    dispatchIndexRoom({
-      type: 'setRooms',
-      rooms: []
-    });
-    getRooms(router)
-      .then((data) => {
-        const roomData = data.data;
-        const pagination = data.meta;
-        setLoading(false);
-        dispatchIndexRoom({
-          type: 'setRooms',
-          rooms: roomData,
-          meta: pagination
-        });
-      })
-      .catch((err) => console.error(err));
-  }, [router.query]);
 
   useEffect(() => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);
-
-  useEffect(() => {
-    console.log(isEmpty);
-  });
 
   const renderRoom = (room) => <RoomCardListing room={room} />;
   return (
@@ -114,7 +90,7 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
           </Grid>
         )}
 
-        <Grid item lg={9} md={8} sm={12} xs={12} style={{ marginTop: '-69px' }}>
+        <Grid item lg={9} md={8} sm={12} xs={12}>
           {rooms.length !== 0 ? (
             <Fragment>
               <ListRoom
@@ -135,7 +111,7 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
               />
             </Fragment>
           ) : !isEmpty ? (
-            <Grid style={{ marginTop: 64 }}>
+            <Grid>
               <LoadingSkeleton type={'rooms'} duplicate={5} />
             </Grid>
           ) : (

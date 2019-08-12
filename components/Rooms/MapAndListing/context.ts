@@ -16,7 +16,7 @@ export const useRefreshListing = (): ReturnUseRefresh => {
   const { router } = useContext(GlobalContext);
   const { state: stateRoomIndex, dispatch: dispatchIndexRoom } = useContext(RoomIndexContext);
   const { isMapOpen, coords } = stateRoomIndex;
-  const filter = useSelector<ReducersList, SearchFilterState>((state) => state.searchFilter);
+  // const filter = useSelector<ReducersList, SearchFilterState>((state) => state.searchFilter);
 
   const getData = async () => {
     try {
@@ -29,42 +29,42 @@ export const useRefreshListing = (): ReturnUseRefresh => {
     getData();
   }, [router.query, coords]);
 
-  useEffect(() => {
-    let query = {};
+  // useEffect(() => {
+  //   let query = {};
 
-    const combinedFilter = { ...state, ...filter };
+  //   const combinedFilter = { ...state, ...filter };
 
-    Object.keys(combinedFilter).forEach((i) => {
-      if (!!combinedFilter[i]) {
-        if (Array.isArray(combinedFilter[i]) && combinedFilter[i].length > 0) {
-          if (i === 'roomTypes') {
-            query['room_type'] = combinedFilter[i];
-          } else {
-            query[i] = combinedFilter[i].join(',');
-          }
-        } else if (i === 'searchText') {
-          query['name'] = combinedFilter[i];
-        } else if (i === 'startDate') {
-          query['check_in'] = combinedFilter[i];
-        } else if (i === 'endDate') {
-          query['check_out'] = combinedFilter[i];
-        } else if (i === 'bookingType') {
-          query['rent_type'] = combinedFilter[i];
-        } else if (i === 'roomsCount') {
-          query['number_of_rooms'] = combinedFilter[i];
-        } else if (i === 'guestsCount') {
-          query['number_of_guests'] = combinedFilter[i];
-        } else if (!Array.isArray(combinedFilter[i])) {
-          query[i] = combinedFilter[i];
-        }
-      }
-    });
+  //   Object.keys(combinedFilter).forEach((i) => {
+  //     if (!!combinedFilter[i]) {
+  //       if (Array.isArray(combinedFilter[i]) && combinedFilter[i].length > 0) {
+  //         if (i === 'roomTypes') {
+  //           query['room_type'] = combinedFilter[i];
+  //         } else {
+  //           query[i] = combinedFilter[i].join(',');
+  //         }
+  //       } else if (i === 'searchText') {
+  //         query['name'] = combinedFilter[i];
+  //       } else if (i === 'startDate') {
+  //         query['check_in'] = combinedFilter[i];
+  //       } else if (i === 'endDate') {
+  //         query['check_out'] = combinedFilter[i];
+  //       } else if (i === 'bookingType') {
+  //         query['rent_type'] = combinedFilter[i];
+  //       } else if (i === 'roomsCount') {
+  //         query['number_of_rooms'] = combinedFilter[i];
+  //       } else if (i === 'guestsCount') {
+  //         query['number_of_guests'] = combinedFilter[i];
+  //       } else if (!Array.isArray(combinedFilter[i])) {
+  //         query[i] = combinedFilter[i];
+  //       }
+  //     }
+  //   });
 
-    Router.push({
-      pathname: '/rooms',
-      query
-    });
-  }, [state, filter]);
+  //   Router.push({
+  //     pathname: '/rooms',
+  //     query
+  //   });
+  // }, [state, filter]);
 
   return { isMapOpen };
 };

@@ -29,7 +29,6 @@ const ChooseMethodPayment = () => {
 
   const [value, setValue] = useState('female');
 
-  //   console.log(value);
 
   const handleChange = (event: ChangeEvent<{}>, value: string) => {
     setValue(value);
