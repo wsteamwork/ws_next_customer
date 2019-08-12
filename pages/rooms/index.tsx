@@ -45,10 +45,12 @@ const Rooms: NextPage = () => {
   return (
     <Fragment>
       <NextHead
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/rooms"></NextHead>
+        url="/rooms">
+      </NextHead>
 
       <NavHeader></NavHeader>
       <RoomIndexContext.Provider value={{ state, dispatch }}>

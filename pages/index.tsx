@@ -29,11 +29,12 @@ const Home: NextPage = () => {
   return (
     <Fragment>
       <NextHead
-        title="Nextjs Demo"
-        description="Welcome to Nextjs"
-        ogImage="/static/favicon.ico"
-        url="https://nextjs.org/"
-      />
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
+        title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
+        url="https://westay.vn"
+        ogImage="/static/images/Bg_home.4023648f.jpg">
+      </NextHead>
 
       <GridContainer xs={12}>
 
@@ -43,12 +44,12 @@ const Home: NextPage = () => {
           <SliderTypeApartment />
           <MetroGridImage />
           <ListRoom
-          roomData={roomsHot}
-          usingSlider={true}
-          title={'Phòng nổi bật'}
-          render={renderRoom}></ListRoom>
+            roomData={roomsHot}
+            usingSlider={true}
+            title={'Phòng nổi bật'}
+            render={renderRoom}></ListRoom>
 
-          <CollectionViews/>
+          <CollectionViews />
 
         </GridContainer>
         <HostBecome />

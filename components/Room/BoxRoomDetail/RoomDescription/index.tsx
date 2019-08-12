@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -89,10 +89,10 @@ const RoomDescription: FC<IProps> = (props) => {
               </Button>
             </Fragment>
           ) : (
-            <Button onClick={toggle} className={classes.button} size="small">
-              &#8230; {t('rooms:readMore')}
-            </Button>
-          )}
+              <Button onClick={toggle} className={classes.button} size="small">
+                &#8230; {t('rooms:readMore')}
+              </Button>
+            )}
         </Grid>
       </Fragment>
     )

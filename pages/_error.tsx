@@ -18,10 +18,12 @@ const Error500: NextPage = (props) => {
   return (
     <GridContainer xs={12} classNameItem="pageError">
       <NextHead
-        title="500 Internal Server Error - Westay.org"
-        description="Opps 500error"
-        ogImage="/static/favicon.ico"
-        url="/"></NextHead>
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
+        title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        url="/signup"
+        ogImage="/static/favicon.ico">
+      </NextHead>
 
       <Grid container>
         <Grid item container xs={12} md={6}>

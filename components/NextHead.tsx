@@ -1,26 +1,46 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 interface IProps {
   title: string;
   description: string;
   url: string;
   ogImage: string;
+  ogSitename: string;
 }
 
 const NextHead: FC<IProps> = (props) => (
-  <Head>
-    <title>{props.title}</title>
-    <meta name="description" content={props.description} />
-    <meta property="og:url" content={props.url} />
-    <meta property="og:title" content={props.title} />
-    <meta property="og:description" content={props.description} />
-    <meta name="twitter:site" content={props.url} />
-    <meta name="twitter:image" content={props.ogImage} />
-    <meta property="og:image" content={props.ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    {/* <link rel="stylesheet" href="/_next/static/css/styles.chunk.css" /> */}
-  </Head>
+  <NextSeo
+    title={props.title}
+    description={props.description}
+    canonical={props.url}
+    additionalMetaTags={[{
+      name: 'robots',
+      content: 'index,follow'
+    }]}
+    openGraph={{
+      url: props.url,
+      title: props.title,
+      locale: 'vi-VN',
+      description: props.description,
+      images: [
+        {
+          url: props.ogImage,
+          width: 1200,
+          height: 630
+        }
+      ],
+      site_name: props.ogSitename,
+    }}
+    facebook={{
+      appId: '331750437466885',
+    }}
+    twitter={{
+      handle: '@handle',
+      site: '@site',
+      cardType: 'summary_large_image',
+    }}
+  />
 );
 
 export default NextHead;
