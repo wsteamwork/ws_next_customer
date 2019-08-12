@@ -1,52 +1,24 @@
-import { useEffect, useContext, useState, Fragment } from 'react';
-import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
+import { useEffect, useContext, useState, Fragment, FC } from 'react';
 import GridContainer from '../Layout/Grid/Container';
 import { Grid, Hidden, Paper } from '@material-ui/core';
 import RoomCardListing from './RoomCardListing';
 import ButtonGlobal from '../ButtonGlobal';
 import VisitedRooms from './VisitedRooms';
 import ListRoom from '../ListRoom';
-import {
-  getRooms,
-  RoomIndexContext,
-  IRoomIndexContext
-} from '@/store/Context/Room/RoomListContext';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
-import { IRoomFilterContext, RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import Pagination from 'rc-pagination';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
 import 'rc-pagination/assets/index.css';
 import _ from 'lodash';
-import Link from 'next/link';
 import { updateRouter } from '@/store/Context/utility';
-import RoomCard from '../RoomCard';
-import ContentLoader from 'react-content-loader';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
 
-interface IProps {
-  classes?: any;
-  filter: SearchFilterState;
-}
-
 // @ts-ignore
-const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
-  const { classes, filter } = props;
-
-  const { state: stateFilterRoom, dispatch: dispatchFilterRoom } = useContext<IRoomFilterContext>(
-    RoomFilterContext
-  );
-  const { state: stateIndexRoom, dispatch: dispatchIndexRoom } = useContext<IRoomIndexContext>(
-    RoomIndexContext
-  );
-  const { roomTypes, instant_book, amenities } = stateFilterRoom;
-  const { rooms, meta } = stateIndexRoom;
-  const [isLoading, setLoading] = useState<boolean>(false);
+const RoomListing: FC = (props) => {
+  const { state: stateIndexRoom } = useContext(RoomIndexContext);
+  const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const { router } = useContext(GlobalContext);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -55,12 +27,16 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
     updateRouter(true, 'page', current);
   };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 892b961dfb0a7cdfb4457258e78a889801f2ac0b
   useEffect(() => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);
 
   const renderRoom = (room) => <RoomCardListing room={room} />;
+
   return (
     <GridContainer xs={11} md={10} xl={9}>
       <Grid
@@ -172,8 +148,4 @@ const RoomListing: ComponentType<IProps> = (props: LocalProps) => {
   );
 };
 
-const mapStateToProps = (state: ReducersType) => ({
-  filter: state.searchFilter
-});
-
-export default compose<IProps, any>(connect(mapStateToProps))(RoomListing);
+export default RoomListing;

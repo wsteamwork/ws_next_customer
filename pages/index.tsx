@@ -29,27 +29,26 @@ const Home: NextPage = () => {
   return (
     <Fragment>
       <NextHead
-        title="Nextjs Demo"
-        description="Welcome to Nextjs"
-        ogImage="/static/favicon.ico"
-        url="https://nextjs.org/"
-      />
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
+        title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
+        description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
+        url="https://westay.vn"
+        ogImage="/static/images/Bg_home.4023648f.jpg">
+      </NextHead>
 
       <GridContainer xs={12}>
-
         <SearchHome></SearchHome>
 
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <SliderTypeApartment />
           <MetroGridImage />
           <ListRoom
-          roomData={roomsHot}
-          usingSlider={true}
-          title={'Phòng nổi bật'}
-          render={renderRoom}></ListRoom>
+            roomData={roomsHot}
+            usingSlider={true}
+            title={'Phòng nổi bật'}
+            render={renderRoom}></ListRoom>
 
-          <CollectionViews/>
-
+          <CollectionViews />
         </GridContainer>
         <HostBecome />
 
@@ -62,17 +61,8 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getInitialProps = async (ctx: NextContextPage) => {
-  try {
-    const res = await getRoomsHomepage();
-    ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
-    ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
-    ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
-    ctx.store.dispatch({ type: 'setCollections', collections: res.collections });
-  } catch (error) {
-    // console.log(error.respose);
-  }
-
+Home.getInitialProps = async ({ store }: NextContextPage) => {
+  const res = await getRoomsHomepage(store.dispatch);
   return {};
 };
 

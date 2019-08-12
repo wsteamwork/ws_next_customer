@@ -1,11 +1,18 @@
 import { Reducer } from 'react';
-import { RoomIndexRes, NumberRoomCity, TypeApartment, Collections } from '@/types/Requests/Rooms/RoomResponses';
+import {
+  RoomIndexRes,
+  NumberRoomCity,
+  TypeApartment,
+  Collections
+} from '@/types/Requests/Rooms/RoomResponses';
 import qs from 'query-string';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
+import { Dispatch } from 'redux';
+import { ReducresActions } from '..';
 
 export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
@@ -102,9 +109,16 @@ export const getCollections = async (): Promise<Collections[]> => {
 };
 
 // @ts-ignore
-export const getRoomsHomepage = async (): Promise<Omit<RoomHomepageState, 'roomsNew'>> => {
-  const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(),getCollections()]);
-  const [roomsHot, roomsCity, apartments,collections] = res;
+export const getRoomsHomepage = async (
+  dispatch: Dispatch<ReducresActions>
+): Promise<Omit<RoomHomepageState, 'roomsNew'>> => {
+  const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(), getCollections()]);
+  const [roomsHot, roomsCity, apartments, collections] = res;
+
+  dispatch({ type: 'setRoomCity', rooms: roomsCity });
+  dispatch({ type: 'setApartment', rooms: apartments });
+  dispatch({ type: 'setRoomHot', rooms: roomsHot });
+  dispatch({ type: 'setCollections', collections: collections });
 
   return {
     roomsHot,

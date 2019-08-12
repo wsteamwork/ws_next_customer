@@ -14,10 +14,12 @@ const PrivacyPolicy: NextPage = (props) => {
   return (
     <Grid className="termsAndConditions">
       <NextHead
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title={t('layout:footer:private')}
         url="./static/images/Logo-westay.png"
         ogImage="/static/favicon.ico"
-        description={t('layout:footer:private')}></NextHead>
+        description={t('layout:footer:private')}>
+      </NextHead>
 
       <NavHeader></NavHeader>
 

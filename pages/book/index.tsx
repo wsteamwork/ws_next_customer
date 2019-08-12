@@ -42,8 +42,9 @@ const Book: NextPage = (props) => {
     <Fragment>
       {!!room && !!dataCalculate && (
         <NextHead
-          title={`Đặt phòng - ${room.details.data[0].name}`}
-          description={`Đặt phòng - ${room.details.data[0].name} | Để thấy thanh thản tâm hồn`}
+          ogSitename="Westay - Đặt phòng homestay trực tuyến"
+          title={`Đặt phòng - ${room.details.data[0].name} ngay`}
+          description={`Đặt phòng - ${room.details.data[0].name} ngay. Westay - Kênh đặt phòng Homestay trực tuyến`}
           url={`/book`}
           ogImage={`${IMAGE_STORAGE_LG}${dataCalculate.room_avatar}`}></NextHead>
       )}

@@ -8,13 +8,15 @@ const Signup = () => {
   return (
     <Fragment>
       <NextHead
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/signup"
-        ogImage="/static/favicon.ico"></NextHead>
+        ogImage="/static/favicon.ico">
+      </NextHead>
       <NavHeader></NavHeader>
 
-      <GridContainer xs={11} md={4}>
+      <GridContainer xs={11} md={8} lg={4} className="pageSignup">
         <FormSignup></FormSignup>
       </GridContainer>
     </Fragment>
