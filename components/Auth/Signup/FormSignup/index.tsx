@@ -1,21 +1,18 @@
 import React, { FC, useMemo, useContext, useState } from 'react';
-import { Grid, FormControl, TextField, FormHelperText } from '@material-ui/core';
+import { Grid, FormControl, TextField, FormHelperText, Typography } from '@material-ui/core';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import Link from 'next/link';
 import * as Yup from 'yup';
-import ButtonGoogle from '../ButtonLogin/ButtonGoogle';
-import ButtonFacebook from '../ButtonLogin/ButtonFacebook';
 import { RegisterReq } from '@/types/Requests/Account/AccountRequests';
 import { registerAccount } from './context';
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { ReactFacebookLoginInfo } from 'react-facebook-login';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import ButtonLoginSocial from '../ButtonLoginSocial';
 
 interface MyFormValues {
   firstName: string;
@@ -48,15 +45,15 @@ const useValidata = () => {
       .max(11, t('book:bookingForm:beetwen10_11'))
       .test('checkNaN', t('book:bookingForm:notSymbol'), (value) => !isNaN(value)),
     password: Yup.string()
-      .required('Vui lòng nhập mật khẩu')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(50, 'Tối đa 50 ký tự'),
+      .required(t('auth:enterPassword'))
+      .min(6, t('auth:min6Characters'))
+      .max(50, t('auth:max50Characters')),
     password_confirmation: Yup.string()
-      .required('Vui lòng xác nhận lại mật khẩu')
-      .min(6, 'Tối thiểu 6 ký tự')
-      .max(50, 'Tối đa 50 ký tự')
-      .oneOf([Yup.ref('password')], 'Mật khẩu không trùng khớp'),
-    birthday: Yup.date().required('Vui lòng nhập ngày sinh')
+      .required(t('auth:confPass'))
+      .min(6, t('auth:min6Characters'))
+      .max(50, t('auth:max50Characters'))
+      .oneOf([Yup.ref('password')], t('auth:passNotMatch')),
+    birthday: Yup.date().required(t('auth:enterBirthday'))
   });
 
   return FormValidationSchema;
@@ -105,8 +102,6 @@ const FormSignup: FC = () => {
     };
   }, []);
 
-  const responseFacebook = (userInfo: ReactFacebookLoginInfo) => {};
-
   return (
     <Grid className="formSignup">
       <Formik
@@ -126,6 +121,10 @@ const FormSignup: FC = () => {
         }: FormikProps<MyFormValues>) => (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h6">{t('auth:registerInfo')}</Typography>
+              </Grid>
+
               <Grid item xs={12} lg={6}>
                 <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
                   <TextField
@@ -197,8 +196,8 @@ const FormSignup: FC = () => {
                     variant="outlined"
                     type="date"
                     name="birthday"
-                    label="Ngày sinh"
-                    placeholder={t('book:bookingForm:placeEmail')}
+                    label={t('auth:birthday')}
+                    placeholder={t('auth:birthday')}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={
@@ -219,8 +218,8 @@ const FormSignup: FC = () => {
                     // id="email-booking"
                     type="password"
                     name="password"
-                    label="Password"
-                    placeholder="Password"
+                    label={t('auth:password')}
+                    placeholder={t('auth:password')}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
@@ -238,8 +237,8 @@ const FormSignup: FC = () => {
                     // id="email-booking"
                     type="password"
                     name="password_confirmation"
-                    label="Nhập lại mật khẩu"
-                    placeholder="Nhập lại mật khẩu"
+                    label={t('auth:enterConf')}
+                    placeholder={t('auth:enterConf')}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password_confirmation}
@@ -254,7 +253,7 @@ const FormSignup: FC = () => {
                 <FormControl fullWidth error={!!error}>
                   <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
                     {!isSubmitting ? (
-                      'Submit'
+                      t('auth:signup')
                     ) : (
                       <SimpleLoader height="45px" width="100%"></SimpleLoader>
                     )}
@@ -266,44 +265,26 @@ const FormSignup: FC = () => {
               <Grid item xs={12} container justify="center">
                 <FormControl fullWidth>
                   <p className="haveAccount">
-                    Bạn đã có tài khoản Westay?{' '}
+                    {t('auth:haveAccount')}{' '}
                     <Link href="/auth/signin">
-                      <a>Đăng nhập</a>
+                      <a>{t('auth:singin')}</a>
                     </Link>
                   </p>
                   <p className="agreeRules">
-                    Tôi đồng ý với{' '}
+                    {t('auth:iAgree')}{' '}
                     <Link href="/terms-and-conditions">
-                      <a>Bảo mật</a>
+                      <a>{t('auth:security')}</a>
                     </Link>{' '}
-                    và{' '}
+                    {t('auth:and')}{' '}
                     <Link href="/privacy-policy">
-                      <a>Chính sách quyền riêng tư</a>
+                      <a>{t('auth:privatePoli')}</a>
                     </Link>{' '}
-                    của Westay.
+                    {t('auth:ofWstay')}
                   </p>
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} container spacing={2}>
-                <Grid item xs={12} lg={6}>
-                  <FormControl fullWidth>
-                    <ButtonGoogle></ButtonGoogle>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12} lg={6}>
-                  <FormControl fullWidth>
-                    <FacebookLogin
-                      appId="1088597931155576"
-                      fields="name,email,picture"
-                      callback={responseFacebook}
-                      cookie
-                      render={(props) => <ButtonFacebook onClick={props.onClick}></ButtonFacebook>}
-                    />
-                  </FormControl>
-                </Grid>
-              </Grid>
+              <ButtonLoginSocial></ButtonLoginSocial>
             </Grid>
           </form>
         )}></Formik>

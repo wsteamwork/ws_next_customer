@@ -14,7 +14,7 @@ const Signup = () => {
         ogImage="/static/favicon.ico"></NextHead>
       <NavHeader></NavHeader>
 
-      <GridContainer xs={11} md={4}>
+      <GridContainer xs={11} md={8} lg={4} className="pageSignup">
         <FormSignup></FormSignup>
       </GridContainer>
     </Fragment>

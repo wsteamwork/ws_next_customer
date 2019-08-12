@@ -72,12 +72,7 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async ({ store, router }: NextContextPage) => {
-  try {
-    const data = await getDataRoom(store.dispatch, router);
-  } catch (error) {
-    router.push('/error');
-  }
-
+  const data = await getDataRoom(store.dispatch, router);
   return {};
 };
 

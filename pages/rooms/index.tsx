@@ -1,11 +1,10 @@
-import React, { useReducer, useContext, Fragment, useEffect } from 'react';
+import React, { useReducer, useContext, Fragment } from 'react';
 import { NextPage } from 'next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
-import RoomListing from '@/components/Rooms/RoomListing';
 import {
   RoomFilterContext,
   RoomFilterStateInit,
@@ -14,8 +13,7 @@ import {
 import {
   RoomIndexReducer,
   RoomIndexContext,
-  RoomIndexStateInit,
-  getRooms
+  RoomIndexStateInit
 } from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
@@ -23,24 +21,7 @@ import MapAndListing from '@/components/Rooms/MapAndListing';
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
-  const { state: stateGlobal, dispatch: dispatchGlobal, router } = useContext(GlobalContext);
-  const { rooms, isMapOpen } = state;
-
-  useEffect(() => {
-    getRooms(router)
-      .then((data) => {
-        const roomData = data.data;
-        const pagination = data.meta;
-        dispatch({
-          type: 'setRooms',
-          rooms: roomData,
-          meta: pagination
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const { isMapOpen } = state;
 
   return (
     <Fragment>
@@ -66,7 +47,6 @@ const Rooms: NextPage = () => {
                 </GridContainer>
               )}
               <FilterActions></FilterActions>
-              {/* <RoomListing /> */}
             </div>
             <MapAndListing></MapAndListing>
           </div>
