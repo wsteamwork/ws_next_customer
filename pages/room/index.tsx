@@ -21,6 +21,7 @@ import BoxImage from '@/components/Room/BoxImage';
 import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -32,14 +33,23 @@ const Room: NextPage = () => {
     !!error && router.push('/error');
   }, [error]);
 
+  const transformHtmlContent = (node: any, index: number) => {
+    if (node.name === 'p' || node.name === 'image') {
+      return convertNodeToElement(node, index, transformHtmlContent);
+    }
+  };
   return (
     <Fragment>
       {!!room && (
         <NextHead
+          ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={room.details.data[0].name}
-          description={room.details.data[0].description}
+          description={ReactHtmlParser(room.details.data[0].description, {
+            transform: transformHtmlContent
+          })}
           url={`${IMAGE_STORAGE_LG}${room.media.data[0]}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0]}`}></NextHead>
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0]}`}>
+        </NextHead>
       )}
 
       <NavHeader></NavHeader>

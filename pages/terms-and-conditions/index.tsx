@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import FooterComponent from '@/components/Layout/FooterComponent';
 
-interface IProps {}
+interface IProps { }
 
 // @ts-ignore
 const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
@@ -17,10 +17,12 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
   return (
     <Grid className="termsAndConditions">
       <NextHead
+        ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title={t('layout:footer:termsOfUse')}
         url="./static/images/Logo-westay.png"
         ogImage="/static/favicon.ico"
-        description={t('layout:footer:termsOfUse')}></NextHead>
+        description={t('layout:footer:termsOfUse')}>
+      </NextHead>
 
       <NavHeader></NavHeader>
 
