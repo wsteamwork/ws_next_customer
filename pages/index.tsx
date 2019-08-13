@@ -1,23 +1,19 @@
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import { NextPage } from 'next';
 import NextHead from '@/components/NextHead';
 import FooterComponent from '@/components/Layout/FooterComponent';
 import HostBecome from '@/components/Shared/HostBecome';
 import GridContainer from '@/components/Layout/Grid/Container';
-import NavHeader from '@/components/Toolbar/NavHeader';
 import ListRoom from '@/components/ListRoom';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import BlogContainer from '@/components/Layout/BlogContainer';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import RoomCard from '@/components/RoomCard';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
-import SeaView from '@/components/Home/CollectionRooms/SeaView';
-import CityView from '@/components/Home/CollectionRooms/CityView';
 import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
 
 const Home: NextPage = () => {
@@ -27,7 +23,7 @@ const Home: NextPage = () => {
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
 
   return (
-    <Fragment>room
+    <Fragment>
       <NextHead
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
