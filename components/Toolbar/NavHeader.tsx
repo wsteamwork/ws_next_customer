@@ -37,6 +37,7 @@ import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import Link from 'next/link';
+import SideDrawer from '@/components/Toolbar/SideDrawer';
 
 interface IProps {
   classes?: any;
@@ -316,19 +317,19 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                <Fragment>
-                  <Button
-                    name="sign-in"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={loginButtonClick}
-                    size="large"
+                  <Fragment>
+                    <Button
+                      name="sign-in"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={loginButtonClick}
+                      size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                  >
-                    {t('home:signIn')}
-                  </Button>
+                    >
+                      {t('home:signIn')}
+                    </Button>
 
-                  {/* <Link href="/auth/signup"> */}
+                    {/* <Link href="/auth/signup"> */}
                     <Button
                       href="/auth/signup"
                       name="sign-up"
@@ -336,15 +337,15 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                       className={classes.button}
                       onClick={signUpButtonClick}
                       size="large"
-                      // onMouseOver={() => SignUpForm.preload()}
+                    // onMouseOver={() => SignUpForm.preload()}
                     >
                       {t('home:signUp')}
                     </Button>
-                  {/* </Link> */}
+                    {/* </Link> */}
 
-                  <SwitchLanguage />
-                </Fragment>
-              )}
+                    <SwitchLanguage />
+                  </Fragment>
+                )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
@@ -364,7 +365,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                     classes={{
                       paper: classes.drawer
                     }}>
-                    {/* <SideDrawer setOpen={handleToggleDrawer} /> */}
+                    <SideDrawer setOpen={setOpenDrawer} />
                   </SwipeableDrawer>
                 </div>
               </Fragment>

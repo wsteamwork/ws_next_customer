@@ -22,6 +22,7 @@ import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import BoxRecommend from '@/components/Room/BoxRecommend';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -59,13 +60,17 @@ const Room: NextPage = () => {
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
               <BoxSearch />
               <BoxImage />
-              <Grid container spacing={1}>
-                <Grid item xs={12} lg={9}>
+              <Grid container>
+                <Grid item xs={12} lg={8} xl={9}>
                   <BoxRoomDetail></BoxRoomDetail>
                 </Grid>
 
-                <Grid item sm={12} md={11} lg={3} className="roomPage__boxBooking">
+                <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
                   <BoxBooking></BoxBooking>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <BoxRecommend />
                 </Grid>
               </Grid>
               <Grid container className="roomPage__boxBookingMoblie">

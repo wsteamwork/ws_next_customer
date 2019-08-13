@@ -40,7 +40,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       backgroundImage:
         'linear-gradient(white, white), radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );',
       backgroundOrigin: 'border-box',
-      backgroundClip: 'content-box, border-box'
+      backgroundClip: 'content-box, border-box',
+      [theme!.breakpoints!.down!('xs')]: {
+        margin:'0 auto',
+      }
     },
     Mark: {
       backgroundColor: '#1ba0e2',
@@ -91,20 +94,33 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       [theme!.breakpoints!.down!('xs')]: {
         fontSize: '4.5vw',
-        paddingTop: 5
+        paddingTop: 5,
+        textAlign:'center'
+      }
+    },
+    subStatus:{
+      [theme!.breakpoints!.down!('xs')]: {
+        textAlign:'center'
       }
     },
     contentRating: {
       alignItems: 'center'
     },
     ratingName: {
-      fontWeight: 700
-    }
+      fontWeight: 700,
+      fontSize:16,
+      [theme.breakpoints.down('sm')]:{
+        fontSize:14
+      }
+    },
   })
 );
 const StyledRating = withStyles({
   iconFilled: {
     color: '#08C299'
+  },
+  root:{
+    justifyContent:'center'
   }
 })(Rating);
 
@@ -150,11 +166,11 @@ const RatingDetail: FC<IProps> = (props) => {
   };
   return (
     <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={12} sm={12} md={6} className={classes.rating}>
-          <div className={classes.rowMargin2}>
+      <Grid container spacing={2}>
+        <Grid container item xs={12} sm={6} md={6} className={classes.rating} >
+          <Grid item className={classes.rowMargin2}>
             <Grid container className={classes.contentRating}>
-              <Grid item xs={4} sm={3} md={4} lg={4}>
+              <Grid item xs>
                 <div className={classes.boxMark}>
                   <div className={classes.Mark}>
                     <Typography variant={'h5'} className={classes.TypoMark}>
@@ -163,27 +179,27 @@ const RatingDetail: FC<IProps> = (props) => {
                   </div>
                 </div>
               </Grid>
-              <Grid item xs={8} sm={7} md={7} lg={7}>
+              <Grid item xs={12} sm={9} md={9} lg={8} xl={9}>
                 <Typography variant={'h5'} className={classes.status}>
                   {room.avg_rating_txt}
                 </Typography>
-                <Typography>
+                <Typography className={classes.subStatus}>
                   {t('rooms:contentRating1')} {room.avg_rating_txt}, {t('rooms:contentRating2')}
                   {room.total_review} {t('rooms:contentRating3')}
                 </Typography>
               </Grid>
             </Grid>
-          </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} md={6}>
+        <Grid item xs={12} sm={6} md={6} container alignContent='space-around'>
           {_.map(arrRating, (item, index) => (
             <Grid container key={index} className={classes.rowMargin}>
-              <Grid item xs={4} sm={3} lg={4}>
-                <Typography variant={'body1'} className={classes.ratingName}>
+              <Grid item xs={4} sm={3} lg={5}>
+                <Typography variant={'body1'} align='right' className={classes.ratingName}>
                   {item.name}
                 </Typography>
               </Grid>
-              <Grid item xs={8} sm={9} lg={8}>
+              <Grid item xs={8} sm={9} lg={7}>
                 {arrMenuItem(item.rating)}
               </Grid>
             </Grid>

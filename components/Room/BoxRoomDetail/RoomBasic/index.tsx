@@ -83,8 +83,8 @@ const RoomBasic: FC<IProps> = (props) => {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={6} sm={6} md={3} lg={3}>
+          <Grid container spacing={1}>
+            <Grid item xs={6} sm={6} md={3} lg xl={3}>
               <Grid container>
                 <Grid item xs={2} sm={2}>
                   <FontAwesomeIcon icon={faUserFriends}></FontAwesomeIcon>
@@ -96,7 +96,7 @@ const RoomBasic: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6} sm={6} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg xl={3}>
               <Grid container>
                 <Grid item xs={2} sm={2}>
                   <FontAwesomeIcon icon={faBed}></FontAwesomeIcon>
@@ -108,7 +108,7 @@ const RoomBasic: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6} sm={6} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
               <Grid container>
                 <Grid item xs={2} sm={2}>
                   <FontAwesomeIcon icon={faBath}></FontAwesomeIcon>
@@ -120,7 +120,7 @@ const RoomBasic: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6} sm={6} md={3} lg={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
               <Grid container>
                 <Grid item xs={2} sm={2}>
                   <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>

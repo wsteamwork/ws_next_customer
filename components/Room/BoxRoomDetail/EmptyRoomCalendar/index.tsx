@@ -32,6 +32,19 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
 
+  let widthCalendar:number;
+  switch (width) {
+    case 'xl': widthCalendar=50;
+      break;
+    case 'lg': widthCalendar=45;
+      break;
+    case 'md': widthCalendar=45;
+      break;
+    case 'sm': widthCalendar=45;
+      break;
+    default : widthCalendar=40;
+  }
+
   return useMemo(
     () => (
       <Fragment>
@@ -40,7 +53,7 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
         </Typography>
         <Grid className="EmptyRoomCalendar">
           <DayPickerRangeController
-            daySize={width === 'xl' || width === 'lg' ? 50 : (width === 'md' ? 40 : 38)}
+            daySize={widthCalendar}
             startDate={!!dateStart ? moment(dateStart) : moment()}
             endDate={!!dateEnd ? moment(dateEnd) : null}
             onDatesChange={() => { }}

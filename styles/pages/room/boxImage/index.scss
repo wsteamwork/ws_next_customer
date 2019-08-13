@@ -103,3 +103,13 @@
     display: none;
   }
 }
+
+.image-gallery-thumbnail, .image-gallery-thumbnail.active{
+  border-radius: 8px;
+
+  .image-gallery-thumbnail-inner{
+    img{
+      border-radius: 4px;
+    }
+  }
+}
