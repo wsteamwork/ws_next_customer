@@ -1,4 +1,4 @@
-import { Reducer } from 'react';
+import { Reducer, Dispatch } from 'react';
 import { RoomIndexRes, NumberRoomCity, TypeApartment, Collections } from '@/types/Requests/Rooms/RoomResponses';
 import qs from 'query-string';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
@@ -6,13 +6,15 @@ import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
+import { ReducresActions } from '..';
 
 export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
   | { type: 'setRoomCity'; rooms: NumberRoomCity[] }
   | { type: 'setRoomNew'; rooms: RoomIndexRes[] }
   | { type: 'setApartment'; rooms: TypeApartment[] }
-  | { type: 'setCollections'; collections: Collections[] };
+  | { type: 'setCollections'; collections: Collections[] }
+  | { type: 'setCollectionById'; collectionById: Collections };
 
 export type RoomHomepageState = {
   readonly roomsHot: RoomIndexRes[];
@@ -20,6 +22,7 @@ export type RoomHomepageState = {
   readonly roomsNew: RoomIndexRes[];
   readonly apartments: TypeApartment[];
   readonly collections: Collections[];
+  readonly collectionById: Collections;
 };
 
 export const init: RoomHomepageState = {
@@ -27,7 +30,8 @@ export const init: RoomHomepageState = {
   roomsCity: null,
   roomsNew: [],
   apartments: [],
-  collections: []
+  collections: [],
+  collectionById: null
 };
 
 export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (
@@ -44,7 +48,9 @@ export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
     case 'setApartment':
       return updateObject<RoomHomepageState>(state, { apartments: action.rooms });
     case 'setCollections':
-      return updateObject<RoomHomepageState>(state, { collections: action.collections });
+      return updateObject<RoomHomepageState>(state, { collections: action.collections }); 
+    case 'setCollectionById':
+      return updateObject<RoomHomepageState>(state, { collectionById: action.collectionById });
     default:
       return state;
   }
@@ -101,8 +107,17 @@ export const getCollections = async (): Promise<Collections[]> => {
   return res.data.data;
 };
 
+export const getCollectionById = async (id:any, dispatch: Dispatch<ReducresActions>): Promise<Collections> => {
+  const url = `collections/${id}?include=details,rooms.media,rooms.details,rooms.city,rooms.district`;
+
+  const res: AxiosRes<Collections> = await axios.get(url);
+  dispatch({type: 'setCollectionById', collectionById: res.data.data})
+
+  return res.data.data;
+};
+
 // @ts-ignore
-export const getRoomsHomepage = async (): Promise<Omit<RoomHomepageState, 'roomsNew'>> => {
+export const getRoomsHomepage = async (): Promise<Omit<RoomHomepageState, 'roomsNew' ,'collectionById'>> => {
   const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(),getCollections()]);
   const [roomsHot, roomsCity, apartments,collections] = res;
 

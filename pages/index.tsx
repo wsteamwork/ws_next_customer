@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
 
   return (
-    <Fragment>
+    <Fragment>room
       <NextHead
         title="Nextjs Demo"
         description="Welcome to Nextjs"

@@ -3,7 +3,7 @@ import {GridSize, GridSpacing, GridItemsAlignment} from '@material-ui/core/Grid'
 import {CustomClasses} from '@/types/Interfaces/CustomInterface';
 import {ReactNode} from 'react';
 
-type IndexMainCardClasses = 'image' | 'title' | 'boxTitle' | 'maskBackground';
+type IndexMainCardClasses = 'image' | 'title' | 'boxTitle' | 'maskBackground'| 'subTitle';
 
 export interface ICardIntro extends CustomClasses<IndexMainCardClasses> {
   /**
