@@ -95,6 +95,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
           }
+          .roomCard__address {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            line-height: 1.5 !important;
+            margin-bottom: 0;
+            display: -webkit-box;
+            max-height: 46px;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
 
           .review {
             display: flex;
@@ -117,6 +128,7 @@
               font-size: 14px;
               font-weight: 500;
             }
+            
           }
         }
       }

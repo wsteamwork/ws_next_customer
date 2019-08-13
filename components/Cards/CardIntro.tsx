@@ -169,7 +169,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
             {title}
           </Typography>
           {showSubTitle ? (
-            <Typography variant="subtitle2" className={classes.subTitle}>
+            <Typography variant="subtitle2" className={classNames(classes.subTitle, customClasses.subTitle)}>
               {subTitle}
             </Typography>
           ) : ''}

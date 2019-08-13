@@ -1,6 +1,5 @@
 import React, { FC, Fragment } from 'react';
-import { compose } from 'recompose';
-import { createStyles, withStyles } from '@material-ui/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
 import { Grid, Link, Typography, Theme, Tooltip } from '@material-ui/core';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import numeral from 'numeral';
@@ -8,15 +7,30 @@ import StarIcon from '@material-ui/icons/StarRounded';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+const useStyles = makeStyles<Theme>((theme: Theme) =>
+  createStyles({
+    icon: {
+      fontSize: '1.2rem !important',
+      paddingRight: 5
+    }
+  })
+);
+
 interface Iprops {
   room: RoomIndexRes;
-  isHomepage: boolean | false;
+  isHomepage: boolean;
+  showIcon?: boolean;
+  showBedRoom?: boolean;
+  showAddress?: boolean;
 }
 
 const RoomCard: FC<Iprops> = (props) => {
-  const { room, isHomepage } = props;
+  const { room, isHomepage, showIcon, showBedRoom, showAddress } = props;
   const { t }: UseTranslationResponse = useTranslation();
-
+  const classes = useStyles(props);
   return (
     <Fragment>
       <Grid className="roomCard">
@@ -40,7 +54,12 @@ const RoomCard: FC<Iprops> = (props) => {
             <Link href={`/room/${room.id}`} target="_blank" className="infoLink">
               <Grid className="info">
                 <Typography variant="subtitle1" className="roomCard__type">
-                  {room.room_type_txt} &#8226; {room.city.data.name}
+                  {showIcon && (
+                    <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
+                  )}
+                  {room.room_type_txt}
+                  {showAddress && <span> &#8226; {room.city.data.name}</span>}
+                  {showBedRoom && <span> &#8226; {room.number_room} {t('room:rooms')}</span>}
                 </Typography>
                 <Typography className="roomCard__name" variant="h1">
                   {room.instant_book === 1 && (
@@ -55,15 +74,26 @@ const RoomCard: FC<Iprops> = (props) => {
                   )}
                   <span>{room.details.data[0].name}</span>
                 </Typography>
+                {!showAddress && (
+                  <Typography className="roomCard__address" variant="h1">
+                    <span>{room.district.data.name}</span>
+                    <span>&#44; {room.city.data.name}</span>
+                  </Typography>
+                )}
 
                 <Grid className="price">
-                  {numeral(room.price_day).format('0,0')}đ/ngày
-                  {isHomepage ? (
-                    ''
-                  ) : (
+                  {numeral(room.price_day).format('0,0')}đ/{t('room:night')}
+                  {!isHomepage && room.price_hour > 0 ? (
                     <Typography className="hourPrice">
-                      {room.price_hour && `${numeral(room.price_hour).format('0,0')}đ/4 giờ`}
+                      &#10072;{' '}
+                      {room.price_hour && (
+                        <span>
+                          {numeral(room.price_hour).format('0,0')}đ/4 {t('room:hour')}
+                        </span>
+                      )}
                     </Typography>
+                  ) : (
+                    ''
                   )}
                 </Grid>
 
@@ -85,6 +115,13 @@ const RoomCard: FC<Iprops> = (props) => {
       </Grid>
     </Fragment>
   );
+};
+
+RoomCard.defaultProps = {
+  isHomepage: false,
+  showIcon: false,
+  showBedRoom: false,
+  showAddress: true
 };
 
 export default RoomCard;

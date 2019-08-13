@@ -60,6 +60,7 @@
     "react-parallax": "^2.2.0",
     "react-read-more-less": "^0.1.6",
     "react-redux": "^7.1.0",
+    "react-scroll": "^1.7.12",
     "react-slick": "^0.24.0",
     "recompose": "^0.30.0",
     "redux": "^4.0.4",
