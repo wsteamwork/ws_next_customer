@@ -130,10 +130,10 @@ const MetroGridImage: FC = (props) => {
 
         <Hidden mdUp implementation="css">
           <ListRoom
-            roomData={roomsCity}
-            usingSlider={true}
-            title={''}
-            render={renderCity}></ListRoom>
+          roomData={roomsCity}
+          usingSlider={true}
+          title={''}
+          render={renderCity}></ListRoom>
         </Hidden>
       </Grid>
     )

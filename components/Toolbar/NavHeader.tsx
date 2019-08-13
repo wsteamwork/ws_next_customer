@@ -36,6 +36,7 @@ import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import SideDrawer from '@/components/Toolbar/SideDrawer';
 
 interface IProps {
   classes?: any;
@@ -358,7 +359,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                     classes={{
                       paper: classes.drawer
                     }}>
-                    {/* <SideDrawer setOpen={handleToggleDrawer} /> */}
+                     <SideDrawer setOpen={setOpenDrawer} />
                   </SwipeableDrawer>
                 </div>
               </Fragment>

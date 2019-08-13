@@ -13,31 +13,32 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       boxShadow: 'none',
-      marginBottom: theme.spacing(10),
+      // marginBottom: theme.spacing(10),
+      padding:'0 32px 0 8px',
       [theme.breakpoints.down('md')]: {
-        boxShadow: 'none'
+        padding:'0 8px',
       }
     },
     root: {
-      justifyContent: 'center'
+      // justifyContent: 'center'
     },
-    wrapper: {
-      paddingTop: theme.spacing(2),
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
-      [theme.breakpoints.down('xs')]: {
-        justifyContent: 'space-around',
-        padding: 0
-      }
-    },
-    wrapperBasic: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
-      [theme.breakpoints.down('xs')]: {
-        justifyContent: 'space-around',
-        padding: 0
-      }
-    },
+    // wrapper: {
+    //   paddingTop: theme.spacing(2),
+    //   paddingLeft: theme.spacing(2),
+    //   paddingRight: theme.spacing(1),
+    //   [theme.breakpoints.down('xs')]: {
+    //     justifyContent: 'space-around',
+    //     padding: 0
+    //   }
+    // },
+    // wrapperBasic: {
+    //   paddingLeft: theme.spacing(2),
+    //   paddingRight: theme.spacing(1),
+    //   [theme.breakpoints.down('xs')]: {
+    //     justifyContent: 'space-around',
+    //     padding: 0
+    //   }
+    // },
     hostInfo: {
       [theme.breakpoints.down('xs')]: {
         marginTop: theme.spacing(3)
@@ -57,17 +58,17 @@ const BoxRoomDetail: FC<IProps> = (props) => {
     <Fragment>
       <Paper className={classes.paper}>
         <Grid container className={classes.root}>
-          <Grid item md={11} lg={12}>
+          <Grid item md={12} lg={12}>
             <Grid container spacing={1} className={classes.wrapperBasic}>
-              <Grid item xs={11} sm={7} md={9}>
+              <Grid item xs={11} sm={8} md={9} lg={8} xl={9}>
                 <RoomBasic />
               </Grid>
-              <Grid className={classes.hostInfo} item xs={12} sm={5} md={3}>
+              <Grid className={classes.hostInfo} item xs={12} sm={4} md={3} lg={4} xl={3}>
                 <HostInfo />
               </Grid>
             </Grid>
             <Grid container spacing={1} className={classes.wrapper}>
-              <Grid item xs={11} sm={12} md={12} lg={9} xl={9}>
+              <Grid item xs={11} sm={12} md={12} lg={10} xl={9}>
                 <div className={classes.rowMargin}>
                   <RoomDescription />
                 </div>
@@ -80,7 +81,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
               </Grid>
             </Grid>
             <Grid container spacing={1} className={classes.wrapper}>
-              <Grid item xs={11} sm={12} md={12} lg={12} xl={12}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   <RoomReview />
                 </div>

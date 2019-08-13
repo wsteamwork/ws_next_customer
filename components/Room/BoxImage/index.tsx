@@ -1,4 +1,4 @@
-import React, { FC, useState, forwardRef } from 'react';
+import React, { FC, useState, forwardRef, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Button, Typography, Grid } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
@@ -18,6 +18,7 @@ import '../../../styles/pages/room/boxImage/index.scss';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   classes?: any;
@@ -45,7 +46,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     contentParallax: {
       display: 'flex',
       justifyContent: 'center',
-      height: '55vh'
+      height: '55vh',
+      [theme.breakpoints.down('xs')]: {
+        height: '30vh',
+      }
     },
     insideParalax: {
       position: 'absolute',
@@ -64,7 +68,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '8px 12px'
     },
     iconScope: {
-      marginRight: theme.spacing(1)
+      marginRight: theme.spacing(1),
+      [theme.breakpoints.down('sm')]:{
+        marginRight: theme.spacing(0),
+      }
     },
     dialog: {
       // maxHeight:'100vh'
@@ -105,6 +112,7 @@ const BoxImage: FC<IProps> = (props) => {
   const {} = props;
   const [openDialog, setOpenDialog] = useState(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {width} = useContext(GlobalContext);
 
   const handleClick = () => {
     setOpenDialog(!openDialog);
@@ -138,7 +146,7 @@ const BoxImage: FC<IProps> = (props) => {
               alt="iconScope"
               className={classes.iconScope}
             />
-            Thăm quan căn hộ
+           {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}
           </Button>
         </div>
       </Parallax>
