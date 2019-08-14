@@ -41,14 +41,14 @@ const FastBooking: FC = () => {
           haveResult: instant_book === 1
         })}>
         <span className="flex_columCenter chooseRoomGuest__actions">
-          <OfflineBoltRounded fontSize="small"></OfflineBoltRounded>&nbsp;&nbsp;
+          {/* <OfflineBoltRounded fontSize="small"></OfflineBoltRounded>&nbsp;&nbsp; */}
           <p>{t('rooms:searchRooms:fastBooking')}</p>
         </span>
-        {instant_book === 1 && (
+        {/* {instant_book === 1 && (
           <span className="chooseRoomGuest__removeIcon">
             <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
           </span>
-        )}
+        )} */}
       </Grid>
     </CustomPopper>
   );

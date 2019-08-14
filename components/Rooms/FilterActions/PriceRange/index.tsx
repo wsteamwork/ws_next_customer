@@ -60,14 +60,14 @@ const PriceRange: FC = () => {
             haveResult: checkPrice !== ''
           })}>
           <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
-            <FontAwesomeIcon icon={faMoneyBillWaveAlt} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
+            {/* <FontAwesomeIcon icon={faMoneyBillWaveAlt} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{checkPrice !== '' ? checkPrice : t('rooms:searchRooms:priceRange')}</p>
           </span>
-          {checkPrice !== '' && (
+          {/* {checkPrice !== '' && (
             <span onClick={handleRemove} className="chooseRoomGuest__removeIcon">
               <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
             </span>
-          )}
+          )} */}
         </Grid>
       </CustomPopper>
     ),

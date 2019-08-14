@@ -50,14 +50,14 @@ const BookByHour: FC<IProps> = (props) => {
           haveResult: bookingType === 1
         })}>
         <span className="flex_columCenter chooseRoomGuest__actions">
-          <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
+          {/* <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
           <p>{t('rooms:searchRooms:bookByHour')}</p>
         </span>
-        {bookingType === 1 && (
+        {/* {bookingType === 1 && (
           <span className="chooseRoomGuest__removeIcon">
             <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
           </span>
-        )}
+        )} */}
       </Grid>
     </CustomPopper>
   );

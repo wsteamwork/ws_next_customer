@@ -19,7 +19,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
-      border: '1px solid #41C9BC'
+      border: '1px solid #FA991C'
       //   padding: '4px 10px'
     },
     btnChange: {
@@ -42,8 +42,8 @@ const InfoSearch: FC<IProps> = (props) => {
   );
   const endDate = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
 
-  const checkIn = moment(startDate).format(DEFAULT_DATE_FORMAT);
-  const checkOut = endDate ? ` - ${moment(endDate).format(DEFAULT_DATE_FORMAT)}` : '';
+  const checkIn = moment(startDate).format('D/M');
+  const checkOut = endDate ? ` - ${moment(endDate).format('D/M')}` : '';
 
   const handleCollapse = () => {
     setCollapseSearch(!collapseSearch);
@@ -73,13 +73,11 @@ const InfoSearch: FC<IProps> = (props) => {
           </Collapse> */}
 
         <Button className={classes.btnChange} onClick={handleCollapse}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography>Tìm kiếm : {searchText}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              {!collapseSearch ? 'Thay đổi' : t('room:cancel')}
-            </Grid>
+          <Grid>
+            <Typography style={{ display: 'inline-block' }}>{searchText}</Typography>, 
+            {/* {!collapseSearch ? 'Thay đổi' : t('room:cancel')} */}
+            {checkIn}
+            {checkOut}
           </Grid>
         </Button>
       </Grid>
