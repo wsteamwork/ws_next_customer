@@ -19,6 +19,8 @@ import auth_vi from './auth/auth-vi.json';
 import auth_en from './auth/auth-en.json';
 import user_vi from './user/user-vi.json';
 import user_en from './user/user-en.json';
+import profile_vi from './profile/profile-vi.json';
+import profile_en from './profile/profile-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -47,7 +49,8 @@ i18n
         book: book_en,
         payment: payment_en,
         auth: auth_en,
-        user: user_en
+        user: user_en,
+        profile: profile_en
       },
       vi: {
         home: home_vi,
@@ -57,7 +60,8 @@ i18n
         book: book_vi,
         payment: payment_vi,
         auth: auth_vi,
-        user: user_vi
+        user: user_vi,
+        profile: profile_vi
       }
     },
 

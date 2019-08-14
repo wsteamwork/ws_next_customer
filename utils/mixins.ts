@@ -1,15 +1,8 @@
 import moment, { Moment } from 'moment';
 import { ChangeEvent, useMemo } from 'react';
 import _ from 'lodash';
+import { IncomingMessage } from 'http';
 
-/**
- * Format money to user friendly
- * @param amount Money amount
- * @param decimalCount Number of decimal
- * @param decimal Decimal Separator
- * @param thousands Thousand separator
- * @returns {string}
- */
 export const formatMoney = (
   amount: any,
   decimalCount: number = 0,
@@ -75,19 +68,30 @@ export const selfMemo = <T = any>(value: T): T => {
   return useMemo(() => value, [value]);
 };
 
-export const formatPrice = (
-  price: number,
-): string => {
+export const formatPrice = (price: number): string => {
   try {
     let format = '';
-    if(price >= 1000000) {
-      format = (price/1000000).toFixed(2) + 'tr '; 
-    }
-    else {
-      format = (price/1000).toFixed(0) + 'k ' 
+    if (price >= 1000000) {
+      format = (price / 1000000).toFixed(2) + 'tr ';
+    } else {
+      format = (price / 1000).toFixed(0) + 'k ';
     }
     return format;
   } catch (e) {
     console.error(e);
   }
+};
+
+export const getCookieFromReq = (req: IncomingMessage, cookie: string) => {
+  if (!req) {
+    return undefined;
+  }
+
+  const cookies = req.headers.cookie.split(';').find((c) => c.trim().startsWith(`${cookie}=`));
+
+  if (!cookies) {
+    return undefined;
+  }
+
+  return cookies.split('=')[1];
 };

@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useContext, useState } from 'react';
+import React, { FC, useMemo, useContext, useState, useEffect } from 'react';
 import { Grid, FormControl, TextField, FormHelperText, Typography } from '@material-ui/core';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -65,6 +65,13 @@ const FormSignup: FC = () => {
   const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const FormValidationSchema = useValidata();
+
+  useEffect(() => {
+    if (!!cookies._token) {
+      router.back();
+    }
+  }, [cookies]);
+
   const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
     const body: RegisterReq = {
       name: `${values.firstName} ${values.lastName}`,
@@ -79,8 +86,8 @@ const FormSignup: FC = () => {
     try {
       const res = await registerAccount(body);
       setCookie('_token', res.access_token, { maxAge: 2147483647, path: '/' });
-      router.back();
       actions.setSubmitting(false);
+      location.reload();
     } catch (error) {
       actions.setSubmitting(false);
       const result: AxiosErrorCustom<{ errors: { email: string[] }; exception: string }> = error;

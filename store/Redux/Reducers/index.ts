@@ -10,6 +10,7 @@ import reuderBooking, { BookingState, BookingAction } from '@/store/Redux/Reduce
 import { RoomReducerState, RoomReducerAction, roomReducer } from './Room/roomReducer';
 import { BookState, BookActions, bookReducer } from './Book/book';
 import { UserProfileState, UserProfileActions, userProfileReducer } from './Profile/userProfile';
+import { ProfileAction, ProfileState, iProfileReducer } from './Profile/profile';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -18,6 +19,7 @@ export type ReducersType = {
   roomPage: Reducer<RoomReducerState, RoomReducerAction>;
   book: Reducer<BookState, BookActions>;
   userProfile: Reducer<UserProfileState, UserProfileActions>;
+  iProfile: Reducer<ProfileState, ProfileAction>;
 };
 
 export type ReducersList = {
@@ -27,6 +29,7 @@ export type ReducersList = {
   roomPage: RoomReducerState;
   book: BookState;
   userProfile: UserProfileState;
+  iProfile: ProfileState;
 };
 
 export type ReducresActions =
@@ -35,7 +38,8 @@ export type ReducresActions =
   | BookingAction
   | RoomReducerAction
   | BookActions
-  | UserProfileActions;
+  | UserProfileActions
+  | ProfileAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -43,7 +47,8 @@ const reducers: ReducersType = {
   roomHomepage: roomHomepageReducer,
   roomPage: roomReducer,
   book: bookReducer,
-  userProfile: userProfileReducer
+  userProfile: userProfileReducer,
+  iProfile: iProfileReducer
 };
 
 export interface NextContextPage extends NextPageContext {
