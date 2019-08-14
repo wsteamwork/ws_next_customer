@@ -38,7 +38,7 @@ const ChooseRoomGuest: FC = () => {
     return '';
   }, [numberGuest, numberRoom]);
 
-  const hanldeClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -58,7 +58,7 @@ const ChooseRoomGuest: FC = () => {
       trigger="click"
       isVisible={open}
       theme="light-border"
-      onHide={hanldeClose}
+      onHide={handleClose}
       interactive
       content={
         <ActionChoose checkRemove={checkRemove} setOpen={setOpen} open={open}></ActionChoose>
@@ -68,16 +68,17 @@ const ChooseRoomGuest: FC = () => {
           haveResult: valueInput !== ''
         })}>
         <span onClick={() => setOpen(true)} className="flex_columCenter chooseRoomGuest__actions">
-          <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
+          {/* <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
           <p>
-            {valueInput || `${t('home:searchComponent:guest')} & ${t('home:searchComponent:room')}`}
+            {valueInput ||
+              `${t('home:searchComponent:guestUpper')} & ${t('home:searchComponent:roomUpper')}`}
           </p>
         </span>
-        {valueInput !== '' && (
+        {/* {valueInput !== '' && (
           <span onClick={handleRemove} className="chooseRoomGuest__removeIcon">
             <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
           </span>
-        )}
+        )} */}
       </Grid>
     </CustomPopper>
   );

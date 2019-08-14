@@ -57,9 +57,11 @@ const RoomListing: FC = (props) => {
             </Grid>
           </Hidden>
         ) : (
-            <Grid item sm={4} lg={3}>
-              <LoadingSkeleton type={'sideBar'} />
-            </Grid>
+            <Hidden smDown>
+              <Grid item sm={4} lg={3}>
+                <LoadingSkeleton type={'sideBar'} />
+              </Grid>
+            </Hidden>
           )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
@@ -83,9 +85,11 @@ const RoomListing: FC = (props) => {
               />
             </Fragment>
           ) : !isEmpty ? (
-            <Grid>
-              <LoadingSkeleton type={'rooms'} duplicate={5} />
-            </Grid>
+            <Hidden xsDown>
+              <Grid>
+                <LoadingSkeleton type={'rooms'} duplicate={5} />
+              </Grid>
+            </Hidden>
           ) : (
                 ''
               )}

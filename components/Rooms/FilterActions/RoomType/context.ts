@@ -62,7 +62,7 @@ export const useRoomTypeChecbox = (
 
   const handleSubmit = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataClick });
-    updateRouter(false, 'room_type', dataClick, 'page', 1);
+    updateRouter(false, 'type_room', dataClick, 'page', 1);
     setOpen(false);
   };
 
@@ -74,7 +74,7 @@ export const useRoomTypeChecbox = (
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setRoomTypes', roomTypes: [] });
-    updateRouter(false, 'room_type', '', 'page', 1);
+    updateRouter(false, 'type_room', '', 'page', 1);
     setDataClick([]);
   };
 

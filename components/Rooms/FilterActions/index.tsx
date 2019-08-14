@@ -8,43 +8,46 @@ import BookByHour from './BookByHour';
 import FastBooking from './FastBooking';
 import FilterRoom from './FilterRoom';
 import SwitchMap from './SwitchMap';
+import InfoSearch from './InfoSearch';
 
-const FilterActions: FC = () => {
+interface Iprops {
+  hideSearchBar?: boolean;
+}
+
+const FilterActions: FC<Iprops> = (props) => {
   return (
-    <AppBar position="sticky" elevation={0} className="filterBar">
-      <Toolbar
-        classes={{
-          root: 'toolbar'
-        }}>
-        <GridContainer xs={11} md={10} className="filterRooms">
-          <Grid container>
-            <Grid item xs={11} container spacing={1}>
-              <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
-                <ChooseRoomGuest></ChooseRoomGuest>
-              </Grid>
-              <Grid item className="displayWebkit filterRooms__roomType">
-                <RoomType></RoomType>
-              </Grid>
-              <Grid item className="displayWebkit filterRooms__priceRange">
-                <PriceRange></PriceRange>
-              </Grid>
-              <Grid item className="displayWebkit filterRooms__bookByHourt">
-                <BookByHour></BookByHour>
-              </Grid>
-              <Grid item className="displayWebkit filterRooms__fastBooking">
-                <FastBooking></FastBooking>
-              </Grid>
-              <Grid item className="displayWebkit filterRooms__filterRoom">
-                <FilterRoom></FilterRoom>
-              </Grid>
-            </Grid>
-            <Grid item xs={1} container justify="flex-end">
-              <SwitchMap></SwitchMap>
-            </Grid>
+    <GridContainer
+      xs={11}
+      md={10}
+      className={`filterRooms ${props.hideSearchBar ? 'hideSearchBar' : ''}`}>
+      <Grid container>
+        <Grid item xs={12} container spacing={1}>
+          <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
+            <ChooseRoomGuest></ChooseRoomGuest>
           </Grid>
-        </GridContainer>
-      </Toolbar>
-    </AppBar>
+          <Grid item className="displayWebkit filterRooms__roomType">
+            <RoomType></RoomType>
+          </Grid>
+          <Grid item className="displayWebkit filterRooms__priceRange">
+            <PriceRange></PriceRange>
+          </Grid>
+          <Grid item className="displayWebkit filterRooms__bookByHourt">
+            <BookByHour></BookByHour>
+          </Grid>
+          <Grid item className="displayWebkit filterRooms__fastBooking">
+            <FastBooking></FastBooking>
+          </Grid>
+          <Grid item className="displayWebkit filterRooms__filterRoom">
+            <FilterRoom></FilterRoom>
+          </Grid>
+        </Grid>
+
+        {/* <Grid item xs={2} container justify="flex-end">
+              <SwitchMap></SwitchMap>
+              <InfoSearch />
+            </Grid> */}
+      </Grid>
+    </GridContainer>
   );
 };
 

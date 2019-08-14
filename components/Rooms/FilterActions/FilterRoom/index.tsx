@@ -57,15 +57,15 @@ const FilterRoom: FC = () => {
             haveResult: checkAmentites
           })}>
           <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
-            <FontAwesomeIcon icon={faFilter} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
+            {/* <FontAwesomeIcon icon={faFilter} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:filterRooms')}</p>
             {checkAmentites && <p>&nbsp;({amenities.length})</p>}
           </span>
-          {checkAmentites && (
+          {/* {checkAmentites && (
             <span onClick={handleRemove} className="chooseRoomGuest__removeIcon">
               <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
             </span>
-          )}
+          )} */}
         </Grid>
       </CustomPopper>
     ),

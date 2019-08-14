@@ -20,7 +20,7 @@ export interface RoomIndexGetParams extends BaseGetRequestParams, Partial<MapCoo
   check_in?: string;
   check_out?: string;
   rent_type?: string | number;
-  room_type?: string;
+  type_room?: string;
   latest_deal?: string;
   comfort_lists?: string;
   price_day_from?: string | number;
@@ -65,7 +65,7 @@ export interface RoomUrlParams {
   rating?: string;
   view?: 'map' | 'list';
   amenities?: string;
-  room_type?: string;
+  type_room?: string;
   sort_total_review?: string;
   sort_price_day?: string;
   discount?: string;
