@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import { Grid, FormControl, TextField, FormHelperText, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +20,13 @@ interface MyFormValues {
 
 const FormSignin = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['_token']);
+
+  useEffect(() => {
+    if (!!cookies._token) {
+      router.back();
+    }
+  }, [cookies]);
+
   const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [error, setError] = useState<string>('');
@@ -44,7 +51,7 @@ const FormSignin = () => {
       const res = await loginAccount(body);
       setCookie('_token', res.access_token, { maxAge: 2147483647, path: '/' });
       actions.setSubmitting(false);
-      router.back();
+      location.reload();
     } catch (error) {
       actions.setSubmitting(false);
       const result: AxiosErrorCustom<{ errors: string[] }> = error;
