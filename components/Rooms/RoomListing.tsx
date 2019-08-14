@@ -16,7 +16,7 @@ import NotFound from './Lotte/NotFound';
 
 // @ts-ignore
 const RoomListing: FC = (props) => {
-  const { state: stateIndexRoom } = useContext(RoomIndexContext);
+  const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
   const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
@@ -32,6 +32,10 @@ const RoomListing: FC = (props) => {
   }, [rooms, isLoading]);
 
   const renderRoom = (room) => <RoomCardListing room={room} />;
+
+  const openMap = () => {
+    dispatch({ type: 'setMapOpen', isMapOpen: true });
+  };
 
   return (
     <GridContainer xs={11} md={10} xl={9}>
@@ -50,7 +54,9 @@ const RoomListing: FC = (props) => {
                 classes={{
                   root: 'mapPaper'
                 }}>
-                <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+                <ButtonGlobal className="watchMapButton" onClick={openMap}>
+                  Xem Bản Đồ
+                </ButtonGlobal>
               </Paper>
 
               <VisitedRooms visitedRoom={rooms} />
