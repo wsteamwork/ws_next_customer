@@ -21,7 +21,7 @@ const FilterActions: FC<Iprops> = (props) => {
       md={10}
       className={`filterRooms ${props.hideSearchBar ? 'hideSearchBar' : ''}`}>
       <Grid container>
-        <Grid item xs={12} container spacing={1}>
+        <Grid item xs={10} container spacing={1}>
           <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
             <ChooseRoomGuest></ChooseRoomGuest>
           </Grid>
@@ -42,10 +42,9 @@ const FilterActions: FC<Iprops> = (props) => {
           </Grid>
         </Grid>
 
-        {/* <Grid item xs={2} container justify="flex-end">
-              <SwitchMap></SwitchMap>
-              <InfoSearch />
-            </Grid> */}
+        <Grid item xs={2} container justify="flex-end">
+          <SwitchMap></SwitchMap>
+        </Grid>
       </Grid>
     </GridContainer>
   );

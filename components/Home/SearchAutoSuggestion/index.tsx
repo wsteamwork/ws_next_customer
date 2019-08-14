@@ -161,7 +161,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const onSuggestionsClearRequested = () => {
-    // setData([]);
+    setData([]);
   };
 
   const getSuggestionValue = (suggestion: any) => {
@@ -186,7 +186,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
         updateSearchText(suggestion.name);
         updateSearchCity(suggestion.id);
         updateSearchDistrict(undefined);
-
         break;
       case 2:
         updateSearchText(suggestion.name);
@@ -279,7 +278,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   return (
     <Autosuggest
       {...autosuggestProps}
-      alwaysRenderSuggestions={true}
+      // alwaysRenderSuggestions={true}
       inputProps={{
         id: 'search-autosuggest-simple',
         value: searchText,
