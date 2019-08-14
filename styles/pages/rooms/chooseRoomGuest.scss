@@ -1,0 +1,25 @@
+.chooseRoomGuest {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $primary;
+    color: white;
+  }
+
+  &__removeIcon {
+    padding-right: 10px;
+  }
+
+  &__actions {
+    padding: 8px 10px;
+  }
+}
+
+.haveResult {
+  background-color: $primary;
+  color: white;
+}

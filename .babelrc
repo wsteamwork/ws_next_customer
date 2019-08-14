@@ -5,6 +5,11 @@
                 "next/babel",
             ]
         },
+        "production": {
+            "presets": [
+                "next/babel"
+            ]
+        },
     },
     "plugins": [
         [
@@ -22,7 +27,23 @@
                     "@/types": "./types/",
                     "@/utils": "./utils/",
                     "@/static": "./static/",
+                    "@/translations": "./translations/",
+                    "@/routes": "./routes/",
                 }
+            }
+        ],
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ],
+        [
+            "styled-jsx/babel",
+            {
+                "plugins": [
+                    "styled-jsx-plugin-sass"
+                ]
             }
         ]
     ]

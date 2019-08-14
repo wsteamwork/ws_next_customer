@@ -1,0 +1,50 @@
+{
+    "SearchAutocomplete": {
+        "toGo": "Where do you want to go?",
+        "city": "City",
+        "district": "District",
+        "accommodation": "Accommodation",
+        "room": "Room",
+        "searchResults": "Search Results",
+        "noResult": "No result is found"
+    },
+    "chooseGuestRoom": {
+        "close": "Close",
+        "apply": "Apply"
+    },
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "logout": "Logout",
+    "profile": "Profile",
+    "policyTerms": "Policy & Terms",
+    "merchantChannel": "Become a host",
+    "contact" : "Contact",
+    "supportHost" : "Support host",
+    "currency" : "USD",
+    "review": "Reviews",
+    "searchComponent": {
+        "enjoy": "Book a Homestay right away to enjoy",
+        "search": "Search",
+        "guestUpper": "Guest",
+        "guest": "guest",
+        "room": "room",
+        "roomUpper": "Room"
+    },
+    "topDestinations" : "Top Destinations",
+    "becomeAHost" : "Become a host",
+    "topHomestay" : "Top Homestay",
+    "blogContainer":{
+        "where": "Stunning Homestay",
+        "journey":"Journeys",
+        "whatPlay":"What play",
+        "blog":"Blog",
+        "titleJourney": "Share travel experiences",
+        "titleWhere": "Discover beautiful places together",
+        "titlePlay": "Find out about strange and interesting games"
+    },
+    "collectionRooms": {
+        "collectionViews": "Collection views",
+        "seaView": "Sea view",
+        "cityView": "City view"
+    }
+}
