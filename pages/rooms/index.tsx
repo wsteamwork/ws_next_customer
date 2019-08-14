@@ -18,6 +18,7 @@ import {
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import { Hidden } from '@material-ui/core';
+import BottomNav from '@/components/Rooms/BottomNav';
 
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -54,6 +55,9 @@ const Rooms: NextPage = () => {
             {/* <RoomListing /> */}
 
             <MapAndListing></MapAndListing>
+            <Hidden mdUp>
+              <BottomNav/>
+            </Hidden>
           </div>
         </RoomFilterContext.Provider>
       </RoomIndexContext.Provider>

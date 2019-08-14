@@ -34,7 +34,8 @@ export type RoomFilterAction =
   | { type: 'setComforts'; comforts: ComfortIndexRes[] }
   | { type: 'setRoomTypes'; roomTypes: number[] }
   | { type: 'setAmenitiesFilter'; amenities: number[] }
-  | { type: 'setInstantBook'; payload: number };
+  | { type: 'setInstantBook'; payload: number }
+  | { type: 'setFilter', amenities?: number[], roomTypesFilter?: number[], ratingLists?: number[], sorts?: number };
 
 export type RoomFilterState = {
   readonly comforts: ComfortIndexRes[];
@@ -45,6 +46,7 @@ export type RoomFilterState = {
   readonly amenities: number[];
   readonly roomTypesFilter: number[];
   readonly instant_book: number;
+  readonly sorts: any;
 };
 
 export const RoomFilterStateInit: RoomFilterState = {
@@ -55,7 +57,8 @@ export const RoomFilterStateInit: RoomFilterState = {
   amenities: [],
   ratingLists: [],
   roomTypesFilter: [],
-  instant_book: 0
+  instant_book: 0,
+  sorts: null,
 };
 
 export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
@@ -78,7 +81,38 @@ export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
       return updateObject<RoomFilterState>(state, { roomTypes: action.roomTypes });
     case 'setInstantBook':
       return updateObject(state, { instant_book: action.payload });
+    case 'setFilter':
+      return updateObject(state, {
+        roomTypesFilter: !action.roomTypesFilter ? state.roomTypesFilter : action.roomTypesFilter,
+        amenities: !action.amenities ? state.amenities : action.amenities,
+        ratingLists: !action.ratingLists ? state.ratingLists : action.ratingLists,
+        // rooms: [],
+        sorts: action.sorts,
+      });
     default:
       return state;
   }
 };
+
+// /**
+//  * Load filter and room type
+//  * @param {React.Dispatch<RoomIndexAction>} dispatch
+//  */
+// export const loadFilter = (dispatch: Dispatch<RoomIndexAction>) => {
+//   Promise.all([
+//     fetchComforts(),
+//     fetchRoomType(),
+//   ]).then(res => {
+//     const [comfortsRes, roomTypes] = res;
+//     dispatch({
+//       type: 'setComforts',
+//       comforts: comfortsRes.data,
+//     });
+//     dispatch({
+//       type: 'setRoomTypes',
+//       roomTypes,
+//     });
+//   }).catch(err => {
+
+//   });
+// };

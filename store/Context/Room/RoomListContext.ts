@@ -134,3 +134,6 @@ export const fetchRoomType = async () => {
   const res: AxiosResponse<TypeSelect[]> = await axios.get('rooms/type');
   return res.data;
 };
+
+
+
