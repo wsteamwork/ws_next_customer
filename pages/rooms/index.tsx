@@ -19,6 +19,7 @@ import MapAndListing from '@/components/Rooms/MapAndListing';
 import { Hidden } from '@material-ui/core';
 import HeadRoom from 'react-headroom';
 import { StickyContainer, Sticky } from 'react-sticky';
+import BottomNav from '@/components/Rooms/BottomNav';
 
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -79,6 +80,8 @@ const Rooms: NextPage = () => {
               </GridContainer>
               <FilterActions />
               <MapAndListing></MapAndListing>
+
+              <BottomNav/>
             </Hidden>
           </div>
         </RoomFilterContext.Provider>
