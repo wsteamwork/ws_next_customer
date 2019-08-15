@@ -21,6 +21,10 @@ import user_vi from './user/user-vi.json';
 import user_en from './user/user-en.json';
 import profile_vi from './profile/profile-vi.json';
 import profile_en from './profile/profile-en.json';
+import reviews_vi from './reviews/reviews-vi.json';
+import reviews_en from './reviews/reviews-en.json';
+import shared_vi from './shared/shared-vi.json';
+import shared_en from './shared/shared-en.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -50,7 +54,9 @@ i18n
         payment: payment_en,
         auth: auth_en,
         user: user_en,
-        profile: profile_en
+        profile: profile_en,
+        reviews: reviews_en,
+        shared: shared_en
       },
       vi: {
         home: home_vi,
@@ -61,7 +67,9 @@ i18n
         payment: payment_vi,
         auth: auth_vi,
         user: user_vi,
-        profile: profile_vi
+        profile: profile_vi,
+        reviews: reviews_vi,
+        shared: shared_vi
       }
     },
 

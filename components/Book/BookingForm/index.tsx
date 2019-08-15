@@ -173,7 +173,13 @@ const BookingForm: FC = () => {
           // enableReinitialize={false}
           validateOnChange={false}
           validationSchema={FormValidationSchema}
-          initialValues={{ paymentMethod: 'payment1' }}
+          initialValues={{
+            paymentMethod: 'payment1',
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: ''
+          }}
           onSubmit={handleSubmitForm}
           render={({
             values,

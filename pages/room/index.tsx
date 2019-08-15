@@ -44,13 +44,12 @@ const Room: NextPage = () => {
       {!!room && (
         <NextHead
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
-          title={room.details.data[0].name}
+          title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={ReactHtmlParser(room.details.data[0].description, {
             transform: transformHtmlContent
           })}
           url={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}>
-        </NextHead>
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
 
       <NavHeader></NavHeader>
