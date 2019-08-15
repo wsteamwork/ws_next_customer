@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import withRedux, { NextJSContext } from 'next-redux-wrapper';
 import { makeStore } from '@/store/Redux';
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
 config.autoAddCss = false;
 
 interface NextContextApp extends NextJSContext, AppContext {}
@@ -41,6 +42,7 @@ class MyApp extends App<IProps> {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+    getProfile(this.props.store.dispatch);
   }
 
   componentWillUnmount() {

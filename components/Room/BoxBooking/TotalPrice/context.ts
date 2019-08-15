@@ -40,7 +40,7 @@ export const useCalculatePrice = (): ReturnCalculate => {
       const startValue = moment(startDate);
       const endValue = moment(endDate);
 
-      return Math.abs(endValue.diff(startValue, 'days') + 1);
+      return Math.abs(endValue.diff(startValue, 'days'));
     }
 
     return 0;
