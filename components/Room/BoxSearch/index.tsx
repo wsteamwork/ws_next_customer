@@ -22,10 +22,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       padding: '8px 0px',
       margin: `${theme.spacing(4)}px 0px`,
-      [theme.breakpoints.down('md')]:{
+      [theme.breakpoints.down('md')]: {
         margin: `${theme.spacing(4)}px 0px 0px`,
       },
-      [theme.breakpoints.down('xs')]:{
+      [theme.breakpoints.down('xs')]: {
         padding: 0,
       }
     },
@@ -33,13 +33,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: '#41C9BC',
       border: '1px solid #41C9BC',
       textTransform: 'initial',
-      [theme.breakpoints.down('xs')]:{
-        marginTop:theme.spacing(1),
+      [theme.breakpoints.down('xs')]: {
+        marginTop: theme.spacing(1),
       }
     },
-    roomName:{
-      [theme.breakpoints.down('md')]:{
-        fontSize:'1.2rem'
+    roomName: {
+      [theme.breakpoints.down('md')]: {
+        fontSize: '1.2rem'
       }
     }
   })
@@ -47,9 +47,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxSearch: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
-  const {width} = useContext(GlobalContext);
+  const { width } = useContext(GlobalContext);
   const [collapseSearch, setCollapseSearch] = useState<boolean>(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const numberGuest = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
@@ -106,7 +106,7 @@ const BoxSearch: FC<IProps> = (props) => {
             <Button
               variant="outlined"
               className={classes.btnChange}
-              size={width === 'sm' || width === 'xs' ? "medium"  : "large" }
+              size={width === 'sm' || width === 'xs' ? "medium" : "large"}
               onClick={handleCollapse}>
               {!collapseSearch ? t('room:changeSearch') : t('room:cancel')}
             </Button>

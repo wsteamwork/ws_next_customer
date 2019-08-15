@@ -69,7 +69,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     iconScope: {
       marginRight: theme.spacing(1),
-      [theme.breakpoints.down('sm')]:{
+      [theme.breakpoints.down('sm')]: {
         marginRight: theme.spacing(0),
       }
     },
@@ -109,10 +109,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const [openDialog, setOpenDialog] = useState(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const {width} = useContext(GlobalContext);
+  const { width } = useContext(GlobalContext);
 
   const handleClick = () => {
     setOpenDialog(!openDialog);
@@ -120,11 +120,11 @@ const BoxImage: FC<IProps> = (props) => {
 
   const images = room
     ? _.map(room.media.data, (o) => {
-        return {
-          original: `${IMAGE_STORAGE_LG}${o.image}`,
-          thumbnail: `${IMAGE_STORAGE_SM}${o.image}`
-        };
-      })
+      return {
+        original: `${IMAGE_STORAGE_LG}${o.image}`,
+        thumbnail: `${IMAGE_STORAGE_SM}${o.image}`
+      };
+    })
     : [];
 
   if (room === null) {
@@ -146,7 +146,7 @@ const BoxImage: FC<IProps> = (props) => {
               alt="iconScope"
               className={classes.iconScope}
             />
-           {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}
+            {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}
           </Button>
         </div>
       </Parallax>

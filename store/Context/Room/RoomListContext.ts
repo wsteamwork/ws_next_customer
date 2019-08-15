@@ -92,7 +92,7 @@ export const getRooms = async (
     price_day_from: params.price_day_from,
     price_day_to: params.price_day_to,
     instant_book: params.instant_book,
-    sort_price_day: params.lowest_price === null ? 0 : 1,
+    // sort_price_day: params.lowest_price === null ? 0 : 1,
     standard_point: params.rating ? _.split(params.rating, ',')[0] : undefined,
     comfort_lists: !!params.amenities ? params.amenities : undefined,
     type_room: !!params.type_room ? params.type_room : undefined,

@@ -1,4 +1,4 @@
-import React, { Fragment,FC } from 'react';
+import React, { Fragment, FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxRecommend: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
   const roomRecommend = useSelector<ReducersList, RoomIndexRes[]>((state) => state.roomPage.roomRecommend);
 
@@ -36,9 +36,9 @@ const BoxRecommend: FC<IProps> = (props) => {
       {/*  {t('room:recommend')}*/}
       {/*</Typography>*/}
       <ListRoom roomData={roomRecommend}
-                usingSlider={true}
-                title={t('room:recommend')}
-                render={renderRoom}/>
+        usingSlider={true}
+        title={t('room:recommend')}
+        render={renderRoom} />
     </Fragment>
   );
 };

@@ -145,8 +145,8 @@ const Collection: NextPage = (props) => {
                 />
               </Grid>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </GridContainer>
         </Fragment>
       )}

@@ -14,9 +14,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     paper: {
       boxShadow: 'none',
       // marginBottom: theme.spacing(10),
-      padding:'0 32px 0 8px',
+      padding: '0 32px 0 8px',
       [theme.breakpoints.down('md')]: {
-        padding:'0 8px',
+        padding: '0 8px',
       }
     },
     root: {

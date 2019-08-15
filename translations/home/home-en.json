@@ -46,5 +46,6 @@
         "collectionViews": "Collection views",
         "seaView": "Sea view",
         "cityView": "City view"
-    }
+    },
+    "editorChoice": "Editor's choices"
 }

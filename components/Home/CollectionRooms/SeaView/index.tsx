@@ -34,7 +34,6 @@ const SeaView: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { } = props;
   const { t } = useTranslation();
-
   const setting: Settings = {
     dots: false,
     infinite: true,
@@ -97,16 +96,16 @@ const SeaView: FC<IProps> = (props) => {
       <Hidden smDown implementation="css">
         <Grid container spacing={2} justify='flex-start'>
           <Grid item xs={3}>
-            <CardIntro imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
+            <CardIntro imgSrc="https://westay-img.s3-ap-southeast-1.amazonaws.com/lg/hanoi_night.jpg"  imgAlt="" imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
           </Grid>
           <Grid item xs={3}>
-            <CardIntro imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
+            <CardIntro imgSrc="https://westay-img.s3-ap-southeast-1.amazonaws.com/lg/hochiminh_night.jpg"  imgAlt="" imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
           </Grid>
           <Grid item xs={3}>
-            <CardIntro imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
+            <CardIntro imgSrc="https://westay-img.s3-ap-southeast-1.amazonaws.com/lg/danang_night.jpg"  imgAlt="" imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
           </Grid>
           <Grid item xs={3}>
-            <CardIntro imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
+            <CardIntro imgSrc="https://westay-img.s3-ap-southeast-1.amazonaws.com/lg/nhatrang_night.jpg"  imgAlt="" imgHeight={230} showContent={true} titleContent='Day la cai ten phong no co the rat la dai' subTitleContent='QUan hoan kiem, Ha Noi' />
           </Grid>
         </Grid>
       </Hidden>
