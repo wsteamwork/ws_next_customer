@@ -16,7 +16,7 @@ interface IProps extends Coords, ChildComponentProps {
 const MapMarker: FC<IProps> = (props) => {
   const { room, $hover } = props;
 
-  console.log(room);
+  // console.log(room);
 
   return (
     <CustomPopper
@@ -27,7 +27,7 @@ const MapMarker: FC<IProps> = (props) => {
       // trigger="click"
       theme="light-border"
       interactive
-      content={<Grid className="mapRoom">{/* <RoomCard room={room} isHomepage={true} /> */}</Grid>}>
+      content={<Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>}>
       <Grid className={classNames('arrow_box')}>
         <p>{numeral(room.price_day).format('0,0')}đ</p>
       </Grid>
