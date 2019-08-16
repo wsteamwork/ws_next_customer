@@ -15,7 +15,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       padding: 1,
       '&$checked': {
         color: theme.palette.common.white,
-        transform: 'translateX(93%)',
         '& + $track': {
           backgroundColor: mainColor.primary,
           opacity: 1,

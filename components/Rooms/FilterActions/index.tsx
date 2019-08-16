@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Grid, Toolbar, AppBar } from '@material-ui/core';
 import ChooseRoomGuest from './ChooseRoomGuest';
@@ -9,17 +9,19 @@ import FastBooking from './FastBooking';
 import FilterRoom from './FilterRoom';
 import SwitchMap from './SwitchMap';
 import InfoSearch from './InfoSearch';
-
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 interface Iprops {
   hideSearchBar?: boolean;
 }
 
 const FilterActions: FC<Iprops> = (props) => {
+  const { state } = useContext(RoomIndexContext);
+  const { isMapOpen } = state;
   return (
     <GridContainer
       xs={11}
       md={10}
-      className={`filterRooms ${props.hideSearchBar ? 'hideSearchBar' : ''}`}>
+      className={`filterRooms ${!isMapOpen && props.hideSearchBar ? 'hideSearchBar' : ''}`}>
       <Grid container>
         <Grid item xs={10} container spacing={1}>
           <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
