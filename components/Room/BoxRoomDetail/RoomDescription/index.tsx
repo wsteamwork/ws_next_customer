@@ -47,7 +47,7 @@ const RoomDescription: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  // console.log(room)
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setIsOpen(!isOpen);
@@ -59,7 +59,6 @@ const RoomDescription: FC<IProps> = (props) => {
       return convertNodeToElement(node, index, transformHtmlContent);
     }
   };
-
   return (
     room && (
       <Fragment>

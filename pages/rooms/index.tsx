@@ -81,7 +81,7 @@ const Rooms: NextPage = () => {
               <FilterActions />
               <MapAndListing></MapAndListing>
 
-              <BottomNav/>
+              <BottomNav />
             </Hidden>
           </div>
         </RoomFilterContext.Provider>
