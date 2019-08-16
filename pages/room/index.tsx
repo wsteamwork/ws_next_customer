@@ -23,12 +23,14 @@ import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import BoxRecommend from '@/components/Room/BoxRecommend';
+import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
+  const [] = useVisitedRoom();
 
   useEffect(() => {
     !!error && router.push('/error');
