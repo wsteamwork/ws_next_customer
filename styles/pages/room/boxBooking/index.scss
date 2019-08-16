@@ -1,5 +1,10 @@
 .boxBooking {
-  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.1);
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  top:6%;
+  position: sticky;
 
   @include xs {
     box-shadow: none;
@@ -15,10 +20,6 @@
     box-shadow: none;
     height: 100%;
   }
-
-  width: 100%;
-  height: auto;
-  border-radius: 2px;
 
   &__chooseBooking {
     margin-top: 20px;

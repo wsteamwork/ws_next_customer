@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useMemo } from 'react';
 import CustomPopper from '@/components/CustomPopper';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { updateRouter } from '@/store/Context/utility';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   filter: SearchFilterState;
@@ -23,6 +24,14 @@ const BookByHour: FC<IProps> = (props) => {
   const { bookingType } = filter;
   const { t } = useTranslation();
   const { dispatch, state } = useContext(RoomIndexContext);
+  const { router } = useContext(GlobalContext);
+  const { query } = router;
+
+  useEffect(() => {
+    if (!!query.rent_type) {
+      updateBookingType(parseInt(query.rent_type as string, 10));
+    }
+  }, [query]);
 
   const handleClick = () => {
     if (bookingType === 2) {
@@ -34,32 +43,35 @@ const BookByHour: FC<IProps> = (props) => {
     }
   };
 
-  return (
-    <CustomPopper
-      arrow
-      placement="bottom"
-      duration={200}
-      content={
-        <Grid>
-          <p>{t('rooms:searchRooms:descBookByHour')}</p>
-        </Grid>
-      }>
-      <Grid
-        onClick={handleClick}
-        className={classNames('chooseRoomGuest', 'flex_columCenter', {
-          haveResult: bookingType === 1
-        })}>
-        <span className="flex_columCenter chooseRoomGuest__actions">
-          <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
-          <p>{t('rooms:searchRooms:bookByHour')}</p>
-        </span>
-        {bookingType === 1 && (
-          <span className="chooseRoomGuest__removeIcon">
-            <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
+  return useMemo(
+    () => (
+      <CustomPopper
+        arrow
+        placement="bottom"
+        duration={200}
+        content={
+          <Grid>
+            <p>{t('rooms:searchRooms:descBookByHour')}</p>
+          </Grid>
+        }>
+        <Grid
+          onClick={handleClick}
+          className={classNames('chooseRoomGuest', 'flex_columCenter', {
+            haveResult: bookingType === 1
+          })}>
+          <span className="flex_columCenter chooseRoomGuest__actions">
+            {/* <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
+            <p>{t('rooms:searchRooms:bookByHour')}</p>
           </span>
-        )}
-      </Grid>
-    </CustomPopper>
+          {/* {bookingType === 1 && (
+      <span className="chooseRoomGuest__removeIcon">
+        <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
+      </span>
+    )} */}
+        </Grid>
+      </CustomPopper>
+    ),
+    [bookingType]
   );
 };
 

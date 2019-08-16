@@ -36,5 +36,6 @@
     "emptyCalender" : "Calendar",
     "review" : "Reviews",
     "lookingFor": "You are looking for:",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "recommend": "Recommend"
 }

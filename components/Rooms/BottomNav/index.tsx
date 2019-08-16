@@ -1,4 +1,4 @@
-import React, { FC, useState, Fragment,forwardRef } from 'react';
+import React, { FC, useState, Fragment, forwardRef, useEffect, useContext } from 'react';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -7,8 +7,9 @@ import { List, Adjust, PinDrop } from "@material-ui/icons";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
 import { TransitionProps } from '@material-ui/core/transitions';
-import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import { useTranslation } from 'react-i18next';
+import FilterDrawerMobile from '../FilterDrawerMobile/index';
+
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
@@ -32,7 +33,7 @@ export const TransitionCustom = forwardRef<unknown, TransitionProps>(function Tr
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-interface IProps {}
+interface IProps { }
 const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
@@ -40,26 +41,26 @@ const BottomNav: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-    <BottomNavigation
-      value={index}
-      onChange={(event, newValue) => {
-        setIndex(newValue);
-      }}
-      showLabels
-      className={classes.root}>
+      <BottomNavigation
+        value={index}
+        onChange={(event, newValue) => {
+          setIndex(newValue);
+        }}
+        showLabels
+        className={classes.root}>
         <BottomNavigationAction className={classes.customColor} label={t('rooms:searchRooms:filterRooms')} icon={<Adjust />} />
         <BottomNavigationAction className={classes.customColor} label={t('rooms:list')} icon={<List />} />
         <BottomNavigationAction className={classes.customColor} label={t('rooms:location')} icon={<PinDrop />} />
-    </BottomNavigation>
-    <Dialog
-      fullScreen
-      TransitionComponent={TransitionCustom}
-      scroll="paper"
-      open={index === FILTER}
-      onClose={() => setIndex(TAB_LIST)}
-  >
-    <FilterDrawerMobile setIndex = {setIndex}/>
-    </Dialog>
+      </BottomNavigation>
+      <Dialog
+        fullScreen
+        TransitionComponent={TransitionCustom}
+        scroll="paper"
+        open={index === FILTER}
+        onClose={() => setIndex(TAB_LIST)}
+      >
+        <FilterDrawerMobile setIndex={setIndex} />
+      </Dialog>
     </Fragment>
   );
 };

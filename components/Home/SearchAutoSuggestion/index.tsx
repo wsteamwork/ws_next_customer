@@ -186,7 +186,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
         updateSearchText(suggestion.name);
         updateSearchCity(suggestion.id);
         updateSearchDistrict(undefined);
-
         break;
       case 2:
         updateSearchText(suggestion.name);

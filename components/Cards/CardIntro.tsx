@@ -13,8 +13,8 @@ interface IProps extends ICardIntro {
   subTitle?: string;
   titleContent?: string;
   subTitleContent?: string;
-  showSubTitle?:boolean;
-  showContent?:boolean;
+  showSubTitle?: boolean;
+  showContent?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -44,7 +44,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 4,
       width: '100%',
       height: '100%',
-      maxHeight:(props)=>props.imgHeight,
+      maxHeight: (props) => props.imgHeight,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
@@ -97,7 +97,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       zIndex: 1,
       bottom: theme.spacing(2),
       left: theme.spacing(3),
-      width:'85%',
+      width: '85%',
     },
     title: {
       color: '#fff',
@@ -105,10 +105,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       // fontSize:'1.075rem',
       textShadow: '1px 1px 4px #000000'
     },
-    subTitle:{
+    subTitle: {
       color: '#fff',
       fontWeight: 500,
-      fontSize:'0.775rem',
+      fontSize: '0.775rem',
       textShadow: '1px 1px 4px #000000'
     },
     boxPrice: {
@@ -126,10 +126,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontSize: '0.75rem',
       textAlign: 'right'
     },
-    titleContent:{
-      minHeight:64,
+    titleContent: {
+      minHeight: 64,
     },
-    noneBG:{
+    noneBG: {
       '&:after': {
         backgroundImage: 'linear-gradient(to top,#1976d2, transparent)',
         height: '0%'
@@ -140,7 +140,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
   const classes = useStyles(props);
-  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice,showSubTitle,recommendedPrice,subTitle,showContent,titleContent,subTitleContent } = props;
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice, showSubTitle, recommendedPrice, subTitle, showContent, titleContent, subTitleContent } = props;
 
   const imgStyles = useMemo<CSSProperties>(
     () => ({
@@ -181,8 +181,8 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
             </Typography>
           </div>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </div>
       {showContent ? (
         <div>
@@ -204,13 +204,13 @@ CardIntro.defaultProps = {
   imgAlt: 'Westay - Homestay cho người Việt',
   imgSrc: './static/images/room_demo.jpg',
   title: '',
-  subTitle:'',
+  subTitle: '',
   showPrice: false,
-  recommendedPrice:'',
-  showSubTitle:false,
-  showContent:false,
-  titleContent:'',
-  subTitleContent:'',
+  recommendedPrice: '',
+  showSubTitle: false,
+  showContent: false,
+  titleContent: '',
+  subTitleContent: '',
 };
 
 export default CardIntro;

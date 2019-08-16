@@ -18,24 +18,29 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: (props) => props.borderRadius || '4px',
       cursor: 'pointer',
       overflow: 'hidden',
-      marginBottom: (props) => props.marginBottom || theme.spacing(2)
+      marginBottom: (props) => props.marginBottom || theme.spacing(2),
+      height: 100
     },
     content: {
       display: 'flex',
       height: '100%',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      padding: '0.5rem 0.5rem 0 0.5rem'
+      padding: '0.5rem'
     },
     img: {
       margin: 'auto',
       display: 'block',
       maxWidth: '100%',
-      maxHeight: '100%'
+      height: '100%',
+      objectFit: 'cover'
     },
     roomName: {
       fontWeight: 'bold',
-      fontSize: (props) => props.fontSize || '1rem'
+      fontSize: (props) => props.fontSize || '1rem',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     textContent: {
       fontSize: (props) => props.fontSize || '1rem'
@@ -45,14 +50,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       justifyContent: 'flex-start'
     },
     priceHour: {
-      paddingLeft: '1rem'
+      paddingLeft: '1rem',
+      fontSize: 14
+    },
+    priceDay: {
+      fontSize: 14
     },
     link: {
       color: '#484848'
     }
   })
 );
- 
+
 interface IProps {
   maxWidth?: string | number;
   fontSize?: string | number;
@@ -69,21 +78,19 @@ const VisitedRoom: FC<IProps> = (props) => {
   const { width } = useContext(GlobalContext);
   return (
     <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={4}>
-          <Link href="/rooms">
-            <a>
-              <img
-                className={classes.img}
-                alt={room.media.data[0].image}
-                src={`${IMAGE_STORAGE_SM + room.media.data[0].image}`}
-              />
-            </a>
+      <Grid container style={{ height: '100%' }}>
+        <Grid item xs={4} style={{ height: '100%' }}>
+          <Link href={`/room/${room.id}`}>
+            <img
+              className={classes.img}
+              alt={room.media.data[0].image}
+              src={`${IMAGE_STORAGE_SM + room.media.data[0].image}`}
+            />
           </Link>
         </Grid>
         <Grid item xs={8}>
           <Grid item xs className={classes.content}>
-            <Link href="/rooms">
+            <Link href={`/room/${room.id}`}>
               <a className={classes.link}>
                 <Typography className={classes.roomName}>{room.details.data[0].name}</Typography>
               </a>

@@ -6,7 +6,10 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import VisitedRoom from './VisitedRoom';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+
+const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     label: {
       textAlign: 'left',
@@ -16,25 +19,26 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {
-  visitedRoom: RoomIndexRes[];
-}
-
-const VisitedRooms: FC<IProps> = (props) => {
+const VisitedRooms: FC = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { visitedRoom } = props;
+  const visitedRoom = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.visitedRoom.visitedRoom
+  );
+
   return (
-    <Grid>
-      <Typography variant="h5" className={classes.label}>
-        {t('rooms:visitedRoom')}
-      </Typography>
-      <Paper elevation={0}>
-        {visitedRoom.slice(0, 4).map((room, index) => (
-          <VisitedRoom key={index} room={room}></VisitedRoom>
-        ))}
-      </Paper>
-    </Grid>
+    visitedRoom.length > 0 && (
+      <Grid>
+        <Typography variant="h5" className={classes.label}>
+          {t('rooms:visitedRoom')}
+        </Typography>
+        <Paper elevation={0}>
+          {visitedRoom.map((room, index) => (
+            <VisitedRoom key={index} room={room}></VisitedRoom>
+          ))}
+        </Paper>
+      </Grid>
+    )
   );
 };
 

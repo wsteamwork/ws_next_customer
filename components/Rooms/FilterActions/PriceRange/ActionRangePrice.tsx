@@ -90,8 +90,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const { price_day_from, price_day_to } = state;
 
   const [price, setPrice] = useState<Range>({
-    min: MIN_PRICE,
-    max: MAX_PRICE
+    min: price_day_from ? price_day_from : MIN_PRICE,
+    max: price_day_to ? price_day_to : MAX_PRICE
   });
 
   const setPriceEnhancement = (value: Range) => {

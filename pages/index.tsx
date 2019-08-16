@@ -15,12 +15,16 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
+import { useTranslation } from 'react-i18next';
+// import SeaView from '@/components/Home/CollectionRooms/SeaView';
+// import CityView from '@/components/Home/CollectionRooms/CityView';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
   );
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
+  const { t } = useTranslation();
 
   return (
     <Fragment>
@@ -41,9 +45,11 @@ const Home: NextPage = () => {
           <ListRoom
             roomData={roomsHot}
             usingSlider={true}
-            title={'Phòng nổi bật'}
+            title={t('home:editorChoice')}
             render={renderRoom}></ListRoom>
 
+          {/* <SeaView /> */}
+          {/* <CityView /> */}
           <CollectionViews />
         </GridContainer>
         <HostBecome />

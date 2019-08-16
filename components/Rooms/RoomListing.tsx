@@ -16,7 +16,7 @@ import NotFound from './Lotte/NotFound';
 
 // @ts-ignore
 const RoomListing: FC = (props) => {
-  const { state: stateIndexRoom } = useContext(RoomIndexContext);
+  const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
   const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
@@ -32,6 +32,10 @@ const RoomListing: FC = (props) => {
   }, [rooms, isLoading]);
 
   const renderRoom = (room) => <RoomCardListing room={room} />;
+
+  const openMap = () => {
+    dispatch({ type: 'setMapOpen', isMapOpen: true });
+  };
 
   return (
     <GridContainer xs={11} md={10} xl={9}>
@@ -50,17 +54,21 @@ const RoomListing: FC = (props) => {
                 classes={{
                   root: 'mapPaper'
                 }}>
-                <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
+                <ButtonGlobal className="watchMapButton" onClick={openMap}>
+                  Xem Bản Đồ
+                </ButtonGlobal>
               </Paper>
 
-              <VisitedRooms visitedRoom={rooms} />
+              <VisitedRooms />
             </Grid>
           </Hidden>
         ) : (
+          <Hidden smDown>
             <Grid item sm={4} lg={3}>
               <LoadingSkeleton type={'sideBar'} />
             </Grid>
-          )}
+          </Hidden>
+        )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
           {rooms.length !== 0 ? (
@@ -83,62 +91,16 @@ const RoomListing: FC = (props) => {
               />
             </Fragment>
           ) : !isEmpty ? (
-            <Grid>
-              <LoadingSkeleton type={'rooms'} duplicate={5} />
-            </Grid>
+            <Hidden xsDown>
+              <Grid>
+                <LoadingSkeleton type={'rooms'} duplicate={5} />
+              </Grid>
+            </Hidden>
           ) : (
-                ''
-              )}
+            ''
+          )}
           {isEmpty ? <NotFound height={250} width={250} /> : ''}
         </Grid>
-
-        {/* <Hidden smDown>
-          <Grid item sm={4} lg={3}>
-            {rooms && meta ? (
-              <Fragment>
-                <Paper
-                  elevation={0}
-                  style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
-                  classes={{
-                    root: 'mapPaper'
-                  }}>
-                  <ButtonGlobal className="watchMapButton">Xem Bản Đồ</ButtonGlobal>
-                </Paper>
-
-                <VisitedRooms visitedRoom={rooms} />
-              </Fragment>
-            ) : (
-              <LoadingSkeleton type={'sideBar'} />
-            )}
-          </Grid>
-        </Hidden>
-
-        <Grid item lg={9} md={8} sm={12} xs={12} style={{ marginTop: '-64px' }}>
-          {rooms && meta ? (
-            <Fragment>
-              <ListRoom
-                customClass="listRoomContainerWithoutSlickCustom"
-                roomData={rooms}
-                usingSlider={false}
-                title={''}
-                spacing={1}
-                render={renderRoom}
-              />
-              <Pagination
-                className="rooms-pagination"
-                total={meta.pagination.total}
-                locale={localeInfo}
-                pageSize={meta.pagination.per_page}
-                current={currentPage}
-                onChange={changePage}
-              />
-            </Fragment>
-          ) : (
-            <Grid style={{ marginTop: 64 }}>
-              <LoadingSkeleton type={'rooms'} duplicate={5} />
-            </Grid>
-          )} */}
-        {/* </Grid> */}
       </Grid>
     </GridContainer>
   );

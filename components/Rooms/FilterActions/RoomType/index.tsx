@@ -58,15 +58,15 @@ const RoomType: FC = () => {
             haveResult: checkRoomTypes
           })}>
           <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
-            <FontAwesomeIcon icon={faBuilding} size="1x"></FontAwesomeIcon>&nbsp;&nbsp;
+            {/* <FontAwesomeIcon icon={faBuilding} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:roomsType')}</p>
             {checkRoomTypes && <p>&nbsp;({roomTypes.length})</p>}
           </span>
-          {checkRoomTypes && (
+          {/* {checkRoomTypes && (
             <span onClick={handleRemove} className="chooseRoomGuest__removeIcon">
               <FontAwesomeIcon icon={faTimesCircle} size="1x"></FontAwesomeIcon>
             </span>
-          )}
+          )} */}
         </Grid>
       </CustomPopper>
     ),

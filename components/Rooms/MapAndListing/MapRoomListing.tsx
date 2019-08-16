@@ -10,7 +10,7 @@ const MapRoomListing: FC = () => {
   const { rooms } = state;
 
   const room = useMemo(() => rooms.length && rooms[0], [rooms]);
-
+  // console.log(room)
   const onChangeMap = ({ bounds }: ChangeEventValue) => {
     const coords: MapCoords = {
       lat_max: bounds.ne.lat,

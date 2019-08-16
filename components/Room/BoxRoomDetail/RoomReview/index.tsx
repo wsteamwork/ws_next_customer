@@ -22,13 +22,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     boxPagination: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'flex-end'
     },
     review: {
       marginBottom: '2rem'
     },
     noComment: {
       marginTop: 10
+    },
+    mgTop:{
+      marginTop: theme.spacing(3)
     }
   })
 );
@@ -66,11 +69,11 @@ const RoomReview: FC<IProps> = (props) => {
                 <RatingDetail />
               </Grid>
             </Grid>
-            <Grid container>
-              <Grid container item xs={12}>
+            <Grid container className={classes.mgTop}>
+              <Grid container item xs={12} spacing={2}>
                 {_.map(newData, (obj, i) =>
                   obj.status === 1 ? (
-                    <Grid key={i} item xs={12} sm={6} className={classes.review}>
+                    <Grid key={i} item xs={12} sm={6} className={classes.review} container alignItems='center'>
                       <ReviewItem review={obj} />
                     </Grid>
                   ) : (
@@ -81,7 +84,7 @@ const RoomReview: FC<IProps> = (props) => {
               {room.reviews.data.length > 4 ? (
                 <Grid item xs={12} className={classes.boxPagination}>
                   <Pagination
-                    className="ant-pagination"
+                    className="rooms-pagination"
                     total={reviews.length}
                     locale={localeInfo}
                     pageSize={pageSize}

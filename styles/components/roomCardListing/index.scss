@@ -52,10 +52,10 @@
 
   .boxSave {
     position: absolute;
-    top: -10;
-    right: -12;
-    width: 40;
-    height: 40;
+    top: -22px;
+    right: -22px;
+    width: 70px;
+    height: 70px;
   }
 
   .boxCard {
@@ -84,7 +84,7 @@
             @include xs {
               margin-bottom: 20px;
             }
-            //padding-right: 40px !important;
+            padding-right: 40px !important;
             .roomName {
               overflow: hidden;
               font-size: 20px;
@@ -158,7 +158,7 @@
               font-weight: 300;
             }
             .totalReviewText {
-              margin-left: 10;
+              margin-left: 10px;
               color: #fa991c;
               font-weight: 500;
             }
@@ -176,7 +176,7 @@
             }
 
             .priceContainer {
-              @include lg {
+              @include lgUp {
                 display: flex;
               }
 
@@ -200,12 +200,30 @@
               color: #fa991c;
               font-weight: 700;
             }
-            .discountpricetext {
+            .discountPriceText {
               font-size: 13px;
               color: #7d7d7db3;
               text-decoration: line-through;
               font-weight: 700;
             }
+            .discountPriceBadge{
+              width: calc(100% + 22px);
+              position: relative;
+              text-align: right;
+              border-radius: 2px;
+              margin-bottom: 9px;
+
+              .discountBox{
+                color: #fff;
+                padding: 4px 10px 4px 8px;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: 700;
+                border-radius: 2px;
+                background-color: #ff9800;
+              }
+            }
+
           }
           .boxsave {
             position: absolute;

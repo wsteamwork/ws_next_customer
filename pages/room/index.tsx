@@ -22,12 +22,15 @@ import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import BoxRecommend from '@/components/Room/BoxRecommend';
+import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
+  const [] = useVisitedRoom();
 
   useEffect(() => {
     !!error && router.push('/error');
@@ -43,13 +46,10 @@ const Room: NextPage = () => {
       {!!room && (
         <NextHead
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
-          title={room.details.data[0].name}
-          description={ReactHtmlParser(room.details.data[0].description, {
-            transform: transformHtmlContent
-          })}
+          title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
+          description={`${room.room_type_txt} ${room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'} ngay tại ${room.district.data.name}, ${room.city.data.name}. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}>
-        </NextHead>
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
 
       <NavHeader></NavHeader>
@@ -59,13 +59,17 @@ const Room: NextPage = () => {
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
               <BoxSearch />
               <BoxImage />
-              <Grid container spacing={1}>
-                <Grid item xs={12} lg={9}>
+              <Grid container>
+                <Grid item xs={12} lg={8} xl={9}>
                   <BoxRoomDetail></BoxRoomDetail>
                 </Grid>
 
-                <Grid item sm={12} md={11} lg={3} className="roomPage__boxBooking">
+                <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
                   <BoxBooking></BoxBooking>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <BoxRecommend />
                 </Grid>
               </Grid>
               <Grid container className="roomPage__boxBookingMoblie">

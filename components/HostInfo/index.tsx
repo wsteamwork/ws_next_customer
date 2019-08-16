@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: '100%',
       justifyContent: 'space-between',
       flexDirection: 'column',
-      padding: '0.7rem 0 0.7rem 1rem',
+      padding: '0.7rem 0',
       fontSize: '0.5rem'
     },
     userName: {
@@ -57,12 +57,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: '#484848'
     },
     avatar: {
-      margin: 10,
+      position:'absolute',
+      top:'50%',
+      left:'50%',
+      transform:'translate(-50%,-50%)',
       width: 60,
       height: 60,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.down('md')]: {
         width: 50,
         height: 50
       },
@@ -110,7 +111,7 @@ const HostInfo: FC<IProps> = (props) => {
     room && (
       <Paper className={classes.paper}>
         <Grid container>
-          <Grid item xs={3}>
+          <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{position:'relative'}}>
             <Link href={`/users/${merchant.id}`}>
               <a>
                 <Avatar
@@ -121,7 +122,7 @@ const HostInfo: FC<IProps> = (props) => {
               </a>
             </Link>
           </Grid>
-          <Grid item xs={9}>
+          <Grid item xs={9} sm={8} md={8} lg={8} xl={9}>
             <Grid item xs className={classes.content}>
               <Link href={`/user/${merchant.id}`}>
                 <a className={classes.link}>
@@ -129,13 +130,13 @@ const HostInfo: FC<IProps> = (props) => {
                 </a>
               </Link>
               <Grid container className={classes.price}>
-                <Grid item sm={3} md={3} lg={3}>
+                <Grid item sm={2} md={3} lg={3}>
                   <Typography variant="subtitle1" className={classes.icon}>
                     <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
                     {merchant.number_room}
                   </Typography>
                 </Grid>
-                <Grid item sm={9} md={9} lg={9}>
+                <Grid item sm={10} md={9} lg={9}>
                   <Typography variant="subtitle1" className={classes.certificate}>
                     <FontAwesomeIcon
                       className={classes.icon}

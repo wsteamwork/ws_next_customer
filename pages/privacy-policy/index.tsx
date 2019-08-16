@@ -27,7 +27,7 @@ const PrivacyPolicy: NextPage = (props) => {
           <div className="termsOfConditions">
             <h1>Chính sách quyền riêng tư</h1>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 C&ocirc;ng ty Cổ phần Westay (Số đăng k&yacute; c&ocirc;ng ty: 0108045140)
                 (&ldquo;WeStay&rdquo; hoặc &ldquo;ch&uacute;ng t&ocirc;i&rdquo;) sở hữu v&agrave;
                 điều h&agrave;nh trang web Westay.vn. Ch&iacute;nh S&aacute;ch Quyền Ri&ecirc;ng Tư
@@ -53,12 +53,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 T&ugrave;y từng thời điểm, WeStay c&oacute; thể sửa đổi Ch&iacute;nh S&aacute;ch
                 Quyền Ri&ecirc;ng Tư để tương th&iacute;ch với những thay đổi về ph&aacute;p luật,
                 c&aacute;c thực tiễn thu thập v&agrave; sử dụng Dữ Liệu C&aacute; Nh&acirc;n của
@@ -82,12 +82,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                1. Th&ocirc;ng tin ch&uacute;ng t&ocirc;i thu thập
-              </span>
+              <span>1. Th&ocirc;ng tin ch&uacute;ng t&ocirc;i thu thập</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Ch&uacute;ng t&ocirc;i thu thập Dữ Liệu C&aacute; Nh&acirc;n về Qu&yacute; vị
                 m&agrave; Qu&yacute; vị cung cấp cho ch&uacute;ng t&ocirc;i khi sử dụng Trang Web.
                 Dữ Liệu C&aacute; Nh&acirc;n n&agrave;y bao gồm nhưng kh&ocirc;ng giới hạn ở
@@ -107,13 +105,13 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 2. Ch&uacute;ng t&ocirc;i sử dụng Th&ocirc;ng tin của Qu&yacute; vị như thế
                 n&agrave;o
               </span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Ch&uacute;ng t&ocirc;i c&oacute; thể sử dụng Dữ Liệu C&aacute; Nh&acirc;n của
                 Qu&yacute; vị v&agrave; c&aacute;c th&ocirc;ng tin kh&aacute;c thu thập qua Trang
                 Web, cho c&aacute;c mục đ&iacute;ch sau: đăng k&yacute;, quản l&yacute;
@@ -137,12 +135,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Ch&uacute;ng t&ocirc;i cũng c&oacute; thể sử dụng Dữ Liệu C&aacute; Nh&acirc;n của
                 Qu&yacute; vị v&agrave; c&aacute;c th&ocirc;ng tin kh&aacute;c được thu thập cho mục
                 đ&iacute;ch tiếp thị qua Mạng Truyền Th&ocirc;ng Mạng X&atilde; Hội bằng c&aacute;ch
@@ -161,12 +159,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 3. Chia sẻ v&agrave; chuyển Dữ liệu C&aacute; nh&acirc;n của Qu&yacute; vị
               </span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Dữ Liệu C&aacute; Nh&acirc;n của Qu&yacute; vị sẽ/c&oacute; thể được WeStay tiết lộ
                 cho c&aacute;c c&ocirc;ng ty li&ecirc;n kết của WeStay. T&ugrave;y từng thời điểm,
                 WeStay (v&agrave;/hoặc c&aacute;c c&ocirc;ng ty li&ecirc;n kết của ch&uacute;ng
@@ -179,12 +177,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Trong một số trường hợp, khi Qu&yacute; vị giao dịch trực tiếp với một b&ecirc;n thứ
                 ba để tiếp nhận dịch vụ, hoặc khi Qu&yacute; vị sử dụng Trang Web để đặt
                 ph&ograve;ng kh&aacute;ch sạn hoặc tiếp nhận sản phẩm hay dịch vụ kh&aacute;c,
@@ -193,12 +191,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 T&ugrave;y thuộc v&agrave;o vị tr&iacute; của Qu&yacute; vị, WeStay, c&aacute;c
                 c&ocirc;ng ty li&ecirc;n kết v&agrave; c&aacute;c nh&agrave; cung cấp, nh&agrave;
                 cung ứng hoặc đại l&yacute; dịch vụ b&ecirc;n thứ ba của WeStay, cũng c&oacute; thể
@@ -206,12 +204,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Xin lưu &yacute; rằng WeStay cũng c&oacute; thể tiết lộ Dữ Liệu C&aacute; Nh&acirc;n
                 của Qu&yacute; vị trong c&aacute;c trường hợp sau đ&acirc;y: để đưa ra v&agrave;
                 phản biện chống lại bất kỳ khiếu nại hoặc khiếu kiện n&agrave;o; để thực hiện lệnh
@@ -232,10 +230,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>4. Chấp thuận</span>
+              <span>4. Chấp thuận</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Như đ&atilde; n&ecirc;u ở tr&ecirc;n, bằng c&aacute;ch truy cập v&agrave; sử dụng
                 Trang Web, hoặc bằng c&aacute;ch đặt h&agrave;ng từ Trang Web, hoặc bằng c&aacute;ch
                 đăng k&yacute; hay sử dụng c&aacute;c dịch vụ tr&ecirc;n Trang Web, hoặc bằng
@@ -255,12 +253,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                5. R&uacute;t lại chấp thuận
-              </span>
+              <span>5. R&uacute;t lại chấp thuận</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Qu&yacute; vị c&oacute; thể r&uacute;t lại sự chấp thuận của Qu&yacute; vị đối với
                 việc cho ch&uacute;ng t&ocirc;i thu thập, sử dụng hoặc tiết lộ Dữ Liệu C&aacute;
                 Nh&acirc;n của Qu&yacute; vị bất cứ l&uacute;c n&agrave;o, bằng c&aacute;ch gửi cho
@@ -282,12 +278,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                6. Ch&iacute;nh s&aacute;ch Cookie
-              </span>
+              <span>6. Ch&iacute;nh s&aacute;ch Cookie</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Một &ldquo;cookie&rdquo; l&agrave; một tệp nhận diện chữ v&agrave; số m&agrave;
                 ch&uacute;ng t&ocirc;i chuyển đến ổ đĩa cứng hoặc thẻ nhớ của Qu&yacute; vị
                 th&ocirc;ng qua tr&igrave;nh duyệt web khi Qu&yacute; vị truy cập Trang Web của
@@ -316,12 +310,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                7. Truy cập hoặc chỉnh sửa Dữ liệu C&aacute; nh&acirc;n của Qu&yacute; vị
-              </span>
+              <span>7. Truy cập hoặc chỉnh sửa Dữ liệu C&aacute; nh&acirc;n của Qu&yacute; vị</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Khi Qu&yacute; vị cung cấp cho ch&uacute;ng t&ocirc;i Dữ Liệu C&aacute; Nh&acirc;n
                 của Qu&yacute; vị, h&atilde;y đảm bảo rằng Dữ Liệu C&aacute; Nh&acirc;n đ&oacute;
                 l&agrave; ch&iacute;nh x&aacute;c v&agrave; đầy đủ. Nếu Qu&yacute; vị tin rằng bất
@@ -334,12 +326,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Nếu Qu&yacute; vị muốn chỉnh sửa lỗi hoặc thiếu s&oacute;t trong bất kỳ Dữ Liệu
                 C&aacute; Nh&acirc;n n&agrave;o thuộc sở hữu hoặc kiểm so&aacute;t của ch&uacute;ng
                 t&ocirc;i m&agrave; kh&ocirc;ng thể thực hiện th&ocirc;ng qua Trang Web của
@@ -354,12 +346,12 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Để bảo vệ sự ri&ecirc;ng tư v&agrave; an to&agrave;n của Qu&yacute; vị, ch&uacute;ng
                 t&ocirc;i sẽ x&aacute;c minh danh t&iacute;nh của Qu&yacute; vị trước khi cấp quyền
                 truy cập hoặc thực hiện việc sửa đổi Dữ Liệu C&aacute; Nh&acirc;n của Qu&yacute; vị.
@@ -369,12 +361,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                8. Bảo vệ Dữ liệu C&aacute; nh&acirc;n của Qu&yacute; vị
-              </span>
+              <span>8. Bảo vệ Dữ liệu C&aacute; nh&acirc;n của Qu&yacute; vị</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Ch&uacute;ng t&ocirc;i bảo vệ Dữ Liệu C&aacute; Nh&acirc;n thuộc sở hữu hoặc kiểm
                 so&aacute;t của ch&uacute;ng t&ocirc;i bằng c&aacute;ch duy tr&igrave; c&aacute;c
                 biện ph&aacute;p an ninh hợp l&yacute;, bao gồm cả c&aacute;c quy tr&igrave;nh về
@@ -384,12 +374,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                9. Li&ecirc;n kết đến c&aacute;c trang Web kh&aacute;c
-              </span>
+              <span>9. Li&ecirc;n kết đến c&aacute;c trang Web kh&aacute;c</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Trang Web của ch&uacute;ng t&ocirc;i c&oacute; thể chứa c&aacute;c li&ecirc;n kết
                 đến c&aacute;c trang web được quan t&acirc;m kh&aacute;c. Tuy nhi&ecirc;n, khi
                 Qu&yacute; vị đ&atilde; sử dụng c&aacute;c li&ecirc;n kết n&agrave;y để rời khỏi
@@ -404,12 +392,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                10. Đăng k&yacute; v&agrave; Th&agrave;nh vi&ecirc;n
-              </span>
+              <span>10. Đăng k&yacute; v&agrave; Th&agrave;nh vi&ecirc;n</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Trang Web n&agrave;y cho ph&eacute;p Qu&yacute; vị tạo một t&agrave;i khoản Người
                 D&ugrave;ng bằng việc đăng k&yacute; th&agrave;nh vi&ecirc;n, dựa tr&ecirc;n
                 c&aacute;c dữ liệu Qu&yacute; vị cung cấp. Bằng c&aacute;ch cung cấp c&aacute;c dữ
@@ -420,14 +406,12 @@ const PrivacyPolicy: NextPage = (props) => {
             <ul>
               <li dir="ltr" style={{ listStyleType: 'disc' }}>
                 <p dir="ltr">
-                  <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                    Qu&yacute; vị đ&atilde; bằng hoặc tr&ecirc;n 18 tuổi.
-                  </span>
+                  <span>Qu&yacute; vị đ&atilde; bằng hoặc tr&ecirc;n 18 tuổi.</span>
                 </p>
               </li>
               <li dir="ltr" style={{ listStyleType: 'disc' }}>
                 <p dir="ltr">
-                  <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+                  <span>
                     Th&ocirc;ng tin về Qu&yacute; vị l&agrave; đ&uacute;ng v&agrave; ch&iacute;nh
                     x&aacute;c, hiện thời v&agrave; đầy đủ theo y&ecirc;u cầu trong mẫu đăng
                     k&yacute; tr&ecirc;n Trang Web (&ldquo;Dữ Liệu Đăng K&yacute;&rdquo;).
@@ -436,7 +420,7 @@ const PrivacyPolicy: NextPage = (props) => {
               </li>
               <li dir="ltr" style={{ listStyleType: 'disc' }}>
                 <p dir="ltr">
-                  <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+                  <span>
                     Qu&yacute; vị sẽ cập nhật Dữ Liệu Đăng K&yacute; n&agrave;y để bảo đảm Dữ Liệu
                     Đăng K&yacute; đ&uacute;ng, ch&iacute;nh x&aacute;c v&agrave; đầy đủ.
                   </span>
@@ -444,7 +428,7 @@ const PrivacyPolicy: NextPage = (props) => {
               </li>
             </ul>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Hơn nữa, Qu&yacute; vị đồng &yacute; rằng WeStay kh&ocirc;ng chịu tr&aacute;ch nhiệm
                 đối với bất kỳ tổn thất hoặc thiệt hại m&agrave; ch&uacute;ng t&ocirc;i, Qu&yacute;
                 vị hay bất kỳ b&ecirc;n thứ ba n&agrave;o phải g&aacute;nh chịu trong trường hợp sự
@@ -473,12 +457,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                11. Chuyển giao c&ocirc;ng việc Kinh doanh
-              </span>
+              <span>11. Chuyển giao c&ocirc;ng việc Kinh doanh</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Trong trường hợp c&oacute; thay đổi về kiểm so&aacute;t hay thay đổi quyền sở hữu
                 của tất cả hay một phần c&ocirc;ng việc kinh doanh hoặc c&ocirc;ng ty của WeStay,
                 bao gồm cả Trang Web, th&igrave; tất cả c&aacute;c Dữ Liệu C&aacute; Nh&acirc;n của
@@ -487,13 +469,13 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 12. Ph&ecirc; duyệt c&aacute;c thay đổi của Ch&iacute;nh s&aacute;ch Quyền
                 ri&ecirc;ng tư
               </span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Bằng c&aacute;ch sử dụng Trang Web hoặc c&aacute;c dịch vụ ch&uacute;ng t&ocirc;i
                 cung cấp, Qu&yacute; vị đồng &yacute; với việc thu thập, sử dụng, tiết lộ v&agrave;
                 xử l&yacute; c&aacute;c Dữ Liệu C&aacute; Nh&acirc;n của Qu&yacute; vị như được quy
@@ -509,12 +491,10 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                13. Thứ tự Ưu ti&ecirc;n
-              </span>
+              <span>13. Thứ tự Ưu ti&ecirc;n</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Nếu Qu&yacute; vị đ&atilde; đồng &yacute; với Điều Khoản Trang Web của ch&uacute;ng
                 t&ocirc;i, trong trường hợp c&oacute; sự kh&ocirc;ng thống nhất giữa c&aacute;c Điều
                 Khoản Trang Web v&agrave; Ch&iacute;nh S&aacute;ch Quyền Ri&ecirc;ng Tư n&agrave;y,
@@ -522,39 +502,33 @@ const PrivacyPolicy: NextPage = (props) => {
               </span>
             </p>
             <h2 dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                14. Li&ecirc;n hệ với ch&uacute;ng t&ocirc;i
-              </span>
+              <span>14. Li&ecirc;n hệ với ch&uacute;ng t&ocirc;i</span>
             </h2>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 Nếu Qu&yacute; vị c&oacute; bất kỳ c&acirc;u hỏi hoặc y&ecirc;u cầu li&ecirc;n quan
                 đến Ch&iacute;nh S&aacute;ch Quyền Ri&ecirc;ng Tư, xin vui l&ograve;ng li&ecirc;n hệ
                 SĐT 093 610 8880.
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                Ng&agrave;y hiệu lực: Th&aacute;ng 3 năm 2019.
-              </span>
+              <span>Ng&agrave;y hiệu lực: Th&aacute;ng 3 năm 2019.</span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>&nbsp;</strong>
               </span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
-                &copy; 2019 WeStay.
-              </span>
+              <span>&copy; 2019 WeStay.</span>
             </p>
             <p dir="ltr">
-              <span style={{ fontFamily: 'helvetica, arial, sans-serif' }}>
+              <span>
                 <strong>
                   <br />
                 </strong>{' '}

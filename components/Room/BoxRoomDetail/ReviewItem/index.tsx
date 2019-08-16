@@ -18,8 +18,7 @@ import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth: (props) => props.maxWidth || '27rem',
-      cursor: 'pointer',
+      maxWidth:'100%',
       overflow: 'hidden',
       boxShadow: 'none',
       [theme.breakpoints.down('xs')]: {
@@ -96,8 +95,8 @@ const ReviewItem: FC<IProps> = (props) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const limitStr = (): number => {
-    if (width === 'lg' || width === 'md') return 85;
-    else return 60;
+    if (width === 'lg' || width === 'md' || width === 'xl') return 100;
+    else return 70;
   };
 
   const arrMenuItem = (x: number): any[] => {
