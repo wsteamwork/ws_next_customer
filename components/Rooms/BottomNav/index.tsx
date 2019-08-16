@@ -7,10 +7,8 @@ import { List, Adjust, PinDrop } from "@material-ui/icons";
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide from "@material-ui/core/Slide/Slide";
 import { TransitionProps } from '@material-ui/core/transitions';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import MapMobile from '@/components/Rooms/MapMobile';
-// import FilterDrawerMobile from '../FilterDrawerMobile/index';
-
+import { useTranslation } from 'react-i18next';
+import FilterDrawerMobile from '../FilterDrawerMobile/index';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -20,6 +18,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       bottom: 0,
       height: 60
     },
+    customColor: {
+      color: '#484848'
+    }
   })
 );
 export const FILTER = 0;
@@ -32,27 +33,11 @@ export const TransitionCustom = forwardRef<unknown, TransitionProps>(function Tr
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-interface IProps {}
+interface IProps { }
 const BottomNav: FC<IProps> = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles(props);
   const [index, setIndex] = useState<number>(TAB_LIST);
-  const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
-  const { isMapOpen } = stateRoomIndex;
-
-  useEffect(() => {
-    if (index === MAP) {
-      mapDispatch({
-        type: "setMapOpen",
-        isMapOpen: true
-      });
-    }
-  }, [index]);
-
-  useEffect(() => {
-    if (!isMapOpen) {
-      setIndex(TAB_LIST);
-    }
-  }, [isMapOpen]);
 
   return (
     <Fragment>
@@ -63,9 +48,9 @@ const BottomNav: FC<IProps> = (props) => {
         }}
         showLabels
         className={classes.root}>
-        <BottomNavigationAction label="Bộ lọc" icon={<Adjust />} />
-        <BottomNavigationAction label="Danh sách" icon={<List />} />
-        <BottomNavigationAction label="Khu vực" icon={<PinDrop />} />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:searchRooms:filterRooms')} icon={<Adjust />} />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:list')} icon={<List />} />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:location')} icon={<PinDrop />} />
       </BottomNavigation>
       <Dialog
         fullScreen
@@ -74,9 +59,8 @@ const BottomNav: FC<IProps> = (props) => {
         open={index === FILTER}
         onClose={() => setIndex(TAB_LIST)}
       >
-        {/*<FilterDrawerMobile setIndex = {setIndex}/>*/}
+        <FilterDrawerMobile setIndex={setIndex} />
       </Dialog>
-      <MapMobile openMap={index === MAP}/>
     </Fragment>
   );
 };

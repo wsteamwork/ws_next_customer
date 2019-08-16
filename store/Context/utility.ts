@@ -36,7 +36,13 @@ export const updateRouter = (
     obj[param] = value;
   } else {
     obj[param] = _.join(value, ',');
-    if (param2) obj[param2] = value2;
+    if (param2) {
+      if (Array.isArray(value2)) {
+        obj[param2] = _.join(value2, ',');
+      } else {
+        obj[param2] = value2;
+      }
+    }
   }
 
   const query = updateObject(Router.query, obj);

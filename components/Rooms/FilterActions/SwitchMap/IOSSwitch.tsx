@@ -6,7 +6,7 @@ import mainColor from '@/styles/constants/colors';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
-      width: 42,
+      width: 50,
       height: 26,
       padding: 0,
       margin: theme.spacing(1)
@@ -37,7 +37,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       opacity: 1,
       transition: theme.transitions.create(['background-color', 'border'])
     },
-    checked: {},
+    checked: {
+    },
     focusVisible: {}
   })
 );

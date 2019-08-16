@@ -14,7 +14,7 @@ import { NextRouter } from 'next/router';
 import { BaseRouter } from 'next-server/dist/lib/router/router';
 
 export const MIN_PRICE = 0;
-export const MAX_PRICE = 100000000;
+export const MAX_PRICE = 50000000;
 export const STEP_PRICE = 100000;
 
 export const RoomIndexContext = createContext<IRoomIndexContext>(null as IRoomIndexContext);
@@ -134,3 +134,6 @@ export const fetchRoomType = async () => {
   const res: AxiosResponse<TypeSelect[]> = await axios.get('rooms/type');
   return res.data;
 };
+
+
+
