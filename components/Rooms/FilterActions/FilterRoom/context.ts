@@ -7,6 +7,7 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { Instance } from 'tippy.js';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 
@@ -54,11 +55,24 @@ export const useFilterRoom = (
 ): ReturnUseFilterRoom => {
   const [data, setData] = useState<ResDataFilter>([]);
   const { state, dispatch } = useContext(RoomFilterContext);
+  const { router } = useContext(GlobalContext);
+  const { query } = router;
   const { amenities } = state;
 
   useEffect(() => {
     getDataFilter(setData);
   }, []);
+
+  useEffect(() => {
+    if (!!query.amenities) {
+      const data = query.amenities as string;
+      const res: number[] = data.split(',').map(function(i) {
+        return parseInt(i, 10);
+      });
+
+      dispatch({ type: 'setAmenitiesFilter', amenities: res });
+    }
+  }, [query]);
 
   const handleChange = (id: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {

@@ -12,6 +12,7 @@ import { AxiosResponse } from 'axios';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 export interface RoomTypeData {
   id: number;
@@ -41,12 +42,25 @@ export const useRoomTypeChecbox = (
   setDataClick?: Dispatch<SetStateAction<number[]>>
 ): ReturnUseCheckBox => {
   const { dispatch, state } = useContext(RoomFilterContext);
+  const { router } = useContext(GlobalContext);
+  const { query } = router;
   const { roomTypes } = state;
   const [data, setData] = useState<RoomTypeData[]>([]);
 
   useEffect(() => {
     getRoomType(setData);
   }, []);
+
+  useEffect(() => {
+    if (!!query.type_room) {
+      const data = query.type_room as string;
+      const res: number[] = data.split(',').map(function(i) {
+        return parseInt(i, 10);
+      });
+
+      dispatch({ type: 'setRoomTypes', roomTypes: res });
+    }
+  }, [query]);
 
   const handleChange = (item: number) => (
     event: ChangeEvent<HTMLInputElement>,

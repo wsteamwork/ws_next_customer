@@ -41,7 +41,7 @@ const Rooms: NextPage = () => {
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
-            <Hidden smDown>
+            <Hidden smDown implementation="css">
               <StickyContainer>
                 <Sticky>
                   {({ style }) => (
@@ -70,7 +70,7 @@ const Rooms: NextPage = () => {
                 <MapAndListing></MapAndListing>
               </StickyContainer>
             </Hidden>
-            <Hidden mdUp>
+            <Hidden mdUp implementation="css">
               <GridContainer
                 xs={11}
                 md={10}

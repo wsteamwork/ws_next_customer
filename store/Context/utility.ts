@@ -27,7 +27,6 @@ export const updateRouter = (
   param3?: string,
   value3?: any
 ) => {
-  console.log(param, value);
   const obj = {};
   if (notArray) {
     // console.log('param', param);
