@@ -1,9 +1,8 @@
-import React, { useReducer, useContext, Fragment } from 'react';
+import React, { useReducer, Fragment } from 'react';
 import { NextPage } from 'next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterActions from '@/components/Rooms/FilterActions';
 import {
   RoomFilterContext,
@@ -18,8 +17,7 @@ import {
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import { Hidden } from '@material-ui/core';
-import BottomNav from '@/components/Rooms/BottomNav';
-
+import BottomNav from '@/components/Rooms/BottomNav/index';
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);

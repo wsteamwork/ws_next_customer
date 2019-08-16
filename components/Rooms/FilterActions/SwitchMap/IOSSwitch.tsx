@@ -6,7 +6,7 @@ import mainColor from '@/styles/constants/colors';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
-      width: 42,
+      width: 50,
       height: 26,
       padding: 0,
       margin: theme.spacing(1)
@@ -15,6 +15,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       padding: 1,
       '&$checked': {
         color: theme.palette.common.white,
+        transform: 'translateX(93%)',
         '& + $track': {
           backgroundColor: mainColor.primary,
           opacity: 1,
@@ -37,7 +38,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       opacity: 1,
       transition: theme.transitions.create(['background-color', 'border'])
     },
-    checked: {},
+    checked: {
+    },
     focusVisible: {}
   })
 );

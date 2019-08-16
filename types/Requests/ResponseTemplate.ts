@@ -17,6 +17,7 @@ export type IsArray<E, T> = E extends any[] ? T[] : T;
 
 export interface TypeSelect {
   id: number;
+  value: string;
 }
 
 export interface ErrorValidate<E = any, T = Array<any>> {

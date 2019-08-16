@@ -14,7 +14,7 @@ import { NextRouter } from 'next/router';
 import { BaseRouter } from 'next-server/dist/lib/router/router';
 
 export const MIN_PRICE = 0;
-export const MAX_PRICE = 100000000;
+export const MAX_PRICE = 50000000;
 export const STEP_PRICE = 100000;
 
 export const RoomIndexContext = createContext<IRoomIndexContext>(null as IRoomIndexContext);
@@ -95,7 +95,7 @@ export const getRooms = async (
     sort_price_day: params.lowest_price === null ? 0 : 1,
     standard_point: params.rating ? _.split(params.rating, ',')[0] : undefined,
     comfort_lists: !!params.amenities ? params.amenities : undefined,
-    room_type: !!params.room_type ? params.room_type : undefined,
+    type_room: !!params.type_room ? params.type_room : undefined,
     page: params.page
   };
 

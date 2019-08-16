@@ -1,20 +1,15 @@
 import { createContext, Dispatch, Reducer } from 'react';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import qs from 'query-string';
-import { AxiosRes, Pagination, BaseResponse, TypeSelect } from '@/types/Requests/ResponseTemplate';
+import { AxiosRes, Pagination} from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import { RoomIndexGetParams, RoomUrlParams, MapCoords } from '@/types/Requests/Rooms/RoomRequests';
-import { Range } from 'react-input-range';
 import _ from 'lodash';
 import { ComfortIndexGetParams } from '@/types/Requests/Comforts/ComfortRequests';
 import { ComfortIndexRes } from '@/types/Requests/Comforts/ComfortResponses';
 import { AxiosResponse } from 'axios';
-import { NextRouter } from 'next/router';
-import { BaseRouter } from 'next-server/dist/lib/router/router';
 
 export const MIN_PRICE = 0;
-export const MAX_PRICE = 100000000;
+export const MAX_PRICE = 50000000;
 export const STEP_PRICE = 100000;
 
 export const RoomFilterContext = createContext<IRoomFilterContext>(null as IRoomFilterContext);
@@ -34,8 +29,7 @@ export type RoomFilterAction =
   | { type: 'setComforts'; comforts: ComfortIndexRes[] }
   | { type: 'setRoomTypes'; roomTypes: number[] }
   | { type: 'setAmenitiesFilter'; amenities: number[] }
-  | { type: 'setInstantBook'; payload: number }
-  | { type: 'setFilter', amenities?: number[], roomTypesFilter?: number[], ratingLists?: number[], sorts?: number };
+  | { type: 'setInstantBook'; payload: number };
 
 export type RoomFilterState = {
   readonly comforts: ComfortIndexRes[];
@@ -46,7 +40,6 @@ export type RoomFilterState = {
   readonly amenities: number[];
   readonly roomTypesFilter: number[];
   readonly instant_book: number;
-  readonly sorts: any;
 };
 
 export const RoomFilterStateInit: RoomFilterState = {
@@ -58,7 +51,6 @@ export const RoomFilterStateInit: RoomFilterState = {
   ratingLists: [],
   roomTypesFilter: [],
   instant_book: 0,
-  sorts: null,
 };
 
 export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
@@ -81,38 +73,24 @@ export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
       return updateObject<RoomFilterState>(state, { roomTypes: action.roomTypes });
     case 'setInstantBook':
       return updateObject(state, { instant_book: action.payload });
-    case 'setFilter':
-      return updateObject(state, {
-        roomTypesFilter: !action.roomTypesFilter ? state.roomTypesFilter : action.roomTypesFilter,
-        amenities: !action.amenities ? state.amenities : action.amenities,
-        ratingLists: !action.ratingLists ? state.ratingLists : action.ratingLists,
-        // rooms: [],
-        sorts: action.sorts,
-      });
     default:
       return state;
   }
 };
 
-// /**
-//  * Load filter and room type
-//  * @param {React.Dispatch<RoomIndexAction>} dispatch
-//  */
-// export const loadFilter = (dispatch: Dispatch<RoomIndexAction>) => {
-//   Promise.all([
-//     fetchComforts(),
-//     fetchRoomType(),
-//   ]).then(res => {
-//     const [comfortsRes, roomTypes] = res;
-//     dispatch({
-//       type: 'setComforts',
-//       comforts: comfortsRes.data,
-//     });
-//     dispatch({
-//       type: 'setRoomTypes',
-//       roomTypes,
-//     });
-//   }).catch(err => {
+export const fetchComforts = async () => {
+  const params: ComfortIndexGetParams = {
+    include: '',
+    limit: -1,
+  };
 
-//   });
-// };
+  const url = 'rooms/count-room-by-comfort-lists';
+  const res: AxiosRes<ComfortIndexRes[]> = await axios.get(url);
+  return res.data;
+};
+
+export const fetchRoomType = async () => {
+  const res: AxiosResponse<number[]> = await axios.get('rooms/type');
+  return res.data;
+};
+

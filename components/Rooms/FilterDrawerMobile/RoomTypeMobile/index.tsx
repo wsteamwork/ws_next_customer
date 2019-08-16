@@ -1,7 +1,5 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useContext, useState, useEffect, ChangeEvent } from 'react';
-import { RoomFilterContext, IRoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
-
+import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import _ from 'lodash';
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox/Checkbox';
@@ -10,12 +8,13 @@ import Grey from '@material-ui/core/colors/grey';
 import Blue from '@material-ui/core/colors/blue';
 import { TypeSelect } from '@/types/Requests/ResponseTemplate';
 import { useExpandableList } from '@/store/Hooks/filterHooks';
-import { arrayFilterCheckBoxEvent } from '@/utils/mixins';
-import { Typography, Theme, makeStyles } from '@material-ui/core';
-
+import { Theme, makeStyles } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+import { useRoomTypeChecbox, getRoomType } from '../../FilterActions/RoomType/context';
 interface IProps {
-  classes?: any;
-  setIndex(value: number): void;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  dataClick: number[];
+  setDataClick: Dispatch<SetStateAction<number[]>>;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -42,50 +41,48 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const SelectMobile: FC<IProps> = (props) => {
-  const { setIndex } = props;
+const RoomTypeMobile: FC<IProps> = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles(props);
-  const { state, dispatch } = useContext<IRoomFilterContext>(RoomFilterContext);
-  const { roomTypes, roomTypesFilter } = state;
-  const [roomTypeLocal, setRoomTypeLocal] = useState<number[]>(roomTypesFilter);
+  const { setOpen, dataClick, setDataClick } = props;
 
-  const [roomTypeChunks, isRoomTypeExpand, setRoomTypeExpand] = useExpandableList<number>(
+  const [roomTypes, setRoomTypes] = useState<TypeSelect[]>([]);
+
+  const [roomTypeChunks, isRoomTypeExpand, setRoomTypeExpand] = useExpandableList<TypeSelect>(
     roomTypes
   );
 
-  // const roomTypeEvent = (e: ChangeEvent<HTMLInputElement>, checked: boolean) => {
-  //   let roomTypeLists = arrayFilterCheckBoxEvent(roomTypeLocal, e, checked);
-  //   roomTypeLists = _.sortBy(roomTypeLists);
+  const { data, handleChange } = useRoomTypeChecbox(
+    setOpen,
+    dataClick,
+    setDataClick
+  );
 
-  //   setRoomTypeLocal(roomTypeLists);
-  // };
-
-  // useEffect(() => {
-  //   if (roomTypes.length === 0) loadFilter(dispatch);
-  // }, []);
+  useEffect(() => {
+    if (roomTypes.length === 0) getRoomType(setRoomTypes);
+  }, []);
 
   return (
     <Fragment>
-      <Typography variant="subtitle2">Loại phòng</Typography>
-      {/* {roomTypes.length > 0 ? (
+      {roomTypes.length > 0 ? (
         <Fragment>
           <ul className={classes.ul}>
-            {_.map(roomTypeChunks, (o) => (
-              <li key={o.id}>
+            {_.map(roomTypeChunks, (item) => (
+              <li key={item.id}>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      name={o.id.toString()}
+                      name={item.id.toString()}
                       color="primary"
-                      onChange={roomTypeEvent}
-                      value={o.id.toString()}
-                      checked={_.indexOf(roomTypeLocal, o.id) !== -1}
+                      onChange={handleChange(item.id)}
+                      value={item.id.toString()}
+                      checked={dataClick.some((i) => i === item.id)}
                       classes={{
                         root: classes.checkboxRoot
                       }}
                     />
                   }
-                  label={o.value}
+                  label={item.value}
                 />
               </li>
             ))}
@@ -94,14 +91,14 @@ const SelectMobile: FC<IProps> = (props) => {
             elevation={0}
             className={classes.showMore}
             onClick={() => setRoomTypeExpand(!isRoomTypeExpand)}>
-            {isRoomTypeExpand ? 'Thu gọn' : 'Mở rộng'}
+            {isRoomTypeExpand ? t('rooms:readLess') : t('rooms:readMore')}
           </Paper>
         </Fragment>
       ) : (
         ''
-      )} */}
+      )}
     </Fragment>
   );
 };
 
-export default SelectMobile;
+export default RoomTypeMobile;
