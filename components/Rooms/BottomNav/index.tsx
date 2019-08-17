@@ -9,6 +9,8 @@ import Slide from "@material-ui/core/Slide/Slide";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
+import MapMobile from '../MapMobile';
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -38,7 +40,21 @@ const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const [index, setIndex] = useState<number>(TAB_LIST);
-
+  const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
+  const { isMapOpen } = stateRoomIndex;
+  useEffect(() => {
+    if (index === MAP) {
+      mapDispatch({
+        type: "setMapOpen",
+        isMapOpen: true
+      });
+    }
+  }, [index]);
+  useEffect(() => {
+    if (!isMapOpen) {
+      setIndex(TAB_LIST);
+    }
+  }, [isMapOpen]);
   return (
     <Fragment>
       <BottomNavigation
@@ -61,6 +77,7 @@ const BottomNav: FC<IProps> = (props) => {
       >
         <FilterDrawerMobile setIndex={setIndex} />
       </Dialog>
+      <MapMobile openMap={index === MAP} />
     </Fragment>
   );
 };

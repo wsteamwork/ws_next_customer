@@ -1,33 +1,20 @@
-import React, { Fragment, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import {
   Theme,
   Grid,
-  Hidden,
   Paper,
   Typography,
   Button,
-  Dialog,
-  DialogTitle,
-  IconButton,
-  DialogContent, Modal
+  Modal
 } from '@material-ui/core';
 import moment from 'moment';
-import DateRangeOutline from "@material-ui/icons/DateRangeOutlined";
-import  Router  from 'next/router';
+import DateRangeOutline from '@material-ui/icons/DateRangeOutlined';
+import Router from 'next/router';
 import { RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
-import { TransitionCustom } from '@/components/Rooms/BottomNav';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import ChooseGuestRoom from '@/components/Home/ChooseGuestRoom';
-import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
 import GridContainer from '@/components/Layout/Grid/Container';
-import CloseIcon from "@material-ui/icons/Close";
 import SearchComponent from '@/components/Home/SearchComponent';
-import ActionChoose from '@/components/Home/ChooseGuestRoom/ActionChoose';
-import classNames from 'classnames';
-import CustomPopper from '@/components/CustomPopper';
 
 
 interface IProps {
@@ -53,13 +40,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     dialogTitle: {
       display: "flex",
       justifyContent: "space-between",
-      // [theme!.breakpoints!.only!("xs")]: {
-      //   textAlign: "center",
-      //   position: "absolute",
-      //   zIndex: 9999,
-      //   top: -3,
-      //   left: 9
-      // }
     },
     closeButtonRoot: {
       [theme!.breakpoints!.only!("xs")]: {
@@ -77,26 +57,26 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         padding: 0
       }
     },
-    boxModal:{
-      position:'absolute',
-      top:'50%',
-      left:'50%',
-      transform:'translate(-50%,-50%)',
+    boxModal: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
     },
-    modalSearch:{
-      padding:16,
-      backgroundColor:'#fff',
+    modalSearch: {
+      padding: 16,
+      backgroundColor: '#fff',
     }
   })
 );
 
 const SearchMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const [open, setOpen] = useState<boolean>(false);
-  const {t} = useTranslation();
-  const param:RoomUrlParams = Router.query;
-
+  const { t } = useTranslation();
+  const param: RoomUrlParams = Router.query;
+  console.log(Router.query);
   const handleClose = () => {
     setOpen(false);
   };
@@ -146,62 +126,14 @@ const SearchMobile: FC<IProps> = (props) => {
         </Grid>
       </Paper>
 
-        {/*<Dialog*/}
-        {/*  fullScreen*/}
-        {/*  TransitionComponent={TransitionCustom}*/}
-        {/*  scroll="paper"*/}
-        {/*  open={open}*/}
-        {/*  onClose={() => setOpen(false)}*/}
-        {/*>*/}
-        {/*  <DialogTitle disableTypography className={classes.dialogTitle}>*/}
-        {/*    <Typography variant="h6">*/}
-        {/*      Tìm kiếm*/}
-        {/*    </Typography>*/}
-        {/*    /!*<MapFilter />*!/*/}
-
-        {/*    <IconButton*/}
-        {/*      className={classes.closeButton}*/}
-        {/*      onClick={()=>setOpen(false)}*/}
-        {/*      classes={{*/}
-        {/*        root: classes.closeButtonRoot,*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <CloseIcon />*/}
-        {/*    </IconButton>*/}
-        {/*  </DialogTitle>*/}
-
-        {/*  <DialogContent className={classes.dialogContent}>*/}
-        {/*    <GridContainer xs={11}>*/}
-        {/*      <SearchComponent showGuestRoom={true} className={classes.test}/>*/}
-        {/*    </GridContainer>*/}
-        {/*  </DialogContent>*/}
-        {/*</Dialog>*/}
-
-      {/*<CustomPopper*/}
-      {/*  arrow*/}
-      {/*  placement="bottom"*/}
-      {/*  duration={200}*/}
-      {/*  trigger="click"*/}
-      {/*  isVisible={open}*/}
-      {/*  theme="light-border"*/}
-      {/*  // onHide={handleClose}*/}
-      {/*  interactive*/}
-      {/*  enabled*/}
-      {/*  isEnabled*/}
-      {/*  content={*/}
-      {/*    <SearchComponent showGuestRoom={true} className={classes.test}/>*/}
-      {/*  }>*/}
-      {/*  */}
-      {/*</CustomPopper>*/}
-
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-title">
         <GridContainer xs={11} sm={10} className={classes.boxModal}>
-          <GridContainer xs={12} spacing={1} style={{backgroundColor:'#fff'}}>
-            <Typography id="modal-title" variant='h5' align='center' style={{padding:8}}>
+          <GridContainer xs={12} spacing={1} style={{ backgroundColor: '#fff' }}>
+            <Typography id="modal-title" variant='h5' align='center' style={{ padding: 8 }}>
               {t('rooms:search')}
             </Typography>
           </GridContainer>
-          <SearchComponent showGuestRoom={true} className={classes.modalSearch}/>
+          <SearchComponent showGuestRoom={true} className={classes.modalSearch} />
         </GridContainer>
       </Modal>
     </Grid>

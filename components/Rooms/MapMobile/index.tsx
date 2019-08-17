@@ -7,10 +7,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import FilterIcon from "@material-ui/icons/FilterListRounded";
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 import { useTranslation } from 'react-i18next';
-
+import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
 interface IProps {
   classes?: any
-  openMap?:boolean
+  openMap?: boolean
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -97,7 +97,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const MapMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {openMap} = props;
+  const { openMap } = props;
   const [index, setIndex] = useState<number>(TAB_LIST);
   const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
   const { t } = useTranslation();
@@ -141,9 +141,9 @@ const MapMobile: FC<IProps> = (props) => {
           </IconButton>
         </DialogTitle>
         <DialogContent className={classes.dialogContent}>
-          <Grid container spacing={0} style={{height:'100%'}}>
+          <Grid container spacing={0} style={{ height: '100%' }}>
             <div className='roomListing'>
-              <MapRoomListing/>
+              <MapRoomListing />
             </div>
 
             <Hidden mdUp>
@@ -164,7 +164,7 @@ const MapMobile: FC<IProps> = (props) => {
                 scroll="paper"
                 onClose={() => setIndex(TAB_LIST)}
               >
-                {/*<FilterDrawerM setIndex={setIndex} />*/}
+                <FilterDrawerMobile setIndex={setIndex} />
               </Dialog>
             </Hidden>
             {/*<Grid*/}

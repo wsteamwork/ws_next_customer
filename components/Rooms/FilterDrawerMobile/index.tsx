@@ -123,7 +123,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
           <Grid container item xs={12}>
             <Grid item xs={6} className={classes.inline}>
               <Typography variant="subtitle2" className={classes.title}>
-              {t('rooms:filterRooms:bookByHour')}
+                {t('rooms:filterRooms:bookByHour')}
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.itemRight}>
@@ -133,7 +133,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
           <Grid container item xs={12}>
             <Grid item xs={6} className={classes.inline}>
               <Typography variant="subtitle2" className={classes.title}>
-              {t('rooms:filterRooms:instantBook')}
+                {t('rooms:filterRooms:instantBook')}
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.itemRight}>
@@ -142,13 +142,13 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
           </Grid>
           <Grid item xs={12} className={classes.sortMargin}>
             <Typography variant="subtitle2" className={classes.titlePrice}>
-            {t('rooms:filterRooms:priceRange')}
+              {t('rooms:filterRooms:priceRange')}
             </Typography>
             <PriceRangeMobile />
           </Grid>
           <Grid item xs={12} className={classes.sortMargin}>
             <Typography variant="subtitle2" className={classes.title}>
-            {t('rooms:filterRooms:roomsType')}
+              {t('rooms:filterRooms:roomsType')}
             </Typography>
             <RoomTypeMobile
               dataClick={dataRoomType}

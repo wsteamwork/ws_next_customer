@@ -60,7 +60,7 @@ const Room: NextPage = () => {
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
 
               <Hidden mdUp>
-                <SearchMobile />
+                {/* <SearchMobile /> */}
               </Hidden>
 
               <Hidden mdDown>
