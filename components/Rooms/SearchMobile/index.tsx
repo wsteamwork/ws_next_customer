@@ -10,15 +10,18 @@ import {
 } from '@material-ui/core';
 import moment from 'moment';
 import DateRangeOutline from '@material-ui/icons/DateRangeOutlined';
-import Router from 'next/router';
-import { RoomUrlParams } from '@/types/Requests/Rooms/RoomRequests';
 import { useTranslation } from 'react-i18next';
 import GridContainer from '@/components/Layout/Grid/Container';
 import SearchComponent from '@/components/Home/SearchComponent';
+import { ReducersType } from '@/store/Redux/Reducers';
+import { compose } from "recompose";
+import { connect } from 'react-redux';
+import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 
 
 interface IProps {
-  classes?: any
+  classes?: any;
+  filter: SearchFilterState;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -72,11 +75,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SearchMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const { filter } = props;
   const [open, setOpen] = useState<boolean>(false);
   const { t } = useTranslation();
-  const param: RoomUrlParams = Router.query;
-  console.log(Router.query);
+  const {
+    startDate,
+    endDate,
+    roomsCount,
+    guestsCount
+  } = filter;
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -100,15 +108,15 @@ const SearchMobile: FC<IProps> = (props) => {
               variant="subtitle2"
               style={{ fontSize: "0.725rem", fontWeight: 700 }}
             >
-              {moment(param.check_in).format("DD/MM/YYYY")} -{" "}
-              {moment(param.check_out).format("DD/MM/YYYY")}
+              {moment(startDate).format("DD/MM/YYYY")} -{" "}
+              {moment(endDate).format("DD/MM/YYYY")}
             </Typography>
             <Typography
               variant="subtitle2"
               color="textSecondary"
               style={{ fontSize: "0.725rem", fontWeight: 700 }}
             >
-              {param.number_of_guests} {t('rooms:guests')}, {param.number_of_rooms}{" "}{t('rooms:rooms')}
+              {guestsCount} {t('rooms:guests')}, {roomsCount}{" "}{t('rooms:rooms')}
             </Typography>
           </Grid>
           <Grid item xs={3} className={classes.flexBox}>
@@ -133,11 +141,19 @@ const SearchMobile: FC<IProps> = (props) => {
               {t('rooms:search')}
             </Typography>
           </GridContainer>
-          <SearchComponent showGuestRoom={true} className={classes.modalSearch} />
+          <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={() => setOpen(false)} />
         </GridContainer>
       </Modal>
     </Grid>
   );
 };
 
-export default SearchMobile;
+const mapStateToProps = (state: ReducersType) => {
+  return {
+    filter: state.searchFilter
+  };
+};
+
+export default compose<IProps, any>(
+  connect(mapStateToProps),
+)(SearchMobile);
