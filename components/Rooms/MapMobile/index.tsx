@@ -6,6 +6,7 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import CloseIcon from "@material-ui/icons/Close";
 import FilterIcon from "@material-ui/icons/FilterListRounded";
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any
@@ -99,7 +100,7 @@ const MapMobile: FC<IProps> = (props) => {
   const {openMap} = props;
   const [index, setIndex] = useState<number>(TAB_LIST);
   const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
-  const { isMapOpen } = stateRoomIndex;
+  const { t } = useTranslation();
 
   const handleOpenFilter = () => {
     setIndex(FILTER);
@@ -123,7 +124,7 @@ const MapMobile: FC<IProps> = (props) => {
         <DialogTitle disableTypography className={classes.dialogTitle}>
           <Hidden xsDown>
             <Typography variant="h6">
-              Bản đồ
+              {t('rooms:map')}
             </Typography>
             {/*<MapFilter />*/}
           </Hidden>

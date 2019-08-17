@@ -6,6 +6,7 @@ import { withCookies, Cookies } from 'react-cookie';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import to from '@/utils/to';
 import { useTranslation } from 'react-i18next';
+import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 
 interface IProps {
   classes?: any;
@@ -150,6 +151,13 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                 />
               </ListItem>
+              <ListItem
+                classes={{
+                gutters: classes.listItemGutters
+                }}
+                button>
+                <SwitchLanguage/>
+              </ListItem>
             </Fragment>
           ) : (
             <Fragment>
@@ -188,6 +196,13 @@ const SideDrawer: FC<IProps> = (props) => {
                     primary: classes.text
                   }}
                 />
+              </ListItem>
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}
+                button>
+                <SwitchLanguage/>
               </ListItem>
             </Fragment>
           )}

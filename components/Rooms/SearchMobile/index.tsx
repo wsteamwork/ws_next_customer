@@ -128,7 +128,7 @@ const SearchMobile: FC<IProps> = (props) => {
               color="textSecondary"
               style={{ fontSize: "0.725rem", fontWeight: 700 }}
             >
-              {param.number_of_guests} khách, {param.number_of_rooms}{" "}phòng
+              {param.number_of_guests} {t('rooms:guests')}, {param.number_of_rooms}{" "}{t('rooms:rooms')}
             </Typography>
           </Grid>
           <Grid item xs={3} className={classes.flexBox}>
@@ -140,7 +140,7 @@ const SearchMobile: FC<IProps> = (props) => {
                 verticalAlign: "-webkit-baseline-middle"
               }}
             >
-              Thay đổi
+              {t('rooms:change')}
             </Button>
           </Grid>
         </Grid>
@@ -198,7 +198,7 @@ const SearchMobile: FC<IProps> = (props) => {
         <GridContainer xs={11} sm={10} className={classes.boxModal}>
           <GridContainer xs={12} spacing={1} style={{backgroundColor:'#fff'}}>
             <Typography id="modal-title" variant='h5' align='center' style={{padding:8}}>
-              Tìm kiếm
+              {t('rooms:search')}
             </Typography>
           </GridContainer>
           <SearchComponent showGuestRoom={true} className={classes.modalSearch}/>
