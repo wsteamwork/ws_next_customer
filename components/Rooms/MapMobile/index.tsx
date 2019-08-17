@@ -31,14 +31,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         backgroundColor: "#fff",
         width: "1.6em",
         height: "1.6em",
-        boxShadow: '1px 5px 5px rgba(0, 0, 0, 0.15)'
+        boxShadow: '1px 5px 5px rgba(0, 0, 0, 0.15)',
+        borderRadius: 4
       }
     },
     filterButton: {
       position: "absolute",
       top: "3.8%",
       [theme!.breakpoints!.only!("xs")]: {
-        top: "3.5%",
+        bottom: '5%',
+        top: 'unset',
       },
       left: "50%",
       transform: "translate(-50%,-50%)",

@@ -159,7 +159,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 }}
                 button
                 onClick={() => {
-                  setOpen(false);
+                  router.push('/auth/signin');
                 }}>
                 {/* <ListItemIcon>
               <AccountCircle />
@@ -177,7 +177,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 }}
                 button
                 onClick={() => {
-                  setOpen(false);
+                  router.push('/auth/signup');
                 }}>
                 {/* <ListItemIcon>
               <AccountCircle />

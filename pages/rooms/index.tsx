@@ -20,6 +20,7 @@ import { Hidden } from '@material-ui/core';
 import HeadRoom from 'react-headroom';
 import { StickyContainer, Sticky } from 'react-sticky';
 import BottomNav from '@/components/Rooms/BottomNav';
+import SearchMobile from '@/components/Rooms/SearchMobile';
 
 const Rooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -76,7 +77,8 @@ const Rooms: NextPage = () => {
                 md={10}
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
-                <SearchComponent />
+                {/*<SearchComponent />*/}
+                <SearchMobile/>
               </GridContainer>
               <FilterActions />
               <MapAndListing></MapAndListing>

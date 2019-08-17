@@ -12,6 +12,7 @@ import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import SearchComponent from '@/components/Home/SearchComponent';
 
 interface IProps {
   classes?: any;
@@ -83,22 +84,7 @@ const BoxSearch: FC<IProps> = (props) => {
               </div>
             </Collapse>
             <Collapse in={collapseSearch}>
-              <Grid container spacing={1} justify="center" alignItems={'center'}>
-                <Grid item xs={12} md={4}>
-                  <SearchAutoSuggestion />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <DateRangeSearch />
-                </Grid>
-                <Grid item xs={12} md={2}>
-                  <ChooseGuestRoom />
-                </Grid>
-                <Grid item xs={12} md={2}>
-                  <ButtonGlobal padding="0px" width="100%">
-                    {t('home:searchComponent:search')}
-                  </ButtonGlobal>
-                </Grid>
-              </Grid>
+              <SearchComponent showGuestRoom={true}/>
             </Collapse>
           </Grid>
 

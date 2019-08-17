@@ -13,12 +13,14 @@ import _ from 'lodash';
 import { updateRouter } from '@/store/Context/utility';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 // @ts-ignore
 const RoomListing: FC = (props) => {
   const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
   const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const {width} = useContext(GlobalContext);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -44,7 +46,7 @@ const RoomListing: FC = (props) => {
         justify="center"
         alignContent="center"
         spacing={4}
-        style={{ marginTop: '48px' }}>
+        style={{ marginTop: width === 'xs' || width === 'sm' ? '8px' : '48px' }}>
         {meta ? (
           <Hidden smDown>
             <Grid item sm={4} lg={3}>
