@@ -23,10 +23,10 @@
     "currency" : "USD",
     "review": "Reviews",
     "searchComponent": {
-        "enjoy": "Book a Homestay right away to enjoy",
+        "enjoy": "Book and Enjoy",
         "search": "Search",
-        "guestUpper": "Guest",
-        "guest": "guest",
+        "guestUpper": "Guest(s)",
+        "guest": "guest(s)",
         "room": "room",
         "roomUpper": "Room"
     },
@@ -36,11 +36,11 @@
     "blogContainer":{
         "where": "Stunning Homestay",
         "journey":"Journeys",
-        "whatPlay":"What play",
+        "whatPlay":"Activities",
         "blog":"Blog",
-        "titleJourney": "Share travel experiences",
+        "titleJourney": "All about travel experiences",
         "titleWhere": "Discover beautiful places together",
-        "titlePlay": "Find out about strange and interesting games"
+        "titlePlay": "Find out about strange and interesting activities"
     },
     "collectionRooms": {
         "collectionViews": "Collection views",

@@ -2,8 +2,8 @@
     "bookingInfoDetail": {
         "checkInDate": "Check-in date",
         "checkOutDate": "Check-out date",
-        "guestNumber": "Guest number",
-        "guest": "guest",
+        "guestNumber": "Number of guest",
+        "guest": "guest(s)",
         "price": "Price",
         "serviceFee": "Service charge",
         "total": "Total",
