@@ -201,7 +201,7 @@ const SearchMobile: FC<IProps> = (props) => {
               {t('rooms:search')}
             </Typography>
           </GridContainer>
-          <SearchComponent showGuestRoom={true} className={classes.modalSearch}/>
+          <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={()=>setOpen(false)}/>
         </GridContainer>
       </Modal>
     </Grid>

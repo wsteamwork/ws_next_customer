@@ -17,10 +17,11 @@ interface IProps {
   className?: string;
   filter: SearchFilterState;
   showGuestRoom: boolean;
+  closeModal?: () => void;
 }
 
 const SearchComponent: FC<IProps> = (props) => {
-  const { className, filter, showGuestRoom } = props;
+  const { className, filter, showGuestRoom,closeModal } = props;
   const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const {
     searchText,
@@ -35,6 +36,8 @@ const SearchComponent: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const applySearch = () => {
+    closeModal && closeModal();
+
     dispatchGlobal({ type: 'setOverlay', payload: false });
     const pushQuery: ParsedUrlQueryInput = {
       name: city_id === undefined && district_id === undefined ? searchText : '',
