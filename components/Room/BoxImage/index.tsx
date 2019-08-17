@@ -33,11 +33,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       margin: '32px 0'
     },
-    img: {
+    imgRoom: {
       // maxHeight: '60vh',
       width: '100%',
       height: '100%',
-      objectFit: 'cover'
+      objectFit: 'cover',
+      borderRadius: 4,
     },
     parallaxContainer: {
       width: '100%',
@@ -46,10 +47,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     contentParallax: {
       display: 'flex',
       justifyContent: 'center',
-      height: '55vh',
+      height: '65vh',
       [theme.breakpoints.down('xs')]: {
         height: '30vh',
-      }
+      },
+      position: 'relative',
     },
     insideParalax: {
       position: 'absolute',
@@ -133,12 +135,30 @@ const BoxImage: FC<IProps> = (props) => {
 
   return (
     <GridContainer xs={12} className={classes.root}>
-      <Parallax
-        bgImage={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
-        strength={300}
-        bgClassName={classes.img}
-        className={classes.parallaxContainer}
-        contentClassName={classes.contentParallax}>
+      {/*<Parallax*/}
+      {/*  bgImage={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}*/}
+      {/*  strength={300}*/}
+      {/*  bgClassName={classes.imgRoom}*/}
+      {/*  className={classes.parallaxContainer}*/}
+      {/*  contentClassName={classes.contentParallax}>*/}
+      {/*  <div className={classes.insideParalax}>*/}
+      {/*    <Button variant="contained" className={classes.button} onClick={handleClick}>*/}
+      {/*      <img*/}
+      {/*        src="../../../static/images/telescope.svg"*/}
+      {/*        alt="iconScope"*/}
+      {/*        className={classes.iconScope}*/}
+      {/*      />*/}
+      {/*      {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}*/}
+      {/*    </Button>*/}
+      {/*  </div>*/}
+      {/*</Parallax>*/}
+
+      <div className={classes.contentParallax}>
+        <img
+                src={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
+                alt={room.details.data[0].name}
+                className={classes.imgRoom}
+              />
         <div className={classes.insideParalax}>
           <Button variant="contained" className={classes.button} onClick={handleClick}>
             <img
@@ -149,7 +169,7 @@ const BoxImage: FC<IProps> = (props) => {
             {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}
           </Button>
         </div>
-      </Parallax>
+      </div>
 
       <Dialog
         aria-labelledby="customized-dialog-title"

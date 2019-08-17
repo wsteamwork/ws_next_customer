@@ -6,6 +6,7 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import CloseIcon from "@material-ui/icons/Close";
 import FilterIcon from "@material-ui/icons/FilterListRounded";
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any
@@ -31,14 +32,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         backgroundColor: "#fff",
         width: "1.6em",
         height: "1.6em",
-        boxShadow: '1px 5px 5px rgba(0, 0, 0, 0.15)'
+        boxShadow: '1px 5px 5px rgba(0, 0, 0, 0.15)',
+        borderRadius: 4
       }
     },
     filterButton: {
       position: "absolute",
       top: "3.8%",
       [theme!.breakpoints!.only!("xs")]: {
-        top: "3.5%",
+        bottom: '5%',
+        top: 'unset',
       },
       left: "50%",
       transform: "translate(-50%,-50%)",
@@ -97,7 +100,7 @@ const MapMobile: FC<IProps> = (props) => {
   const {openMap} = props;
   const [index, setIndex] = useState<number>(TAB_LIST);
   const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
-  const { isMapOpen } = stateRoomIndex;
+  const { t } = useTranslation();
 
   const handleOpenFilter = () => {
     setIndex(FILTER);
@@ -121,7 +124,7 @@ const MapMobile: FC<IProps> = (props) => {
         <DialogTitle disableTypography className={classes.dialogTitle}>
           <Hidden xsDown>
             <Typography variant="h6">
-              Bản đồ
+              {t('rooms:map')}
             </Typography>
             {/*<MapFilter />*/}
           </Hidden>

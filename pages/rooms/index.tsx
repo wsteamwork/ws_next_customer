@@ -22,6 +22,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import BottomNav from '@/components/Rooms/BottomNav';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
+import SearchMobile from '@/components/Rooms/SearchMobile';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -86,11 +87,12 @@ const Rooms: NextPage = (props) => {
                 md={10}
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
-                <SearchComponent />
+                {/*<SearchComponent />*/}
+                <SearchMobile />
               </GridContainer>
               <FilterActions />
               <MapAndListing></MapAndListing>
-              <BottomNav/>
+              <BottomNav />
             </Hidden>
           </div>
         </RoomFilterContext.Provider>

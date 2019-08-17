@@ -8,7 +8,7 @@ import {
   RoomDetailsContext
 } from '@/store/Context/Room/RoomDetailContext';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import { Grid } from '@material-ui/core';
+import { Grid, Hidden } from '@material-ui/core';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NextHead from '@/components/NextHead';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
@@ -21,9 +21,10 @@ import BoxImage from '@/components/Room/BoxImage';
 import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import { convertNodeToElement } from 'react-html-parser';
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+import SearchMobile from '@/components/Rooms/SearchMobile';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -57,7 +58,15 @@ const Room: NextPage = () => {
         () => (
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-              <BoxSearch />
+
+              <Hidden mdUp>
+                <SearchMobile />
+              </Hidden>
+
+              <Hidden mdDown>
+                <BoxSearch />
+              </Hidden>
+
               <BoxImage />
               <Grid container>
                 <Grid item xs={12} lg={8} xl={9}>

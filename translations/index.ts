@@ -8,7 +8,7 @@ import home_en from './home/home-en.json';
 import layout_vi from './layout/layout-vi.json';
 import layout_en from './layout/layout-en.json';
 import rooms_vi from './rooms/rooms-vi.json';
-import rooms_en from './rooms/room-en.json';
+import rooms_en from './rooms/rooms-en.json';
 import room_vi from './room/room-vi.json';
 import room_en from './room/room-en.json';
 import book_en from './book/book-en.json';

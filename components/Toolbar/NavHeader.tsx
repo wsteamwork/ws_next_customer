@@ -1,6 +1,6 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, MouseEvent, useState, useRef } from 'react';
+import React, { Fragment, FunctionComponent, MouseEvent, useState, useRef, useContext } from 'react';
 import { compose } from 'recompose';
 import {
   MenuItem,
@@ -38,6 +38,7 @@ import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import Link from 'next/link';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   classes?: any;
@@ -161,13 +162,15 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
+  const {router} = useContext(GlobalContext);
 
-  const closeMenu = () => {
-    setMenuStatus(false);
-  };
 
   const Hotline = (contact: string) => {
     window.location.href = `${contact}`;
+  };
+
+  const toProfile = () => {
+    router.push('/profile');
   };
 
   const logoutTrigger = () => {
@@ -175,18 +178,19 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
     cookies.remove('_token', { path: '/' });
   };
 
-  const loginButtonClick = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  const loginButtonClick = () => {
+    router.push('/auth/signin');
   };
 
-  const signUpButtonClick = (e: MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  const signUpButtonClick = () => {
+    router.push('/auth/signup');
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  // @ts-ignore
   return (
     <Fragment>
       <GridContainer xs={12} xl={12} classNameItem={classes.containter}>
@@ -266,6 +270,8 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               </Popover>
               {cookies.get('_token') ? (
                 <Fragment>
+                  <SwitchLanguage />
+
                   <Button
                     buttonRef={userRefButton}
                     color="inherit"
@@ -290,23 +296,20 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                           minWidth: 300
                         }}>
                         <Paper elevation={1}>
-                          <ClickAwayListener onClickAway={closeMenu}>
+                          <ClickAwayListener onClickAway={()=> setMenuStatus(false)}>
                             <MenuList>
-                              <MenuItem
-                                name="profile"
-                                onClick={closeMenu}
-                                {...to({ href: '/profile' })}>
+                              <MenuItem onClick={toProfile} component='li'>
                                 <ListItemIcon>
                                   <AccountCircleOutlined />
                                 </ListItemIcon>
-                                Thông tin cá nhân
+                                {t('home:profile')}
                               </MenuItem>
                               <Divider />
                               <MenuItem onClick={logoutTrigger} component="li">
                                 <ListItemIcon>
                                   <PowerSettingsNewRounded />
                                 </ListItemIcon>
-                                {t('home:signUp')}
+                                {t('home:logout')}
                               </MenuItem>
                               {/*<Divider />*/}
                             </MenuList>
@@ -315,6 +318,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                       </Grow>
                     )}
                   </Popper>
+
                 </Fragment>
               ) : (
                   <Fragment>
