@@ -83,7 +83,7 @@ const NavBottomBook: FC = (props) => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent className="navBottomBook__dialogContent">
+        <DialogContent className="navBottomBook__dialogContent" style={{ height: '100%' }}>
           <BoxBooking />
         </DialogContent>
       </Dialog>
