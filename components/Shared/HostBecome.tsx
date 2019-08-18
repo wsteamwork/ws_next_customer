@@ -28,10 +28,8 @@ const HostBecome: FC = () => {
         <Grid item xs sm={8}>
           <h3 className="title">{t('home:becomeAHost')}</h3>
           <Grid>
-            <p className="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia accusamus dolore
-                                ea ullam explicabo, placeat nostrum aliquam magnam sit accusantium, dolorum odio cum
-                                officiis? Dolorem illo error repellendus necessitatibus itaque?
-                </p>
+            <p className="desc">{t('home:hostAttraction')}
+            </p>
           </Grid>
 
           <Grid className="hostBecome__button">
