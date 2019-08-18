@@ -115,7 +115,9 @@ const RoomBasic: FC<IProps> = (props) => {
                 </Grid>
                 <Grid className={classes.nameIcon} item xs={10} sm={10}>
                   <Typography variant={'body2'}>
-                    {room.bathroom} {t('rooms:bathrooms')}
+                    {
+                      room.bathroom > 0 ? `${room.bathroom} ${t('rooms:bathrooms')}` : `${room.comforts.data.length} ${t('rooms:amenitiesLower')}`
+                    }
                   </Typography>
                 </Grid>
               </Grid>

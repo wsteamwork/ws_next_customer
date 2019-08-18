@@ -50,7 +50,7 @@ const Home: NextPage = () => {
 
           {/* <SeaView /> */}
           {/* <CityView /> */}
-          <CollectionViews />
+          {/* <CollectionViews /> */}
         </GridContainer>
         <HostBecome />
 
