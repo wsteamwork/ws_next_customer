@@ -59,11 +59,11 @@ const Room: NextPage = () => {
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
 
-              <Hidden mdUp>
+              <Hidden mdUp implementation="css">
                 {/* <SearchMobile /> */}
               </Hidden>
 
-              <Hidden mdDown>
+              <Hidden mdDown implementation="css">
                 <BoxSearch />
               </Hidden>
 
@@ -95,7 +95,12 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async ({ store, router }: NextContextPage) => {
-  const data = await getDataRoom(store.dispatch, router);
+  try {
+
+    const data = await getDataRoom(store.dispatch, router);
+  } catch (error) {
+
+  }
   return {};
 };
 
