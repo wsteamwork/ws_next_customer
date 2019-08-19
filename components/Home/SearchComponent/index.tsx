@@ -1,4 +1,4 @@
-import React, { FC, memo, useContext, Fragment } from 'react';
+import React, { FC, memo, Fragment } from 'react';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import SearchAutoSuggestion from '../SearchAutoSuggestion';
@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ParsedUrlQueryInput } from 'querystring';
 import Router from 'next/router';
 
@@ -21,7 +20,6 @@ interface IProps {
 
 const SearchComponent: FC<IProps> = (props) => {
   const { className, filter, showGuestRoom } = props;
-  const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const {
     searchText,
     city_id,
@@ -35,7 +33,6 @@ const SearchComponent: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const applySearch = () => {
-    dispatchGlobal({ type: 'setOverlay', payload: false });
     const pushQuery: ParsedUrlQueryInput = {
       name: city_id === undefined && district_id === undefined ? searchText : '',
       number_of_rooms: roomsCount,

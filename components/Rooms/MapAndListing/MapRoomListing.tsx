@@ -4,6 +4,7 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import _ from 'lodash';
 import MapMarker from '../Map/MapMarker';
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
+import NotFound from '../Lotte/NotFound';
 
 const MapRoomListing: FC = () => {
   const { state, dispatch } = useContext(RoomIndexContext);
@@ -22,31 +23,31 @@ const MapRoomListing: FC = () => {
     dispatch({ type: 'setCoords', payload: coords });
   };
 
-  return (
-    rooms.length && (
-      <div className="mapRoomListing">
-        <GoogleMap
-          bootstrapURLKeys={{
-            key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
-          }}
-          defaultZoom={15}
-          onChange={onChangeMap}
-          defaultCenter={{
-            lat: parseFloat(room.latitude),
-            lng: parseFloat(room.longitude)
-          }}
-          yesIWantToUseGoogleMapApiInternals>
-          {_.map(rooms, (room) => (
-            <MapMarker
-              room={room}
-              key={room.id}
-              lat={parseFloat(room.latitude)}
-              lng={parseFloat(room.longitude)}
-            />
-          ))}
-        </GoogleMap>
-      </div>
-    )
+  return rooms.length > 0 ? (
+    <div className="mapRoomListing">
+      <GoogleMap
+        bootstrapURLKeys={{
+          key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
+        }}
+        defaultZoom={15}
+        onChange={onChangeMap}
+        defaultCenter={{
+          lat: parseFloat(room.latitude),
+          lng: parseFloat(room.longitude)
+        }}
+        yesIWantToUseGoogleMapApiInternals>
+        {_.map(rooms, (room) => (
+          <MapMarker
+            room={room}
+            key={room.id}
+            lat={parseFloat(room.latitude)}
+            lng={parseFloat(room.longitude)}
+          />
+        ))}
+      </GoogleMap>
+    </div>
+  ) : (
+    <NotFound height={250} width={250} />
   );
 };
 

@@ -3,14 +3,12 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import { List, Adjust, PinDrop } from "@material-ui/icons";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import Slide from "@material-ui/core/Slide/Slide";
-import { TransitionProps } from '@material-ui/core/transitions';
+import { List, Adjust, PinDrop } from '@material-ui/icons';
+import Dialog from '@material-ui/core/Dialog/Dialog';
+import Slide, { SlideProps } from '@material-ui/core/Slide/Slide';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import MapMobile from '@/components/Rooms/MapMobile';
 // import FilterDrawerMobile from '../FilterDrawerMobile/index';
-
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -19,7 +17,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%',
       bottom: 0,
       height: 60
-    },
+    }
   })
 );
 export const FILTER = 0;
@@ -27,10 +25,9 @@ export const TAB_LIST = 1;
 export const MAP = 2;
 export const NAV = 3;
 
-
-export const TransitionCustom = forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 interface IProps {}
 const BottomNav: FC<IProps> = (props) => {
@@ -42,7 +39,7 @@ const BottomNav: FC<IProps> = (props) => {
   useEffect(() => {
     if (index === MAP) {
       mapDispatch({
-        type: "setMapOpen",
+        type: 'setMapOpen',
         isMapOpen: true
       });
     }
@@ -72,11 +69,11 @@ const BottomNav: FC<IProps> = (props) => {
         TransitionComponent={TransitionCustom}
         scroll="paper"
         open={index === FILTER}
-        onClose={() => setIndex(TAB_LIST)}
-      >
+        onClose={() => setIndex(TAB_LIST)}>
+          <div></div>
         {/*<FilterDrawerMobile setIndex = {setIndex}/>*/}
       </Dialog>
-      <MapMobile openMap={index === MAP}/>
+      <MapMobile openMap={index === MAP} />
     </Fragment>
   );
 };
