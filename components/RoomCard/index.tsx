@@ -9,6 +9,7 @@ import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { formatPrice } from '@/utils/mixins';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -25,10 +26,11 @@ interface Iprops {
   showIcon?: boolean;
   showBedRoom?: boolean;
   showAddress?: boolean;
+  isFormatPrice?: boolean;
 }
 
 const RoomCard: FC<Iprops> = (props) => {
-  const { room, isHomepage, showIcon, showBedRoom, showAddress } = props;
+  const { room, isHomepage, showIcon, showBedRoom, showAddress, isFormatPrice } = props;
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   return (
@@ -82,13 +84,13 @@ const RoomCard: FC<Iprops> = (props) => {
                 )}
 
                 <Grid className="price">
-                  {numeral(room.price_day).format('0,0')}đ/{t('room:night')}
+                  {isFormatPrice ? formatPrice(room.price_day) : numeral(room.price_day).format('0,0')}đ/{t('room:night')}
                   {!isHomepage && room.price_hour > 0 ? (
                     <Typography className="hourPrice">
                       &#10072;{' '}
                       {room.price_hour && (
                         <span>
-                          {numeral(room.price_hour).format('0,0')}đ/4 {t('room:hour')}
+                          {isFormatPrice ? formatPrice(room.price_hour) : numeral(room.price_hour).format('0,0')}đ/4 {t('room:hour')}
                         </span>
                       )}
                     </Typography>
@@ -121,7 +123,8 @@ RoomCard.defaultProps = {
   isHomepage: false,
   showIcon: false,
   showBedRoom: false,
-  showAddress: true
+  showAddress: true,
+  isFormatPrice: false
 };
 
 export default RoomCard;

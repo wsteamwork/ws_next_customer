@@ -10,6 +10,10 @@ import PrevArrow from '@/components/ListRoom/PrevArrow';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { TypeApartment } from '@/types/Requests/Rooms/RoomResponses';
+import { updateRouter } from '@/store/Context/utility';
+interface Iprops {
+  classes?: any;
+}
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -22,13 +26,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const SliderTypeApartment: FC = (props) => {
+const SliderTypeApartment: FC<Iprops> = (props:Iprops) => {
   const classes = useStyles(props);
   const { width } = useContext<IGlobalContext>(GlobalContext);
 
   const apartments = useSelector<ReducersList, TypeApartment[]>(
     (state) => state.roomHomepage.apartments
   );
+
+  const SearchType = (idType: number) => {
+    updateRouter(true,'type_room',idType);
+  };
 
   const setting: Settings = {
     dots: false,
@@ -95,6 +103,7 @@ const SliderTypeApartment: FC = (props) => {
                     imgHeight={width === 'xl' ? 250 : 200}
                     imgSrc={obj.image}
                     title={obj.value}
+                    onClickCard={()=>SearchType(obj.id)}
                   />
                 </Grid>
               ) : (
@@ -114,6 +123,7 @@ const SliderTypeApartment: FC = (props) => {
                       imgHeight={width === 'xl' ? 250 : 200}
                       imgSrc={obj.image}
                       title={obj.value}
+                      onClickCard={()=>SearchType(obj.id)}
                     />
                   </div>
                 ) : (
@@ -128,4 +138,4 @@ const SliderTypeApartment: FC = (props) => {
   );
 };
 
-export default SliderTypeApartment;
+export default SliderTypeApartment

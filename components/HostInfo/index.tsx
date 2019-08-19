@@ -57,10 +57,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: '#484848'
     },
     avatar: {
-      position:'absolute',
-      top:'50%',
-      left:'50%',
-      transform:'translate(-50%,-50%)',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
       width: 60,
       height: 60,
       [theme.breakpoints.down('md')]: {
@@ -101,53 +101,49 @@ interface IProps {
 }
 
 const HostInfo: FC<IProps> = (props) => {
-  const { t } = useTranslation();
+  const { t }   = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const room    = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
   const merchant = !!room && room.merchant.data;
 
   return (
     room && (
-      <Paper className={classes.paper}>
-        <Grid container>
-          <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{position:'relative'}}>
-            <Link href={`/users/${merchant.id}`}>
-              <a>
+      <Paper className = {classes.paper}>
+        <Link href = {`/user/${merchant.id}`}>
+          <a className = {classes.link}>
+            <Grid container>
+              <Grid item xs = {3} sm = {4} md = {4} lg = {4} xl = {3} style = {{ position: 'relative' }}>
                 <Avatar
-                  alt={merchant.avatar}
-                  src="/static/images/room_demo.jpg"
-                  className={classes.avatar}
+                  alt = {merchant.avatar}
+                  src = {merchant.avatar !== '' ? merchant.avatar_url : '/static/images/avatar_default.png'}
+                  className = {classes.avatar}
                 />
-              </a>
-            </Link>
-          </Grid>
-          <Grid item xs={9} sm={8} md={8} lg={8} xl={9}>
-            <Grid item xs className={classes.content}>
-              <Link href={`/user/${merchant.id}`}>
-                <a className={classes.link}>
-                  <Typography className={classes.userName}>{merchant.name}</Typography>
-                </a>
-              </Link>
-              <Grid container className={classes.price}>
-                <Grid item sm={2} md={3} lg={3}>
-                  <Typography variant="subtitle1" className={classes.icon}>
-                    <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
-                    {merchant.number_room}
-                  </Typography>
-                </Grid>
-                <Grid item sm={10} md={9} lg={9}>
-                  <Typography variant="subtitle1" className={classes.certificate}>
-                    <FontAwesomeIcon
-                      className={classes.icon}
-                      icon={faCheckCircle}></FontAwesomeIcon>
-                    {t('rooms:verified')}
-                  </Typography>
+              </Grid>
+              <Grid item xs = {9} sm = {8} md = {8} lg = {8} xl = {9}>
+                <Grid item xs className = {classes.content}>
+                      <Typography className = {classes.userName}>{merchant.name}</Typography>
+                  <Grid container className = {classes.price}>
+                    <Grid item sm = {2} md = {3} lg = {3}>
+                      <Typography variant = 'subtitle1' className = {classes.icon}>
+                        <FontAwesomeIcon className = {classes.icon} icon = {faHome}></FontAwesomeIcon>
+                        {merchant.number_room}
+                      </Typography>
+                    </Grid>
+                    <Grid item sm = {10} md = {9} lg = {9}>
+                      <Typography variant = 'subtitle1' className = {classes.certificate}>
+                        <FontAwesomeIcon
+                          className = {classes.icon}
+                          icon = {faCheckCircle}></FontAwesomeIcon>
+                        {t('rooms:verified')}
+                      </Typography>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Grid>
+          </a>
+        </Link>
       </Paper>
     )
   );

@@ -4,15 +4,21 @@ import { Theme, Typography, Grid, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
 import numeral from 'numeral';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
-import Slider, { Settings } from 'react-slick';
-import NextArrow from '@/components/ListRoom/NextArrow';
-import PrevArrow from '@/components/ListRoom/PrevArrow';
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import ListRoom from '../ListRoom';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
+import { useSelector, connect } from 'react-redux';
+import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
 import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
+import { updateRouter } from '@/store/Context/utility';
+import { Dispatch } from 'redux';
+import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import { compose } from "recompose";
+
+interface Iprops {
+  classes?: any;
+  filter: SearchFilterState;
+  updateSearchText: (searchText: string) => void;
+}
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -29,14 +35,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const MetroGridImage: FC = (props) => {
+const MetroGridImage: FC<Iprops> = (props:Iprops) => {
   const classes = useStyles(props);
+  const {filter,updateSearchText} = props;
   const { t } = useTranslation();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
   const { width } = useContext<IGlobalContext>(GlobalContext);
-  const renderCity = (city) => (
+  const renderCity = (city:NumberRoomCity) => (
     <div className={classes.paddingGrid}>
       <CardIntro
         title={city.name_city}
@@ -44,9 +51,15 @@ const MetroGridImage: FC = (props) => {
         showPrice={true}
         recommendedPrice={numeral(city.average_price).format('0,0')}
         imgHeight={290}
+        onClickCard={()=>locationRoom(city.name_city)}
       />
     </div>
   );
+
+  const locationRoom = (nameCity: string) => {
+    updateRouter(true,'name',nameCity);
+    updateSearchText(nameCity)
+  };
 
   return (
     roomsCity && (
@@ -65,6 +78,7 @@ const MetroGridImage: FC = (props) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 280 : 250}
+                    onClickCard={()=>locationRoom(roomsCity[0].name_city)}
                   />
                 </Grid>
                 <Grid item>
@@ -76,6 +90,7 @@ const MetroGridImage: FC = (props) => {
                         showPrice={true}
                         recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')}
                         imgHeight={width === 'xl' ? 230 : 200}
+                        onClickCard={()=>locationRoom(roomsCity[1].name_city)}
                       />
                     </Grid>
                     <Grid item xs={6} className={classes.paddingGrid}>
@@ -85,6 +100,7 @@ const MetroGridImage: FC = (props) => {
                         showPrice={true}
                         recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')}
                         imgHeight={width === 'xl' ? 230 : 200}
+                        onClickCard={()=>locationRoom(roomsCity[2].name_city)}
                       />
                     </Grid>
                   </Grid>
@@ -100,6 +116,7 @@ const MetroGridImage: FC = (props) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 280 : 250}
+                    onClickCard={()=>locationRoom(roomsCity[3].name_city)}
                   />
                 </Grid>
                 <Grid item xs={12} className={classes.paddingGrid}>
@@ -109,6 +126,7 @@ const MetroGridImage: FC = (props) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 230 : 200}
+                    onClickCard={()=>locationRoom(roomsCity[4].name_city)}
                   />
                 </Grid>
               </Grid>
@@ -120,6 +138,7 @@ const MetroGridImage: FC = (props) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 518 : 458}
+                    onClickCard={()=>locationRoom(roomsCity[5].name_city)}
                   />
                   {/* +8px la khoang cach padding*/}
                 </Grid>
@@ -140,4 +159,21 @@ const MetroGridImage: FC = (props) => {
   );
 };
 
-export default MetroGridImage;
+
+const mapDispatchToProps = (dispatch: Dispatch<SearchFilterAction>) => {
+  return {
+    updateSearchText: (searchText: string) => {
+      dispatch({
+        type: 'SET_SEARCH_TEXT',
+        searchText: searchText
+      });
+    },
+  };
+};
+
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+)(MetroGridImage);
