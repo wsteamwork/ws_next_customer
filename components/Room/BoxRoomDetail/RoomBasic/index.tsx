@@ -20,6 +20,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     roomName: {
       fontWeight: 900
     },
+    roomId: {
+      marginTop: '-10px',
+      fontSize: '0.80rem'
+    },
     iconHeartBlue: {
       color: '#08C299',
       marginRight: 3
@@ -70,6 +74,11 @@ const RoomBasic: FC<IProps> = (props) => {
             <Grid item xs={12}>
               <Typography variant="h5" className={classes.roomName}>
                 {room.details.data[0].name}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h5" className={classes.roomId}>
+                Room No. {room.id}
               </Typography>
             </Grid>
           </Grid>

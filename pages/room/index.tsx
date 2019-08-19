@@ -49,7 +49,7 @@ const Room: NextPage = () => {
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`${room.room_type_txt} ${room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'} ngay tại ${room.district.data.name}, ${room.city.data.name}. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
-          url={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+          url={`https://westay.vn/room/${room.id}`}
           ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
 

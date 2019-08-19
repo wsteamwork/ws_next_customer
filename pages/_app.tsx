@@ -9,12 +9,12 @@ import ProviderGlobal from '@/utils/ProviderGlobal';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import withRedux, { NextJSContext } from 'next-redux-wrapper';
-import { makeStore } from '@/store/Redux';
+import { makeStore, windowExist } from '@/store/Redux';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
 config.autoAddCss = false;
 
-interface NextContextApp extends NextJSContext, AppContext {}
+interface NextContextApp extends NextJSContext, AppContext { }
 interface IProps extends AppProps {
   isServer: boolean;
   store: any;
@@ -37,7 +37,21 @@ class MyApp extends App<IProps> {
     Router.events.on('routeChangeStart', this.handleRouteChangeStart);
     Router.events.on('routeChangeStart', this.handleRouteChangeEnd);
     Router.events.on('routeChangeError', this.handleRouteChangeEnd);
-
+    if (windowExist) {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .getRegistrations()
+          .then(function (registrations) {
+            for (let registration of registrations) {
+              registration.unregister();
+            }
+            console.log('unregistered')
+          })
+          .catch(function (err) {
+            console.log('Service Worker registration failed: ', err);
+          });
+      }
+    }
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
