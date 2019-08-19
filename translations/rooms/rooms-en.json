@@ -2,7 +2,7 @@
     "searchRooms": {
         "roomsType": "Type of accommodation",
         "priceRange": "Price Range",
-        "fastBooking": "Fast Booking",
+        "fastBooking": "Instant Book",
         "fastPayment": "Direct payment is possible",
         "filterRooms": "Filter",
         "bookByHour": "Book by hour",
@@ -19,7 +19,7 @@
     "rooms" : "rooms",
     "bathrooms" : "bathrooms",
     "beds" : "beds",
-    "readLess" : "Read less",
+    "readLess" : "Show less",
     "readMore" : "Read more",
     "emptyCalender" : "Calendar",
     "review" : "Reviews",
@@ -34,10 +34,18 @@
     "search": "Search",
     "map": "Map",
     "noComment" : "No comments",
-    "noReview" : "There is currently no reviews of the room. Please make a reservation and be the first to tell us how you feel.",
+    "noReview" : "There are currently no reviews of the room. Please make a reservation and be the first to tell us how you feel.",
     "contentRating1" : "This apartment is rated as",
     "contentRating2" : " based on the rating of ",
-    "contentRating3" : " who had booked."
-
-
+    "contentRating3" : " who had booked.",
+    "list": "List",
+    "location": "Location",
+    "filterRooms": {
+        "filters": "Filters",
+        "bookByHour": "Book by hour",
+        "instantBook": "Instant book",
+        "priceRange": "Price range",
+        "roomsType": "Type of accommodation",
+        "apply": "Apply"
+    }
 }

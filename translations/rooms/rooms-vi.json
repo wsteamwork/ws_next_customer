@@ -37,6 +37,17 @@
     "noReview" : "Hiện tại chưa có đánh giá về căn hộ. Vui lòng đặt phòng và là người đầu tiên cho chúng tôi biết cảm nhận của bạn.",
     "contentRating1" : "Căn hộ này được đánh giá là ",
     "contentRating2" : " dựa trên sự đánh giá của ",
-    "contentRating3" : " người đã từng đặt phòng."
-
+    "contentRating3" : " người đã từng đặt phòng.",
+    "list": "Danh sách",
+    "location": "Location",
+    "filterRooms": {
+        "filters": "Bộ lọc phòng",
+        "bookByHour": "Theo giờ",
+        "instantBook": "Đặt phòng nhanh",
+        "priceRange": "Khoảng giá",
+        "roomsType": "Loại phòng",
+        "apply": "Lọc kết quả",
+        "readMore": "Mở rộng",
+        "readLess" : "Thu gọn"
+    }
 }

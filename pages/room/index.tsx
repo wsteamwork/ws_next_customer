@@ -21,8 +21,9 @@ import BoxImage from '@/components/Room/BoxImage';
 import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import { convertNodeToElement } from 'react-html-parser';
 import BoxRecommend from '@/components/Room/BoxRecommend';
+import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import SearchMobile from '@/components/Rooms/SearchMobile';
 
 const Room: NextPage = () => {
@@ -30,6 +31,7 @@ const Room: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
+  const [] = useVisitedRoom();
 
   useEffect(() => {
     !!error && router.push('/error');
@@ -46,10 +48,8 @@ const Room: NextPage = () => {
         <NextHead
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
-          description={ReactHtmlParser(room.details.data[0].description, {
-            transform: transformHtmlContent
-          })}
-          url={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+          description={`${room.room_type_txt} ${room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'} ngay tại ${room.district.data.name}, ${room.city.data.name}. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
+          url={`https://westay.vn/room/${room.id}`}
           ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
 
@@ -59,11 +59,11 @@ const Room: NextPage = () => {
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
 
-              <Hidden mdUp>
-                <SearchMobile/>
+              <Hidden mdUp implementation="css">
+                {/* <SearchMobile /> */}
               </Hidden>
 
-              <Hidden mdDown>
+              <Hidden mdDown implementation="css">
                 <BoxSearch />
               </Hidden>
 
@@ -95,7 +95,12 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async ({ store, router }: NextContextPage) => {
-  const data = await getDataRoom(store.dispatch, router);
+  try {
+
+    const data = await getDataRoom(store.dispatch, router);
+  } catch (error) {
+
+  }
   return {};
 };
 

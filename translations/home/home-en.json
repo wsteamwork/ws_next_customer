@@ -23,10 +23,10 @@
     "currency" : "USD",
     "review": "Reviews",
     "searchComponent": {
-        "enjoy": "Book a Homestay right away to enjoy",
+        "enjoy": "Book and Enjoy",
         "search": "Search",
-        "guestUpper": "Guest",
-        "guest": "guest",
+        "guestUpper": "Guest(s)",
+        "guest": "guest(s)",
         "room": "room",
         "roomUpper": "Room"
     },
@@ -36,16 +36,17 @@
     "blogContainer":{
         "where": "Stunning Homestay",
         "journey":"Journeys",
-        "whatPlay":"What play",
+        "whatPlay":"Activities",
         "blog":"Blog",
-        "titleJourney": "Share travel experiences",
+        "titleJourney": "All about travel experiences",
         "titleWhere": "Discover beautiful places together",
-        "titlePlay": "Find out about strange and interesting games"
+        "titlePlay": "Find out about strange and interesting activities"
     },
     "collectionRooms": {
         "collectionViews": "Collection views",
         "seaView": "Sea view",
         "cityView": "City view"
     },
-    "editorChoice": "Editor's choices"
+    "editorChoice": "Editor's choices",
+    "hostAttraction": "You have free apartments? You have free rooms in your place? You want to earn more money? Or you just want to make friends with travelers from all around the world? Become a host at Westay, you will have the opportunity to make everything come true. Yes, it is possible!"
 }

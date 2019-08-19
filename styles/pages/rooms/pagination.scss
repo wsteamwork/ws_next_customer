@@ -1,3 +1,4 @@
+@import "../../mixins.scss";
 .rooms-pagination {
   margin: 24px 0;
   display: flex;
@@ -31,5 +32,8 @@
   .rc-pagination-jump-prev:hover:after,
   .rc-pagination-jump-next:hover:after {
     color: #fa991c;
+  }
+  @include mdDown {
+    margin-bottom: 60px !important;
   }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
     <list default="true" id="feaa1ab7-d36b-4411-8d56-41386cce87ed" name="Default Changelist" comment="mobile map va 1 so chinh sua roomlist">
       <change afterPath="$PROJECT_DIR$/components/Rooms/BottomNav/index.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/components/Rooms/MapMobile/index.tsx" afterDir="false" />
@@ -10,9 +9,6 @@
       <change beforePath="$PROJECT_DIR$/styles/components/roomCardListing/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/roomCardListing/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/pages/rooms/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/rooms/index.scss" afterDir="false" />
     </list>
-=======
-    <list default="true" id="feaa1ab7-d36b-4411-8d56-41386cce87ed" name="Default Changelist" comment="mobile map va 1 so chinh sua roomlist" />
->>>>>>> Stashed changes
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -24,7 +20,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/RoomCard/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,16 +37,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="160" column="32" lean-forward="true" selection-start-line="160" selection-start-column="32" selection-end-line="160" selection-end-column="32" />
-=======
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/RoomCard/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="123" column="19" lean-forward="true" selection-start-line="123" selection-start-column="19" selection-end-line="123" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
->>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -205,7 +190,6 @@
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Rooms" type="462c0819:PsiDirectoryNode" />
-<<<<<<< Updated upstream
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
@@ -213,8 +197,6 @@
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Rooms" type="462c0819:PsiDirectoryNode" />
               <item name="BottomNav" type="462c0819:PsiDirectoryNode" />
-=======
->>>>>>> Stashed changes
             </path>
           </expand>
           <select />
@@ -383,11 +365,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="392438000" />
-=======
-    <option name="totallyTimeSpent" value="370075000" />
->>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="0" width="1710" height="1050" extended-state="0" />

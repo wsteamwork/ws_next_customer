@@ -61,16 +61,16 @@ const RoomListing: FC = (props) => {
                 </ButtonGlobal>
               </Paper>
 
-              <VisitedRooms visitedRoom={rooms} />
+              <VisitedRooms />
             </Grid>
           </Hidden>
         ) : (
-            <Hidden smDown>
-              <Grid item sm={4} lg={3}>
-                <LoadingSkeleton type={'sideBar'} />
-              </Grid>
-            </Hidden>
-          )}
+          <Hidden smDown>
+            <Grid item sm={4} lg={3}>
+              <LoadingSkeleton type={'sideBar'} />
+            </Grid>
+          </Hidden>
+        )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
           {rooms.length !== 0 ? (
@@ -99,8 +99,8 @@ const RoomListing: FC = (props) => {
               </Grid>
             </Hidden>
           ) : (
-                ''
-              )}
+            ''
+          )}
           {isEmpty ? <NotFound height={250} width={250} /> : ''}
         </Grid>
       </Grid>

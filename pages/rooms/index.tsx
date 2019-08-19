@@ -20,14 +20,24 @@ import { Hidden } from '@material-ui/core';
 import HeadRoom from 'react-headroom';
 import { StickyContainer, Sticky } from 'react-sticky';
 import BottomNav from '@/components/Rooms/BottomNav';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
 import SearchMobile from '@/components/Rooms/SearchMobile';
 
-const Rooms: NextPage = () => {
+const useStyles = makeStyles<Theme>((theme: Theme) =>
+  createStyles({
+    rowMargin: {
+      marginBottom: 50
+    }
+  })
+);
+
+const Rooms: NextPage = (props) => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { isMapOpen } = state;
   const [hideSearchBar, setHideSearchBar] = useState<boolean>(false);
-
+  const classes = useStyles(props);
   return (
     <Fragment>
       <NextHead
@@ -42,7 +52,7 @@ const Rooms: NextPage = () => {
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
-            <Hidden smDown>
+            <Hidden smDown implementation="css">
               <StickyContainer>
                 <Sticky>
                   {({ style }) => (
@@ -71,19 +81,18 @@ const Rooms: NextPage = () => {
                 <MapAndListing></MapAndListing>
               </StickyContainer>
             </Hidden>
-            <Hidden mdUp>
+            <Hidden mdUp implementation="css">
               <GridContainer
                 xs={11}
                 md={10}
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}
-                <SearchMobile/>
+                <SearchMobile />
               </GridContainer>
               <FilterActions />
               <MapAndListing></MapAndListing>
-
-              <BottomNav/>
+              <BottomNav />
             </Hidden>
           </div>
         </RoomFilterContext.Provider>
