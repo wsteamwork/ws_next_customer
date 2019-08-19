@@ -15,6 +15,7 @@ interface IProps extends ICardIntro {
   subTitleContent?: string;
   showSubTitle?: boolean;
   showContent?: boolean;
+  onClickCard?: ()=>void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -140,7 +141,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
   const classes = useStyles(props);
-  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice, showSubTitle, recommendedPrice, subTitle, showContent, titleContent, subTitleContent } = props;
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice, showSubTitle, recommendedPrice, subTitle, showContent, titleContent, subTitleContent,onClickCard } = props;
 
   const imgStyles = useMemo<CSSProperties>(
     () => ({
@@ -151,7 +152,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
   );
 
   return (
-    <GridContainer xs={12}>
+    <div onClick={()=>onClickCard()}>
       <div
         className={
           showPrice
@@ -194,7 +195,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
           </Typography>
         </div>
       ) : ''}
-    </GridContainer>
+    </div>
   );
 };
 
