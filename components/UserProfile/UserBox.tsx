@@ -34,7 +34,7 @@ const UserBox: FC = (props) => {
         <Grid item className = {'boxName'}>
           {profile.avatar && (
             <div className = {'avatar'}>
-              <img alt = 'Avatar' src = {profile.avatar !== '' ? profile.avatar_url : '../static/images/avatar_default.png'}
+              <img alt = 'Avatar' src = {profile.avatar_url !== '' ? profile.avatar_url : '../static/images/avatar_default.png'}
                    className = {'imgAvatar'} />
             </div>
           )}

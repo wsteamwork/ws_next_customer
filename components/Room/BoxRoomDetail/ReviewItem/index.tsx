@@ -143,7 +143,7 @@ const ReviewItem: FC<IProps> = (props) => {
           md={2}
           lg={2}
           className={width == 'lg' ? classes.marginAvatar : ''}>
-          {review.user.data.avatar !== '' ? (
+          {review.user.data.avatar_url !== '' ? (
             <Avatar alt="Avatar" src={review.user.data.avatar_url} className={classes.avatar} />
           ) : (
             <Avatar className={classes.avatar}></Avatar>

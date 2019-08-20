@@ -151,13 +151,6 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                 />
               </ListItem>
-              <ListItem
-                classes={{
-                gutters: classes.listItemGutters
-                }}
-                button>
-                <SwitchLanguage/>
-              </ListItem>
             </Fragment>
           ) : (
             <Fragment>
@@ -197,18 +190,19 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                 />
               </ListItem>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button>
-                <SwitchLanguage/>
-              </ListItem>
+
             </Fragment>
           )}
         </div>
 
         <div className="bottom">
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button>
+            <SwitchLanguage/>
+          </ListItem>
           <ListItem
             button
             onClick={() => setOpen(false)}

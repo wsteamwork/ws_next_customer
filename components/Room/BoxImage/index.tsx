@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any;
@@ -39,6 +40,15 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: '100%',
       objectFit: 'cover',
       borderRadius: 4,
+      cursor:'pointer',
+      MozTransition: 'all 0.5s',
+      WebkitTransition: 'all 0.5s',
+      transition: 'all 0.5s',
+      '&:hover': {
+        MsTransform: 'scale(1.005)' /* IE 9 */,
+        WebkitTransform: 'scale(1.005)' /* Safari 3-8 */,
+        transform: 'scale(1.005)'
+      },
     },
     parallaxContainer: {
       width: '100%',
@@ -47,7 +57,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     contentParallax: {
       display: 'flex',
       justifyContent: 'center',
-      height: '65vh',
+      height: '55vh',
       [theme.breakpoints.down('xs')]: {
         height: '30vh',
       },
@@ -102,9 +112,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     roomName: {
       textAlign: 'center',
+      width:'80%',
+      margin: '0 auto',
       [theme.breakpoints.down('sm')]: {
-        fontSize: '1,125rem'
-      }
+        fontSize: '1.125rem',
+      },
     }
   })
 );
@@ -115,6 +127,7 @@ const BoxImage: FC<IProps> = (props) => {
   const [openDialog, setOpenDialog] = useState(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { width } = useContext(GlobalContext);
+  const {t} = useTranslation();
 
   const handleClick = () => {
     setOpenDialog(!openDialog);
@@ -158,15 +171,20 @@ const BoxImage: FC<IProps> = (props) => {
                 src={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
                 alt={room.details.data[0].name}
                 className={classes.imgRoom}
+                onClick={handleClick}
               />
         <div className={classes.insideParalax}>
           <Button variant="contained" className={classes.button} onClick={handleClick}>
-            <img
+
+            {width === 'sm' || width === 'xs' ? t('room:imageRoom') :
+              <img
               src="../../../static/images/telescope.svg"
               alt="iconScope"
               className={classes.iconScope}
-            />
-            {width === 'sm' || width === 'xs' ? '' : 'Thăm quan căn hộ'}
+              />
+            }
+
+            {width === 'sm' || width === 'xs' ? '' : t('room:viewPhotos')}
           </Button>
         </div>
       </div>
