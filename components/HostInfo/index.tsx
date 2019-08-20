@@ -116,7 +116,7 @@ const HostInfo: FC<IProps> = (props) => {
               <Grid item xs = {3} sm = {4} md = {4} lg = {4} xl = {3} style = {{ position: 'relative' }}>
                 <Avatar
                   alt = {merchant.avatar}
-                  src = {merchant.avatar !== '' ? merchant.avatar_url : '/static/images/avatar_default.png'}
+                  src = {merchant.avatar_url !== '' ? merchant.avatar_url : '/static/images/avatar_default.png'}
                   className = {classes.avatar}
                 />
               </Grid>

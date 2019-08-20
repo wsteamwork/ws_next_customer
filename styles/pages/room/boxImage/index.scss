@@ -3,17 +3,19 @@
 .image-gallery-image{
   max-height: 75vh;
   height:70vh;
-
+  @include xsDown{
+    height:60vh;
+  }
   img{
     //width: auto !important;
     max-height: 100%;
     height:100%;
-    object-fit: cover;
+    object-fit: contain;
     cursor: pointer;
     z-index: 2;
     border-radius: 16px;
     position: absolute;
-    max-width: 85%;
+    width: auto;
     margin: 0 auto;
     top: 50%;
     left: 0;
@@ -31,7 +33,7 @@
   }
 }
 .image-gallery-fullscreen-button{
-  right: 7.5%;
+  right: 7%;
   @include sm {
     display: none;
   }
@@ -41,8 +43,8 @@
 }
 
 .image-gallery-index {
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff;
+  background: none;
+  color: #323232;
   line-height: 1;
   padding: 10px 20px;
   position: absolute;
@@ -79,8 +81,8 @@
 
 .fullscreen{
   .image-gallery-image{
-    max-height: 80vh;
-    height:80vh;
+    max-height: 85vh;
+    height:85vh;
   }
 }
 
@@ -112,4 +114,8 @@
       border-radius: 4px;
     }
   }
+}
+
+.image-gallery-fullscreen-button::before, .image-gallery-play-button::before, .image-gallery-left-nav::before, .image-gallery-right-nav::before{
+  color: #6b6b6b;
 }
