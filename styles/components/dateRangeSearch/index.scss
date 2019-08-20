@@ -1,0 +1,45 @@
+@import "./rc-calendar.scss";
+
+.dateRangeSearch {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+
+  .calendar {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+
+    .day {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .input {
+      flex: 1;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0;
+    }
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .numberDay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
+}

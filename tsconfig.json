@@ -38,6 +38,12 @@
       ],
       "@/static/*": [
         "static/*"
+      ],
+      "@/translations/*": [
+        "translations/*"
+      ],
+      "@/routes/*": [
+        "routes/*"
       ]
     },
     "typeRoots": [
@@ -56,11 +62,15 @@
     "isolatedModules": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    ".next",
+    "out",
+    "next.config.js"
   ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx", "components/Room/BoxRoomDetail/RoomBasic"
   ]
 }

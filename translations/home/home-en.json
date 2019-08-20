@@ -1,0 +1,52 @@
+{
+    "SearchAutocomplete": {
+        "toGo": "Where do you want to go?",
+        "city": "City",
+        "district": "District",
+        "accommodation": "Accommodation",
+        "room": "Room",
+        "searchResults": "Search Results",
+        "noResult": "No result is found"
+    },
+    "chooseGuestRoom": {
+        "close": "Close",
+        "apply": "Apply"
+    },
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "logout": "Logout",
+    "profile": "Profile",
+    "policyTerms": "Policy & Terms",
+    "merchantChannel": "Become a host",
+    "contact" : "Contact",
+    "supportHost" : "Support host",
+    "currency" : "USD",
+    "review": "Reviews",
+    "searchComponent": {
+        "enjoy": "Book and Enjoy",
+        "search": "Search",
+        "guestUpper": "Guest(s)",
+        "guest": "guest(s)",
+        "room": "room",
+        "roomUpper": "Room"
+    },
+    "topDestinations" : "Top Destinations",
+    "becomeAHost" : "Become a host",
+    "topHomestay" : "Top Homestay",
+    "blogContainer":{
+        "where": "Stunning Homestay",
+        "journey":"Journeys",
+        "whatPlay":"Activities",
+        "blog":"Blog",
+        "titleJourney": "All about travel experiences",
+        "titleWhere": "Discover beautiful places together",
+        "titlePlay": "Find out about strange and interesting activities"
+    },
+    "collectionRooms": {
+        "collectionViews": "Collection views",
+        "seaView": "Sea view",
+        "cityView": "City view"
+    },
+    "editorChoice": "Editor's choices",
+    "hostAttraction": "You have free apartments? You have free rooms in your place? You want to earn more money? Or you just want to make friends with travelers from all around the world? Become a host at Westay, you will have the opportunity to make everything come true. Yes, it is possible!"
+}
