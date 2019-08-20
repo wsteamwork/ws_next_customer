@@ -49,5 +49,7 @@
         "apply": "Lọc kết quả",
         "readMore": "Mở rộng",
         "readLess" : "Thu gọn"
-    }
+    },
+    "notFoundTitle": "Rất tiếc, không còn phòng trống cho ngày bạn chọn.",
+    "notFoundContent": "Bạn vui lòng thay đổi thông tin tìm kiếm như số khách, ngày nhận/trả phòng để nhận các thông tin phòng trống khác"
 }

@@ -1,10 +1,19 @@
 import React, { Fragment, FC, useContext, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography, Hidden, DialogTitle, Dialog, IconButton, DialogContent, Grid } from '@material-ui/core';
-import { TransitionCustom, FILTER, TAB_LIST } from "@/components/Rooms/BottomNav";
+import {
+  Theme,
+  Typography,
+  Hidden,
+  DialogTitle,
+  Dialog,
+  IconButton,
+  DialogContent,
+  Grid
+} from '@material-ui/core';
+import { TransitionCustom, FILTER, TAB_LIST } from '@/components/Rooms/BottomNav';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import CloseIcon from "@material-ui/icons/Close";
-import FilterIcon from "@material-ui/icons/FilterListRounded";
+import CloseIcon from '@material-ui/icons/Close';
+import FilterIcon from '@material-ui/icons/FilterListRounded';
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
@@ -16,14 +25,14 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     closeButton: {
-      [theme!.breakpoints!.only!("xs")]: {},
-      position: "absolute",
+      [theme!.breakpoints!.only!('xs')]: {},
+      position: 'absolute',
       top: '1%',
       right: '1%'
     },
     closeButtonRoot: {
-      [theme!.breakpoints!.only!("xs")]: {
-        position: "absolute"
+      [theme!.breakpoints!.only!('xs')]: {
+        position: 'absolute'
       }
     },
     label: {
@@ -43,50 +52,50 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         bottom: '5%',
         top: 'unset',
       },
-      left: "50%",
-      transform: "translate(-50%,-50%)",
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
       zIndex: 999
     },
     list: {
-      [theme!.breakpoints!.up!("lg")]: {
-        maxHeight: "83vh"
+      [theme!.breakpoints!.up!('lg')]: {
+        maxHeight: '83vh'
       },
-      [theme!.breakpoints!.between!("sm", "md")]: {
-        maxHeight: "43vh",
+      [theme!.breakpoints!.between!('sm', 'md')]: {
+        maxHeight: '43vh',
         order: 1,
         marginTop: 10
       },
-      [theme!.breakpoints!.only!("xs")]: {
-        maxHeight: "47vh",
+      [theme!.breakpoints!.only!('xs')]: {
+        maxHeight: '47vh',
         order: 1,
-        position: "absolute",
+        position: 'absolute',
         bottom: 5,
         zIndex: 100
       },
-      overflow: "auto"
+      overflow: 'auto'
     },
     mapContainer: {
-      [theme!.breakpoints!.up!("lg")]: {
-        minHeight: "82vh"
+      [theme!.breakpoints!.up!('lg')]: {
+        minHeight: '82vh'
       },
-      [theme!.breakpoints!.between!("sm", "md")]: {
-        minHeight: "46vh"
+      [theme!.breakpoints!.between!('sm', 'md')]: {
+        minHeight: '46vh'
       },
-      [theme!.breakpoints!.only!("xs")]: {
-        minHeight: "100vh"
+      [theme!.breakpoints!.only!('xs')]: {
+        minHeight: '100vh'
       }
     },
     dialogContent: {
-      [theme!.breakpoints!.only!("xs")]: {
+      [theme!.breakpoints!.only!('xs')]: {
         padding: 0
       }
     },
     dialogTitle: {
-      display: "flex",
-      justifyContent: "space-between",
-      [theme!.breakpoints!.only!("xs")]: {
-        textAlign: "center",
-        position: "absolute",
+      display: 'flex',
+      justifyContent: 'space-between',
+      [theme!.breakpoints!.only!('xs')]: {
+        textAlign: 'center',
+        position: 'absolute',
         zIndex: 9999,
         top: -3,
         left: 9
@@ -108,19 +117,14 @@ const MapMobile: FC<IProps> = (props) => {
 
   const mapClose = () => {
     mapDispatch({
-      type: "setMapOpen",
+      type: 'setMapOpen',
       isMapOpen: false
     });
   };
 
   return (
     <Fragment>
-      <Dialog
-        fullScreen
-        open={openMap}
-        onClose={mapClose}
-        TransitionComponent={TransitionCustom}
-      >
+      <Dialog fullScreen open={openMap} onClose={mapClose} TransitionComponent={TransitionCustom}>
         <DialogTitle disableTypography className={classes.dialogTitle}>
           <Hidden xsDown>
             <Typography variant="h6">
@@ -135,8 +139,7 @@ const MapMobile: FC<IProps> = (props) => {
             classes={{
               root: classes.closeButtonRoot,
               label: classes.label
-            }}
-          >
+            }}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
@@ -146,15 +149,14 @@ const MapMobile: FC<IProps> = (props) => {
               <MapRoomListing />
             </div>
 
-            <Hidden mdUp>
+            <Hidden mdUp implementation="css">
               <IconButton
                 className={classes.filterButton}
                 classes={{
                   root: classes.closeButtonRoot,
                   label: classes.label
                 }}
-                onClick={handleOpenFilter}
-              >
+                onClick={handleOpenFilter}>
                 <FilterIcon />
               </IconButton>
               <Dialog
@@ -167,34 +169,6 @@ const MapMobile: FC<IProps> = (props) => {
                 <FilterDrawerMobile setIndex={setIndex} />
               </Dialog>
             </Hidden>
-            {/*<Grid*/}
-            {/*  container*/}
-            {/*  item*/}
-            {/*  xs={12}*/}
-            {/*  lg={5}*/}
-            {/*  spacing={xsMode ? 0 : 12}*/}
-            {/*  className={classes.list}*/}
-            {/*  id="room-map-list"*/}
-            {/*  justify="center"*/}
-            {/*>*/}
-            {/*  <MapRooms*/}
-            {/*    page={page}*/}
-            {/*    pageChange={pageChange}*/}
-            {/*    hoverId={hoverId}*/}
-            {/*    hoverAction={hoverAction}*/}
-            {/*    focusRoomLocation={focusRoomLocation}*/}
-            {/*    rooms={roomChunks}*/}
-            {/*  />*/}
-            {/*</Grid>*/}
-            {/*<Grid item xs={12} lg={7} className={classes.mapContainer}>*/}
-            {/*  <MapDetail*/}
-            {/*    hoverId={hoverId}*/}
-            {/*    center={center}*/}
-            {/*    hoverAction={hoverAction}*/}
-            {/*    rooms={roomChunks}*/}
-            {/*    setRooms={setRoomChunks}*/}
-            {/*  />*/}
-            {/*</Grid>*/}
           </Grid>
         </DialogContent>
       </Dialog>

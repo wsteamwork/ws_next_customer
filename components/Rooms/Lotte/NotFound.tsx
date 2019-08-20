@@ -2,13 +2,15 @@ import React, { ComponentType } from 'react';
 import Lottie from 'react-lottie';
 import animationData from '@/assets/lottie/empty_status.json';
 import { Typography } from '@material-ui/core';
-
+import { useTranslation } from 'react-i18next'
 interface IProps {
   height?: number;
   width?: number;
 }
 
 const NotFound: ComponentType<IProps> = (props) => {
+  const { t } = useTranslation();
+
   const defaultOptions: any = {
     loop: true,
     animationData: animationData,
@@ -26,11 +28,10 @@ const NotFound: ComponentType<IProps> = (props) => {
         width={props.width || 70}
       />
       <Typography variant="h6" style={{ textAlign: 'center' }}>
-        Rất tiếc, không còn phòng trống cho ngày bạn chọn.
+        {t('rooms:notFoundTitle')}
       </Typography>
       <Typography variant="subtitle1" color="textSecondary" style={{ textAlign: 'center' }}>
-        Bạn vui lòng thay đổi thông tin tìm kiếm như số khách, ngày nhận/trả phòng để nhận các thông
-        tin phòng trống khác
+        {t('rooms:notFoundContent')}
       </Typography>
     </span>
   );

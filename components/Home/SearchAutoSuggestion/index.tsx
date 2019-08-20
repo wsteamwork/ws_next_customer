@@ -66,11 +66,11 @@ const styles: any = (theme: Theme) =>
     },
     textFieldRoot: {
       color: '#fff',
-      height: '100%',
-      justifyContent: 'center',
-      [theme.breakpoints.down!('sm')]: {
-        padding: '8px 0'
-      }
+      height: '45px',
+      justifyContent: 'center'
+      // [theme.breakpoints.down!('sm')]: {
+      //   padding: '8px 0'
+      // }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -125,7 +125,7 @@ const styles: any = (theme: Theme) =>
       marginLeft: 8
     },
     inputCustom: {
-      height: '1.8875em'
+      height: '45px'
     }
   });
 

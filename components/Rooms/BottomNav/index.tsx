@@ -5,7 +5,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { List, Adjust, PinDrop } from "@material-ui/icons";
 import Dialog from "@material-ui/core/Dialog/Dialog";
-import Slide from "@material-ui/core/Slide/Slide";
+import Slide, { SlideProps } from "@material-ui/core/Slide/Slide";
 import { TransitionProps } from '@material-ui/core/transitions';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
@@ -30,10 +30,9 @@ export const TAB_LIST = 1;
 export const MAP = 2;
 export const NAV = 3;
 
-
-export const TransitionCustom = forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 interface IProps { }
 const BottomNav: FC<IProps> = (props) => {
@@ -45,7 +44,7 @@ const BottomNav: FC<IProps> = (props) => {
   useEffect(() => {
     if (index === MAP) {
       mapDispatch({
-        type: "setMapOpen",
+        type: 'setMapOpen',
         isMapOpen: true
       });
     }

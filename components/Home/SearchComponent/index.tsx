@@ -1,4 +1,4 @@
-import React, { FC, memo, useContext, Fragment } from 'react';
+import React, { FC, memo, Fragment, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import SearchAutoSuggestion from '../SearchAutoSuggestion';
@@ -9,9 +9,9 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ParsedUrlQueryInput } from 'querystring';
 import Router from 'next/router';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   className?: string;
@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const SearchComponent: FC<IProps> = (props) => {
-  const { className, filter, showGuestRoom,closeModal } = props;
+  const { className, filter, showGuestRoom, closeModal } = props;
   const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const {
     searchText,
@@ -71,15 +71,15 @@ const SearchComponent: FC<IProps> = (props) => {
           </Grid>
         </Fragment>
       ) : (
-        <Fragment>
-          <Grid item xs={12} md={6}>
-            <SearchAutoSuggestion />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <DateRangeSearch />
-          </Grid>
-        </Fragment>
-      )}
+          <Fragment>
+            <Grid item xs={12} md={6}>
+              <SearchAutoSuggestion />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <DateRangeSearch />
+            </Grid>
+          </Fragment>
+        )}
 
       <Grid item xs={12} md={2}>
         <ButtonGlobal padding="0px" width="100%" onClick={applySearch}>
