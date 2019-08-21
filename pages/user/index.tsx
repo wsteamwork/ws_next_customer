@@ -51,7 +51,10 @@ const UserPage: NextPage = (props) => {
 };
 
 UserPage.getInitialProps = async ({ query, store }: NextContextPage) => {
-  const res = await getDataViewProfile(query.id, store.dispatch);
+  if (!store.getState().iProfile.profile) {
+    const res = await getDataViewProfile(query.id, store.dispatch);
+  }
+
   return {};
 };
 

@@ -48,7 +48,11 @@ const Room: NextPage = () => {
         <NextHead
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
-          description={`${room.room_type_txt} ${room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'} ngay tại ${room.district.data.name}, ${room.city.data.name}. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
+          description={`${room.room_type_txt} ${
+            room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'
+          } ngay tại ${room.district.data.name}, ${
+            room.city.data.name
+          }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
           ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
@@ -58,7 +62,6 @@ const Room: NextPage = () => {
         () => (
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
             <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-
               <Hidden mdUp implementation="css">
                 {/* <SearchMobile /> */}
               </Hidden>
@@ -95,12 +98,7 @@ const Room: NextPage = () => {
 };
 
 Room.getInitialProps = async ({ store, router }: NextContextPage) => {
-  try {
-
-    const data = await getDataRoom(store.dispatch, router);
-  } catch (error) {
-
-  }
+  const data = await getDataRoom(store.dispatch, router);
   return {};
 };
 
