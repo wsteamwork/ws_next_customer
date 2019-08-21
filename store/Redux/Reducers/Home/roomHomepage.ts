@@ -11,7 +11,8 @@ import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
 import _ from 'lodash';
-import { ReducresActions } from '..';
+import { ReducresActions, ReducersList } from '..';
+import { Store } from 'redux';
 
 export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
@@ -125,9 +126,17 @@ export const getCollectionById = async (
 };
 
 // @ts-ignore
-export const getRoomsHomepage = async (): Promise<Omit<RoomHomepageState, 'roomsNew', 'collectionById'>> => {
+export const getRoomsHomepage = async (
+  dispatch: Dispatch<ReducresActions>
+): Promise<Omit<RoomHomepageState, 'roomsNew' | 'collectionById'>> => {
   const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(), getCollections()]);
   const [roomsHot, roomsCity, apartments, collections] = res;
+
+  dispatch({ type: 'setRoomCity', rooms: roomsCity });
+  dispatch({ type: 'setApartment', rooms: apartments });
+  dispatch({ type: 'setRoomHot', rooms: roomsHot });
+  dispatch({ type: 'setCollections', collections: collections });
+
   return {
     roomsHot,
     roomsCity,

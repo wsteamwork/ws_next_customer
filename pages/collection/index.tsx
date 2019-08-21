@@ -16,8 +16,8 @@ import localeInfo from 'rc-pagination/lib/locale/vi_VN';
 import 'rc-pagination/assets/index.css';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { ReactScrollLinkProps } from "react-scroll/modules/components/Link";
-import { animateScroll as scroll } from "react-scroll/modules";
+import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
+import { animateScroll as scroll } from 'react-scroll/modules';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxTitle: {
@@ -82,7 +82,7 @@ const Collection: NextPage = (props) => {
   const scrollTop = () => {
     let duration = 500 + window.scrollY * 0.1;
     let effect: Partial<ReactScrollLinkProps> = {
-      smooth: "easeInOutQuad",
+      smooth: 'easeInOutQuad',
       isDynamic: true,
       duration
     };
@@ -145,8 +145,8 @@ const Collection: NextPage = (props) => {
                 />
               </Grid>
             ) : (
-                ''
-              )}
+              ''
+            )}
           </GridContainer>
         </Fragment>
       )}
@@ -155,7 +155,9 @@ const Collection: NextPage = (props) => {
 };
 
 Collection.getInitialProps = async ({ query, store }: NextContextPage) => {
-  const data = await getCollectionById(query.id, store.dispatch);
+  if (!store.getState().roomHomepage.collectionById) {
+    const data = await getCollectionById(query.id, store.dispatch);
+  }
   return {};
 };
 

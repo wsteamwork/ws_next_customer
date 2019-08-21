@@ -33,8 +33,7 @@ const Home: NextPage = () => {
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
         url="https://westay.vn"
-        ogImage="/static/images/Bg_home.4023648f.jpg">
-      </NextHead>
+        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       <GridContainer xs={12}>
         <SearchHome></SearchHome>
@@ -63,16 +62,11 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getInitialProps = async (ctx: NextContextPage) => {
-  try {
-    const res = await getRoomsHomepage();
-    ctx.store.dispatch({ type: 'setRoomCity', rooms: res.roomsCity });
-    ctx.store.dispatch({ type: 'setApartment', rooms: res.apartments });
-    ctx.store.dispatch({ type: 'setRoomHot', rooms: res.roomsHot });
-    ctx.store.dispatch({ type: 'setCollections', collections: res.collections });
-  } catch (error) {
-    // console.log(error.respose);
+Home.getInitialProps = async ({ store }: NextContextPage) => {
+  if (store.getState().roomHomepage.roomsHot.length === 0) {
+    const res = await getRoomsHomepage(store.dispatch);
   }
+
   return {};
 };
 
