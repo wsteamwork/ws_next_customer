@@ -15,7 +15,7 @@
         "detailsService": "Service fees and other surcharges",
         "chargeAddGuest": "Charge additional guest",
         "chargeAddHour": "Charge additional hour",
-        "setByHour": "Set by hour",
+        "setByHour": "Book by hour",
         "average": "Avarge"
     },
     "map": "Map",
@@ -33,7 +33,7 @@
     "beds" : "Bed(s)",
     "readLess" : "Show less",
     "readMore" : "Read more",
-    "emptyCalender" : "Calendar",
+    "emptyCalender" : "Available Dates",
     "review" : "Reviews",
     "lookingFor": "You are looking for:",
     "cancel": "Cancel",

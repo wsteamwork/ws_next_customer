@@ -89,15 +89,15 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     </span>
                   </Grid>
                   <Grid className="collectionAmenities">
-                    {room!.max_guest} khách
+                    {room!.max_guest} {t('rooms:guests')}
                     <span className="dotAmenties">.</span>
-                    {room!.number_room} phòng
+                    {room!.number_room} {t('rooms:rooms')}
                     <span className="dotAmenties">.</span>
-                    {room!.number_bed} giường
+                    {room!.number_bed} {t('rooms:beds')}
                     {room!.bathroom > 0 ? (
                       <Fragment>
                         <span className="dotAmenties">.</span>
-                        {room!.bathroom} phòng tắm
+                        {room!.bathroom} {t('rooms:bathrooms')}
                       </Fragment>
                     ) : (
                         ''
@@ -155,7 +155,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       placement="top">
                       <span className="avgRating">{room.avg_rating}</span>
                     </Tooltip>
-                    <span className="totalReview">{room.total_review}</span>
+                    <span className="totalReview">{`(${room.total_review} ${t('rooms:review')}) `}</span>
                     {/* <span className='totalRev'iewText}>{`${
                           room.avg_rating_txt
                           }`}</span> */}

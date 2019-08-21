@@ -17,6 +17,7 @@ import numeral from 'numeral';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { useTranslation } from 'react-i18next';
 
 const Transition = forwardRef<HTMLElement, SlideProps>((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
@@ -30,6 +31,8 @@ const NavBottomBook: FC = (props) => {
   if (room === null) {
     return <ContentPlaceHolder />;
   }
+
+  const { t } = useTranslation();
 
   const handleClick = () => {
     setOpenDialog(!openDialog);
@@ -46,14 +49,14 @@ const NavBottomBook: FC = (props) => {
                   <Grid item xs={12} sm={4}>
                     <div>
                       <span className={'price'}>
-                        {numeral(room.price_day).format('0,0')} VND / ngày
+                        {numeral(room.price_day).format('0,0')} {t('shared:dayPrice')}
                       </span>
                     </div>
                   </Grid>
                   {room!.rent_type != 2 && (
                     <Grid item xs={12} sm={4}>
                       <span className={'price'}>
-                        {numeral(room.price_hour).format('0,0')} VND / 4 giờ
+                        {numeral(room.price_hour).format('0,0')} {t('shared:hourPrice')}
                       </span>
                     </Grid>
                   )}
@@ -61,7 +64,7 @@ const NavBottomBook: FC = (props) => {
               </Grid>
               <Grid item xs={4} sm={3}>
                 <ButtonGlobal padding="0px" width="100%" onClick={handleClick} className={'btBook'}>
-                  Đặt phòng
+                  {t('room:boxBooking:bookNow')}
                 </ButtonGlobal>
               </Grid>
             </Grid>

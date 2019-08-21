@@ -32,7 +32,7 @@ const SubmitBooking: FC = () => {
   return (
     <Grid className="boxBooking__buttonSubmit">
       <ButtonGlobal onClick={handleSubmit} disabled={!!error} padding="0px" width="100%">
-        <p className="flex_center">
+        <p className="flex_center" style={{ color: '#ffffff' }}>
           <OfflineBoltRounded></OfflineBoltRounded>&nbsp;&nbsp;{t('room:boxBooking:bookNow')}
         </p>
       </ButtonGlobal>

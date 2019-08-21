@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     roomName: {
       fontWeight: 'bold',
-      fontSize: (props) => props.fontSize || '1rem',
+      fontSize: (props) => props.fontSize || '0.85rem',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis'

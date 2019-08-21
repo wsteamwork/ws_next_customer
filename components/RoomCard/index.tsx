@@ -68,7 +68,7 @@ const RoomCard: FC<Iprops> = (props) => {
                     <div className="iconWrapper">
                       <Tooltip
                         classes={{ tooltip: 'tooltip' }}
-                        title={'Đặt phòng nhanh'}
+                        title={t('book:bookingForm:instantBook')}
                         placement="top">
                         <QuickBookIcon className="instantBookIcon" />
                       </Tooltip>
@@ -90,7 +90,7 @@ const RoomCard: FC<Iprops> = (props) => {
                       &#10072;{' '}
                       {room.price_hour && (
                         <span>
-                          {isFormatPrice ? formatPrice(room.price_hour) : numeral(room.price_hour).format('0,0')}đ/4 {t('room:hour')}
+                          {isFormatPrice ? formatPrice(room.price_hour) : numeral(room.price_hour).format('0,0')}{t('shared:hourPrice')}
                         </span>
                       )}
                     </Typography>

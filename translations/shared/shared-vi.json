@@ -7,8 +7,8 @@
         "desc2": "Nếu chọn 'Lý do khác' xin vui lòng cho chúng tôi biết chi tiết lý do bạn hủy đơn đặt phòng",
         "canceled": "Đã hủy đơn",
         "conf": "Xác nhận hủy đơn",
-        "success": "Hủy phòng thành công!",
-        "dayPrice": "₫/ngày",
-        "hourPrice": "₫/4 giờ"
-    }
+        "success": "Hủy phòng thành công!"
+    },
+    "dayPrice": "₫/ngày",
+    "hourPrice": "₫/4 giờ"
 }
