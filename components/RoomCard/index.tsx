@@ -95,8 +95,8 @@ const RoomCard: FC<Iprops> = (props) => {
                       )}
                     </Typography>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Grid>
 
                 {room.total_review > 3 ? (
@@ -105,11 +105,11 @@ const RoomCard: FC<Iprops> = (props) => {
                     <Typography className="rating text">{`${room.avg_rating}`}</Typography>
                     <Typography variant="subtitle1" className="totalReview text">{` (${
                       room.total_review
-                    } ${t('home:review')})`}</Typography>
+                      } ${t('home:review')})`}</Typography>
                   </Grid>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </Grid>
             </Link>
           </Grid>

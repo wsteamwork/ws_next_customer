@@ -14,14 +14,14 @@ import { updateRouter } from '@/store/Context/utility';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-
+import { useTranslation } from 'react-i18next'
 // @ts-ignore
 const RoomListing: FC = (props) => {
   const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
   const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const {width} = useContext(GlobalContext);
-
+  const { width } = useContext(GlobalContext);
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const changePage = (current: number) => {
@@ -57,7 +57,7 @@ const RoomListing: FC = (props) => {
                   root: 'mapPaper'
                 }}>
                 <ButtonGlobal className="watchMapButton" onClick={openMap}>
-                  Xem Bản Đồ
+                  {t('rooms:viewOnMap')}
                 </ButtonGlobal>
               </Paper>
 
@@ -65,12 +65,12 @@ const RoomListing: FC = (props) => {
             </Grid>
           </Hidden>
         ) : (
-          <Hidden smDown>
-            <Grid item sm={4} lg={3}>
-              <LoadingSkeleton type={'sideBar'} />
-            </Grid>
-          </Hidden>
-        )}
+            <Hidden smDown>
+              <Grid item sm={4} lg={3}>
+                <LoadingSkeleton type={'sideBar'} />
+              </Grid>
+            </Hidden>
+          )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
           {rooms.length !== 0 ? (
@@ -99,8 +99,8 @@ const RoomListing: FC = (props) => {
               </Grid>
             </Hidden>
           ) : (
-            ''
-          )}
+                ''
+              )}
           {isEmpty ? <NotFound height={250} width={250} /> : ''}
         </Grid>
       </Grid>

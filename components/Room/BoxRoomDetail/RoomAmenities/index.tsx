@@ -82,7 +82,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps { }
 
 const RoomAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -137,12 +137,12 @@ const RoomAmenities: FC<IProps> = (props) => {
               </Button>
             </Grid>
           ) : (
-            <Grid item xs={2} className={classes.buttonLess}>
-              <Button onClick={toggle} className={classes.readLess} size="small">
-                {t('rooms:readLess')}
-              </Button>
-            </Grid>
-          )}
+              <Grid item xs={2} className={classes.buttonLess}>
+                <Button onClick={toggle} className={classes.readLess} size="small">
+                  {t('rooms:readLess')}
+                </Button>
+              </Grid>
+            )}
         </Grid>
       </Fragment>
     )

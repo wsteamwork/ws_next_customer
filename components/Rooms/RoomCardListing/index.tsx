@@ -1,23 +1,16 @@
 import React, { FC, Fragment, useContext } from 'react';
-import { compose } from 'recompose';
-import { createStyles, withStyles } from '@material-ui/styles';
-import { Grid, Typography, Theme, Tooltip } from '@material-ui/core';
+import { Grid, Typography, Tooltip } from '@material-ui/core';
 import numeral from 'numeral';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import Slider, { Settings } from 'react-slick';
-import classNames from 'classnames';
 import _ from 'lodash';
 import Paper from '@material-ui/core/Paper/Paper';
-import { formatMoney } from '@/utils/mixins';
-import Button from '@material-ui/core/Button/Button';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Hidden from '@material-ui/core/Hidden/Hidden';
 import LazyLoad from 'react-lazyload';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-//import '@/styles/PageProfile/StylePageProfile.scss';
 import StarIcon from '@material-ui/icons/StarRounded';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import Link from '@material-ui/core/Link';
@@ -62,8 +55,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                   />
                 ))
               ) : (
-                <img src="./static/images/background.svg" className="imgSize" />
-              )}
+                  <img src="./static/images/background.svg" className="imgSize" />
+                )}
             </Slider>
           </LazyLoad>
         </Grid>
@@ -107,8 +100,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} phòng tắm
                       </Fragment>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -143,8 +136,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                        ''
-                      )}
+                          ''
+                        )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -168,8 +161,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           }`}</span> */}
                   </Grid>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -177,51 +170,51 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">Giảm giá</Grid>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
                         {room.is_discount === 1 ? (
                           <span className="discountPriceText">
                             {numeral(room.price_day).format('0,0')}
-                            ₫/ngày
+                            {t('shared:dayPrice')}
                           </span>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
                           ).format('0,0')}
-                          ₫/ngày
+                          {t('shared:dayPrice')}
                         </Typography>
                       </Grid>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                      <Grid className="hourPrice">
-                        {room.is_discount === 1 ? (
-                          <span className="discountPriceText">
-                            {numeral(room.price_hour).format('0,0')}
-                            ₫/4 giờ
-                          </span>
-                        ) : (
-                          ''
-                        )}
-                        <Typography className="priceText" variant={typoVariant}>
-                          {numeral(
-                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                          ).format('0,0')}
-                          ₫/4 giờ
-                        </Typography>
-                      </Grid>
-                    ) : (
-                      ''
-                    )}
+                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                        <Grid className="hourPrice">
+                          {room.is_discount === 1 ? (
+                            <span className="discountPriceText">
+                              {numeral(room.price_hour).format('0,0')}
+                              {t('shared:hourPrice')}
+                            </span>
+                          ) : (
+                              ''
+                            )}
+                          <Typography className="priceText" variant={typoVariant}>
+                            {numeral(
+                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                            ).format('0,0')}
+                            {t('shared:hourPrice')}
+                          </Typography>
+                        </Grid>
+                      ) : (
+                        ''
+                      )}
                   </Grid>
                 </Grid>
               </Link>

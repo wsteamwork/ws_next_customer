@@ -153,46 +153,46 @@ const SideDrawer: FC<IProps> = (props) => {
               </ListItem>
             </Fragment>
           ) : (
-            <Fragment>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button
-                onClick={() => {
-                  router.push('/auth/signin');
-                }}>
-                {/* <ListItemIcon>
+              <Fragment>
+                <ListItem
+                  classes={{
+                    gutters: classes.listItemGutters
+                  }}
+                  button
+                  onClick={() => {
+                    router.push('/auth/signin');
+                  }}>
+                  {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                <ListItemText
-                  primary={t('home:signIn')}
+                  <ListItemText
+                    primary={t('home:signIn')}
+                    classes={{
+                      primary: classes.text
+                    }}
+                  />
+                </ListItem>
+                <ListItem
                   classes={{
-                    primary: classes.text
+                    gutters: classes.listItemGutters
                   }}
-                />
-              </ListItem>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button
-                onClick={() => {
-                  router.push('/auth/signup');
-                }}>
-                {/* <ListItemIcon>
+                  button
+                  onClick={() => {
+                    router.push('/auth/signup');
+                  }}>
+                  {/* <ListItemIcon>
               <AccountCircle />
             </ListItemIcon> */}
-                <ListItemText
-                  primary={t('home:signUp')}
-                  classes={{
-                    primary: classes.text
-                  }}
-                />
-              </ListItem>
+                  <ListItemText
+                    primary={t('home:signUp')}
+                    classes={{
+                      primary: classes.text
+                    }}
+                  />
+                </ListItem>
 
-            </Fragment>
-          )}
+              </Fragment>
+            )}
         </div>
 
         <div className="bottom">
@@ -201,7 +201,7 @@ const SideDrawer: FC<IProps> = (props) => {
               gutters: classes.listItemGutters
             }}
             button>
-            <SwitchLanguage/>
+            <SwitchLanguage />
           </ListItem>
           <ListItem
             button
@@ -284,8 +284,8 @@ const SideDrawer: FC<IProps> = (props) => {
               />
             </ListItem>
           ) : (
-            ''
-          )}
+              ''
+            )}
         </div>
       </List>
     </Fragment>

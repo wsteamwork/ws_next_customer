@@ -5,7 +5,7 @@ import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-
+import { useTranslation } from 'react-i18next';
 interface IProps {
   updateBookingType: (type: number) => void;
 }
@@ -19,7 +19,6 @@ export const CustomCheckbox = withStyles({
   },
   checked: {}
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
-
 const CheckboxList: FC<IProps> = (props) => {
   const { updateBookingType } = props;
   const [state, setState] = useState({
@@ -36,6 +35,8 @@ const CheckboxList: FC<IProps> = (props) => {
     }
   }, [state.rentType]);
 
+  const { t } = useTranslation();
+
   const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [name]: event.target.checked });
   };
@@ -50,7 +51,7 @@ const CheckboxList: FC<IProps> = (props) => {
             value="rentType"
           />
         }
-        label="Thuê phòng theo giờ"
+        label={t('rooms:filterRooms:bookByHour')}
       />
       <FormControlLabel
         control={
@@ -60,7 +61,7 @@ const CheckboxList: FC<IProps> = (props) => {
             value="checkedB"
           />
         }
-        label="Tôi đi công tác"
+        label={t('book:bookingForm:toWork')}
       />
       <FormControlLabel
         control={
@@ -70,7 +71,7 @@ const CheckboxList: FC<IProps> = (props) => {
             value="checkedC"
           />
         }
-        label="Villa - Biệt thự nghỉ dưỡng"
+        label={t('home:searchVilla')}
       />
     </FormGroup>
   );

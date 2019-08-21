@@ -162,7 +162,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
-  const {router} = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
 
   const closeMenu = () => {
     setMenuStatus(false);
@@ -197,7 +197,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
 
   return (
     <Fragment>
-      <GridContainer xs={12}  classNameItem={classes.containter}>
+      <GridContainer xs={12} classNameItem={classes.containter}>
         <AppBar
           elevation={0}
           position="static"
@@ -276,7 +276,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               </Popover>
               {cookies.get('_token') ? (
                 <Fragment>
-                  <SwitchLanguage/>
+                  <SwitchLanguage />
                   <Button
                     buttonRef={userRefButton}
                     color="inherit"
@@ -325,31 +325,31 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                <Fragment>
-                  <Button
-                    name="sign-in"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={loginButtonClick}
-                    size="large"
+                  <Fragment>
+                    <Button
+                      name="sign-in"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={loginButtonClick}
+                      size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                  >
-                    {t('home:signIn')}
-                  </Button>
-                  <Button
-                    name="sign-up"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={signUpButtonClick}
-                    size="large"
+                    >
+                      {t('home:signIn')}
+                    </Button>
+                    <Button
+                      name="sign-up"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={signUpButtonClick}
+                      size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                  >
-                    {t('home:signUp')}
-                  </Button>
+                    >
+                      {t('home:signUp')}
+                    </Button>
 
-                  <SwitchLanguage />
-                </Fragment>
-              )}
+                    <SwitchLanguage />
+                  </Fragment>
+                )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
@@ -369,7 +369,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                     classes={{
                       paper: classes.drawer
                     }}>
-                     <SideDrawer setOpen={setOpenDrawer} />
+                    <SideDrawer setOpen={setOpenDrawer} />
                   </SwipeableDrawer>
                 </div>
               </Fragment>

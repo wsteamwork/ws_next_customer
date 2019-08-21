@@ -32,17 +32,17 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
 
-  let widthCalendar:number;
+  let widthCalendar: number;
   switch (width) {
-    case 'xl': widthCalendar=50;
+    case 'xl': widthCalendar = 50;
       break;
-    case 'lg': widthCalendar=45;
+    case 'lg': widthCalendar = 45;
       break;
-    case 'md': widthCalendar=45;
+    case 'md': widthCalendar = 45;
       break;
-    case 'sm': widthCalendar=45;
+    case 'sm': widthCalendar = 45;
       break;
-    default : widthCalendar=40;
+    default: widthCalendar = 40;
   }
 
   return useMemo(

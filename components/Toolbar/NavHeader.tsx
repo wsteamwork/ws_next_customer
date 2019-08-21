@@ -162,7 +162,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
-  const {router} = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
 
 
   const Hotline = (contact: string) => {
@@ -296,7 +296,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                           minWidth: 300
                         }}>
                         <Paper elevation={1}>
-                          <ClickAwayListener onClickAway={()=> setMenuStatus(false)}>
+                          <ClickAwayListener onClickAway={() => setMenuStatus(false)}>
                             <MenuList>
                               <MenuItem onClick={toProfile} component='li'>
                                 <ListItemIcon>

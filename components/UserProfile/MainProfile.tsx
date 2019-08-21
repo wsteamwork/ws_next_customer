@@ -31,8 +31,8 @@ const MainProfile: FC = (props) => {
           </Grid>
         </GridContainer>
       ) : (
-        <SimpleLoader />
-      )}
+          <SimpleLoader />
+        )}
     </div>
   );
 };

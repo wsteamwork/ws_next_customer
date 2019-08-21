@@ -42,7 +42,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       backgroundOrigin: 'border-box',
       backgroundClip: 'content-box, border-box',
       [theme!.breakpoints!.down!('xs')]: {
-        margin:'0 auto',
+        margin: '0 auto',
       }
     },
     Mark: {
@@ -95,12 +95,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme!.breakpoints!.down!('xs')]: {
         fontSize: '4.5vw',
         paddingTop: 5,
-        textAlign:'center'
+        textAlign: 'center'
       }
     },
-    subStatus:{
+    subStatus: {
       [theme!.breakpoints!.down!('xs')]: {
-        textAlign:'center'
+        textAlign: 'center'
       }
     },
     contentRating: {
@@ -108,9 +108,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     ratingName: {
       fontWeight: 700,
-      fontSize:16,
-      [theme.breakpoints.down('sm')]:{
-        fontSize:14
+      fontSize: 16,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 14
       }
     },
   })
@@ -119,8 +119,8 @@ const StyledRating = withStyles({
   iconFilled: {
     color: '#08C299'
   },
-  root:{
-    justifyContent:'center'
+  root: {
+    justifyContent: 'center'
   }
 })(Rating);
 

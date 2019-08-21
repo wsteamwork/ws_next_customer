@@ -18,7 +18,7 @@ import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
-      maxWidth:'100%',
+      maxWidth: '100%',
       overflow: 'hidden',
       boxShadow: 'none',
       [theme.breakpoints.down('xs')]: {
@@ -146,8 +146,8 @@ const ReviewItem: FC<IProps> = (props) => {
           {review.user.data.avatar_url !== '' ? (
             <Avatar alt="Avatar" src={review.user.data.avatar_url} className={classes.avatar} />
           ) : (
-            <Avatar className={classes.avatar}></Avatar>
-          )}
+              <Avatar className={classes.avatar}></Avatar>
+            )}
         </Grid>
         <Grid container item xs={9} sm={9} md={10} lg={9}>
           <Grid item xs className={classes.content}>
@@ -183,15 +183,15 @@ const ReviewItem: FC<IProps> = (props) => {
                     <Grid container className={classes.dialog}>
                       <Grid item xs={3} sm={2}>
                         {review.user.data.avatar_url !== '' &&
-                        review.user.data.avatar !== 'default_avatar.jpg' ? (
-                          <Avatar
-                            alt="Avatar"
-                            src={review.user.data.avatar_url}
-                            className={classes.avatar}
-                          />
-                        ) : (
-                          <Avatar className={classes.avatar}></Avatar>
-                        )}
+                          review.user.data.avatar !== 'default_avatar.jpg' ? (
+                            <Avatar
+                              alt="Avatar"
+                              src={review.user.data.avatar_url}
+                              className={classes.avatar}
+                            />
+                          ) : (
+                            <Avatar className={classes.avatar}></Avatar>
+                          )}
                       </Grid>
                       <Grid container item xs={9} sm={10}>
                         <Grid item xs className={classes.content}>
@@ -215,7 +215,7 @@ const ReviewItem: FC<IProps> = (props) => {
                       <Grid item xs={12}>
                         <DialogActions>
                           <Button onClick={handleClose} color="primary" autoFocus>
-                          {t('rooms:close')}
+                            {t('rooms:close')}
                           </Button>
                         </DialogActions>
                       </Grid>
@@ -223,11 +223,11 @@ const ReviewItem: FC<IProps> = (props) => {
                   </Dialog>
                 </Fragment>
               ) : (
-                review.comment
-              )
+                  review.comment
+                )
             ) : (
-              t('rooms:noComment')
-            )}
+                t('rooms:noComment')
+              )}
           </Grid>
         </Grid>
       </Grid>

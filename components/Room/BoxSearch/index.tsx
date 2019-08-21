@@ -2,10 +2,6 @@ import React, { FC, useState, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Paper, Grid, Typography, Button, Collapse } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import ChooseGuestRoom from '@/components/Home/ChooseGuestRoom';
-import ButtonGlobal from '@/components/ButtonGlobal';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import moment from 'moment';
@@ -84,7 +80,7 @@ const BoxSearch: FC<IProps> = (props) => {
               </div>
             </Collapse>
             <Collapse in={collapseSearch}>
-              <SearchComponent showGuestRoom={true}/>
+              <SearchComponent showGuestRoom={true} />
             </Collapse>
           </Grid>
 

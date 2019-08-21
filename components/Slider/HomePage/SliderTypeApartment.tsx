@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const SliderTypeApartment: FC<Iprops> = (props:Iprops) => {
+const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
   const { width } = useContext<IGlobalContext>(GlobalContext);
 
@@ -35,7 +35,7 @@ const SliderTypeApartment: FC<Iprops> = (props:Iprops) => {
   );
 
   const SearchType = (idType: number) => {
-    updateRouter(true,'type_room',idType);
+    updateRouter(true, 'type_room', idType);
   };
 
   const setting: Settings = {
@@ -103,7 +103,7 @@ const SliderTypeApartment: FC<Iprops> = (props:Iprops) => {
                     imgHeight={width === 'xl' ? 250 : 200}
                     imgSrc={obj.image}
                     title={obj.value}
-                    onClickCard={()=>SearchType(obj.id)}
+                    onClickCard={() => SearchType(obj.id)}
                   />
                 </Grid>
               ) : (
@@ -123,7 +123,7 @@ const SliderTypeApartment: FC<Iprops> = (props:Iprops) => {
                       imgHeight={width === 'xl' ? 250 : 200}
                       imgSrc={obj.image}
                       title={obj.value}
-                      onClickCard={()=>SearchType(obj.id)}
+                      onClickCard={() => SearchType(obj.id)}
                     />
                   </div>
                 ) : (

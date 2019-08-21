@@ -47,8 +47,8 @@ const MapRoomListing: FC = () => {
       </GoogleMap>
     </div>
   ) : (
-    <NotFound height={250} width={250} />
-  );
+      <NotFound height={250} width={250} />
+    );
 };
 
 export default MapRoomListing;

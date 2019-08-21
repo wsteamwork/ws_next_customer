@@ -7,6 +7,8 @@
         "desc2": "If you choose 'Other reasons' please let us know the reason why you canceled your booking",
         "canceled": "Application canceled",
         "conf": "Confirm cancellation",
-        "success": "Cancel the room successfully!"
+        "success": "Cancel the room successfully!",
+        "dayPrice": "VND/night",
+        "hourPrice": "VND/4 hours"
     }
 }
