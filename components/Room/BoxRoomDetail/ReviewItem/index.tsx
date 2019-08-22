@@ -19,6 +19,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       maxWidth:'100%',
+      width:'100%',
       overflow: 'hidden',
       boxShadow: 'none',
       [theme.breakpoints.down('xs')]: {

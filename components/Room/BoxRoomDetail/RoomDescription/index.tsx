@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, MouseEvent } from 'react';
+import React, { FC, Fragment, useState, MouseEvent, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,7 @@ import Orange from '@material-ui/core/colors/orange';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
@@ -36,6 +37,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     iconPlus: {
       fontSize: '15px'
+    },
+    title:{
+      fontWeight: 700,
+      margin: '8px 0',
     }
   })
 );
@@ -47,7 +52,9 @@ const RoomDescription: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // console.log(room)
+  const {router} = useContext(GlobalContext);
+  const isPreviewPage = router.pathname.includes('preview-room');
+
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setIsOpen(!isOpen);
@@ -59,6 +66,9 @@ const RoomDescription: FC<IProps> = (props) => {
       return convertNodeToElement(node, index, transformHtmlContent);
     }
   };
+
+  const notFoundContent = `<p> ${t('room:notFoundContent')} </p>`;
+
   return (
     room && (
       <Fragment>
@@ -67,19 +77,25 @@ const RoomDescription: FC<IProps> = (props) => {
             <Typography variant="h5" className={classes.name}>
               {t('rooms:description')}
             </Typography>
-            {ReactHtmlParser(room.details.data[0].description, {
+            {ReactHtmlParser(isPreviewPage && !room.details.data[0].description ? notFoundContent : room.details.data[0].description, {
               transform: transformHtmlContent
             })}
           </Grid>
           {isOpen ? (
             <Fragment>
               <Grid item xs={12}>
-                {ReactHtmlParser(room.details.data[0].space, {
+                <Typography variant='subtitle2' className={classes.title}>
+                  {t('room:space')}
+                </Typography>
+                {ReactHtmlParser(isPreviewPage && !room.details.data[0].space ? notFoundContent : room.details.data[0].space, {
                   transform: transformHtmlContent
                 })}
               </Grid>
               <Grid item xs={12}>
-                {ReactHtmlParser(room.details.data[0].note, {
+                <Typography variant='subtitle2' className={classes.title}>
+                  {t('room:rules')}
+                </Typography>
+                {ReactHtmlParser(isPreviewPage && !room.details.data[0].note ? notFoundContent : room.details.data[0].note, {
                   transform: transformHtmlContent
                 })}
               </Grid>

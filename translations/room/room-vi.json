@@ -31,6 +31,8 @@
     "rooms" : "phòng ngủ",
     "bathrooms" : "phòng tắm",
     "beds" : "giường",
+    "space" : "Không gian",
+    "rules" : "Nội quy",
     "readLess" : "Thu gọn",
     "readMore" : "Xem thêm",
     "emptyCalender" : "Lịch trống phòng",
@@ -39,5 +41,9 @@
     "cancel": "Hủy bỏ",
     "recommend": "Gợi ý",
     "viewPhotos": "Tham quan căn hộ",
-    "imageRoom": "Ảnh phòng"
+    "imageRoom": "Ảnh phòng",
+    "updateRoomName": "[Tên căn hộ/phòng của bạn]",
+    "notFoundContent": "Chưa có nội dung, hãy cập nhật đầy đủ thông tin phòng của bạn!",
+    "notFoundResource": "Không tìm thấy phòng. Phòng này có thể đã bị khóa do yêu cầu từ chủ nhà",
+    "goBackHome": "Trở về trang chủ"
 }

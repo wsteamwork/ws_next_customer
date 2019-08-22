@@ -2,10 +2,6 @@ import React, { FC, useState, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Paper, Grid, Typography, Button, Collapse } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import ChooseGuestRoom from '@/components/Home/ChooseGuestRoom';
-import ButtonGlobal from '@/components/ButtonGlobal';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import moment from 'moment';
@@ -13,9 +9,11 @@ import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import SearchComponent from '@/components/Home/SearchComponent';
+import { Router } from 'next/router';
 
 interface IProps {
   classes?: any;
+  isPreview?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -48,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxSearch: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const { isPreview } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const [collapseSearch, setCollapseSearch] = useState<boolean>(false);
@@ -75,7 +73,7 @@ const BoxSearch: FC<IProps> = (props) => {
             <Collapse in={!collapseSearch}>
               <div>
                 <Typography variant="h5" gutterBottom className={classes.roomName}>
-                  {room.details.data[0].name} - {room.district.data.name} - {room.city.data.name}
+                  {isPreview && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name} - {room.district.data.name} - {room.city.data.name}
                 </Typography>
                 <Typography variant="subtitle2" color="textPrimary">
                   {t('room:lookingFor')} {checkIn}

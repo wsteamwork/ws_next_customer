@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,7 @@ import {
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     roomName: {
@@ -41,6 +42,8 @@ const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {router} = useContext(GlobalContext);
+  const isPreviewPage = router.pathname.includes('preview-room');
 
   const arrMenuItem = (x: number): any[] => {
     let i = 1;
@@ -73,7 +76,7 @@ const RoomBasic: FC<IProps> = (props) => {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography variant="h5" className={classes.roomName}>
-                {room.details.data[0].name}
+                {isPreviewPage && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name}
               </Typography>
             </Grid>
             <Grid item xs={12}>

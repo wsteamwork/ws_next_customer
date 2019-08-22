@@ -21,7 +21,6 @@ import BoxImage from '@/components/Room/BoxImage';
 import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { convertNodeToElement } from 'react-html-parser';
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import SearchMobile from '@/components/Rooms/SearchMobile';
@@ -34,14 +33,9 @@ const Room: NextPage = () => {
   const [] = useVisitedRoom();
 
   useEffect(() => {
-    !!error && router.push('/error');
-  }, [error]);
+    if (room.status === 0 || !!error) router.push('/not-found-resource');
+  }, [error,room.status]);
 
-  const transformHtmlContent = (node: any, index: number) => {
-    if (node.name === 'p' || node.name === 'image') {
-      return convertNodeToElement(node, index, transformHtmlContent);
-    }
-  };
   return (
     <Fragment>
       {!!room && (
@@ -50,10 +44,10 @@ const Room: NextPage = () => {
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`${room.room_type_txt} ${room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'} ngay tại ${room.district.data.name}, ${room.city.data.name}. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}/>
       )}
 
-      <NavHeader></NavHeader>
+      <NavHeader/>
       {useMemo(
         () => (
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
@@ -70,11 +64,11 @@ const Room: NextPage = () => {
               <BoxImage />
               <Grid container>
                 <Grid item xs={12} lg={8} xl={9}>
-                  <BoxRoomDetail></BoxRoomDetail>
+                  <BoxRoomDetail/>
                 </Grid>
 
                 <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                  <BoxBooking></BoxBooking>
+                  <BoxBooking/>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -89,7 +83,7 @@ const Room: NextPage = () => {
         ),
         [state]
       )}
-      <Footer></Footer>
+      <Footer/>
     </Fragment>
   );
 };
