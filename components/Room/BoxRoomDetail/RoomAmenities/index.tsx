@@ -12,6 +12,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
@@ -89,6 +90,8 @@ const RoomAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { width } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const { router } = useContext(GlobalContext);
+  const isPreviewPage = router.pathname.includes('preview-room');
 
   const MAX_ITEMS = width === 'xs' ? 5 : 8;
   const MORE_ITEMS = !!room && room.comforts.data.length - MAX_ITEMS;
@@ -109,41 +112,53 @@ const RoomAmenities: FC<IProps> = (props) => {
   return (
     !!room && (
       <Fragment>
-        <Typography variant="h5" className={classes.name}>
+        <Typography variant='h5' className={classes.name}>
           {t('rooms:amenities')}
         </Typography>
-        <Grid container spacing={3} className={classes.rowMargin}>
-          {_.map(getRenderedItems(), (o, i) => (
-            <Fragment key={i}>
-              <Grid item xs={2} sm={1} md={1} lg={1}>
-                <img
-                  src={o.icon}
-                  alt={o.details.data[0].name}
-                  className={classes.roomAmenitiesIcon}
-                />
-              </Grid>
-              <Hidden xsDown>
-                <Grid className={classes.nameIcon} item sm={3} md={3} lg={3}>
-                  <Typography variant={'body2'}>{o.details.data[0].name}</Typography>
+        {
+          isPreviewPage && room.comforts.data.length === 0 ?
+            (
+              <Typography variant='h6'>
+                {t('room:notFoundContent')}
+              </Typography>
+            )
+            :
+            <Grid container spacing={3} className={classes.rowMargin}>
+              {_.map(getRenderedItems(), (o, i) => (
+                <Fragment key={i}>
+                  <Grid item xs={2} sm={1} md={1} lg={1}>
+                    <img
+                      src={o.icon}
+                      alt={o.details.data[0].name}
+                      className={classes.roomAmenitiesIcon}
+                    />
+                  </Grid>
+                  <Hidden xsDown>
+                    <Grid className={classes.nameIcon} item sm={3} md={3} lg={3}>
+                      <Typography variant={'body2'}>{o.details.data[0].name}</Typography>
+                    </Grid>
+                  </Hidden>
+                </Fragment>
+              ))}
+              {!isOpen ? (
+                <Grid item xs={2} className={classes.buttonLess}>
+                  <Hidden xsUp={isPreviewPage && room.comforts.data.length < 5}
+                    xsDown={isPreviewPage && room.comforts.data.length < 5}>
+                    <Button onClick={toggle} className={classes.button} size='small'>
+                      <AddIcon className={classes.iconPlus} />
+                      {MORE_ITEMS} <Hidden xsDown>{t('rooms:amenitiesLower')}</Hidden>
+                    </Button>
+                  </Hidden>
                 </Grid>
-              </Hidden>
-            </Fragment>
-          ))}
-          {!isOpen ? (
-            <Grid item xs={2} className={classes.buttonLess}>
-              <Button onClick={toggle} className={classes.button} size="small">
-                <AddIcon className={classes.iconPlus} />
-                {MORE_ITEMS} <Hidden xsDown>{t('rooms:amenitiesLower')}</Hidden>
-              </Button>
+              ) : (
+                  <Grid item xs={2} className={classes.buttonLess}>
+                    <Button onClick={toggle} className={classes.readLess} size='small'>
+                      {t('rooms:readLess')}
+                    </Button>
+                  </Grid>
+                )}
             </Grid>
-          ) : (
-              <Grid item xs={2} className={classes.buttonLess}>
-                <Button onClick={toggle} className={classes.readLess} size="small">
-                  {t('rooms:readLess')}
-                </Button>
-              </Grid>
-            )}
-        </Grid>
+        }
       </Fragment>
     )
   );

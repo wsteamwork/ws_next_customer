@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any;
+  isPreview?: boolean;
 }
 
 const Transition = forwardRef<HTMLElement, SlideProps>((props, ref) => (
@@ -123,14 +124,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const { isPreview } = props;
   const [openDialog, setOpenDialog] = useState(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { width } = useContext(GlobalContext);
   const {t} = useTranslation();
 
   const handleClick = () => {
-    setOpenDialog(!openDialog);
+    if (isPreview && room.media.data.length === 0) {
+      setOpenDialog(false);
+    }else{
+      setOpenDialog(!openDialog);
+    }
   };
 
   const images = room
@@ -168,13 +173,13 @@ const BoxImage: FC<IProps> = (props) => {
 
       <div className={classes.contentParallax}>
         <img
-                src={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
-                alt={room.details.data[0].name}
+                src={ isPreview && room.media.data.length === 0 ? '/static/images/image-room-default.png' : `${IMAGE_STORAGE_LG + room.media.data[0].image}`}
+                alt={ isPreview && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name}
                 className={classes.imgRoom}
                 onClick={handleClick}
               />
         <div className={classes.insideParalax}>
-          <Button variant="contained" className={classes.button} onClick={handleClick}>
+          <Button variant="contained" className={classes.button} onClick={handleClick} disabled={isPreview && room.media.data.length === 0}>
 
             {width === 'sm' || width === 'xs' ? t('room:imageRoom') :
               <img
@@ -203,7 +208,7 @@ const BoxImage: FC<IProps> = (props) => {
           <DialogTitle className={classes.dialogTitle}>
             <Grid>
               <Typography variant="h4" className={classes.roomName}>
-                {room.details.data[0].name}
+                {isPreview && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name}
               </Typography>
 
               <IconButton className={classes.btClose} aria-label="Close" onClick={handleClick}>

@@ -1,5 +1,4 @@
 import React, { FC, useState, MouseEvent, Fragment, useContext } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -19,6 +18,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       maxWidth: '100%',
+      width: '100%',
       overflow: 'hidden',
       boxShadow: 'none',
       [theme.breakpoints.down('xs')]: {

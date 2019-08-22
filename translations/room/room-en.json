@@ -31,6 +31,8 @@
     "rooms" : "Room(s)",
     "bathrooms" : "Bathroom(s)",
     "beds" : "Bed(s)",
+    "space" : "The space",
+    "rules" : "House rules",
     "readLess" : "Show less",
     "readMore" : "Read more",
     "emptyCalender" : "Available Dates",
@@ -39,5 +41,9 @@
     "cancel": "Cancel",
     "recommend": "Recommend",
     "viewPhotos": "View photos",
-    "imageRoom": "View photos"
+    "imageRoom": "View photos",
+    "updateRoomName": "[Your room name]",
+    "notFoundContent": "Haven't content, Let's update your room information!",
+    "notFoundResource": "Not found resource",
+    "goBackHome": "Go back Home"
 }
