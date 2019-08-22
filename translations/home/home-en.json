@@ -27,8 +27,8 @@
         "search": "Search",
         "guestUpper": "Guest(s)",
         "guest": "guest(s)",
-        "room": "room",
-        "roomUpper": "Room"
+        "room": "room(s)",
+        "roomUpper": "Room(s)"
     },
     "topDestinations" : "Top Destinations",
     "becomeAHost" : "Become a host",
