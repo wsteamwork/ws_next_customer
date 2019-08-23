@@ -124,7 +124,10 @@ export const getReviews = async (
   };
 
   try {
-    const res: AxiosRes<RoomReviewInfoRes> = await axios.get(`reviews/${id}`, headers);
+    const res: AxiosRes<RoomReviewInfoRes> = await axios.get(
+      `reviews/${id}?token=${token}`,
+      headers
+    );
     dispath({ type: 'SET_DATA_REVIEW', payload: res.data.data });
     dispath({ type: 'SET_ERROR_REVIEW', payload: null });
     return res.data.data;
