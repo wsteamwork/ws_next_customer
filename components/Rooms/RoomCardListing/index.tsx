@@ -18,6 +18,8 @@ import { windowExist } from '@/store/Redux';
 import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 import SvgCustom from '@/components/Custom/SvgCustom';
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.jsx';
+import { cleanAccents } from '@/utils/mixins';
+import Cookies from 'universal-cookie';
 
 interface Iprops {
   classes?: any;
@@ -28,6 +30,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const { room } = props;
   const { t }: UseTranslationResponse = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
+  const cookies = new Cookies();
 
   const settings: Settings = {
     speed: 300,
@@ -85,7 +88,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     </Hidden>
 
                     <span className="address">
-                      {room.district.data.name}, {room.city.data.name}
+                      {cookies.get('initLanguage') == 'vi' ? room.district.data.name : cleanAccents(room.district.data.name)}, {cookies.get('initLanguage') == 'vi' ? room.city.data.name : cleanAccents(room.city.data.name)}
                     </span>
                   </Grid>
                   <Grid className="collectionAmenities">
@@ -167,7 +170,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
                     <Grid className="discountPriceBadge">
-                      <Grid className="discountBox">Giảm giá</Grid>
+                      <Grid className="discountBox">{t('rooms:discount')}</Grid>
                     </Grid>
                   ) : (
                       ''

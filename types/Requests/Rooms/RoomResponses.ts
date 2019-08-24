@@ -81,7 +81,7 @@ export interface RoomDetails {
 
 export type RoomScheduleRes = {
   blocks: string[];
-}
+};
 
 export interface NumberRoomCity {
   city_id: number;
@@ -92,28 +92,28 @@ export interface NumberRoomCity {
 }
 
 export interface Collections {
-  id: number,
-  image:string,
-  status: number,
-  hot: number,
-  new: number,
-  details:TransformerInclude<CollectionsDetail[]>,
-  rooms:TransformerInclude<RoomIndexRes[]>
+  id: number;
+  image: string;
+  status: number;
+  hot: number;
+  new: number;
+  details: TransformerInclude<CollectionsDetail[]>;
+  rooms: TransformerInclude<RoomIndexRes[]>;
 }
 
 export interface CollectionsDetail {
-  id:number,
-  collection_id:number,
-  name:string,
-  description:string,
-  lang:string
+  id: number;
+  collection_id: number;
+  name: string;
+  description: string;
+  lang: string;
 }
 
 export interface TypeApartment {
-  id: number,
-  value: string,
-  status: number,
-  image:string
+  id: number;
+  value: string;
+  status: number;
+  image: string;
 }
 
 export interface Merchant {
