@@ -101,7 +101,7 @@ const RoomAmenities: FC<IProps> = (props) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
-
+  // console.log(room.comforts.data);
   const getRenderedItems = () => {
     if (isOpen) {
       return room.comforts.data;

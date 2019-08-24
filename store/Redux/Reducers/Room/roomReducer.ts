@@ -10,7 +10,7 @@ import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { updateObject } from '@/store/Context/utility';
 import { ReducresActions } from '..';
 import { Reducer, Dispatch } from 'redux';
-
+// import Cookies from 'universal-cookie';
 export type RoomReducerState = {
   readonly room: RoomIndexRes | null;
   readonly roomRecommend: RoomIndexRes[];
@@ -100,7 +100,6 @@ export const getDataRoom = async (
   router: NextRouter
 ): Promise<Omit<RoomReducerState, 'error'>> => {
   const { id } = router.query;
-
   try {
     const res = await Promise.all([
       getRoom(id),

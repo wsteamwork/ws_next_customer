@@ -1,10 +1,12 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { Typography, Theme, makeStyles } from '@material-ui/core';
 import classNames from 'classnames';
 import { ICardIntro } from '@/types/Interfaces/Components/Card';
-import GridContainer from '../Layout/Grid/Container';
+import { useTranslation } from 'react-i18next'
+import { cleanAccents } from '@/utils/mixins'
+import Cookies from 'universal-cookie';
 
 interface IProps extends ICardIntro {
   classes?: any;
@@ -15,7 +17,7 @@ interface IProps extends ICardIntro {
   subTitleContent?: string;
   showSubTitle?: boolean;
   showContent?: boolean;
-  onClickCard?: ()=>void;
+  onClickCard?: () => void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -141,8 +143,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CardIntro: FunctionComponent<IProps> = (props) => {
   const classes = useStyles(props);
-  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice, showSubTitle, recommendedPrice, subTitle, showContent, titleContent, subTitleContent,onClickCard } = props;
-
+  const cookies = new Cookies();
+  const { customClasses, imgHeight, imgAlt, imgSrc, title, showPrice, showSubTitle, recommendedPrice, subTitle, showContent, titleContent, subTitleContent, onClickCard } = props;
+  const { t } = useTranslation();
   const imgStyles = useMemo<CSSProperties>(
     () => ({
       maxHeight: imgHeight,
@@ -152,7 +155,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
   );
 
   return (
-    <div onClick={()=>onClickCard()}>
+    <div onClick={() => onClickCard()}>
       <div
         className={
           showPrice
@@ -167,18 +170,18 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
         />
         <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
-            {title}
+            {cookies.get('initLanguage') == 'vi' ? title : cleanAccents(title)}
           </Typography>
           {showSubTitle ? (
             <Typography variant="subtitle2" className={classNames(classes.subTitle, customClasses.subTitle)}>
-              {subTitle}
+              {cookies.get('initLanguage') == 'vi' ? subTitle : cleanAccents(subTitle)}
             </Typography>
           ) : ''}
         </div>
         {showPrice ? (
           <div className={classes.boxPrice}>
             <Typography variant="subtitle2" className={classes.price}>
-              Chỉ từ <br /> {recommendedPrice}/đêm
+              {t('home:fromPrice')} <br /> {recommendedPrice}/{t('home:night')}
             </Typography>
           </div>
         ) : (
@@ -188,10 +191,10 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
       {showContent ? (
         <div>
           <Typography variant='h6' className={classes.titleContent}>
-            {titleContent}
+            {cookies.get('initLanguage') == 'vi' ? titleContent : cleanAccents(titleContent)}
           </Typography>
           <Typography variant='body2'>
-            {subTitleContent}
+            {cookies.get('initLanguage') == 'vi' ? subTitleContent : cleanAccents(subTitleContent)}
           </Typography>
         </div>
       ) : ''}

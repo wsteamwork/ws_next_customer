@@ -14,22 +14,22 @@ import Footer from '@/components/Layout/FooterComponent';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-
+// import Cookies from 'universal-cookie';
 const PreviewRoom: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
-  const {router} = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
   return (
     <Fragment>
-      <NavHeader/>
+      <NavHeader />
 
       <RoomDetailsContext.Provider value={{ state, dispatch }}>
         <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
 
           <Hidden mdDown implementation="css">
             <div className="roomPage__disabledBoxSearch">
-              <BoxSearch isPreview={isPreviewPage}/>
+              <BoxSearch isPreview={isPreviewPage} />
             </div>
           </Hidden>
 
@@ -37,11 +37,11 @@ const PreviewRoom: NextPage = () => {
 
           <Grid container>
             <Grid item xs={12} lg={8} xl={9}>
-              <BoxRoomDetail/>
+              <BoxRoomDetail />
             </Grid>
 
             <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__disabledBoxBooking roomPage__boxBooking">
-              <BoxBooking/>
+              <BoxBooking />
             </Grid>
 
             <Grid item xs={12}>
@@ -54,7 +54,7 @@ const PreviewRoom: NextPage = () => {
         </GridContainer>
       </RoomDetailsContext.Provider>
 
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };

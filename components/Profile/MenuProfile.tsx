@@ -51,7 +51,7 @@ const MenuProfile: FC = (props) => {
               icon={<PersonOutlineRounded />}></Tab>
 
             <Tab
-              label={t('profile:listRooms')}
+              label={t('profile:myBooking')}
               className={'sideNavItemText'}
               icon={<NotificationsNoneRounded />}></Tab>
           </Tabs>
@@ -74,7 +74,7 @@ const MenuProfile: FC = (props) => {
               icon={<PersonOutlined />}
             />
             <BottomNavigationAction
-              label={t('profile:listRooms')}
+              label={t('profile:myBooking')}
               value={1}
               icon={<BookmarksOutlined />}
             />

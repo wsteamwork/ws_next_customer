@@ -9,7 +9,8 @@ import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { formatPrice } from '@/utils/mixins';
+import { formatPrice, cleanAccents } from '@/utils/mixins';
+import Cookies from 'universal-cookie';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -33,6 +34,8 @@ const RoomCard: FC<Iprops> = (props) => {
   const { room, isHomepage, showIcon, showBedRoom, showAddress, isFormatPrice } = props;
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
+  const cookies = new Cookies();
+
   return (
     <Fragment>
       <Grid className="roomCard">
@@ -78,8 +81,8 @@ const RoomCard: FC<Iprops> = (props) => {
                 </Typography>
                 {!showAddress && (
                   <Typography className="roomCard__address" variant="h1">
-                    <span>{room.district.data.name}</span>
-                    <span>&#44; {room.city.data.name}</span>
+                    <span>{cookies.get('initLanguage') == 'vi' ? room.district.data.name : cleanAccents(room.district.data.name)}</span>
+                    <span>&#44;{cookies.get('initLanguage') == 'vi' ? room.city.data.name : cleanAccents(room.city.data.name)}</span>
                   </Typography>
                 )}
 
