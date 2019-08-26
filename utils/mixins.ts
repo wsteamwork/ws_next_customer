@@ -95,3 +95,9 @@ export const getCookieFromReq = (req: IncomingMessage, cookie: string) => {
 
   return cookies.split('=')[1];
 };
+
+export const getFirstLetterOfName = (name: string) => {
+  let splitName =  name.split(' ');
+  let itemLast = splitName.slice(-1).pop();
+  return itemLast!.substring(0,1);
+}

@@ -24,7 +24,7 @@ const MainProfile: FC = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={12} md={8} lg={8} xl={8} className={'boxPadding'}>
-              <Paper elevation={0} className={'detailPaper'}>
+              <Paper elevation={0}>
                 <UserDetail />
               </Paper>
             </Grid>
