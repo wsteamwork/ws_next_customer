@@ -28,16 +28,20 @@ const PriceDetail: FC = () => {
             <Grid container>
               <Grid item xs={6} className="priceDetail__priceDay flex_center">
                 <p>
-                  {numeral(room.price_day).format('0,0')} VND/ {t('room:boxBooking:day')}
+                  {numeral(
+                    room.is_discount === 1 ? room.price_day_discount : room.price_day
+                  ).format('0,0')}{' '}
+                  VND/ {t('room:boxBooking:day')}
                 </p>
               </Grid>
               {room.price_hour !== 0 && (
                 <Grid item xs={6} className="priceDetail__priceHour flex_center">
-                  {room.price_hour !== 0 && (
-                    <p>
-                      {numeral(room.price_hour).format('0,0')} VND/ 4 {t('room:boxBooking:hours')}
-                    </p>
-                  )}
+                  <p>
+                    {numeral(
+                      room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                    ).format('0,0')}{' '}
+                    VND/ 4 {t('room:boxBooking:hours')}
+                  </p>
                 </Grid>
               )}
             </Grid>
