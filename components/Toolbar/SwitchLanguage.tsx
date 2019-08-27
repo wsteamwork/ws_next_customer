@@ -97,7 +97,7 @@ const SwitchLanguage: FunctionComponent<IProps> = (props) => {
     setCookieLanguage('initLanguage', 'vi', { maxAge: 2147483647, path: '/' });
     setAnchorEl(null);
     // reload browser
-    // process.browser && location.reload();
+    process.browser && location.reload();
   };
 
   const handleChangeEN = () => {
@@ -105,7 +105,7 @@ const SwitchLanguage: FunctionComponent<IProps> = (props) => {
     setCookieLanguage('initLanguage', 'en', { maxAge: 2147483647, path: '/' });
     setAnchorEl(null);
     //reload browser
-    // process.browser && location.reload();
+    process.browser && location.reload();
   };
 
   return (
