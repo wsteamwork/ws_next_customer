@@ -23,8 +23,7 @@ import Footer from '@/components/Layout/FooterComponent';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-// import SearchMobile from '@/components/Rooms/SearchMobile';
-// import Cookies from 'universal-cookie'
+import { getCookieFromReq } from '@/utils/mixins';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -32,6 +31,7 @@ const Room: NextPage = () => {
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
   const [] = useVisitedRoom();
+
   useEffect(() => {
     if (room.status === 0 || !!error) router.push('/not-found-resource');
   }, [error, room.status]);
@@ -44,11 +44,12 @@ const Room: NextPage = () => {
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`${room.room_type_txt} ${
             room.room_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'
-            } ngay tại ${room.district.data.name}, ${
+          } ngay tại ${room.district.data.name}, ${
             room.city.data.name
-            }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
+          }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`} />
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+        />
       )}
 
       <NavHeader />
@@ -91,8 +92,10 @@ const Room: NextPage = () => {
   );
 };
 
-Room.getInitialProps = async ({ store, router }: NextContextPage) => {
-  const data = await getDataRoom(store.dispatch, router);
+Room.getInitialProps = async ({ store, query, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+
+  const data = await getDataRoom(store.dispatch, query, initLanguage);
   return {};
 };
 

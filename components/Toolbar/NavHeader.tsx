@@ -1,6 +1,6 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, MouseEvent, useState, useRef, useContext } from 'react';
+import React, { Fragment, FunctionComponent, useState, useRef, useContext } from 'react';
 import { compose } from 'recompose';
 import {
   MenuItem,
@@ -20,7 +20,6 @@ import {
   ClickAwayListener,
   Theme
 } from '@material-ui/core';
-import to from '@/utils/to';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
 import { withCookies } from 'react-cookie';
@@ -36,7 +35,6 @@ import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import Link from 'next/link';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 
@@ -163,7 +161,6 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
   const { router } = useContext(GlobalContext);
-
 
   const Hotline = (contact: string) => {
     window.location.href = `${contact}`;
@@ -298,7 +295,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                         <Paper elevation={1}>
                           <ClickAwayListener onClickAway={() => setMenuStatus(false)}>
                             <MenuList>
-                              <MenuItem onClick={toProfile} component='li'>
+                              <MenuItem onClick={toProfile} component="li">
                                 <ListItemIcon>
                                   <AccountCircleOutlined />
                                 </ListItemIcon>
@@ -318,38 +315,37 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                       </Grow>
                     )}
                   </Popper>
-
                 </Fragment>
               ) : (
-                  <Fragment>
-                    <Button
-                      name="sign-in"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={loginButtonClick}
-                      size="large"
+                <Fragment>
+                  <Button
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                    >
-                      {t('home:signIn')}
-                    </Button>
+                  >
+                    {t('home:signIn')}
+                  </Button>
 
-                    {/* <Link href="/auth/signup"> */}
-                    <Button
-                      href="/auth/signup"
-                      name="sign-up"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={signUpButtonClick}
-                      size="large"
+                  {/* <Link href="/auth/signup"> */}
+                  <Button
+                    href="/auth/signup"
+                    name="sign-up"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={signUpButtonClick}
+                    size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                    >
-                      {t('home:signUp')}
-                    </Button>
-                    {/* </Link> */}
+                  >
+                    {t('home:signUp')}
+                  </Button>
+                  {/* </Link> */}
 
-                    <SwitchLanguage />
-                  </Fragment>
-                )}
+                  <SwitchLanguage />
+                </Fragment>
+              )}
             </Hidden>
             <Hidden mdUp>
               <Logo />

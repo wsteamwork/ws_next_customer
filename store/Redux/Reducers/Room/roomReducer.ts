@@ -10,6 +10,7 @@ import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { updateObject } from '@/store/Context/utility';
 import { ReducresActions } from '..';
 import { Reducer, Dispatch } from 'redux';
+import { ParsedUrlQuery } from 'querystring';
 // import Cookies from 'universal-cookie';
 export type RoomReducerState = {
   readonly room: RoomIndexRes | null;
@@ -57,24 +58,31 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
   }
 };
 
-export const getRoom = async (idRoom: any): Promise<RoomIndexRes> => {
+export const getRoom = async (idRoom: any, initLanguage: string = 'vi'): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
-    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user`
+    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user`,
+    { headers: { 'Accept-Language': initLanguage } }
   );
 
   return res.data.data;
 };
 
-const getRoomRecommend = async (idRoom: any): Promise<RoomIndexRes[]> => {
+const getRoomRecommend = async (
+  idRoom: any,
+  initLanguage: string = 'vi'
+): Promise<RoomIndexRes[]> => {
   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
-    `rooms/room_recommend/${idRoom}?include=media,details,city,district`
+    `rooms/room_recommend/${idRoom}?include=media,details,city,district`,
+    { headers: { 'Accept-Language': initLanguage } }
   );
 
   return res.data.data;
 };
 
-const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
-  const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`);
+const getRoomSchedule = async (idRoom: any, initLanguage: string = 'vi'): Promise<string[]> => {
+  const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`, {
+    headers: { 'Accept-Language': initLanguage }
+  });
   return res.data.data.blocks;
 };
 
@@ -84,12 +92,14 @@ export const getPriceByDay = async (
   date_end: string = moment()
     .add(6, 'month')
     .endOf('month')
-    .format(DEFAULT_DATE_FORMAT)
+    .format(DEFAULT_DATE_FORMAT),
+  initLanguage: string = 'vi'
 ): Promise<PriceByDayRes[]> => {
   const query: BodyRequestPriceByDayRes = { date_start, date_end };
 
   const res: AxiosRes<PriceByDayRes[]> = await axios.get(
-    `rooms/calendar-props/${idRoom}?${qs.stringify(query)}`
+    `rooms/calendar-props/${idRoom}?${qs.stringify(query)}`,
+    { headers: { 'Accept-Language': initLanguage } }
   );
 
   return res.data.data;
@@ -97,15 +107,16 @@ export const getPriceByDay = async (
 
 export const getDataRoom = async (
   dispatch: Dispatch<ReducresActions>,
-  router: NextRouter
+  query: ParsedUrlQuery,
+  initLanguage: string = 'vi'
 ): Promise<Omit<RoomReducerState, 'error'>> => {
-  const { id } = router.query;
+  const { id } = query;
   try {
     const res = await Promise.all([
-      getRoom(id),
-      getRoomRecommend(id),
-      getRoomSchedule(id),
-      getPriceByDay(id)
+      getRoom(id, initLanguage),
+      getRoomRecommend(id, initLanguage),
+      getRoomSchedule(id, initLanguage),
+      getPriceByDay(id, undefined, undefined, initLanguage)
     ]);
 
     const [room, roomRecommend, schedule, priceByDay] = res;

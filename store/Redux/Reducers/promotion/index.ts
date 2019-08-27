@@ -34,18 +34,24 @@ export const promotionReducer: Reducer<PomotionState, PomotionActions> = (
 };
 
 export const getDataPromotions = async (
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<PromotionRes[]> => {
-  const res: AxiosRes<PromotionRes[]> = await axios.get('promotions?include=coupons');
+  const res: AxiosRes<PromotionRes[]> = await axios.get('promotions?include=coupons', {
+    headers: { 'Accept-Language': initLanguage }
+  });
   dispatch({ type: 'SET_PROMOTIONS', payload: res.data.data });
   return res.data.data;
 };
 
 export const getPromotionsById = async (
   dispatch: Dispatch<ReducresActions>,
-  id: any
+  id: any,
+  initLanguage: string = 'vi'
 ): Promise<PromotionRes> => {
-  const res: AxiosRes<PromotionRes> = await axios.get(`promotions/${id}?include=coupons`);
+  const res: AxiosRes<PromotionRes> = await axios.get(`promotions/${id}?include=coupons`, {
+    headers: { 'Accept-Language': initLanguage }
+  });
   dispatch({ type: 'SET_PROMOTION', payload: res.data.data });
   return res.data.data;
 };

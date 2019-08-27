@@ -16,6 +16,7 @@ import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
 import { useTranslation } from 'react-i18next';
+import { getCookieFromReq } from '@/utils/mixins';
 // import SeaView from '@/components/Home/CollectionRooms/SeaView';
 // import CityView from '@/components/Home/CollectionRooms/CityView';
 
@@ -62,9 +63,11 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getInitialProps = async ({ store }: NextContextPage) => {
+Home.getInitialProps = async ({ store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  
   if (store.getState().roomHomepage.roomsHot.length === 0) {
-    const res = await getRoomsHomepage(store.dispatch);
+    const res = await getRoomsHomepage(store.dispatch, initLanguage);
   }
 
   return {};

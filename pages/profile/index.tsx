@@ -50,8 +50,9 @@ const Profile: NextPage = () => {
 };
 
 Profile.getInitialProps = async ({ req, store }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
   const token = getCookieFromReq(req, '_token');
-  const res = await getProfile(store.dispatch, token);
+  const res = await getProfile(store.dispatch, initLanguage, token);
 
   return {};
 };

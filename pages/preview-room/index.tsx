@@ -1,7 +1,11 @@
 import React, { Fragment, useReducer, useContext } from 'react';
 import { NextPage } from 'next';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import { RoomDetailsContext, RoomDetailsReducer, RoomDetailsStateInit } from '@/store/Context/Room/RoomDetailContext';
+import {
+  RoomDetailsContext,
+  RoomDetailsReducer,
+  RoomDetailsStateInit
+} from '@/store/Context/Room/RoomDetailContext';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Hidden, Grid } from '@material-ui/core';
 import BoxSearch from '@/components/Room/BoxSearch';
@@ -14,6 +18,7 @@ import Footer from '@/components/Layout/FooterComponent';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { getCookieFromReq } from '@/utils/mixins';
 // import Cookies from 'universal-cookie';
 const PreviewRoom: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -26,7 +31,6 @@ const PreviewRoom: NextPage = () => {
 
       <RoomDetailsContext.Provider value={{ state, dispatch }}>
         <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-
           <Hidden mdDown implementation="css">
             <div className="roomPage__disabledBoxSearch">
               <BoxSearch isPreview={isPreviewPage} />
@@ -40,7 +44,13 @@ const PreviewRoom: NextPage = () => {
               <BoxRoomDetail />
             </Grid>
 
-            <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__disabledBoxBooking roomPage__boxBooking">
+            <Grid
+              item
+              sm={12}
+              md={11}
+              lg={4}
+              xl={3}
+              className="roomPage__disabledBoxBooking roomPage__boxBooking">
               <BoxBooking />
             </Grid>
 
@@ -59,12 +69,10 @@ const PreviewRoom: NextPage = () => {
   );
 };
 //
-PreviewRoom.getInitialProps = async ({ store, router }: NextContextPage) => {
-  try {
-    const data = await getDataRoom(store.dispatch, router);
-  } catch (error) {
+PreviewRoom.getInitialProps = async ({ store, query, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const data = await getDataRoom(store.dispatch, query, initLanguage);
 
-  }
   return {};
 };
 

@@ -9,6 +9,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import Footer from '@/components/Layout/FooterComponent';
 import MainProfile from '@/components/UserProfile/MainProfile';
 import NextHead from '@/components/NextHead';
+import { getCookieFromReq } from '@/utils/mixins';
 
 const UserPage: NextPage = (props) => {
   const { router } = useContext(GlobalContext);
@@ -50,9 +51,11 @@ const UserPage: NextPage = (props) => {
   );
 };
 
-UserPage.getInitialProps = async ({ query, store }: NextContextPage) => {
+UserPage.getInitialProps = async ({ query, store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+
   if (!store.getState().iProfile.profile) {
-    const res = await getDataViewProfile(query.id, store.dispatch);
+    const res = await getDataViewProfile(query.id, store.dispatch, initLanguage);
   }
 
   return {};

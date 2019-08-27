@@ -21,6 +21,7 @@ import BookingForm from '@/components/Book/BookingForm';
 import NextHead from '@/components/NextHead';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { getCookieFromReq } from '@/utils/mixins';
 
 const Book: NextPage = (props) => {
   const { width, router } = useContext(GlobalContext);
@@ -75,8 +76,9 @@ const Book: NextPage = (props) => {
   );
 };
 
-Book.getInitialProps = async ({ query, store }: NextContextPage) => {
-  const res = await getDataBook(query, store.dispatch);
+Book.getInitialProps = async ({ query, store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const res = await getDataBook(query, store.dispatch, initLanguage);
   return {};
 };
 

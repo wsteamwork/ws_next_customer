@@ -8,6 +8,7 @@ import NextHead from '@/components/NextHead';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
 import PromotionComponent from '@/components/PromotionComponent';
+import { getCookieFromReq } from '@/utils/mixins';
 
 const Promotion: NextPage = () => {
   const promotion = useSelector<ReducersList, PromotionRes>((state) => state.promotion.promotion);
@@ -37,8 +38,9 @@ const Promotion: NextPage = () => {
   );
 };
 
-Promotion.getInitialProps = async ({ query, store }: NextContextPage) => {
-  const res = await getPromotionsById(store.dispatch, query.id);
+Promotion.getInitialProps = async ({ query, store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const res = await getPromotionsById(store.dispatch, query.id, initLanguage);
   return {};
 };
 

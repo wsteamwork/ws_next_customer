@@ -6,7 +6,7 @@ export type AxiosRequestType = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 export const CUSTOMER_URL = process.env.API_URL + 'customer-api/';
 
 const cookies = new Cookies();
-// console.log(cookies.get('initLanguage'));
+
 const headers = {
   Accept: 'application/json',
   'Accept-Language': cookies.get('initLanguage') || 'vi',

@@ -45,7 +45,6 @@ class MyApp extends App<IProps> {
             for (let registration of registrations) {
               registration.unregister();
             }
-            console.log('unregistered')
           })
           .catch(function (err) {
             console.log('Service Worker registration failed: ', err);

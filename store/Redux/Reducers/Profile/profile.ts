@@ -83,11 +83,13 @@ export const iProfileReducer: Reducer<ProfileState, ProfileAction> = (
 
 export const getProfile = async (
   dispath: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi',
   token?: string
 ): Promise<ProfileInfoRes> => {
   const headers = token && {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': initLanguage
     }
   };
 
@@ -115,11 +117,13 @@ export const getUserBookingList = async (
 export const getReviews = async (
   dispath: Dispatch<ReducresActions>,
   id: any,
+  initLanguage: string = 'vi',
   token?: string
 ): Promise<RoomReviewInfoRes> => {
   const headers = token && {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': initLanguage
     }
   };
 
@@ -137,10 +141,15 @@ export const getReviews = async (
   }
 };
 
-export const getBookingById = async (id: any, token?: string): Promise<BookingIndexRes> => {
+export const getBookingById = async (
+  id: any,
+  initLanguage: string = 'vi',
+  token?: string
+): Promise<BookingIndexRes> => {
   const headers = token && {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': initLanguage
     }
   };
 
@@ -151,18 +160,24 @@ export const getBookingById = async (id: any, token?: string): Promise<BookingIn
   return res.data.data;
 };
 
-export const getTypeCancel = async (): Promise<CancelReasonList[]> => {
-  const res: AxiosResponse<CancelReasonList[]> = await axios.get(`bookings/cancel-reason-list`);
+export const getTypeCancel = async (initLanguage: string = 'vi'): Promise<CancelReasonList[]> => {
+  const res: AxiosResponse<CancelReasonList[]> = await axios.get(`bookings/cancel-reason-list`, {
+    headers: { 'Accept-Language': initLanguage }
+  });
   return res.data;
 };
 
 export const getPageBookingCancel = async (
   dispath: Dispatch<ReducresActions>,
   id: any,
+  initLanguage: string = 'vi',
   token?: string
 ): Promise<Pick<ProfileState, 'bookingById' | 'typeCancel'>> => {
   try {
-    const res = await Promise.all([getBookingById(id, token), getTypeCancel()]);
+    const res = await Promise.all([
+      getBookingById(id, initLanguage, token),
+      getTypeCancel(initLanguage)
+    ]);
     const [bookingById, typeCancel] = res;
 
     dispath({ type: 'SET_BOOKING_BY_ID', payload: bookingById });

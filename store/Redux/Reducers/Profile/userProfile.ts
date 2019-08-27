@@ -40,24 +40,37 @@ export const userProfileReducer: Reducer<UserProfileState, UserProfileActions> =
   }
 };
 
-export const getProfileById = async (idUser: any): Promise<ProfileViewInfoRes> => {
-  const res: AxiosRes<ProfileViewInfoRes> = await axios.get(`/profile/${idUser}`);
+export const getProfileById = async (
+  idUser: any,
+  initLanguage: string = 'vi'
+): Promise<ProfileViewInfoRes> => {
+  const res: AxiosRes<ProfileViewInfoRes> = await axios.get(`/profile/${idUser}`, {
+    headers: { 'Accept-Language': initLanguage }
+  });
   return res.data.data;
 };
 
-export const getRoomMerchantById = async (idUser: any): Promise<RoomIndexRes[]> => {
+export const getRoomMerchantById = async (
+  idUser: any,
+  initLanguage: string = 'vi'
+): Promise<RoomIndexRes[]> => {
   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
-    `rooms?merchant=${idUser}&include=reviews.user,details,media,city,district&limit=30`
+    `rooms?merchant=${idUser}&include=reviews.user,details,media,city,district&limit=30`,
+    { headers: { 'Accept-Language': initLanguage } }
   );
   return res.data.data;
 };
 
 export const getDataViewProfile = async (
   id: any,
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<Omit<UserProfileState, 'error'>> => {
   try {
-    const res = await Promise.all([getProfileById(id), getRoomMerchantById(id)]);
+    const res = await Promise.all([
+      getProfileById(id, initLanguage),
+      getRoomMerchantById(id, initLanguage)
+    ]);
     const [profile, userRooms] = res;
     dispatch({ type: 'SET_PROFILE_USER', payload: profile });
     dispatch({ type: 'SET_ROOMS_USER', payload: userRooms });
