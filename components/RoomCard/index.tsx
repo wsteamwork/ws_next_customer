@@ -81,8 +81,8 @@ const RoomCard: FC<Iprops> = (props) => {
                 </Typography>
                 {!showAddress && (
                   <Typography className="roomCard__address" variant="h1">
-                    <span>{cookies.get('initLanguage') == 'vi' ? room.district.data.name : cleanAccents(room.district.data.name)}</span>
-                    <span>&#44;{cookies.get('initLanguage') == 'vi' ? room.city.data.name : cleanAccents(room.city.data.name)}</span>
+                    <span>{cookies.get('initLanguage') == 'en' ? cleanAccents(room.district.data.name) : room.district.data.name}</span>
+                    <span>&#44;{cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}</span>
                   </Typography>
                 )}
 
