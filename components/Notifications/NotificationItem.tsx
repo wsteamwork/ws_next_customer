@@ -116,15 +116,19 @@ const NotificationItem: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
               <Grid item xs={7} sm={8} className={classes.boxItem}>
-                <Typography className={classes.notiUnread}>{notification.data.sender_name}</Typography>
+                <Typography className={classes.notiUnread}>
+                  {notification.data.sender_name}
+                </Typography>
                 <Typography>{formatCreated(notification.data.created)}</Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid className={classes.boxItem} item xs={6} sm={7} md={7} lg={5} xl={6}>
-            {notification.data.type !== 1 ? (
+            {notification.data.type !== 1 && notification.data.type !== 4 ? (
               <Fragment>
-                <Typography className={classes.notiUnread}>{notification.data.body ? notification.data.body : ''}</Typography>
+                <Typography className={classes.notiUnread}>
+                  {notification.data.body ? notification.data.body : ''}
+                </Typography>
                 <Typography>
                   (
                   {timeBook(
@@ -137,7 +141,9 @@ const NotificationItem: FC<IProps> = (props) => {
               </Fragment>
             ) : (
               <Fragment>
-                <Typography className={classes.notiUnread}>{notification.data.title ? notification.data.title : ''}</Typography>
+                <Typography className={classes.notiUnread}>
+                  {notification.data.title ? notification.data.title : ''}
+                </Typography>
                 <Typography className={classes.bodyContent}>
                   {notification.data.body ? notification.data.body : ''}
                 </Typography>
