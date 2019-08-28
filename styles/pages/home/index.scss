@@ -11,16 +11,9 @@
   width: 100%;
   height: 80vh;
   object-fit: cover;
-  @include xs {
-    height: 50vh;
-  }
 
-  @include sm {
-    height: 50vh;
-  }
-
-  @include md {
-    height: 50vh;
+  @include mdDown {
+    height: 60vh;
   }
   // &__image {
   //   width: 100%;

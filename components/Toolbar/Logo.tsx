@@ -9,6 +9,7 @@ import { Theme } from '@material-ui/core';
 
 interface IProps {
   classes?: any;
+  isFooter?: boolean;
 }
 
 const styles: any = (theme: Theme) =>
@@ -21,18 +22,19 @@ const styles: any = (theme: Theme) =>
       [theme!.breakpoints!.down!('sm')]: {
         height: 30
       }
+    },
+    footer: {
+      height: 45
     }
   });
 
 const Logo: FunctionComponent<IProps> = (props) => {
-  const { classes } = props;
+  const { classes, isFooter } = props;
 
   return (
     <div>
       <Link href="/">
-        <a>
-          <img src={logo} className={classes.img} alt="Westay.vn" />
-        </a>
+        <img src={logo} className={isFooter ? classes.footer : classes.img} alt="Westay.vn" />
       </Link>
     </div>
   );

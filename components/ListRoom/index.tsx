@@ -45,18 +45,19 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     ...propsSlick
   } = props;
   const classes = useStyles({});
-  
+
   const setting: Settings = {
     dots: false,
     infinite: true,
     slidesToShow: 5,
     speed: 800,
-    lazyLoad: 'ondemand',
+    lazyLoad: 'progressive',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 1000000,
     centerPadding: '20%',
     swipeToSlide: true,
+    // useCSS: false,
     responsive: [
       {
         breakpoint: 1920,
@@ -74,9 +75,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         breakpoint: 960,
         settings: {
           slidesToShow: 1.9,
-          // touchThreshold: 5000,
           arrows: false,
-          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           centerPadding: '24%',
@@ -86,11 +85,9 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
       {
         breakpoint: 600,
         settings: {
-          // touchThreshold: 1000,
           slidesToShow: 1.2,
           centerPadding: '12%',
           arrows: false,
-          lazyLoad: 'progressive',
           centerMode: true,
           initialSlide: 0,
           slidesToScroll: 1

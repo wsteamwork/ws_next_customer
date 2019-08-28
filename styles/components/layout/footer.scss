@@ -1,18 +1,21 @@
-$background_footer: #333;
+$background_footer: #f6f6f6;
 
 .footer {
   width: 100%;
-  background-color: #444953 !important;
+  background-color: $background_footer;
   margin-top: 56px;
+  .itemMobile {
+    padding: 1.5rem 0px 1.5rem 0px;
+  }
   .firstItem {
     padding: 40px 0px 20px 0px;
     width: 100%;
-    background-color: #444953;
+    background-color: $background_footer;
   }
 
   .paper {
-    padding-top: 30px;
-    color: #999;
+    padding-top: 20px;
+    // color: #999;
     background-color: $background_footer;
     @include sm {
       font-size: 14px;
@@ -24,7 +27,8 @@ $background_footer: #333;
   }
 
   .linksList {
-    background-color: #444953;
+    background-color: $background_footer;
+    padding: 0 5px;
   }
 
   .textCenter {
@@ -33,7 +37,7 @@ $background_footer: #333;
 
   .textLeft {
     text-align: left;
-    padding-bottom: 15px;
+    padding-bottom: 20px;
     @include xs {
       text-align: center;
       font-size: 14px;
@@ -48,7 +52,7 @@ $background_footer: #333;
     @include sm {
       font-size: 14px;
     }
-    color: white;
+    color: #484848;
     font-size: 16px;
     margin-bottom: 0.5rem;
   }
@@ -62,7 +66,7 @@ $background_footer: #333;
     margin-top: 0px;
     padding-left: 0px;
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: #484848;
     line-height: 1.7em;
   }
 
@@ -81,7 +85,7 @@ $background_footer: #333;
 
   .textTerms {
     display: list-item;
-    color: rgba(255, 255, 255, 0.8) !important;
+    // color: rgba(255, 255, 255, 0.8) !important;
     font-size: 15px;
     list-style: none;
     margin-top: 0px;
@@ -98,7 +102,7 @@ $background_footer: #333;
     margin-top: 7px;
     padding-left: 0;
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.8) !important;
+    // color: rgba(255, 255, 255, 0.8) !important;
     line-height: 1.7em;
   }
 
@@ -115,6 +119,7 @@ $background_footer: #333;
     background-color: $background_footer;
     margin: 0;
     width: 100%;
+    border-top: 1px solid #ebebeb;
   }
 }
 
