@@ -52,7 +52,9 @@ const BookingCancel: NextPage = () => {
 
 BookingCancel.getInitialProps = async ({ query, req, store }: NextContextPage) => {
   const token = getCookieFromReq(req, '_token');
-  const res = await getPageBookingCancel(store.dispatch, query.id, token);
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+
+  const res = await getPageBookingCancel(store.dispatch, query.id, initLanguage, token);
 
   return {};
 };

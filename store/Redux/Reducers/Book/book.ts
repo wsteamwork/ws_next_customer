@@ -54,18 +54,25 @@ export const bookReducer: Reducer<BookState, BookActions> = (
   }
 };
 
-export const getRoomDetails = async (id: any): Promise<RoomIndexRes> => {
-  const res: AxiosRes<RoomIndexRes> = await axios.get(`rooms/${id}?include=details,district,city`);
+export const getRoomDetails = async (
+  id: any,
+  initLanguage: string = 'vi'
+): Promise<RoomIndexRes> => {
+  const res: AxiosRes<RoomIndexRes> = await axios.get(`rooms/${id}?include=details,district,city`, {
+    headers: { 'Accept-Language': initLanguage }
+  });
 
   return res.data.data;
 };
 
 export const getDataCalculate = async (
-  query: BookingPriceCalculatorReq
+  query: BookingPriceCalculatorReq,
+  initLanguage: string = 'vi'
 ): Promise<BookingPriceCalculatorRes> => {
   const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
     'bookings/calculate-price-with-specific-day-price',
-    query
+    query,
+    { headers: { 'Accept-Language': initLanguage } }
   );
 
   return res.data.data;
@@ -73,7 +80,8 @@ export const getDataCalculate = async (
 
 export const getDataBook = async (
   query: any,
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<Omit<BookState, 'error' | 'dataInvoice'>> => {
   const body = {
     booking_type: parseInt(query.booking_type, 10),
@@ -85,7 +93,10 @@ export const getDataBook = async (
   } as BookingPriceCalculatorReq;
 
   try {
-    const res = await Promise.all([getRoomDetails(query.room_id), getDataCalculate(body)]);
+    const res = await Promise.all([
+      getRoomDetails(query.room_id, initLanguage),
+      getDataCalculate(body, initLanguage)
+    ]);
 
     const [room, dataCalculate] = res;
 
@@ -109,7 +120,8 @@ export const createBooking = async (data: BookingCreateReq): Promise<BookingInde
 
 export const getInvoice = async (
   query: any,
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<PaymentBankListRes> => {
   const { uuid } = query;
 
@@ -121,7 +133,10 @@ export const getInvoice = async (
   const url = `bank-list/${uuid}?${queryString}`;
 
   try {
-    const res: AxiosRes<PaymentBankListRes> = await axios.get(url);
+    const res: AxiosRes<PaymentBankListRes> = await axios.get(url, {
+      headers: { 'Accept-Language': initLanguage }
+    });
+    
     dispatch({ type: 'setInvoice', payload: res.data.data });
     dispatch({ type: 'setError', payload: false });
     return res.data.data;

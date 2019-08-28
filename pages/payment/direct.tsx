@@ -13,6 +13,7 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
 import DirectPayment from '@/components/Payment/DirectPayment';
 import { Grid } from '@material-ui/core';
+import { getCookieFromReq } from '@/utils/mixins';
 
 const Direct: NextPage = () => {
   const error = useSelector<ReducersList, boolean>((state) => state.book.error);
@@ -33,8 +34,7 @@ const Direct: NextPage = () => {
           title={`Thanh toán booking của phòng ${room.details.data[0].name}`}
           description={`Thanh toán booking của phòng ${room.details.data[0].name}`}
           url={`/payment/invoice/${lists.uuid}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}>
-        </NextHead>
+          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
       )}
 
       {useMemo(
@@ -53,8 +53,10 @@ const Direct: NextPage = () => {
   );
 };
 
-Direct.getInitialProps = async ({ query, store }: NextContextPage) => {
-  const res = await getInvoice(query, store.dispatch);
+Direct.getInitialProps = async ({ query, store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+
+  const res = await getInvoice(query, store.dispatch, initLanguage);
   return {};
 };
 

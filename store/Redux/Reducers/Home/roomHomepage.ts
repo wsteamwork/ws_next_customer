@@ -62,7 +62,7 @@ export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
   }
 };
 
-export const getRoomHot = async (): Promise<RoomIndexRes[]> => {
+export const getRoomHot = async (initLanguage: string = 'vi'): Promise<RoomIndexRes[]> => {
   const query: Partial<RoomIndexGetParams> = {
     include: 'details,media,city,district,merchant',
     hot: 1,
@@ -70,56 +70,69 @@ export const getRoomHot = async (): Promise<RoomIndexRes[]> => {
   };
   const url = `rooms?${qs.stringify(query)}`;
 
-  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url);
+  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
 
   return res.data.data;
 };
 
-export const getRoomCity = async (): Promise<NumberRoomCity[]> => {
+export const getRoomCity = async (initLanguage: string = 'vi'): Promise<NumberRoomCity[]> => {
   const query: Partial<RoomIndexGetParams> = {
     hot: 1
   };
   const res: AxiosRes<NumberRoomCity[]> = await axios.get(
-    `rooms/number-room-by-city?${qs.stringify(query)}`
+    `rooms/number-room-by-city?${qs.stringify(query)}`,
+    { headers: { 'Accept-Language': initLanguage } }
   );
   return res.data.data;
 };
 
-export const getRoomNew = async (): Promise<RoomIndexRes[]> => {
+export const getRoomNew = async (initLanguage: string = 'vi'): Promise<RoomIndexRes[]> => {
   const query: Partial<RoomIndexGetParams> = {
     include: 'details,media,city,district',
     limit: 10
   };
   const url = `get-new-room?${qs.stringify(query)}`;
 
-  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url);
+  const res: AxiosRes<RoomIndexRes[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
 
   return res.data.data;
 };
 
-export const getApartments = async (): Promise<TypeApartment[]> => {
+export const getApartments = async (initLanguage: string = 'vi'): Promise<TypeApartment[]> => {
   const url = `rooms/room-type-homepage`;
 
-  const res: AxiosRes<TypeApartment[]> = await axios.get(url);
+  const res: AxiosRes<TypeApartment[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
 
   return res.data.data;
 };
 
-export const getCollections = async (): Promise<Collections[]> => {
+export const getCollections = async (initLanguage: string = 'vi'): Promise<Collections[]> => {
   const url = `collections?include=details,rooms`;
 
-  const res: AxiosRes<Collections[]> = await axios.get(url);
+  const res: AxiosRes<Collections[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
 
   return res.data.data;
 };
 
 export const getCollectionById = async (
   id: any,
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<Collections> => {
   const url = `collections/${id}?include=details,rooms.media,rooms.details,rooms.city,rooms.district`;
 
-  const res: AxiosRes<Collections> = await axios.get(url);
+  const res: AxiosRes<Collections> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
+
   dispatch({ type: 'setCollectionById', collectionById: res.data.data });
 
   return res.data.data;
@@ -127,9 +140,15 @@ export const getCollectionById = async (
 
 // @ts-ignore
 export const getRoomsHomepage = async (
-  dispatch: Dispatch<ReducresActions>
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
 ): Promise<Omit<RoomHomepageState, 'roomsNew' | 'collectionById'>> => {
-  const res = await Promise.all([getRoomHot(), getRoomCity(), getApartments(), getCollections()]);
+  const res = await Promise.all([
+    getRoomHot(initLanguage),
+    getRoomCity(initLanguage),
+    getApartments(initLanguage),
+    getCollections(initLanguage)
+  ]);
   const [roomsHot, roomsCity, apartments, collections] = res;
 
   dispatch({ type: 'setRoomCity', rooms: roomsCity });

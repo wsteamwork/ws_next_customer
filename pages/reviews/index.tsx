@@ -50,8 +50,9 @@ const Reviews: NextPage = () => {
 };
 
 Reviews.getInitialProps = async ({ req, store, query }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
   const token = getCookieFromReq(req, '_token') || query.token.toString();
-  const res = await getReviews(store.dispatch, query.id, token);
+  const res = await getReviews(store.dispatch, query.id, initLanguage, token);
 
   return {};
 };

@@ -6,6 +6,7 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
 import PromotionsComponent from '@/components/PromotionsComponent';
 import { getDataPromotions } from '@/store/Redux/Reducers/promotion';
+import { getCookieFromReq } from '@/utils/mixins';
 
 const Promotions: NextPage = () => {
   return (
@@ -16,7 +17,7 @@ const Promotions: NextPage = () => {
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
         url="https://westay.vn/promotions"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
- 
+
       <NavHeader></NavHeader>
       <PromotionsComponent></PromotionsComponent>
       <Footer></Footer>
@@ -24,8 +25,9 @@ const Promotions: NextPage = () => {
   );
 };
 
-Promotions.getInitialProps = async ({ store }: NextContextPage) => {
-  const res = await getDataPromotions(store.dispatch);
+Promotions.getInitialProps = async ({ store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const res = await getDataPromotions(store.dispatch, initLanguage);
 
   return {};
 };

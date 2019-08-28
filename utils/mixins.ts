@@ -83,7 +83,7 @@ export const formatPrice = (price: number): string => {
 };
 
 export const getCookieFromReq = (req: IncomingMessage, cookie: string) => {
-  if (!req) {
+  if (!req || !req.headers || !req.headers.cookie) {
     return undefined;
   }
 

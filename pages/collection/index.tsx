@@ -18,6 +18,7 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { animateScroll as scroll } from 'react-scroll/modules';
+import { getCookieFromReq } from '@/utils/mixins';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxTitle: {
@@ -154,9 +155,11 @@ const Collection: NextPage = (props) => {
   );
 };
 
-Collection.getInitialProps = async ({ query, store }: NextContextPage) => {
+Collection.getInitialProps = async ({ query, store, req }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+
   if (!store.getState().roomHomepage.collectionById) {
-    const data = await getCollectionById(query.id, store.dispatch);
+    const data = await getCollectionById(query.id, store.dispatch, initLanguage);
   }
   return {};
 };
