@@ -1,7 +1,5 @@
 import React, { useState, FC, useMemo, memo, useCallback } from 'react';
 import { Grid, InputBase, Paper } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';

@@ -117,3 +117,8 @@ export const cleanAccents = (str: string): string => {
 
   return str;
 };
+export const getFirstLetterOfName = (name: string) => {
+  let splitName = name.split(' ');
+  let itemLast = splitName.slice(-1).pop();
+  return itemLast!.substring(0, 1);
+};

@@ -23,7 +23,15 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
     const persistConfig: PersistConfig = {
       key: 'root',
       storage,
-      blacklist: ['roomHomepage', 'roomPage', 'book', 'userProfile', 'iProfile', 'promotion']
+      blacklist: [
+        'roomHomepage',
+        'roomPage',
+        'book',
+        'userProfile',
+        'iProfile',
+        'promotion',
+        'notifications'
+      ]
     };
 
     const persistedReducer = persistReducer(persistConfig, rootReducer);

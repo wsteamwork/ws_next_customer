@@ -9,4 +9,4 @@ export default new Router()
   .add('promotion', '/promotion/:id')
   .add('collection', '/collection/:id')
   .add('/payment/invoice/:uuid', 'payment/invoice')
-  .add('/payment/direct/:uuid', 'payment/direct');
+  .add('/payment/direct/:uuid', 'payment/direct')

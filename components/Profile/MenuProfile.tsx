@@ -22,6 +22,7 @@ import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import EditProfile from './EditProfile';
 import BookingProfile from './BookingProfile';
 import { useTranslation } from 'react-i18next';
+import NotificationPanel from '../Notifications/NotificationPanel';
 
 const MenuProfile: FC = (props) => {
   const { t } = useTranslation();
@@ -46,6 +47,10 @@ const MenuProfile: FC = (props) => {
             textColor="primary"
             scrollButtons="off">
             <Tab
+              label={t('profile:notifications')}
+              className={'sideNavItemText'}
+              icon={<NotificationsNoneRounded />}></Tab>
+            <Tab
               label={t('profile:userProfile')}
               className="sideNavItemText"
               icon={<PersonOutlineRounded />}></Tab>
@@ -69,22 +74,27 @@ const MenuProfile: FC = (props) => {
             showLabels
             className={'NaviBottom'}>
             <BottomNavigationAction
-              label={t('profile:userProfile')}
+              label={t('profile:notifications')}
               value={0}
+              icon={<BookmarksOutlined />}
+            />
+            <BottomNavigationAction
+              label={t('profile:userProfile')}
+              value={1}
               icon={<PersonOutlined />}
             />
             <BottomNavigationAction
               label={t('profile:myBooking')}
-              value={1}
+              value={2}
               icon={<BookmarksOutlined />}
             />
           </BottomNavigation>
         </Hidden>
 
         <Grid item xs={12} md={9}>
-          {value === 0 && <EditProfile />}
-
-          {value === 1 && <BookingProfile />}
+          {value === 0 && <NotificationPanel />}
+          {value === 1 && <EditProfile />}
+          {value === 2 && <BookingProfile />}
         </Grid>
       </Grid>
     </GridContainer>

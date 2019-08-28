@@ -13,6 +13,11 @@ import { UserProfileState, UserProfileActions, userProfileReducer } from './Prof
 import { ProfileAction, ProfileState, iProfileReducer } from './Profile/profile';
 import { VisitedRoomActions, VisitedRoomState, visitedRoomReducer } from './Room/visitedRoom';
 import { PomotionState, PomotionActions, promotionReducer } from './promotion';
+import {
+  NotificationReducerAction,
+  NotificationReducerState,
+  notificationReducer
+} from './Notification/notification';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -24,6 +29,7 @@ export type ReducersType = {
   iProfile: Reducer<ProfileState, ProfileAction>;
   visitedRoom: Reducer<VisitedRoomState, VisitedRoomActions>;
   promotion: Reducer<PomotionState, PomotionActions>;
+  notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
 };
 
 export type ReducersList = {
@@ -36,6 +42,7 @@ export type ReducersList = {
   iProfile: ProfileState;
   visitedRoom: VisitedRoomState;
   promotion: PomotionState;
+  notifications: NotificationReducerState;
 };
 
 export type ReducresActions =
@@ -47,7 +54,8 @@ export type ReducresActions =
   | UserProfileActions
   | ProfileAction
   | VisitedRoomActions
-  | PomotionActions;
+  | PomotionActions
+  | NotificationReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -58,7 +66,8 @@ const reducers: ReducersType = {
   userProfile: userProfileReducer,
   iProfile: iProfileReducer,
   visitedRoom: visitedRoomReducer,
-  promotion: promotionReducer
+  promotion: promotionReducer,
+  notifications: notificationReducer
 };
 
 export interface NextContextPage extends NextPageContext {

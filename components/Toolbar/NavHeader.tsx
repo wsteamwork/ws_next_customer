@@ -1,6 +1,6 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, useState, useRef, useContext } from 'react';
+import React, { Fragment, FunctionComponent, useState, useRef, useContext, Dispatch, useEffect } from 'react';
 import { compose } from 'recompose';
 import {
   MenuItem,
@@ -18,7 +18,9 @@ import {
   ListItemIcon,
   Popover,
   ClickAwayListener,
-  Theme
+  Theme,
+  Badge,
+  Typography
 } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
@@ -31,13 +33,18 @@ import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import IconMenu from '@material-ui/icons/Menu';
+import NotificationsOutlined from '@material-ui/icons/NotificationsOutlined';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import GridContainer from '../Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { CountUnreadRes } from '@/types/Requests/Notification/CountUnread';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { NotificationReducerAction } from '@/store/Redux/Reducers/Notification/notification';
+import { setMarkAllRead } from '@/store/Redux/Reducers/Notification/notification';
 interface IProps {
   classes?: any;
   hiddenListCitySearch?: boolean;
@@ -64,7 +71,6 @@ const styles = (theme: Theme) =>
       justifyContent: 'center'
     },
     button: {
-      // height: theme!.palette!.button.nav,
       fontSize: '.875rem',
       letterSpacing: '.2px',
       borderRadius: 8,
@@ -88,13 +94,11 @@ const styles = (theme: Theme) =>
       borderRadius: 8,
       fontFamily: 'Montserrat Alternates, Quicksand, sans-serif',
       fontWeight: 600,
-      // boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
       marginRight: 16,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
       '&:hover': {
-        // color: Orange[500],
         backgroundColor: '#f9f9f9',
         boxShadow: 'none'
       }
@@ -141,13 +145,22 @@ const styles = (theme: Theme) =>
       margin: 8
     },
     rightIcon: {
-      // marginLeft: theme.spacing
       marginLeft: 8
     },
     textSpan: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
+    },
+    margin: {
+      color: 'white',
+      backgroundColor: 'red',
+    },
+    padding: {
+      padding: theme.spacing(0, 1),
+    },
+    MuiBadge: {
+      color: 'red'
     }
   });
 
@@ -157,11 +170,13 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-  const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
   const { router } = useContext(GlobalContext);
-
+  const count_unread = useSelector<ReducersList, CountUnreadRes>(
+    (state) => state.notifications.count_unread
+  );
+  const dispatch = useDispatch<Dispatch<NotificationReducerAction>>();
   const Hotline = (contact: string) => {
     window.location.href = `${contact}`;
   };
@@ -187,6 +202,13 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
     setOpen(false);
   };
 
+  const openNotification = () => {
+    setMarkAllRead().then(() => {
+      dispatch({ type: 'setMarkAllRead', payload: { count: 0 } });
+    });
+    router.push('/profile');
+  };
+
   // @ts-ignore
   return (
     <Fragment>
@@ -209,6 +231,20 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                 size="large">
                 {t('home:merchantChannel')}
               </ButtonGlobal>
+
+              {cookies.get('_token') &&
+                <Button
+                  onClick={openNotification}
+                  buttonRef={userRefButton}
+                  name="notification"
+                  color="inherit"
+                  className={classes.button}
+                  size="large">
+                  {count_unread ? (<Badge classes={{ badge: classes.margin }} max={99} badgeContent={count_unread.count}>
+                    <Typography className={classes.padding}><NotificationsOutlined /></Typography>
+                  </Badge>) : <NotificationsOutlined />}
+                </Button>
+              }
 
               <Button
                 onClick={() => setOpen(!open)}
@@ -317,35 +353,35 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                <Fragment>
-                  <Button
-                    name="sign-in"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={loginButtonClick}
-                    size="large"
+                  <Fragment>
+                    <Button
+                      name="sign-in"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={loginButtonClick}
+                      size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                  >
-                    {t('home:signIn')}
-                  </Button>
+                    >
+                      {t('home:signIn')}
+                    </Button>
 
-                  {/* <Link href="/auth/signup"> */}
-                  <Button
-                    href="/auth/signup"
-                    name="sign-up"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={signUpButtonClick}
-                    size="large"
+                    {/* <Link href="/auth/signup"> */}
+                    <Button
+                      href="/auth/signup"
+                      name="sign-up"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={signUpButtonClick}
+                      size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                  >
-                    {t('home:signUp')}
-                  </Button>
-                  {/* </Link> */}
+                    >
+                      {t('home:signUp')}
+                    </Button>
+                    {/* </Link> */}
 
-                  <SwitchLanguage />
-                </Fragment>
-              )}
+                    <SwitchLanguage />
+                  </Fragment>
+                )}
             </Hidden>
             <Hidden mdUp>
               <Logo />
