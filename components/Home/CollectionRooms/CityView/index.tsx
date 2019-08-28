@@ -40,7 +40,7 @@ const CityView: FC<IProps> = (props) => {
     infinite: true,
     slidesToShow: 3,
     speed: 800,
-    lazyLoad: 'ondemand',
+    lazyLoad: 'progressive',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,

@@ -9,7 +9,7 @@ import _ from 'lodash';
 import { makeStyles } from '@material-ui/styles';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
 
 interface Iprops<T> extends Partial<Settings> {
@@ -45,13 +45,13 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     ...propsSlick
   } = props;
   const classes = useStyles({});
-  
+
   const setting: Settings = {
     dots: false,
     infinite: true,
     slidesToShow: 5,
     speed: 800,
-    lazyLoad: 'ondemand',
+    lazyLoad: 'progressive',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 1000000,
@@ -126,11 +126,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
               {renderRooms}
             </Slider>
           ) : (
-            <Fragment>{renderRooms}</Fragment>
-          )
+              <Fragment>{renderRooms}</Fragment>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Fragment>
   );

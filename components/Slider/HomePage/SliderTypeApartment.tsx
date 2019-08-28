@@ -43,7 +43,7 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
     infinite: true,
     slidesToShow: 1.5,
     speed: 800,
-    lazyLoad: 'ondemand',
+    lazyLoad: 'progressive',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,

@@ -41,7 +41,7 @@ const BlogContainer: FC<IProps> = (props) => {
     infinite: true,
     slidesToShow: 5,
     speed: 800,
-    lazyLoad: 'ondemand',
+    lazyLoad: 'progressive',
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     touchThreshold: 10,
