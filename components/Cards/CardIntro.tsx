@@ -170,11 +170,11 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
         />
         <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
-            {cookies.get('initLanguage') == 'vi' ? title : cleanAccents(title)}
+            {cookies.get('initLanguage') == 'en' ? cleanAccents(title) : title}
           </Typography>
           {showSubTitle ? (
             <Typography variant="subtitle2" className={classNames(classes.subTitle, customClasses.subTitle)}>
-              {cookies.get('initLanguage') == 'vi' ? subTitle : cleanAccents(subTitle)}
+              {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle}
             </Typography>
           ) : ''}
         </div>
@@ -191,10 +191,10 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
       {showContent ? (
         <div>
           <Typography variant='h6' className={classes.titleContent}>
-            {cookies.get('initLanguage') == 'vi' ? titleContent : cleanAccents(titleContent)}
+            {cookies.get('initLanguage') == 'en' ? cleanAccents(titleContent) : titleContent}
           </Typography>
           <Typography variant='body2'>
-            {cookies.get('initLanguage') == 'vi' ? subTitleContent : cleanAccents(subTitleContent)}
+            {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitleContent) : subTitleContent}
           </Typography>
         </div>
       ) : ''}

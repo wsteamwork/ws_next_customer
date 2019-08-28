@@ -88,7 +88,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     </Hidden>
 
                     <span className="address">
-                      {cookies.get('initLanguage') == 'vi' ? room.district.data.name : cleanAccents(room.district.data.name)}, {cookies.get('initLanguage') == 'vi' ? room.city.data.name : cleanAccents(room.city.data.name)}
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(room.district.data.name) : room.district.data.name}, {cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}
                     </span>
                   </Grid>
                   <Grid className="collectionAmenities">
