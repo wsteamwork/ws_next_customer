@@ -15,8 +15,10 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
+import FooterMobile from '@/components/Layout/FooterMobile';
 import { useTranslation } from 'react-i18next';
 import { getCookieFromReq } from '@/utils/mixins';
+import { Hidden } from '@material-ui/core';
 // import SeaView from '@/components/Home/CollectionRooms/SeaView';
 // import CityView from '@/components/Home/CollectionRooms/CityView';
 
@@ -58,6 +60,7 @@ const Home: NextPage = () => {
           <BlogContainer />
         </GridContainer>
       </GridContainer>
+
       <FooterComponent />
     </Fragment>
   );
@@ -65,7 +68,7 @@ const Home: NextPage = () => {
 
 Home.getInitialProps = async ({ store, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
-  
+
   if (store.getState().roomHomepage.roomsHot.length === 0) {
     const res = await getRoomsHomepage(store.dispatch, initLanguage);
   }
