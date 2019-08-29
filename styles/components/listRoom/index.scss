@@ -76,17 +76,18 @@
   }
 }
 
-
 .listRoomContainerWithoutSlickCustom {
+  padding: 0 24px;
   display: block !important;
   %slickOpacity {
     opacity: 0.7;
     pointer-events: auto;
   }
-  
+
   .slick-slider {
     height: 100%;
-    .slick-next,.slick-prev {
+    .slick-next,
+    .slick-prev {
       @include transition(all 150ms ease-in-out);
       @include xs {
         right: 0;
@@ -110,7 +111,6 @@
       background: transparent;
       z-index: 20;
       pointer-events: none;
-  
     }
     &:hover {
       display: block;
@@ -134,11 +134,10 @@
     }
     .slick-list {
       border-radius: 4px 0 0 4px;
-  
+
       @include xs {
         border-radius: 4px 4px 0 0;
       }
     }
   }
-  
 }

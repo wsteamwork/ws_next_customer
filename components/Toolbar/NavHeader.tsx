@@ -1,6 +1,14 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, useState, useRef, useContext, Dispatch, useEffect } from 'react';
+import React, {
+  Fragment,
+  FunctionComponent,
+  useState,
+  useRef,
+  useContext,
+  Dispatch,
+  useEffect
+} from 'react';
 import { compose } from 'recompose';
 import {
   MenuItem,
@@ -49,6 +57,7 @@ interface IProps {
   classes?: any;
   hiddenListCitySearch?: boolean;
   cookies: Cookies;
+  isSticky?: boolean;
 }
 
 const styles = (theme: Theme) =>
@@ -59,6 +68,10 @@ const styles = (theme: Theme) =>
     containter: {
       zIndex: 4,
       borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
+    },
+    stickyContainer: {
+      position: 'fixed',
+      zIndex: 99999
     },
     grow: {
       flexGrow: 1,
@@ -154,10 +167,10 @@ const styles = (theme: Theme) =>
     },
     margin: {
       color: 'white',
-      backgroundColor: 'red',
+      backgroundColor: 'red'
     },
     padding: {
-      padding: theme.spacing(0, 1),
+      padding: theme.spacing(0, 1)
     },
     MuiBadge: {
       color: 'red'
@@ -165,7 +178,7 @@ const styles = (theme: Theme) =>
   });
 
 const NavHeader: FunctionComponent<IProps> = (props) => {
-  const { classes, cookies, hiddenListCitySearch } = props;
+  const { classes, cookies, hiddenListCitySearch, isSticky } = props;
 
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
@@ -212,7 +225,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   // @ts-ignore
   return (
     <Fragment>
-      <GridContainer xs={12} xl={12} classNameItem={classes.containter}>
+      <GridContainer
+        xs={12}
+        xl={12}
+        className={isSticky ? classes.stickyContainer : ''}
+        classNameItem={classes.containter}>
         <AppBar
           elevation={0}
           position="static"
@@ -232,7 +249,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                 {t('home:merchantChannel')}
               </ButtonGlobal>
 
-              {cookies.get('_token') &&
+              {cookies.get('_token') && (
                 <Button
                   onClick={openNotification}
                   buttonRef={userRefButton}
@@ -240,11 +257,20 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   color="inherit"
                   className={classes.button}
                   size="large">
-                  {count_unread ? (<Badge classes={{ badge: classes.margin }} max={99} badgeContent={count_unread.count}>
-                    <Typography className={classes.padding}><NotificationsOutlined /></Typography>
-                  </Badge>) : <NotificationsOutlined />}
+                  {count_unread ? (
+                    <Badge
+                      classes={{ badge: classes.margin }}
+                      max={99}
+                      badgeContent={count_unread.count}>
+                      <Typography className={classes.padding}>
+                        <NotificationsOutlined />
+                      </Typography>
+                    </Badge>
+                  ) : (
+                    <NotificationsOutlined />
+                  )}
                 </Button>
-              }
+              )}
 
               <Button
                 onClick={() => setOpen(!open)}
@@ -353,35 +379,35 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                  <Fragment>
-                    <Button
-                      name="sign-in"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={loginButtonClick}
-                      size="large"
+                <Fragment>
+                  <Button
+                    name="sign-in"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={loginButtonClick}
+                    size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                    >
-                      {t('home:signIn')}
-                    </Button>
+                  >
+                    {t('home:signIn')}
+                  </Button>
 
-                    {/* <Link href="/auth/signup"> */}
-                    <Button
-                      href="/auth/signup"
-                      name="sign-up"
-                      color="inherit"
-                      className={classes.button}
-                      onClick={signUpButtonClick}
-                      size="large"
+                  {/* <Link href="/auth/signup"> */}
+                  <Button
+                    href="/auth/signup"
+                    name="sign-up"
+                    color="inherit"
+                    className={classes.button}
+                    onClick={signUpButtonClick}
+                    size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                    >
-                      {t('home:signUp')}
-                    </Button>
-                    {/* </Link> */}
+                  >
+                    {t('home:signUp')}
+                  </Button>
+                  {/* </Link> */}
 
-                    <SwitchLanguage />
-                  </Fragment>
-                )}
+                  <SwitchLanguage />
+                </Fragment>
+              )}
             </Hidden>
             <Hidden mdUp>
               <Logo />

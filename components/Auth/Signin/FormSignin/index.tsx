@@ -12,6 +12,7 @@ import { LoginRequest } from '@/types/Requests/Account/AccountRequests';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import Router from 'next/router';
 
 interface MyFormValues {
   email: string;
@@ -51,7 +52,7 @@ const FormSignin = () => {
       const res = await loginAccount(body);
       setCookie('_token', res.access_token, { maxAge: 2147483647, path: '/' });
       actions.setSubmitting(false);
-      location.reload();
+      Router.push('/')
     } catch (error) {
       actions.setSubmitting(false);
       const result: AxiosErrorCustom<{ errors: string[] }> = error;

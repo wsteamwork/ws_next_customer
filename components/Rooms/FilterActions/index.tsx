@@ -21,7 +21,10 @@ const FilterActions: FC<Iprops> = (props) => {
     <GridContainer
       xs={11}
       md={10}
-      className={`filterRooms ${!isMapOpen && props.hideSearchBar ? 'hideSearchBar' : ''}`}>
+      className={`filterRooms 
+      ${!isMapOpen && props.hideSearchBar ? 'hideSearchBar' : ''}
+      ${isMapOpen ? 'stickyFilter' : ''}
+      `}>
       <Grid container>
         <Grid item xs={10} container spacing={1}>
           <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
