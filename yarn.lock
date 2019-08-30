@@ -6668,6 +6668,11 @@ react-paginate@^6.3.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-pannellum@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-pannellum/-/react-pannellum-0.1.6.tgz#7eaa23f346d60444b3f542248f4cb0c7ece6f0c0"
+  integrity sha512-36wBCTr++DzaEnx+//S+Neg5csax6GpMCk1csVpBTsZKa+AbwPPEKUSQ7MOUSkpbiU82AYpr3Li7EcUiMUktcw==
+
 react-parallax@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-parallax/-/react-parallax-2.2.0.tgz#676ef4d94d0e2e56520f175c1c213eafa8aa6c15"
@@ -6719,13 +6724,6 @@ react-slick@^0.24.0:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
-react-sticky@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/react-sticky/-/react-sticky-6.0.3.tgz#7a18b643e1863da113d7f7036118d2a75d9ecde4"
-  integrity sha512-LNH4UJlRatOqo29/VHxDZOf6fwbgfgcHO4mkEFvrie5FuaZCSTGtug5R8NGqJ0kSnX8gHw8qZN37FcvnFBJpTQ==
-  dependencies:
-    prop-types "^15.5.8"
-    raf "^3.3.0"
 react-star-ratings@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-star-ratings/-/react-star-ratings-2.3.0.tgz#311a68f8f44492439a5b306ed743e63a63fe0fa7"
@@ -6734,6 +6732,14 @@ react-star-ratings@^2.3.0:
     classnames "^2.2.1"
     prop-types "^15.6.0"
     react "^16.1.0"
+
+react-sticky@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-sticky/-/react-sticky-6.0.3.tgz#7a18b643e1863da113d7f7036118d2a75d9ecde4"
+  integrity sha512-LNH4UJlRatOqo29/VHxDZOf6fwbgfgcHO4mkEFvrie5FuaZCSTGtug5R8NGqJ0kSnX8gHw8qZN37FcvnFBJpTQ==
+  dependencies:
+    prop-types "^15.5.8"
+    raf "^3.3.0"
 
 react-swipeable@^5.2.0:
   version "5.4.0"
