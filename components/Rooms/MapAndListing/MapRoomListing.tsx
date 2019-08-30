@@ -1,54 +1,74 @@
-import React, { FC, useContext, useMemo } from 'react';
-import GoogleMap, { ChangeEventValue } from 'google-map-react';
+import React, { FC, useContext, useMemo, Fragment, useState, useEffect } from 'react';
+import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import _ from 'lodash';
-import MapMarker from '../Map/MapMarker';
+
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import NotFound from '../Lotte/NotFound';
+import { Grid, Hidden } from '@material-ui/core';
+import RoomCardListing from '../RoomCardListing';
+import GridContainer from '@/components/Layout/Grid/Container';
+import LazyLoad from 'react-lazyload';
+import ListRoom from '@/components/ListRoom';
+import { StickyContainer, Sticky } from 'react-sticky';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import MapRooms from './MapRooms';
+import MapCanvas from './MapCanvas';
 
 const MapRoomListing: FC = () => {
   const { state, dispatch } = useContext(RoomIndexContext);
-  const { rooms } = state;
+  const { rooms, isMapOpen } = state;
+  const [hoverId, setHoverId] = useState<number>(-1);
+  const [center, setCenter] = useState<Coords>({
+    lat: 0,
+    lng: 0
+  });
 
-  const room = useMemo(() => rooms.length && rooms[0], [rooms]);
-  // console.log(room)
-  const onChangeMap = ({ bounds }: ChangeEventValue) => {
-    const coords: MapCoords = {
-      lat_max: bounds.ne.lat,
-      lat_min: bounds.sw.lat,
-      long_max: bounds.ne.lng,
-      long_min: bounds.sw.lng
-    };
-
-    dispatch({ type: 'setCoords', payload: coords });
+  const hoverAction = (key: number) => {
+    setHoverId(key);
   };
 
-  return rooms.length > 0 ? (
+  const focusRoomLocation = (room: RoomIndexRes) => {
+    setCenter({
+      lat: parseFloat(room.latitude),
+      lng: parseFloat(room.longitude)
+    });
+  };
+
+  useEffect(() => {
+    if (rooms.length > 0 && isMapOpen) {
+      let lat = parseFloat(rooms[0].latitude);
+      let lng = parseFloat(rooms[0].longitude);
+      let valid = lat < 90 && lat > 90 && lng < 180 && lng > -180;
+
+      let coords: Coords = {
+        lat: valid ? lat : 21.02,
+        lng: valid ? lng : 105.83
+      };
+
+      setCenter(coords);
+    }
+  }, [rooms.length > 0, isMapOpen]);
+
+  return (
     <div className="mapRoomListing">
-      <GoogleMap
-        bootstrapURLKeys={{
-          key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
-        }}
-        defaultZoom={15}
-        onChange={onChangeMap}
-        defaultCenter={{
-          lat: parseFloat(room.latitude),
-          lng: parseFloat(room.longitude)
-        }}
-        yesIWantToUseGoogleMapApiInternals>
-        {_.map(rooms, (room) => (
-          <MapMarker
-            room={room}
-            key={room.id}
-            lat={parseFloat(room.latitude)}
-            lng={parseFloat(room.longitude)}
-          />
-        ))}
-      </GoogleMap>
+      <Hidden mdDown>
+        <Grid className="roomListingInMap">
+          <MapRooms hoverId={hoverId} hoverAction={hoverAction} rooms={rooms} />
+        </Grid>
+      </Hidden>
+
+      <Grid className="mapListing">
+        <MapCanvas
+          focusRoomLocation={focusRoomLocation}
+          hoverId={hoverId}
+          center={center}
+          hoverAction={hoverAction}
+          rooms={rooms}
+        />
+      </Grid>
     </div>
-  ) : (
-      <NotFound height={250} width={250} />
-    );
+  );
 };
 
 export default MapRoomListing;

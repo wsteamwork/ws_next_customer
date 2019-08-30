@@ -47,17 +47,17 @@ const Rooms: NextPage = (props) => {
         ogImage="/static/favicon.ico"
         url="/rooms"></NextHead>
 
-      <NavHeader></NavHeader>
+      <NavHeader isSticky={isMapOpen}></NavHeader>
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
             <Hidden smDown implementation="css">
               <StickyContainer>
-                <Sticky>
-                  {({ style }) => (
-                    <header style={{ ...style, zIndex: 9999, transform: 'none' }}>
-                      {!isMapOpen && (
+                {!isMapOpen ? (
+                  <Sticky>
+                    {({ style }) => (
+                      <header style={{ ...style, zIndex: 9999, transform: 'none' }}>
                         <HeadRoom
                           onPin={() => {
                             setHideSearchBar(false);
@@ -73,11 +73,25 @@ const Rooms: NextPage = (props) => {
                             <SearchComponent />
                           </GridContainer>
                         </HeadRoom>
-                      )}
-                      <FilterActions hideSearchBar={hideSearchBar} />
-                    </header>
-                  )}
-                </Sticky>
+
+                        <FilterActions hideSearchBar={hideSearchBar} />
+                      </header>
+                    )}
+                  </Sticky>
+                ) : (
+                  <Fragment>
+                    {/* <GridContainer
+                      xs={11}
+                      md={10}
+                      classNameItem="searchRooms__overlay"
+                      className="searchRooms">
+                      <SearchComponent />
+                    </GridContainer> */}
+
+                    <FilterActions hideSearchBar={hideSearchBar} />
+                  </Fragment>
+                )}
+
                 <MapAndListing></MapAndListing>
               </StickyContainer>
             </Hidden>

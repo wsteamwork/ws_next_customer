@@ -10,11 +10,12 @@ import RoomCard from '@/components/RoomCard';
 interface IProps extends Coords, ChildComponentProps {
   room: RoomIndexRes;
   isHover?: boolean;
+  focus(room: RoomIndexRes): void;
 }
 
 // @ts-ignore
 const MapMarker: FC<IProps> = (props) => {
-  const { room, $hover } = props;
+  const { room, $hover, isHover, focus } = props;
 
   // console.log(room);
 
@@ -24,12 +25,13 @@ const MapMarker: FC<IProps> = (props) => {
       multiple
       placement="top"
       duration={200}
-      // trigger="click"
+      trigger="click"
       theme="light-border"
       interactive
+      onTrigger={() => focus(room)}
       content={<Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>}>
       <Grid className={classNames('arrow_box')}>
-        <p>{numeral(room.price_day).format('0,0')}đ</p>
+        <p className={isHover ? 'arrow_hover' : ''}>{numeral(room.price_day).format('0,0')}đ</p>
       </Grid>
     </CustomPopper>
   );

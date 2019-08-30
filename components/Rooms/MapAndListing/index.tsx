@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
-import RoomListing from '@/components/Rooms/RoomListing';
 import { useRefreshListing } from './context';
 import MapRoomListing from './MapRoomListing';
+import SidebarAndListing from '../SidebarAndListing';
 
 const MapAndListing = () => {
   const { isMapOpen } = useRefreshListing();
   return useMemo(
-    () => (!!isMapOpen ? <MapRoomListing></MapRoomListing> : <RoomListing></RoomListing>),
+    () =>
+      !!isMapOpen ? <MapRoomListing></MapRoomListing> : <SidebarAndListing></SidebarAndListing>,
     [isMapOpen]
   );
 };

@@ -11,14 +11,21 @@ import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 // import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 interface Iprops<T> extends Partial<Settings> {
   roomData: T[];
   title?: string;
   usingSlider?: boolean;
+
   render?: (room: T) => ReactNode;
   spacing?: GridSpacing;
   customClass?: string;
+
+  usingInMap?: boolean;
+  hoverAction?(id: number): void;
+  hoverId?: number;
+  focusRoomLocation?(room: RoomIndexRes): void;
 }
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
@@ -41,6 +48,10 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     usingSlider,
     render,
     spacing,
+    usingInMap,
+    hoverAction,
+    hoverId,
+    focusRoomLocation,
     customClass = 'listRoomContainer',
     ...propsSlick
   } = props;
@@ -106,6 +117,21 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     [roomData]
   );
 
+  const renderMapRooms = useMemo(
+    () =>
+      _.map(roomData, (room, index) => (
+        <Grid
+          item
+          id={`room-${room.id}`}
+          key={room.id}
+          onMouseEnter={() => hoverAction(room.id)}
+          onMouseLeave={() => hoverAction(0)}>
+          {render(room)}
+        </Grid>
+      )),
+    [roomData]
+  );
+
   return (
     <Fragment>
       <Grid
@@ -123,11 +149,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
               {renderRooms}
             </Slider>
           ) : (
-              <Fragment>{renderRooms}</Fragment>
-            )
+            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );
