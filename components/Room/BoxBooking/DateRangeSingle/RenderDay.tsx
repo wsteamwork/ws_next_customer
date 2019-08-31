@@ -9,12 +9,15 @@ import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 
 interface Iprops {
   day: Moment;
+  priceByDay:PriceByDayRes[];
 }
 
 const RenderDay: FC<Iprops> = (props) => {
-  const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
-    (state) => state.roomPage.priceByDay
-  );
+  // const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
+  //   (state) => state.roomPage.priceByDay
+  // );
+  const {priceByDay} = props;
+
   const { day } = props;
   const dataPriceByDay = useMemo(() => changeDataPriceByDay(priceByDay), [priceByDay]);
 

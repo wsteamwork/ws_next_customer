@@ -56,7 +56,7 @@ const Rooms: NextPage = (props) => {
               <StickyContainer>
                 <Sticky>
                   {({ style }) => (
-                    <header style={{ ...style, zIndex: 9999, transform: 'none' }}>
+                    <header style={{ ...style, zIndex: 99, transform: 'none' }}>
                       {!isMapOpen && (
                         <HeadRoom
                           onPin={() => {

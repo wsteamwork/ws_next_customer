@@ -10,6 +10,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -27,8 +28,11 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
   const dateStart = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
   const dateEnd = useSelector<ReducersList, string | null>((state) => state.booking.endDate);
   const { isDayBlocked, isOutsideRange, onNextMonthClick } = useDateRange();
+  const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
+    (state) => state.roomPage.priceByDay
+  );
+  const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay}/>;
   const { width } = useContext(GlobalContext);
-  const _renderDayContents = (day: Moment) => <RenderDay day={day} />;
   const { t } = useTranslation();
   const classes = useStyles(props);
 
@@ -42,7 +46,7 @@ const EmptyRoomCalendar: FC<IProps> = (props) => {
       break;
     case 'sm': widthCalendar = 45;
       break;
-    default: widthCalendar = 40;
+    default: widthCalendar = 38;
   }
 
   return useMemo(

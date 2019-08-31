@@ -15,6 +15,7 @@ import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next'
+import CompareRooms from '@/components/Rooms/CompareRooms';
 // @ts-ignore
 const RoomListing: FC = (props) => {
   const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
@@ -62,6 +63,7 @@ const RoomListing: FC = (props) => {
               </Paper>
 
               <VisitedRooms />
+              <CompareRooms/>
             </Grid>
           </Hidden>
         ) : (

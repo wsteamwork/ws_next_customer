@@ -98,13 +98,14 @@ interface IProps {
   fontSize?: string | number;
   border?: string;
   borderRadius?: string | number;
+  room?: RoomIndexRes;
 }
 
 const HostInfo: FC<IProps> = (props) => {
   const { t }   = useTranslation();
   const classes = useStyles(props);
   const room    = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-
+  // const {room} = props;
   const merchant = !!room && room.merchant.data;
 
   return (

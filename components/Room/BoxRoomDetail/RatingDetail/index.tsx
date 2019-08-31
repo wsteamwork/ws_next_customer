@@ -124,12 +124,15 @@ const StyledRating = withStyles({
   }
 })(Rating);
 
-interface IProps { }
+interface IProps {
+  room: RoomIndexRes;
+}
 
 const RatingDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {room} = props;
   const arrRating = [
     {
       name: t('rooms:cleanliness'),

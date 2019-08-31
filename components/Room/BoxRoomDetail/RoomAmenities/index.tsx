@@ -83,13 +83,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps { }
+interface IProps {
+  room: RoomIndexRes;
+}
 
 const RoomAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { width } = useContext(GlobalContext);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {room} = props;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
@@ -151,7 +154,7 @@ const RoomAmenities: FC<IProps> = (props) => {
                   </Hidden>
                 </Grid>
               ) : (
-                  <Grid item xs={2} className={classes.buttonLess}>
+                  <Grid item xs={2} sm={3} className={classes.buttonLess}>
                     <Button onClick={toggle} className={classes.readLess} size='small'>
                       {t('rooms:readLess')}
                     </Button>

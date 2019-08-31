@@ -12,6 +12,7 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 interface IProps {
   classes?: any;
+  room: RoomIndexRes
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -40,7 +41,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const BoxMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {room} = props;
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
   return (
     room && (

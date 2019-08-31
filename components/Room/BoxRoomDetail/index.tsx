@@ -9,6 +9,7 @@ import HostInfo from '@/components/HostInfo/index';
 import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar';
 import RoomReview from './RoomReview/index';
 import BoxMap from '../BoxMap/index';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -50,10 +51,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps { }
+interface IProps {
+  room?: RoomIndexRes,
+}
 
 const BoxRoomDetail: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const {room} = props;
+
   return (
     <Fragment>
       <Paper className={classes.paper}>
@@ -61,19 +66,19 @@ const BoxRoomDetail: FC<IProps> = (props) => {
           <Grid item md={12} lg={12}>
             <Grid container spacing={1} className={classes.wrapperBasic}>
               <Grid item xs={11} sm={8} md={9} lg={8} xl={9}>
-                <RoomBasic />
+                <RoomBasic room={room}/>
               </Grid>
               <Grid className={classes.hostInfo} item xs={12} sm={4} md={3} lg={4} xl={3}>
-                <HostInfo />
+                <HostInfo room={room}/>
               </Grid>
             </Grid>
             <Grid container spacing={1} className={classes.wrapper}>
               <Grid item xs={11} sm={12} md={12} lg={10} xl={9}>
                 <div className={classes.rowMargin}>
-                  <RoomDescription />
+                  <RoomDescription room={room}/>
                 </div>
                 <div className={classes.rowMargin}>
-                  <RoomAmenities />
+                  <RoomAmenities room={room}/>
                 </div>
                 <div className={classes.rowMargin}>
                   <EmptyRoomCalendar />
@@ -83,10 +88,10 @@ const BoxRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1} className={classes.wrapper}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
-                  <RoomReview />
+                  <RoomReview room={room} showComment/>
                 </div>
                 <div className={classes.rowMargin}>
-                  <BoxMap />
+                  <BoxMap room={room}/>
                 </div>
               </Grid>
             </Grid>

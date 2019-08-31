@@ -45,12 +45,15 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps { }
+interface IProps {
+  room: RoomIndexRes,
+}
 
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {room} = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {router} = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');

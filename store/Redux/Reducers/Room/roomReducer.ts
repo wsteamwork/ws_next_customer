@@ -73,7 +73,7 @@ const getRoomRecommend = async (idRoom: any): Promise<RoomIndexRes[]> => {
   return res.data.data;
 };
 
-const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
+export const getRoomSchedule = async (idRoom: any): Promise<string[]> => {
   const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`);
   return res.data.data.blocks;
 };

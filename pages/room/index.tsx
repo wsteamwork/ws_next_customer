@@ -24,6 +24,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import SearchMobile from '@/components/Rooms/SearchMobile';
+import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
@@ -33,8 +34,19 @@ const Room: NextPage = () => {
   const [] = useVisitedRoom();
 
   useEffect(() => {
-    if (room.status === 0 || !!error) router.push('/not-found-resource');
-  }, [error,room.status]);
+    if (error || !room.status) router.push('/not-found-resource');
+
+  }, [error]);
+
+  if (error || !room.status) {
+    return (
+      <div>
+        <NavHeader/>
+        <ContentPlaceHolder/>
+        <Footer/>
+      </div>
+    )
+  }
 
   return (
     <Fragment>
@@ -55,33 +67,35 @@ const Room: NextPage = () => {
       {useMemo(
         () => (
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
-            <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-              <Hidden mdUp implementation="css">
-                {/* <SearchMobile /> */}
-              </Hidden>
+            {room ? (
+              <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
+                <Hidden mdUp implementation="css">
+                  {/* <SearchMobile /> */}
+                </Hidden>
 
-              <Hidden mdDown implementation="css">
-                <BoxSearch />
-              </Hidden>
+                <Hidden mdDown implementation="css">
+                  <BoxSearch />
+                </Hidden>
 
-              <BoxImage />
-              <Grid container>
-                <Grid item xs={12} lg={8} xl={9}>
-                  <BoxRoomDetail/>
+                <BoxImage />
+                <Grid container>
+                  <Grid item xs={12} lg={8} xl={9}>
+                    <BoxRoomDetail room={room}/>
+                  </Grid>
+
+                  <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
+                    <BoxBooking/>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <BoxRecommend />
+                  </Grid>
                 </Grid>
-
-                <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                  <BoxBooking/>
+                <Grid container className="roomPage__boxBookingMoblie">
+                  <NavBottomBook />
                 </Grid>
-
-                <Grid item xs={12}>
-                  <BoxRecommend />
-                </Grid>
-              </Grid>
-              <Grid container className="roomPage__boxBookingMoblie">
-                <NavBottomBook />
-              </Grid>
             </GridContainer>
+            ):''}
           </RoomDetailsContext.Provider>
         ),
         [state]

@@ -5,6 +5,9 @@ import { Moment } from 'moment';
 import { Grid } from '@material-ui/core';
 import RenderDay from './RenderDay';
 import { useDateRange } from './context';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 
 const DateRange: FC = (props) => {
   const {
@@ -17,8 +20,10 @@ const DateRange: FC = (props) => {
     onNextMonthClick,
     focused
   } = useDateRange();
-
-  const _renderDayContents = (day: Moment) => <RenderDay day={day} />;
+  const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
+    (state) => state.roomPage.priceByDay
+  );
+  const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay}/>;
 
   const _renderMonthText = (day: Moment) => (
     <p className="datePickerBooking__monthText">{day.format('MMMM YYYY')}</p>

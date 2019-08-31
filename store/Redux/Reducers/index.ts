@@ -13,6 +13,7 @@ import { UserProfileState, UserProfileActions, userProfileReducer } from './Prof
 import { ProfileAction, ProfileState, iProfileReducer } from './Profile/profile';
 import { VisitedRoomActions, VisitedRoomState, visitedRoomReducer } from './Room/visitedRoom';
 import { PomotionState, PomotionActions, promotionReducer } from './promotion';
+import { CompareRoomsActions, CompareRoomsState, ComparisonListReducer } from '@/store/Redux/Reducers/Room/CompareRooms';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -23,6 +24,7 @@ export type ReducersType = {
   userProfile: Reducer<UserProfileState, UserProfileActions>;
   iProfile: Reducer<ProfileState, ProfileAction>;
   visitedRoom: Reducer<VisitedRoomState, VisitedRoomActions>;
+  compareRooms: Reducer<CompareRoomsState, CompareRoomsActions>;
   promotion: Reducer<PomotionState, PomotionActions>;
 };
 
@@ -35,6 +37,7 @@ export type ReducersList = {
   userProfile: UserProfileState;
   iProfile: ProfileState;
   visitedRoom: VisitedRoomState;
+  compareRooms: CompareRoomsState;
   promotion: PomotionState;
 };
 
@@ -47,6 +50,7 @@ export type ReducresActions =
   | UserProfileActions
   | ProfileAction
   | VisitedRoomActions
+  | CompareRoomsActions
   | PomotionActions;
 
 const reducers: ReducersType = {
@@ -58,6 +62,7 @@ const reducers: ReducersType = {
   userProfile: userProfileReducer,
   iProfile: iProfileReducer,
   visitedRoom: visitedRoomReducer,
+  compareRooms: ComparisonListReducer,
   promotion: promotionReducer
 };
 

@@ -14,7 +14,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     label: {
       textAlign: 'left',
       fontWeight: 900,
-      marginBottom: theme.spacing(2)
+      marginBottom: theme.spacing(2),
+      marginTop: theme.spacing(4)
     }
   })
 );
@@ -34,7 +35,7 @@ const VisitedRooms: FC = (props) => {
         </Typography>
         <Paper elevation={0}>
           {visitedRoom.map((room, index) => (
-            <VisitedRoom key={index} room={room}></VisitedRoom>
+            <VisitedRoom key={index} room={room}/>
           ))}
         </Paper>
       </Grid>
