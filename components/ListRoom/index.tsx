@@ -149,11 +149,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
               {renderRooms}
             </Slider>
           ) : (
-            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
-          )
+              <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Fragment>
   );
