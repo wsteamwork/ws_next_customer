@@ -74,11 +74,11 @@ export const getRooms = async (
   router: NextRouter,
   coords?: MapCoords
 ): Promise<BaseResponse<RoomIndexRes[]>> => {
-  
+
   let params: RoomUrlParams = router.query;
 
   let query: Partial<RoomIndexGetParams> = {
-    include: 'details,media,city,district,comforts.details',
+    include: 'details,media,city,district,comforts.details,reviews.user',
     name: params.name,
     city_id: params.city_id,
     district_id: params.district_id,

@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useContext } from 'react';
-import { Grid, Typography, Tooltip } from '@material-ui/core';
+import { Grid, Typography, Tooltip, IconButton } from '@material-ui/core';
 import numeral from 'numeral';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
 import Slider, { Settings } from 'react-slick';
@@ -20,6 +20,13 @@ import SvgCustom from '@/components/Custom/SvgCustom';
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.jsx';
 import { cleanAccents } from '@/utils/mixins';
 import Cookies from 'universal-cookie';
+import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 interface Iprops {
   classes?: any;
@@ -31,6 +38,28 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const cookies = new Cookies();
+  const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
+  const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.compareRooms.compareRooms
+  );
+
+  const handleCompareList = () => {
+    const comparisonListId = comparisonList.map(item => item.id);
+    if (!comparisonListId.includes(room.id)) {
+      if (comparisonList.length === 2) {
+        const data = comparisonList.slice(1);
+        dispatch({
+          type: 'SET_COMPARISON_LIST',
+          comparisonList: [...data, room]
+        })
+      } else {
+        dispatch({
+          type: 'SET_COMPARISON_LIST',
+          comparisonList: [...comparisonList, room]
+        })
+      }
+    }
+  };
 
   const settings: Settings = {
     speed: 300,
@@ -52,7 +81,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                 _.map(room.media.data, (o) => (
                   <img
                     key={o.image}
-                    src={`https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/${o.image}`}
+                    src={`${IMAGE_STORAGE_LG + o.image}`}
                     className="imgSize"
                     alt={`Westay - Homestay cho người việt`}
                   />
@@ -223,6 +252,11 @@ const RoomCardListing: FC<Iprops> = (props) => {
               </Link>
               <Grid className="boxSave">
                 <FavoriteAnimation />
+                <Tooltip title="Compare room" placement='right-start'>
+                  <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
+                    <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+                  </IconButton>
+                </Tooltip>
               </Grid>
             </Grid>
           </Grid>

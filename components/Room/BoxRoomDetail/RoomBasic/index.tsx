@@ -16,6 +16,11 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+
+interface IProps {
+  room: RoomIndexRes,
+}
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     roomName: {
@@ -36,12 +41,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-interface IProps { }
-
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const {room} = props;
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const {router} = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 

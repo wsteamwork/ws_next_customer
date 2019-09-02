@@ -51,5 +51,8 @@
     "notFoundTitle": "Sorry, there are no available properties on this date.",
     "notFoundContent": "Please change your checkin , checkout date or find another place for more results",
     "viewOnMap": "View map",
-    "discount": "Discount"
+    "discount": "Discount",
+    "compareRooms": "Compare rooms",
+    "emptyItem": "Comparison accommodation",
+    "showCompare": "Show compare"
 }

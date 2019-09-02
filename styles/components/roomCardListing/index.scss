@@ -16,7 +16,7 @@
     height: 100%;
   }
   @include smUp {
-    height: 200px !important;
+    height: 200px;
   }
 
   &:hover {
@@ -57,8 +57,20 @@
     position: absolute;
     top: -22px;
     right: -22px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+
+    .Animation{
+      cursor: pointer;
+    }
+
+    .iconCompare{
+      color: #08C299;
+      padding: 6px;
+      font-size: 1.15rem;
+      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
   }
 
   .boxCard {

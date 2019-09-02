@@ -79,8 +79,8 @@ const Rooms: NextPage = (props) => {
                     )}
                   </Sticky>
                 ) : (
-                  <Fragment>
-                    {/* <GridContainer
+                    <Fragment>
+                      {/* <GridContainer
                       xs={11}
                       md={10}
                       classNameItem="searchRooms__overlay"
@@ -88,9 +88,9 @@ const Rooms: NextPage = (props) => {
                       <SearchComponent />
                     </GridContainer> */}
 
-                    <FilterActions hideSearchBar={hideSearchBar} />
-                  </Fragment>
-                )}
+                      <FilterActions hideSearchBar={hideSearchBar} />
+                    </Fragment>
+                  )}
 
                 <MapAndListing></MapAndListing>
               </StickyContainer>

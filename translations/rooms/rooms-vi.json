@@ -53,5 +53,8 @@
     "notFoundTitle": "Rất tiếc, không còn phòng trống cho ngày bạn chọn.",
     "notFoundContent": "Bạn vui lòng thay đổi thông tin tìm kiếm như số khách, ngày nhận/trả phòng để nhận các thông tin phòng trống khác",
     "viewOnMap": "Xem bản đồ",
-    "discount": "Giảm giá"
+    "discount": "Giảm giá",
+    "compareRooms": "So sánh phòng",
+    "emptyItem": "So sánh chỗ ở",
+    "showCompare": "Xem so sánh"
 }

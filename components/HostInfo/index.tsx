@@ -98,6 +98,7 @@ interface IProps {
   fontSize?: string | number;
   border?: string;
   borderRadius?: string | number;
+  room?: RoomIndexRes;
 }
 
 const HostInfo: FC<IProps> = (props) => {

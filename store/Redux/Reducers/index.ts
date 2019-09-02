@@ -18,6 +18,11 @@ import {
   NotificationReducerState,
   notificationReducer
 } from './Notification/notification';
+import {
+  CompareRoomsActions,
+  CompareRoomsState,
+  ComparisonListReducer
+} from '@/store/Redux/Reducers/Room/CompareRooms';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -28,6 +33,7 @@ export type ReducersType = {
   userProfile: Reducer<UserProfileState, UserProfileActions>;
   iProfile: Reducer<ProfileState, ProfileAction>;
   visitedRoom: Reducer<VisitedRoomState, VisitedRoomActions>;
+  compareRooms: Reducer<CompareRoomsState, CompareRoomsActions>;
   promotion: Reducer<PomotionState, PomotionActions>;
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
 };
@@ -41,6 +47,7 @@ export type ReducersList = {
   userProfile: UserProfileState;
   iProfile: ProfileState;
   visitedRoom: VisitedRoomState;
+  compareRooms: CompareRoomsState;
   promotion: PomotionState;
   notifications: NotificationReducerState;
 };
@@ -54,8 +61,9 @@ export type ReducresActions =
   | UserProfileActions
   | ProfileAction
   | VisitedRoomActions
-  | PomotionActions
-  | NotificationReducerAction;
+  | NotificationReducerAction
+  | CompareRoomsActions
+  | PomotionActions;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -67,7 +75,8 @@ const reducers: ReducersType = {
   iProfile: iProfileReducer,
   visitedRoom: visitedRoomReducer,
   promotion: promotionReducer,
-  notifications: notificationReducer
+  notifications: notificationReducer,
+  compareRooms: ComparisonListReducer
 };
 
 export interface NextContextPage extends NextPageContext {
