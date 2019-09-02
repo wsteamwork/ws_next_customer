@@ -79,7 +79,10 @@ const getRoomRecommend = async (
   return res.data.data;
 };
 
-const getRoomSchedule = async (idRoom: any, initLanguage: string = 'vi'): Promise<string[]> => {
+export const getRoomSchedule = async (
+  idRoom: any,
+  initLanguage: string = 'vi'
+): Promise<string[]> => {
   const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`, {
     headers: { 'Accept-Language': initLanguage }
   });
