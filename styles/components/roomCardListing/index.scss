@@ -15,11 +15,12 @@
   @include xs {
     height: 100%;
   }
+
   @include smUp {
     height: 200px;
   }
 
-  @include mdDown {
+  @include md {
     height: 230px;
   }
 
@@ -30,9 +31,8 @@
   &__wrapper {
     height: 100%;
   }
-  .boxImg {
 
-    // Override Swiper
+  .boxImg {
     .swiper-container {
       height: 100%;
     }
