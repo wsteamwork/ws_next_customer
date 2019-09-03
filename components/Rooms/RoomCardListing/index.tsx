@@ -252,11 +252,13 @@ const RoomCardListing: FC<Iprops> = (props) => {
               </Link>
               <Grid className="boxSave">
                 <FavoriteAnimation />
-                <Tooltip title="Compare room" placement='right-start'>
-                  <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
-                    <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
-                  </IconButton>
-                </Tooltip>
+                <Hidden smDown>
+                  <Tooltip title={t('rooms:compareRooms')} placement='right-start'>
+                    <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
+                      <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+                    </IconButton>
+                  </Tooltip>
+                </Hidden>
               </Grid>
             </Grid>
           </Grid>

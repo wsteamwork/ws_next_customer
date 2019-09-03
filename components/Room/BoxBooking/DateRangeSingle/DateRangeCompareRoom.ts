@@ -20,20 +20,24 @@ export const useScheduleCompareRoom =(idRoom1:number,idRoom2:number):IScheduleCo
   const [priceByDay2, setPriceByDay2] = useState<PriceByDayRes[]>([]);
 
   useEffect(() => {
-    Promise.all([
-      getRoomSchedule(idRoom1),
-      getRoomSchedule(idRoom2),
-      getPriceByDay(idRoom1),
-      getPriceByDay(idRoom2)
-    ]).then(res=>{
-        setScheduleRoom1(res[0]);
-        setScheduleRoom2(res[1]);
-        setPriceByDay1(res[2]);
-        setPriceByDay2(res[3]);
-      }
-    ).catch(err=>{}
+    if (idRoom1 !== 0 && idRoom2 !== 0) {
+      Promise.all([
+        getRoomSchedule(idRoom1),
+        getRoomSchedule(idRoom2),
+        getPriceByDay(idRoom1),
+        getPriceByDay(idRoom2)
+      ]).then(res=>{
+          setScheduleRoom1(res[0]);
+          setScheduleRoom2(res[1]);
+          setPriceByDay1(res[2]);
+          setPriceByDay2(res[3]);
+        }
+      ).catch(err=>{}
 
-    )
+      )
+    }else {
+
+    }
   }, [idRoom1,idRoom2]);
 
   const isDayBlocked = (day: Moment, status: 'room1' | 'room2') => {

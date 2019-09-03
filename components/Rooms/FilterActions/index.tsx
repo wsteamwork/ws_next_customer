@@ -20,7 +20,8 @@ const FilterActions: FC<Iprops> = (props) => {
   return (
     <GridContainer
       xs={11}
-      md={10}
+      md={11}
+      lg={10}
       className={`filterRooms 
       ${!isMapOpen && props.hideSearchBar ? 'hideSearchBar' : ''}
       ${isMapOpen ? 'stickyFilter' : ''}
