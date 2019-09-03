@@ -1,4 +1,4 @@
-import React, { FC, useEffect, Fragment } from 'react';
+import React, { FC, useEffect, Fragment, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, AppBar, Toolbar, IconButton, Grid, Dialog, Typography } from '@material-ui/core';
 import Slider, { Settings } from 'react-slick';
@@ -23,6 +23,7 @@ import 'react-dates/initialize';
 import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
 import RoomReview from '@/components/Room/BoxRoomDetail/RoomReview';
 import BoxMap from '@/components/Room/BoxMap';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 
 interface IProps {
@@ -39,12 +40,19 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     title: {
       marginLeft: theme.spacing(2),
       flex: 1,
+      textAlign:'center',
+      margin:'24px 0'
     },
     boxImage:{
       height:300,
     },
     rowMargin: {
       marginTop: theme.spacing(4)
+    },
+    subTitle: {
+      fontWeight: 900,
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(2)
     }
   })
 );
@@ -53,6 +61,7 @@ const DialogComparison: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const {open,handleClose} = props;
   const { t } = useTranslation();
+  const { width } = useContext(GlobalContext);
   const  comparisonList= useSelector<ReducersList,RoomIndexRes[]>(
     (state) => state.compareRooms.compareRooms
   );
@@ -75,7 +84,7 @@ const DialogComparison: FC<IProps> = (props) => {
 
   }, [comparisonList]);
 
-  return comparisonList.length ? (
+  return comparisonList.length === 2 ? (
     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
       <AppBar className={classes.appBar} elevation={0}>
         <Toolbar>
@@ -114,16 +123,20 @@ const DialogComparison: FC<IProps> = (props) => {
             </div>
             <div>
               <Grid container spacing={1} className={classes.wrapperBasic}>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={12} md={12} lg={11} xl={10}>
                   <RoomBasic room={comparisonList[0]}/>
                 </Grid>
               </Grid>
               <Grid container spacing={1} className={classes.wrapper}>
                 <Grid item xs={12}>
-                  <div className={classes.rowMargin}>
+                  <Grid item xs={12} sm={12} md={12} lg={11} xl={10} className={classes.rowMargin}>
                     <RoomAmenities room={comparisonList[0]}/>
-                  </div>
+                  </Grid>
+
                   <div className="EmptyRoomCalendar">
+                    <Typography variant="h5" className={classes.subTitle}>
+                      {t('rooms:emptyCalender')}
+                    </Typography>
                     <DayPickerRangeController
                       // daySize={widthCalendar}
                       startDate={moment()}
@@ -133,7 +146,7 @@ const DialogComparison: FC<IProps> = (props) => {
                       focusedInput={'startDate'}
                       onFocusChange={() => {}}
                       isDayBlocked={day=>isDayBlocked(day,'room1')}
-                      numberOfMonths={1}
+                      numberOfMonths={width === 'xl' ? 2 : 1}
                       isOutsideRange={isOutsideRange}
                       hideKeyboardShortcutsPanel
                       renderDayContents={_renderDayContents1}
@@ -189,6 +202,9 @@ const DialogComparison: FC<IProps> = (props) => {
                     <RoomAmenities room={comparisonList[1]}/>
                   </div>
                   <div className="EmptyRoomCalendar">
+                    <Typography variant="h5" className={classes.subTitle}>
+                      {t('rooms:emptyCalender')}
+                    </Typography>
                     <DayPickerRangeController
                       // daySize={widthCalendar}
                       startDate={moment()}
@@ -198,7 +214,7 @@ const DialogComparison: FC<IProps> = (props) => {
                       focusedInput={'startDate'}
                       onFocusChange={() => {}}
                       isDayBlocked={day=>isDayBlocked(day,'room2')}
-                      numberOfMonths={1}
+                      numberOfMonths={width === 'xl' ? 2 : 1}
                       isOutsideRange={isOutsideRange}
                       hideKeyboardShortcutsPanel
                       renderDayContents={_renderDayContents2}

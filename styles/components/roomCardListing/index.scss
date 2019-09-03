@@ -19,6 +19,10 @@
     height: 200px;
   }
 
+  @include mdDown {
+    height: 230px;
+  }
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
   }
@@ -98,15 +102,13 @@
     .Animation {
       cursor: pointer;
     }
-
-    .iconCompare {
-      color: #08c299;
-      padding: 6px;
-      font-size: 1.15rem;
-      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    }
   }
-
+  .iconCompare{
+    color: #08C299;
+    padding: 6px;
+    font-size: 1.15rem;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
   .boxCard {
     width: 100%;
     vertical-align: middle;

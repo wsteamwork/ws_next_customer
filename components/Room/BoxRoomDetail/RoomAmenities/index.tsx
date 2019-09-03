@@ -144,7 +144,7 @@ const RoomAmenities: FC<IProps> = (props) => {
                 </Fragment>
               ))}
               {!isOpen ? (
-                <Grid item xs={2} className={classes.buttonLess}>
+                <Grid item xs={2} sm={3} className={classes.buttonLess}>
                   <Hidden xsUp={isPreviewPage && room.comforts.data.length < 5}
                     xsDown={isPreviewPage && room.comforts.data.length < 5}>
                     <Button onClick={toggle} className={classes.button} size='small'>

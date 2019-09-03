@@ -41,7 +41,7 @@ const RoomListing: FC = (props) => {
   };
 
   return (
-    <GridContainer xs={11} md={10} xl={9}>
+    <GridContainer xs={11} md={11} lg={10} xl={9}>
       <Grid
         container
         justify="center"

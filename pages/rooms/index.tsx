@@ -57,7 +57,7 @@ const Rooms: NextPage = (props) => {
                 {!isMapOpen ? (
                   <Sticky>
                     {({ style }) => (
-                      <header style={{ ...style, zIndex: 9999, transform: 'none' }}>
+                      <header style={{ ...style, zIndex: 99, transform: 'none' }}>
                         <HeadRoom
                           onPin={() => {
                             setHideSearchBar(false);
@@ -67,7 +67,8 @@ const Rooms: NextPage = (props) => {
                           }}>
                           <GridContainer
                             xs={11}
-                            md={10}
+                            md={11}
+                            lg={10}
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
                             <SearchComponent />
@@ -98,7 +99,8 @@ const Rooms: NextPage = (props) => {
             <Hidden mdUp implementation="css">
               <GridContainer
                 xs={11}
-                md={10}
+                md={11}
+                lg={10}
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}

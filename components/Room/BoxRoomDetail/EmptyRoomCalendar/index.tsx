@@ -16,7 +16,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     name: {
       fontWeight: 900,
-      margin: '1rem 0 1rem 0'
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(2)
     }
   })
 );

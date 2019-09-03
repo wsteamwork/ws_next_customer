@@ -67,6 +67,11 @@
 .listRoomContainerWithoutSlickCustom {
   padding: 0 24px;
   display: block !important;
+
+  @include mdDown {
+    padding: 0;
+  }
+
   %slickOpacity {
     opacity: 0.7;
     pointer-events: auto;
