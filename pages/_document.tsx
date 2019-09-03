@@ -64,6 +64,7 @@ class MyDocument extends Document {
           <meta name="theme-color" content={theme.palette.primary.main} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="fb:app_id" content="331750437466885" />
+          <meta name="google-site-verification" content="Xn4ULuU-MncP7CZoQxH1r7F2DzzID_IolgwbUbQMxtM" />
           <link
             href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,500,700|Quicksand:300,400,500,600,700&display=swap&subset=vietnamese"
             rel="stylesheet"
