@@ -9,8 +9,8 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Hidden from '@material-ui/core/Hidden/Hidden';
 import LazyLoad from 'react-lazyload';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 import StarIcon from '@material-ui/icons/StarRounded';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import Link from '@material-ui/core/Link';
@@ -27,6 +27,10 @@ import { Dispatch } from 'redux';
 import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import Swiper from 'react-id-swiper';
+
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 interface Iprops {
   classes?: any;
@@ -44,29 +48,49 @@ const RoomCardListing: FC<Iprops> = (props) => {
   );
 
   const handleCompareList = () => {
-    const comparisonListId = comparisonList.map(item => item.id);
+    const comparisonListId = comparisonList.map((item) => item.id);
     if (!comparisonListId.includes(room.id)) {
       if (comparisonList.length === 2) {
         const data = comparisonList.slice(1);
         dispatch({
           type: 'SET_COMPARISON_LIST',
           comparisonList: [...data, room]
-        })
+        });
       } else {
         dispatch({
           type: 'SET_COMPARISON_LIST',
           comparisonList: [...comparisonList, room]
-        })
+        });
       }
     }
   };
 
-  const settings: Settings = {
-    speed: 300,
-    dots: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    lazyLoad: 'ondemand'
+  const settings = {
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    renderPrevButton: () => (
+      <FontAwesomeIcon
+        className="swiper-button-prev"
+        icon={faChevronLeft}
+        size="2x"
+        color="#fff"></FontAwesomeIcon>
+    ),
+    renderNextButton: () => (
+      <FontAwesomeIcon
+        className="swiper-button-next"
+        icon={faChevronRight}
+        size="2x"
+        color="#fff"></FontAwesomeIcon>
+    ),
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true
+    },
+    loop: true
   };
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
@@ -76,7 +100,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
           <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-            <Slider {...settings}>
+            <Swiper {...settings}>
               {room.media.data.length > 0 ? (
                 _.map(room.media.data, (o) => (
                   <img
@@ -87,9 +111,9 @@ const RoomCardListing: FC<Iprops> = (props) => {
                   />
                 ))
               ) : (
-                  <img src="./static/images/background.svg" className="imgSize" />
-                )}
-            </Slider>
+                <img src="./static/images/background.svg" className="imgSize" />
+              )}
+            </Swiper>
           </LazyLoad>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
@@ -117,7 +141,13 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     </Hidden>
 
                     <span className="address">
-                      {cookies.get('initLanguage') == 'en' ? cleanAccents(room.district.data.name) : room.district.data.name}, {cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}
+                      {cookies.get('initLanguage') == 'en'
+                        ? cleanAccents(room.district.data.name)
+                        : room.district.data.name}
+                      ,{' '}
+                      {cookies.get('initLanguage') == 'en'
+                        ? cleanAccents(room.city.data.name)
+                        : room.city.data.name}
                     </span>
                   </Grid>
                   <Grid className="collectionAmenities">
@@ -132,8 +162,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} {t('rooms:bathrooms')}
                       </Fragment>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -168,8 +198,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                          ''
-                        )}
+                        ''
+                      )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -187,14 +217,16 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       placement="top">
                       <span className="avgRating">{room.avg_rating}</span>
                     </Tooltip>
-                    <span className="totalReview">{`(${room.total_review} ${t('rooms:review')}) `}</span>
+                    <span className="totalReview">{`(${room.total_review} ${t(
+                      'rooms:review'
+                    )}) `}</span>
                     {/* <span className='totalRev'iewText}>{`${
                           room.avg_rating_txt
                           }`}</span> */}
                   </Grid>
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -202,8 +234,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">{t('rooms:discount')}</Grid>
                     </Grid>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
@@ -213,8 +245,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             {t('shared:dayPrice')}
                           </span>
                         ) : (
-                            ''
-                          )}
+                          ''
+                        )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -223,38 +255,41 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         </Typography>
                       </Grid>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                        <Grid className="hourPrice">
-                          {room.is_discount === 1 ? (
-                            <span className="discountPriceText">
-                              {numeral(room.price_hour).format('0,0')}
-                              {t('shared:hourPrice')}
-                            </span>
-                          ) : (
-                              ''
-                            )}
-                          <Typography className="priceText" variant={typoVariant}>
-                            {numeral(
-                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                            ).format('0,0')}
+                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                      <Grid className="hourPrice">
+                        {room.is_discount === 1 ? (
+                          <span className="discountPriceText">
+                            {numeral(room.price_hour).format('0,0')}
                             {t('shared:hourPrice')}
-                          </Typography>
-                        </Grid>
-                      ) : (
-                        ''
-                      )}
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                        <Typography className="priceText" variant={typoVariant}>
+                          {numeral(
+                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                          ).format('0,0')}
+                          {t('shared:hourPrice')}
+                        </Typography>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
                   </Grid>
                 </Grid>
               </Link>
               <Grid className="boxSave">
                 <FavoriteAnimation />
-                <Tooltip title="Compare room" placement='right-start'>
-                  <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
-                    <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+                <Tooltip title="Compare room" placement="right-start">
+                  <IconButton
+                    aria-label="compare"
+                    className="iconCompare"
+                    onClick={handleCompareList}>
+                    <FontAwesomeIcon size="1x" icon={faBalanceScaleRight} />
                   </IconButton>
                 </Tooltip>
               </Grid>

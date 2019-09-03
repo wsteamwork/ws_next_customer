@@ -1,8 +1,8 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import React, { Fragment, useMemo, ReactNode } from 'react';
 import Slider, { Settings } from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
 import { Theme, Typography, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import _ from 'lodash';
@@ -12,6 +12,8 @@ import PrevArrow from './PrevArrow';
 // import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
 
 interface Iprops<T> extends Partial<Settings> {
   roomData: T[];
@@ -57,54 +59,29 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
   } = props;
   const classes = useStyles({});
 
-  const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    speed: 800,
-    lazyLoad: 'progressive',
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    touchThreshold: 1000000,
-    centerPadding: '20%',
-    swipeToSlide: true,
-    // useCSS: false,
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 5
-        }
+  const setting = {
+    slidesPerView: 5,
+    lazy: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    renderPrevButton: () => <PrevArrow className="swiper-button-prev"></PrevArrow>,
+    renderNextButton: () => <NextArrow className="swiper-button-next"></NextArrow>,
+    breakpoints: {
+      1920: {},
+      1128: {
+        slidesPerView: 4
       },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 4
-        }
+      960: {
+        slidesPerView: 2.3,
+        freeMode: true
       },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1.9,
-          arrows: false,
-          centerMode: true,
-          initialSlide: 0,
-          centerPadding: '24%',
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1.2,
-          centerPadding: '12%',
-          arrows: false,
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1
-        }
+      600: {
+        slidesPerView: 1.5
       }
-    ]
+    }
+    
   };
 
   const renderRooms = useMemo(
@@ -145,15 +122,13 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         )}
         {roomData ? (
           usingSlider ? (
-            <Slider {...setting} {...propsSlick}>
-              {renderRooms}
-            </Slider>
+            <Swiper {...setting}>{renderRooms}</Swiper>
           ) : (
-              <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
-            )
+            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );
