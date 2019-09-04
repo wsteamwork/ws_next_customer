@@ -81,7 +81,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         slidesPerView: 1.5
       }
     }
-    
+
   };
 
   const renderRooms = useMemo(
@@ -124,11 +124,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           usingSlider ? (
             <Swiper {...setting}>{renderRooms}</Swiper>
           ) : (
-            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
-          )
+              <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Fragment>
   );

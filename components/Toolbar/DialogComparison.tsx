@@ -28,8 +28,8 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   classes?: any,
-  open?:boolean,
-  handleClose: ()=>void
+  open?: boolean,
+  handleClose: () => void
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -40,11 +40,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     title: {
       marginLeft: theme.spacing(2),
       flex: 1,
-      textAlign:'center',
-      margin:'24px 0'
+      textAlign: 'center',
+      margin: '24px 0'
     },
-    boxImage:{
-      height:300,
+    boxImage: {
+      height: 300,
     },
     rowMargin: {
       marginTop: theme.spacing(4)
@@ -59,18 +59,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const DialogComparison: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {open,handleClose} = props;
+  const { open, handleClose } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
-  const  comparisonList= useSelector<ReducersList,RoomIndexRes[]>(
+  const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.compareRooms.compareRooms
   );
-  const IDroom1 = comparisonList.length === 1? comparisonList[0].id : 0 ;
-  const IDroom2 = comparisonList.length === 2?  comparisonList[1].id : 0 ;
+  const IDroom1 = comparisonList.length === 1 ? comparisonList[0].id : 0;
+  const IDroom2 = comparisonList.length === 2 ? comparisonList[1].id : 0;
 
-  const {isDayBlocked,isOutsideRange,priceByDay1,priceByDay2} = useScheduleCompareRoom(IDroom1, IDroom2);
-  const _renderDayContents1 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay1}/>;
-  const _renderDayContents2 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay2}/>;
+  const { isDayBlocked, isOutsideRange, priceByDay1, priceByDay2 } = useScheduleCompareRoom(IDroom1, IDroom2);
+  const _renderDayContents1 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay1} />;
+  const _renderDayContents2 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay2} />;
 
   const settings: Settings = {
     speed: 300,
@@ -99,7 +99,7 @@ const DialogComparison: FC<IProps> = (props) => {
       <GridContainer xs={11}>
         <Grid container spacing={4}>
           <Grid item xs={6}>
-            <div className={classNames("roomCardListing",classes.boxImage)}>
+            <div className={classNames("roomCardListing", classes.boxImage)}>
               <div className="roomCardListing__wrapper">
                 <div className="boxImg">
                   <LazyLoad offset={windowExist ? window.innerHeight : 0}>
@@ -108,14 +108,14 @@ const DialogComparison: FC<IProps> = (props) => {
                         _.map(comparisonList[0].media.data, (o) => (
                           <img
                             key={o.image}
-                            src={`${IMAGE_STORAGE_LG+o.image}`}
+                            src={`${IMAGE_STORAGE_LG + o.image}`}
                             className="imgSize"
                             alt={`Westay - Homestay cho người việt`}
                           />
                         ))
                       ) : (
-                        <img src="./static/images/background.svg" className="imgSize" />
-                      )}
+                          <img src="./static/images/background.svg" className="imgSize" />
+                        )}
                     </Slider>
                   </LazyLoad>
                 </div>
@@ -124,13 +124,13 @@ const DialogComparison: FC<IProps> = (props) => {
             <div>
               <Grid container spacing={1} className={classes.wrapperBasic}>
                 <Grid item xs={12} sm={12} md={12} lg={11} xl={10}>
-                  <RoomBasic room={comparisonList[0]}/>
+                  <RoomBasic room={comparisonList[0]} />
                 </Grid>
               </Grid>
               <Grid container spacing={1} className={classes.wrapper}>
                 <Grid item xs={12}>
                   <Grid item xs={12} sm={12} md={12} lg={11} xl={10} className={classes.rowMargin}>
-                    <RoomAmenities room={comparisonList[0]}/>
+                    <RoomAmenities room={comparisonList[0]} />
                   </Grid>
 
                   <div className="EmptyRoomCalendar">
@@ -144,8 +144,8 @@ const DialogComparison: FC<IProps> = (props) => {
                       onDatesChange={() => { }}
                       // onNextMonthClick={onNextMonthClick}
                       focusedInput={'startDate'}
-                      onFocusChange={() => {}}
-                      isDayBlocked={day=>isDayBlocked(day,'room1')}
+                      onFocusChange={() => { }}
+                      isDayBlocked={day => isDayBlocked(day, 'room1')}
                       numberOfMonths={width === 'xl' ? 2 : 1}
                       isOutsideRange={isOutsideRange}
                       hideKeyboardShortcutsPanel
@@ -158,17 +158,17 @@ const DialogComparison: FC<IProps> = (props) => {
               <Grid container spacing={1} className={classes.wrapper}>
                 <Grid item xs={12}>
                   <div className={classes.rowMargin}>
-                    <RoomReview room={comparisonList[0]}/>
+                    <RoomReview room={comparisonList[0]} />
                   </div>
                   <div className={classes.rowMargin}>
-                    <BoxMap room={comparisonList[0]}/>
+                    <BoxMap room={comparisonList[0]} />
                   </div>
                 </Grid>
               </Grid>
             </div>
           </Grid>
           <Grid item xs={6}>
-            <div className={classNames("roomCardListing",classes.boxImage)}>
+            <div className={classNames("roomCardListing", classes.boxImage)}>
               <div className="roomCardListing__wrapper">
                 <div className="boxImg">
                   <LazyLoad offset={windowExist ? window.innerHeight : 0}>
@@ -177,14 +177,14 @@ const DialogComparison: FC<IProps> = (props) => {
                         _.map(comparisonList[1].media.data, (o) => (
                           <img
                             key={o.image}
-                            src={`${IMAGE_STORAGE_LG+o.image}`}
+                            src={`${IMAGE_STORAGE_LG + o.image}`}
                             className="imgSize"
                             alt={`Westay - Homestay cho người việt`}
                           />
                         ))
                       ) : (
-                        <img src="./static/images/background.svg" className="imgSize" />
-                      )}
+                          <img src="./static/images/background.svg" className="imgSize" />
+                        )}
                     </Slider>
                   </LazyLoad>
                 </div>
@@ -193,13 +193,13 @@ const DialogComparison: FC<IProps> = (props) => {
             <div>
               <Grid container spacing={1} className={classes.wrapperBasic}>
                 <Grid item xs={12}>
-                  <RoomBasic room={comparisonList[1]}/>
+                  <RoomBasic room={comparisonList[1]} />
                 </Grid>
               </Grid>
               <Grid container spacing={1} className={classes.wrapper}>
                 <Grid item xs={12}>
                   <div className={classes.rowMargin}>
-                    <RoomAmenities room={comparisonList[1]}/>
+                    <RoomAmenities room={comparisonList[1]} />
                   </div>
                   <div className="EmptyRoomCalendar">
                     <Typography variant="h5" className={classes.subTitle}>
@@ -212,8 +212,8 @@ const DialogComparison: FC<IProps> = (props) => {
                       onDatesChange={() => { }}
                       // onNextMonthClick={onNextMonthClick}
                       focusedInput={'startDate'}
-                      onFocusChange={() => {}}
-                      isDayBlocked={day=>isDayBlocked(day,'room2')}
+                      onFocusChange={() => { }}
+                      isDayBlocked={day => isDayBlocked(day, 'room2')}
                       numberOfMonths={width === 'xl' ? 2 : 1}
                       isOutsideRange={isOutsideRange}
                       hideKeyboardShortcutsPanel
@@ -226,10 +226,10 @@ const DialogComparison: FC<IProps> = (props) => {
               <Grid container spacing={1} className={classes.wrapper}>
                 <Grid item xs={12}>
                   <div className={classes.rowMargin}>
-                    <RoomReview room={comparisonList[1]} showComment={false}/>
+                    <RoomReview room={comparisonList[1]} showComment={false} />
                   </div>
                   <div className={classes.rowMargin}>
-                    <BoxMap room={comparisonList[1]}/>
+                    <BoxMap room={comparisonList[1]} />
                   </div>
                 </Grid>
               </Grid>
@@ -238,7 +238,7 @@ const DialogComparison: FC<IProps> = (props) => {
         </Grid>
       </GridContainer>
     </Dialog>
-  ) : <Fragment/>;
+  ) : <Fragment />;
 };
 
 export default DialogComparison;

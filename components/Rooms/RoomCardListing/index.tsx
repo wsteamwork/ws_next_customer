@@ -2,7 +2,7 @@ import React, { FC, Fragment, useContext } from 'react';
 import { Grid, Typography, Tooltip, IconButton } from '@material-ui/core';
 import numeral from 'numeral';
 import { UseTranslationResponse, useTranslation } from 'react-i18next';
-import Slider, { Settings } from 'react-slick';
+// import Slider, { Settings } from 'react-slick';
 import _ from 'lodash';
 import Paper from '@material-ui/core/Paper/Paper';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
@@ -99,22 +99,22 @@ const RoomCardListing: FC<Iprops> = (props) => {
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-            <Swiper {...settings}>
-              {room.media.data.length > 0 ? (
-                _.map(room.media.data, (o) => (
+          <Swiper {...settings}>
+            {room.media.data.length > 0 ? (
+              _.map(room.media.data, (o) => (
+                <LazyLoad offset={windowExist ? window.innerHeight : 0}>
                   <img
                     key={o.image}
                     src={`${IMAGE_STORAGE_LG + o.image}`}
                     className="imgSize"
                     alt={`Westay - Homestay cho người việt`}
                   />
-                ))
-              ) : (
-                  <img src="./static/images/background.svg" className="imgSize" />
-                )}
-            </Swiper>
-          </LazyLoad>
+                </LazyLoad>
+              ))
+            ) : (
+                <img src="./static/images/background.svg" className="imgSize" />
+              )}
+          </Swiper>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
