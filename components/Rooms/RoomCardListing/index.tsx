@@ -99,22 +99,22 @@ const RoomCardListing: FC<Iprops> = (props) => {
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <Swiper {...settings}>
-            {room.media.data.length > 0 ? (
-              _.map(room.media.data, (o) => (
-                <LazyLoad offset={windowExist ? window.innerHeight : 0}>
+          <LazyLoad offset={windowExist ? window.innerHeight : 0}>
+            <Swiper {...settings} rebuildOnUpdate={true}>
+              {room.media.data.length > 0 ? (
+                _.map(room.media.data, (o) => (
                   <img
                     key={o.image}
                     src={`${IMAGE_STORAGE_LG + o.image}`}
                     className="imgSize"
                     alt={`Westay - Homestay cho người việt`}
                   />
-                </LazyLoad>
-              ))
-            ) : (
-                <img src="./static/images/background.svg" className="imgSize" />
-              )}
-          </Swiper>
+                ))
+              ) : (
+                  <img src="./static/images/background.svg" className="imgSize" />
+                )}
+            </Swiper>
+          </LazyLoad>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
