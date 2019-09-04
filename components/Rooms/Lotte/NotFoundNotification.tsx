@@ -18,7 +18,7 @@ const NotFoundNotification: ComponentType<IProps> = (props) => {
   };
 
   return (
-    <span style={{ margin: '20px 0' }}>
+    <span style={{ margin: '20px auto' }}>
       <Lottie
         options={defaultOptions}
         isClickToPauseDisabled={true}

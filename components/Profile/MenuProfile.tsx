@@ -23,6 +23,7 @@ import EditProfile from './EditProfile';
 import BookingProfile from './BookingProfile';
 import { useTranslation } from 'react-i18next';
 import NotificationPanel from '../Notifications/NotificationPanel';
+import WishList from '../UserProfile/WishList';
 
 const MenuProfile: FC = (props) => {
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ const MenuProfile: FC = (props) => {
   };
 
   return (
-    <GridContainer xs={11} lg={8} className={'menuProfile'}>
+    <GridContainer xs={11} lg={10} className={'menuProfile'}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={3} className="tabProfilePc">
           <Tabs
@@ -55,6 +56,11 @@ const MenuProfile: FC = (props) => {
               className="sideNavItemText"
               icon={<PersonOutlineRounded />}></Tab>
 
+            <Tab
+              label={t('profile:wishList')}
+              className="sideNavItemText"
+              icon={<PersonOutlined />}
+            />
             <Tab
               label={t('profile:myBooking')}
               className={'sideNavItemText'}
@@ -84,17 +90,31 @@ const MenuProfile: FC = (props) => {
               icon={<PersonOutlined />}
             />
             <BottomNavigationAction
-              label={t('profile:myBooking')}
+              label={t('profile:wishList')}
               value={2}
+              icon={<PersonOutlined />}
+            />
+            <BottomNavigationAction
+              label={t('profile:myBooking')}
+              value={3}
               icon={<BookmarksOutlined />}
             />
           </BottomNavigation>
         </Hidden>
 
-        <Grid item xs={12} md={9}>
+        <Grid
+          item
+          xs={12}
+          md={9}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between'
+          }}>
           {value === 0 && <NotificationPanel />}
           {value === 1 && <EditProfile />}
-          {value === 2 && <BookingProfile />}
+          {value === 2 && <WishList />}
+          {value === 3 && <BookingProfile />}
         </Grid>
       </Grid>
     </GridContainer>

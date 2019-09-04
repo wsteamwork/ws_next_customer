@@ -1164,10 +1164,10 @@
     "@types/react" "*"
     "@types/webpack" "*"
 
-"@types/react-lottie@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.2.tgz#2d4f8a7fb6831f89e915c1944c2f37721f06f167"
-  integrity sha512-ARFwpddiJXSz0k/Cgvu4tkc7kXmutoUmF4f2xBnSgDG7vF9i8ChOGb++kpo+Zt5SNyRsZvI5wJTCHwGn7ATiwQ==
+"@types/react-lottie@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@types/react-lottie/-/react-lottie-1.2.3.tgz#aa25deecdc6d44e5d367662709c95121b7fe22ae"
+  integrity sha512-e1vOQ+poOGQwDAJkv8AIhXBOkUq9XctxUdFdbVsBIi2t9wgDrdjxUxnpzyy85XQNMwkRQF1VDDSyMN9whW2EVw==
   dependencies:
     "@types/react" "*"
 

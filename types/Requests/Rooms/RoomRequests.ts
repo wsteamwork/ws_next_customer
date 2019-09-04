@@ -45,6 +45,10 @@ export interface MapCoords {
   long_max: number;
 }
 
+export interface FavoriteRoomReq {
+  room_id: number;
+}
+
 export interface RoomUrlParams {
   name?: string;
   page?: number;

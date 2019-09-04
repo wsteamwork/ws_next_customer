@@ -79,6 +79,12 @@ export interface RoomDetails {
   note: string;
 }
 
+export interface FavoriteRoomRes {
+  id: number;
+  room_id: number;
+  rooms: TransformerInclude<RoomIndexRes[]>;
+}
+
 export type RoomScheduleRes = {
   blocks: string[];
 };

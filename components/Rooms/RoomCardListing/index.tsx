@@ -17,7 +17,7 @@ import Link from '@material-ui/core/Link';
 import { windowExist } from '@/store/Redux';
 import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
 import SvgCustom from '@/components/Custom/SvgCustom';
-import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.jsx';
+import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.tsx';
 import { cleanAccents } from '@/utils/mixins';
 import Cookies from 'universal-cookie';
 import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +31,9 @@ import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import Swiper from 'react-id-swiper';
 
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import { FavoriteRoomReq } from '@/types/Requests/Rooms/RoomRequests';
+import { addFavoriteRoom, deleteFavoriteRoom } from '@/components/UserProfile/WishList/context';
 
 interface Iprops {
   classes?: any;
@@ -61,6 +64,25 @@ const RoomCardListing: FC<Iprops> = (props) => {
           type: 'SET_COMPARISON_LIST',
           comparisonList: [...comparisonList, room]
         });
+      }
+    }
+  };
+
+  const handleAddFavoriteRoom = async (isSaved: boolean) => {
+    const data: FavoriteRoomReq = {
+      room_id: room.id
+    };
+    if (!isSaved) {
+      try {
+        const res = await addFavoriteRoom(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const res = await deleteFavoriteRoom(data);
+      } catch (error) {
+        console.log(error);
       }
     }
   };
@@ -99,22 +121,22 @@ const RoomCardListing: FC<Iprops> = (props) => {
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-            <Swiper {...settings}>
-              {room.media.data.length > 0 ? (
-                _.map(room.media.data, (o) => (
-                  <img
-                    key={o.image}
-                    src={`${IMAGE_STORAGE_LG + o.image}`}
-                    className="imgSize"
-                    alt={`Westay - Homestay cho người việt`}
-                  />
-                ))
-              ) : (
-                  <img src="./static/images/background.svg" className="imgSize" />
-                )}
-            </Swiper>
-          </LazyLoad>
+          {/* <LazyLoad offset={windowExist ? window.innerHeight : 0}> */}
+          <Swiper {...settings}>
+            {room.media.data.length > 0 ? (
+              _.map(room.media.data, (o) => (
+                <img
+                  key={o.image}
+                  src={`${IMAGE_STORAGE_LG + o.image}`}
+                  className="imgSize"
+                  alt={`Westay - Homestay cho người việt`}
+                />
+              ))
+            ) : (
+              <img src="./static/images/background.svg" className="imgSize" />
+            )}
+          </Swiper>
+          {/* </LazyLoad> */}
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
@@ -162,8 +184,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} {t('rooms:bathrooms')}
                       </Fragment>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -198,8 +220,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                          ''
-                        )}
+                        ''
+                      )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -225,8 +247,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           }`}</span> */}
                   </Grid>
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -234,8 +256,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">{t('rooms:discount')}</Grid>
                     </Grid>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
@@ -245,8 +267,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             {t('shared:dayPrice')}
                           </span>
                         ) : (
-                            ''
-                          )}
+                          ''
+                        )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -255,39 +277,42 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         </Typography>
                       </Grid>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                        <Grid className="hourPrice">
-                          {room.is_discount === 1 ? (
-                            <span className="discountPriceText">
-                              {numeral(room.price_hour).format('0,0')}
-                              {t('shared:hourPrice')}
-                            </span>
-                          ) : (
-                              ''
-                            )}
-                          <Typography className="priceText" variant={typoVariant}>
-                            {numeral(
-                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                            ).format('0,0')}
+                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                      <Grid className="hourPrice">
+                        {room.is_discount === 1 ? (
+                          <span className="discountPriceText">
+                            {numeral(room.price_hour).format('0,0')}
                             {t('shared:hourPrice')}
-                          </Typography>
-                        </Grid>
-                      ) : (
-                        ''
-                      )}
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                        <Typography className="priceText" variant={typoVariant}>
+                          {numeral(
+                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                          ).format('0,0')}
+                          {t('shared:hourPrice')}
+                        </Typography>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
                   </Grid>
                 </Grid>
               </Link>
               <Grid className="boxSave">
-                <FavoriteAnimation />
+                <FavoriteAnimation handleAddFavoriteRoom={handleAddFavoriteRoom} />
                 <Hidden smDown>
-                  <Tooltip title={t('rooms:compareRooms')} placement='right-start'>
-                    <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
-                      <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+                  <Tooltip title={t('rooms:compareRooms')} placement="right-start">
+                    <IconButton
+                      aria-label="compare"
+                      className="iconCompare"
+                      onClick={handleCompareList}>
+                      <FontAwesomeIcon size="1x" icon={faBalanceScaleRight} />
                     </IconButton>
                   </Tooltip>
                 </Hidden>

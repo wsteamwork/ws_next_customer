@@ -1,0 +1,29 @@
+.swiper-container {
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-image: none;
+}
+
+// .swiper-button-next,
+// .swiper-button-prev {
+//   display: none;
+// }
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+  background: #fff;
+  opacity: 1;
+}
+
+// &:hover {
+//   .swiper-button-next,
+//   .swiper-button-prev {
+//     display: block;
+//   }
+
