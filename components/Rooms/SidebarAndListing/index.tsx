@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState, Fragment, FC } from 'react';
 
-import { Grid, Hidden, Paper } from '@material-ui/core';
+// import { Grid, Hidden, Paper } from '@material-ui/core';
 
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 // import Pagination from 'rc-pagination';
@@ -11,13 +11,13 @@ import { updateRouter } from '@/store/Context/utility';
 
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
-import GridContainer from '@/components/Layout/Grid/Container';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import VisitedRooms from '../VisitedRooms';
-import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
+// import GridContainer from '@/components/Layout/Grid/Container';
+// import ButtonGlobal from '@/components/ButtonGlobal';
+// import VisitedRooms from '../VisitedRooms';
+// import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
 import RoomCardListing from '../RoomCardListing';
 import RoomListing from '../RoomListing';
-import CompareRooms from '../CompareRooms';
+// import CompareRooms from '../CompareRooms';
 // @ts-ignore
 const SidebarAndListing: FC = (props) => {
   const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);

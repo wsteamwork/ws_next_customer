@@ -1,16 +1,16 @@
-import React, { FC, useContext, useMemo, Fragment, useState, useEffect } from 'react';
-import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
+import React, { FC, useContext, useState, useEffect } from 'react';
+import { Coords } from 'google-map-react';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import _ from 'lodash';
 
-import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
-import NotFound from '../Lotte/NotFound';
+// import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
+// import NotFound from '../Lotte/NotFound';
 import { Grid, Hidden } from '@material-ui/core';
-import RoomCardListing from '../RoomCardListing';
-import GridContainer from '@/components/Layout/Grid/Container';
-import LazyLoad from 'react-lazyload';
-import ListRoom from '@/components/ListRoom';
-import { StickyContainer, Sticky } from 'react-sticky';
+// import RoomCardListing from '../RoomCardListing';
+// import GridContainer from '@/components/Layout/Grid/Container';
+// import LazyLoad from 'react-lazyload';
+// import ListRoom from '@/components/ListRoom';
+// import { StickyContainer, Sticky } from 'react-sticky';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import MapRooms from './MapRooms';
 import MapCanvas from './MapCanvas';
