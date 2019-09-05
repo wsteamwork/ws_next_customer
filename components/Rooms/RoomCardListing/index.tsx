@@ -33,6 +33,24 @@ interface Iprops {
   room?: RoomIndexRes;
 }
 
+export const handleCompareList = (comparisonList:RoomIndexRes[],room:RoomIndexRes,dispatch:Dispatch<CompareRoomsActions>) => {
+  const comparisonListId = comparisonList.map(item => item.id);
+  if (!comparisonListId.includes(room.id)) {
+    if (comparisonList.length === 2) {
+      const data = comparisonList.slice(1);
+      dispatch({
+        type: 'SET_COMPARISON_LIST',
+        comparisonList: [...data, room]
+      })
+    } else {
+      dispatch({
+        type: 'SET_COMPARISON_LIST',
+        comparisonList: [...comparisonList, room]
+      })
+    }
+  }
+};
+
 const RoomCardListing: FC<Iprops> = (props) => {
   const { room } = props;
   const { t }: UseTranslationResponse = useTranslation();
@@ -42,24 +60,6 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.compareRooms.compareRooms
   );
-
-  const handleCompareList = () => {
-    const comparisonListId = comparisonList.map(item => item.id);
-    if (!comparisonListId.includes(room.id)) {
-      if (comparisonList.length === 2) {
-        const data = comparisonList.slice(1);
-        dispatch({
-          type: 'SET_COMPARISON_LIST',
-          comparisonList: [...data, room]
-        })
-      } else {
-        dispatch({
-          type: 'SET_COMPARISON_LIST',
-          comparisonList: [...comparisonList, room]
-        })
-      }
-    }
-  };
 
   const settings: Settings = {
     speed: 300,
@@ -254,7 +254,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                 <FavoriteAnimation />
                 <Hidden smDown>
                   <Tooltip title={t('rooms:compareRooms')} placement='right-start'>
-                    <IconButton aria-label="compare" className='iconCompare' onClick={handleCompareList}>
+                    <IconButton aria-label="compare" className='iconCompare' onClick={()=>handleCompareList(comparisonList,room,dispatch)}>
                       <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
                     </IconButton>
                   </Tooltip>

@@ -34,8 +34,12 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
+    dialog:{
+      zIndex:9999,
+    },
     appBar: {
       position: 'relative',
+      backgroundColor:'#fff',
     },
     title: {
       marginLeft: theme.spacing(2),
@@ -85,7 +89,7 @@ const DialogComparison: FC<IProps> = (props) => {
   }, [comparisonList]);
 
   return comparisonList.length === 2 ? (
-    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
+    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom} classes={{root:classes.dialog}}>
       <AppBar className={classes.appBar} elevation={0}>
         <Toolbar>
           <Typography variant="h4" className={classes.title}>

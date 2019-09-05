@@ -19,7 +19,7 @@
     height: 200px;
   }
 
-  @include mdDown {
+  @include md {
     height: 230px;
   }
 
@@ -64,11 +64,12 @@
     width: 60px;
     height: 60px;
     text-align: center;
-
-    .Animation{
-      cursor: pointer;
-    }
   }
+
+  .Lottie_iconHeart{
+    cursor: pointer;
+  }
+
   .iconCompare{
     color: #08C299;
     padding: 6px;

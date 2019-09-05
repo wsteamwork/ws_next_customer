@@ -51,7 +51,7 @@ class FavoriteAnimation extends Component {
         value.substr(value.length - 1) === '%' ? value : Number(value);
 
     return (
-        <div className="Animation">
+        <div className="Lottie_iconHeart">
           <Lottie
               onClick={this.handleClick}
               options={defaultOptions}

@@ -1,6 +1,6 @@
 import React, { FC, useState, forwardRef, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Button, Typography, Grid } from '@material-ui/core';
+import { Theme, Button, Typography, Grid, Snackbar } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Parallax } from 'react-parallax';
 import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
@@ -15,11 +15,21 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import _ from 'lodash';
 import '../../../styles/pages/room/boxImage/index.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
+import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons';
+import { handleCompareList } from '@/components/Rooms/RoomCardListing';
+import { Dispatch } from 'redux';
+import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
+import SnackBarCompareRoom from '@/components/Toolbar/SnackBarCompareRoom';
+import { TransitionProps } from '@material-ui/core/transitions';
+import VisitedRoom from '@/components/Rooms/VisitedRooms/VisitedRoom';
+import CardIntro from '@/components/Cards/CardIntro';
 
 interface IProps {
   classes?: any;
@@ -40,15 +50,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      borderRadius: 4,
       cursor:'pointer',
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
       '&:hover': {
-        MsTransform: 'scale(1.005)' /* IE 9 */,
-        WebkitTransform: 'scale(1.005)' /* Safari 3-8 */,
-        transform: 'scale(1.005)'
+        MsTransform: 'scale(1.008)' /* IE  */,
+        WebkitTransform: 'scale(1.008)' /* Safari */,
+        transform: 'scale(1.008)'
       },
     },
     parallaxContainer: {
@@ -63,6 +72,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         height: '30vh',
       },
       position: 'relative',
+      borderRadius: 4,
+      overflow: 'hidden'
     },
     insideParalax: {
       position: 'absolute',
@@ -118,6 +129,29 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.down('sm')]: {
         fontSize: '1.125rem',
       },
+    },
+    boxHeart:{
+      position: 'absolute',
+      right: 0,
+      top:0,
+      width:'auto',
+      height: 60,
+      display:'flex',
+      alignItems:'center',
+      backgroundColor: 'rgba(255,255,255,0.5)',
+      borderRadius: 4
+    },
+    iconCompare:{
+      color: '#d64d57',
+      padding: 6,
+      fontSize: '1.15rem',
+      transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      width:60,
+      height:60,
+    },
+    boxSnackBar:{
+      backgroundColor:'#fff',
+      color:'#323232'
     }
   })
 );
@@ -129,6 +163,11 @@ const BoxImage: FC<IProps> = (props) => {
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { width } = useContext(GlobalContext);
   const {t} = useTranslation();
+  const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
+  const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.compareRooms.compareRooms
+  );
+  const [openCompare, setOpenCompare] = useState<boolean>(false);
 
   const handleClick = () => {
     if (isPreview && room.media.data.length === 0) {
@@ -136,6 +175,15 @@ const BoxImage: FC<IProps> = (props) => {
     }else{
       setOpenDialog(!openDialog);
     }
+  };
+
+  const handldeSnackBar=()=>{
+    setOpenCompare(!openCompare);
+  };
+
+  const handleCompare=()=>{
+    handleCompareList(comparisonList,room,dispatch);
+    handldeSnackBar();
   };
 
   const images = room
@@ -192,6 +240,12 @@ const BoxImage: FC<IProps> = (props) => {
             {width === 'sm' || width === 'xs' ? '' : t('room:viewPhotos')}
           </Button>
         </div>
+        <div className={classes.boxHeart}>
+          <IconButton aria-label="compare" className={classes.iconCompare} onClick={handleCompare}>
+            <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+          </IconButton>
+          <FavoriteAnimation />
+        </div>
       </div>
 
       <Dialog
@@ -228,6 +282,9 @@ const BoxImage: FC<IProps> = (props) => {
           </DialogContent>
         </Grid>
       </Dialog>
+
+      <SnackBarCompareRoom open={openCompare} onClose={()=>handldeSnackBar()}/>
+
     </GridContainer>
   );
 };
