@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import FooterComponent from '@/components/Layout/FooterComponent';
 
-interface IProps {}
+interface IProps { }
 
 // @ts-ignore
 const TermsOfConditions: NextPage<IProps> = (props: IProps) => {

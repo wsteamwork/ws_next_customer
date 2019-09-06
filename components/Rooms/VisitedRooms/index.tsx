@@ -35,7 +35,7 @@ const VisitedRooms: FC = (props) => {
         </Typography>
         <Paper elevation={0}>
           {visitedRoom.map((room, index) => (
-            <VisitedRoom key={index} room={room}/>
+            <VisitedRoom key={index} room={room} />
           ))}
         </Paper>
       </Grid>

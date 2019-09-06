@@ -267,8 +267,8 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                       </Typography>
                     </Badge>
                   ) : (
-                    <NotificationsOutlined />
-                  )}
+                      <NotificationsOutlined />
+                    )}
                 </Button>
               )}
 
@@ -379,35 +379,35 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </Popper>
                 </Fragment>
               ) : (
-                <Fragment>
-                  <Button
-                    name="sign-in"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={loginButtonClick}
-                    size="large"
+                  <Fragment>
+                    <Button
+                      name="sign-in"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={loginButtonClick}
+                      size="large"
                     // onMouseOver={() => LoginForm.preload()}
-                  >
-                    {t('home:signIn')}
-                  </Button>
+                    >
+                      {t('home:signIn')}
+                    </Button>
 
-                  {/* <Link href="/auth/signup"> */}
-                  <Button
-                    href="/auth/signup"
-                    name="sign-up"
-                    color="inherit"
-                    className={classes.button}
-                    onClick={signUpButtonClick}
-                    size="large"
+                    {/* <Link href="/auth/signup"> */}
+                    <Button
+                      href="/auth/signup"
+                      name="sign-up"
+                      color="inherit"
+                      className={classes.button}
+                      onClick={signUpButtonClick}
+                      size="large"
                     // onMouseOver={() => SignUpForm.preload()}
-                  >
-                    {t('home:signUp')}
-                  </Button>
-                  {/* </Link> */}
+                    >
+                      {t('home:signUp')}
+                    </Button>
+                    {/* </Link> */}
 
-                  <SwitchLanguage />
-                </Fragment>
-              )}
+                    <SwitchLanguage />
+                  </Fragment>
+                )}
             </Hidden>
             <Hidden mdUp>
               <Logo />

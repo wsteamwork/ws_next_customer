@@ -18,7 +18,7 @@ interface IProps {
   classes?: any,
   open?: boolean,
   onClose?: () => void,
-  className?:string,
+  className?: string,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -26,36 +26,36 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     icon: {
       fontSize: 20,
     },
-    boxEmpty:{
+    boxEmpty: {
       padding: 16,
       border: '2px dashed #ddd',
-      borderRadius:2,
-      margin:'8px 0px',
+      borderRadius: 2,
+      margin: '8px 0px',
       textAlign: 'center',
-      color:'#ddd'
+      color: '#ddd'
     },
     btnShow: {
       color: '#41C9BC',
       border: '1px solid #41C9BC',
       textTransform: 'initial',
       marginTop: theme.spacing(1),
-      float:'right'
+      float: 'right'
     },
-    indexSnack:{
-      zIndex:1200,
+    indexSnack: {
+      zIndex: 1200,
     }
   })
 );
 
 const SnackBarCompareRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {open,onClose} = props;
+  const { open, onClose } = props;
   const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.compareRooms.compareRooms
   );
   const { t } = useTranslation();
   const [openCompare, setOpenCompare] = useState<boolean>(false);
-  const hanldeShow=()=>{
+  const hanldeShow = () => {
     setOpenCompare(true);
   };
 
@@ -63,39 +63,39 @@ const SnackBarCompareRoom: FC<IProps> = (props) => {
     <Fragment>
       <Snackbar
         open={open}
-        classes={{root:classes.indexSnack}}
+        classes={{ root: classes.indexSnack }}
         autoHideDuration={null}
         // TransitionComponent={Transition}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         action={[
-          <IconButton key="close" aria-label="close" color="inherit" onClick={()=>onClose()}>
+          <IconButton key="close" aria-label="close" color="inherit" onClick={() => onClose()}>
             <CloseIcon className={classes.icon} />
           </IconButton>,
         ]}
         message={
-          <Grid container spacing={2} style={{maxWidth:500}}>
+          <Grid container spacing={2} style={{ maxWidth: 500 }}>
             <Grid item xs={6}>
               {
                 comparisonList[0] ? (
-                  <VisitedRoom room={comparisonList[0]} marginBottom={'0px'}/>
+                  <VisitedRoom room={comparisonList[0]} marginBottom={'0px'} />
                 ) : (
-                  <div className={classes.boxEmpty}>
-                    <FontAwesomeIcon size='2x' icon={faTags} />
-                    <Typography variant='h6'>{t('rooms:emptyItem')}</Typography>
-                  </div>
-                )
+                    <div className={classes.boxEmpty}>
+                      <FontAwesomeIcon size='2x' icon={faTags} />
+                      <Typography variant='h6'>{t('rooms:emptyItem')}</Typography>
+                    </div>
+                  )
               }
             </Grid>
             <Grid item xs={6}>
               {
                 comparisonList[1] ? (
-                  <VisitedRoom room={comparisonList[1]} marginBottom={'0px'}/>
+                  <VisitedRoom room={comparisonList[1]} marginBottom={'0px'} />
                 ) : (
-                  <div className={classes.boxEmpty}>
-                    <FontAwesomeIcon size='2x' icon={faTags} />
-                    <Typography variant='h6'>{t('rooms:emptyItem')}</Typography>
-                  </div>
-                )
+                    <div className={classes.boxEmpty}>
+                      <FontAwesomeIcon size='2x' icon={faTags} />
+                      <Typography variant='h6'>{t('rooms:emptyItem')}</Typography>
+                    </div>
+                  )
               }
             </Grid>
             <Grid item xs={12}>
@@ -116,7 +116,7 @@ const SnackBarCompareRoom: FC<IProps> = (props) => {
         }
       />
 
-      <DialogComparison open={openCompare} handleClose={()=>setOpenCompare(false)}/>
+      <DialogComparison open={openCompare} handleClose={() => setOpenCompare(false)} />
     </Fragment>
   );
 };

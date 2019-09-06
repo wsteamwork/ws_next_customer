@@ -16,16 +16,16 @@ const Notification: NextPage = () => {
 
   return (
     <Fragment>
-    {useMemo(
-      () => (
-      <Fragment>
-        <NavHeader></NavHeader>
-        <Notifications></Notifications>
-        <Footer></Footer>
-      </Fragment>
-       ),
-       []
-     )}
+      {useMemo(
+        () => (
+          <Fragment>
+            <NavHeader></NavHeader>
+            <Notifications></Notifications>
+            <Footer></Footer>
+          </Fragment>
+        ),
+        []
+      )}
     </Fragment>
   );
 };

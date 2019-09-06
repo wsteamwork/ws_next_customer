@@ -91,18 +91,18 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
                   />
                 </Grid>
               ) : (
-                ''
-              )
+                  ''
+                )
             )}
           </Grid>
         </Hidden>
 
         <Hidden smUp implementation="css">
           <div className={classes.root}>
-            <ListRoom 
-            roomData={apartments}
-            usingSlider={true}
-            render={renderRoom}
+            <ListRoom
+              roomData={apartments}
+              usingSlider={true}
+              render={renderRoom}
             />
             {/* <Swiper {...settings}>
               {_.map(apartments, (obj, i) =>

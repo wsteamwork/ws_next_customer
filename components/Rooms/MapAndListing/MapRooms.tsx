@@ -3,12 +3,12 @@ import _ from 'lodash';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import NotFound from '../Lotte/NotFound';
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 import ListRoom from '@/components/ListRoom';
 import RoomCardListing from '../RoomCardListing';
 import 'rc-pagination/assets/index.css';
 import Pagination from 'rc-pagination';
-import { updateRouter } from '@/store/Context/utility';
+// import { updateRouter } from '@/store/Context/utility';
 import { Grid } from '@material-ui/core';
 import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
 
@@ -93,8 +93,8 @@ const MapRooms: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-        <NotFound height={250} width={250} />
-      )}
+            <NotFound height={250} width={250} />
+          )}
     </Fragment>
   );
 };

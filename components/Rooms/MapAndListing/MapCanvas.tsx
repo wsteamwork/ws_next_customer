@@ -1,10 +1,10 @@
 import React, {
-  ComponentType,
+  // ComponentType,
   Fragment,
-  useState,
+  // useState,
   useContext,
-  memo,
-  useEffect,
+  // memo,
+  // useEffect,
   useMemo
 } from 'react';
 import _ from 'lodash';
@@ -54,8 +54,8 @@ const MapCanvas: FC<IProps> = (props) => {
         }}
         center={center}
         yesIWantToUseGoogleMapApiInternals
-        // onChildMouseEnter={(h) => hoverAction(parseInt(h))}
-        // onChildMouseLeave={(h) => hoverAction(0)}
+      // onChildMouseEnter={(h) => hoverAction(parseInt(h))}
+      // onChildMouseLeave={(h) => hoverAction(0)}
       >
         {_.map(rooms, (room) => (
           <MapMarker
