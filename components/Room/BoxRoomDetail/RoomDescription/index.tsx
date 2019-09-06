@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import Button from '@material-ui/core/Button';
 import Orange from '@material-ui/core/colors/orange';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -38,7 +36,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     iconPlus: {
       fontSize: '15px'
     },
-    title:{
+    title: {
       fontWeight: 700,
       margin: '8px 0',
     }
@@ -53,9 +51,9 @@ const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const {room} = props;
+  const { room } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const {router} = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
   const toggle = (e: MouseEvent<HTMLElement>) => {

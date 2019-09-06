@@ -44,9 +44,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const {room} = props;
+  const { room } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const {router} = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
   const arrMenuItem = (x: number): any[] => {

@@ -97,7 +97,7 @@ const Room: NextPage = () => {
                   <NavBottomBook />
                 </Grid>
 
-                
+
               </GridContainer>
             ) : ''}
           </RoomDetailsContext.Provider>

@@ -15,15 +15,18 @@ import BoxBooking from '@/components/Room/BoxBooking';
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import Footer from '@/components/Layout/FooterComponent';
-import { NextContextPage } from '@/store/Redux/Reducers';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { getCookieFromReq } from '@/utils/mixins';
+import { useSelector } from 'react-redux';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 // import Cookies from 'universal-cookie';
 const PreviewRoom: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
+  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
 
   return (
     <Fragment>
@@ -41,7 +44,7 @@ const PreviewRoom: NextPage = () => {
 
           <Grid container>
             <Grid item xs={12} lg={8} xl={9}>
-              <BoxRoomDetail />
+              <BoxRoomDetail room={room} />
             </Grid>
 
             <Grid
