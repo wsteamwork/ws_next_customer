@@ -5,9 +5,10 @@ import CardIntro from '@/components/Cards/CardIntro';
 import { useTranslation } from 'react-i18next';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import Link from 'next/link';
-import Slider, { Settings } from 'react-slick';
 import NextArrow from '@/components/ListRoom/NextArrow';
 import PrevArrow from '@/components/ListRoom/PrevArrow';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
 
 interface IProps {
   classes?: any;
@@ -33,60 +34,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BlogContainer: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const {} = props;
   const { t } = useTranslation();
 
-  const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    speed: 800,
-    lazyLoad: 'progressive',
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    touchThreshold: 10,
-    centerPadding: "20%",
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 5
-        }
-      },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 4
-        }
-      },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1.9,
-          touchThreshold: 5000,
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          centerPadding: '24%',
-          slidesToScroll: 1
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          touchThreshold: 5000,
-          slidesToShow: 1.2,
-          centerPadding: '12%',
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1
-        }
-      }
-    ]
+  const setting: ReactIdSwiperProps = {
+    slidesPerView: 1.5,
+    lazy: true
   };
 
   return (
@@ -135,7 +88,7 @@ const BlogContainer: FC<IProps> = (props) => {
         </Grid>
       </Hidden>
       <Hidden smUp implementation="css">
-        <Slider {...setting}>
+        <Swiper {...setting}>
           <div className={classes.paddingItem}>
             <a href="https://blog.westay.vn/cam-nang-du-lich" target="_blank">
               <CardIntro
@@ -172,7 +125,7 @@ const BlogContainer: FC<IProps> = (props) => {
               />
             </a>
           </div>
-        </Slider>
+        </Swiper>
       </Hidden>
     </Grid>
   );

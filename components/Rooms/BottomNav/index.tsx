@@ -18,7 +18,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       position: 'fixed',
       width: '100%',
       bottom: 0,
-      height: 60
+      height: 60,
+      zIndex: 1
     },
     customColor: {
       color: '#484848'

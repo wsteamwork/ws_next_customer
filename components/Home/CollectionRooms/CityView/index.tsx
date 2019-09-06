@@ -4,12 +4,13 @@ import { Theme, Typography, Hidden, Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import NextArrow from '@/components/ListRoom/NextArrow';
 import PrevArrow from '@/components/ListRoom/PrevArrow';
-import Slider, { Settings } from 'react-slick';
 import CardIntro from '@/components/Cards/CardIntro';
 import Link from 'next/link';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import Swiper from 'react-id-swiper';
 
 interface IProps {
-  classes?: any
+  classes?: any;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -22,81 +23,50 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     title: {
       marginBottom: theme.spacing(3),
-      fontWeight: 900,
+      fontWeight: 900
     },
     paddingItem: {
       padding: theme.spacing(1 / 2)
-    },
+    }
   })
 );
 
 const CityView: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { } = props;
+  const {} = props;
   const { t } = useTranslation();
 
-  const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 3,
-    speed: 800,
-    lazyLoad: 'progressive',
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    touchThreshold: 10,
-
-    centerPadding: "20%",
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 3,
-        }
+  const setting = {
+    slidesPerView: 5,
+    lazy: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    renderPrevButton: () => <PrevArrow className="swiper-button-prev"></PrevArrow>,
+    renderNextButton: () => <NextArrow className="swiper-button-next"></NextArrow>,
+    breakpoints: {
+      1920: {},
+      1128: {
+        slidesPerView: 4
       },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 3,
-        }
+      960: {
+        slidesPerView: 2.3,
+        freeMode: true
       },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1.2,
-          centerPadding: "12%",
-          touchThreshold: 5000,
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          touchThreshold: 5000,
-          slidesToShow: 1.2,
-          centerPadding: "12%",
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1,
-        }
+      600: {
+        slidesPerView: 1.5
       }
-    ]
+    }
   };
-
 
   return (
     <Grid className={classes.root}>
-      <Typography variant='h5' className={classes.title}>
+      <Typography variant="h5" className={classes.title}>
         {t('home:collectionRooms:cityView')}
       </Typography>
       <Hidden smDown implementation="css">
-        <Grid container spacing={2} justify='flex-start'>
+        <Grid container spacing={2} justify="flex-start">
           <Grid item xs>
             <CardIntro imgHeight={350} />
           </Grid>
@@ -116,36 +86,36 @@ const CityView: FC<IProps> = (props) => {
       </Hidden>
 
       <Hidden mdUp implementation="css">
-        <Slider {...setting}>
+        <Swiper {...setting}>
           <div className={classes.paddingItem}>
-            <Link href='/room/3762'>
+            <Link href="/room/3762">
               <a>
                 <CardIntro imgHeight={290} />
               </a>
             </Link>
           </div>
           <div className={classes.paddingItem}>
-            <Link href='/room/3762'>
+            <Link href="/room/3762">
               <a>
                 <CardIntro imgHeight={290} />
               </a>
             </Link>
           </div>
           <div className={classes.paddingItem}>
-            <Link href='/room/3762'>
+            <Link href="/room/3762">
               <a>
                 <CardIntro imgHeight={290} />
               </a>
             </Link>
           </div>
           <div className={classes.paddingItem}>
-            <Link href='/room/3762'>
+            <Link href="/room/3762">
               <a>
                 <CardIntro imgHeight={290} />
               </a>
             </Link>
           </div>
-        </Slider>
+        </Swiper>
       </Hidden>
     </Grid>
   );

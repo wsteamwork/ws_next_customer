@@ -1,21 +1,18 @@
 import createStyles from '@material-ui/core/styles/createStyles';
 import React, { Fragment, useMemo, ReactNode } from 'react';
-import Slider, { Settings } from 'react-slick';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
 import { Theme, Typography, Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/styles';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
-// import { useTranslation } from 'react-i18next';
 import { GridSpacing } from '@material-ui/core/Grid';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
+import Swiper from 'react-id-swiper';
+import { SwiperOptions } from 'swiper';
 
-interface Iprops<T> extends Partial<Settings> {
+interface Iprops<T> extends Partial<SwiperOptions> {
   roomData: T[];
   title?: string;
   usingSlider?: boolean;
@@ -52,10 +49,8 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     spacing,
     usingInMap,
     hoverAction,
-    hoverId,
-    focusRoomLocation,
     customClass = 'listRoomContainer',
-    ...propsSlick
+    ...propsSwiper
   } = props;
   const classes = useStyles({});
 
@@ -81,7 +76,6 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         slidesPerView: 1.5
       }
     }
-
   };
 
   const renderRooms = useMemo(
@@ -122,13 +116,13 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         )}
         {roomData ? (
           usingSlider ? (
-            <Swiper {...setting}>{renderRooms}</Swiper>
+            <Swiper {...setting} {...propsSwiper}>{renderRooms}</Swiper>
           ) : (
-              <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
-            )
+            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+          )
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
     </Fragment>
   );

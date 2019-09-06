@@ -24,7 +24,8 @@ import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
 import RoomReview from '@/components/Room/BoxRoomDetail/RoomReview';
 import BoxMap from '@/components/Room/BoxMap';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import Swiper from 'react-id-swiper';
 
 interface IProps {
   classes?: any,
@@ -72,12 +73,10 @@ const DialogComparison: FC<IProps> = (props) => {
   const _renderDayContents1 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay1} />;
   const _renderDayContents2 = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay2} />;
 
-  const settings: Settings = {
-    speed: 300,
-    dots: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    lazyLoad: 'ondemand',
+
+  const settings = {
+    slidesPerView: 1,
+    lazy: true,
   };
 
   useEffect(() => {
@@ -103,7 +102,7 @@ const DialogComparison: FC<IProps> = (props) => {
               <div className="roomCardListing__wrapper">
                 <div className="boxImg">
                   <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-                    <Slider {...settings}>
+                    <Swiper {...settings}>
                       {comparisonList[0].media.data.length > 0 ? (
                         _.map(comparisonList[0].media.data, (o) => (
                           <img
@@ -116,7 +115,7 @@ const DialogComparison: FC<IProps> = (props) => {
                       ) : (
                           <img src="./static/images/background.svg" className="imgSize" />
                         )}
-                    </Slider>
+                    </Swiper>
                   </LazyLoad>
                 </div>
               </div>
@@ -172,7 +171,7 @@ const DialogComparison: FC<IProps> = (props) => {
               <div className="roomCardListing__wrapper">
                 <div className="boxImg">
                   <LazyLoad offset={windowExist ? window.innerHeight : 0}>
-                    <Slider {...settings}>
+                    <Swiper {...settings}>
                       {comparisonList[1].media.data.length > 0 ? (
                         _.map(comparisonList[1].media.data, (o) => (
                           <img
@@ -185,7 +184,7 @@ const DialogComparison: FC<IProps> = (props) => {
                       ) : (
                           <img src="./static/images/background.svg" className="imgSize" />
                         )}
-                    </Slider>
+                    </Swiper>
                   </LazyLoad>
                 </div>
               </div>

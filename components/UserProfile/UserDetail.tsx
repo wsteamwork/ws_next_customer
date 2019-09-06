@@ -73,8 +73,7 @@ const UserDetail: FC = (props) => {
 
       <ListRoom
         roomData={userRooms}
-        responsive={null}
-        slidesToShow={userRooms.length < 2 ? 1 : 2}
+        slidesPerView={userRooms.length < 2 ? 1 : 2}
         usingSlider={true}
         title={t('user:accommodationUpper')}
         render={renderRoom}></ListRoom>

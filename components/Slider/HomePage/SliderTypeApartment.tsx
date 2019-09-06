@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { TypeApartment } from '@/types/Requests/Rooms/RoomResponses';
 import { updateRouter } from '@/store/Context/utility';
+
+import ListRoom from '@/components/ListRoom';
 interface Iprops {
   classes?: any;
 }
@@ -38,58 +40,40 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
     updateRouter(true, 'type_room', idType);
   };
 
-  const setting: Settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 1.5,
+  const settings = {
+    slidesPerView: 1.5,
     speed: 800,
-    lazyLoad: 'progressive',
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    touchThreshold: 10,
-    centerPadding: '20%',
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 5
-        }
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    renderPrevButton: () => <PrevArrow className="swiper-button-prev"></PrevArrow>,
+    renderNextButton: () => <NextArrow className="swiper-button-next"></NextArrow>,
+    breakpoints: {
+      1920: {
+        slidesPerView: 5
       },
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 4
-        }
+      1366: {
+        slidesPerView: 4
       },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 1.9,
-          touchThreshold: 5000,
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          centerPadding: '24%',
-          slidesToScroll: 1
-        }
+      960: {
+        slidesPerView: 1.9,
+        freeMode: true
       },
-      {
-        breakpoint: 600,
-        settings: {
-          touchThreshold: 5000,
-          slidesToShow: 1.2,
-          centerPadding: '12%',
-          arrows: false,
-          lazyLoad: 'progressive',
-          centerMode: true,
-          initialSlide: 0,
-          slidesToScroll: 1
-        }
+      600: {
+        slidesPerView: 1.2
       }
-    ]
+    }
   };
+
+  const renderRoom = (room) => (<div className={classes.paddingGrid}>
+    <CardIntro
+      imgHeight={width === 'xl' ? 250 : 200}
+      imgSrc={room.image}
+      title={room.value}
+      onClickCard={() => SearchType(room.id)}
+    />
+  </div>);
 
   return (
     apartments && (
@@ -107,17 +91,23 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
                   />
                 </Grid>
               ) : (
-                  ''
-                )
+                ''
+              )
             )}
           </Grid>
         </Hidden>
 
         <Hidden smUp implementation="css">
           <div className={classes.root}>
-            <Slider {...setting}>
+            <ListRoom 
+            roomData={apartments}
+            usingSlider={true}
+            render={renderRoom}
+            />
+            {/* <Swiper {...settings}>
               {_.map(apartments, (obj, i) =>
-                obj.status === 1 ? (
+                // obj.status === 1 ? 
+                (
                   <div key={i} className={classes.paddingGrid}>
                     <CardIntro
                       imgHeight={width === 'xl' ? 250 : 200}
@@ -127,10 +117,10 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
                     />
                   </div>
                 ) : (
-                    ''
-                  )
+                  ''
+                )
               )}
-            </Slider>
+            </Swiper> */}
           </div>
         </Hidden>
       </Fragment>
@@ -138,4 +128,4 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
   );
 };
 
-export default SliderTypeApartment
+export default SliderTypeApartment;
