@@ -57,11 +57,7 @@ const MapRooms: FC<IProps> = (props) => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);
 
-  const renderMapRooms = (room) => (
-    <LazyLoad>
-      <RoomCardListing room={room} />
-    </LazyLoad>
-  );
+  const renderMapRooms = (room) => <RoomCardListing room={room} />;
 
   return (
     <Fragment>
@@ -97,8 +93,8 @@ const MapRooms: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-            <NotFound height={250} width={250} />
-          )}
+        <NotFound height={250} width={250} />
+      )}
     </Fragment>
   );
 };

@@ -14,14 +14,16 @@ import { updateRouter } from '@/store/Context/utility';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import CompareRooms from '@/components/Rooms/CompareRooms';
+import Router from 'next/router';
+import LazyLoad from 'react-lazyload';
 // @ts-ignore
 const RoomListing: FC = (props) => {
   const { state: stateIndexRoom, dispatch } = useContext(RoomIndexContext);
   const { rooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const { width } = useContext(GlobalContext);
+  const { width, router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -31,10 +33,18 @@ const RoomListing: FC = (props) => {
   };
 
   useEffect(() => {
+    if (meta && meta.pagination) setCurrentPage(meta.pagination.current_page);
+  }, [meta]);
+
+  useEffect(() => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);
 
-  const renderRoom = (room) => <RoomCardListing room={room} />;
+  const renderRoom = (room) => (
+    <LazyLoad>
+      <RoomCardListing room={room} />
+    </LazyLoad>
+  );
 
   const openMap = () => {
     dispatch({ type: 'setMapOpen', isMapOpen: true });
@@ -67,15 +77,15 @@ const RoomListing: FC = (props) => {
             </Grid>
           </Hidden>
         ) : (
-            <Hidden smDown>
-              <Grid item sm={4} lg={3}>
-                <LoadingSkeleton type={'sideBar'} />
-              </Grid>
-            </Hidden>
-          )}
+          <Hidden smDown>
+            <Grid item sm={4} lg={3}>
+              <LoadingSkeleton type={'sideBar'} />
+            </Grid>
+          </Hidden>
+        )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
-          {rooms.length !== 0 ? (
+          {!isLoading && meta ? (
             <Fragment>
               <ListRoom
                 customClass="listRoomContainerWithoutSlickCustom"
@@ -101,8 +111,8 @@ const RoomListing: FC = (props) => {
               </Grid>
             </Hidden>
           ) : (
-                ''
-              )}
+            ''
+          )}
           {isEmpty ? <NotFound height={250} width={250} /> : ''}
         </Grid>
       </Grid>

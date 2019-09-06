@@ -21,6 +21,11 @@
     background-color: #fa991c;
     border-radius: 100%;
   }
+
+  .rc-pagination-item-active:hover{
+    color: #fff;
+  }
+
   .rc-pagination-prev,
   .rc-pagination-next {
     border: none;

@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import ReviewItem from '../ReviewItem/index';
 import RatingDetail from '../RatingDetail/index';
 import _ from 'lodash';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
