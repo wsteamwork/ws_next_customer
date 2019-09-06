@@ -71,9 +71,9 @@ const Room: NextPage = () => {
           <RoomDetailsContext.Provider value={{ state, dispatch }}>
             {room ? (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <Hidden mdUp implementation="css">
-                  {/* <SearchMobile /> */}
-                </Hidden>
+                {/*<Hidden mdUp implementation="css">*/}
+                {/*   <SearchMobile /> */}
+                {/*</Hidden>*/}
 
                 <Hidden mdDown implementation="css">
                   <BoxSearch />
@@ -96,6 +96,8 @@ const Room: NextPage = () => {
                 <Grid container className="roomPage__boxBookingMoblie">
                   <NavBottomBook />
                 </Grid>
+
+                
               </GridContainer>
             ) : ''}
           </RoomDetailsContext.Provider>

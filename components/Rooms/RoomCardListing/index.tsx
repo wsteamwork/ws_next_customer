@@ -34,6 +34,24 @@ interface Iprops {
   room?: RoomIndexRes;
 }
 
+export const handleCompareList = (comparisonList: RoomIndexRes[], room: RoomIndexRes, dispatch: Dispatch<CompareRoomsActions>) => {
+  const comparisonListId = comparisonList.map(item => item.id);
+  if (!comparisonListId.includes(room.id)) {
+    if (comparisonList.length === 2) {
+      const data = comparisonList.slice(1);
+      dispatch({
+        type: 'SET_COMPARISON_LIST',
+        comparisonList: [...data, room]
+      })
+    } else {
+      dispatch({
+        type: 'SET_COMPARISON_LIST',
+        comparisonList: [...comparisonList, room]
+      })
+    }
+  }
+};
+
 const RoomCardListing: FC<Iprops> = (props) => {
   const { room } = props;
   const { t }: UseTranslationResponse = useTranslation();
@@ -43,24 +61,6 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.compareRooms.compareRooms
   );
-
-  const handleCompareList = () => {
-    const comparisonListId = comparisonList.map((item) => item.id);
-    if (!comparisonListId.includes(room.id)) {
-      if (comparisonList.length === 2) {
-        const data = comparisonList.slice(1);
-        dispatch({
-          type: 'SET_COMPARISON_LIST',
-          comparisonList: [...data, room]
-        });
-      } else {
-        dispatch({
-          type: 'SET_COMPARISON_LIST',
-          comparisonList: [...comparisonList, room]
-        });
-      }
-    }
-  };
 
   const settings = {
     rebuildOnUpdate: true,
@@ -111,8 +111,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                 </div>
               ))
             ) : (
-              <img src="./static/images/background.svg" className="imgSize" />
-            )}
+                <img src="./static/images/background.svg" className="imgSize" />
+              )}
           </Swiper>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
@@ -161,8 +161,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} {t('rooms:bathrooms')}
                       </Fragment>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -197,8 +197,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                        ''
-                      )}
+                          ''
+                        )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -224,8 +224,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           }`}</span> */}
                   </Grid>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -233,8 +233,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">{t('rooms:discount')}</Grid>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
@@ -244,8 +244,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             {t('shared:dayPrice')}
                           </span>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -254,30 +254,30 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         </Typography>
                       </Grid>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                      <Grid className="hourPrice">
-                        {room.is_discount === 1 ? (
-                          <span className="discountPriceText">
-                            {numeral(room.price_hour).format('0,0')}
+                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                        <Grid className="hourPrice">
+                          {room.is_discount === 1 ? (
+                            <span className="discountPriceText">
+                              {numeral(room.price_hour).format('0,0')}
+                              {t('shared:hourPrice')}
+                            </span>
+                          ) : (
+                              ''
+                            )}
+                          <Typography className="priceText" variant={typoVariant}>
+                            {numeral(
+                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                            ).format('0,0')}
                             {t('shared:hourPrice')}
-                          </span>
-                        ) : (
-                          ''
-                        )}
-                        <Typography className="priceText" variant={typoVariant}>
-                          {numeral(
-                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                          ).format('0,0')}
-                          {t('shared:hourPrice')}
-                        </Typography>
-                      </Grid>
-                    ) : (
-                      ''
-                    )}
+                          </Typography>
+                        </Grid>
+                      ) : (
+                        ''
+                      )}
                   </Grid>
                 </Grid>
               </Link>
@@ -288,7 +288,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     <IconButton
                       aria-label="compare"
                       className="iconCompare"
-                      onClick={handleCompareList}>
+                      onClick={() => handleCompareList(comparisonList, room, dispatch)}>
                       <FontAwesomeIcon size="1x" icon={faBalanceScaleRight} />
                     </IconButton>
                   </Tooltip>

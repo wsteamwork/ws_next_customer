@@ -32,7 +32,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: 16,
       border: '2px dashed #ddd',
       borderRadius:2,
-      margin:'8px 0px',
       textAlign: 'center',
       color:'#ddd'
     },
