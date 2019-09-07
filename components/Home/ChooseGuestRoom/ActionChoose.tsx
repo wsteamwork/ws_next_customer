@@ -4,7 +4,6 @@ import React, {
   Dispatch,
   SetStateAction,
   memo,
-  MouseEventHandler,
   useEffect
 } from 'react';
 import { Grid } from '@material-ui/core';
@@ -15,7 +14,6 @@ import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { updateRouter } from '@/store/Context/utility';
 
 const RowSelect = dynamic(() => import('./RowSelect'));
 
@@ -48,7 +46,6 @@ const ActionChoose: FC<IProps> = (props) => {
     setOpen(false);
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: room });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: guest });
-    updateRouter(true, 'number_of_guests', guest, 'number_of_rooms', room);
   };
 
   return (

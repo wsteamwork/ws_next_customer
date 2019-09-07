@@ -30,6 +30,7 @@ const SearchComponent: FC<IProps> = (props) => {
     startDate,
     endDate,
     bookingType,
+    roomType,
     roomsCount,
     guestsCount
   } = filter;
@@ -46,6 +47,7 @@ const SearchComponent: FC<IProps> = (props) => {
       check_out: endDate,
       number_of_guests: guestsCount,
       rent_type: bookingType !== 0 ? bookingType : undefined,
+      type_room: roomType !== 0 ? roomType : undefined,
       city_id: city_id ? city_id : '',
       district_id: district_id ? district_id : ''
     };

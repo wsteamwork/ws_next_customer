@@ -3,11 +3,16 @@ import { withStyles, Checkbox, FormGroup, FormControlLabel } from '@material-ui/
 import mainColor from '@/styles/constants/colors';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { connect, useSelector } from 'react-redux';
+import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { useTranslation } from 'react-i18next';
+import { ReducersType, ReducersList } from '@/store/Redux/Reducers';
+import { compose } from 'recompose';
+
 interface IProps {
+  filter: SearchFilterState;
   updateBookingType: (type: number) => void;
+  updateRoomType: (type: number) => void;
 }
 
 export const CustomCheckbox = withStyles({
@@ -16,29 +21,35 @@ export const CustomCheckbox = withStyles({
     '&$checked': {
       color: mainColor.primary
     }
-  },
-  checked: {}
+  }
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 const CheckboxList: FC<IProps> = (props) => {
-  const { updateBookingType } = props;
+  const { filter, updateBookingType, updateRoomType } = props;
+  const { bookingType, roomType } = filter;
+  // const bookingType = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
+  // const roomType = useSelector<ReducersList, number>((state) => state.searchFilter.roomType);
   const [state, setState] = useState({
-    rentType: false,
-    checkedB: false,
-    checkedC: false
+    checkedB: false
   });
-
-  useEffect(() => {
-    if (state.rentType) {
-      updateBookingType(1);
-    } else {
-      updateBookingType(2);
-    }
-  }, [state.rentType]);
 
   const { t } = useTranslation();
 
   const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [name]: event.target.checked });
+  };
+  const handleRoomType = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    if (checked === true) {
+      updateRoomType(3);
+    } else {
+      updateRoomType(0);
+    }
+  };
+  const handleBookingType = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    if (checked === true) {
+      updateBookingType(1);
+    } else {
+      updateBookingType(2);
+    }
   };
 
   return (
@@ -46,9 +57,9 @@ const CheckboxList: FC<IProps> = (props) => {
       <FormControlLabel
         control={
           <CustomCheckbox
-            checked={state.rentType}
-            onChange={handleChange('rentType')}
-            value="rentType"
+            checked={bookingType === 1}
+            onChange={handleBookingType}
+            value="bookingType"
           />
         }
         label={t('rooms:filterRooms:bookByHour')}
@@ -65,29 +76,38 @@ const CheckboxList: FC<IProps> = (props) => {
       />
       <FormControlLabel
         control={
-          <CustomCheckbox
-            checked={state.checkedC}
-            onChange={handleChange('checkedC')}
-            value="checkedC"
-          />
+          <CustomCheckbox checked={roomType === 3} onChange={handleRoomType} value="roomType" />
         }
         label={t('home:searchVilla')}
       />
     </FormGroup>
   );
 };
-
+const mapStateToProps = (state: ReducersType) => {
+  return {
+    filter: state.searchFilter
+  };
+};
 const mapDispatchToProps = (dispatch: Dispatch<SearchFilterAction>) => {
   return {
-    updateBookingType: (type: number) =>
+    updateBookingType: (type: number) => {
       dispatch({
         type: 'SET_BOOKING_TYPE',
         bookingType: type
-      })
+      });
+    },
+    updateRoomType: (type: number) => {
+      dispatch({
+        type: 'SET_ROOM_TYPE',
+        roomType: type
+      });
+    }
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
+export default compose<IProps, any>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(CheckboxList);
