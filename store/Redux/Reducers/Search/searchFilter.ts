@@ -16,6 +16,7 @@ export type SearchFilterState = {
   readonly searchText: string;
   readonly roomsCount: number;
   readonly bookingType: number;
+  readonly roomType: number;
   readonly startDate: string | null;
   readonly endDate: string | null;
   readonly roomRecently: number[];
@@ -23,6 +24,7 @@ export type SearchFilterState = {
 
 export type SearchFilterAction =
   | { type: 'SET_BOOKING_TYPE'; bookingType: number }
+  | { type: 'SET_ROOM_TYPE'; roomType: number }
   | { type: 'SET_NAV_BOOKING_TYPE'; bookingType: number }
   | { type: 'SET_NAV_GUESTS'; guestsCount: number }
   | { type: 'SET_NUMBER_ROOM'; roomsCount: number }
@@ -40,6 +42,7 @@ const init: SearchFilterState = {
   guestsCount: 0,
   roomsCount: 0,
   bookingType: 2,
+  roomType: 0,
   startDate: moment().format(DEFAULT_DATE_TIME_FORMAT),
   endDate: null,
   roomRecently: []
@@ -52,6 +55,8 @@ const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
   switch (action.type) {
     case 'SET_BOOKING_TYPE':
       return updateObject(state, { bookingType: action.bookingType });
+    case 'SET_ROOM_TYPE':
+      return updateObject(state, { roomType: action.roomType });
     case 'SET_NAV_BOOKING_TYPE':
       return updateObject(state, { bookingType: action.bookingType });
     case 'SET_NAV_GUESTS':

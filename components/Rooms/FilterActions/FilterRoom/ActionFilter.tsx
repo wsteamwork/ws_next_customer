@@ -4,7 +4,6 @@ import { useFilterRoom } from './context';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;

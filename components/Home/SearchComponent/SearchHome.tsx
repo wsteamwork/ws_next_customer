@@ -1,12 +1,10 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import CheckboxList from '../CheckboxList';
 import SearchComponent from '.';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import NavHeaderHome from '@/components/Toolbar/NavHeaderHome';
-
+import CheckboxList from '../CheckboxList/index';
+import { useTranslation } from 'react-i18next';
 const SearchHome = () => {
   const { t } = useTranslation();
 

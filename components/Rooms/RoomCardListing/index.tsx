@@ -101,9 +101,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
           <Swiper {...settings}>
             {room.media.data.length > 0 ? (
               _.map(room.media.data, (o) => (
-                <div>
+                <div key={o.image}>
                   <img
-                    key={o.image}
                     src={`${IMAGE_STORAGE_LG + o.image}`}
                     className="imgSize"
                     alt={`Westay - Homestay cho người việt`}
