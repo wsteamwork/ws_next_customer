@@ -35,23 +35,6 @@ const MapRooms: FC<IProps> = (props) => {
     setCurrentPage(current);
   };
 
-  //   useEffect(() => {
-  //     if (width === 'xs' && hoverId !== 0 && hoverId !== -1) {
-  //       axios.get(`/rooms/${hoverId}?include=comforts,details,media,city,district,prices`)
-  //         .then((res: AxiosRes<RoomIndexRes>) => {
-  //           setShowRoom(res.data.data)
-  //         })
-  //         .catch((err: AxiosError) => {
-
-  //         })
-  //     }
-  //   }, [hoverId]);
-
-  //   useEffect(() => {
-  //     if (rooms) {
-  //       setdefaultRoom(rooms[0])
-  //     }
-  //   }, [rooms.length > 0])
 
   useEffect(() => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
@@ -62,7 +45,6 @@ const MapRooms: FC<IProps> = (props) => {
   return (
     <Fragment>
       {rooms.length > 0 ? (
-        // <Grid item lg={7} md={7} sm={12} xs={12}>
         <Fragment>
           {rooms && (
             <Fragment>
