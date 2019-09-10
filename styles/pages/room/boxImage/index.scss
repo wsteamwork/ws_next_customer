@@ -3,6 +3,15 @@
 .image-gallery-image{
   max-height: 75vh;
   height:70vh;
+
+  @include lg{
+    height:65vh;
+  }
+
+  @include md{
+    height:65vh;
+  }
+
   @include xsDown{
     height:60vh;
   }
@@ -33,7 +42,7 @@
   }
 }
 .image-gallery-fullscreen-button{
-  right: 7%;
+  right: 0;
   @include sm {
     display: none;
   }
@@ -48,7 +57,7 @@
   line-height: 1;
   padding: 10px 20px;
   position: absolute;
-  right: 7.5%;
+  right: 0;
   top: 0;
   z-index: 4;
   border-radius: 4px 16px 4px 4px;

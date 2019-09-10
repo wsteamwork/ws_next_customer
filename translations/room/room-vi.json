@@ -45,5 +45,15 @@
     "updateRoomName": "[Tên căn hộ/phòng của bạn]",
     "notFoundContent": "Chưa có nội dung, hãy cập nhật đầy đủ thông tin phòng của bạn!",
     "notFoundResource": "Không tìm thấy phòng. Phòng này có thể đã bị khóa do yêu cầu từ chủ nhà",
-    "goBackHome": "Trở về trang chủ"
+    "goBackHome": "Trở về trang chủ",
+    "surchargeList": "Danh mục phí",
+    "surcharge": "Phụ phí",
+    "holidays": "Ngày lễ",
+    "priceHolidays": "Giá ngày lễ",
+    "sunday": "Chủ Nhật",
+    "serviceFee": "Phí dịch vụ",
+    "surchargeGuests": "Phụ thu kể từ người thứ",
+    "surchargeHours" : "Phụ thu sau 4 giờ đầu (thuê theo giờ)",
+    "feeList": "Danh mục phí",
+    "lang": "vi"
 }

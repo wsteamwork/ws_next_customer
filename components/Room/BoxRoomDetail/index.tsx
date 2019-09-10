@@ -9,6 +9,7 @@ import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar
 import RoomReview from './RoomReview/index';
 import BoxMap from '../BoxMap/index';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import TablePrices from '@/components/Room/BoxRoomDetail/TablePrices';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -20,26 +21,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         padding: '0 8px'
       }
     },
-    root: {
-      // justifyContent: 'center'
-    },
-    // wrapper: {
-    //   paddingTop: theme.spacing(2),
-    //   paddingLeft: theme.spacing(2),
-    //   paddingRight: theme.spacing(1),
-    //   [theme.breakpoints.down('xs')]: {
-    //     justifyContent: 'space-around',
-    //     padding: 0
-    //   }
-    // },
-    // wrapperBasic: {
-    //   paddingLeft: theme.spacing(2),
-    //   paddingRight: theme.spacing(1),
-    //   [theme.breakpoints.down('xs')]: {
-    //     justifyContent: 'space-around',
-    //     padding: 0
-    //   }
-    // },
     hostInfo: {
       [theme.breakpoints.down('xs')]: {
         marginTop: theme.spacing(3)
@@ -62,9 +43,9 @@ const BoxRoomDetail: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Paper className={classes.paper}>
-        <Grid container className={classes.root}>
+        <Grid container>
           <Grid item md={12} lg={12}>
-            <Grid container spacing={1} className={classes.wrapperBasic}>
+            <Grid container spacing={1} justify='center'>
               <Grid item xs={11} sm={8} md={9} lg={8} xl={9}>
                 <RoomBasic room={room} />
               </Grid>
@@ -72,20 +53,23 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 <HostInfo room={room} />
               </Grid>
             </Grid>
-            <Grid container spacing={1} className={classes.wrapper}>
-              <Grid item xs={11} sm={12} md={12} lg={10} xl={9}>
+            <Grid container spacing={1}>
+              <Grid item xs={12} sm={12} md={12} lg={10} xl={9}>
                 <div className={classes.rowMargin}>
                   <RoomDescription room={room} />
                 </div>
                 <div className={classes.rowMargin}>
-                  <RoomAmenities room={room} />
+                  <RoomAmenities room={room}/>
+                </div>
+                <div className={classes.rowMargin}>
+                  <TablePrices room={room}/>
                 </div>
                 <div className={classes.rowMargin}>
                   <EmptyRoomCalendar />
                 </div>
               </Grid>
             </Grid>
-            <Grid container spacing={1} className={classes.wrapper}>
+            <Grid container spacing={1} justify='center'>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   <RoomReview room={room} showComment />

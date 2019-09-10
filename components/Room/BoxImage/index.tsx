@@ -1,6 +1,6 @@
 import React, { FC, useState, forwardRef, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Button, Typography, Grid, Snackbar } from '@material-ui/core';
+import { Theme, Button, Typography, Grid, Snackbar, Hidden } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { Parallax } from 'react-parallax';
 import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
@@ -138,7 +138,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: 60,
       display:'flex',
       alignItems:'center',
-      backgroundColor: 'rgba(255,255,255,0.5)',
+      backgroundColor: 'rgba(255,255,255,0.7)',
       borderRadius: 4
     },
     iconCompare:{
@@ -241,9 +241,11 @@ const BoxImage: FC<IProps> = (props) => {
           </Button>
         </div>
         <div className={classes.boxHeart}>
-          <IconButton aria-label="compare" className={classes.iconCompare} onClick={handleCompare}>
-            <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
-          </IconButton>
+          <Hidden smDown>
+            <IconButton aria-label="compare" className={classes.iconCompare} onClick={handleCompare}>
+              <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
+            </IconButton>
+          </Hidden>
           <FavoriteAnimation />
         </div>
       </div>
