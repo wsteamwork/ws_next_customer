@@ -45,5 +45,15 @@
     "updateRoomName": "[Your room name]",
     "notFoundContent": "Haven't content, Let's update your room information!",
     "notFoundResource": "Not found resource",
-    "goBackHome": "Go back Home"
+    "goBackHome": "Go back Home",
+    "surchargeList": "Surcharge list",
+    "surcharge": "Cost",
+    "holidays": "Holidays",
+    "priceHolidays": "Price for holidays",
+    "sunday": "Sunday",
+    "serviceFee": "Service fee",
+    "surchargeGuests": "Surcharge guests from the",
+    "surchargeHours" : "Surcharge after 4 hours early (rent by the hour)",
+    "feeList": "Fee list",
+    "lang": "en"
 }

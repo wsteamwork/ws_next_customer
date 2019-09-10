@@ -69,6 +69,7 @@ export interface RoomIndexRes {
   merchant: TransformerInclude<Merchant>;
   places: TransformerInclude<PlaceIndexResponse[]>;
   reviews: TransformerInclude<RoomReviewIndexResponse[]>;
+  prices: TransformerInclude<PriceSpecialDays[]>;
 }
 
 export interface RoomDetails {
@@ -132,4 +133,16 @@ export interface Settings {
   days: number;
   booking_cancel_text: string;
   no_booking_cancel: number;
+}
+
+export interface PriceSpecialDays {
+  id: number,
+  weekday: number | null,
+  day: string,
+  price_day: number,
+  price_hour: number,
+  price_after_hour: number,
+  price_charge_guest: number,
+  status: number,
+  status_txt: string
 }

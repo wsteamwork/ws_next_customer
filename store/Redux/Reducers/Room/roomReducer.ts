@@ -60,7 +60,7 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
 
 export const getRoom = async (idRoom: any, initLanguage: string = 'vi'): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
-    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user`,
+    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user,prices`,
     { headers: { 'Accept-Language': initLanguage } }
   );
 
