@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper/Paper';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Hidden from '@material-ui/core/Hidden/Hidden';
-// import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazyload';
 import StarIcon from '@material-ui/icons/StarRounded';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import Link from '@material-ui/core/Link';
@@ -23,9 +23,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import Swiper from 'react-id-swiper';
+import Swiper, { SwiperInstance } from 'react-id-swiper';
 
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,20 +34,24 @@ interface Iprops {
   room?: RoomIndexRes;
 }
 
-export const handleCompareList = (comparisonList: RoomIndexRes[], room: RoomIndexRes, dispatch: Dispatch<CompareRoomsActions>) => {
-  const comparisonListId = comparisonList.map(item => item.id);
+export const handleCompareList = (
+  comparisonList: RoomIndexRes[],
+  room: RoomIndexRes,
+  dispatch: Dispatch<CompareRoomsActions>
+) => {
+  const comparisonListId = comparisonList.map((item) => item.id);
   if (!comparisonListId.includes(room.id)) {
     if (comparisonList.length === 2) {
       const data = comparisonList.slice(1);
       dispatch({
         type: 'SET_COMPARISON_LIST',
         comparisonList: [...data, room]
-      })
+      });
     } else {
       dispatch({
         type: 'SET_COMPARISON_LIST',
         comparisonList: [...comparisonList, room]
-      })
+      });
     }
   }
 };
@@ -89,7 +93,10 @@ const RoomCardListing: FC<Iprops> = (props) => {
       clickable: true,
       dynamicBullets: true
     },
-    loop: true
+    loop: true,
+    getSwiper: (swiper: SwiperInstance) => {
+      swiper.update();
+    }
   };
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
@@ -103,15 +110,17 @@ const RoomCardListing: FC<Iprops> = (props) => {
               _.map(room.media.data, (o) => (
                 <div key={o.image}>
                   <img
-                    src={`${IMAGE_STORAGE_SM + o.image}`}
-                    className="imgSize"
+                    data-srcset={`${IMAGE_STORAGE_SM + o.image}`}
+                    className="imgSize swiper-lazy"
                     alt={`Westay - Homestay cho người việt`}
                   />
+
+                  {/* <div className="swiper-lazy-preloader" /> */}
                 </div>
               ))
             ) : (
-                <img src="./static/images/background.svg" className="imgSize" />
-              )}
+              <img src="./static/images/background.svg" className="imgSize" />
+            )}
           </Swiper>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
@@ -160,8 +169,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         {room!.bathroom} {t('rooms:bathrooms')}
                       </Fragment>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
                   </Grid>
                   <Grid>
                     <ul className="ul">
@@ -196,8 +205,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           </li>
                         </Tooltip>
                       ) : (
-                          ''
-                        )}
+                        ''
+                      )}
                     </ul>
                   </Grid>
                 </Grid>
@@ -220,8 +229,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     )}) `}</span>
                   </Grid>
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
 
                 <Grid className="boxPrice">
                   {room.is_discount === 1 ? (
@@ -229,8 +238,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="discountBox">{t('rooms:discount')}</Grid>
                     </Grid>
                   ) : (
-                      ''
-                    )}
+                    ''
+                  )}
                   <Grid className="priceContainer">
                     {room.price_day > 0 ? (
                       <Grid className="dayPrice">
@@ -240,8 +249,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             {t('shared:dayPrice')}
                           </span>
                         ) : (
-                            ''
-                          )}
+                          ''
+                        )}
                         <Typography className="priceText" variant={typoVariant}>
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -250,30 +259,30 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         </Typography>
                       </Grid>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
 
                     {(room.is_discount === 0 && room.price_hour > 0) ||
-                      (room.is_discount === 1 && room.price_hour_discount > 0) ? (
-                        <Grid className="hourPrice">
-                          {room.is_discount === 1 ? (
-                            <span className="discountPriceText">
-                              {numeral(room.price_hour).format('0,0')}
-                              {t('shared:hourPrice')}
-                            </span>
-                          ) : (
-                              ''
-                            )}
-                          <Typography className="priceText" variant={typoVariant}>
-                            {numeral(
-                              room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                            ).format('0,0')}
+                    (room.is_discount === 1 && room.price_hour_discount > 0) ? (
+                      <Grid className="hourPrice">
+                        {room.is_discount === 1 ? (
+                          <span className="discountPriceText">
+                            {numeral(room.price_hour).format('0,0')}
                             {t('shared:hourPrice')}
-                          </Typography>
-                        </Grid>
-                      ) : (
-                        ''
-                      )}
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                        <Typography className="priceText" variant={typoVariant}>
+                          {numeral(
+                            room.is_discount === 1 ? room.price_hour_discount : room.price_hour
+                          ).format('0,0')}
+                          {t('shared:hourPrice')}
+                        </Typography>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
                   </Grid>
                 </Grid>
               </Link>

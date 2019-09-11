@@ -16,15 +16,11 @@ interface Iprops<T> extends Partial<SwiperOptions> {
   roomData: T[];
   title?: string;
   usingSlider?: boolean;
-
   render?: (room: T) => ReactNode;
   spacing?: GridSpacing;
   customClass?: string;
-
   usingInMap?: boolean;
   hoverAction?(id: number): void;
-  hoverId?: number;
-  focusRoomLocation?(room: RoomIndexRes): void;
 }
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
