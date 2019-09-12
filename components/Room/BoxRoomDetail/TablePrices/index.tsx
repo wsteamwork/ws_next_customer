@@ -15,7 +15,7 @@ import moment from 'moment';
 
 interface IProps {
   classes?: any,
-  room:RoomIndexRes
+  room: RoomIndexRes
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -33,8 +33,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       flexBasis: '50%',
       flexShrink: 0,
     },
-    expansionPanel:{
-      margin:'1px 0 !important'
+    expansionPanel: {
+      margin: '1px 0 !important'
     }
   })
 );
@@ -62,13 +62,13 @@ const StyledTableRow = withStyles((theme: Theme) =>
 )(TableRow);
 
 function createData(name: string, fee: string) {
-  return { name, fee};
+  return { name, fee };
 }
 
 const TablePrices: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {room} = props;
-  const {t} = useTranslation();
+  const { room } = props;
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState<boolean>(false);
 
   const handleChange = () => {
@@ -79,8 +79,8 @@ const TablePrices: FC<IProps> = (props) => {
     createData(` ${t('room:surchargeGuests') + ' ' + (room.max_guest + 1)}`, `${formatMoney(room.price_charge_guest)}`),
     createData(`${t('room:surchargeHours')}`, `${formatMoney(room.price_after_hour)}`),
   ];
-  const formatDayVN =(day:number,local:string)=>{
-    const dayofWeek = moment().isoWeekday(day).lang(local).format('dddd');
+  const formatDayVN = (day: number, local: string) => {
+    const dayofWeek = moment().isoWeekday(day).locale(local).format('dddd');
     const dayUpcase = dayofWeek[0].toUpperCase() + dayofWeek.substring(1);
     return dayUpcase;
   };
@@ -124,7 +124,7 @@ const TablePrices: FC<IProps> = (props) => {
         </Table>
         <ExpansionPanel expanded={expanded} elevation={0} onChange={handleChange} className={classes.expansionPanel}>
           <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon/>}
+            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
@@ -137,12 +137,12 @@ const TablePrices: FC<IProps> = (props) => {
               !row.weekday ? (
                 <Grid container key={row.id}>
                   <Grid item xs={6}>
-                    <Typography align='center' gutterBottom variant='subtitle2' style={{fontWeight:600}}>
+                    <Typography align='center' gutterBottom variant='subtitle2' style={{ fontWeight: 600 }}>
                       {row.day}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography align='center' gutterBottom variant='subtitle2' style={{fontWeight:600}}>
+                    <Typography align='center' gutterBottom variant='subtitle2' style={{ fontWeight: 600 }}>
                       {`${formatMoney(row.price_day)}`}
                     </Typography>
                   </Grid>
