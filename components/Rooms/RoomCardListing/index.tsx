@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import Swiper from 'react-id-swiper';
 
@@ -103,7 +103,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
               _.map(room.media.data, (o) => (
                 <div key={o.image}>
                   <img
-                    src={`${IMAGE_STORAGE_LG + o.image}`}
+                    src={`${IMAGE_STORAGE_SM + o.image}`}
                     className="imgSize"
                     alt={`Westay - Homestay cho người việt`}
                   />
@@ -218,9 +218,6 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     <span className="totalReview">{`(${room.total_review} ${t(
                       'rooms:review'
                     )}) `}</span>
-                    {/* <span className='totalRev'iewText}>{`${
-                          room.avg_rating_txt
-                          }`}</span> */}
                   </Grid>
                 ) : (
                     ''

@@ -29,13 +29,14 @@ const MapCanvas: FC<IProps> = (props) => {
 
   const room = useMemo(() => rooms.length && rooms[0], [rooms]);
   // console.log(room)
-  const onChangeMap = ({ bounds }: ChangeEventValue) => {
+  const onChangeMap = ({ bounds, center }: ChangeEventValue) => {
     const coords: MapCoords = {
       lat_max: bounds.ne.lat,
       lat_min: bounds.sw.lat,
       long_max: bounds.ne.lng,
       long_min: bounds.sw.lng
     };
+    console.log(bounds, center)
 
     dispatch({ type: 'setCoords', payload: coords });
   };

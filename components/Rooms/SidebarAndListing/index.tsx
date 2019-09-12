@@ -46,44 +46,6 @@ const SidebarAndListing: FC = (props) => {
     <Fragment>
       <RoomListing />
     </Fragment>
-    // <GridContainer xs={11} md={10} xl={9}>
-    //   <Grid
-    //     container
-    //     justify="center"
-    //     alignContent="center"
-    //     spacing={4}
-    //     style={{ marginTop: width === 'xs' || width === 'sm' ? '8px' : '48px' }}>
-    //     {meta ? (
-    //       <Hidden smDown>
-    //         <Grid item sm={4} lg={3}>
-    //           <Paper
-    //             elevation={0}
-    //             style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
-    //             classes={{
-    //               root: 'mapPaper'
-    //             }}>
-    //             <ButtonGlobal className="watchMapButton" onClick={openMap}>
-    //               {t('rooms:viewOnMap')}
-    //             </ButtonGlobal>
-    //           </Paper>
-
-    //           <VisitedRooms />
-    //           <CompareRooms />
-    //         </Grid>
-    //       </Hidden>
-    //     ) : (
-    //         <Hidden smDown>
-    //           <Grid item sm={4} lg={3}>
-    //             <LoadingSkeleton type={'sideBar'} />
-    //           </Grid>
-    //         </Hidden>
-    //       )}
-
-    //     <Grid item lg={9} md={8} sm={12} xs={12}>
-    //       <RoomListing />
-    //     </Grid>
-    //   </Grid>
-    // </GridContainer>
   );
 };
 
