@@ -1,5 +1,6 @@
 .listing-container {
   position: relative;
+  background-color: #fafafa;
   .listing-header {
     position: fixed;
 
@@ -7,7 +8,6 @@
     margin-top: 0px;
 
     z-index: 2;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px;
     padding: 0px;
     background: rgb(255, 255, 255);
     .listing-header-wrapper {
@@ -28,10 +28,8 @@
         float: left;
         padding-left: 10px;
         .box-title-wrapper {
-          
           .title {
             overflow-wrap: break-word;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
             font-size: 18px;
             font-weight: 400;
             line-height: 1.44444em;
@@ -51,8 +49,9 @@
   }
 
   .listing-content {
-    padding-top: 71px;
+    padding-top: 64px;
     .listing-content-wrapper {
+      background-color: #fff;
       width: 60%;
       padding: 30px 30px 120px;
     }
@@ -64,15 +63,19 @@
     left: 0px;
     bottom: 0px;
     width: 100%;
-    .wrapper {
+    .container {
       background: #fff;
-
-      max-width: 912px;
       margin: 0px auto;
-      padding: 20px 0px 16px 0px !important;
+      padding: 0 0px 16px 0px !important;
       display: flex;
-      justify-content: space-between;
-      border-top: 1px solid #ddd;
+      justify-content: flex-end;
+
+      .wrapper {
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+      }
     }
 
     .prev-button {

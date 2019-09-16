@@ -13,10 +13,7 @@ interface IProps {}
 
 const Room: FC<IProps> = (props) => {
   return (
-    <Layout
-      title={'Bước 1: Bắt đầu với những thông tin cơ bản'}
-      nextLink={'/'}
-      backLink={'/host/create-listing/room'}>
+    <div>
       <h1>Số phòng tắm</h1>
 
       <Grid>
@@ -27,7 +24,7 @@ const Room: FC<IProps> = (props) => {
           <option value={2}>2</option>
         </Select>
       </Grid>
-    </Layout>
+    </div>
   );
 };
 

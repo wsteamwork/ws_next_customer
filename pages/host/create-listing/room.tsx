@@ -16,7 +16,7 @@ const RoomCreateListing = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       {/* <NavHeader></NavHeader> */}
-      <Room />
+      <Layout title="Bước 1: Thông tin cơ bản" />
     </Fragment>
   );
 };

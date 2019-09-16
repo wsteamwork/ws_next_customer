@@ -4,31 +4,33 @@ import ProgressStepper from './ProgressStepper';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link } from '@material-ui/core';
+import { Link, Button } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 
 interface IProps {
-  setPercentage?: Dispatch<SetStateAction<number>>;
-  percentage: number;
-  nextLink: string;
-  backLink: string;
+  activeStep: number;
+  handleBack: () => void;
+  steps: Array<string>;
+  handleNext: () => void;
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { setPercentage, percentage, backLink, nextLink } = props;
+  const { activeStep, handleBack, steps, handleNext } = props;
 
   return (
-    <GridContainer xs={7} className="bottom-navigation" classNameItem="wrapper">
-      <Grid className="prev-button">
-        <Link href={backLink} className="prev-link" onClick={() => setPercentage(percentage - 10)}>
-          <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
-          <span className="prev-title">Back</span>
-        </Link>
-      </Grid>
-      <Grid className="next-button">
-        <Link href={nextLink}>
-          <ButtonGlobal onClick={() => setPercentage(percentage + 10)}>Next</ButtonGlobal>
-        </Link>
+    <GridContainer xs={10} className="bottom-navigation" classNameItem="container">
+      <Grid xs={7} className="wrapper">
+        <Grid className="prev-button">
+          <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
+            <span className="prev-title">Back</span>
+          </Button>
+        </Grid>
+        <Grid className="next-button">
+          <ButtonGlobal onClick={handleNext}>
+            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+          </ButtonGlobal>
+        </Grid>
       </Grid>
     </GridContainer>
   );
