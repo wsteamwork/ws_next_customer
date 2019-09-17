@@ -5,7 +5,7 @@ import Description from '@/components/LTR/Merchant/Listing/CreateListing/Descrip
 const Host: NextPage = (props) => {
   return (
     <Fragment>
-      <Description />
+      {/* <Description /> */}Host
     </Fragment>
   );
 };
