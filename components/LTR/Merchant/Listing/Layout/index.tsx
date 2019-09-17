@@ -18,12 +18,8 @@ const Layout: FC<IProps> = (props) => {
   return (
     <Grid className="listing-container">
       <HeaderNav title={title} />
-      <GridContainer xs={10} classNameItem="listing-content">
+      <GridContainer xs={10} className="listing-content" classNameItem="listing-content-wrapper">
         <StepperProgress />
-        {/* <Grid container>
-          
-          
-        </Grid> */}
       </GridContainer>
     </Grid>
   );

@@ -16,7 +16,7 @@ const Room: FC<IProps> = (props) => {
     <div>
       <h1>Thông tin cơ bản</h1>
 
-      <Grid>
+      <Grid style={{ width: '50%' }}>
         {/* <h3>Hình thức thuê: </h3> */}
 
         <Select title="Hình thức thuê: ">
@@ -26,7 +26,7 @@ const Room: FC<IProps> = (props) => {
         </Select>
       </Grid>
 
-      <Grid>
+      <Grid style={{ width: '50%' }}>
         {/* <h3>Loại Căn hộ: </h3> */}
         <Select title="Loại Căn hộ: ">
           <option value="">Select one</option>

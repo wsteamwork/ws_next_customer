@@ -18,18 +18,23 @@ const Layout: FC<IProps> = (props) => {
   const { activeStep, handleBack, steps, handleNext } = props;
 
   return (
-    <GridContainer xs={10} className="bottom-navigation" classNameItem="container">
-      <Grid xs={7} className="wrapper">
-        <Grid className="prev-button">
-          <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
-            <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
-            <span className="prev-title">Back</span>
-          </Button>
-        </Grid>
-        <Grid className="next-button">
-          <ButtonGlobal onClick={handleNext}>
-            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-          </ButtonGlobal>
+    <GridContainer
+      xs={10}
+      className="bottom-navigation"
+      classNameItem="bottom-navigation-container">
+      <Grid container xs={7} className="bottom-navigation-inner-container">
+        <Grid item className="bottom-navigation-inner-wrapper">
+          <Grid className="prev-button">
+            <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
+              <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
+              <span className="prev-title">Back</span>
+            </Button>
+          </Grid>
+          <Grid className="next-button">
+            <ButtonGlobal onClick={handleNext}>
+              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            </ButtonGlobal>
+          </Grid>
         </Grid>
       </Grid>
     </GridContainer>

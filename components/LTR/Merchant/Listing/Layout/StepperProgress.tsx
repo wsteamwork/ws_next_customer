@@ -14,6 +14,7 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({
   root: {
+    position: 'fixed',
     padding: '14vh 24px 24px',
     backgroundColor: 'transparent'
   },
@@ -163,8 +164,7 @@ const StepperProgress: FC<IProps> = (props) => {
         </Stepper>
       </Grid>
 
-      <Grid item xs={7} className="listing-content-wrapper">
-        {/* {props.children} */}
+      <Grid item xs={7} className="stepper-content-wrapper">
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
