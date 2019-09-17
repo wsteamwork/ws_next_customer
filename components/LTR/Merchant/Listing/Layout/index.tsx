@@ -1,9 +1,7 @@
-import React, { Fragment, FC, useState } from 'react';
-import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
-import ProgressStepper from './ProgressStepper';
+import React, { FC } from 'react';
+import Grid from '@material-ui/core/Grid/Grid';
 
 import GridContainer from '@/components/Layout/Grid/Container';
-import Logo from '@/components/Toolbar/Logo';
 import HeaderNav from './HeaderNavigation';
 import StepperProgress from './StepperProgress';
 

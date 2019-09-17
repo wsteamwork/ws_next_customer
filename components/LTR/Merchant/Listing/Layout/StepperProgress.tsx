@@ -1,5 +1,5 @@
-import React, { Fragment, FC, useState } from 'react';
-import Grid, { GridProps } from '@material-ui/core/Grid/';
+import React, { FC, useState } from 'react';
+import Grid from '@material-ui/core/Grid/';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -17,8 +17,6 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';

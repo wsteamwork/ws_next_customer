@@ -1,5 +1,5 @@
-import React, { Fragment, FC } from 'react';
-import Grid, { GridProps } from '@material-ui/core/Grid/';
+import React, { FC } from 'react';
+import Grid from '@material-ui/core/Grid/';
 import 'react-step-progress-bar/styles.css';
 import { ProgressBar, Step } from 'react-step-progress-bar';
 

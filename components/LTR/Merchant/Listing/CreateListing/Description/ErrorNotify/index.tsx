@@ -42,8 +42,8 @@ const ErrorNotify: FC<IProps> = (props) => {
           {errorMessage}
         </Grid>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

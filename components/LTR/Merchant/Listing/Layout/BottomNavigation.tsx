@@ -1,10 +1,9 @@
-import React, { Fragment, FC, useState, Dispatch, SetStateAction } from 'react';
-import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
-import ProgressStepper from './ProgressStepper';
+import React, { FC } from 'react';
+import Grid from '@material-ui/core/Grid/Grid';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 
 interface IProps {
