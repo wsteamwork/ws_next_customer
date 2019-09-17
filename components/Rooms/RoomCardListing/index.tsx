@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper/Paper';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import Hidden from '@material-ui/core/Hidden/Hidden';
-// import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazyload';
 import StarIcon from '@material-ui/icons/StarRounded';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import Link from '@material-ui/core/Link';
@@ -23,9 +23,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import Swiper from 'react-id-swiper';
+import Swiper, { SwiperInstance } from 'react-id-swiper';
 
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -34,20 +34,24 @@ interface Iprops {
   room?: RoomIndexRes;
 }
 
-export const handleCompareList = (comparisonList: RoomIndexRes[], room: RoomIndexRes, dispatch: Dispatch<CompareRoomsActions>) => {
-  const comparisonListId = comparisonList.map(item => item.id);
+export const handleCompareList = (
+  comparisonList: RoomIndexRes[],
+  room: RoomIndexRes,
+  dispatch: Dispatch<CompareRoomsActions>
+) => {
+  const comparisonListId = comparisonList.map((item) => item.id);
   if (!comparisonListId.includes(room.id)) {
     if (comparisonList.length === 2) {
       const data = comparisonList.slice(1);
       dispatch({
         type: 'SET_COMPARISON_LIST',
         comparisonList: [...data, room]
-      })
+      });
     } else {
       dispatch({
         type: 'SET_COMPARISON_LIST',
         comparisonList: [...comparisonList, room]
-      })
+      });
     }
   }
 };
@@ -89,7 +93,10 @@ const RoomCardListing: FC<Iprops> = (props) => {
       clickable: true,
       dynamicBullets: true
     },
-    loop: true
+    loop: true,
+    // getSwiper: (swiper: SwiperInstance) => {
+    //   swiper.update();
+    // }
   };
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
@@ -103,10 +110,12 @@ const RoomCardListing: FC<Iprops> = (props) => {
               _.map(room.media.data, (o) => (
                 <div key={o.image}>
                   <img
-                    src={`${IMAGE_STORAGE_SM + o.image}`}
-                    className="imgSize"
+                    data-srcset={`${IMAGE_STORAGE_SM + o.image}`}
+                    className="imgSize swiper-lazy"
                     alt={`Westay - Homestay cho người việt`}
                   />
+
+                  {/* <div className="swiper-lazy-preloader" /> */}
                 </div>
               ))
             ) : (
