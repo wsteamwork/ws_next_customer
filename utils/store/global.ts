@@ -59,8 +59,14 @@ export const BOOKING_CANCEL_LEVEL: number = 4;
 export const DEFAULT_DATE_TIME_FORMAT: string = 'YYYY-MM-DD HH:mm:ss';
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
-export const IMAGE_URL = 'https://s3-ap-southeast-1.amazonaws.com/westay-img/';
-export const IMAGE_STORAGE_LG = IMAGE_URL + 'lg/';
-export const IMAGE_STORAGE_SM = IMAGE_URL + 'sm/';
-export const IMAGE_STORAGE_MD = IMAGE_URL + 'md/';
-export const IMAGE_STORAGE_XS = IMAGE_URL + 'xs/';
+// export const IMAGE_URL = 'https://s3-ap-southeast-1.amazonaws.com/westay-img/';
+// export const IMAGE_STORAGE_LG = IMAGE_URL + 'lg/';
+// export const IMAGE_STORAGE_SM = IMAGE_URL + 'sm/';
+// export const IMAGE_STORAGE_MD = IMAGE_URL + 'md/';
+// export const IMAGE_STORAGE_XS = IMAGE_URL + 'xs/';
+
+export const IMAGE_URL = 'http://westay.org/storage/rooms/';
+export const IMAGE_STORAGE_LG = IMAGE_URL;
+export const IMAGE_STORAGE_SM = IMAGE_URL;
+export const IMAGE_STORAGE_MD = IMAGE_URL;
+export const IMAGE_STORAGE_XS = IMAGE_URL;
