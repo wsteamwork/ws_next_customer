@@ -79,6 +79,12 @@
   font-weight: 400 !important;
   line-height: 1.375em !important;
   color: #484848 !important;
+  @include xs {
+    font-size: 14px !important;
+  }
+  @include sm {
+    font-size: 14px !important;
+  }
 }
 .normal_fieldset {
   position: relative;
