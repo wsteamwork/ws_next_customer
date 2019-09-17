@@ -13,7 +13,6 @@ import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import Router from 'next/router';
-
 interface MyFormValues {
   email: string;
   password: string;

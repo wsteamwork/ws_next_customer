@@ -27,6 +27,8 @@ import shared_vi from './shared/shared-vi.json';
 import shared_en from './shared/shared-en.json';
 import promotion_vi from './promotion/promotion-vi.json';
 import promotion_en from './promotion/promotion-en.json';
+import details_en from './LongTermRental/listing/details/details-en.json';
+import details_vi from './LongTermRental/listing/details/details-vi.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -59,7 +61,8 @@ i18n
         profile: profile_en,
         reviews: reviews_en,
         shared: shared_en,
-        promotion: promotion_en
+        promotion: promotion_en,
+        details: details_en
       },
       vi: {
         home: home_vi,
@@ -73,7 +76,8 @@ i18n
         profile: profile_vi,
         reviews: reviews_vi,
         shared: shared_vi,
-        promotion: promotion_vi
+        promotion: promotion_vi,
+        details: details_vi
       }
     },
 
