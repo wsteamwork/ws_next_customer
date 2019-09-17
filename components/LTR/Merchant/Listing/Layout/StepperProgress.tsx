@@ -21,6 +21,7 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
+import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
 interface IProps {
   classes?: any;
 }
@@ -86,10 +87,12 @@ const getSteps = () => {
 const getStepContent = (step) => {
   switch (step) {
     case 0:
-      return <Room />;
+      return <Amenities />;
     case 1:
-      return <Bathroom />;
+      return <Room />;
     case 2:
+      return <Bathroom />;
+    case 3:
       return <Description />;
     default:
       return 'Unknown step';
@@ -191,51 +194,51 @@ const StepperProgress: FC<IProps> = (props) => {
             </Button>
           </div>
         ) : (
-            <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-              <Hidden smDown>
-                <BottomNavigation
-                  handleNext={handleNext}
-                  handleBack={handleBack}
-                  steps={steps}
-                  activeStep={activeStep}
-                />
-              </Hidden>
+          <div>
+            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Hidden smDown>
+              <BottomNavigation
+                handleNext={handleNext}
+                handleBack={handleBack}
+                steps={steps}
+                activeStep={activeStep}
+              />
+            </Hidden>
 
-              <Hidden mdUp>
-                <MobileStepper
-                  variant="progress"
-                  steps={6}
-                  position="static"
-                  activeStep={activeStep}
-                  className="mobile-stepper"
-                  nextButton={
-                    // <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-                    //   Next
-                    //   <KeyboardArrowRight />
-                    // </Button>
+            <Hidden mdUp>
+              <MobileStepper
+                variant="progress"
+                steps={6}
+                position="static"
+                activeStep={activeStep}
+                className="mobile-stepper"
+                nextButton={
+                  // <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+                  //   Next
+                  //   <KeyboardArrowRight />
+                  // </Button>
 
-                    <ButtonGlobal onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </ButtonGlobal>
-                  }
-                  backButton={
-                    // <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    //   <KeyboardArrowLeft />
-                    //   Back
-                    // </Button>
-                    <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
-                      <FontAwesomeIcon
-                        icon={faChevronLeft}
-                        size="2x"
-                        color="#fa991c"></FontAwesomeIcon>
-                      <span className="prev-title">Back</span>
-                    </Button>
-                  }
-                />
-              </Hidden>
-            </div>
-          )}
+                  <ButtonGlobal onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </ButtonGlobal>
+                }
+                backButton={
+                  // <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                  //   <KeyboardArrowLeft />
+                  //   Back
+                  // </Button>
+                  <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
+                    <FontAwesomeIcon
+                      icon={faChevronLeft}
+                      size="2x"
+                      color="#fa991c"></FontAwesomeIcon>
+                    <span className="prev-title">Back</span>
+                  </Button>
+                }
+              />
+            </Hidden>
+          </div>
+        )}
       </Grid>
     </Grid>
   );
