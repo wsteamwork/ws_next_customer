@@ -24,7 +24,9 @@ const Layout: FC<IProps> = (props) => {
       <Grid container xs={7} className="bottom-navigation-inner-container">
         <Grid item className="bottom-navigation-inner-wrapper">
           <Grid className="prev-button">
-            <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
+            <Button className="prev-link" 
+            // disabled={activeStep === 0}
+             onClick={handleBack}>
               <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
               <span className="prev-title">Back</span>
             </Button>

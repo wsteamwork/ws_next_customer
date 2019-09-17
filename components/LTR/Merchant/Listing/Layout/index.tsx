@@ -7,10 +7,13 @@ import StepperProgress from './StepperProgress';
 
 interface IProps {
   title: string;
+  getStepContent: (step: number) => any;
+  getSteps: () => Array<string>;
+  nextLink: string
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { title } = props;
+  const { title, getStepContent, getSteps, nextLink } = props;
 
   return (
     <Grid className="listing-container">
@@ -20,7 +23,7 @@ const Layout: FC<IProps> = (props) => {
         md={10}
         className="listing-content"
         classNameItem="listing-content-wrapper">
-        <StepperProgress />
+        <StepperProgress getSteps={getSteps} getStepContent={getStepContent} nextLink={nextLink} />
       </GridContainer>
     </Grid>
   );
