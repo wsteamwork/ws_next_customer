@@ -15,15 +15,19 @@ import {
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
-import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
-import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
+import Router from 'next/router';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
+import Bathroom from '../CreateListing/Bathroom';
+import Room from '../CreateListing/Room';
 interface IProps {
   classes?: any;
+  getSteps?: () => Array<string>;
+  getStepContent?: (step: number) => any;
+  nextLink: string;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({
@@ -102,6 +106,7 @@ const getStepContent = (step) => {
 const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
+  const { getSteps, getStepContent, nextLink } = props;
   const [activeStep, setActiveStep] = useState<number>(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -115,34 +120,20 @@ const StepperProgress: FC<IProps> = (props) => {
   };
 
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+    if (activeStep === steps.length - 1) {
+      Router.push(nextLink);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (activeStep === 0) {
+      Router.back();
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
-
-  // const handleSkip = () => {
-  //   if (!isStepOptional(activeStep)) {
-  //     // You probably want to guard against something like this,
-  //     // it should never occur unless someone's actively trying to break something.
-  //     throw new Error("You can't skip a step that isn't optional.");
-  //   }
-
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   setSkipped((prevSkipped) => {
-  //     const newSkipped = new Set(prevSkipped.values());
-  //     newSkipped.add(activeStep);
-  //     return newSkipped;
-  //   });
-  // };
 
   const handleReset = () => {
     setActiveStep(0);
@@ -162,12 +153,6 @@ const StepperProgress: FC<IProps> = (props) => {
               const labelProps = {
                 // StepIconComponent: QontoStepIcon
               };
-              // if (isStepOptional(index)) {
-              //   labelProps.optional = <Typography variant="caption">Optional</Typography>;
-              // }
-              // if (isStepSkipped(index)) {
-              //   stepProps.completed = false;
-              // }
               return (
                 <Step key={label} {...stepProps}>
                   <StepLabel
