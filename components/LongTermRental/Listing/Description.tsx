@@ -59,16 +59,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const HtmlTooltip = withStyles((theme: Theme) => ({
-  tooltip: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
-    maxWidth: 400,
-    fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #dce0e0'
-  }
-}))(Tooltip);
-
 const Description: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
@@ -114,7 +104,9 @@ const Description: FC<IProps> = (props) => {
                 sub_label={t('details:subName')}
                 value={values.name.replace(/\s+/g, ' ')}
                 classTextField={
-                  !!(values.name.length < 15 && touched!.name && errors.name) ? 'textarea error_textarea' : 'textarea'
+                  !!(values.name.length < 15 && touched!.name && errors.name)
+                    ? 'textarea error_textarea'
+                    : 'textarea'
                 }
                 show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
                 error_message={errors.name ? errors.name : t('details:defaultError')}
@@ -122,10 +114,16 @@ const Description: FC<IProps> = (props) => {
                 rowsMax={1}
                 max_char={100}
                 multiline={true}
-                classMaxChar={!!(values.name.length < 15 && touched!.name && errors.name) ? 'error_char' : 'remain_char'}
+                classMaxChar={
+                  !!(values.name.length < 15 && touched!.name && errors.name)
+                    ? 'error_char'
+                    : 'remain_char'
+                }
                 InputProps={{
                   classes: {
-                    notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name) ? classes.notchedOutline : ''
+                    notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
+                      ? classes.notchedOutline
+                      : ''
                   }
                 }}
                 inputProps={{ maxLength: 100 }}
@@ -145,14 +143,16 @@ const Description: FC<IProps> = (props) => {
                     ? 'textarea error_textarea'
                     : 'textarea'
                 }
-                show_error={!!(values.description.length < 50 && touched!.description && errors.description)}
-                error_message={values.description.length < 50 ? errors.description : t('details:defaultError')}
+                show_error={
+                  !!(values.description.length < 50 && touched!.description && errors.description)
+                }
+                error_message={
+                  values.description.length < 50 ? errors.description : t('details:defaultError')
+                }
                 title_tooltips={
                   <Fragment>
                     <Typography color="inherit">{t('details:examples')}</Typography>
-                    <Typography color="inherit">
-                      {t('details:desExample1')}
-                    </Typography>
+                    <Typography color="inherit">{t('details:desExample1')}</Typography>
                     <Typography color="inherit">{t('details:desExample2')}</Typography>
                   </Fragment>
                 }
@@ -161,21 +161,23 @@ const Description: FC<IProps> = (props) => {
                 max_char={500}
                 multiline={true}
                 classMaxChar={
-                  !!(values.description.length < 50 && touched!.description && errors.description) ? 'error_char' : 'remain_char'
+                  !!(values.description.length < 50 && touched!.description && errors.description)
+                    ? 'error_char'
+                    : 'remain_char'
                 }
                 InputProps={{
                   classes: {
-                    notchedOutline: !!(values.description.length < 50 && touched!.description && errors.description)
+                    notchedOutline: !!(
+                      values.description.length < 50 &&
+                      touched!.description &&
+                      errors.description
+                    )
                       ? classes.notchedOutline
                       : ''
                   }
                 }}
                 inputProps={{ maxLength: 500 }}
-                placeholder={
-                  width !== 'xl' && width !== 'lg'
-                    ? t('details:desExample1')
-                    : ''
-                }
+                placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
               />
@@ -183,7 +185,7 @@ const Description: FC<IProps> = (props) => {
               <Divider className={classes.normal_divider} />
               <section>
                 <Typography variant="h1" gutterBottom className="label main_label">
-                {t('details:addMoreInfo')}
+                  {t('details:addMoreInfo')}
                 </Typography>
                 <Grid item className="normal_text">
                   <span>{t('details:subAddMore')}</span>
@@ -204,10 +206,7 @@ const Description: FC<IProps> = (props) => {
                   title_tooltips={
                     <Fragment>
                       <Typography color="inherit">{t('details:examples')}</Typography>
-                      <Typography color="inherit">
-                        {t('details:spaceExample1')}
-                        
-                      </Typography>
+                      <Typography color="inherit">{t('details:spaceExample1')}</Typography>
                       <Typography color="inherit">{t('details:spaceExample2')}</Typography>
                       <Typography color="inherit">{t('details:spaceExample3')}</Typography>
                     </Fragment>
@@ -250,9 +249,7 @@ const Description: FC<IProps> = (props) => {
                   title_tooltips={
                     <Fragment>
                       <Typography color="inherit">{t('details:examples')}</Typography>
-                      <Typography color="inherit">
-                      {t('details:rulesExample1')}
-                      </Typography>
+                      <Typography color="inherit">{t('details:rulesExample1')}</Typography>
                       <Typography color="inherit">{t('details:rulesExample2')}</Typography>
                       <Typography color="inherit">{t('details:rulesExample3')}</Typography>
                     </Fragment>
