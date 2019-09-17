@@ -5,7 +5,9 @@ import React, {
   useContext,
   // memo,
   // useEffect,
-  useMemo
+  useMemo,
+  useState,
+  useEffect
 } from 'react';
 import _ from 'lodash';
 import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
@@ -16,30 +18,62 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 
 interface IProps {
   rooms: RoomIndexRes[];
-  center: Coords;
   hoverAction(id: number): void;
   hoverId: number;
-  focusRoomLocation(room: RoomIndexRes): void
 }
 
 // @ts-ignore
 const MapCanvas: FC<IProps> = (props) => {
-  const { rooms, center, hoverAction, hoverId, focusRoomLocation } = props;
+  const { rooms, hoverAction, hoverId } = props;
   const { state, dispatch } = useContext(RoomIndexContext);
+  const { isMapOpen } = state;
+  const [readyToLoad, setReadyToLoad] = useState<boolean>(false);
+  const [center, setCenter] = useState<Coords>({
+    lat: 0,
+    lng: 0
+  });
 
   const room = useMemo(() => rooms.length && rooms[0], [rooms]);
   // console.log(room)
-  const onChangeMap = ({ bounds, center }: ChangeEventValue) => {
-    const coords: MapCoords = {
-      lat_max: bounds.ne.lat,
-      lat_min: bounds.sw.lat,
-      long_max: bounds.ne.lng,
-      long_min: bounds.sw.lng
-    };
-    console.log(bounds, center)
 
-    dispatch({ type: 'setCoords', payload: coords });
+  const onChangeMap = ({ bounds }: ChangeEventValue) => {
+    if (readyToLoad) {
+      const coords: MapCoords = {
+        lat_max: bounds.ne.lat,
+        lat_min: bounds.sw.lat,
+        long_max: bounds.ne.lng,
+        long_min: bounds.sw.lng
+      };
+      dispatch({ type: 'setCoords', payload: coords });
+    }
   };
+
+  const focusRoomLocation = (room: RoomIndexRes) => {
+    setReadyToLoad(false);
+    setCenter({
+      lat: parseFloat(room.latitude),
+      lng: parseFloat(room.longitude)
+    });
+  };
+
+  const onDrag = () => {
+    setReadyToLoad(true);
+  };
+
+  useEffect(() => {
+    if (rooms.length > 0 && isMapOpen) {
+      let lat = parseFloat(rooms[0].latitude);
+      let lng = parseFloat(rooms[0].longitude);
+      let valid = lat < 90 && lat > -90 && lng < 180 && lng > -180;
+
+      let coords: Coords = {
+        lat: valid ? lat : 21.02,
+        lng: valid ? lng : 105.83
+      };
+
+      setCenter(coords);
+    }
+  }, [rooms.length > 0, isMapOpen]);
 
   return (
     <Fragment>
@@ -47,17 +81,12 @@ const MapCanvas: FC<IProps> = (props) => {
         bootstrapURLKeys={{
           key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
         }}
-        defaultZoom={15}
+        defaultZoom={14}
         onChange={onChangeMap}
-        defaultCenter={{
-          lat: parseFloat(room.latitude),
-          lng: parseFloat(room.longitude)
-        }}
+        onDrag={onDrag}
+        defaultCenter={center}
         center={center}
-        yesIWantToUseGoogleMapApiInternals
-      // onChildMouseEnter={(h) => hoverAction(parseInt(h))}
-      // onChildMouseLeave={(h) => hoverAction(0)}
-      >
+        yesIWantToUseGoogleMapApiInternals>
         {_.map(rooms, (room) => (
           <MapMarker
             isHover={hoverId === room.id}

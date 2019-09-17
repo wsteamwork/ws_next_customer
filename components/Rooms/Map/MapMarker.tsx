@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import CustomPopper from '@/components/CustomPopper';
 import RoomCard from '@/components/RoomCard';
+import LazyLoad from 'react-lazyload';
 
 interface IProps extends Coords, ChildComponentProps {
   room: RoomIndexRes;
@@ -29,7 +30,11 @@ const MapMarker: FC<IProps> = (props) => {
       theme="light-border"
       interactive
       onTrigger={() => focus(room)}
-      content={<Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>}>
+      content={
+        // <LazyLoad>
+          <Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>
+        // </LazyLoad>
+      }>
       <Grid className={classNames('arrow_box')}>
         <p className={isHover ? 'arrow_hover' : ''}>{numeral(room.price_day).format('0,0')}đ</p>
       </Grid>

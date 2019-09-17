@@ -17,6 +17,15 @@ import { useTranslation } from 'react-i18next';
 // import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
 import RoomCardListing from '../RoomCardListing';
 import RoomListing from '../RoomListing';
+import GridContainer from '@/components/Layout/Grid/Container';
+import { Grid, Hidden, Paper } from '@material-ui/core';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import ListRoom from '@/components/ListRoom';
+import { Pagination } from 'swiper/dist/js/swiper.esm';
+import NotFound from '../Lotte/NotFound';
+import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
+import CompareRooms from '../CompareRooms';
+import VisitedRooms from '../VisitedRooms';
 // import CompareRooms from '../CompareRooms';
 // @ts-ignore
 const SidebarAndListing: FC = (props) => {
@@ -36,16 +45,54 @@ const SidebarAndListing: FC = (props) => {
     setIsEmpty(meta !== null && rooms.length === 0 && !isLoading);
   }, [rooms, isLoading]);
 
-  const renderRoom = (room) => <RoomCardListing room={room} />;
+  useEffect(() => {
+    if (meta && meta.pagination) setCurrentPage(meta.pagination.current_page);
+  }, [meta]);
+
 
   const openMap = () => {
     dispatch({ type: 'setMapOpen', isMapOpen: true });
   };
 
   return (
-    <Fragment>
-      <RoomListing />
-    </Fragment>
+    <GridContainer xs={11} md={11} lg={10} xl={9}>
+      <Grid
+        container
+        justify="center"
+        alignContent="center"
+        spacing={4}
+        style={{ marginTop: width === 'xs' || width === 'sm' ? '8px' : '48px' }}>
+        {meta && !isLoading ? (
+          <Hidden smDown>
+            <Grid item sm={4} lg={3}>
+              <Paper
+                elevation={0}
+                style={{ backgroundImage: `url('./static/images/map-vector.svg')` }}
+                classes={{
+                  root: 'mapPaper'
+                }}>
+                <ButtonGlobal className="watchMapButton" onClick={openMap}>
+                  {t('rooms:viewOnMap')}
+                </ButtonGlobal>
+              </Paper>
+
+              <VisitedRooms />
+              <CompareRooms />
+            </Grid>
+          </Hidden>
+        ) : (
+          <Hidden smDown>
+            <Grid item sm={4} lg={3}>
+              <LoadingSkeleton type={'sideBar'} />
+            </Grid>
+          </Hidden>
+        )}
+
+        <Grid item lg={9} md={8} sm={12} xs={12}>
+          <RoomListing usingInMap={false} rooms={rooms} />
+        </Grid>
+      </Grid>
+    </GridContainer>
   );
 };
 
