@@ -3,11 +3,25 @@ import Grid, { GridProps } from '@material-ui/core/Grid/';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import { Typography, Button, Theme, StepConnector, withStyles, StepIcon } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import {
+  Typography,
+  Button,
+  Theme,
+  StepConnector,
+  withStyles,
+  StepIcon,
+  MobileStepper,
+  Hidden
+} from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 interface IProps {
   classes?: any;
 }
@@ -85,6 +99,7 @@ const getStepContent = (step) => {
 
 const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const theme = useTheme();
   const [activeStep, setActiveStep] = useState<number>(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -133,38 +148,40 @@ const StepperProgress: FC<IProps> = (props) => {
 
   return (
     <Grid container className="stepper">
-      <Grid item xs={5}>
-        <Stepper
-          className={classes.root}
-          activeStep={activeStep}
-          orientation="vertical"
-          connector={<QontoConnector />}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {
-              // StepIconComponent: QontoStepIcon
-            };
-            // if (isStepOptional(index)) {
-            //   labelProps.optional = <Typography variant="caption">Optional</Typography>;
-            // }
-            // if (isStepSkipped(index)) {
-            //   stepProps.completed = false;
-            // }
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel
-                  classes={{ label: classes.label, active: classes.labelActive }}
-                  StepIconComponent={QontoStepIcon}
-                  {...labelProps}>
-                  {label}
-                </StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-      </Grid>
+      <Hidden smDown>
+        <Grid item xs={5}>
+          <Stepper
+            className={classes.root}
+            activeStep={activeStep}
+            orientation="vertical"
+            connector={<QontoConnector />}>
+            {steps.map((label, index) => {
+              const stepProps = {};
+              const labelProps = {
+                // StepIconComponent: QontoStepIcon
+              };
+              // if (isStepOptional(index)) {
+              //   labelProps.optional = <Typography variant="caption">Optional</Typography>;
+              // }
+              // if (isStepSkipped(index)) {
+              //   stepProps.completed = false;
+              // }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel
+                    classes={{ label: classes.label, active: classes.labelActive }}
+                    StepIconComponent={QontoStepIcon}
+                    {...labelProps}>
+                    {label}
+                  </StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Grid>
+      </Hidden>
 
-      <Grid item xs={7} className="stepper-content-wrapper">
+      <Grid item xs={12} md={7} className="stepper-content-wrapper">
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
@@ -177,13 +194,47 @@ const StepperProgress: FC<IProps> = (props) => {
         ) : (
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+            <Hidden smDown>
+              <BottomNavigation
+                handleNext={handleNext}
+                handleBack={handleBack}
+                steps={steps}
+                activeStep={activeStep}
+              />
+            </Hidden>
 
-            <BottomNavigation
-              handleNext={handleNext}
-              handleBack={handleBack}
-              steps={steps}
-              activeStep={activeStep}
-            />
+            <Hidden mdUp>
+              <MobileStepper
+                variant="progress"
+                steps={6}
+                position="static"
+                activeStep={activeStep}
+                className="mobile-stepper"
+                nextButton={
+                  // <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+                  //   Next
+                  //   <KeyboardArrowRight />
+                  // </Button>
+
+                  <ButtonGlobal onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  </ButtonGlobal>
+                }
+                backButton={
+                  // <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                  //   <KeyboardArrowLeft />
+                  //   Back
+                  // </Button>
+                  <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
+                    <FontAwesomeIcon
+                      icon={faChevronLeft}
+                      size="2x"
+                      color="#fa991c"></FontAwesomeIcon>
+                    <span className="prev-title">Back</span>
+                  </Button>
+                }
+              />
+            </Hidden>
           </div>
         )}
       </Grid>

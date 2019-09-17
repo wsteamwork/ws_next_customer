@@ -14,11 +14,14 @@ interface IProps {
 const Layout: FC<IProps> = (props) => {
   const { title } = props;
 
-
   return (
     <Grid className="listing-container">
       <HeaderNav title={title} />
-      <GridContainer xs={10} className="listing-content" classNameItem="listing-content-wrapper">
+      <GridContainer
+        xs={12}
+        md={10}
+        className="listing-content"
+        classNameItem="listing-content-wrapper">
         <StepperProgress />
       </GridContainer>
     </Grid>
