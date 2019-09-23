@@ -26,8 +26,6 @@ export const CustomCheckbox = withStyles({
 const CheckboxList: FC<IProps> = (props) => {
   const { filter, updateBookingType, updateRoomType } = props;
   const { bookingType, roomType } = filter;
-  // const bookingType = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
-  // const roomType = useSelector<ReducersList, number>((state) => state.searchFilter.roomType);
   const [state, setState] = useState({
     checkedB: false
   });

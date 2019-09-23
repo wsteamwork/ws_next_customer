@@ -5,6 +5,9 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import FormSignin from '@/components/Auth/Signin/FormSignin';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
+import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
+import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
+import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage';
 const RoomCreateListing = () => {
   const getSteps = () => {
     return ['Mô tả căn hộ', 'Tiện nghi', 'Ảnh'];
@@ -13,11 +16,11 @@ const RoomCreateListing = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return 'Mô tả căn hộ';
+        return <Description />;
       case 1:
-        return 'Tiện nghi';
+        return <Amenities />;
       case 2:
-        return 'Ảnh';
+        return <UploadImage />;
       default:
         return 'Unknown step';
     }
