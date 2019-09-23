@@ -16,11 +16,11 @@ const RoomCreateListing = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <Description />;
+        return <UploadImage />;
       case 1:
         return <Amenities />;
       case 2:
-        return <UploadImage />;
+        return <Description />;
       default:
         return 'Unknown step';
     }

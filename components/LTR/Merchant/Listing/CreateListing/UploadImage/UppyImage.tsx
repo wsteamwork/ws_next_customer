@@ -67,14 +67,19 @@ const UppyImage: FC<IProps> = (props) => {
     img.width = 400;
     img.alt = file.id;
     img.src = response.uploadURL;
-    // document.body.appendChild(img)
+    console.log(img)
+    uppy.getFiles().forEach(file => {
+      uppy.setFileState(file.id, { 
+        progress: { uploadComplete: true, uploadStarted: false } 
+      })
+    })
   })
   .on('dashboard:file-edit-start', () => {
     console.log('Modal is start')
   })
   .on('dashboard:file-edit-complete', () => {
     console.log('Modal is complete')
-  })
+  }).run();
 
   uppy.getFiles().forEach(file => {
     console.log(file)
@@ -83,8 +88,7 @@ const UppyImage: FC<IProps> = (props) => {
     })
   })
 
-  const numFiles1 = Object.keys(uppy.state.files).length;
-  const numFiles = uppy.state.files;
+  const numFiles = Object.keys(uppy.state.files).length;
   console.log('num Files:', numFiles);
 
   return (
