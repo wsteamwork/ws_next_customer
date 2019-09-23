@@ -1,31 +1,40 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import React, { FC, Dispatch, SetStateAction, Fragment } from 'react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Grid, IconButton } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { RemoveCircleOutline, AddCircleOutline } from '@material-ui/icons';
 
 interface Iprops {
-  icon: IconDefinition;
+  icon?: IconDefinition;
   title: string;
   number: number;
   setNumber: Dispatch<SetStateAction<number>>;
+  containerWidth?: string;
 }
 
-const RowSelect: FC<Iprops> = (props) => {
-  const { icon, title, number, setNumber } = props;
+const QuantityButtons: FC<Iprops> = (props) => {
+  const { icon, title, number, setNumber, containerWidth } = props;
 
   const handleMinus = () => {
     if (number === 0) {
       return;
     }
+
     setNumber(number - 1);
   };
 
   return (
-    <Grid container className="item">
+    <Grid container className="quantityButtons" style={{ width: containerWidth }}>
       <Grid item xs={8} className="flex_columCenter">
         <p>
-          <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp; {title}
+          {icon ? (
+            <Fragment>
+              <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp;
+            </Fragment>
+          ) : (
+            ''
+          )}
+          {title}
         </p>
       </Grid>
 
@@ -56,4 +65,4 @@ const RowSelect: FC<Iprops> = (props) => {
   );
 };
 
-export default RowSelect;
+export default QuantityButtons;

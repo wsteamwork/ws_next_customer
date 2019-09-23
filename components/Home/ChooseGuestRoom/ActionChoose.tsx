@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  useState,
-  Dispatch,
-  SetStateAction,
-  memo,
-  useEffect
-} from 'react';
+import React, { FC, useState, Dispatch, SetStateAction, memo, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { faUserFriends, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +8,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';
 
-const RowSelect = dynamic(() => import('./RowSelect'));
+const QuantityButtons = dynamic(() => import('@/components/ReusableComponents/QuantityButtons'));
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -50,16 +43,16 @@ const ActionChoose: FC<IProps> = (props) => {
 
   return (
     <Grid className="chooseGuestRoom__actions">
-      <RowSelect
+      <QuantityButtons
         icon={faUserFriends}
         number={guest}
         setNumber={setGuest}
-        title={t('home:searchComponent:guestUpper')}></RowSelect>
-      <RowSelect
+        title={t('home:searchComponent:guestUpper')}></QuantityButtons>
+      <QuantityButtons
         icon={faDoorClosed}
         number={room}
         setNumber={setRoom}
-        title={t('home:searchComponent:roomUpper')}></RowSelect>
+        title={t('home:searchComponent:roomUpper')}></QuantityButtons>
 
       <Grid container>
         <Grid item xs={6}>

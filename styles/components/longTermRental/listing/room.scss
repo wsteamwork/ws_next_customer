@@ -1,0 +1,18 @@
+.add-bedroom-container {
+  &__wrapper {
+    border-bottom: 1px solid #dce0e0;
+    border-top: 1px solid #dce0e0;
+    padding: 28px 0;
+    margin: 0 0;
+    .add-room-button {
+      border: 1px solid #aaa;
+      color: #484848;
+      padding: 9px 27px;
+      text-transform: initial;
+    }
+
+    .counting-open {
+      text-align: right;
+    }
+  }
+}
