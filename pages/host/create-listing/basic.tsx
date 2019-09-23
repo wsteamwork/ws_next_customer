@@ -16,7 +16,7 @@ const RoomCreateListing = () => {
       case 1:
         return <Bathroom />;
       case 2:
-        return <Description />;
+        return 'Địa chỉ';
       default:
         return 'Unknown step';
     }

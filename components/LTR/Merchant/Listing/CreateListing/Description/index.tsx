@@ -73,7 +73,29 @@ const Description: FC<IProps> = (props) => {
   const handleSubmitForm = async (
     values: MyDescription,
     actions: FormikActions<MyDescription>
-  ) => { };
+  ) => {
+    const data: any = {
+      name: values.name,
+      description: values.description,
+      space: values.space,
+      rules: values.rules
+    };
+
+    // try {
+    //   const res: AxiosRes<ProfileInfoRes> = await axios.put('profile?include=city,district', data);
+    //   getProfile(dispath);
+    //   setOpen(true);
+    // } catch (error) {}
+
+    // axios
+    //   .put('profile', data)
+    //   .then((res) => {
+    //     actions.setSubmitting(false);
+    //   })
+    //   .catch((error) => {
+    //     actions.setSubmitting(false);
+    //   });
+  };
 
   return (
     <Fragment>
