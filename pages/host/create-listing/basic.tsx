@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import NextHead from '@/components/NextHead';
 import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
+import Basic from '@/components/LTR/Merchant/Listing/CreateListing/Basic';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
-import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 const RoomCreateListing = () => {
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
@@ -12,11 +12,13 @@ const RoomCreateListing = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return <Room />;
+        return <Basic />;
       case 1:
-        return <Bathroom />;
+        return <Room />;
       case 2:
-        return <Description />;
+        return <Bathroom />;
+      case 3:
+        return <Room />;
       default:
         return 'Unknown step';
     }

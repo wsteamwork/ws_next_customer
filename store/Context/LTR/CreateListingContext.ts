@@ -10,7 +10,12 @@ export interface ICreateListingContext {
 }
 
 export type CreateListingState = {
-  readonly percentage: number | null;
+  readonly leaseType: number;
+  readonly accommodationType: number;
+  readonly stayWithHost: number;
+  readonly guestRecommendation: number;
+  readonly maxGuest: number;
+
   readonly listings: any;
 };
 
@@ -19,7 +24,11 @@ export type CreateListingAction =
   | { type: 'setListings'; listings: any };
 
 export const CreateListingInit: CreateListingState = {
-  percentage: null,
+  leaseType: null,
+  accommodationType: null,
+  stayWithHost: null,
+  guestRecommendation: null,
+  maxGuest: null,
   listings: null
 };
 
@@ -28,8 +37,6 @@ export const CreateListingReducer: Reducer<CreateListingState, CreateListingActi
   action: CreateListingAction
 ): CreateListingState => {
   switch (action.type) {
-    case 'setPercentage':
-      return updateObject<CreateListingState>(state, { percentage: action.payload });
     case 'setListings':
       return updateObject<CreateListingState>(state, { listings: action.listings });
 

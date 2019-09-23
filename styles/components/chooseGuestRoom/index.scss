@@ -27,29 +27,28 @@
   &__actions {
     height: 150px;
     width: 310px;
+  }
+}
 
-    p {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
+.quantityButtons {
+  padding: 10px 10px;
+  p {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
 
-    .centerCustom {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  .centerCustom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .title {
-      display: flex;
-      align-items: center;
-    }
+  .title {
+    display: flex;
+    align-items: center;
+  }
 
-    .item {
-      padding: 10px 10px;
-    }
-
-    .icon {
-      padding: 4px;
-    }
+  .icon {
+    padding: 4px;
   }
 }

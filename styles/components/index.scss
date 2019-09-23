@@ -7,6 +7,7 @@
 @import "./listRoom/index.scss";
 @import "./roomCardListing/index.scss";
 @import "./longTermRental/listing/index.scss";
+@import "./reusableComponents/index.scss";
 
 .flex_columCenter {
   align-items: center;
@@ -69,13 +70,14 @@
 
 .readmore {
   span > span {
-    color: #08C299 !important;
+    color: #08c299 !important;
   }
 }
 
 .slides {
   position: relative;
-  .slick-prev, .slick-next {
+  .slick-prev,
+  .slick-next {
     position: absolute;
     top: 50%;
   }

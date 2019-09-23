@@ -1,35 +1,63 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/Select';
-
-interface IProps { }
+import Select from '@/components/ReusableComponents/Select';
+import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import AddBedRoom from './AddBedRoom';
+interface IProps {}
 
 const Room: FC<IProps> = (props) => {
+  const [guest, setGuest] = useState<number>(0);
+  const [maxGuest, setMaxGuest] = useState<number>(0);
+  const [bed, setBed] = useState<number>(0);
+  const [single, setSingle] = useState<number>(0);
+  const [double, setDouble] = useState<number>(0);
+  const [king, setKing] = useState<number>(0);
+  const [queen, setQueen] = useState<number>(0);
+
+
+
+  const [bedRoomNumbers, setBedRoomNumbers] = useState<any>(0);
+  const bedRoomNumbersArray = (length: number) =>
+    Array.from(new Array(length), (val: any, index: number) => ++index);
+
+
   return (
     <div>
-      <h1>Thông tin cơ bản</h1>
+      <h1>Bạn có thể cung cấp dịch vụ cho bao nhiêu khách</h1>
 
-      <Grid style={{ width: '50%' }}>
-        {/* <h3>Hình thức thuê: </h3> */}
-
-        <Select title="Hình thức thuê: ">
-          <option value="">Select one</option>
-          <option value={1}>Ngắn hạn</option>
-          <option value={2}>Dài hạn</option>
-        </Select>
+      <QuantityButtons
+        containerWidth={'66.67%'}
+        number={guest}
+        setNumber={setGuest}
+        title={'Khách'}></QuantityButtons>
+      <QuantityButtons
+        number={maxGuest}
+        setNumber={setMaxGuest}
+        title={'Số khách tối đa'}
+        containerWidth={'66.67%'}></QuantityButtons>
+      <Grid style={{ paddingRight: 10 }}>
+        <Select
+          value={bedRoomNumbers}
+          setValue={setBedRoomNumbers}
+          unit={' phòng ngủ'}
+          title="Bạn có thể cung cấp bao nhiêu phòng ngủ cho khách?"
+          options={bedRoomNumbersArray(50)}
+          twoThirdWidth={true}
+        />
       </Grid>
 
-      <Grid style={{ width: '50%' }}>
-        {/* <h3>Loại Căn hộ: </h3> */}
-        <Select title="Loại Căn hộ: ">
-          <option value="">Select one</option>
-          <option value={1}>Nhà Riêng</option>
-          <option value={2}>Chung cư</option>
-          <option value={3}>Biệt thự Villa</option>
-          <option value={4}>Phòng riêng</option>
-          <option value={5}>Khách sạn</option>
-        </Select>
-      </Grid>
+      <QuantityButtons
+        number={bed}
+        setNumber={setBed}
+        title={'Giường'}
+        containerWidth={'66.67%'}></QuantityButtons>
+
+      <h1>Sắp xếp chỗ ngủ</h1>
+      <h3>Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn</h3>
+
+      {bedRoomNumbersArray(parseInt(bedRoomNumbers)).map((number) => (
+        <AddBedRoom roomNumber={number} />
+      ))}
     </div>
   );
 };
