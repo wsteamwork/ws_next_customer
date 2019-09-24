@@ -21,7 +21,7 @@ const Layout: FC<IProps> = (props) => {
       xs={10}
       className="bottom-navigation"
       classNameItem="bottom-navigation-container">
-      <Grid container xs={7} className="bottom-navigation-inner-container">
+      <Grid item container xs={7} className="bottom-navigation-inner-container">
         <Grid item className="bottom-navigation-inner-wrapper">
           <Grid className="prev-button">
             <Button className="prev-link" 

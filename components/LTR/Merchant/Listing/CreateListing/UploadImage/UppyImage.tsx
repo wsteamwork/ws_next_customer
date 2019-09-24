@@ -10,7 +10,8 @@ import '@uppy/dashboard/dist/style.css';
 import '@uppy/webcam/dist/style.css';
 import '@uppy/url/dist/style.css';
 import 'uppy/dist/uppy.min.css';
-
+import fetch from 'isomorphic-fetch';
+import Promise from 'es6-promise';
 interface IProps {
   classes?: any;
 }
@@ -20,11 +21,26 @@ const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [state, setState] = useState({
-    showInlineDashboard: true,
+    showInlineDashboard: true
   });
-
+  const initImages = async (arrImg) => {
+    for (let i = 0; i < arrImg.length; i++) {
+      const img = arrImg[i];
+      await fetch(img)
+        .then((res) => res.blob())
+        .then((blob) => {
+          console.log(2)
+          uppy.addFile({
+            name: 'image.jpg',
+            type: blob.type,
+            data: blob
+          });
+        })
+        .catch((err) => console.error(err));
+    };
+  };
   const uppy = Uppy({
-    id: 'uppy1',
+    id: 'uppy',
     autoProceed: false,
     debug: true,
     locale: {
@@ -55,37 +71,45 @@ const UppyImage: FC<IProps> = (props) => {
       minNumberOfFiles: 1,
       maxNumberOfFiles: 10,
       allowedFileTypes: ['image/*']
+    },
+    onBeforeFileAdded: (currentFile, files) => {
+      console.log(1)
+      let year = new Date().getFullYear();
+      let month = new Date().getMonth() + 1;
+      let date = new Date().getDate();
+      let timestamp = new Date().getTime();
+      let newName =
+        `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
+        '_' +
+        timestamp +
+        '_' +
+        currentFile.name;
+      let modifiedFile = Object.assign({}, currentFile, { name: newName });
+      return modifiedFile;
     }
   })
-  .use(Tus, { endpoint: 'https://master.tus.io/files/', limit: 5 })
-  .use(GoogleDrive, { companionUrl: 'https://companion.uppy.io' })
-  .on('complete', (result) => {
-    console.log('successful files:', result.successful);
-  })
-  .on('upload-success', (file, response) => {
-    var img = new Image();
-    img.width = 400;
-    img.alt = file.id;
-    img.src = response.uploadURL;
-    // document.body.appendChild(img)
-  })
-  .on('dashboard:file-edit-start', () => {
-    console.log('Modal is start')
-  })
-  .on('dashboard:file-edit-complete', () => {
-    console.log('Modal is complete')
-  })
-
-  uppy.getFiles().forEach(file => {
-    console.log(file)
-    uppy.setFileState(file.id, { 
-      progress: { uploadComplete: true, uploadStarted: false } 
+    .use(Tus, { endpoint: 'https://master.tus.io/files/', limit: 20 })
+    .use(GoogleDrive, {
+      companionUrl: 'https://master.tus.io/files/'
     })
-  })
+    .on('complete', (result) => {
+      console.log('successful files:', result.successful);
+    })
+    .on('upload-success', (file, response) => {
+      var img = new Image();
+      img.width = 400;
+      img.alt = file.id;
+      img.src = response.uploadURL;
+    });
+  initImages([
+    'https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/2019_03_16_e410127450295795210b.jpg',
+  ]);
 
-  const numFiles1 = Object.keys(uppy.state.files).length;
-  const numFiles = uppy.state.files;
-  console.log('num Files:', numFiles);
+  uppy.getFiles().forEach((file) => {
+    uppy.setFileState(file.id, {
+      progress: { uploadComplete: true, uploadStarted: false }
+    });
+  });
 
   return (
     <Fragment>

@@ -1,7 +1,7 @@
-import React, { FC, Fragment, useState, useRef } from 'react';
-import { Grid, createStyles, makeStyles, Theme } from '@material-ui/core';
-import CustomDropzone2 from './CustomDropzone';
+import React, { FC, Fragment, useState, useReducer } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import UppyImage from './UppyImage';
+import { ListingDetailContext, ListingDetailStateInit, ListingDetailReducer } from '@/store/Context/LTR/ListingDetailContext';
 interface IProps {
   classes?: any;
 }
@@ -32,9 +32,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const UploadImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
   return (
     <Fragment>
-      <UppyImage/>
+      <ListingDetailContext.Provider value={{ state, dispatch }}>
+        <UppyImage />
+      </ListingDetailContext.Provider>
     </Fragment>
   );
 };
