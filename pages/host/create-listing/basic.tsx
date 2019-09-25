@@ -4,21 +4,45 @@ import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import Basic from '@/components/LTR/Merchant/Listing/CreateListing/Basic';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
+import Location from '@/components/LTR/Merchant/Listing/CreateListing/Location';
 const RoomCreateListing = () => {
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
   };
 
-  const getStepContent = (step) => {
+  const getStepContent = (step, steps, setActiveStep, nextLink) => {
     switch (step) {
       case 0:
-        return <Basic />;
+        return (
+          <Basic
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       case 1:
-        return <Room />;
+        return (
+          <Room steps={steps} activeStep={step} setActiveStep={setActiveStep} nextLink={nextLink} />
+        );
       case 2:
-        return <Bathroom />;
+        return (
+          <Bathroom
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       case 3:
-        return <Room />;
+        return (
+          <Location
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       default:
         return 'Unknown step';
     }
