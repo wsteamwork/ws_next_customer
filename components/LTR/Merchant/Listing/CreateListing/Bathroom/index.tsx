@@ -1,21 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC, useState, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Select from '@/components/ReusableComponents/Select';
+import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 
-interface IProps {}
+interface IProps {
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
+}
 
 const Bathroom: FC<IProps> = (props) => {
+  const [bathroom, setBathroom] = useState<number>(0);
   return (
-    <div>
-      <h1>Số phòng tắm</h1>
+    <div className="step1-tab3-bathroom">
+      <Grid className="createListing-title">
+        <Grid className="createListing-heading-1">Số phòng tắm</Grid>
+      </Grid>
 
       <Grid>
-        <h3>Phòng Tắm: </h3>
-        {/* <Select>
-          <option value="">Select one</option>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-        </Select> */}
+        <QuantityButtons
+          number={bathroom}
+          setNumber={setBathroom}
+          title={'Số khách tối đa'}
+          containerWidth={'66.67%'}
+          step={0.5}></QuantityButtons>
       </Grid>
     </div>
   );

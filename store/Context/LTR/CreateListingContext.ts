@@ -15,12 +15,15 @@ export type CreateListingState = {
   readonly stayWithHost: number;
   readonly guestRecommendation: number;
   readonly maxGuest: number;
-
   readonly listings: any;
 };
 
 export type CreateListingAction =
-  | { type: 'setPercentage'; payload: number }
+  | { type: 'setLeaseType'; payload: number }
+  | { type: 'setAccommodationType'; payload: number }
+  | { type: 'setStayWithHost'; payload: number }
+  | { type: 'setGuestRecommendation'; payload: number }
+  | { type: 'setMaxGuest'; payload: number }
   | { type: 'setListings'; listings: any };
 
 export const CreateListingInit: CreateListingState = {
@@ -37,6 +40,16 @@ export const CreateListingReducer: Reducer<CreateListingState, CreateListingActi
   action: CreateListingAction
 ): CreateListingState => {
   switch (action.type) {
+    case 'setLeaseType':
+      return updateObject<CreateListingState>(state, { leaseType: action.payload });
+    case 'setAccommodationType':
+      return updateObject<CreateListingState>(state, { accommodationType: action.payload });
+    case 'setStayWithHost':
+      return updateObject<CreateListingState>(state, { stayWithHost: action.payload });
+    case 'setGuestRecommendation':
+      return updateObject<CreateListingState>(state, { guestRecommendation: action.payload });
+    case 'setMaxGuest':
+      return updateObject<CreateListingState>(state, { maxGuest: action.payload });
     case 'setListings':
       return updateObject<CreateListingState>(state, { listings: action.listings });
 

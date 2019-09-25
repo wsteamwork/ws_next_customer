@@ -1,9 +1,15 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Select from '@/components/ReusableComponents/Select';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import AddBedRoom from './AddBedRoom';
-interface IProps {}
+import { Typography } from '@material-ui/core';
+interface IProps {
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
+}
 
 const Room: FC<IProps> = (props) => {
   const [guest, setGuest] = useState<number>(0);
@@ -14,16 +20,17 @@ const Room: FC<IProps> = (props) => {
   const [king, setKing] = useState<number>(0);
   const [queen, setQueen] = useState<number>(0);
 
-
-
-  const [bedRoomNumbers, setBedRoomNumbers] = useState<any>(0);
+  const [bedRoomNumbers, setBedRoomNumbers] = useState<any>(1);
   const bedRoomNumbersArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);
 
-
   return (
-    <div>
-      <h1>Bạn có thể cung cấp dịch vụ cho bao nhiêu khách</h1>
+    <div className="step1-tab2-room">
+      <Grid className="createListing-title">
+        <Grid className="createListing-heading-1">
+          Bạn có thể cung cấp dịch vụ cho bao nhiêu khách
+        </Grid>
+      </Grid>
 
       <QuantityButtons
         containerWidth={'66.67%'}
@@ -52,10 +59,12 @@ const Room: FC<IProps> = (props) => {
         title={'Giường'}
         containerWidth={'66.67%'}></QuantityButtons>
 
-      <h1>Sắp xếp chỗ ngủ</h1>
-      <h3>Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn</h3>
+      <Grid className="createListing-heading-2">Sắp xếp chỗ ngủ</Grid>
+      <h3 className="createListing-subTitle">
+        Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn
+      </h3>
 
-      {bedRoomNumbersArray(parseInt(bedRoomNumbers)).map((number) => (
+      {bedRoomNumbersArray(+bedRoomNumbers).map((number) => (
         <AddBedRoom roomNumber={number} />
       ))}
     </div>
