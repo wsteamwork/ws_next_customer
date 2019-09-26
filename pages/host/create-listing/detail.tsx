@@ -24,14 +24,35 @@ const RoomCreateListing = () => {
   const getSteps = () => {
     return ['Mô tả căn hộ', 'Tiện nghi', 'Ảnh'];
   };
-  const getStepContent = (step) => {
+  const getStepContent = (step, steps, setActiveStep, nextLink) => {
     switch (step) {
       case 0:
-        return <UploadImage />;
+        return (
+          <UploadImage
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       case 1:
-        return <Amenities />;
+        return (
+          <Amenities
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       case 2:
-        return <Description />;
+        return (
+          <Description
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
       default:
         return 'Unknown step';
     }

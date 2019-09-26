@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, useReducer, useContext, useMemo, useEffect } from 'react';
+import React, { FC, Fragment, useState, useReducer, useContext, useMemo, useEffect, Dispatch, SetStateAction } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import UppyImage from './UppyImage';
 import _ from 'lodash';
@@ -6,17 +6,23 @@ import {
   ListingDetailContext,
   IListingDetailContext
 } from '@/store/Context/LTR/ListingDetailContext';
+import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 interface IProps {
-  classes?: any;
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 
 const UploadImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { activeStep, steps, setActiveStep, nextLink } = props;
   const { state } = useContext<IListingDetailContext>(ListingDetailContext);
   const { listing } = state;
-  // console.log(state);
+  console.log(state);
   return (
     <Fragment>
       {listing ? (
@@ -103,6 +109,12 @@ const UploadImage: FC<IProps> = (props) => {
       ) : (
         ''
       )}
+      <BottomNavigation
+        steps={steps}
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        nextLink={nextLink}
+      />
     </Fragment>
   );
 };

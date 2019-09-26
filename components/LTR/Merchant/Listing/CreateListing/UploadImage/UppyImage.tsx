@@ -49,7 +49,8 @@ const UppyImage: FC<IProps> = (props) => {
     } else {
       dispatch({ type: typeUpload.type, payload: { images: initImages } });
     }
-  },[]);
+  }, []);
+
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
       // const img = 'https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/' + arrImg[i].name + '.jpg';
@@ -65,6 +66,7 @@ const UppyImage: FC<IProps> = (props) => {
         .catch((err) => console.error(err));
     }
   };
+  initImage(initImages);
   const uppy = Uppy({
     id: 'uppy',
     autoProceed: false,
@@ -84,6 +86,19 @@ const UppyImage: FC<IProps> = (props) => {
           '1': '%{complete} của %{smart_count} ảnh đã được tải lên',
           '2': '%{complete} của %{smart_count} ảnh đã được tải lên'
         },
+        uploadXFiles: {
+          '0': 'Tải lên %{smart_count} ảnh',
+          '1': 'Tải lên %{smart_count} ảnh',
+          '2': 'Tải lên %{smart_count} ảnh'
+        },
+        xFilesSelected: {
+          '0': '%{smart_count} ảnh đã tải lên',
+          '1': '%{smart_count} ảnh đã tải lên',
+          '2': '%{smart_count} ảnh đã tải lên'
+        },
+        saveChanges: 'Lưu thay đổi',
+        done: 'Hoàn thành',
+        editing: 'Đang thay đổi ảnh %{file}',
         xTimeLeft: '%{time} còn lại',
         cancel: 'Hủy',
         complete: 'Hoàn thành',
@@ -98,22 +113,25 @@ const UppyImage: FC<IProps> = (props) => {
       maxNumberOfFiles: maxImage ? maxImage : 20,
       allowedFileTypes: ['image/*']
     },
-    // onBeforeFileAdded: (currentFile, files) => {
-    //   let year = new Date().getFullYear();
-    //   let month = new Date().getMonth() + 1;
-    //   let date = new Date().getDate();
-    //   let timestamp = new Date().getTime();
-    //   let newName =
-    //   `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
-    //     '_' +
-    //     timestamp +
-    //     '_' +
-    //     currentFile.name;
-    //   let pos = newName.lastIndexOf('.');
-    //   newName = newName.substr(0, pos < 0 ? newName.length : pos) + '.jpg';
-    //   let modifiedFile = Object.assign({}, currentFile, { id: parseInt(currentFile.id), name: newName });
-    //   return modifiedFile;
-    // }
+    onBeforeFileAdded: (currentFile, files) => {
+      if(currentFile.meta) {
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth() + 1;
+        let date = new Date().getDate();
+        let timestamp = new Date().getTime();
+        let newName =
+        `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
+          '_' +
+          timestamp +
+          '_' +
+          currentFile.name;
+        let pos = newName.lastIndexOf('.');
+        newName = newName.substr(0, pos < 0 ? newName.length : pos) + '.jpg';
+        let modifiedFile = Object.assign({}, currentFile, { name: newName });
+        return modifiedFile;
+      }
+      return currentFile;
+    }
   })
     .use(XHRUpload, {
       endpoint: 'http://ws-api.nhat/merchant-api/upload-image/',
@@ -139,20 +157,17 @@ const UppyImage: FC<IProps> = (props) => {
       }
     })
     .on('file-removed', (file) => {
-      let index = initImages.findIndex(i => (i.name + '.jpg') === file.name);
-        if (index > -1) {
-          initImages.splice(index, 1);
-          if (type_txt) {
-            dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
-          } else {
-            dispatch({ type: typeUpload.type, payload: { images: initImages } });
-          }
+      let index = initImages.findIndex((i) => i.name + '.jpg' === file.name);
+      if (index > -1) {
+        initImages.splice(index, 1);
+        if (type_txt) {
+          dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
+        } else {
+          dispatch({ type: typeUpload.type, payload: { images: initImages } });
         }
-        console.log('file-removed', initImages);
-    })
-  // useEffect(() => {
-    initImage(initImages);
-  // }, [initImages]);
+      }
+      // console.log('file-removed', initImages);
+    });
 
   return (
     <Fragment>

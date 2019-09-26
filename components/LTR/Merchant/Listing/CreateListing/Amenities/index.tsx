@@ -1,5 +1,5 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useState, useEffect } from 'react';
+import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { Theme, makeStyles } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import CardAmenities from './CardAmenities';
@@ -8,11 +8,17 @@ import qs from 'query-string';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 interface IProps {
   classes?: any;
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
 }
 const Amenities: FC<IProps> = (props) => {
   const [amenities, setAmenities] = useState<any>([]);
+  const { activeStep, steps, setActiveStep, nextLink } = props;
   const getAmenities = async () => {
     const url = `comforts`;
     const res: AxiosRes<any> = await axios_merchant.get(url);
@@ -80,6 +86,12 @@ const Amenities: FC<IProps> = (props) => {
           ) : (
             ''
           )}
+          <BottomNavigation
+            steps={steps}
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+            />
         </Grid>
       </Grid>
     </Fragment>

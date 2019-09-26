@@ -1,5 +1,5 @@
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useMemo, useContext } from 'react';
+import React, { FC, Fragment, useMemo, useContext, SetStateAction, Dispatch } from 'react';
 import { Theme, makeStyles } from '@material-ui/core';
 import { Grid, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
@@ -8,9 +8,13 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import CardTextarea from './CardTextarea';
-
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 interface IProps {
   classes?: any;
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
 }
 
 interface MyDescription {
@@ -58,6 +62,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Description: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { activeStep, steps, setActiveStep, nextLink } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
@@ -296,25 +301,13 @@ const Description: FC<IProps> = (props) => {
                   />
                 </Grid>
               </Grid>
-              {/* <Grid item xs={11} sm={10} md={6} lg={4} className="action_footer">
-              <Link href="/">
-                <a>
-                  <Grid item className="action_back">
-                    <Grid item className="back_icon">
-                      <ArrowBackIosRounded className="size_icon" />
-                    </Grid>
-                    <Grid item className="back_text">
-                      Trước
-                    </Grid>
-                  </Grid>
-                </a>
-              </Link>
-              <Grid item>
-                <Button className="btn_next" variant="contained" type="submit">
-                  Tiếp tục
-                </Button>
-              </Grid>
-            </Grid> */}
+              <BottomNavigation
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              nextLink={nextLink}
+              handleSubmit={handleSubmit}
+            />
             </Grid>
           )}></Formik>
     </Fragment>
