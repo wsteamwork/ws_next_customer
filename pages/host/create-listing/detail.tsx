@@ -8,21 +8,22 @@ import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
 import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage';
-import { NextPage } from 'next';
-import { ListingDetailStateInit, ListingDetailReducer, getListingDetail, ListingDetailContext } from '@/store/Context/LTR/ListingDetailContext';
-import { CodeSharp } from '@material-ui/icons';
+import {
+  ListingDetailStateInit,
+  ListingDetailReducer,
+  getListingDetail,
+  ListingDetailContext
+} from '@/store/Context/LTR/ListingDetailContext';
 
-const RoomCreateListing = ()  => {
+const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
   useEffect(() => {
-    let id = 6;
+    let id = 13;
     getListingDetail(id, dispatch);
   }, []);
   const getSteps = () => {
     return ['Mô tả căn hộ', 'Tiện nghi', 'Ảnh'];
   };
-  console.log(state);
-
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -44,7 +45,6 @@ const RoomCreateListing = ()  => {
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
-      {/* <NavHeader></NavHeader> */}
       <ListingDetailContext.Provider value={{ state, dispatch }}>
         <Layout
           title="Bước 2: Thông tin chi tiết"

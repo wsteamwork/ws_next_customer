@@ -1,43 +1,69 @@
-import React, { FC, Fragment, useState } from 'react';
-import { Grid, createStyles, makeStyles, Theme, Typography, TextField } from '@material-ui/core';
+import React, { FC, Fragment, useState, useContext, useEffect } from 'react';
+import { Grid, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
 import Tus from '@uppy/tus';
 import GoogleDrive from '@uppy/google-drive';
-import { Dashboard, DashboardModal, DragDrop, ProgressBar } from '@uppy/react';
-import AwsS3 from '@uppy/aws-s3';
+import XHRUpload from '@uppy/xhr-upload';
+import { Dashboard } from '@uppy/react';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 import '@uppy/webcam/dist/style.css';
 import '@uppy/url/dist/style.css';
 import 'uppy/dist/uppy.min.css';
 import fetch from 'isomorphic-fetch';
-import Promise from 'es6-promise';
+import { handleSubmitImage } from '@/store/Context/LTR/ListingDetailContext';
+import {
+  ListingDetailContext,
+  IListingDetailContext
+} from '@/store/Context/LTR/ListingDetailContext';
 interface IProps {
   classes?: any;
+  label?: string;
+  subLabel?: string;
+  initImages?: any;
+  height?: number;
+  width?: number;
+  typeUpload: any;
+  maxImage?: number;
+  type_txt?: string;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
+const useStyles = makeStyles<Theme>((theme: Theme) =>
+  createStyles({
+    margin: {
+      marginTop: theme.spacing(3)
+    }
+  })
+);
 
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { label, subLabel, initImages, height, width, maxImage, typeUpload, type_txt } = props;
   const [state, setState] = useState({
     showInlineDashboard: true
   });
-  const initImages = async (arrImg) => {
+  const { dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
+  useEffect(() => {
+    if (type_txt) {
+      dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
+    } else {
+      dispatch({ type: typeUpload.type, payload: { images: initImages } });
+    }
+  },[]);
+  const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
-      const img = arrImg[i];
+      // const img = 'https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/' + arrImg[i].name + '.jpg';
+      let img = 'https://i.ibb.co/QP49Yyn/68509021-879169062453399-4079830846545068032-n.jpg';
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
-          console.log(2)
           uppy.addFile({
-            name: 'image.jpg',
-            type: blob.type,
+            name: arrImg[i].name + '.jpg',
             data: blob
           });
         })
         .catch((err) => console.error(err));
-    };
+    }
   };
   const uppy = Uppy({
     id: 'uppy',
@@ -69,68 +95,96 @@ const UppyImage: FC<IProps> = (props) => {
     restrictions: {
       maxFileSize: 250000000,
       minNumberOfFiles: 1,
-      maxNumberOfFiles: 10,
+      maxNumberOfFiles: maxImage ? maxImage : 20,
       allowedFileTypes: ['image/*']
     },
-    onBeforeFileAdded: (currentFile, files) => {
-      console.log(1)
-      let year = new Date().getFullYear();
-      let month = new Date().getMonth() + 1;
-      let date = new Date().getDate();
-      let timestamp = new Date().getTime();
-      let newName =
-        `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
-        '_' +
-        timestamp +
-        '_' +
-        currentFile.name;
-      let modifiedFile = Object.assign({}, currentFile, { name: newName });
-      return modifiedFile;
-    }
+    // onBeforeFileAdded: (currentFile, files) => {
+    //   let year = new Date().getFullYear();
+    //   let month = new Date().getMonth() + 1;
+    //   let date = new Date().getDate();
+    //   let timestamp = new Date().getTime();
+    //   let newName =
+    //   `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
+    //     '_' +
+    //     timestamp +
+    //     '_' +
+    //     currentFile.name;
+    //   let pos = newName.lastIndexOf('.');
+    //   newName = newName.substr(0, pos < 0 ? newName.length : pos) + '.jpg';
+    //   let modifiedFile = Object.assign({}, currentFile, { id: parseInt(currentFile.id), name: newName });
+    //   return modifiedFile;
+    // }
   })
-    .use(Tus, { endpoint: 'https://master.tus.io/files/', limit: 20 })
+    .use(XHRUpload, {
+      endpoint: 'http://ws-api.nhat/merchant-api/upload-image/',
+      fieldname: 'file',
+      limit: 20
+    })
     .use(GoogleDrive, {
       companionUrl: 'https://master.tus.io/files/'
     })
-    .on('complete', (result) => {
-      console.log('successful files:', result.successful);
+    .on('file-added', (file) => {
+      console.log('file-added', file);
     })
-    .on('upload-success', (file, response) => {
-      var img = new Image();
-      img.width = 400;
-      img.alt = file.id;
-      img.src = response.uploadURL;
-    });
-  initImages([
-    'https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/2019_03_16_e410127450295795210b.jpg',
-  ]);
-
-  uppy.getFiles().forEach((file) => {
-    uppy.setFileState(file.id, {
-      progress: { uploadComplete: true, uploadStarted: false }
-    });
-  });
+    .on('complete', (result) => {
+      let imgs = [];
+      result.successful.map((res) => {
+        let img = { name: res.meta.name, caption: '', type: 1 };
+        imgs = [...imgs, img];
+      });
+      if (type_txt) {
+        dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
+      } else {
+        dispatch({ type: typeUpload.type, payload: { images: imgs } });
+      }
+    })
+    .on('file-removed', (file) => {
+      let index = initImages.findIndex(i => (i.name + '.jpg') === file.name);
+        if (index > -1) {
+          initImages.splice(index, 1);
+          if (type_txt) {
+            dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
+          } else {
+            dispatch({ type: typeUpload.type, payload: { images: initImages } });
+          }
+        }
+        console.log('file-removed', initImages);
+    })
+  // useEffect(() => {
+    initImage(initImages);
+  // }, [initImages]);
 
   return (
     <Fragment>
-      <Grid container justify="center" alignContent="center">
-        <div>
-          <h1>Đăng ảnh căn hộ</h1>
-          {state.showInlineDashboard && (
-            <Dashboard
-              uppy={uppy}
-              trigger={'.UppyModalOpenerBtn'}
-              showProgressDetails={true}
-              note={'Bạn phải đăng ít nhất 2 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
-              height={500}
-              plugins={['GoogleDrive']}
-              metaFields={[
-                { id: 'name', name: 'Tên ảnh', placeholder: 'Đặt tên ảnh' },
-                { id: 'caption', name: 'Mô tả', placeholder: 'Mô tả chi tiết về bức ảnh này' }
-              ]}
-            />
+      <Grid container className={classes.margin}>
+        <section>
+          {label && (
+            <Typography variant="h1" gutterBottom className="label main_label">
+              {label}
+            </Typography>
           )}
-        </div>
+          {subLabel && (
+            <Grid item className="normal_text">
+              <span>{subLabel}</span>
+            </Grid>
+          )}
+        </section>
+        {state.showInlineDashboard && (
+          <Dashboard
+            uppy={uppy}
+            trigger={'.UppyModalOpenerBtn'}
+            showProgressDetails={true}
+            note={'Bạn phải đăng ít nhất 2 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
+            height={height ? height : 500}
+            width={width ? width : 700}
+            thumbnailWidth={480}
+            plugins={['GoogleDrive']}
+            metaFields={[
+              { id: 'name', name: 'Tên ảnh', placeholder: 'Đặt tên ảnh' },
+              { id: 'caption', name: 'Mô tả', placeholder: 'Mô tả chi tiết về bức ảnh này' }
+            ]}
+          />
+        )}
       </Grid>
     </Fragment>
   );
