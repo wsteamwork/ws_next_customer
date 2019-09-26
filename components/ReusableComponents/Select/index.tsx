@@ -12,15 +12,17 @@ interface IProps<T> extends SelectProps {
   twoThirdWidth?: boolean;
   setValue?: Dispatch<SetStateAction<T>>;
   unit?: string;
+  // onChange: (e: React.ChangeEvent<any>) => void;
+  // onBlur: (e: any) => void;
 }
 
 const SelectGlobal = <T extends any>(props: IProps<T>) => {
-  const { value, options, title, twoThirdWidth, setValue, unit } = props;
-  const [valueInput, setValueInput] = React.useState(value);
-  const handleChange = (event: ChangeEvent<{ name?: string; value: T }>) => {
-    setValueInput(event.target.value);
-    if (setValue) setValue(event.target.value);
-  };
+  const { value, options, title, twoThirdWidth, setValue, unit, onChange, onBlur } = props;
+  // const [valueInput, setValueInput] = React.useState(value);
+  // const handleChange = (event: ChangeEvent<{ name?: string; value: T }>) => {
+  //   setValueInput(event.target.value);
+  //   if (setValue) setValue(event.target.value);
+  // };
 
   const optionsRender = () => {
     return options.map((item, i) => {
@@ -37,10 +39,13 @@ const SelectGlobal = <T extends any>(props: IProps<T>) => {
       {title ? <Grid className="title">{title}</Grid> : ''}
       <Grid className={twoThirdWidth ? 'two-third-width' : ''}>
         <Select
+          name="accommodation_type"
           native
           fullWidth
           classes={{ icon: 'icon' }}
-          onChange={handleChange}
+          onChange={onChange}
+          onBlur={onBlur}
+          value={value}
           input={
             <OutlinedInput
               name="term-rental"
@@ -49,7 +54,6 @@ const SelectGlobal = <T extends any>(props: IProps<T>) => {
             />
           }
           displayEmpty
-          value={valueInput}
           IconComponent={KeyboardArrowDown}>
           {optionsRender()}
         </Select>

@@ -1,45 +1,85 @@
-import React, { FC } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC, useState, Fragment, Dispatch, SetStateAction } from 'react';
+import Grid from '@material-ui/core/Grid/';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import {
+  Typography,
+  Button,
+  Theme,
+  StepConnector,
+  withStyles,
+  StepIcon,
+  MobileStepper,
+  Hidden
+} from '@material-ui/core';
+
+import Router from 'next/router';
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '@material-ui/core';
-import GridContainer from '@/components/Layout/Grid/Container';
+import BottomMdNavigation from './BottomMdNavigation';
 
 interface IProps {
-  activeStep: number;
-  handleBack: () => void;
-  steps: Array<string>;
-  handleNext: () => void;
+  steps?: string[];
+  activeStep?: number;
+  nextLink?: string;
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Layout: FC<IProps> = (props) => {
-  const { activeStep, handleBack, steps, handleNext } = props;
+const BottomNavigation: FC<IProps> = (props) => {
+  const { steps, activeStep, nextLink, setActiveStep, handleSubmit } = props;
+  const handleNext = async () => {
+    if (handleSubmit) await handleSubmit();
+    if (activeStep === steps.length - 1) {
+      Router.push(nextLink);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (activeStep === 0) {
+      Router.back();
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
+  };
 
   return (
-    <GridContainer
-      xs={10}
-      className="bottom-navigation"
-      classNameItem="bottom-navigation-container">
-      <Grid item container xs={7} className="bottom-navigation-inner-container">
-        <Grid item className="bottom-navigation-inner-wrapper">
-          <Grid className="prev-button">
-            <Button className="prev-link" 
-            // disabled={activeStep === 0}
-             onClick={handleBack}>
+    <Fragment>
+      <Hidden smDown>
+        <BottomMdNavigation
+          handleNext={handleNext}
+          handleBack={handleBack}
+          steps={steps}
+          activeStep={activeStep}
+        />
+      </Hidden>
+
+      <Hidden mdUp>
+        <MobileStepper
+          variant="progress"
+          steps={6}
+          position="static"
+          activeStep={activeStep}
+          className="mobile-stepper"
+          nextButton={
+            <ButtonGlobal onClick={handleNext} type="submit">
+              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            </ButtonGlobal>
+          }
+          backButton={
+            <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
               <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
               <span className="prev-title">Back</span>
             </Button>
-          </Grid>
-          <Grid className="next-button">
-            <ButtonGlobal onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ButtonGlobal>
-          </Grid>
-        </Grid>
-      </Grid>
-    </GridContainer>
+          }
+        />
+      </Hidden>
+    </Fragment>
   );
 };
 
-export default Layout;
+export default BottomNavigation;

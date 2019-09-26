@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -16,14 +16,16 @@ import {
 import { makeStyles, useTheme } from '@material-ui/styles';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import Router from 'next/router';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
   classes?: any;
   getSteps?: () => Array<string>;
-  getStepContent?: (step: number) => any;
+  getStepContent?: (
+    step: number,
+    steps: string[],
+    setActiveStep: Dispatch<SetStateAction<number>>,
+    nextLink: string
+  ) => any;
   nextLink: string;
 }
 
@@ -93,25 +95,25 @@ const StepperProgress: FC<IProps> = (props) => {
   //   return step === 1;
   // };
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
+  // const isStepSkipped = (step) => {
+  //   return skipped.has(step);
+  // };
 
-  const handleNext = () => {
-    if (activeStep === steps.length - 1) {
-      Router.push(nextLink);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
+  // const handleNext = () => {
+  //   if (activeStep === steps.length - 1) {
+  //     Router.push(nextLink);
+  //   } else {
+  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   }
+  // };
 
-  const handleBack = () => {
-    if (activeStep === 0) {
-      Router.back();
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    }
-  };
+  // const handleBack = () => {
+  //   if (activeStep === 0) {
+  //     Router.back();
+  //   } else {
+  //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  //   }
+  // };
 
   const handleReset = () => {
     setActiveStep(0);
@@ -157,42 +159,12 @@ const StepperProgress: FC<IProps> = (props) => {
             </Button>
           </div>
         ) : (
-            <div>
-              {getStepContent(activeStep)}
-              <Hidden smDown>
-                <BottomNavigation
-                  handleNext={handleNext}
-                  handleBack={handleBack}
-                  steps={steps}
-                  activeStep={activeStep}
-                />
-              </Hidden>
+          <div>
+            {getStepContent(activeStep, steps, setActiveStep, nextLink)}
 
-              <Hidden mdUp>
-                <MobileStepper
-                  variant="progress"
-                  steps={6}
-                  position="static"
-                  activeStep={activeStep}
-                  className="mobile-stepper"
-                  nextButton={
-                    <ButtonGlobal onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                    </ButtonGlobal>
-                  }
-                  backButton={
-                    <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>
-                      <FontAwesomeIcon
-                        icon={faChevronLeft}
-                        size="2x"
-                        color="#fa991c"></FontAwesomeIcon>
-                      <span className="prev-title">Back</span>
-                    </Button>
-                  }
-                />
-              </Hidden>
-            </div>
-          )}
+            
+          </div>
+        )}
       </Grid>
     </Grid>
   );

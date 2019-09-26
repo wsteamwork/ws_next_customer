@@ -1,3 +1,9 @@
+.step1-tab2-room {
+  .createListing-title{
+    padding: 20px 0;
+  }
+}
+
 .add-bedroom-container {
   &__wrapper {
     border-bottom: 1px solid #dce0e0;
@@ -9,9 +15,10 @@
       color: #484848;
       padding: 9px 27px;
       text-transform: initial;
+      margin-top: 10px;
     }
 
-    .counting-open {
+    .add-bedroom-container__counting {
       text-align: right;
     }
   }

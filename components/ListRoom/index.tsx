@@ -69,7 +69,8 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
         freeMode: true
       },
       600: {
-        slidesPerView: 1.5
+        slidesPerView: 1.5,
+        freeMode: true
       }
     }
   };
