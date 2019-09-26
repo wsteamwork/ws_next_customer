@@ -1,6 +1,6 @@
 import React, { Fragment, FC, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, TextField, InputAdornment, Divider } from '@material-ui/core';
+import { Theme, Grid, Typography, TextField, InputAdornment, Divider, Button } from '@material-ui/core';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
 
 interface IProps {
@@ -77,6 +77,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
               }}
             />
+
             <Divider className={classes.divider}/>
           </Grid>
 

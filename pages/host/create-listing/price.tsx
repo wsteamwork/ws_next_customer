@@ -5,7 +5,7 @@ import PriceShortTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step
 import LongTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm';
 const RoomCreateListing = () => {
   const getSteps = () => {
-    return ['Ngắn hạn', 'Dài hạn', 'Giá dịch vụ', 'Giá dịch vụ bổ sung'];
+    return ['Ngắn hạn', 'Dài hạn', 'Giá dịch vụ bổ sung'];
   };
 
   const getStepContent = (step) => {
@@ -15,8 +15,6 @@ const RoomCreateListing = () => {
       case 1:
         return <LongTerm/>;
       case 2:
-        return 'Giá dịch vụ';
-      case 3:
         return 'Giá dịch vụ bổ sung';
       default:
         return 'Unknown step';
