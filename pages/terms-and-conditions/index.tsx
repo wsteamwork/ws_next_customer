@@ -494,7 +494,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
             </p>
             <h3 className="ql-align-justify">
               <strong style={{ backgroundColor: 'transparent', color: 'rgb(67, 67, 67)' }}>
-                2. Chính sách chuyển nhượng
+                2. Chính sách thay đổi chuyển nhượng
               </strong>
             </h3>
             <p className="ql-align-justify">
