@@ -516,6 +516,11 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
               </span>
             </p>
             <p className="ql-align-justify">
+              <span style={{ backgroundColor: 'transparent', color: 'rgb(0, 0, 0)' }}>
+                Khách hàng có quyền thay đổi địa điểm lưu trú trong cùng thời gian đã đặt trong vòng 72 giờ kể từ thời điểm đặt phòng và chịu mức phí là 10% trên tổng booking. Westay sẽ hỗ trợ tìm sản phẩm phù hợp nhất với nhu cầu của khách hàng.
+              </span>
+            </p>
+            <p className="ql-align-justify">
               <br />
             </p>
             <h2 className="ql-align-justify">
