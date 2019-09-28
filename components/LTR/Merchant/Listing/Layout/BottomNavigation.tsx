@@ -26,17 +26,25 @@ interface IProps {
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
   handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => void;
+  isSubmitting: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, handleSubmit } = props;
-  const handleNext = async () => {
-    if (handleSubmit) await handleSubmit();
-    if (activeStep === steps.length - 1) {
-      Router.push(nextLink);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+  const { steps, activeStep, nextLink, setActiveStep, handleSubmit, isSubmitting } = props;
+  const handleNext = () => {
+    console.log('submit');
+    
+    // if (isSubmitting) {
+    //   console.log('submitting');
+    //
+    // } else {
+    //   console.log('not submitting');
+    //   if (activeStep === steps.length - 1) {
+    //     Router.push(nextLink);
+    //   } else {
+    //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    //   }
+    // }
   };
 
   const handleBack = () => {
@@ -66,7 +74,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} type="submit">
+            <ButtonGlobal type="submit">
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }

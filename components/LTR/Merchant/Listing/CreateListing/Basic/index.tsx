@@ -5,6 +5,7 @@ import { Formik, FormikActions, FormikProps } from 'formik';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
 
+import Router from 'next/router';
 interface IProps {
   activeStep: number;
   steps: string[];
@@ -34,8 +35,19 @@ const Basic: FC<IProps> = (props) => {
     stay_with_host: null
   };
 
-  const handleFormSubmit = (values: FormValues, action: FormikActions<FormValues>) => {
-    console.log('submit');
+  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+    console.log('handle submit');
+    const data: any = {
+      lease_type: values.lease_type,
+      accommodation_type: values.accommodation_type,
+      stay_with_host: values.stay_with_host
+    };
+
+    if (activeStep === steps.length - 1) {
+      Router.push(nextLink);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   return (
@@ -56,7 +68,7 @@ const Basic: FC<IProps> = (props) => {
           handleBlur,
           isSubmitting
         }: FormikProps<FormValues>) => (
-          <form >
+          <form onSubmit={handleSubmit}>
             {/* onSubmit={handleSubmit} */}
             <CheckboxCustom />
 
@@ -77,6 +89,7 @@ const Basic: FC<IProps> = (props) => {
               setActiveStep={setActiveStep}
               nextLink={nextLink}
               handleSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
             />
           </form>
         )}

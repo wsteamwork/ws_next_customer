@@ -1,11 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useReducer } from 'react';
 import NextHead from '@/components/NextHead';
 import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import Basic from '@/components/LTR/Merchant/Listing/CreateListing/Basic';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Location from '@/components/LTR/Merchant/Listing/CreateListing/Location';
+import {
+  CreateListingContext,
+  CreateListingInit,
+  CreateListingReducer
+} from '@/store/Context/LTR/CreateListingContext';
 const RoomCreateListing = () => {
+  const [state, dispatch] = useReducer(CreateListingReducer, CreateListingInit);
+
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
   };
@@ -55,13 +62,14 @@ const RoomCreateListing = () => {
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
-
+      {/* <CreateListingContext.Provider value={{ state, dispatch }}> */}
       <Layout
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={'/host/create-listing/detail'}
       />
+      {/* </CreateListingContext.Provider> */}
     </Fragment>
   );
 };

@@ -15,7 +15,6 @@ interface IProps {
 
 const BottomMdNavigation: FC<IProps> = (props) => {
   const { activeStep, handleBack, steps, handleNext } = props;
-
   return (
     <GridContainer
       xs={10}
