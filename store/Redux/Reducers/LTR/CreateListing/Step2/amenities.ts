@@ -1,87 +1,64 @@
-import { CountUnreadRes } from '@/types/Requests/Notification/CountUnread';
-import { Pagination } from '@/types/Requests/ResponseTemplate';
-import { NotificationIndexRes } from '@/types/Requests/Notification/NotificationResponse';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
-import { NextRouter } from 'next/router';
-import qs from 'query-string';
 
-export type NotificationReducerState = {
-  readonly notifications: NotificationIndexRes[];
-  readonly count_unread: CountUnreadRes;
-  readonly meta: Pagination | null;
-  readonly error: boolean;
+export type DescriptionReducerState = {
+  name: string;
+  description: string;
+  space: string;
+  rules: string;
+  error: boolean;
 };
 
-export type NotificationReducerAction =
-  | { type: 'setNotifications'; payload: NotificationIndexRes[]; meta?: Pagination | null }
-  | { type: 'setCountUnread'; payload: CountUnreadRes }
-  | { type: 'setMarkAllRead'; payload: CountUnreadRes }
-  | { type: 'setMeta'; meta: Pagination }
+export const init: DescriptionReducerState = {
+    name: '',
+    description: '',
+    space: '',
+    rules: '',
+    error: false,
+};
+
+export type DescriptionReducerAction =
+  | { type: 'setName'; payload: string}
+  | { type: 'setDescription'; payload: string}
+  | { type: 'setSpace'; payload: string}
+  | { type: 'setRules'; payload: string}
   | { type: 'setError'; payload: boolean };
 
-export const init: NotificationReducerState = {
-  notifications: [],
-  count_unread: null,
-  meta: null,
-  error: false
-};
-
-export const notificationReducer: Reducer<NotificationReducerState, NotificationReducerAction> = (
-  state: NotificationReducerState = init,
-  action: NotificationReducerAction
-): NotificationReducerState => {
+export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionReducerAction> = (
+  state: DescriptionReducerState = init,
+  action: DescriptionReducerAction
+): DescriptionReducerState => {
   switch (action.type) {
-    case 'setNotifications':
-      return updateObject(state, { notifications: action.payload, meta: action.meta || null });
-    case 'setCountUnread':
-      return updateObject(state, { count_unread: action.payload });
-    case 'setMarkAllRead':
-      return updateObject(state, { count_unread: action.payload });
-    case 'setMeta':
-      return updateObject(state, { meta: action.meta });
+    case 'setName':
+      return updateObject(state, { name: action.payload });
+    case 'setDescription':
+      return updateObject(state, { description: action.payload });
+    case 'setSpace':
+      return updateObject(state, { space: action.payload });
+    case 'setRules':
+      return updateObject(state, { rules: action.payload });
     case 'setError':
-      return updateObject(state, { error: action.payload });
+        return updateObject(state, { error: action.payload });
     default:
       return state;
   }
 };
 
-export const getNotifications = async (router: NextRouter) => {
-  let params = router.query;
-  let query = {
-    page: params.page
+export const getDataDescription = async (
+    id: any,
+    dispatch: Dispatch<DescriptionReducerAction>
+  ): Promise<any> => {
+    try {
+      const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
+      const about_room = res.data.data.about_room;
+        dispatch({ type: 'setName', payload: about_room ? about_room.name : ''});
+        dispatch({ type: 'setDescription', payload: about_room ? about_room.description: '' });
+        dispatch({ type: 'setSpace', payload: about_room ? about_room.space : '' });
+        dispatch({ type: 'setRules', payload: about_room ? about_room.note : '' });
+      return about_room;
+    } catch (error) {
+        dispatch({ type: 'setError', payload: true });
+      }
   };
-  const url = `notifications?${qs.stringify(query)}`;
-
-  const res: AxiosRes<NotificationIndexRes[]> = await axios.get(url);
-
-  return res.data;
-};
-const getCountUnread = async (): Promise<any> => {
-  const res: AxiosRes<CountUnreadRes> = await axios.get(`count-unread-notification`);
-  return res.data;
-};
-export const setMarkAllRead = async (): Promise<any> => {
-  const res: AxiosRes<any> = await axios.post(`notifications/mark-all-read`);
-  return res.data;
-};
-
-export const getDataNotifications = async (
-  router: NextRouter,
-  dispatch: Dispatch<NotificationReducerAction>
-): Promise<Omit<NotificationReducerState, 'error'>> => {
-  try {
-    const res = await getNotifications(router);
-    const count_unread = await getCountUnread();
-    const notifications = res.data;
-    const meta = res.meta;
-    dispatch({ type: 'setNotifications', payload: notifications, meta: meta });
-    dispatch({ type: 'setCountUnread', payload: count_unread });
-    return { notifications, meta, count_unread };
-  } catch (error) {
-    dispatch({ type: 'setError', payload: true });
-  }
-};
