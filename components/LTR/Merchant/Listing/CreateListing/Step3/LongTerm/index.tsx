@@ -1,11 +1,16 @@
-import React, { Fragment, FC, useState } from 'react';
+import React, { Fragment, FC, useState, Dispatch, SetStateAction } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Grid, Typography, TextField, InputAdornment, Divider, Button } from '@material-ui/core';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
 import ServiceFee from '@/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 
 interface IProps {
-  classes?: any
+  classes?: any;
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
 }
 
 interface ValuesPrice {
@@ -48,7 +53,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const LongTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { activeStep, steps, setActiveStep, nextLink } = props;
   const [price, setPrice] = useState<ValuesPrice>({
     priceBasic: null,
     price2_3: null,
@@ -83,6 +88,7 @@ const LongTerm: FC<IProps> = (props) => {
   };
 
   return (
+    <Fragment>
     <div>
       <div>
         <h1 className={classes.bigTitle}>
@@ -270,6 +276,14 @@ const LongTerm: FC<IProps> = (props) => {
 
       <ServiceFee/>
     </div>
+    <BottomNavigation
+      steps={steps}
+      activeStep={activeStep}
+      setActiveStep={setActiveStep}
+      nextLink={nextLink}
+      // handleSubmit={handleSubmit}
+      />
+    </Fragment>
   );
 };
 
