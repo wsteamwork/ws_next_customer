@@ -22,6 +22,7 @@ const NumberFormatCustom: FC<NumberFormatCustomProps> = (props) => {
   return (
     <NumberFormat
       {...other}
+      allowNegative={false}
       getInputRef={inputRef}
       onValueChange={values => {
         onChange({

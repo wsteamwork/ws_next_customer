@@ -1,10 +1,15 @@
-import React, { Fragment, FC, useState } from 'react';
+import React, { Fragment, FC, useState, Dispatch, SetStateAction } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, TextField, InputAdornment, Divider } from '@material-ui/core';
+import { Theme, Grid, Typography, TextField, InputAdornment, Divider, Button } from '@material-ui/core';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 
 interface IProps {
-  classes?: any
+  classes?: any;
+  activeStep: number;
+  steps: string[];
+  setActiveStep: Dispatch<SetStateAction<number>>;
+  nextLink: string;
 }
 
 interface ValuesPrice {
@@ -34,7 +39,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const PriceShortTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { activeStep, steps, setActiveStep, nextLink } = props;
   const [price, setPrice] = useState<ValuesPrice>({
     priceDay: null,
     priceHour: null,
@@ -77,6 +82,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
               }}
             />
+
             <Divider className={classes.divider}/>
           </Grid>
 
@@ -180,6 +186,14 @@ const PriceShortTerm: FC<IProps> = (props) => {
           </Grid>
         </Grid>
       </div>
+
+      <BottomNavigation
+        steps={steps}
+        activeStep={activeStep}
+        setActiveStep={setActiveStep}
+        nextLink={nextLink}
+        // handleSubmit={handleSubmit}
+      />
     </Grid>
   );
 };
