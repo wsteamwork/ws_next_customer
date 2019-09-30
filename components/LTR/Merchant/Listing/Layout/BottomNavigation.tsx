@@ -1,38 +1,23 @@
-import React, { FC, useState, Fragment, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import {
-  Typography,
-  Button,
-  Theme,
-  StepConnector,
-  withStyles,
-  StepIcon,
-  MobileStepper,
-  Hidden
-} from '@material-ui/core';
-
-import Router from 'next/router';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Hidden, MobileStepper } from '@material-ui/core';
+import Router from 'next/router';
+import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
+
 
 interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => any;
   disableNext?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, handleSubmit, disableNext } = props;
+  const { steps, activeStep, nextLink, setActiveStep, disableNext } = props;
   const handleNext = () => {
-    handleSubmit();
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {

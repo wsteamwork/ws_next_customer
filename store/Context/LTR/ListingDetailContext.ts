@@ -39,14 +39,14 @@ export type ListingDetailAction =
 
 export const ListingDetailStateInit: ListingDetailState = {
   listing: null,
-  avatar_image: {images: []},
-  cover_photo: {images: []},
-  livingrooms: {images: []},
+  avatar_image: { images: [] },
+  cover_photo: { images: [] },
+  livingrooms: { images: [] },
   bedrooms: {},
-  kitchens: {images: []},
+  kitchens: { images: [] },
   bathrooms: {},
-  outdoors: {images: []},
-  furnitures: {images: []}
+  outdoors: { images: [] },
+  furnitures: { images: [] }
 };
 
 export const ListingDetailReducer: Reducer<ListingDetailState, ListingDetailAction> = (
@@ -69,9 +69,13 @@ export const ListingDetailReducer: Reducer<ListingDetailState, ListingDetailActi
     case 'setFurnituresImage':
       return updateObject<ListingDetailState>(state, { furnitures: action.payload });
     case 'setBedRoomImage':
-        return updateObject<ListingDetailState>(state, { bedrooms: {...state.bedrooms, ...action.payload }});
+      return updateObject<ListingDetailState>(state, {
+        bedrooms: { ...state.bedrooms, ...action.payload }
+      });
     case 'setBathRoomImage':
-        return updateObject<ListingDetailState>(state, { bathrooms: {...state.bathrooms, ...action.payload }});
+      return updateObject<ListingDetailState>(state, {
+        bathrooms: { ...state.bathrooms, ...action.payload }
+      });
     default:
       return state;
   }
@@ -85,7 +89,7 @@ export const getListingDetail = async (
     const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
     dispatch({ type: 'setListing', payload: res.data.data });
   } catch (error) {
-    Router.push('/');
+    // Router.push('/');
   }
 };
 

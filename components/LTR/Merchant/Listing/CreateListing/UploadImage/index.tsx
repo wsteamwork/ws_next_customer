@@ -1,15 +1,11 @@
-import React, { FC, Fragment, useContext, Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import UppyImage from './UppyImage';
-import _ from 'lodash';
-import {
-  ListingDetailContext,
-  IListingDetailContext
-} from '@/store/Context/LTR/ListingDetailContext';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
-import { axios_merchant } from '@/utils/axiosInstance';
+import { IListingDetailContext, ListingDetailContext } from '@/store/Context/LTR/ListingDetailContext';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { faBold } from '@fortawesome/free-solid-svg-icons';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import _ from 'lodash';
+import React, { Dispatch, FC, Fragment, SetStateAction, useContext, useEffect, useState } from 'react';
+import UppyImage from './UppyImage';
 interface IProps {
   activeStep: number;
   steps: string[];
@@ -77,7 +73,7 @@ const UploadImage: FC<IProps> = (props) => {
           }
         }
       );
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <Fragment>
@@ -159,15 +155,14 @@ const UploadImage: FC<IProps> = (props) => {
           />
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
 
       <BottomNavigation
         steps={steps}
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         nextLink={nextLink}
-        handleSubmit={handleSubmit}
         disableNext={disable}
       />
     </Fragment>

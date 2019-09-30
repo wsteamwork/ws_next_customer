@@ -1,22 +1,17 @@
-import React, { Fragment, useEffect, useReducer } from 'react';
-import NextHead from '@/components/NextHead';
-import Layout from '@/components/LTR/Merchant/Listing/Layout';
-import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
+import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage';
-import {
-  ListingDetailStateInit,
-  ListingDetailReducer,
-  getListingDetail,
-  ListingDetailContext
-} from '@/store/Context/LTR/ListingDetailContext';
 import ImageCaption from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption';
+import Layout from '@/components/LTR/Merchant/Listing/Layout';
+import NextHead from '@/components/NextHead';
+import { getListingDetail, ListingDetailContext, ListingDetailReducer, ListingDetailStateInit } from '@/store/Context/LTR/ListingDetailContext';
+import React, { Fragment, useEffect, useReducer } from 'react';
 
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
   console.log(state.listing);
   useEffect(() => {
-    let id = 18;
+    let id = 7;
     getListingDetail(id, dispatch);
   }, []);
   const getSteps = () => {

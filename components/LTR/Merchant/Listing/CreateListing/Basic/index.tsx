@@ -1,15 +1,16 @@
-import React, { FC, useState, Dispatch, SetStateAction } from 'react';
+import React, { FC, useState, Dispatch, useEffect, ChangeEvent } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import Select from '@/components/ReusableComponents/SelectCustom';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
-
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Router from 'next/router';
+import { FormControlLabel, Checkbox } from '@material-ui/core';
 interface IProps {
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
+  classes?: any;
 }
 
 interface FormValues {
@@ -18,8 +19,27 @@ interface FormValues {
   stay_with_host: number;
 }
 
+const useStyles = makeStyles((theme) => ({
+  checked: {
+    color: '#FFA712 !important'
+  }
+}));
+
 const Basic: FC<IProps> = (props) => {
-  const { activeStep, steps, setActiveStep, nextLink } = props;
+  const classes = useStyles(props);
+  const [stayWithHost, setStayWithHost] = useState<boolean>(false);
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+
+  const handleChangeCheckBox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    setStayWithHost(checked);
+  };
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_STAY_WITH_HOST',
+      payload: stayWithHost ? 1 : 0
+    });
+  }, [stayWithHost]);
   const propertyType: Array<string> = [
     'Nhà riêng',
     'Chung cư',
@@ -34,8 +54,13 @@ const Basic: FC<IProps> = (props) => {
     stay_with_host: null
   };
 
-  const handleFormSubmit = (values: FormValues, action: FormikActions<FormValues>) => {
-    console.log('submit');
+  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+    console.log('handle submit');
+    const data: any = {
+      lease_type: values.lease_type,
+      accommodation_type: values.accommodation_type,
+      stay_with_host: values.stay_with_host
+    };
   };
 
   return (
@@ -56,7 +81,7 @@ const Basic: FC<IProps> = (props) => {
           handleBlur,
           isSubmitting
         }: FormikProps<FormValues>) => (
-          <form >
+          <form onSubmit={handleSubmit}>
             {/* onSubmit={handleSubmit} */}
             <CheckboxCustom />
 
@@ -71,12 +96,17 @@ const Basic: FC<IProps> = (props) => {
                 options={propertyType}
               />
             </Grid>
-            <BottomNavigation
-              steps={steps}
-              activeStep={activeStep}
-              setActiveStep={setActiveStep}
-              nextLink={nextLink}
-              handleSubmit={handleSubmit}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  disableRipple
+                  classes={{ checked: classes.checked }}
+                  checked={stayWithHost}
+                  onChange={handleChangeCheckBox}
+                  value="stayWithHost"
+                />
+              }
+              label="Bạn có đang ở trong căn hộ này không?"
             />
           </form>
         )}

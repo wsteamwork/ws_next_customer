@@ -1,12 +1,9 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { Theme, makeStyles } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
-import CardAmenities from './CardAmenities';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import { Grid } from '@material-ui/core';
+import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
+import CardAmenities from './CardAmenities';
 interface IProps {
   classes?: any;
   activeStep: number;
@@ -25,7 +22,7 @@ const Amenities: FC<IProps> = (props) => {
   const handleSubmit = () => {
     console.log('submit');
   };
-  
+
   useEffect(() => {
     getAmenities();
   }, []);
@@ -41,8 +38,8 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['facilities']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           {amenities['bathrooms'] ? (
             <CardAmenities
               label={amenities['bathrooms'][0].type_txt}
@@ -50,8 +47,8 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['bathrooms']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           {amenities['kitchens'] ? (
             <CardAmenities
               label={amenities['kitchens'][0].type_txt}
@@ -59,8 +56,8 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['kitchens']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           {amenities['entertainments'] ? (
             <CardAmenities
               label={amenities['entertainments'][0].type_txt}
@@ -68,8 +65,8 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['entertainments']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           {amenities['outdoors'] ? (
             <CardAmenities
               label={amenities['outdoors'][0].type_txt}
@@ -77,8 +74,8 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['outdoors']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           {amenities['others'] ? (
             <CardAmenities
               label={amenities['others'][0].type_txt}
@@ -86,15 +83,14 @@ const Amenities: FC<IProps> = (props) => {
               amenities={amenities['others']}
             />
           ) : (
-            ''
-          )}
+              ''
+            )}
           <BottomNavigation
             steps={steps}
             activeStep={activeStep}
             setActiveStep={setActiveStep}
             nextLink={nextLink}
-            handleSubmit={handleSubmit}
-            />
+          />
         </Grid>
       </Grid>
     </Fragment>

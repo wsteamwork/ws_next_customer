@@ -91,30 +91,6 @@ const StepperProgress: FC<IProps> = (props) => {
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-  // const isStepOptional = (step) => {
-  //   return step === 1;
-  // };
-
-  // const isStepSkipped = (step) => {
-  //   return skipped.has(step);
-  // };
-
-  // const handleNext = () => {
-  //   if (activeStep === steps.length - 1) {
-  //     Router.push(nextLink);
-  //   } else {
-  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   }
-  // };
-
-  // const handleBack = () => {
-  //   if (activeStep === 0) {
-  //     Router.back();
-  //   } else {
-  //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //   }
-  // };
-
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -161,8 +137,12 @@ const StepperProgress: FC<IProps> = (props) => {
         ) : (
           <div>
             {getStepContent(activeStep, steps, setActiveStep, nextLink)}
-
-            
+            <BottomNavigation
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              nextLink={nextLink}
+            />
           </div>
         )}
       </Grid>

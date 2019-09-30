@@ -1,13 +1,10 @@
 import React, { FC, useState, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import Select from '@/components/ReusableComponents/SelectCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 
 interface IProps {
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
+  
 }
 
 const Bathroom: FC<IProps> = (props) => {

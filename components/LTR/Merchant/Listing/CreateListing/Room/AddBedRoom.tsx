@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import Select from '@/components/ReusableComponents/SelectCustom';
 import Checkbox from '@material-ui/core/Checkbox';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
