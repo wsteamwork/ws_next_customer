@@ -123,7 +123,6 @@ export const fetchComforts = async () => {
     limit: -1
   };
 
-  // const url = `comforts?${qs.stringify(params)}`;
   const url = 'rooms/count-room-by-comfort-lists';
   const res: AxiosRes<ComfortIndexRes[]> = await axios.get(url);
   return res.data;

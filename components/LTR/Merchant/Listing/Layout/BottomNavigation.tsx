@@ -25,13 +25,14 @@ interface IProps {
   activeStep?: number;
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => any;
+  disableNext?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, handleSubmit } = props;
-  const handleNext = async () => {
-    if (handleSubmit) await handleSubmit();
+  const { steps, activeStep, nextLink, setActiveStep, handleSubmit, disableNext } = props;
+  const handleNext = () => {
+    handleSubmit();
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {
@@ -55,6 +56,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           handleBack={handleBack}
           steps={steps}
           activeStep={activeStep}
+          disableNext={disableNext}
         />
       </Hidden>
 
@@ -66,7 +68,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} type="submit">
+            <ButtonGlobal onClick={handleNext} disabled={disableNext} >
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }
@@ -80,6 +82,9 @@ const BottomNavigation: FC<IProps> = (props) => {
       </Hidden>
     </Fragment>
   );
+};
+BottomNavigation.defaultProps = {
+  disableNext: false,
 };
 
 export default BottomNavigation;

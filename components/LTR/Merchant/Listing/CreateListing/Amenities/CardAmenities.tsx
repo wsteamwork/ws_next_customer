@@ -44,7 +44,7 @@ const CardAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { label, sub_label, amenities } = props;
   const [dataClick, setDataClick] = useState<number[]>([]);
-
+  console.log(dataClick);
   const handleChange = (id: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
       setDataClick([...dataClick, id]);

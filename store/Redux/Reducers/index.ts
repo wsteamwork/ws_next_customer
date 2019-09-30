@@ -23,6 +23,11 @@ import {
   CompareRoomsState,
   ComparisonListReducer
 } from '@/store/Redux/Reducers/Room/CompareRooms';
+import {
+  DescriptionReducerState,
+  DescriptionReducerAction,
+  descriptionReducer
+} from './LTR/CreateListing/Step2/description';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -36,6 +41,7 @@ export type ReducersType = {
   compareRooms: Reducer<CompareRoomsState, CompareRoomsActions>;
   promotion: Reducer<PomotionState, PomotionActions>;
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
+  description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
 };
 
 export type ReducersList = {
@@ -50,6 +56,7 @@ export type ReducersList = {
   compareRooms: CompareRoomsState;
   promotion: PomotionState;
   notifications: NotificationReducerState;
+  description: DescriptionReducerState;
 };
 
 export type ReducresActions =
@@ -63,7 +70,8 @@ export type ReducresActions =
   | VisitedRoomActions
   | NotificationReducerAction
   | CompareRoomsActions
-  | PomotionActions;
+  | PomotionActions
+  | DescriptionReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -76,7 +84,8 @@ const reducers: ReducersType = {
   visitedRoom: visitedRoomReducer,
   promotion: promotionReducer,
   notifications: notificationReducer,
-  compareRooms: ComparisonListReducer
+  compareRooms: ComparisonListReducer,
+  description: descriptionReducer,
 };
 
 export interface NextContextPage extends NextPageContext {

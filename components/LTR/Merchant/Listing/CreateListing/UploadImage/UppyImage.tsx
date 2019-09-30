@@ -1,30 +1,77 @@
-import React, { FC, Fragment, useState } from 'react';
-import { Grid, createStyles, makeStyles, Theme, Typography, TextField } from '@material-ui/core';
+import React, { FC, Fragment, useState, useContext, useEffect, useMemo } from 'react';
+import { Grid, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
-import Tus from '@uppy/tus';
 import GoogleDrive from '@uppy/google-drive';
-import { Dashboard, DashboardModal, DragDrop, ProgressBar } from '@uppy/react';
-import AwsS3 from '@uppy/aws-s3';
+import XHRUpload from '@uppy/xhr-upload';
+import { Dashboard } from '@uppy/react';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 import '@uppy/webcam/dist/style.css';
 import '@uppy/url/dist/style.css';
 import 'uppy/dist/uppy.min.css';
-
+import fetch from 'isomorphic-fetch';
+import { handleSubmitImage } from '@/store/Context/LTR/ListingDetailContext';
+import {
+  ListingDetailContext,
+  IListingDetailContext
+} from '@/store/Context/LTR/ListingDetailContext';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 interface IProps {
   classes?: any;
+  label?: string;
+  subLabel?: string;
+  initImages?: any;
+  height?: number;
+  width?: number;
+  typeUpload: any;
+  maxImage?: number;
+  type_txt?: string;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
+const useStyles = makeStyles<Theme>((theme: Theme) =>
+  createStyles({
+    margin: {
+      marginTop: theme.spacing(3)
+    },
+    marginLabel: {
+      marginBottom: theme.spacing(2)
+    }
+  })
+);
 
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { label, subLabel, initImages, height, width, maxImage, typeUpload, type_txt } = props;
   const [state, setState] = useState({
-    showInlineDashboard: true,
+    showInlineDashboard: true
   });
+  const { dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
+  useEffect(() => {
+    if (type_txt) {
+      dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
+    } else {
+      dispatch({ type: typeUpload.type, payload: { images: initImages } });
+    }
+  }, []);
 
+  const initImage = async (arrImg) => {
+    for (let i = 0; i < arrImg.length; i++) {
+      // const img = `${IMAGE_STORAGE_LG}` + arrImg[i].name + '.jpg';
+      let img = 'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
+      await fetch(img)
+        .then((res) => res.blob())
+        .then((blob) => {
+          uppy.addFile({
+            name: arrImg[i].name + '.jpg',
+            data: blob
+          });
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  initImage(initImages);
   const uppy = Uppy({
-    id: 'uppy1',
+    id: 'uppy',
     autoProceed: false,
     debug: true,
     locale: {
@@ -42,6 +89,19 @@ const UppyImage: FC<IProps> = (props) => {
           '1': '%{complete} của %{smart_count} ảnh đã được tải lên',
           '2': '%{complete} của %{smart_count} ảnh đã được tải lên'
         },
+        uploadXFiles: {
+          '0': 'Tải lên',
+          '1': 'Tải lên',
+          '2': 'Tải lên'
+        },
+        xFilesSelected: {
+          '0': '%{smart_count} ảnh đã tải lên',
+          '1': '%{smart_count} ảnh đã tải lên',
+          '2': '%{smart_count} ảnh đã tải lên'
+        },
+        saveChanges: 'Lưu thay đổi',
+        done: 'Hoàn thành',
+        editing: 'Đang thay đổi ảnh %{file}',
         xTimeLeft: '%{time} còn lại',
         cancel: 'Hủy',
         complete: 'Hoàn thành',
@@ -53,62 +113,97 @@ const UppyImage: FC<IProps> = (props) => {
     restrictions: {
       maxFileSize: 250000000,
       minNumberOfFiles: 1,
-      maxNumberOfFiles: 10,
+      maxNumberOfFiles: maxImage ? maxImage : 20,
       allowedFileTypes: ['image/*']
+    },
+    onBeforeFileAdded: (currentFile, files) => {
+      if (currentFile.meta) {
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth() + 1;
+        let date = new Date().getDate();
+        let timestamp = new Date().getTime();
+        let newName =
+          `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
+          '_' +
+          timestamp +
+          '_' +
+          currentFile.name;
+        let pos = newName.lastIndexOf('.');
+        newName = newName.substr(0, pos < 0 ? newName.length : pos) + '.jpg';
+        let modifiedFile = Object.assign({}, currentFile, { name: newName });
+        return modifiedFile;
+      }
+      return currentFile;
     }
   })
-  .use(Tus, { endpoint: 'https://master.tus.io/files/', limit: 5 })
-  .use(GoogleDrive, { companionUrl: 'https://companion.uppy.io' })
-  .on('complete', (result) => {
-    console.log('successful files:', result.successful);
-  })
-  .on('upload-success', (file, response) => {
-    var img = new Image();
-    img.width = 400;
-    img.alt = file.id;
-    img.src = response.uploadURL;
-    // document.body.appendChild(img)
-  })
-  .on('dashboard:file-edit-start', () => {
-    console.log('Modal is start')
-  })
-  .on('dashboard:file-edit-complete', () => {
-    console.log('Modal is complete')
-  })
-
-  uppy.getFiles().forEach(file => {
-    console.log(file)
-    uppy.setFileState(file.id, { 
-      progress: { uploadComplete: true, uploadStarted: false } 
+    .use(XHRUpload, {
+      endpoint: 'http://ws-api.nhat/merchant-api/upload-image/',
+      fieldname: 'file',
+      limit: 20
     })
-  })
+    .use(GoogleDrive, {
+      companionUrl: 'https://master.tus.io/files/'
+    })
+    .on('complete', (result) => {
+      let imgs = [];
+      result.successful.map((res) => {
+        let img = { name: res.meta.name, caption: '', type: 1 };
+        imgs = [...imgs, img];
+      });
+      if (type_txt) {
+        dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
+      } else {
+        dispatch({ type: typeUpload.type, payload: { images: imgs } });
+      }
+      uppy.getFiles().forEach(file => {
+        uppy.setFileState(file.id, { 
+          progress: { uploadComplete: false, uploadStarted: false } 
+        })
+      })
+    })
+    .on('file-removed', (file) => {
+      let index = initImages.findIndex((i) => i.name + '.jpg' === file.name);
+      if (index > -1) {
+        initImages.splice(index, 1);
+        if (type_txt) {
+          dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
+        } else {
+          dispatch({ type: typeUpload.type, payload: { images: initImages } });
+        }
+      }
+    });
 
-  const numFiles1 = Object.keys(uppy.state.files).length;
-  const numFiles = uppy.state.files;
-  console.log('num Files:', numFiles);
-
-  return (
-    <Fragment>
-      <Grid container justify="center" alignContent="center">
-        <div>
-          <h1>Đăng ảnh căn hộ</h1>
+  return useMemo(
+    () => (
+      <Fragment>
+        <Grid container className={classes.margin}>
+          <section className={classes.marginLabel}>
+            {label && (
+              <Typography variant="h1" gutterBottom className="label main_label">
+                {label}
+              </Typography>
+            )}
+            {subLabel && (
+              <Grid item className="normal_text">
+                <span>{subLabel}</span>
+              </Grid>
+            )}
+          </section>
           {state.showInlineDashboard && (
             <Dashboard
               uppy={uppy}
               trigger={'.UppyModalOpenerBtn'}
               showProgressDetails={true}
-              note={'Bạn phải đăng ít nhất 2 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
-              height={500}
-              plugins={['GoogleDrive']}
-              metaFields={[
-                { id: 'name', name: 'Tên ảnh', placeholder: 'Đặt tên ảnh' },
-                { id: 'caption', name: 'Mô tả', placeholder: 'Mô tả chi tiết về bức ảnh này' }
-              ]}
+              note={'Bạn phải đăng ít nhất 1 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
+              height={height ? height : 500}
+              width={width ? width : 700}
+              thumbnailWidth={480}
             />
           )}
-        </div>
-      </Grid>
-    </Fragment>
+        </Grid>
+      </Fragment>
+    ),
+    []
   );
 };
 
