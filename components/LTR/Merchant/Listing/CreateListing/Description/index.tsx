@@ -9,6 +9,13 @@ import { useTranslation } from 'react-i18next';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import CardTextarea from './CardTextarea';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import {
+  IListingDetailContext,
+  ListingDetailContext
+} from '@/store/Context/LTR/ListingDetailContext';
+import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { axios_merchant } from '@/utils/axiosInstance';
 interface IProps {
   classes?: any;
   activeStep: number;
@@ -66,47 +73,51 @@ const Description: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
+  const { state, dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
+  const { listing} = state;
+  // const about_room = useSelector<ReducersList, Descrip>(
+  //   (state) => state.description;
+  // );
+
+  // useEffect(() => {
+  //   getDataDescription(11743, dispatch);
+  // }, [about_room]);
+
   const formikInit: MyDescription = useMemo<MyDescription>(() => {
     return {
-      name: '',
-      description: '',
-      space: '',
-      rules: ''
+      name: listing && listing.about_room.name ? listing.about_room.name : '',
+      description: listing && listing.about_room.description ? listing.about_room.description : '',
+      space: listing && listing.about_room.space ? listing.about_room.space : '',
+      rules: listing && listing.about_room.note ? listing.about_room.note : ''
     };
-  }, []);
+  }, [listing]);
 
-  const handleSubmitForm = async (
-    values: MyDescription,
-    actions: FormikActions<MyDescription>
-  ) => {
-    const data: any = {
+  const handleSubmitForm = async (values: MyDescription, actions: FormikActions<MyDescription>) => {
+    const data: DescriptionReq = {
       name: values.name,
       description: values.description,
       space: values.space,
       rules: values.rules
     };
-
-    // try {
-    //   const res: AxiosRes<ProfileInfoRes> = await axios.put('profile?include=city,district', data);
-    //   getProfile(dispath);
-    //   setOpen(true);
-    // } catch (error) {}
-
-    // axios
-    //   .put('profile', data)
-    //   .then((res) => {
-    //     actions.setSubmitting(false);
-    //   })
-    //   .catch((error) => {
-    //     actions.setSubmitting(false);
-    //   });
+    try {
+      const res: AxiosRes<any> = await axios_merchant.post(
+        `long-term/room/step2/tab1/${listing.room_id}`,
+        {
+          step2: {
+            tab1: data
+          }
+        }
+      );
+      actions.setSubmitting(false);
+      console.log('res', res);
+    } catch (error) {}
   };
 
   return (
     <Fragment>
       <Formik
-        enableReinitialize={false}
-        validateOnChange={false}
+        enableReinitialize={true}
+        validateOnChange={true}
         validationSchema={FormValidationSchema}
         initialValues={formikInit}
         onSubmit={handleSubmitForm}
@@ -120,6 +131,7 @@ const Description: FC<IProps> = (props) => {
           isSubmitting,
           validateOnChange
         }: FormikProps<MyDescription>) => (
+          <form onSubmit={handleSubmit}>
             <Grid container justify="center" alignContent="center">
               <Grid item xs={12} className="wrapper">
                 <CardTextarea
@@ -302,14 +314,16 @@ const Description: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
               <BottomNavigation
-              steps={steps}
-              activeStep={activeStep}
-              setActiveStep={setActiveStep}
-              nextLink={nextLink}
-              handleSubmit={handleSubmit}
-            />
+                steps={steps}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                nextLink={nextLink}
+                handleSubmit={handleSubmit}
+                
+              />
             </Grid>
-          )}></Formik>
+          </form>
+        )}></Formik>
     </Fragment>
   );
 };

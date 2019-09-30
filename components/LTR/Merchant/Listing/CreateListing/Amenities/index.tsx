@@ -3,8 +3,6 @@ import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } fr
 import { Theme, makeStyles } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import CardAmenities from './CardAmenities';
-import { AmenitiesIndexGetParams } from '@/types/Requests/LTR/Amenities/AmenitiesRequests';
-import qs from 'query-string';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
@@ -24,6 +22,10 @@ const Amenities: FC<IProps> = (props) => {
     const res: AxiosRes<any> = await axios_merchant.get(url);
     setAmenities(res.data);
   };
+  const handleSubmit = () => {
+    console.log('submit');
+  };
+  
   useEffect(() => {
     getAmenities();
   }, []);
@@ -91,6 +93,7 @@ const Amenities: FC<IProps> = (props) => {
             activeStep={activeStep}
             setActiveStep={setActiveStep}
             nextLink={nextLink}
+            handleSubmit={handleSubmit}
             />
         </Grid>
       </Grid>

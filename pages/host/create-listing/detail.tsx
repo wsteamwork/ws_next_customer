@@ -1,10 +1,6 @@
-import React, { Fragment, useContext, Dispatch, useEffect, useReducer } from 'react';
+import React, { Fragment, useEffect, useReducer } from 'react';
 import NextHead from '@/components/NextHead';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import GridContainer from '@/components/Layout/Grid/Container';
-import FormSignin from '@/components/Auth/Signin/FormSignin';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
-import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Description from '@/components/LTR/Merchant/Listing/CreateListing/Description';
 import Amenities from '@/components/LTR/Merchant/Listing/CreateListing/Amenities';
 import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage';
@@ -14,21 +10,23 @@ import {
   getListingDetail,
   ListingDetailContext
 } from '@/store/Context/LTR/ListingDetailContext';
+import ImageCaption from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption';
 
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
+  console.log(state.listing);
   useEffect(() => {
-    let id = 13;
+    let id = 18;
     getListingDetail(id, dispatch);
   }, []);
   const getSteps = () => {
-    return ['Mô tả căn hộ', 'Tiện nghi', 'Ảnh'];
+    return ['Mô tả căn hộ', 'Tiện nghi', 'Đăng ảnh', 'Mô tả ảnh'];
   };
   const getStepContent = (step, steps, setActiveStep, nextLink) => {
     switch (step) {
       case 0:
         return (
-          <UploadImage
+          <Description
             steps={steps}
             activeStep={step}
             setActiveStep={setActiveStep}
@@ -46,7 +44,16 @@ const RoomCreateListing = () => {
         );
       case 2:
         return (
-          <Description
+          <UploadImage
+            steps={steps}
+            activeStep={step}
+            setActiveStep={setActiveStep}
+            nextLink={nextLink}
+          />
+        );
+      case 3:
+        return (
+          <ImageCaption
             steps={steps}
             activeStep={step}
             setActiveStep={setActiveStep}

@@ -1,7 +1,6 @@
-import React, { FC, Fragment, useState, useContext, useEffect } from 'react';
+import React, { FC, Fragment, useState, useContext, useEffect, useMemo } from 'react';
 import { Grid, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
-import Tus from '@uppy/tus';
 import GoogleDrive from '@uppy/google-drive';
 import XHRUpload from '@uppy/xhr-upload';
 import { Dashboard } from '@uppy/react';
@@ -16,6 +15,7 @@ import {
   ListingDetailContext,
   IListingDetailContext
 } from '@/store/Context/LTR/ListingDetailContext';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 interface IProps {
   classes?: any;
   label?: string;
@@ -32,6 +32,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     margin: {
       marginTop: theme.spacing(3)
+    },
+    marginLabel: {
+      marginBottom: theme.spacing(2)
     }
   })
 );
@@ -53,8 +56,8 @@ const UppyImage: FC<IProps> = (props) => {
 
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
-      // const img = 'https://s3-ap-southeast-1.amazonaws.com/westay-img/lg/' + arrImg[i].name + '.jpg';
-      let img = 'https://i.ibb.co/QP49Yyn/68509021-879169062453399-4079830846545068032-n.jpg';
+      // const img = `${IMAGE_STORAGE_LG}` + arrImg[i].name + '.jpg';
+      let img = 'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
@@ -87,9 +90,9 @@ const UppyImage: FC<IProps> = (props) => {
           '2': '%{complete} của %{smart_count} ảnh đã được tải lên'
         },
         uploadXFiles: {
-          '0': 'Tải lên %{smart_count} ảnh',
-          '1': 'Tải lên %{smart_count} ảnh',
-          '2': 'Tải lên %{smart_count} ảnh'
+          '0': 'Tải lên',
+          '1': 'Tải lên',
+          '2': 'Tải lên'
         },
         xFilesSelected: {
           '0': '%{smart_count} ảnh đã tải lên',
@@ -114,13 +117,13 @@ const UppyImage: FC<IProps> = (props) => {
       allowedFileTypes: ['image/*']
     },
     onBeforeFileAdded: (currentFile, files) => {
-      if(currentFile.meta) {
+      if (currentFile.meta) {
         let year = new Date().getFullYear();
         let month = new Date().getMonth() + 1;
         let date = new Date().getDate();
         let timestamp = new Date().getTime();
         let newName =
-        `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
+          `${year}_${month < 10 ? `0${month}` : month}_${date < 10 ? `0${date}` : date}` +
           '_' +
           timestamp +
           '_' +
@@ -141,9 +144,6 @@ const UppyImage: FC<IProps> = (props) => {
     .use(GoogleDrive, {
       companionUrl: 'https://master.tus.io/files/'
     })
-    .on('file-added', (file) => {
-      console.log('file-added', file);
-    })
     .on('complete', (result) => {
       let imgs = [];
       result.successful.map((res) => {
@@ -155,6 +155,11 @@ const UppyImage: FC<IProps> = (props) => {
       } else {
         dispatch({ type: typeUpload.type, payload: { images: imgs } });
       }
+      uppy.getFiles().forEach(file => {
+        uppy.setFileState(file.id, { 
+          progress: { uploadComplete: false, uploadStarted: false } 
+        })
+      })
     })
     .on('file-removed', (file) => {
       let index = initImages.findIndex((i) => i.name + '.jpg' === file.name);
@@ -166,42 +171,39 @@ const UppyImage: FC<IProps> = (props) => {
           dispatch({ type: typeUpload.type, payload: { images: initImages } });
         }
       }
-      // console.log('file-removed', initImages);
     });
 
-  return (
-    <Fragment>
-      <Grid container className={classes.margin}>
-        <section>
-          {label && (
-            <Typography variant="h1" gutterBottom className="label main_label">
-              {label}
-            </Typography>
+  return useMemo(
+    () => (
+      <Fragment>
+        <Grid container className={classes.margin}>
+          <section className={classes.marginLabel}>
+            {label && (
+              <Typography variant="h1" gutterBottom className="label main_label">
+                {label}
+              </Typography>
+            )}
+            {subLabel && (
+              <Grid item className="normal_text">
+                <span>{subLabel}</span>
+              </Grid>
+            )}
+          </section>
+          {state.showInlineDashboard && (
+            <Dashboard
+              uppy={uppy}
+              trigger={'.UppyModalOpenerBtn'}
+              showProgressDetails={true}
+              note={'Bạn phải đăng ít nhất 1 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
+              height={height ? height : 500}
+              width={width ? width : 700}
+              thumbnailWidth={480}
+            />
           )}
-          {subLabel && (
-            <Grid item className="normal_text">
-              <span>{subLabel}</span>
-            </Grid>
-          )}
-        </section>
-        {state.showInlineDashboard && (
-          <Dashboard
-            uppy={uppy}
-            trigger={'.UppyModalOpenerBtn'}
-            showProgressDetails={true}
-            note={'Bạn phải đăng ít nhất 2 ảnh, kích thước tối đa của mỗi ảnh là 25 MB'}
-            height={height ? height : 500}
-            width={width ? width : 700}
-            thumbnailWidth={480}
-            plugins={['GoogleDrive']}
-            metaFields={[
-              { id: 'name', name: 'Tên ảnh', placeholder: 'Đặt tên ảnh' },
-              { id: 'caption', name: 'Mô tả', placeholder: 'Mô tả chi tiết về bức ảnh này' }
-            ]}
-          />
-        )}
-      </Grid>
-    </Fragment>
+        </Grid>
+      </Fragment>
+    ),
+    []
   );
 };
 
