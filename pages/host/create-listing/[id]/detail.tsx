@@ -14,7 +14,7 @@ import React, { Fragment, useEffect, useReducer } from 'react';
 
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
-  console.log(state.listing);
+  // console.log(state.listing);
   const id = 7;
   useEffect(() => {
     getListingDetail(id, dispatch);

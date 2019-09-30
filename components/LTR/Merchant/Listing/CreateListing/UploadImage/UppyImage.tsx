@@ -156,8 +156,8 @@ const UppyImage: FC<IProps> = (props) => {
         dispatch({ type: typeUpload.type, payload: { images: imgs } });
       }
       uppy.getFiles().forEach(file => {
-        uppy.setFileState(file.id, { 
-          progress: { uploadComplete: false, uploadStarted: false } 
+        uppy.setFileState(file.id, {
+          progress: { uploadComplete: false, uploadStarted: false }
         })
       })
     })
