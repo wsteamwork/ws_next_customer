@@ -3,8 +3,6 @@ import NextHead from '@/components/NextHead';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import PriceShortTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm';
 import LongTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm';
-import AdditionalServiceFee from '@/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee';
-import Basic from '@/components/LTR/Merchant/Listing/CreateListing/Basic';
 
 const RoomCreateListing = () => {
   const getSteps = () => {
@@ -23,11 +21,7 @@ const RoomCreateListing = () => {
                          activeStep = {step}
                          setActiveStep = {setActiveStep}
                          nextLink = {nextLink}/>;
-      // case 2:
-      //   return <AdditionalServiceFee steps = {steps}
-      //                                activeStep = {step}
-      //                                setActiveStep = {setActiveStep}
-      //                                nextLink = {nextLink} />;
+
       default:
         return 'Unknown step';
     }

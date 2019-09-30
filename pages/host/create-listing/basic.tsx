@@ -20,27 +20,13 @@ const RoomCreateListing = () => {
   const getStepContent = (step, steps, setActiveStep, nextLink) => {
     switch (step) {
       case 0:
-        return (
-          <Basic
-            
-          />
-        );
+        return <Basic />;
       case 1:
-        return (
-          <Room  />
-        );
+        return <Room />;
       case 2:
-        return (
-          <Bathroom
-            
-          />
-        );
+        return <Bathroom />;
       case 3:
-        return (
-          <Location
-            
-          />
-        );
+        return <Location />;
       default:
         return 'Unknown step';
     }
@@ -58,7 +44,7 @@ const RoomCreateListing = () => {
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={'/host/create-listing/detail'}
+        nextLink={'/host/create-listing/123/detail'}
       />
       {/* </CreateListingContext.Provider> */}
     </Fragment>

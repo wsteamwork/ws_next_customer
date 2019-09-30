@@ -4,14 +4,19 @@ import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadI
 import ImageCaption from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
-import { getListingDetail, ListingDetailContext, ListingDetailReducer, ListingDetailStateInit } from '@/store/Context/LTR/ListingDetailContext';
+import {
+  getListingDetail,
+  ListingDetailContext,
+  ListingDetailReducer,
+  ListingDetailStateInit
+} from '@/store/Context/LTR/ListingDetailContext';
 import React, { Fragment, useEffect, useReducer } from 'react';
 
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
   console.log(state.listing);
+  const id = 7;
   useEffect(() => {
-    let id = 7;
     getListingDetail(id, dispatch);
   }, []);
   const getSteps = () => {
@@ -73,7 +78,7 @@ const RoomCreateListing = () => {
           title="Bước 2: Thông tin chi tiết"
           getSteps={getSteps}
           getStepContent={getStepContent}
-          nextLink={'/host/create-listing/price'}
+          nextLink={`/host/create-listing/${id}/price`}
         />
       </ListingDetailContext.Provider>
     </Fragment>

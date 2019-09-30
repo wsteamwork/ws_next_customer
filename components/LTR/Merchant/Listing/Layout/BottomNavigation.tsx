@@ -5,8 +5,8 @@ import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
-
-
+import axios from 'axios';
+import { RoomIndexContext, getRooms } from '@/store/Context/Room/RoomListContext';
 interface IProps {
   steps?: string[];
   activeStep?: number;
@@ -17,12 +17,27 @@ interface IProps {
 
 const BottomNavigation: FC<IProps> = (props) => {
   const { steps, activeStep, nextLink, setActiveStep, disableNext } = props;
-  const handleNext = () => {
+
+  const nextStep = () => {
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
+  };
+  const getAPI = async () => {
+    const res: any = await setTimeout(() => console.log('3sec', 3000));
+    //axios.get('https://dev.westay.vn/customer-api/rooms')
+    return res;
+  };
+
+  const handleNext = () => {
+    try {
+      getAPI().then((res) => {
+        console.log(res);
+        nextStep();
+      });
+    } catch (error) {}
   };
 
   const handleBack = () => {
@@ -53,7 +68,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} disabled={disableNext} >
+            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }
@@ -69,7 +84,7 @@ const BottomNavigation: FC<IProps> = (props) => {
   );
 };
 BottomNavigation.defaultProps = {
-  disableNext: false,
+  disableNext: false
 };
 
 export default BottomNavigation;
