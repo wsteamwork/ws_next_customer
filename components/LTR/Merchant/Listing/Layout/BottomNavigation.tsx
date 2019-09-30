@@ -1,42 +1,43 @@
-import React, { FC, useState, Fragment, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import {
-  Typography,
-  Button,
-  Theme,
-  StepConnector,
-  withStyles,
-  StepIcon,
-  MobileStepper,
-  Hidden
-} from '@material-ui/core';
-
-import Router from 'next/router';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Hidden, MobileStepper } from '@material-ui/core';
+import Router from 'next/router';
+import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
-
+import axios from 'axios';
+import { RoomIndexContext, getRooms } from '@/store/Context/Room/RoomListContext';
 interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
-  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => void;
+  disableNext?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, handleSubmit } = props;
-  const handleNext = async () => {
-    if (handleSubmit) await handleSubmit();
+  const { steps, activeStep, nextLink, setActiveStep, disableNext } = props;
+
+  const nextStep = () => {
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
+  };
+  const getAPI = async () => {
+    const res: any = await setTimeout(() => console.log('3sec', 3000));
+    //axios.get('https://dev.westay.vn/customer-api/rooms')
+    return res;
+  };
+
+  const handleNext = () => {
+    try {
+      getAPI().then((res) => {
+        console.log(res);
+        nextStep();
+      });
+    } catch (error) {}
   };
 
   const handleBack = () => {
@@ -55,6 +56,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           handleBack={handleBack}
           steps={steps}
           activeStep={activeStep}
+          disableNext={disableNext}
         />
       </Hidden>
 
@@ -66,7 +68,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} type="submit">
+            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }
@@ -80,6 +82,9 @@ const BottomNavigation: FC<IProps> = (props) => {
       </Hidden>
     </Fragment>
   );
+};
+BottomNavigation.defaultProps = {
+  disableNext: false
 };
 
 export default BottomNavigation;

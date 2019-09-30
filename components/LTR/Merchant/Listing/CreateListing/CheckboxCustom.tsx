@@ -1,15 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, Dispatch, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import Select from '@/components/ReusableComponents/SelectCustom';
 import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { FormGroup } from '@material-ui/core';
+import { FormGroup, FormControlLabel } from '@material-ui/core';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
 
 interface IProps {
   classes?: any;
@@ -40,16 +38,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckboxCustom: FC<IProps> = (props) => {
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+
   const classes = useStyles(props);
   const [state, setState] = useState<any>({
     shortterm: true,
     longterm: false
   });
+  const { shortterm, longterm } = state;
   const handleChange = (name) => (event) => {
     setState({ ...state, [name]: event.target.checked });
   };
 
-  const { shortterm, longterm } = state;
+  useEffect(() => {
+    dispatch({
+      type: 'SET_LEASE_TYPE',
+      payload:
+        shortterm && !longterm ? 1 : !shortterm && longterm ? 2 : shortterm && longterm ? 3 : null
+    });
+  }, [state]);
+
   const error = [shortterm, longterm].filter((v) => v).length !== 2;
 
   return (

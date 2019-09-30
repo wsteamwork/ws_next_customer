@@ -1,14 +1,9 @@
 import React, { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import { Typography, FormControl, OutlinedInput } from '@material-ui/core';
-interface IProps {
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
-}
+interface IProps {}
 
 const Location: FC<IProps> = (props) => {
   const [address, setAddress] = useState<string>('');

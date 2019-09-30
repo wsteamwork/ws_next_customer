@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, SetStateAction, Dispatch } from 'react';
+import React, { FC, useEffect, SetStateAction, Dispatch, ChangeEvent } from 'react';
 import Select, { SelectProps } from '@material-ui/core/Select';
 import { Theme, OutlinedInput, Grid } from '@material-ui/core';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
@@ -10,19 +10,21 @@ interface IProps<T> extends SelectProps {
   options?: any[];
   title?: string;
   twoThirdWidth?: boolean;
-  setValue?: Dispatch<SetStateAction<T>>;
+  // setValue?: Dispatch<SetStateAction<T>>;
   unit?: string;
-  // onChange: (e: React.ChangeEvent<any>) => void;
-  // onBlur: (e: any) => void;
+  onChange?: (e: React.ChangeEvent<any>) => void;
+  onBlur?: (e: any) => void;
+  callBackOnChange?: (value: any) => void;
 }
 
-const SelectGlobal = <T extends any>(props: IProps<T>) => {
-  const { value, options, title, twoThirdWidth, setValue, unit, onChange, onBlur } = props;
-  // const [valueInput, setValueInput] = React.useState(value);
-  // const handleChange = (event: ChangeEvent<{ name?: string; value: T }>) => {
-  //   setValueInput(event.target.value);
-  //   if (setValue) setValue(event.target.value);
-  // };
+const SelectCustom = <T extends any>(props: IProps<T>) => {
+  const { value, options, title, twoThirdWidth, callBackOnChange, unit, onBlur } = props;
+  const [valueInput, setValueInput] = React.useState<T>(value);
+  const handleChange = (event: ChangeEvent<{ name?: string; value: T }>) => {
+    console.log(event.target.value);
+    setValueInput(event.target.value);
+    if (callBackOnChange) callBackOnChange(event.target.value);
+  };
 
   const optionsRender = () => {
     return options.map((item, i) => {
@@ -43,9 +45,9 @@ const SelectGlobal = <T extends any>(props: IProps<T>) => {
           native
           fullWidth
           classes={{ icon: 'icon' }}
-          onChange={onChange}
-          onBlur={onBlur}
-          value={value}
+          onChange={handleChange}
+          // onBlur={onBlur}
+          value={valueInput}
           input={
             <OutlinedInput
               name="term-rental"
@@ -62,8 +64,8 @@ const SelectGlobal = <T extends any>(props: IProps<T>) => {
   );
 };
 
-SelectGlobal.defaultProps = {
+SelectCustom.defaultProps = {
   displayEmpty: false
 };
 
-export default SelectGlobal;
+export default SelectCustom;

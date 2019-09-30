@@ -30,7 +30,8 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
         'userProfile',
         'iProfile',
         'promotion',
-        'notifications'
+        'notifications',
+        'description'
       ]
     };
 

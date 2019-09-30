@@ -1,28 +1,38 @@
-import reducerSearch, {
-  SearchFilterState,
-  SearchFilterAction
-} from '@/store/Redux/Reducers/Search/searchFilter';
-import { combineReducers, Reducer, Store } from 'redux';
-import { RoomHomepageState, RoomHomepageAction, roomHomepageReducer } from './Home/roomHomepage';
-import { NextPageContext } from 'next';
-import { Router } from 'next/router';
-import reuderBooking, { BookingState, BookingAction } from '@/store/Redux/Reducers/Booking/booking';
-import { RoomReducerState, RoomReducerAction, roomReducer } from './Room/roomReducer';
-import { BookState, BookActions, bookReducer } from './Book/book';
-import { UserProfileState, UserProfileActions, userProfileReducer } from './Profile/userProfile';
-import { ProfileAction, ProfileState, iProfileReducer } from './Profile/profile';
-import { VisitedRoomActions, VisitedRoomState, visitedRoomReducer } from './Room/visitedRoom';
-import { PomotionState, PomotionActions, promotionReducer } from './promotion';
-import {
-  NotificationReducerAction,
-  NotificationReducerState,
-  notificationReducer
-} from './Notification/notification';
+import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
 import {
   CompareRoomsActions,
   CompareRoomsState,
   ComparisonListReducer
 } from '@/store/Redux/Reducers/Room/CompareRooms';
+import reducerSearch, {
+  SearchFilterAction,
+  SearchFilterState
+} from '@/store/Redux/Reducers/Search/searchFilter';
+import { NextPageContext } from 'next';
+import { Router } from 'next/router';
+import { combineReducers, Reducer, Store } from 'redux';
+import { BookActions, bookReducer, BookState } from './Book/book';
+import { RoomHomepageAction, roomHomepageReducer, RoomHomepageState } from './Home/roomHomepage';
+import {
+  CreateListingActions,
+  createListingReducer,
+  CreateListingState
+} from './LTR/CreateListing';
+import {
+  descriptionReducer,
+  DescriptionReducerAction,
+  DescriptionReducerState
+} from './LTR/CreateListing/Step2/description';
+import {
+  notificationReducer,
+  NotificationReducerAction,
+  NotificationReducerState
+} from './Notification/notification';
+import { iProfileReducer, ProfileAction, ProfileState } from './Profile/profile';
+import { UserProfileActions, userProfileReducer, UserProfileState } from './Profile/userProfile';
+import { PomotionActions, PomotionState, promotionReducer } from './promotion';
+import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
+import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -36,6 +46,8 @@ export type ReducersType = {
   compareRooms: Reducer<CompareRoomsState, CompareRoomsActions>;
   promotion: Reducer<PomotionState, PomotionActions>;
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
+  description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
+  createListing: Reducer<CreateListingState, CreateListingActions>;
 };
 
 export type ReducersList = {
@@ -50,6 +62,8 @@ export type ReducersList = {
   compareRooms: CompareRoomsState;
   promotion: PomotionState;
   notifications: NotificationReducerState;
+  description: DescriptionReducerState;
+  createListing: CreateListingState;
 };
 
 export type ReducresActions =
@@ -63,7 +77,9 @@ export type ReducresActions =
   | VisitedRoomActions
   | NotificationReducerAction
   | CompareRoomsActions
-  | PomotionActions;
+  | PomotionActions
+  | DescriptionReducerAction
+  | CreateListingActions;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -76,7 +92,9 @@ const reducers: ReducersType = {
   visitedRoom: visitedRoomReducer,
   promotion: promotionReducer,
   notifications: notificationReducer,
-  compareRooms: ComparisonListReducer
+  compareRooms: ComparisonListReducer,
+  description: descriptionReducer,
+  createListing: createListingReducer
 };
 
 export interface NextContextPage extends NextPageContext {
