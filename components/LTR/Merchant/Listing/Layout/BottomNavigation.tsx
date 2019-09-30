@@ -24,27 +24,17 @@ interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  handleSubmit?: (e?: React.FormEvent<HTMLFormElement>) => void;
-  isSubmitting: boolean;
+  setActiveStep: Dispatch<SetStateAction<number>>;  isSubmitting?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, handleSubmit, isSubmitting } = props;
+  const { steps, activeStep, nextLink, setActiveStep } = props;
   const handleNext = () => {
-    console.log('submit');
-    
-    // if (isSubmitting) {
-    //   console.log('submitting');
-    //
-    // } else {
-    //   console.log('not submitting');
-    //   if (activeStep === steps.length - 1) {
-    //     Router.push(nextLink);
-    //   } else {
-    //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    //   }
-    // }
+    if (activeStep === steps.length - 1) {
+      Router.push(nextLink);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {

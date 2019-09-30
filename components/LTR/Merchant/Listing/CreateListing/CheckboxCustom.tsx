@@ -1,6 +1,6 @@
 import React, { FC, useState, Dispatch, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/Select';
+import Select from '@/components/ReusableComponents/SelectCustom';
 import Checkbox from '@material-ui/core/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';

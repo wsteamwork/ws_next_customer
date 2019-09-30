@@ -22,32 +22,23 @@ const RoomCreateListing = () => {
       case 0:
         return (
           <Basic
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
+            
           />
         );
       case 1:
         return (
-          <Room steps={steps} activeStep={step} setActiveStep={setActiveStep} nextLink={nextLink} />
+          <Room  />
         );
       case 2:
         return (
           <Bathroom
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
+            
           />
         );
       case 3:
         return (
           <Location
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
+            
           />
         );
       default:

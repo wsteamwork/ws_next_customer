@@ -91,7 +91,6 @@ const StepperProgress: FC<IProps> = (props) => {
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
 
-
   const handleReset = () => {
     setActiveStep(0);
   };
@@ -138,8 +137,12 @@ const StepperProgress: FC<IProps> = (props) => {
         ) : (
           <div>
             {getStepContent(activeStep, steps, setActiveStep, nextLink)}
-
-            
+            <BottomNavigation
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              nextLink={nextLink}
+            />
           </div>
         )}
       </Grid>
