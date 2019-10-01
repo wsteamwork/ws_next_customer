@@ -1,10 +1,9 @@
-import React, { FC, useState, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC, useState } from 'react';
 
 interface IProps {
-  
+
 }
 
 const Bathroom: FC<IProps> = (props) => {

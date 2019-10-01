@@ -1,9 +1,7 @@
-import React, { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
-import SelectCustom from '@/components/ReusableComponents/SelectCustom';
-import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { Typography, FormControl, OutlinedInput } from '@material-ui/core';
-interface IProps {}
+import React, { FC, useState } from 'react';
+interface IProps { }
 
 const Location: FC<IProps> = (props) => {
   const [address, setAddress] = useState<string>('');

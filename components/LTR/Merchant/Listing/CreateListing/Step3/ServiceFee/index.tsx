@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '5px 15px 10px',
       border: '1px solid #767676',
       borderRadius: 4,
-      minHeight:120,
+      minHeight: 120,
     },
     title: {
       fontSize: 16,
@@ -48,8 +48,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       lineHeight: '1.375em',
       color: 'rgb(118, 118, 118)',
     },
-    rowCheckPrice:{
-      padding:'8px 0'
+    rowCheckPrice: {
+      padding: '8px 0'
     }
   })
 );
@@ -57,16 +57,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const ServiceFee: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const [selectedValue, setSelectedValue] = React.useState<any>(0);
   const [amenities, setAmenities] = useState<ServicesIndexRes[]>([]);
   const [dataClick, setDataClick] = useState<number[]>([]);
 
   const [included_fee, setIncludedFee] = useState<ValuesPrice[]>([
     {
-      id:0,
-      value:0,
-      included:0
+      id: 0,
+      value: 0,
+      included: 0
     }
   ]);
 
@@ -93,9 +93,9 @@ const ServiceFee: FC<IProps> = (props) => {
   // });
 
   const handlePrice = () => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIncludedFee([{
-        ...included_fee[0],
-        value: parseInt(event.target.value)
+    setIncludedFee([{
+      ...included_fee[0],
+      value: parseInt(event.target.value)
     }]);
   };
 
@@ -120,33 +120,33 @@ const ServiceFee: FC<IProps> = (props) => {
   return (
     <div>
       <div>
-      <h1 className={classes.bigTitle}>
-        Lựa chọn gói dịch vụ
+        <h1 className={classes.bigTitle}>
+          Lựa chọn gói dịch vụ
       </h1>
-      <Grid container className={classes.container} justify='center'>
-        {/* <h3>Hình thức thuê: </h3> */}
-        <Grid item xs={11}>
-          <FormControl component="fieldset" fullWidth>
-            <RadioGroup value={selectedValue.toString()} onChange={handleChange} row>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <RadioCustom label={"Trọn gói dịch vụ"}
-                               descr={"Giá này đã bao gồm wifi, điện, nước, phí môi trường,..."}
-                               value={String(0)}/>
+        <Grid container className={classes.container} justify='center'>
+          {/* <h3>Hình thức thuê: </h3> */}
+          <Grid item xs={11}>
+            <FormControl component="fieldset" fullWidth>
+              <RadioGroup value={selectedValue.toString()} onChange={handleChange} row>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <RadioCustom label={"Trọn gói dịch vụ"}
+                      descr={"Giá này đã bao gồm wifi, điện, nước, phí môi trường,..."}
+                      value={String(0)} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <RadioCustom label={"Bán lẻ dịch vụ"}
+                      descr={"Hình thức thanh toán dịch vụ riêng lẻ theo từng loại phí: wifi, điện, nước, phí môi trường..."}
+                      value={String(1)} />
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <RadioCustom label={"Bán lẻ dịch vụ"}
-                               descr={"Hình thức thanh toán dịch vụ riêng lẻ theo từng loại phí: wifi, điện, nước, phí môi trường..."}
-                               value={String(1)}/>
-                </Grid>
-              </Grid>
-            </RadioGroup>
-          </FormControl>
+              </RadioGroup>
+            </FormControl>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
 
-      <Collapse  in={!!selectedValue}>
+      <Collapse in={!!selectedValue}>
         <div>
           <h1 className={classes.bigTitle}>
             Giá dịch vụ bán lẻ
@@ -154,12 +154,12 @@ const ServiceFee: FC<IProps> = (props) => {
           <Grid container justify='center'>
             <Grid item xs={11}>
               <FormGroup row>
-                {amenities.map(o =>(
+                {amenities.map(o => (
                   <Grid container spacing={2} alignItems='center' className={classes.rowCheckPrice} key={o.id}>
                     <Grid item xs={5}>
                       <FormControlLabel
                         control={
-                          <Checkbox checked={dataClick.some((x) => x === o.id)} classes={{checked:classes.checked}} onChange={handleChangeServices(o.id)} value={o.id} />
+                          <Checkbox checked={dataClick.some((x) => x === o.id)} classes={{ checked: classes.checked }} onChange={handleChangeServices(o.id)} value={o.id} />
                         }
                         label={o.type_txt}
                       />
@@ -172,7 +172,7 @@ const ServiceFee: FC<IProps> = (props) => {
                           value={included_fee[0].value}
                           onChange={handlePrice()}
                           InputProps={{
-                            id:o.id.toString(),
+                            id: o.id.toString(),
                             inputComponent: NumberFormatCustom as any,
                             endAdornment: <InputAdornment position="start"> đ/người/tháng </InputAdornment>,
                           }}
