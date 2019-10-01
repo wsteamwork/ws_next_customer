@@ -44,7 +44,7 @@ const RoomCreateListing = () => {
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={'/host/create-listing/123/detail'}
+        nextLink={'/host/create-listing/18/detail'}
       />
       {/* </CreateListingContext.Provider> */}
     </Fragment>
