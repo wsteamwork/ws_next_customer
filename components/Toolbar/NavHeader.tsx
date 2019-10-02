@@ -1,58 +1,30 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, {
-  Fragment,
-  FunctionComponent,
-  useState,
-  useRef,
-  useContext,
-  Dispatch,
-  useEffect
-} from 'react';
-import { compose } from 'recompose';
-import {
-  MenuItem,
-  AppBar,
-  Avatar,
-  Button,
-  Divider,
-  Grow,
-  MenuList,
-  Paper,
-  Popper,
-  Toolbar,
-  Hidden,
-  SwipeableDrawer,
-  ListItemIcon,
-  Popover,
-  ClickAwayListener,
-  Theme,
-  Badge,
-  Typography
-} from '@material-ui/core';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import Logo from '@/components/Toolbar/Logo';
+import SideDrawer from '@/components/Toolbar/SideDrawer';
+import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { NotificationReducerAction, setMarkAllRead } from '@/store/Redux/Reducers/Notification/notification';
+import { CountUnreadRes } from '@/types/Requests/Notification/CountUnread';
+import { AppBar, Avatar, Badge, Button, ClickAwayListener, Divider, Grow, Hidden, ListItemIcon, MenuItem, MenuList, Paper, Popover, Popper, SwipeableDrawer, Theme, Toolbar, Typography } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
-import { withCookies } from 'react-cookie';
-import Cookies from 'universal-cookie';
-import Logo from '@/components/Toolbar/Logo';
-import People from '@material-ui/icons/PersonRounded';
-import PowerSettingsNewRounded from '@material-ui/icons/PowerSettingsNewRounded';
+import createStyles from '@material-ui/core/styles/createStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
-import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import IconMenu from '@material-ui/icons/Menu';
 import NotificationsOutlined from '@material-ui/icons/NotificationsOutlined';
-import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
-import { UseTranslationResponse, useTranslation } from 'react-i18next';
-import GridContainer from '../Layout/Grid/Container';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import SideDrawer from '@/components/Toolbar/SideDrawer';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import People from '@material-ui/icons/PersonRounded';
+import PhoneIcon from '@material-ui/icons/Phone';
+import PowerSettingsNewRounded from '@material-ui/icons/PowerSettingsNewRounded';
+import React, { Dispatch, Fragment, FunctionComponent, useContext, useRef, useState } from 'react';
+import { withCookies } from 'react-cookie';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { CountUnreadRes } from '@/types/Requests/Notification/CountUnread';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { NotificationReducerAction } from '@/store/Redux/Reducers/Notification/notification';
-import { setMarkAllRead } from '@/store/Redux/Reducers/Notification/notification';
+import { compose } from 'recompose';
+import Cookies from 'universal-cookie';
+import GridContainer from '../Layout/Grid/Container';
 interface IProps {
   classes?: any;
   hiddenListCitySearch?: boolean;

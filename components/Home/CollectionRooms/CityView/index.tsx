@@ -1,13 +1,13 @@
-import React, { Fragment, FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography, Hidden, Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import CardIntro from '@/components/Cards/CardIntro';
 import NextArrow from '@/components/ListRoom/NextArrow';
 import PrevArrow from '@/components/ListRoom/PrevArrow';
-import CardIntro from '@/components/Cards/CardIntro';
+import { Grid, Hidden, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import Swiper from 'react-id-swiper';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
 
 interface IProps {
   classes?: any;
@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CityView: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
 
   const setting = {

@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { Paper, Grid, List } from '@material-ui/core';
-import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
-import { useTranslation } from 'react-i18next';
-import Lottie, { Options } from 'react-lottie';
 import simpleLoading from '@/assets/lottie/simple-loading.json';
+import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { Grid, List, Paper } from '@material-ui/core';
 import dynamic from 'next/dynamic';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Options } from 'react-lottie';
 
 const ItemSeach = dynamic(() => import('./ItemSeach'));
 

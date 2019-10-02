@@ -1,14 +1,11 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
-import { useTranslation } from 'react-i18next';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import Link from 'next/link';
-import NextArrow from '@/components/ListRoom/NextArrow';
-import PrevArrow from '@/components/ListRoom/PrevArrow';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import { Grid, Hidden, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
 
 interface IProps {
   classes?: any;
@@ -34,7 +31,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BlogContainer: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
 
   const setting: ReactIdSwiperProps = {

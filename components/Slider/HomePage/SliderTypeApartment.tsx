@@ -1,18 +1,17 @@
-import React, { Fragment, FC, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
-import _ from 'lodash';
-import { IGlobalContext, GlobalContext } from '@/store/Context/GlobalContext';
-import Slider, { Settings } from 'react-slick';
+import ListRoom from '@/components/ListRoom';
 import NextArrow from '@/components/ListRoom/NextArrow';
 import PrevArrow from '@/components/ListRoom/PrevArrow';
-import { useSelector } from 'react-redux';
+import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
+import { updateRouter } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { TypeApartment } from '@/types/Requests/Rooms/RoomResponses';
-import { updateRouter } from '@/store/Context/utility';
+import { Grid, Hidden, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC, Fragment, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
-import ListRoom from '@/components/ListRoom';
 interface Iprops {
   classes?: any;
 }

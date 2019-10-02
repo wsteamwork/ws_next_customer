@@ -1,15 +1,15 @@
-import React, { FC, Fragment } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Paper, Grid } from '@material-ui/core';
-import RoomBasic from './RoomBasic/index';
-import RoomDescription from './RoomDescription/index';
-import RoomAmenities from './RoomAmenities/index';
 import HostInfo from '@/components/HostInfo/index';
 import EmptyRoomCalendar from '@/components/Room/BoxRoomDetail/EmptyRoomCalendar';
-import RoomReview from './RoomReview/index';
-import BoxMap from '../BoxMap/index';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import TablePrices from '@/components/Room/BoxRoomDetail/TablePrices';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid, Paper, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment } from 'react';
+import BoxMap from '../BoxMap/index';
+import RoomAmenities from './RoomAmenities/index';
+import RoomBasic from './RoomBasic/index';
+import RoomDescription from './RoomDescription/index';
+import RoomReview from './RoomReview/index';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -59,10 +59,10 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                   <RoomDescription room={room} />
                 </div>
                 <div className={classes.rowMargin}>
-                  <RoomAmenities room={room}/>
+                  <RoomAmenities room={room} />
                 </div>
                 <div className={classes.rowMargin}>
-                  <TablePrices room={room}/>
+                  <TablePrices room={room} />
                 </div>
                 <div className={classes.rowMargin}>
                   <EmptyRoomCalendar />

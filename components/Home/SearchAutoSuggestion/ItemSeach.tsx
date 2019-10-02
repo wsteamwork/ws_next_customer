@@ -1,10 +1,6 @@
-import React, { FC } from 'react';
+import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT } from '@/types/Requests/Search/SearchResponse';
 import { Grid, ListItem } from '@material-ui/core';
-import {
-
-  IS_SEARCH_CITY,
-  IS_SEARCH_DISTRICT
-} from '@/types/Requests/Search/SearchResponse';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 // type CheckType = CityEntity | DistrictEntity | RoomEntity;

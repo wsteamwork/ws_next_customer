@@ -1,12 +1,12 @@
-import React, { FC, useState, Dispatch, SetStateAction, memo, useEffect } from 'react';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { faDoorClosed, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { Grid } from '@material-ui/core';
 import dynamic from 'next/dynamic';
-import { faUserFriends, faDoorClosed } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { ReducersList } from '@/store/Redux/Reducers';
+import React, { Dispatch, FC, memo, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ButtonGlobal from '@/components/ButtonGlobal';
+import { useDispatch, useSelector } from 'react-redux';
 
 const QuantityButtons = dynamic(() => import('@/components/ReusableComponents/QuantityButtons'));
 

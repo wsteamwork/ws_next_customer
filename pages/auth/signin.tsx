@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import FormSignin from '@/components/Auth/Signin/FormSignin';
+import GridContainer from '@/components/Layout/Grid/Container';
 import NextHead from '@/components/NextHead';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import GridContainer from '@/components/Layout/Grid/Container';
-import FormSignin from '@/components/Auth/Signin/FormSignin';
+import React, { Fragment } from 'react';
 
 const Signin = () => {
   return (

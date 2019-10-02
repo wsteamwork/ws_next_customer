@@ -1,20 +1,20 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import React, { FC, useState, useRef, useMemo, memo, Dispatch } from 'react';
-import DatePicker from 'rc-calendar/lib/Picker';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import { Grid, InputBase, Paper } from '@material-ui/core';
+import { CalendarToday } from '@material-ui/icons';
+import moment, { Moment } from 'moment';
+import 'moment/locale/en-gb';
+import 'moment/locale/vi';
 import Calendar from 'rc-calendar';
-import Cookies from 'universal-cookie';
 import enGB from 'rc-calendar/lib/locale/en_GB';
 import viVN from 'rc-calendar/lib/locale/vi_VN';
-import moment, { Moment } from 'moment';
-import 'moment/locale/vi';
-import 'moment/locale/en-gb';
-import { Grid, Paper, InputBase } from '@material-ui/core';
-import { CalendarToday } from '@material-ui/icons';
+import DatePicker from 'rc-calendar/lib/Picker';
+import React, { Dispatch, FC, memo, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
