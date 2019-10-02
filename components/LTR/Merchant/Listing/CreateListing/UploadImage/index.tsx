@@ -6,19 +6,17 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import _ from 'lodash';
 import React, { Dispatch, FC, Fragment, SetStateAction, useContext, useEffect, useState } from 'react';
 import UppyImage from './UppyImage';
+import { useDispatch } from 'react-redux';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
+  classes?: any;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
 
 const UploadImage: FC<IProps> = (props) => {
-  const { activeStep, steps, setActiveStep, nextLink } = props;
   const [disable, setDisable] = useState(false);
-  console.log('disable', disable);
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   const { state } = useContext<IListingDetailContext>(ListingDetailContext);
   const {
     listing,
@@ -53,6 +51,9 @@ const UploadImage: FC<IProps> = (props) => {
       setDisable(false);
     }
   }, [avatar_image, cover_photo, livingrooms, bedrooms, kitchens, bathrooms, outdoors, furnitures]);
+  useEffect(() => {
+    dispatch_detail({ type: 'setStep', payload: 'tab3' });
+  }, []);
   const handleSubmit = async () => {
     const data = {
       avatar_image,
@@ -157,14 +158,6 @@ const UploadImage: FC<IProps> = (props) => {
       ) : (
           ''
         )}
-
-      <BottomNavigation
-        steps={steps}
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-        nextLink={nextLink}
-        disableNext={disable}
-      />
     </Fragment>
   );
 };

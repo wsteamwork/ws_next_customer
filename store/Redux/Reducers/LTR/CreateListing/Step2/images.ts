@@ -1,10 +1,12 @@
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import _ from 'lodash';
 
 export type ImageReducerState = {
+  room_id: number;
   avatar_image: ImagesRes;
   cover_photo: ImagesRes;
   livingrooms: ImagesRes;
@@ -13,9 +15,11 @@ export type ImageReducerState = {
   bathrooms: any;
   outdoors: ImagesRes;
   furnitures: ImagesRes;
+  error: boolean;
 };
 
 export const init: ImageReducerState = {
+  room_id: null,
   avatar_image: { images: [] },
   cover_photo: { images: [] },
   livingrooms: { images: [] },
@@ -23,11 +27,12 @@ export const init: ImageReducerState = {
   kitchens: { images: [] },
   bathrooms: {},
   outdoors: { images: [] },
-  furnitures: { images: [] }
+  furnitures: { images: [] },
+  error: false
 };
 
 export type ImageReducerAction =
-  | { type: 'setListing'; payload: any }
+  | { type: 'setRoomId'; payload: number }
   | { type: 'setAvatarImage'; payload: ImagesRes }
   | { type: 'setCoverImage'; payload: ImagesRes }
   | { type: 'setLivingRoomImage'; payload: ImagesRes }
@@ -35,13 +40,16 @@ export type ImageReducerAction =
   | { type: 'setOutdoorsImage'; payload: ImagesRes }
   | { type: 'setFurnituresImage'; payload: ImagesRes }
   | { type: 'setBedRoomImage'; payload: any }
-  | { type: 'setBathRoomImage'; payload: any };
+  | { type: 'setBathRoomImage'; payload: any }
+  | { type: 'setError'; payload: boolean };
 
-export const descriptionReducer: Reducer<ImageReducerState, ImageReducerAction> = (
+export const imageReducer: Reducer<ImageReducerState, ImageReducerAction> = (
   state: ImageReducerState = init,
   action: ImageReducerAction
 ): ImageReducerState => {
   switch (action.type) {
+    case 'setRoomId':
+      return updateObject<ImageReducerState>(state, { room_id: action.payload });
     case 'setAvatarImage':
       return updateObject<ImageReducerState>(state, { avatar_image: action.payload });
     case 'setCoverImage':
@@ -55,16 +63,65 @@ export const descriptionReducer: Reducer<ImageReducerState, ImageReducerAction> 
     case 'setFurnituresImage':
       return updateObject<ImageReducerState>(state, { furnitures: action.payload });
     case 'setBedRoomImage':
-        return updateObject<ImageReducerState>(state, { bedrooms: {...state.bedrooms, ...action.payload }});
+      return updateObject<ImageReducerState>(state, {
+        bedrooms: { ...state.bedrooms, ...action.payload }
+      });
     case 'setBathRoomImage':
-        return updateObject<ImageReducerState>(state, { bathrooms: {...state.bathrooms, ...action.payload }});
+      return updateObject<ImageReducerState>(state, {
+        bathrooms: { ...state.bathrooms, ...action.payload }
+      });
+    case 'setError':
+      return updateObject(state, { error: action.payload });
     default:
       return state;
   }
 };
 
-export const handleSubmitImage = async (id: string | number, data: any) => {
+export const getDataImages = async (
+  id: any,
+  dispatch: Dispatch<ImageReducerAction>
+): Promise<any> => {
   try {
-    const res = await axios.post(`long-term/room/step2/tab3/${id}`, { step2: { tab3: data } });
-  } catch (error) {}
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
+    const data = res.data.data;
+    const room_id = data.room_id;
+    const number_bedroom = res.data.data.bedrooms.number_bedroom;
+    const number_bathroom = res.data.data.bedrooms.number_bathroom;
+    dispatch({ type: 'setRoomId', payload: room_id });
+    dispatch({ type: 'setAvatarImage', payload: data.avatar ? data.avatar : { images: [] } });
+    dispatch({
+      type: 'setCoverImage',
+      payload: data.cover_photo ? data.cover_photo : { images: [] }
+    });
+    dispatch({
+      type: 'setLivingRoomImage',
+      payload: data.livingrooms ? data.livingrooms : { images: [] }
+    });
+    dispatch({ type: 'setKitchensImage', payload: data.kitchens ? data.kitchens : { images: [] } });
+    dispatch({ type: 'setOutdoorsImage', payload: data.outdoors ? data.outdoors : { images: [] } });
+    dispatch({
+      type: 'setFurnituresImage',
+      payload: data.furnitures ? data.furnitures : { images: [] }
+    });
+    if (number_bedroom) {
+      _.times(number_bedroom, (i) =>
+        dispatch({
+          type: 'setBedRoomImage',
+          payload: { [`bedroom_${i}`]: { images: data.bedrooms[`bedroom_${i}`].images } }
+        })
+      );
+    }
+    if (number_bathroom) {
+      _.times(number_bathroom, (i) =>
+        dispatch({
+          type: 'setBathRoomImage',
+          payload: { [`bathroom_${i}`]: { images: data.bathrooms[`bathroom_${i}`].images } }
+        })
+      );
+    }
+    return data;
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
 };
+

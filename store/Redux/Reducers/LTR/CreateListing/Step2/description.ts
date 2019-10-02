@@ -1,5 +1,7 @@
+import Cookies from 'universal-cookie';
+import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
 
@@ -56,7 +58,7 @@ export const getDataDescription = async (
   dispatch: Dispatch<DescriptionReducerAction>
 ): Promise<any> => {
   try {
-    const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const room_id = res.data.data.room_id;
     const about_room = res.data.data.about_room;
     dispatch({ type: 'setRoomId', payload: room_id });
@@ -69,3 +71,4 @@ export const getDataDescription = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
+

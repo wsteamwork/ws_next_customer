@@ -16,6 +16,9 @@ import {
   IListingDetailContext
 } from '@/store/Context/LTR/ListingDetailContext';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { Dispatch } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 interface IProps {
   classes?: any;
   label?: string;
@@ -23,7 +26,7 @@ interface IProps {
   initImages?: any;
   height?: number;
   width?: number;
-  typeUpload: any;
+  typeUpload: {type: any};
   maxImage?: number;
   type_txt?: string;
 }
@@ -42,10 +45,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { label, subLabel, initImages, height, width, maxImage, typeUpload, type_txt } = props;
-  const [state, setState] = useState({
-    showInlineDashboard: true
-  });
-  const { dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
+  // const { dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
+  const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
   useEffect(() => {
     if (type_txt) {
       dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
@@ -189,7 +190,6 @@ const UppyImage: FC<IProps> = (props) => {
               </Grid>
             )}
           </section>
-          {state.showInlineDashboard && (
             <Dashboard
               uppy={uppy}
               trigger={'.UppyModalOpenerBtn'}
@@ -199,7 +199,6 @@ const UppyImage: FC<IProps> = (props) => {
               width={width ? width : 700}
               thumbnailWidth={480}
             />
-          )}
         </Grid>
       </Fragment>
     ),

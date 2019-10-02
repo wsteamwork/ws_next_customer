@@ -5,6 +5,7 @@ import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
+import { AxiosResponse } from 'axios';
 
 interface IProps {
   steps?: string[];
@@ -12,7 +13,7 @@ interface IProps {
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
   disableNext?: boolean;
-  handleAPI?: () => any;
+  handleAPI?: () => Promise<any>;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
@@ -63,7 +64,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+            <ButtonGlobal onClick={handleNext} disabled={disableNext} type="submit">
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }

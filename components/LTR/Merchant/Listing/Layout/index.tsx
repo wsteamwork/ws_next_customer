@@ -15,7 +15,7 @@ interface IProps {
   ) => any;
   getSteps: () => Array<string>;
   nextLink: string;
-  handleAPI?: () => void;
+  handleAPI?: () => any;
 }
 
 const Layout: FC<IProps> = (props) => {

@@ -27,7 +27,7 @@ interface IProps {
     nextLink: string
   ) => any;
   nextLink: string;
-  handleAPI?: () => void
+  handleAPI?: () => any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({

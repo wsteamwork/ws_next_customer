@@ -6,7 +6,7 @@ import { axios_merchant } from '@/utils/axiosInstance';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import createStyles from '@material-ui/core/styles/createStyles';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import React, { FC, Fragment, useContext, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
@@ -15,15 +15,13 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getDataDescription,
-  DescriptionReducerAction
+  DescriptionReducerAction,
 } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
 import { Dispatch } from 'redux';
+import { AxiosResponse } from 'axios';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   classes?: any;
-  activeStep: number;
-  steps: string[];
-  setActiveStep: any;
-  nextLink: string;
 }
 
 interface MyDescription {
@@ -71,7 +69,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Description: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { activeStep, steps, setActiveStep, nextLink } = props;
   const { t } = useTranslation();
   const { width, router } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
@@ -81,12 +78,41 @@ const Description: FC<IProps> = (props) => {
   const description = useSelector<ReducersList, string>((state) => state.description.description);
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
-  const dispatch = useDispatch<Dispatch<DescriptionReducerAction>>();
-  const id = router.query.id;
 
+  const data: DescriptionReq = {
+    name: name,
+    description: description,
+    space: space,
+    rules: rules
+  };
+  const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const id = router.query.id;
   useEffect(() => {
-    getDataDescription(id, dispatch);
+    getDataDescription(id, dispatch_des);
   }, [id]);
+  useEffect(() => {
+    dispatch_detail({ type: 'setStep', payload: 'tab1' });
+  }, []);
+
+  const handleSubmitForm: any = async () => {
+    console.log('handle submit form');
+    // const data: DescriptionReq = {
+    //   name: name,
+    //   description: description,
+    //   space: space,
+    //   rules: rules
+    // };
+    // try {
+    //   const res = await axios_merchant.post(`long-term/room/step2/tab1/${room_id}`, {
+    //     step2: {
+    //       tab1: data
+    //     }
+    //   });
+    //   return res;
+    // } catch (error) {}
+    return {};
+  };
 
   const formikInit: MyDescription = useMemo<MyDescription>(() => {
     return {
@@ -96,25 +122,9 @@ const Description: FC<IProps> = (props) => {
       rules: rules
     };
   }, [name, description, space, rules]);
-
-  const handleSubmitForm = async (values: MyDescription, actions: FormikActions<MyDescription>) => {
-    const data: DescriptionReq = {
-      name: values.name,
-      description: values.description,
-      space: values.space,
-      rules: values.rules
-    };
-    try {
-      const res: AxiosRes<any> = await axios_merchant.post(`long-term/room/step2/tab1/${room_id}`, {
-        step2: {
-          tab1: data
-        }
-      });
-      actions.setSubmitting(false);
-    } catch (error) {}
-  };
+  
   const dispatchDescription = (typeAction, value) => {
-    dispatch({ type: typeAction.type, payload: value });
+    dispatch_des({ type: typeAction.type, payload: value });
   };
   return (
     <Fragment>
@@ -332,12 +342,6 @@ const Description: FC<IProps> = (props) => {
                   />
                 </Grid>
               </Grid>
-              <BottomNavigation
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                nextLink={nextLink}
-              />
             </Grid>
           </form>
         )}></Formik>

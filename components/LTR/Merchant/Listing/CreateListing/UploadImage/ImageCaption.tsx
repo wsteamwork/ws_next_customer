@@ -15,12 +15,8 @@ import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNav
 import CardImageCaption from './CardImageCaption';
 
 interface IProps {
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
+  classes?: any;
 }
-
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     margin: {
@@ -31,7 +27,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const ImageCaption: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { activeStep, steps, setActiveStep, nextLink } = props;
   const { state } = useContext<IListingDetailContext>(ListingDetailContext);
   const {
     avatar_image,
@@ -56,34 +51,28 @@ const ImageCaption: FC<IProps> = (props) => {
         </Grid>
         <Grid item xs={6}>
         {cover_photo.images.length && (
-          <CardImageCaption label="Ảnh bìa" subLabel="Thêm chú thích cho ảnh bìa căn hộ" typeImage ={1} arrImage={cover_photo.images}/>
+          <CardImageCaption label="Ảnh bìa" subLabel="Thêm chú thích cho ảnh bìa căn hộ" typeImage ={4} arrImage={cover_photo.images}/>
         )}
         </Grid>
       </Grid>
       {livingrooms.images.length && (
-        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={2} arrImage={livingrooms.images}/>
+        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={7} arrImage={livingrooms.images}/>
       )}
       {countBedRoom && (_.times(countBedRoom, (i) => (
-        bedrooms[`bedroom_${i + 1}`].images.length ? <CardImageCaption key={i} label={`Ảnh phòng ngủ ${i + 1}`} typeImage ={2} subLabel="Thêm chú thích cho ảnh phòng ngủ" arrImage={bedrooms[`bedroom_${i + 1}`].images}/>: ''
+        bedrooms[`bedroom_${i + 1}`].images.length ? <CardImageCaption key={i} label={`Ảnh phòng ngủ ${i + 1}`} typeImage ={5} subLabel="Thêm chú thích cho ảnh phòng ngủ" arrImage={bedrooms[`bedroom_${i + 1}`].images}/>: ''
       )))}
       {countBathRoom && (_.times(countBathRoom, (i) => (
-        bathrooms[`bathroom_${i + 1}`].images.length ? <CardImageCaption key={i} label={`Ảnh phòng tắm ${i + 1}`} typeImage ={2} subLabel="Thêm chú thích cho ảnh phòng tắm" arrImage={bathrooms[`bathroom_${i + 1}`].images}/>: ''
+        bathrooms[`bathroom_${i + 1}`].images.length ? <CardImageCaption key={i} label={`Ảnh phòng tắm ${i + 1}`} typeImage ={6} subLabel="Thêm chú thích cho ảnh phòng tắm" arrImage={bathrooms[`bathroom_${i + 1}`].images}/>: ''
       )))}
       {kitchens.images.length && (
-        <CardImageCaption label="Ảnh phòng bếp" subLabel="Thêm chú thích cho ảnh phòng bếp căn hộ" typeImage ={2} arrImage={kitchens.images}/>
+        <CardImageCaption label="Ảnh phòng bếp" subLabel="Thêm chú thích cho ảnh phòng bếp căn hộ" typeImage ={8} arrImage={kitchens.images}/>
       )}
       {furnitures.images.length && (
-        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={2} arrImage={furnitures.images}/>
+        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={10} arrImage={furnitures.images}/>
       )}
       {outdoors.images.length && (
-        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={2} arrImage={outdoors.images}/>
+        <CardImageCaption label="Ảnh phòng khách" subLabel="Thêm chú thích cho ảnh phòng khách căn hộ" typeImage ={9} arrImage={outdoors.images}/>
       )}
-      <BottomNavigation
-        steps={steps}
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-        nextLink={nextLink}
-      />
     </Fragment>
   );
 };

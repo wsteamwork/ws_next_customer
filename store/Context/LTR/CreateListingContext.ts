@@ -138,7 +138,3 @@ export const handleCreateRoom = async (token?: string, initLanguage: string = 'v
   }
   return response.data;
 };
-
-// const create = async () => {
-//   const res: AxiosResponse<
-// }

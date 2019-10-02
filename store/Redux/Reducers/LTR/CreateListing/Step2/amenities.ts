@@ -1,64 +1,117 @@
+import Cookies from 'universal-cookie';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
+import { axios_merchant} from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
 
-export type DescriptionReducerState = {
-  name: string;
-  description: string;
-  space: string;
-  rules: string;
+export type AmenitiesReducerState = {
+  room_id: number;
+  amentitiesList: any;
+  common: number[];
+  livingrooms: number[];
+  bedrooms: number[];
+  kitchens: number[];
+  bathrooms: number[];
+  entertainment: number[];
+  facilities: number[];
+  others: number[];
   error: boolean;
 };
 
-export const init: DescriptionReducerState = {
-    name: '',
-    description: '',
-    space: '',
-    rules: '',
-    error: false,
+export const init: AmenitiesReducerState = {
+  room_id: null,
+  amentitiesList: null,
+  common: [], 
+  livingrooms: [],
+  bedrooms: [],
+  kitchens: [],
+  bathrooms: [],
+  entertainment: [],
+  facilities: [],
+  others: [],
+  error: false
 };
 
-export type DescriptionReducerAction =
-  | { type: 'setName'; payload: string}
-  | { type: 'setDescription'; payload: string}
-  | { type: 'setSpace'; payload: string}
-  | { type: 'setRules'; payload: string}
+export type AmenitiesReducerAction =
+  | { type: 'setRoomId'; payload: number }
+  | { type: 'setCommon'; payload: number[] }
+  | { type: 'setAmenitiesList'; payload: any }
+  | { type: 'setLivingRooms'; payload: number[] }
+  | { type: 'setBedRooms'; payload: number[] }
+  | { type: 'setKitChens'; payload: number[] }
+  | { type: 'setBathRooms'; payload: number[] }
+  | { type: 'setEntertainment'; payload: number[] }
+  | { type: 'setFacilities'; payload: number[] }
+  | { type: 'setOthers'; payload: number[] }
   | { type: 'setError'; payload: boolean };
 
-export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionReducerAction> = (
-  state: DescriptionReducerState = init,
-  action: DescriptionReducerAction
-): DescriptionReducerState => {
+export const amenitiesReducer: Reducer<AmenitiesReducerState, AmenitiesReducerAction> = (
+  state: AmenitiesReducerState = init,
+  action: AmenitiesReducerAction
+): AmenitiesReducerState => {
   switch (action.type) {
-    case 'setName':
-      return updateObject(state, { name: action.payload });
-    case 'setDescription':
-      return updateObject(state, { description: action.payload });
-    case 'setSpace':
-      return updateObject(state, { space: action.payload });
-    case 'setRules':
-      return updateObject(state, { rules: action.payload });
+    case 'setRoomId':
+      return updateObject(state, { room_id: action.payload });
+    case 'setAmenitiesList':
+      return updateObject(state, { amentitiesList: action.payload });
+    case 'setCommon':
+      return updateObject(state, { common: action.payload });
+    case 'setLivingRooms':
+      return updateObject(state, { livingrooms: action.payload });
+    case 'setBedRooms':
+      return updateObject(state, { bedrooms: action.payload });
+    case 'setKitChens':
+      return updateObject(state, { kitchens: action.payload }); 
+    case 'setBathRooms':
+      return updateObject(state, { bathrooms: action.payload });
+    case 'setEntertainment':
+      return updateObject(state, { entertainment: action.payload });
+    case 'setFacilities':
+      return updateObject(state, { facilities: action.payload }); 
+    case 'setOthers':
+      return updateObject(state, { others: action.payload });
     case 'setError':
-        return updateObject(state, { error: action.payload });
+      return updateObject(state, { error: action.payload });
     default:
       return state;
   }
 };
 
-export const getDataDescription = async (
-    id: any,
-    dispatch: Dispatch<DescriptionReducerAction>
-  ): Promise<any> => {
-    try {
-      const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
-      const about_room = res.data.data.about_room;
-        dispatch({ type: 'setName', payload: about_room ? about_room.name : ''});
-        dispatch({ type: 'setDescription', payload: about_room ? about_room.description: '' });
-        dispatch({ type: 'setSpace', payload: about_room ? about_room.space : '' });
-        dispatch({ type: 'setRules', payload: about_room ? about_room.note : '' });
-      return about_room;
-    } catch (error) {
-        dispatch({ type: 'setError', payload: true });
-      }
-  };
+export const getDataAmenities = async (
+  id: any,
+  dispatch: Dispatch<AmenitiesReducerAction>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
+    const room_id = res.data.data.room_id;
+    const amenities = res.data.data.comforts;
+    if(amenities) {
+      console.log('amenities',amenities.facilities.map(item => item.id))
+      dispatch({ type: 'setRoomId', payload: room_id });
+      // dispatch({ type: 'setCommon', payload: amenities.common.map(item => item.id) });
+      dispatch({ type: 'setLivingRooms', payload: amenities.livingrooms.map(item => item.id) });
+      dispatch({ type: 'setBedRooms', payload: amenities.bedrooms.map(item => item.id) });
+      dispatch({ type: 'setKitChens', payload: amenities.kitchens.map(item => item.id) });
+      dispatch({ type: 'setBathRooms', payload: amenities.bathrooms.map(item => item.id) });
+      dispatch({ type: 'setEntertainment', payload: amenities.entertainment.map(item => item.id) });
+      dispatch({ type: 'setFacilities', payload: amenities.facilities.map(item => item.id) });
+      dispatch({ type: 'setOthers', payload: amenities.others.map(item => item.id) });
+    }
+    return amenities;
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+
+export const getAmenitiesList = async (
+  dispatch: Dispatch<AmenitiesReducerAction>,
+) => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get('comforts');
+    dispatch({ type: 'setAmenitiesList', payload: res.data });
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+
+

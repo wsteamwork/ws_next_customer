@@ -73,7 +73,7 @@ const CardImageCaption: FC<IProps> = (props) => {
       </Grid>
       <Grid container spacing={3}>
         {arrImage.map((img, index) => (
-          <Grid item xs={typeImage === 1 ? 12 : 4 } key={index}>
+          <Grid item xs={typeImage === 1 || typeImage === 4 ? 12 : 4 } key={index}>
             <Card className={classes.card}>
               {/* <img src={IMAGE_STORAGE_LG + img.name + '.jpg'} className="media" alt={`Ảnh đại diện`} /> */}
               <CardMedia
