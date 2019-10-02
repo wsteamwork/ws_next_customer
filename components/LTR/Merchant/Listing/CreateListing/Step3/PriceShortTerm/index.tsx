@@ -6,10 +6,6 @@ import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNav
 
 interface IProps {
   classes?: any;
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
 }
 
 interface ValuesPrice {
@@ -39,7 +35,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const PriceShortTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { activeStep, steps, setActiveStep, nextLink } = props;
+  const {} = props;
   const [price, setPrice] = useState<ValuesPrice>({
     priceDay: null,
     priceHour: null,
@@ -186,14 +182,6 @@ const PriceShortTerm: FC<IProps> = (props) => {
           </Grid>
         </Grid>
       </div>
-
-      <BottomNavigation
-        steps={steps}
-        activeStep={activeStep}
-        setActiveStep={setActiveStep}
-        nextLink={nextLink}
-        // handleSubmit={handleSubmit}
-      />
     </Grid>
   );
 };

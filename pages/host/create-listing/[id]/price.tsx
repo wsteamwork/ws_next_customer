@@ -3,25 +3,21 @@ import NextHead from '@/components/NextHead';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import PriceShortTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm';
 import LongTerm from '@/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm';
+import ServiceFee from '@/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee';
 
 const RoomCreateListing = () => {
   const getSteps = () => {
-    return ['Ngắn hạn', 'Dài hạn'];
+    return ['Ngắn hạn', 'Dài hạn', 'Giá dịch vụ cho thuê dài hạn'];
   };
 
   const getStepContent = (step, steps, setActiveStep, nextLink) => {
     switch (step) {
       case 0:
-        return <PriceShortTerm steps = {steps}
-                               activeStep = {step}
-                               setActiveStep = {setActiveStep}
-                               nextLink = {nextLink} />;
+        return <PriceShortTerm />;
       case 1:
-        return <LongTerm steps = {steps}
-                         activeStep = {step}
-                         setActiveStep = {setActiveStep}
-                         nextLink = {nextLink}/>;
-
+        return <LongTerm />;
+      case 2:
+        return <ServiceFee />;
       default:
         return 'Unknown step';
     }
