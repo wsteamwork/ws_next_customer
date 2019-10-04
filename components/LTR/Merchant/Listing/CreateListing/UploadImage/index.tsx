@@ -86,7 +86,7 @@ const UploadImage: FC<IProps> = (props) => {
                   type_txt={`bedroom_${i + 1}`}
                   typeUpload={{ type: 'setBedRoomImage' }}
                   initImages={
-                    bedrooms[`bedroom_${i + 1}`] ? bedrooms[`bedroom_${i + 1}`].images : []
+                    bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images ? bedrooms[`bedroom_${i + 1}`].images : []
                   }
                 />
               </Grid>
@@ -100,7 +100,7 @@ const UploadImage: FC<IProps> = (props) => {
                   type_txt={`bathroom_${i + 1}`}
                   typeUpload={{ type: 'setBathRoomImage' }}
                   initImages={
-                    bathrooms[`bathroom_${i + 1}`] ? bathrooms[`bathroom_${i + 1}`].images : []
+                    bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images ? bathrooms[`bathroom_${i + 1}`].images : []
                   }
                 />
               </Grid>

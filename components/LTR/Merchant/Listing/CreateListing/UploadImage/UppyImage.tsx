@@ -34,14 +34,13 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     marginLabel: {
       marginBottom: theme.spacing(2)
     }
-  })                                                                          
+  })
 );
 
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { label, subLabel, initImages, height, maxImage, typeUpload, type_txt } = props;
-
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   useEffect(() => {
@@ -60,14 +59,14 @@ const UppyImage: FC<IProps> = (props) => {
     }
     initImage(initImages);
   }, [initImages]);
-  
+
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
       // const img = `${IMAGE_STORAGE_LG}` + arrImg[i].name + '.jpg';
       let img =
-      'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
+        'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
       await fetch(img)
-      .then((res) => res.blob())
+        .then((res) => res.blob())
         .then((blob) => {
           uppy.addFile({
             name: arrImg[i].name + '.jpg',
@@ -75,8 +74,8 @@ const UppyImage: FC<IProps> = (props) => {
           });
         })
         .catch((err) => console.error(err));
-      }
-    };
+    }
+  };
   const uppy = Uppy({
     id: 'uppy',
     autoProceed: false,

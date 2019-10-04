@@ -35,6 +35,7 @@
     "tab4": "Images Caption",
     "amenities": {
         "titleAmenities": "Please select the facilities and equipment in the apartment that you provide when guests book.",
+        "subTitleAmenities": "(Please select at least 10 amenities before next)",
         "subLabelFacilities": "Facilities often look for these when booking homes",
         "subLabelBathrooms": "The bathroom, toilet facilities as well as what many travelers use",
         "subLabelKitchens": "Facilities and amenities that allow travelers to eat and drink comfortably",

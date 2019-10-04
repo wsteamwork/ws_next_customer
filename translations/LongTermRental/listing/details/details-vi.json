@@ -35,6 +35,7 @@
     "tab4": "Mô tả ảnh",
     "amenities": {
         "titleAmenities": "Dưới đây hãy chọn những tiện nghi, thiết bị trong căn hộ mà bạn cung cấp khi khách đặt phòng.",
+        "subTitleAmenities": "(Vui lòng chọn tối thiểu 10 tiện nghi trước khi tiếp tục)",
         "subLabelFacilities": "Những tiện nghi thiết yếu thường được du khách chú trọng khi đặt phòng",
         "subLabelBathrooms": "Những thiện nghi phòng tắm, khu vệ sinh cũng là những thứ du khách sử dụng nhiều",
         "subLabelKitchens": "Những thiết bị và tiện nghi cho phép du khách thoải mái nấu ăn",
