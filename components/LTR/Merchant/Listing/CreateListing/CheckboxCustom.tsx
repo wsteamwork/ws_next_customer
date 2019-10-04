@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 
 interface IProps {
   classes?: any;

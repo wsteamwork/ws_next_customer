@@ -27,12 +27,10 @@ const BottomNavigation: FC<IProps> = (props) => {
   };
 
   const handleNext = async () => {
+    nextStep();
     try {
-      const result = await handleAPI();
-      if (result) {
-        nextStep()
-      }
-    } catch (error) { }
+
+    } catch (error) {}
   };
 
   const handleBack = () => {

@@ -1,7 +1,7 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,13 +18,12 @@ const Room: FC<IProps> = (props) => {
   );
   const bedRoomsNumberArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);
-  console.log(bedRoomsNumber)
 
   const callBackOnChange = (value: any) => {
     console.log('callbacl');
     dispatch({
       type: 'SET_BEDROOMS_NUMBER',
-      payload: value
+      payload: parseInt(value)
     });
   };
 
@@ -62,7 +61,7 @@ const Room: FC<IProps> = (props) => {
         Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn
       </h3>
 
-      {bedRoomsNumberArray(+bedRoomsNumber).map((number) => (
+      {bedRoomsNumberArray(bedRoomsNumber).map((number) => (
         <AddBedRoom roomNumber={number} />
       ))}
     </div>

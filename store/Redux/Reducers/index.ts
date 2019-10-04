@@ -17,7 +17,7 @@ import {
   CreateListingActions,
   createListingReducer,
   CreateListingState
-} from './LTR/CreateListing';
+} from './LTR/CreateListing/Basic/CreateListing';
 import {
   descriptionReducer,
   DescriptionReducerAction,

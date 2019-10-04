@@ -4,11 +4,12 @@ import Select from '@/components/ReusableComponents/SelectCustom';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Router from 'next/router';
 import { FormControlLabel, Checkbox } from '@material-ui/core';
+import { RoomTypeData, getRoomType } from '@/components/Rooms/FilterActions/RoomType/context';
 interface IProps {
   classes?: any;
 }
@@ -28,7 +29,14 @@ const useStyles = makeStyles((theme) => ({
 const Basic: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [stayWithHost, setStayWithHost] = useState<boolean>(false);
+  const [roomType, setRoomType] = useState<number>(null);
+
+  const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+
+  useEffect(() => {
+    getRoomType(setRoomTypesData);
+  }, []);
 
   const handleChangeCheckBox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setStayWithHost(checked);
@@ -40,13 +48,6 @@ const Basic: FC<IProps> = (props) => {
       payload: stayWithHost ? 1 : 0
     });
   }, [stayWithHost]);
-  const propertyType: Array<string> = [
-    'Nhà riêng',
-    'Chung cư',
-    'Biệt thự Villa',
-    'Phòng riêng',
-    'Khách sạn'
-  ];
 
   const initFormValue: FormValues = {
     lease_type: null,
@@ -61,6 +62,13 @@ const Basic: FC<IProps> = (props) => {
       accommodation_type: values.accommodation_type,
       stay_with_host: values.stay_with_host
     };
+  };
+
+  const callBackOnChange = (value: string) => {
+    dispatch({
+      type: 'SET_ACCOMMODATION_TYPE',
+      payload: parseInt(value)
+    });
   };
 
   return (
@@ -89,11 +97,12 @@ const Basic: FC<IProps> = (props) => {
               {/* <h3>Loại Căn hộ: </h3> */}
               <Select
                 name="accommodation_type"
-                onChange={handleChange}
+                // onChange={handleChangeSelect}
                 onBlur={handleBlur}
-                value={values.accommodation_type}
+                value={roomType}
                 title="Loại Căn hộ: "
-                options={propertyType}
+                options={roomTypesData}
+                callBackOnChange={callBackOnChange}
               />
             </Grid>
             <FormControlLabel

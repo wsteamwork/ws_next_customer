@@ -15,7 +15,7 @@ const RoomCreateListing = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
   };
 
-  const getStepContent = (step, steps, setActiveStep, nextLink) => {
+  const getStepContent = (step) => {
     switch (step) {
       case 0:
         return <Basic />;

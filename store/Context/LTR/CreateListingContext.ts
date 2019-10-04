@@ -1,6 +1,7 @@
 import { axios_merchant } from '@/utils/axiosInstance';
 import { createContext, Dispatch, Reducer } from 'react';
 import { updateObject } from '../utility';
+// import { headers } from '@/utils/axiosInstance.ts';
 
 export const CreateListingContext = createContext<ICreateListingContext>(
   null as ICreateListingContext
@@ -60,12 +61,6 @@ export const CreateListingReducer: Reducer<CreateListingState, CreateListingActi
   }
 };
 
-const createFirstTab = async (data: any, dispatch: Dispatch<CreateListingAction>) => {
-  dispatch({ type: 'setLeaseType', payload: data });
-  dispatch({ type: 'setAccommodationType', payload: data });
-  dispatch({ type: 'setStayWithHost', payload: data });
-};
-
 export const handleCreateRoom = async (token?: string, initLanguage: string = 'vi') => {
   const headers = token && {
     headers: {
@@ -73,7 +68,8 @@ export const handleCreateRoom = async (token?: string, initLanguage: string = 'v
       'Accept-Language': initLanguage
     }
   };
-  const response = await axios_merchant.post(`long-term/room/create`, {
+
+  const body = {
     step1: {
       tab1: {
         lease_type: 2,
@@ -131,14 +127,12 @@ export const handleCreateRoom = async (token?: string, initLanguage: string = 'v
         longitude: '39'
       }
     }
-  });
+  };
+
+  const response = await axios_merchant.post(`long-term/room/create`, body);
 
   if (response) {
     console.log('before next');
   }
-  return response.data;
+  return response;
 };
-
-// const create = async () => {
-//   const res: AxiosResponse<
-// }
