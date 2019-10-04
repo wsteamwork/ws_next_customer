@@ -27,6 +27,39 @@
     "space1000Character": "Chú ý ! Không gian không quá 1000 kí tự.",
     "rules500Character": "Chú ý ! Nội quy không quá 500 kí tự.",
     "defaulError": "Có lỗi xảy ra.",
-    "remainChar": "ký tự còn lại."
+    "remainChar": "ký tự còn lại.",
+    "titleStep": "Bước 2: Thông tin chi tiết",
+    "tab1": "Mô tả căn hộ",
+    "tab2": "Tiện nghi",
+    "tab3": "Đăng ảnh",
+    "tab4": "Mô tả ảnh",
+    "amenities": {
+        "titleAmenities": "Dưới đây hãy chọn những tiện nghi, thiết bị trong căn hộ mà bạn cung cấp khi khách đặt phòng.",
+        "subLabelFacilities": "Những tiện nghi thiết yếu thường được du khách chú trọng khi đặt phòng",
+        "subLabelBathrooms": "Những thiện nghi phòng tắm, khu vệ sinh cũng là những thứ du khách sử dụng nhiều",
+        "subLabelKitchens": "Những thiết bị và tiện nghi cho phép du khách thoải mái nấu ăn",
+        "subLabelEntertainments": "Những tiện nghi vui chơi, nơi thư giãn trong căn hộ hoặc khu vực xung quanh",
+        "subLabelOutdoors": "Những tiện nghi bên ngoài căn hộ",
+        "subLabelOtherAmen": "Những tiện nghi bổ sung trong căn hộ"
+    },
+    "images": {
+        "labelAvatar": "Ảnh đại diện căn hộ",
+        "subLabelAvatar": "Vui lòng đăng 1 ảnh đại diện cho căn hộ của bạn",
+        "labelCover": "Ảnh bìa căn hộ",
+        "subLabelCover": "Vui lòng đăng 1 ảnh bìa cho căn hộ của bạn",
+        "labelLivingRooms": "Ảnh phòng khách",
+        "subLabelLivingRooms": "Vui lòng đăng tất cả ảnh phòng khách cho căn hộ của bạn",
+        "labelBedRooms": "Ảnh phòng ngủ",
+        "subLabelBedRooms": "Vui lòng đăng ảnh phòng ngủ cho căn hộ của bạn",
+        "labelBathRooms": "Ảnh phòng tắm",
+        "subLabelBathRooms": "Vui lòng đăng ảnh phòng tắm cho căn hộ của bạn",
+        "labelKitchens": "Ảnh phòng bếp",
+        "subLabelKitchens": "Vui lòng đăng ảnh phòng bếp cho căn hộ của bạn",
+        "labelFurnitures": "Ảnh tiện nghi, đồ dùng trang trí nội thất",
+        "subLabelFurnitures": "Vui lòng đăng tất cả ảnh tiện nghi, đồ dùng trang trí nội thất cho căn hộ của bạn",
+        "labelOutdoors": "Ảnh lối ra vào, khu vực xunh quanh",
+        "subLabelOutdoors": "Vui lòng đăng ảnh lối ra vào, khu vực xunh quanh cho căn hộ của bạn",
+        "addCaption": "Thêm chú thích"
+    }
 
 }

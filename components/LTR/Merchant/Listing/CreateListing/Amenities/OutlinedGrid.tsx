@@ -11,7 +11,7 @@ interface IProps {
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     wrapper: {
-      marginBottom: theme.spacing(6)
+      marginTop: theme.spacing(6)
     },
     inputLabel: {
       fontSize: "24px",

@@ -1,8 +1,5 @@
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios_merchant } from '@/utils/axiosInstance';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import createStyles from '@material-ui/core/styles/createStyles';
@@ -15,10 +12,9 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getDataDescription,
-  DescriptionReducerAction,
+  DescriptionReducerAction
 } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
 import { Dispatch } from 'redux';
-import { AxiosResponse } from 'axios';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   classes?: any;
@@ -56,7 +52,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       margin: theme.spacing(3, 0)
     },
     margin_top: {
-      marginTop: theme.spacing(3)
+      marginTop: '32px !important'
     },
     notchedOutline: {
       border: 'none',
@@ -73,44 +69,32 @@ const Description: FC<IProps> = (props) => {
   const { width, router } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
 
-  const room_id = useSelector<ReducersList, number>((state) => state.description.room_id);
   const name = useSelector<ReducersList, string>((state) => state.description.name);
   const description = useSelector<ReducersList, string>((state) => state.description.description);
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
 
-  const data: DescriptionReq = {
-    name: name,
-    description: description,
-    space: space,
-    rules: rules
-  };
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   const id = router.query.id;
   useEffect(() => {
     getDataDescription(id, dispatch_des);
   }, [id]);
+
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab1' });
   }, []);
 
-  const handleSubmitForm: any = async () => {
-    console.log('handle submit form');
-    // const data: DescriptionReq = {
-    //   name: name,
-    //   description: description,
-    //   space: space,
-    //   rules: rules
-    // };
-    // try {
-    //   const res = await axios_merchant.post(`long-term/room/step2/tab1/${room_id}`, {
-    //     step2: {
-    //       tab1: data
-    //     }
-    //   });
-    //   return res;
-    // } catch (error) {}
+  useMemo(() => {
+    if(name.length < 10 || description.length < 50 ) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    }
+    else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
+  }, [name,description]);
+
+  const handleSubmitForm: any = () => {
     return {};
   };
 
@@ -122,7 +106,7 @@ const Description: FC<IProps> = (props) => {
       rules: rules
     };
   }, [name, description, space, rules]);
-  
+
   const dispatchDescription = (typeAction, value) => {
     dispatch_des({ type: typeAction.type, payload: value });
   };
@@ -141,12 +125,10 @@ const Description: FC<IProps> = (props) => {
           errors,
           handleChange,
           handleBlur,
-          isSubmitting,
-          validateOnChange
         }: FormikProps<MyDescription>) => (
           <form onSubmit={handleSubmit}>
             <Grid container justify="center" alignContent="center">
-              <Grid item xs={12} className="wrapper">
+              <Grid item xs={11}>
                 <CardTextarea
                   name="name"
                   label={t('details:listingName')}

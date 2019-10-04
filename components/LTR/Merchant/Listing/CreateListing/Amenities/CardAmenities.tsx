@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState } from 'react';
+import React, { FC, ChangeEvent, useState, useEffect } from 'react';
 import {
   Grid,
   FormControlLabel,
@@ -15,8 +15,10 @@ import mainColor from '@/styles/constants/colors';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 export const CustomCheckbox = withStyles({
   root: {
     color: mainColor.primary,
@@ -48,18 +50,29 @@ const CardAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { label, sub_label, amenities, dataClick, typeUpload } = props;
   const dispatch = useDispatch<Dispatch<AmenitiesReducerAction>>();
-
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const countAmenities = useSelector<ReducersList, number>((state) => state.amenities.count_amenities);
   const [newDataClick, setNewDataClick] = useState<number[]>(dataClick);
   const handleChange = (id: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
       setNewDataClick([...newDataClick, id]);
       dispatch({ type: typeUpload.type, payload: [...newDataClick, id] });
+      dispatch({ type: 'setCountAmenities', payload: countAmenities + 1 });
     } else {
       let dataCheckboxUnCheck = newDataClick.filter((i) => i !== id);
       setNewDataClick(dataCheckboxUnCheck);
       dispatch({ type: typeUpload.type, payload: dataCheckboxUnCheck });
+      dispatch({ type: 'setCountAmenities', payload: countAmenities - 1 });
     }
   };
+  useEffect(() => {
+    if(countAmenities < 10 ) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    }
+    else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
+  }, [countAmenities]);
   return (
     <OutlinedDiv label={label}>
       <Grid container>
@@ -67,7 +80,7 @@ const CardAmenities: FC<IProps> = (props) => {
           <Typography>{sub_label}</Typography>
         </Grid>
         {amenities.map((o) => (
-          <Grid item xs={6} key={o.id}>
+          <Grid item xs={12} sm={6} key={o.id}>
             <FormControlLabel
               control={
                 <CustomCheckbox

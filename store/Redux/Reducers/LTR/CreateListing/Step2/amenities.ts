@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios_merchant} from '@/utils/axiosInstance';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
 
@@ -15,13 +15,14 @@ export type AmenitiesReducerState = {
   entertainment: number[];
   facilities: number[];
   others: number[];
+  count_amenities: number;
   error: boolean;
 };
 
 export const init: AmenitiesReducerState = {
   room_id: null,
   amentitiesList: null,
-  common: [], 
+  common: [],
   livingrooms: [],
   bedrooms: [],
   kitchens: [],
@@ -29,6 +30,7 @@ export const init: AmenitiesReducerState = {
   entertainment: [],
   facilities: [],
   others: [],
+  count_amenities: 0,
   error: false
 };
 
@@ -43,6 +45,7 @@ export type AmenitiesReducerAction =
   | { type: 'setEntertainment'; payload: number[] }
   | { type: 'setFacilities'; payload: number[] }
   | { type: 'setOthers'; payload: number[] }
+  | { type: 'setCountAmenities'; payload: number }
   | { type: 'setError'; payload: boolean };
 
 export const amenitiesReducer: Reducer<AmenitiesReducerState, AmenitiesReducerAction> = (
@@ -61,15 +64,17 @@ export const amenitiesReducer: Reducer<AmenitiesReducerState, AmenitiesReducerAc
     case 'setBedRooms':
       return updateObject(state, { bedrooms: action.payload });
     case 'setKitChens':
-      return updateObject(state, { kitchens: action.payload }); 
+      return updateObject(state, { kitchens: action.payload });
     case 'setBathRooms':
       return updateObject(state, { bathrooms: action.payload });
     case 'setEntertainment':
       return updateObject(state, { entertainment: action.payload });
     case 'setFacilities':
-      return updateObject(state, { facilities: action.payload }); 
+      return updateObject(state, { facilities: action.payload });
     case 'setOthers':
       return updateObject(state, { others: action.payload });
+    case 'setCountAmenities':
+      return updateObject(state, { count_amenities: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -85,27 +90,41 @@ export const getDataAmenities = async (
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const room_id = res.data.data.room_id;
     const amenities = res.data.data.comforts;
-    if(amenities) {
-      console.log('amenities',amenities.facilities.map(item => item.id))
-      dispatch({ type: 'setRoomId', payload: room_id });
-      // dispatch({ type: 'setCommon', payload: amenities.common.map(item => item.id) });
-      dispatch({ type: 'setLivingRooms', payload: amenities.livingrooms.map(item => item.id) });
-      dispatch({ type: 'setBedRooms', payload: amenities.bedrooms.map(item => item.id) });
-      dispatch({ type: 'setKitChens', payload: amenities.kitchens.map(item => item.id) });
-      dispatch({ type: 'setBathRooms', payload: amenities.bathrooms.map(item => item.id) });
-      dispatch({ type: 'setEntertainment', payload: amenities.entertainment.map(item => item.id) });
-      dispatch({ type: 'setFacilities', payload: amenities.facilities.map(item => item.id) });
-      dispatch({ type: 'setOthers', payload: amenities.others.map(item => item.id) });
-    }
+    const livingrooms = amenities.kitchens ? amenities.kitchens.map((item) => item.id) : [];
+    const bedrooms = amenities.bedrooms ? amenities.bedrooms.map((item) => item.id) : [];
+    const kitchens = amenities.kitchens ? amenities.kitchens.map((item) => item.id) : [];
+    const bathrooms = amenities.bathrooms ? amenities.bathrooms.map((item) => item.id) : [];
+    const entertainment = amenities.entertainment
+      ? amenities.entertainment.map((item) => item.id)
+      : [];
+    const facilities = amenities.facilities ? amenities.facilities.map((item) => item.id) : [];
+    const others = amenities.others ? amenities.others.map((item) => item.id) : [];
+    const count_amenities =
+      livingrooms.length +
+      bedrooms.length +
+      kitchens.length +
+      bathrooms.length +
+      entertainment.length +
+      facilities.length +
+      others.length;
+
+    dispatch({ type: 'setRoomId', payload: room_id });
+    dispatch({ type: 'setLivingRooms', payload: livingrooms });
+    dispatch({ type: 'setBedRooms', payload: bedrooms });
+    dispatch({ type: 'setKitChens', payload: kitchens });
+    dispatch({ type: 'setBathRooms', payload: bathrooms });
+    dispatch({ type: 'setEntertainment', payload: entertainment });
+    dispatch({ type: 'setFacilities', payload: facilities });
+    dispatch({ type: 'setOthers', payload: others });
+    dispatch({ type: 'setCountAmenities', payload: count_amenities });
+
     return amenities;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
   }
 };
 
-export const getAmenitiesList = async (
-  dispatch: Dispatch<AmenitiesReducerAction>,
-) => {
+export const getAmenitiesList = async (dispatch: Dispatch<AmenitiesReducerAction>) => {
   try {
     const res: AxiosRes<any> = await axios_merchant.get('comforts');
     dispatch({ type: 'setAmenitiesList', payload: res.data });
@@ -113,5 +132,3 @@ export const getAmenitiesList = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
-
-

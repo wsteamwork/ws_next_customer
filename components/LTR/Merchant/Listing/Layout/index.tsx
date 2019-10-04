@@ -15,11 +15,12 @@ interface IProps {
   ) => any;
   getSteps: () => Array<string>;
   nextLink: string;
+  disableNext?: boolean;
   handleAPI?: () => any;
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { title, getStepContent, getSteps, nextLink, handleAPI } = props;
+  const { title, getStepContent, getSteps, nextLink, disableNext, handleAPI } = props;
 
   return (
     <Grid className="listing-container">
@@ -29,7 +30,7 @@ const Layout: FC<IProps> = (props) => {
         md={10}
         className="listing-content"
         classNameItem="listing-content-wrapper">
-        <StepperProgress getSteps={getSteps} getStepContent={getStepContent} nextLink={nextLink} handleAPI={handleAPI} />
+        <StepperProgress getSteps={getSteps} getStepContent={getStepContent} nextLink={nextLink} disableNext={disableNext} handleAPI={handleAPI} />
       </GridContainer>
     </Grid>
   );

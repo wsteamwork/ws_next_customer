@@ -15,13 +15,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { Dispatch } from 'redux';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import { useTranslation } from 'react-i18next';
 
 const RoomCreateListing = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<DetailsReducerAction>>();
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const listing = useSelector<ReducersList, any>((state) => state.details.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.details.step);
+  const disable_next = useSelector<ReducersList, boolean>((state) => state.details.disable_next);
 
   const data_description = {
     name: useSelector<ReducersList, string>((state) => state.description.name),
@@ -33,24 +37,30 @@ const RoomCreateListing = () => {
   const data_amenities = {
     facilities: useSelector<ReducersList, number[]>((state) => state.amenities.facilities),
     kitchens: useSelector<ReducersList, number[]>((state) => state.amenities.kitchens),
-    bedrooms: useSelector<ReducersList, number[]>((state) => state.amenities.bedrooms),
-    entertainment: useSelector<ReducersList, number[]>(
-      (state) => state.amenities.entertainment
-    ),
+    bathrooms: useSelector<ReducersList, number[]>((state) => state.amenities.bathrooms),
+    entertainment: useSelector<ReducersList, number[]>((state) => state.amenities.entertainment),
     others: useSelector<ReducersList, number[]>((state) => state.amenities.others)
+  };
+  const data_images = {
+    avatar_image: useSelector<ReducersList, ImagesRes>((state) => state.images.avatar_image),
+    cover_photo: useSelector<ReducersList, ImagesRes>((state) => state.images.cover_photo),
+    livingrooms: useSelector<ReducersList, ImagesRes>((state) => state.images.livingrooms),
+    bedrooms: useSelector<ReducersList, any>((state) => state.images.bedrooms),
+    kitchens: useSelector<ReducersList, ImagesRes>((state) => state.images.kitchens),
+    bathrooms: useSelector<ReducersList, any>((state) => state.images.bathrooms),
+    outdoors: useSelector<ReducersList, ImagesRes>((state) => state.images.outdoors),
+    furnitures: useSelector<ReducersList, ImagesRes>((state) => state.images.furnitures)
   };
   const data = (step) => {
     switch (step) {
       case 'tab1':
         return data_description;
       case 'tab2':
-        return data_amenities; 
-      // case 'tab3':
-      //   return data_amenities;
-      // case 'tab3':
-      //   return data_amenities;
+        return data_amenities;
+      case 'tab3':
+        return data_images;
       default:
-        return 'tab1';
+        return data_description;
     }
   };
 
@@ -60,8 +70,7 @@ const RoomCreateListing = () => {
     }
   }, []);
   const getSteps = () => {
-    return ['Mô tả căn hộ', 'Tiện nghi'];
-    // return ['Mô tả căn hộ', 'Tiện nghi', 'Đăng ảnh', 'Mô tả ảnh'];
+    return [t('details:tab1'), t('details:tab2'), t('details:tab3'), t('details:tab4')];
   };
   const getStepContent = (step) => {
     switch (step) {
@@ -87,10 +96,11 @@ const RoomCreateListing = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
       <Layout
-        title="Bước 2: Thông tin chi tiết"
+        title={t('details:titleStep')}
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={`/host/create-listing/${id}/price`}
+        disableNext={disable_next}
         handleAPI={() => handleDetailsListing(listing.room_id, current_step, data(current_step))}
       />
     </Fragment>

@@ -107,7 +107,7 @@ export const getDataImages = async (
       _.times(number_bedroom, (i) =>
         dispatch({
           type: 'setBedRoomImage',
-          payload: { [`bedroom_${i}`]: { images: data.bedrooms[`bedroom_${i}`].images } }
+          payload: { [`bedroom_${i + 1}`]: { images: data.bedrooms[`bedroom_${i + 1}`].images } }
         })
       );
     }
@@ -115,7 +115,7 @@ export const getDataImages = async (
       _.times(number_bathroom, (i) =>
         dispatch({
           type: 'setBathRoomImage',
-          payload: { [`bathroom_${i}`]: { images: data.bathrooms[`bathroom_${i}`].images } }
+          payload: { [`bathroom_${i + 1}`]: { images: data.bathrooms[`bathroom_${i + 1}`].images } }
         })
       );
     }
@@ -124,4 +124,3 @@ export const getDataImages = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
-
