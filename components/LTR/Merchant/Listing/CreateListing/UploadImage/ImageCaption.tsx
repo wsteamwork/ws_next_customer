@@ -81,7 +81,7 @@ const ImageCaption: FC<IProps> = (props) => {
           bedrooms[`bedroom_${i + 1}`].images.length ? (
             <CardImageCaption
               key={i}
-              label={`Ảnh phòng ngủ ${i + 1}`}
+              label={`${t('details:images:labelBedRooms')} ${i + 1}`}
               typeImage={5}
               type_txt={`bedroom_${i + 1}`}
               typeUpload={{ type: 'setBedRoomImage' }}
@@ -97,7 +97,7 @@ const ImageCaption: FC<IProps> = (props) => {
           bathrooms[`bathroom_${i + 1}`].images.length ? (
             <CardImageCaption
               key={i}
-              label={`Ảnh phòng tắm ${i + 1}`}
+              label={`${t('details:images:labelBathRooms')} ${i + 1}`}
               type_txt={`bathroom_${i + 1}`}
               typeUpload={{ type: 'setBathRoomImage' }}
               typeImage={6}
