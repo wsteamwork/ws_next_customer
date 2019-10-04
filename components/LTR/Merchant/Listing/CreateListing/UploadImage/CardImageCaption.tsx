@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { useTranslation } from 'react-i18next';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 interface IProps {
   classes?: any;
@@ -82,9 +83,10 @@ const CardImageCaption: FC<IProps> = (props) => {
             <Grid item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
               <Card className={classes.card}>
                 {/* <img src={IMAGE_STORAGE_LG + img.name + '.jpg'} className="media" alt={`Ảnh đại diện`} /> */}
+                {/* image="https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large" */}
                 <CardMedia
                   className={classes.media}
-                  image="https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large"
+                  image={IMAGE_STORAGE_LG + img.name}
                   title="Image"
                 />
                 <CardContent className={classes.cardContent}>

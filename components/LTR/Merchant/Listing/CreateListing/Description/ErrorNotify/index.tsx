@@ -14,11 +14,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       border: 'solid 1px #ff7272',
       borderRadius: '0 0 3px 3px',
       [theme!.breakpoints!.down!('xs')]: {
-        fontSize: '14px',
+        fontSize: '14px'
       },
       [theme!.breakpoints!.down!('sm')]: {
-        fontSize: '14px',
-      },
+        fontSize: '14px'
+      }
     },
     error_icon: {
       marginRight: theme.spacing(1)
@@ -42,8 +42,8 @@ const ErrorNotify: FC<IProps> = (props) => {
           {errorMessage}
         </Grid>
       ) : (
-          ''
-        )}
+        ''
+      )}
     </Fragment>
   );
 };

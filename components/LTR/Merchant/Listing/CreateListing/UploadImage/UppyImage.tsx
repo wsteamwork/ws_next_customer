@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useMemo, useContext } from 'react';
+import React, { FC, Fragment, useEffect, useMemo } from 'react';
 import { Grid, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
 import XHRUpload from '@uppy/xhr-upload';
@@ -62,9 +62,9 @@ const UppyImage: FC<IProps> = (props) => {
 
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
-      // const img = `${IMAGE_STORAGE_LG}` + arrImg[i].name + '.jpg';
-      let img =
-        'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
+      let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
+      // let img =
+      //   'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {

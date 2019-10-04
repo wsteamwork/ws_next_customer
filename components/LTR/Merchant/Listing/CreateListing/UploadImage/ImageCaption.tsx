@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useContext, useEffect } from 'react';
+import React, { FC, Fragment, useEffect } from 'react';
 import { createStyles, makeStyles, Theme, Grid } from '@material-ui/core';
 import _ from 'lodash';
 import CardImageCaption from './CardImageCaption';
@@ -21,7 +21,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 
 const ImageCaption: FC<IProps> = (props) => {
-  const classes = useStyles(props);
   const { t } = useTranslation();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
 
