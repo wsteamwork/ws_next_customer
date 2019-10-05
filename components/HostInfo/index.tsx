@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Avatar } from '@material-ui/core';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { faCheckCircle, faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Avatar, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({

@@ -1,31 +1,27 @@
-import React, { useReducer, Fragment, useMemo, useEffect, useContext } from 'react';
-import { NextPage } from 'next';
-import GridContainer from '@/components/Layout/Grid/Container';
-import BoxBooking from '@/components/Room/BoxBooking';
-import {
-  RoomDetailsReducer,
-  RoomDetailsStateInit,
-  RoomDetailsContext
-} from '@/store/Context/Room/RoomDetailContext';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import { Grid, Hidden } from '@material-ui/core';
-import NavBottomBook from '@/components/Room/NavBottomBook';
-import NextHead from '@/components/NextHead';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
-import { useSelector } from 'react-redux';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
-import BoxImage from '@/components/Room/BoxImage';
-import BoxSearch from '@/components/Room/BoxSearch';
 import Footer from '@/components/Layout/FooterComponent';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import BoxRecommend from '@/components/Room/BoxRecommend';
-import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-import { getCookieFromReq } from '@/utils/mixins';
+import GridContainer from '@/components/Layout/Grid/Container';
+import NextHead from '@/components/NextHead';
 // import SearchMobile from '@/components/Rooms/SearchMobile';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
+import BoxBooking from '@/components/Room/BoxBooking';
+import BoxImage from '@/components/Room/BoxImage';
+import BoxRecommend from '@/components/Room/BoxRecommend';
+import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
+import BoxSearch from '@/components/Room/BoxSearch';
+import NavBottomBook from '@/components/Room/NavBottomBook';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RoomDetailsContext, RoomDetailsReducer, RoomDetailsStateInit } from '@/store/Context/Room/RoomDetailContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { getCookieFromReq } from '@/utils/mixins';
+import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { Grid, Hidden } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
+import { useSelector } from 'react-redux';
 
 const Room: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);

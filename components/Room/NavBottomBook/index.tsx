@@ -1,23 +1,23 @@
-import React, { useContext, useState, FC, forwardRef } from 'react';
-import Toolbar from '@material-ui/core/Toolbar';
-import { AppBar } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import Slide, { SlideProps } from '@material-ui/core/Slide';
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
-import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
-import GridContainer from '@/components/Layout/Grid/Container';
-import BoxBooking from '../BoxBooking';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import numeral from 'numeral';
-import { useSelector } from 'react-redux';
+import GridContainer from '@/components/Layout/Grid/Container';
+import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { AppBar } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Slide, { SlideProps } from '@material-ui/core/Slide';
+import Toolbar from '@material-ui/core/Toolbar';
+import CloseIcon from '@material-ui/icons/Close';
+import numeral from 'numeral';
+import React, { FC, forwardRef, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import BoxBooking from '../BoxBooking';
 
 const Transition = forwardRef<HTMLElement, SlideProps>((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />

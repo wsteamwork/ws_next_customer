@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography, Hidden, Grid } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import ListRoom from '@/components/ListRoom';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { Collections } from '@/types/Requests/Rooms/RoomResponses';
-import _ from 'lodash';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import ListRoom from '@/components/ListRoom';
+import { Grid, Hidden, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any

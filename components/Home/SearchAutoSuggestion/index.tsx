@@ -1,37 +1,24 @@
-import React, { FC, useState, ChangeEvent, useEffect, useContext } from 'react';
-import { PinDropRounded, Close, SearchRounded } from '@material-ui/icons';
-import {
-  IconButton,
-  Paper,
-  Fade,
-  Grid,
-  List,
-  TextField,
-  InputAdornment,
-  MenuItem,
-  ClickAwayListener
-} from '@material-ui/core';
-import { axios } from '@/utils/axiosInstance';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersType } from '@/store/Redux/Reducers';
+import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { SearchSuggestRes, SearchSuggestData } from '@/types/Requests/Search/SearchResponse';
-import { useTranslation } from 'react-i18next';
-import Autosuggest from 'react-autosuggest';
+import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { axios } from '@/utils/axiosInstance';
+import { Fade, Grid, IconButton, InputAdornment, MenuItem, Paper, TextField } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core/styles';
+import { Close, SearchRounded } from '@material-ui/icons';
+import HomeIcon from '@material-ui/icons/HomeRounded';
+import LocationIcon from '@material-ui/icons/LocationOnRounded';
+import { withStyles } from '@material-ui/styles';
 // @ts-ignore
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import dynamic from 'next/dynamic';
-import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT } from '@/types/Requests/Search/SearchResponse';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { compose } from 'recompose';
-import { withStyles } from '@material-ui/styles';
-import HomeIcon from '@material-ui/icons/HomeRounded';
-import LocationIcon from '@material-ui/icons/LocationOnRounded';
-import Popular from '@material-ui/icons/WhatshotRounded';
-import { ReducersType } from '@/store/Redux/Reducers';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import Autosuggest from 'react-autosuggest';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { compose } from 'recompose';
 import { Dispatch } from 'redux';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface Iprops {
   classes?: any;
@@ -201,7 +188,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => {}, ref, ...other } = inputProps;
+    const { inputRef = () => { }, ref, ...other } = inputProps;
     return (
       <TextField
         fullWidth
@@ -245,8 +232,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                <HomeIcon className={classes.searchIcon} />
-              )}
+                  <HomeIcon className={classes.searchIcon} />
+                )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (

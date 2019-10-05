@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
-import { Coords, ChildComponentProps } from 'google-map-react';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import numeral from 'numeral';
-import { Grid } from '@material-ui/core';
-import classNames from 'classnames';
 import CustomPopper from '@/components/CustomPopper';
 import RoomCard from '@/components/RoomCard';
-import LazyLoad from 'react-lazyload';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import { ChildComponentProps, Coords } from 'google-map-react';
+import numeral from 'numeral';
+import React, { FC } from 'react';
 
 interface IProps extends Coords, ChildComponentProps {
   room: RoomIndexRes;
@@ -32,7 +31,7 @@ const MapMarker: FC<IProps> = (props) => {
       onTrigger={() => focus(room)}
       content={
         // <LazyLoad>
-          <Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>
+        <Grid className="mapRoom">{<RoomCard room={room} isHomepage={true} />}</Grid>
         // </LazyLoad>
       }>
       <Grid className={classNames('arrow_box')}>

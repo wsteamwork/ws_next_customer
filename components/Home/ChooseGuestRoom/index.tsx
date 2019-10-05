@@ -1,10 +1,10 @@
-import React, { useState, FC, useMemo, memo, useCallback } from 'react';
+import CustomPopper from '@/components/CustomPopper';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { Grid, InputBase, Paper } from '@material-ui/core';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import CustomPopper from '@/components/CustomPopper';
+import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const ActionChoose = dynamic(() => import('./ActionChoose'));
 

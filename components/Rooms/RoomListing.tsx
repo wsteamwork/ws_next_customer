@@ -1,24 +1,15 @@
-import { useEffect, useContext, useState, Fragment, FC } from 'react';
-import GridContainer from '../Layout/Grid/Container';
-import { Grid, Hidden, Paper } from '@material-ui/core';
-import RoomCardListing from './RoomCardListing';
-import ButtonGlobal from '../ButtonGlobal';
-import VisitedRooms from './VisitedRooms';
-import ListRoom from '../ListRoom';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import Pagination from 'rc-pagination';
-import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import 'rc-pagination/assets/index.css';
-import _ from 'lodash';
 import { updateRouter } from '@/store/Context/utility';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid } from '@material-ui/core';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import LazyLoad from 'react-lazyload';
+import ListRoom from '../ListRoom';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next';
-import CompareRooms from '@/components/Rooms/CompareRooms';
-import Router from 'next/router';
-import LazyLoad from 'react-lazyload';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import RoomCardListing from './RoomCardListing';
 
 interface IProps {
   classes?: any;
@@ -80,8 +71,8 @@ const RoomListing: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-        <NotFound height={250} width={250} />
-      )}
+            <NotFound height={250} width={250} />
+          )}
     </Fragment>
   );
 };

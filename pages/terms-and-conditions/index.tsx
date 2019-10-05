@@ -494,7 +494,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
             </p>
             <h3 className="ql-align-justify">
               <strong style={{ backgroundColor: 'transparent', color: 'rgb(67, 67, 67)' }}>
-                2. Chính sách chuyển nhượng
+                2. Chính sách thay đổi chuyển nhượng
               </strong>
             </h3>
             <p className="ql-align-justify">
@@ -513,6 +513,11 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
               <span style={{ backgroundColor: 'transparent', color: 'rgb(0, 0, 0)' }}>
                 Bên Chuyển Nhượng lại có trách nhiệm thông báo cho WeStay và Chủ Nhà về việc thực
                 hiện giao dịch này để hoàn thiện các thủ tục cần thiết theo quy định của WeStay.
+              </span>
+            </p>
+            <p className="ql-align-justify">
+              <span style={{ backgroundColor: 'transparent', color: 'rgb(0, 0, 0)' }}>
+                Khách hàng có quyền thay đổi địa điểm lưu trú trong cùng thời gian đã đặt trong vòng 72 giờ kể từ thời điểm đặt phòng và chịu mức phí là 10% trên tổng booking. Westay sẽ hỗ trợ tìm sản phẩm phù hợp nhất với nhu cầu của khách hàng.
               </span>
             </p>
             <p className="ql-align-justify">

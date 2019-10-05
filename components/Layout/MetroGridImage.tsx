@@ -1,18 +1,18 @@
-import React, { FC, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography, Grid, Hidden } from '@material-ui/core';
 import CardIntro from '@/components/Cards/CardIntro';
-import numeral from 'numeral';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next';
-import ListRoom from '../ListRoom';
-import { useSelector, connect } from 'react-redux';
-import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
-import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
 import { updateRouter } from '@/store/Context/utility';
-import { Dispatch } from 'redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid, Hidden, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import numeral from 'numeral';
+import React, { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect, useSelector } from 'react-redux';
 import { compose } from "recompose";
+import { Dispatch } from 'redux';
+import ListRoom from '../ListRoom';
 
 interface Iprops {
   classes?: any;
@@ -35,15 +35,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const MetroGridImage: FC<Iprops> = (props:Iprops) => {
+const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
-  const {filter,updateSearchText} = props;
+  const { filter, updateSearchText } = props;
   const { t } = useTranslation();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
   const { width } = useContext<IGlobalContext>(GlobalContext);
-  const renderCity = (city:NumberRoomCity) => (
+  const renderCity = (city: NumberRoomCity) => (
     <div className={classes.paddingGrid}>
       <CardIntro
         title={city.name_city}
@@ -51,13 +51,13 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
         showPrice={true}
         recommendedPrice={numeral(city.average_price).format('0,0')}
         imgHeight={290}
-        onClickCard={()=>locationRoom(city.name_city)}
+        onClickCard={() => locationRoom(city.name_city)}
       />
     </div>
   );
 
   const locationRoom = (nameCity: string) => {
-    updateRouter(true,'name',nameCity);
+    updateRouter(true, 'name', nameCity);
     updateSearchText(nameCity)
   };
 
@@ -78,7 +78,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[0].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 280 : 250}
-                    onClickCard={()=>locationRoom(roomsCity[0].name_city)}
+                    onClickCard={() => locationRoom(roomsCity[0].name_city)}
                   />
                 </Grid>
                 <Grid item>
@@ -90,7 +90,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                         showPrice={true}
                         recommendedPrice={numeral(roomsCity[1].average_price).format('0,0')}
                         imgHeight={width === 'xl' ? 230 : 200}
-                        onClickCard={()=>locationRoom(roomsCity[1].name_city)}
+                        onClickCard={() => locationRoom(roomsCity[1].name_city)}
                       />
                     </Grid>
                     <Grid item xs={6} className={classes.paddingGrid}>
@@ -100,7 +100,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                         showPrice={true}
                         recommendedPrice={numeral(roomsCity[2].average_price).format('0,0')}
                         imgHeight={width === 'xl' ? 230 : 200}
-                        onClickCard={()=>locationRoom(roomsCity[2].name_city)}
+                        onClickCard={() => locationRoom(roomsCity[2].name_city)}
                       />
                     </Grid>
                   </Grid>
@@ -116,7 +116,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[3].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 280 : 250}
-                    onClickCard={()=>locationRoom(roomsCity[3].name_city)}
+                    onClickCard={() => locationRoom(roomsCity[3].name_city)}
                   />
                 </Grid>
                 <Grid item xs={12} className={classes.paddingGrid}>
@@ -126,7 +126,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[4].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 230 : 200}
-                    onClickCard={()=>locationRoom(roomsCity[4].name_city)}
+                    onClickCard={() => locationRoom(roomsCity[4].name_city)}
                   />
                 </Grid>
               </Grid>
@@ -138,7 +138,7 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
                     showPrice={true}
                     recommendedPrice={numeral(roomsCity[5].average_price).format('0,0')}
                     imgHeight={width === 'xl' ? 518 : 458}
-                    onClickCard={()=>locationRoom(roomsCity[5].name_city)}
+                    onClickCard={() => locationRoom(roomsCity[5].name_city)}
                   />
                   {/* +8px la khoang cach padding*/}
                 </Grid>
@@ -149,10 +149,10 @@ const MetroGridImage: FC<Iprops> = (props:Iprops) => {
 
         <Hidden mdUp implementation="css">
           <ListRoom
-          roomData={roomsCity}
-          usingSlider={true}
-          title={''}
-          render={renderCity}></ListRoom>
+            roomData={roomsCity}
+            usingSlider={true}
+            title={''}
+            render={renderCity}></ListRoom>
         </Hidden>
       </Grid>
     )

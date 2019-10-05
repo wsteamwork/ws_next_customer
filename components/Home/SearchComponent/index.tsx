@@ -1,17 +1,17 @@
-import React, { FC, memo, Fragment, useContext } from 'react';
-import { Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import SearchAutoSuggestion from '../SearchAutoSuggestion';
-import DateRangeSearch from '../DateRangeSearch';
-import ChooseGuestRoom from '../ChooseGuestRoom';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
-import { ParsedUrlQueryInput } from 'querystring';
+import { Grid } from '@material-ui/core';
 import Router from 'next/router';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ParsedUrlQueryInput } from 'querystring';
+import React, { FC, Fragment, memo, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import ChooseGuestRoom from '../ChooseGuestRoom';
+import DateRangeSearch from '../DateRangeSearch';
+import SearchAutoSuggestion from '../SearchAutoSuggestion';
 
 interface IProps {
   className?: string;

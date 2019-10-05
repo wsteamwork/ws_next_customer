@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { Grid } from '@material-ui/core';
-import SearchComponent from '.';
 import NavHeaderHome from '@/components/Toolbar/NavHeaderHome';
-import CheckboxList from '../CheckboxList/index';
+import { Grid } from '@material-ui/core';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import SearchComponent from '.';
+import CheckboxList from '../CheckboxList/index';
 const SearchHome = () => {
   const { t } = useTranslation();
 

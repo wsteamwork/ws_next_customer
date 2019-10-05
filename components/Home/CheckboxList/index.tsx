@@ -1,13 +1,13 @@
-import React, { FC, useState, ChangeEvent, useEffect } from 'react';
-import { withStyles, Checkbox, FormGroup, FormControlLabel } from '@material-ui/core';
+import { ReducersType } from '@/store/Redux/Reducers';
+import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import mainColor from '@/styles/constants/colors';
+import { Checkbox, FormControlLabel, FormGroup, withStyles } from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
-import { Dispatch } from 'redux';
-import { connect, useSelector } from 'react-redux';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ReducersType, ReducersList } from '@/store/Redux/Reducers';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { Dispatch } from 'redux';
 
 interface IProps {
   filter: SearchFilterState;

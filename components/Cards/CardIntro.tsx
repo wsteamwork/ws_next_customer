@@ -1,12 +1,13 @@
+import { ICardIntro } from '@/types/Interfaces/Components/Card';
+import { cleanAccents } from '@/utils/mixins';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
-import React, { FunctionComponent, useMemo } from 'react';
-import { Typography, Theme, makeStyles } from '@material-ui/core';
 import classNames from 'classnames';
-import { ICardIntro } from '@/types/Interfaces/Components/Card';
-import { useTranslation } from 'react-i18next'
-import { cleanAccents } from '@/utils/mixins'
+import React, { FunctionComponent, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
+import LazyLoad from 'react-lazyload';
 
 interface IProps extends ICardIntro {
   classes?: any;
@@ -162,12 +163,14 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
             ? classNames(classes.imgGradientLeftBottom, title === '' ? classes.noneBG : '')
             : classNames(classes.imgGradientLeftBottom, classes.imgGradientToTop, title === '' ? classes.noneBG : '')
         }>
-        <img
-          src={imgSrc}
-          alt={imgAlt}
-          style={imgStyles}
-          className={classNames(classes.imgSize, customClasses.image)}
-        />
+        <LazyLoad>
+          <img
+            src={imgSrc}
+            alt={imgAlt}
+            style={imgStyles}
+            className={classNames(classes.imgSize, customClasses.image)}
+          />
+        </LazyLoad>
         <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
             {cookies.get('initLanguage') == 'en' ? cleanAccents(title) : title}

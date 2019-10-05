@@ -1,26 +1,21 @@
-import React, { Fragment } from 'react';
-import { NextPage } from 'next';
-import NextHead from '@/components/NextHead';
-import FooterComponent from '@/components/Layout/FooterComponent';
-import HostBecome from '@/components/Shared/HostBecome';
-import GridContainer from '@/components/Layout/Grid/Container';
-import ListRoom from '@/components/ListRoom';
-import MetroGridImage from '@/components/Layout/MetroGridImage';
-import BlogContainer from '@/components/Layout/BlogContainer';
-import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
-import RoomCard from '@/components/RoomCard';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { useSelector } from 'react-redux';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
-// import CollectionViews from '@/components/Home/CollectionRooms/CollectionViews';
-// import FooterMobile from '@/components/Layout/FooterMobile';
-import { useTranslation } from 'react-i18next';
+import BlogContainer from '@/components/Layout/BlogContainer';
+import FooterComponent from '@/components/Layout/FooterComponent';
+import GridContainer from '@/components/Layout/Grid/Container';
+import MetroGridImage from '@/components/Layout/MetroGridImage';
+import ListRoom from '@/components/ListRoom';
+import NextHead from '@/components/NextHead';
+import RoomCard from '@/components/RoomCard';
+// import HostBecome from '@/components/Shared/HostBecome';
+import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
-// import { Hidden } from '@material-ui/core';
-// import SeaView from '@/components/Home/CollectionRooms/SeaView';
-// import CityView from '@/components/Home/CollectionRooms/CityView';
+import { NextPage } from 'next';
+import React, { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
@@ -50,11 +45,8 @@ const Home: NextPage = () => {
             title={t('home:editorChoice')}
             render={renderRoom}></ListRoom>
 
-          {/* <SeaView /> */}
-          {/* <CityView /> */}
-          {/* <CollectionViews /> */}
         </GridContainer>
-        <HostBecome />
+        {/* <HostBecome /> */}
 
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />

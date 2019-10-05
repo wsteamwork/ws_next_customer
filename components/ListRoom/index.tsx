@@ -1,16 +1,15 @@
+import { Grid, Theme, Typography } from '@material-ui/core';
+import { GridSpacing } from '@material-ui/core/Grid';
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { Fragment, useMemo, ReactNode } from 'react';
-import { Theme, Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import _ from 'lodash';
-import { makeStyles } from '@material-ui/styles';
+import React, { Fragment, ReactNode, useMemo } from 'react';
+import Swiper from 'react-id-swiper';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import { SwiperOptions } from 'swiper';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
-import { GridSpacing } from '@material-ui/core/Grid';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import Swiper from 'react-id-swiper';
-import { SwiperOptions } from 'swiper';
 
 interface Iprops<T> extends Partial<SwiperOptions> {
   roomData: T[];
@@ -115,11 +114,11 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
           usingSlider ? (
             <Swiper {...setting} {...propsSwiper}>{renderRooms}</Swiper>
           ) : (
-            <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
-          )
+              <Fragment>{usingInMap ? renderMapRooms : renderRooms}</Fragment>
+            )
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Fragment>
   );
