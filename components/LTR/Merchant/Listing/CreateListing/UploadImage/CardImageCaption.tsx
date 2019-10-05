@@ -82,8 +82,6 @@ const CardImageCaption: FC<IProps> = (props) => {
           {values.map((img, index) => (
             <Grid item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
               <Card className={classes.card}>
-                {/* <img src={IMAGE_STORAGE_LG + img.name + '.jpg'} className="media" alt={`Ảnh đại diện`} /> */}
-                {/* image="https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large" */}
                 <CardMedia
                   className={classes.media}
                   image={IMAGE_STORAGE_LG + img.name}

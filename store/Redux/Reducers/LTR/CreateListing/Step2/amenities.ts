@@ -15,6 +15,7 @@ export type AmenitiesReducerState = {
   entertainment: number[];
   facilities: number[];
   others: number[];
+  outdoors: number[];
   count_amenities: number;
   error: boolean;
 };
@@ -29,6 +30,7 @@ export const init: AmenitiesReducerState = {
   bathrooms: [],
   entertainment: [],
   facilities: [],
+  outdoors: [],
   others: [],
   count_amenities: 0,
   error: false
@@ -44,6 +46,7 @@ export type AmenitiesReducerAction =
   | { type: 'setBathRooms'; payload: number[] }
   | { type: 'setEntertainment'; payload: number[] }
   | { type: 'setFacilities'; payload: number[] }
+  | { type: 'setOutdoors'; payload: number[] }
   | { type: 'setOthers'; payload: number[] }
   | { type: 'setCountAmenities'; payload: number }
   | { type: 'setError'; payload: boolean };
@@ -71,6 +74,8 @@ export const amenitiesReducer: Reducer<AmenitiesReducerState, AmenitiesReducerAc
       return updateObject(state, { entertainment: action.payload });
     case 'setFacilities':
       return updateObject(state, { facilities: action.payload });
+    case 'setOutdoors':
+      return updateObject(state, { outdoors: action.payload });
     case 'setOthers':
       return updateObject(state, { others: action.payload });
     case 'setCountAmenities':
@@ -98,6 +103,7 @@ export const getDataAmenities = async (
       ? amenities.entertainment.map((item) => item.id)
       : [];
     const facilities = amenities.facilities ? amenities.facilities.map((item) => item.id) : [];
+    const outdoors = amenities.outdoors ? amenities.outdoors.map((item) => item.id) : [];
     const others = amenities.others ? amenities.others.map((item) => item.id) : [];
     const count_amenities =
       livingrooms.length +
@@ -106,6 +112,7 @@ export const getDataAmenities = async (
       bathrooms.length +
       entertainment.length +
       facilities.length +
+      outdoors.length +
       others.length;
 
     dispatch({ type: 'setRoomId', payload: room_id });
@@ -115,6 +122,7 @@ export const getDataAmenities = async (
     dispatch({ type: 'setBathRooms', payload: bathrooms });
     dispatch({ type: 'setEntertainment', payload: entertainment });
     dispatch({ type: 'setFacilities', payload: facilities });
+    dispatch({ type: 'setOutdoors', payload: outdoors });
     dispatch({ type: 'setOthers', payload: others });
     dispatch({ type: 'setCountAmenities', payload: count_amenities });
 

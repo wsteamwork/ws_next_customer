@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { useTranslation } from 'react-i18next';
+import { axios } from '@/utils/axiosInstance';
 interface IProps {
   classes?: any;
   label?: string;
@@ -24,6 +25,7 @@ interface IProps {
   typeUpload: { type: any };
   maxImage?: number;
   type_txt?: string;
+  typeImage?: number;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -40,7 +42,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const UppyImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
-  const { label, subLabel, initImages, height, maxImage, typeUpload, type_txt } = props;
+  const { label, subLabel, initImages, height, maxImage, typeUpload, type_txt, typeImage } = props;
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   useEffect(() => {
@@ -57,25 +59,28 @@ const UppyImage: FC<IProps> = (props) => {
     } else {
       dispatch_detail({ type: 'setDisableNext', payload: false });
     }
-    initImage(initImages);
   }, [initImages]);
-
+  
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
       let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
-      // let img =
-      //   'https://a0.muscache.com/im/pictures/d1daeb37-7f48-4f49-941a-34f840c2db94.jpg?aki_policy=x_large';
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
           uppy.addFile({
-            name: arrImg[i].name + '.jpg',
+            name: arrImg[i].name,
             data: blob
           });
         })
         .catch((err) => console.error(err));
-    }
+        uppy.getFiles().forEach((file) => {
+          uppy.setFileState(file.id, {
+            progress: { uploadComplete: true, uploadStarted: true }
+          });
+        });
+      }
   };
+  initImage(initImages);
   const uppy = Uppy({
     id: 'uppy',
     autoProceed: false,
@@ -122,7 +127,7 @@ const UppyImage: FC<IProps> = (props) => {
       maxFileSize: 250000000,
       minNumberOfFiles: 1,
       maxNumberOfFiles: maxImage ? maxImage : 20,
-      allowedFileTypes: ['image/*']
+      allowedFileTypes:  ['image/*', '.heic', '.heif']
     },
     onBeforeFileAdded: (currentFile, files) => {
       if (currentFile.meta) {
@@ -136,8 +141,6 @@ const UppyImage: FC<IProps> = (props) => {
           timestamp +
           '_' +
           currentFile.name;
-        let pos = newName.lastIndexOf('.');
-        newName = newName.substr(0, pos < 0 ? newName.length : pos) + '.jpg';
         let modifiedFile = Object.assign({}, currentFile, { name: newName });
         return modifiedFile;
       }
@@ -146,13 +149,14 @@ const UppyImage: FC<IProps> = (props) => {
   })
     .use(XHRUpload, {
       endpoint: 'http://ws-api.nhat/merchant-api/upload-image/',
-      fieldname: 'file',
-      limit: 20
+      fieldName: 'file[]',
+      limit: 20,
+      formData: true
     })
     .on('complete', (result) => {
-      let imgs = [];
+      let imgs = initImages;
       result.successful.map((res) => {
-        let img = { name: res.meta.name, caption: '', type: 1 };
+        let img = { name: res.meta.name, caption: '', type: typeImage };
         imgs = [...imgs, img];
       });
       if (type_txt) {
@@ -162,12 +166,12 @@ const UppyImage: FC<IProps> = (props) => {
       }
       uppy.getFiles().forEach((file) => {
         uppy.setFileState(file.id, {
-          progress: { uploadComplete: false, uploadStarted: false }
+          progress: { uploadComplete: true, uploadStarted: true }
         });
       });
     })
     .on('file-removed', (file) => {
-      let index = initImages.findIndex((i) => i.name + '.jpg' === file.name);
+      let index = initImages.findIndex((i) => i.name === file.name);
       if (index > -1) {
         initImages.splice(index, 1);
         if (type_txt) {

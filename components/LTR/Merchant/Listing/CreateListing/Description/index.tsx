@@ -157,6 +157,7 @@ const Description: FC<IProps> = (props) => {
                         : ''
                     }
                   }}
+                  autoFocus={true}
                   inputProps={{ maxLength: 100 }}
                   handleChange={handleChange}
                   handleBlur={(e) => {

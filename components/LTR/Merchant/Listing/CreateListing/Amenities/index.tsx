@@ -28,6 +28,7 @@ const Amenities: FC<IProps> = (props) => {
   //   (state) => state.amenities.livingrooms
   // );
   // const bedroomsClick = useSelector<ReducersList, number[]>((state) => state.amenities.bedrooms);
+  const outdoorsClick = useSelector<ReducersList, number[]>((state) => state.amenities.outdoors);
   const facilitiesClick = useSelector<ReducersList, number[]>(
     (state) => state.amenities.facilities
   );
@@ -110,7 +111,7 @@ const Amenities: FC<IProps> = (props) => {
           ) : (
             ''
           )}
-          {/* {amenities['outdoors'] ? (
+          {amenities['outdoors'] ? (
             <CardAmenities
               label={amenities['outdoors'][0].type_txt}
               sub_label={t('details:amenities:subLabelOutdoors')}
@@ -120,7 +121,7 @@ const Amenities: FC<IProps> = (props) => {
             />
           ) : (
             ''
-          )} */}
+          )}
           {amenities['others'] ? (
             <CardAmenities
               label={amenities['others'][0].type_txt}

@@ -55,6 +55,7 @@ const UploadImage: FC<IProps> = (props) => {
                 subLabel={t('details:images:subLabelAvatar')}
                 height={350}
                 maxImage={1}
+                typeImage={1}
                 typeUpload={{ type: 'setAvatarImage' }}
                 initImages={avatar_image.images.length ? avatar_image.images : []}
               />
@@ -65,6 +66,7 @@ const UploadImage: FC<IProps> = (props) => {
                 subLabel={t('details:images:subLabelCover')}
                 height={350}
                 maxImage={1}
+                typeImage={4}
                 typeUpload={{ type: 'setCoverImage' }}
                 initImages={cover_photo.images.length ? cover_photo.images : []}
               />
@@ -74,6 +76,7 @@ const UploadImage: FC<IProps> = (props) => {
                 label={t('details:images:labelLivingRooms')}
                 subLabel={t('details:images:subLabelLivingRooms')}
                 typeUpload={{ type: 'setLivingRoomImage' }}
+                typeImage={7}
                 initImages={livingrooms.images.length ? livingrooms.images : []}
               />
             </Grid>
@@ -85,6 +88,7 @@ const UploadImage: FC<IProps> = (props) => {
                   subLabel={t('details:images:subLabelBedRooms')}
                   type_txt={`bedroom_${i + 1}`}
                   typeUpload={{ type: 'setBedRoomImage' }}
+                  typeImage={5}
                   initImages={
                     bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images ? bedrooms[`bedroom_${i + 1}`].images : []
                   }
@@ -99,6 +103,7 @@ const UploadImage: FC<IProps> = (props) => {
                   subLabel={t('details:images:subLabelBathRooms')}
                   type_txt={`bathroom_${i + 1}`}
                   typeUpload={{ type: 'setBathRoomImage' }}
+                  typeImage={6}
                   initImages={
                     bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images ? bathrooms[`bathroom_${i + 1}`].images : []
                   }
@@ -109,6 +114,7 @@ const UploadImage: FC<IProps> = (props) => {
               <UppyImage
                 label={t('details:images:labelKitchens')}
                 subLabel={t('details:images:subLabelKitchens')}
+                typeImage={8}
                 typeUpload={{ type: 'setKitchensImage' }}
                 initImages={kitchens.images.length ? kitchens.images : []}
               />
@@ -118,6 +124,7 @@ const UploadImage: FC<IProps> = (props) => {
                 label={t('details:images:labelFurnitures')}
                 subLabel={t('details:images:subLabelFurnitures')}
                 typeUpload={{ type: 'setFurnituresImage' }}
+                typeImage={10}
                 initImages={furnitures.images.length ? furnitures.images : []}
               />
             </Grid>
@@ -125,6 +132,7 @@ const UploadImage: FC<IProps> = (props) => {
               <UppyImage
                 label={t('details:images:labelFurnitures')}
                 subLabel={t('details:images:subLabelOutdoors')}
+                typeImage={9}
                 typeUpload={{ type: 'setOutdoorsImage' }}
                 initImages={outdoors.images.length ? outdoors.images : []}
               />
