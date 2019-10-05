@@ -10,7 +10,7 @@ interface IProps {
   activeStep: number;
   handleBack: () => void;
   steps: Array<string>;
-  handleNext: () => void;
+  handleNext: () => Promise<any>;
   disableNext?: boolean;
 }
 
@@ -33,7 +33,7 @@ const BottomMdNavigation: FC<IProps> = (props) => {
             </Button>
           </Grid>
           <Grid className="next-button">
-            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+            <ButtonGlobal onClick={handleNext} disabled={disableNext} type="submit">
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           </Grid>

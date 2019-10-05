@@ -8,7 +8,7 @@
     width: 100%;
     margin-top: 0px;
     border-bottom: 1px solid #7676762e;
-    z-index: 2;
+    z-index: 9999;
     padding: 0px;
     background: rgb(255, 255, 255);
     .listing-header-wrapper {
@@ -65,12 +65,13 @@
       left: 0;
       bottom: 0;
       padding: 20px;
+      z-index: 9999;
     }
   }
 
   .bottom-navigation {
     position: fixed;
-    z-index: 111;
+    z-index: 9999;
     left: 0px;
     bottom: 0px;
     width: 100%;

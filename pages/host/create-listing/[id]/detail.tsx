@@ -4,62 +4,84 @@ import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadI
 import ImageCaption from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
+
+import React, { Fragment, useEffect, useContext } from 'react';
 import {
-  getListingDetail,
-  ListingDetailContext,
-  ListingDetailReducer,
-  ListingDetailStateInit
-} from '@/store/Context/LTR/ListingDetailContext';
-import React, { Fragment, useEffect, useReducer } from 'react';
+  handleDetailsListing,
+  getListingDetails,
+  DetailsReducerAction
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Dispatch } from 'redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import { useTranslation } from 'react-i18next';
 
 const RoomCreateListing = () => {
-  const [state, dispatch] = useReducer(ListingDetailReducer, ListingDetailStateInit);
-  console.log(state.listing);
-  const id = 7;
+  const { t } = useTranslation();
+  const dispatch = useDispatch<Dispatch<DetailsReducerAction>>();
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const listing = useSelector<ReducersList, any>((state) => state.details.listing);
+  const current_step = useSelector<ReducersList, string>((state) => state.details.step);
+  const disable_next = useSelector<ReducersList, boolean>((state) => state.details.disable_next);
+
+  const data_description = {
+    name: useSelector<ReducersList, string>((state) => state.description.name),
+    description: useSelector<ReducersList, string>((state) => state.description.description),
+    space: useSelector<ReducersList, string>((state) => state.description.space),
+    rules: useSelector<ReducersList, string>((state) => state.description.rules)
+  };
+
+  const data_amenities = {
+    facilities: useSelector<ReducersList, number[]>((state) => state.amenities.facilities),
+    kitchens: useSelector<ReducersList, number[]>((state) => state.amenities.kitchens),
+    bathrooms: useSelector<ReducersList, number[]>((state) => state.amenities.bathrooms),
+    entertainment: useSelector<ReducersList, number[]>((state) => state.amenities.entertainment),
+    others: useSelector<ReducersList, number[]>((state) => state.amenities.others)
+  };
+  const data_images = {
+    avatar_image: useSelector<ReducersList, ImagesRes>((state) => state.images.avatar_image),
+    cover_photo: useSelector<ReducersList, ImagesRes>((state) => state.images.cover_photo),
+    livingrooms: useSelector<ReducersList, ImagesRes>((state) => state.images.livingrooms),
+    bedrooms: useSelector<ReducersList, any>((state) => state.images.bedrooms),
+    kitchens: useSelector<ReducersList, ImagesRes>((state) => state.images.kitchens),
+    bathrooms: useSelector<ReducersList, any>((state) => state.images.bathrooms),
+    outdoors: useSelector<ReducersList, ImagesRes>((state) => state.images.outdoors),
+    furnitures: useSelector<ReducersList, ImagesRes>((state) => state.images.furnitures)
+  };
+  const data = (step) => {
+    switch (step) {
+      case 'tab1':
+        return data_description;
+      case 'tab2':
+        return data_amenities;
+      case 'tab3':
+        return data_images;
+      default:
+        return data_description;
+    }
+  };
+
   useEffect(() => {
-    getListingDetail(id, dispatch);
+    if (!listing) {
+      getListingDetails(id, dispatch);
+    }
   }, []);
   const getSteps = () => {
-    return ['Mô tả căn hộ', 'Tiện nghi', 'Đăng ảnh', 'Mô tả ảnh'];
+    return [t('details:tab1'), t('details:tab2'), t('details:tab3'), t('details:tab4')];
   };
-  const getStepContent = (step, steps, setActiveStep, nextLink) => {
+  const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return (
-          <Description
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
-          />
-        );
+        return <Description />;
       case 1:
-        return (
-          <Amenities
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
-          />
-        );
+        return <Amenities />;
       case 2:
-        return (
-          <UploadImage
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
-          />
-        );
+        return <UploadImage />;
       case 3:
-        return (
-          <ImageCaption
-            steps={steps}
-            activeStep={step}
-            setActiveStep={setActiveStep}
-            nextLink={nextLink}
-          />
-        );
+        return <ImageCaption />;
       default:
         return 'Unknown step';
     }
@@ -73,14 +95,14 @@ const RoomCreateListing = () => {
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
 
-      <ListingDetailContext.Provider value={{ state, dispatch }}>
-        <Layout
-          title="Bước 2: Thông tin chi tiết"
-          getSteps={getSteps}
-          getStepContent={getStepContent}
-          nextLink={`/host/create-listing/${id}/price`}
-        />
-      </ListingDetailContext.Provider>
+      <Layout
+        title={t('details:titleStep')}
+        getSteps={getSteps}
+        getStepContent={getStepContent}
+        nextLink={`/host/create-listing/${id}/price`}
+        disableNext={disable_next}
+        handleAPI={() => handleDetailsListing(listing.room_id, current_step, data(current_step))}
+      />
     </Fragment>
   );
 };

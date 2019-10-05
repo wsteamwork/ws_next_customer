@@ -1,3 +1,4 @@
+import { AmenitiesReducerAction, amenitiesReducer } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
 import {
   CompareRoomsActions,
@@ -33,6 +34,9 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import { AmenitiesReducerState } from './LTR/CreateListing/Step2/amenities';
+import { ImageReducerAction, ImageReducerState, imageReducer } from './LTR/CreateListing/Step2/images';
+import { DetailsReducerAction, DetailsReducerState, detailsReducer } from './LTR/CreateListing/Step2/details';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -47,6 +51,9 @@ export type ReducersType = {
   promotion: Reducer<PomotionState, PomotionActions>;
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
   description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
+  amenities: Reducer<AmenitiesReducerState, AmenitiesReducerAction>;
+  images: Reducer<ImageReducerState, ImageReducerAction>;
+  details: Reducer<DetailsReducerState, DetailsReducerAction>;
   createListing: Reducer<CreateListingState, CreateListingActions>;
 };
 
@@ -63,6 +70,9 @@ export type ReducersList = {
   promotion: PomotionState;
   notifications: NotificationReducerState;
   description: DescriptionReducerState;
+  amenities: AmenitiesReducerState;
+  images: ImageReducerState;
+  details: DetailsReducerState;
   createListing: CreateListingState;
 };
 
@@ -79,6 +89,9 @@ export type ReducresActions =
   | CompareRoomsActions
   | PomotionActions
   | DescriptionReducerAction
+  | AmenitiesReducerAction
+  | ImageReducerAction
+  | DetailsReducerAction
   | CreateListingActions;
 
 const reducers: ReducersType = {
@@ -94,6 +107,9 @@ const reducers: ReducersType = {
   notifications: notificationReducer,
   compareRooms: ComparisonListReducer,
   description: descriptionReducer,
+  amenities: amenitiesReducer,
+  images: imageReducer,
+  details: detailsReducer,
   createListing: createListingReducer
 };
 

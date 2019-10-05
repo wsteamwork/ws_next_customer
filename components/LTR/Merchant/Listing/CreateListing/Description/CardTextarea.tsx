@@ -26,6 +26,7 @@ interface IProps {
   InputProps?: any;
   inputProps?: any;
   placeholder?: any;
+  autoFocus?: boolean;
   handleChange?: (event: any) => void;
   handleBlur?: (event: any) => void;
   error?: any;
@@ -60,6 +61,7 @@ const CardTextarea: FC<IProps> = (props) => {
     InputProps,
     inputProps,
     placeholder,
+    autoFocus,
     handleChange,
     handleBlur,
   } = props;
@@ -103,6 +105,7 @@ const CardTextarea: FC<IProps> = (props) => {
               variant="outlined"
               multiline={multiline}
               placeholder={placeholder}
+              autoFocus={autoFocus}
               InputProps={InputProps}
               inputProps={inputProps}
             />

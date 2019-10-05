@@ -1,15 +1,13 @@
-import React, { Fragment, useReducer } from 'react';
-import NextHead from '@/components/NextHead';
-import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
-import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import Basic from '@/components/LTR/Merchant/Listing/CreateListing/Basic';
-import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
+import Bathroom from '@/components/LTR/Merchant/Listing/CreateListing/Bathroom';
 import Location from '@/components/LTR/Merchant/Listing/CreateListing/Location';
-import {
-  CreateListingContext,
-  CreateListingInit,
-  CreateListingReducer
-} from '@/store/Context/LTR/CreateListingContext';
+import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
+import Layout from '@/components/LTR/Merchant/Listing/Layout';
+import NextHead from '@/components/NextHead';
+import { CreateListingInit, CreateListingReducer } from '@/store/Context/LTR/CreateListingContext';
+import React, { Fragment, useReducer } from 'react';
+import { handleCreateRoom } from '@/store/Context/LTR/CreateListingContext';
+
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(CreateListingReducer, CreateListingInit);
 
@@ -44,7 +42,7 @@ const RoomCreateListing = () => {
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={'/host/create-listing/123/detail'}
+        nextLink={'/host/create-listing/18/detail'}
       />
       {/* </CreateListingContext.Provider> */}
     </Fragment>
