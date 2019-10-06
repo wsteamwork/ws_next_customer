@@ -1,6 +1,6 @@
 import React, { FC, useState, Dispatch, useEffect, ChangeEvent } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
@@ -89,36 +89,36 @@ const Basic: FC<IProps> = (props) => {
           handleBlur,
           isSubmitting
         }: FormikProps<FormValues>) => (
-            <form onSubmit={handleSubmit}>
-              {/* onSubmit={handleSubmit} */}
-              <CheckboxCustom />
+          <form onSubmit={handleSubmit}>
+            {/* onSubmit={handleSubmit} */}
+            <CheckboxCustom />
 
-              <Grid style={{ width: 'calc(50% - 8px)' }}>
-                {/* <h3>Loại Căn hộ: </h3> */}
-                <Select
-                  name="accommodation_type"
-                  // onChange={handleChangeSelect}
-                  onBlur={handleBlur}
-                  value={roomType}
-                  title="Loại Căn hộ: "
-                  options={roomTypesData}
-                  callBackOnChange={callBackOnChange}
-                />
-              </Grid>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    disableRipple
-                    classes={{ checked: classes.checked }}
-                    checked={stayWithHost}
-                    onChange={handleChangeCheckBox}
-                    value="stayWithHost"
-                  />
-                }
-                label="Bạn có đang ở trong căn hộ này không?"
+            <Grid style={{ width: 'calc(50% - 8px)' }}>
+              {/* <h3>Loại Căn hộ: </h3> */}
+              <SelectCustom
+                name="accommodation_type"
+                // onChange={handleChangeSelect}
+                onBlur={handleBlur}
+                value={roomType}
+                title="Loại Căn hộ: "
+                options={roomTypesData}
+                callBackOnChange={callBackOnChange}
               />
-            </form>
-          )}
+            </Grid>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  disableRipple
+                  classes={{ checked: classes.checked }}
+                  checked={stayWithHost}
+                  onChange={handleChangeCheckBox}
+                  value="stayWithHost"
+                />
+              }
+              label="Bạn có đang ở trong căn hộ này không?"
+            />
+          </form>
+        )}
       />
     </div>
   );

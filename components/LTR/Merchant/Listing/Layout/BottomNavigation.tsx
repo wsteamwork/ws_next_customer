@@ -13,10 +13,28 @@ interface IProps {
   setActiveStep: Dispatch<SetStateAction<number>>;
   disableNext?: boolean;
   handleAPI?: () => any;
+  submitEachStep?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, disableNext, handleAPI } = props;
+  const {
+    steps,
+    activeStep,
+    nextLink,
+    setActiveStep,
+    disableNext,
+    handleAPI,
+    submitEachStep
+  } = props;
+
+  const handleFinish = async () => {
+    try {
+      const result = await handleAPI();
+      if (result) {
+        nextStep();
+      }
+    } catch (error) {}
+  };
 
   const nextStep = () => {
     if (activeStep === steps.length - 1) {
@@ -27,9 +45,15 @@ const BottomNavigation: FC<IProps> = (props) => {
   };
 
   const handleNext = async () => {
-    nextStep();
     try {
-
+      if (!submitEachStep) {
+        const result = await handleAPI();
+        if (result) {
+          nextStep();
+        }
+      } else {
+        nextStep();
+      }
     } catch (error) {}
   };
 
@@ -61,9 +85,15 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ButtonGlobal>
+            activeStep === steps.length - 1 ? (
+              <ButtonGlobal onClick={handleFinish} disabled={disableNext}>
+                Finish
+              </ButtonGlobal>
+            ) : (
+              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                Next
+              </ButtonGlobal>
+            )
           }
           backButton={
             <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>

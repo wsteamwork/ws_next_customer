@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, Dispatch } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Select from '@/components/ReusableComponents/SelectCustom';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,12 +10,19 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { FormGroup, Button, Collapse } from '@material-ui/core';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { ReducersList } from '@/store/Redux/Reducers';
 interface IProps {
   roomNumber?: number;
 }
 
 const BedRoom: FC<IProps> = (props) => {
   const { roomNumber } = props;
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [guest, setGuest] = useState<number>(0);
   const [maxGuest, setMaxGuest] = useState<number>(0);
   const [bed, setBed] = useState<number>(0);
@@ -23,11 +30,25 @@ const BedRoom: FC<IProps> = (props) => {
   const [double, setDouble] = useState<number>(0);
   const [king, setKing] = useState<number>(0);
   const [queen, setQueen] = useState<number>(0);
-
+  const { bedRooms } = useSelector<ReducersList, CreateListingState>(
+    (state) => state.createListing
+  );
   const totalBeds = [single, double, king, bed].reduce((a, b) => a + b, 0);
 
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
   const handleToggleAddBedRoom = () => {
+    if (isAddBedRoom) {
+      let bedroomsTemp: any[] = bedRooms.slice();
+      bedroomsTemp.find((value, index) => {
+        console.log(value);
+        
+      });
+    }
+
+    // dispatch({
+    //   type: 'SET_BEDROOMS',
+    //   payload: maxGuest
+    // });
     setIsAddBedRoom(!isAddBedRoom);
   };
 

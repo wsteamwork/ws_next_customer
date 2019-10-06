@@ -9,7 +9,7 @@ import {
 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-interface IProps { }
+interface IProps {}
 
 interface Coordinate {
   lat: number;
@@ -24,12 +24,29 @@ interface GoogleMapProps {
 
 const Location: FC<IProps> = (props) => {
   const [address, setAddress] = useState<string>('');
+  const [building, setBuilding] = useState<string>('');
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   // const { latitude, longitude } = useSelector<ReducersList, CreateListingState>(
   //   (state) => state.createListing
   // );
   const [coordinate, setCoordinate] = useState<Coordinate>(null);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
+
+  useEffect(() => {
+    console.log(address);
+    dispatch({
+      type: 'SET_COORDINATE',
+      payload: coordinate
+    });
+    dispatch({
+      type: 'SET_ADDRESS',
+      payload: address
+    });
+    dispatch({
+      type: 'SET_BUILDING',
+      payload: building
+    });
+  }, [coordinate, address, building]);
 
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
@@ -57,19 +74,19 @@ const Location: FC<IProps> = (props) => {
     </GoogleMap>
   ));
 
-  useEffect(() => {
-    console.log(coordinate)
-  }, [coordinate])
-
-
   const handleChange = (event) => {
-    setAddress(event.target.value);
+    setBuilding(event.target.value);
   };
 
+  // const handleBlur = (value) => {
+  //   console.log(value);
+  //   setAddress(value);
+  // };
+
   const onSuggestSelect = (place: Suggest) => {
-    console.log('suggest selected');
     const {
-      location: { lat, lng }
+      location: { lat, lng },
+      label
     } = place;
     setCoordinate({
       lat,
@@ -80,6 +97,8 @@ const Location: FC<IProps> = (props) => {
       lat,
       lng
     });
+
+    setAddress(label);
   };
 
   return (
@@ -90,33 +109,7 @@ const Location: FC<IProps> = (props) => {
           Khách sẽ chỉ biết được địa chỉ chính xác sau khi đặt phòng thành công
         </Grid>
       </Grid>
-      <Grid style={{ width: 'calc(80% - 8px)' }}>
-        <FormControl variant="outlined">
-          <OutlinedInput
-            fullWidth
-            id="component-outlined"
-            value={address}
-            onChange={handleChange}
-            labelWidth={0}
-          />
-        </FormControl>
-      </Grid>
-      <Grid style={{ width: 'calc(80% - 8px)' }}>
-        <FormControl variant="outlined">
-          <OutlinedInput
-            fullWidth
-            id="component-outlined"
-            value={address}
-            onChange={handleChange}
-            labelWidth={0}
-          />
-        </FormControl>
-      </Grid>
-      <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>
-      <h3 className="createListing-subTitle">
-        Nếu cần thiết, bạn có thể thay đổi vị trí cho chính xác. Chỉ những khách hàng xác nhận đặt
-        phòng mới có thể thấy được
-      </h3>
+      <h2>Địa chỉ</h2>
       <Geosuggest
         country="vn"
         placeholder="Start typing!"
@@ -125,6 +118,51 @@ const Location: FC<IProps> = (props) => {
         radius={20}
         autoActivateFirstSuggest
       />
+      <h2>Toà nhà (Tuỳ chọn)</h2>
+      <Grid style={{ width: 'calc(80% - 8px)' }}>
+        <FormControl variant="outlined">
+          <OutlinedInput
+            fullWidth
+            placeholder="Số căn hộ + Mã chung cư"
+            id="component-outlined"
+            value={building}
+            onChange={handleChange}
+            labelWidth={0}
+          />
+        </FormControl>
+      </Grid>
+      <Grid style={{ display: 'flex' }}>
+        <Grid>
+          <h3>Thành phố</h3>
+          <FormControl variant="outlined">
+            <OutlinedInput
+              fullWidth
+              id="component-outlined"
+              // value={a}
+              // onChange={handleChange}
+              labelWidth={0}
+            />
+          </FormControl>
+        </Grid>
+        <Grid>
+          <h3>Quận Huyện</h3>
+          <FormControl variant="outlined">
+            <OutlinedInput
+              fullWidth
+              id="component-outlined"
+              // value={address}
+              // onChange={handleChange}
+              labelWidth={0}
+            />
+          </FormControl>
+        </Grid>
+      </Grid>
+      <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>
+      <h3 className="createListing-subTitle">
+        Nếu cần thiết, bạn có thể thay đổi vị trí cho chính xác. Chỉ những khách hàng xác nhận đặt
+        phòng mới có thể thấy được
+      </h3>
+
       <div></div>
       {defaultCenter && (
         <MapWithAMarker
@@ -135,58 +173,6 @@ const Location: FC<IProps> = (props) => {
           onClickMap={onClickMap}
         />
       )}
-
-      {/* {latitude && longitude && (
-        <GoogleMap
-          id="marker-example"
-          mapContainerStyle={{
-            height: '400px',
-            width: '100%'
-          }}
-          zoom={15}
-          center={{
-            lat: parseFloat(latitude),
-            lng: parseFloat(longitude)
-          }}
-          onClick={mapOnClick}
-          options={{ draggable: false }}>
-          <Circle
-            // optional
-            onLoad={(circle) => {
-              console.log('Circle onLoad circle: ', circle);
-            }}
-            // optional
-            onUnmount={(circle) => {
-              console.log('Circle onUnmount circle: ', circle);
-            }}
-            // required
-            center={{
-              lat: parseFloat(latitude),
-              lng: parseFloat(longitude)
-            }}
-            radius={400}
-            // required
-            options={{
-              strokeColor: '#FCAB70',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#FDBF68',
-              fillOpacity: 0.3
-            }}
-          />
-          <Marker
-            onLoad={(marker) => {
-              console.log('marker: ', marker);
-            }}
-            onDragEnd={onDragMarkerEnd}
-            draggable
-            position={{
-              lat: parseFloat(latitude),
-              lng: parseFloat(longitude)
-            }}
-          />
-        </GoogleMap> */}
-      {/* )} */}
     </div>
   );
 };

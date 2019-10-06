@@ -1,5 +1,12 @@
 import { updateObject } from '@/store/Context/utility';
 import { Dispatch, Reducer } from 'redux';
+import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
+import { axios_merchant } from '@/utils/axiosInstance';
+
+interface Coordinate {
+  lat: number;
+  lng: number;
+}
 
 export type CreateListingState = {
   readonly leaseType: number;
@@ -8,12 +15,13 @@ export type CreateListingState = {
   readonly guestRecommendation: number;
   readonly maxGuest: number;
   readonly bedRoomsNumber: number;
+  readonly bathroomNumber: number;
+  readonly bedRooms: BedRoomReq[];
   readonly address: string;
   readonly building: string;
   readonly city_id: number;
   readonly district_id: number;
-  readonly latitude: string;
-  readonly longitude: string;
+  readonly coordinate: Coordinate;
 };
 
 export type CreateListingActions =
@@ -23,26 +31,28 @@ export type CreateListingActions =
   | { type: 'SET_GUEST_RECOMMENDATION'; payload: number }
   | { type: 'SET_MAX_GUEST'; payload: number }
   | { type: 'SET_BEDROOMS_NUMBER'; payload: number }
+  | { type: 'SET_BEDROOMS'; payload: BedRoomReq[] }
+  | { type: 'SET_BATHROOM_NUMBER'; payload: number }
   | { type: 'SET_ADDRESS'; payload: string }
   | { type: 'SET_BUILDING'; payload: string }
   | { type: 'SET_CITY_ID'; payload: number }
   | { type: 'SET_DISTRICT_ID'; payload: number }
-  | { type: 'SET_LATITUDE'; payload: string }
-  | { type: 'SET_LONGITUDE'; payload: string };
+  | { type: 'SET_COORDINATE'; payload: Coordinate };
 
 const init: CreateListingState = {
   leaseType: null,
   accommodationType: null,
   stayWithHost: null,
+  bedRooms: [],
   guestRecommendation: null,
   maxGuest: null,
   bedRoomsNumber: 1,
+  bathroomNumber: 0,
   address: '',
   building: '',
   city_id: null,
   district_id: null,
-  latitude: '',
-  longitude: ''
+  coordinate: null
 };
 
 export const createListingReducer: Reducer<CreateListingState, CreateListingActions> = (
@@ -62,6 +72,10 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { maxGuest: action.payload });
     case 'SET_BEDROOMS_NUMBER':
       return updateObject<CreateListingState>(state, { bedRoomsNumber: action.payload });
+    case 'SET_BEDROOMS':
+      return updateObject<CreateListingState>(state, { bedRooms: action.payload });
+    case 'SET_BATHROOM_NUMBER':
+      return updateObject<CreateListingState>(state, { bathroomNumber: action.payload });
     case 'SET_ADDRESS':
       return updateObject<CreateListingState>(state, { address: action.payload });
     case 'SET_BUILDING':
@@ -70,17 +84,114 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { city_id: action.payload });
     case 'SET_DISTRICT_ID':
       return updateObject<CreateListingState>(state, { district_id: action.payload });
-    case 'SET_LATITUDE':
-      return updateObject<CreateListingState>(state, { latitude: action.payload });
-    case 'SET_LONGITUDE':
-      return updateObject<CreateListingState>(state, { longitude: action.payload });
+    case 'SET_COORDINATE':
+      return updateObject<CreateListingState>(state, { coordinate: action.payload });
+
     default:
       return state;
   }
 };
 
-const createFirstTab = async (data: any, dispatch: Dispatch<CreateListingActions>) => {
-  dispatch({ type: 'SET_LEASE_TYPE', payload: data });
-  dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: data });
-  dispatch({ type: 'SET_STAY_WITH_HOST', payload: data });
+// const submitStepOne = async (data: any, dispatch: Dispatch<CreateListingActions>) => {
+//   dispatch({ type: 'SET_LEASE_TYPE', payload: data });
+//   dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: data });
+//   dispatch({ type: 'SET_STAY_WITH_HOST', payload: data });
+// };
+
+export const handleCreateRoom = async (data: any, token?: string, initLanguage: string = 'vi') => {
+  const headers = token && {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': initLanguage
+    }
+  };
+
+  const body = {
+    step1: {
+      tab1: {
+        lease_type: data.lease_type,
+        accommodation_type: data.accommodation_type,
+        stay_with_host: data.stay_with_host
+      },
+      tab2: {
+        guest: {
+          recommendation: data.guest_recommendation,
+          max_additional_guest: data.max_guest
+        },
+        bedrooms: {
+          bedroom_1: {
+            number_bed: 1,
+            beds: [
+              {
+                number_bed: 1,
+                size: 3
+              },
+              {
+                number_bed: 2,
+                size: 1
+              }
+            ],
+            area: 15
+          },
+          bedroom_2: {
+            beds: [
+              {
+                number_bed: 1,
+                size: 3
+              },
+              {
+                number_bed: 2,
+                size: 1
+              }
+            ],
+            number_bed: 3,
+            area: 15
+          },
+          number_bedroom: data.number_bedrooms
+        }
+      },
+      tab3: {
+        bathrooms: {
+          number_bathroom: data.number_bathroom
+        }
+      },
+      tab4: {
+        address: data.address,
+        building: data.building,
+        city_id: 2,
+        district_id: 102,
+        latitude: parseFloat(data.coordinate.lat),
+        longitude: parseFloat(data.coordinate.long)
+      }
+    }
+  };
+  console.log(body);
+
+  const response = await axios_merchant.post(`long-term/room/create`, body);
+
+  if (response) {
+    console.log(response);
+  }
+  return response;
 };
+
+// export const submitStepOne = async (data: any) => {
+//   const cookies = new Cookies();
+//   const token = cookies.get('_token');
+//   const headers = token && {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     }
+//   };
+//   const response = await axios_merchant.post(
+//     `long-term/room/step2/${tab}/${room_id}`,
+//     {
+//       step2: {
+//         [`${tab}`]: data
+//       }
+//     },
+//     headers
+//   );
+
+//   return response.data;
+// };

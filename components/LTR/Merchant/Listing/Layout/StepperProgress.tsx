@@ -27,7 +27,8 @@ interface IProps {
     nextLink: string
   ) => any;
   nextLink: string;
-  handleAPI?: () => void
+  handleAPI?: () => void;
+  submitEachStep?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({
@@ -87,7 +88,7 @@ const QontoStepIcon = withStyles({
 const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
-  const { getSteps, getStepContent, nextLink, handleAPI } = props;
+  const { getSteps, getStepContent, nextLink, handleAPI, submitEachStep } = props;
   const [activeStep, setActiveStep] = useState<number>(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -136,17 +137,18 @@ const StepperProgress: FC<IProps> = (props) => {
             </Button>
           </div>
         ) : (
-            <div>
-              {getStepContent(activeStep, steps, setActiveStep, nextLink)}
-              <BottomNavigation
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                nextLink={nextLink}
-                handleAPI={handleAPI}
-              />
-            </div>
-          )}
+          <div>
+            {getStepContent(activeStep, steps, setActiveStep, nextLink)}
+            <BottomNavigation
+              submitEachStep={submitEachStep}
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              nextLink={nextLink}
+              handleAPI={handleAPI}
+            />
+          </div>
+        )}
       </Grid>
     </Grid>
   );

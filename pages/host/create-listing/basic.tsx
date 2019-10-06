@@ -6,13 +6,36 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { CreateListingInit, CreateListingReducer } from '@/store/Context/LTR/CreateListingContext';
 import React, { Fragment, useReducer } from 'react';
-import { handleCreateRoom } from '@/store/Context/LTR/CreateListingContext';
+import { handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 const RoomCreateListing = () => {
   const [state, dispatch] = useReducer(CreateListingReducer, CreateListingInit);
 
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
+  };
+
+  const data = {
+    lease_type: useSelector<ReducersList, number>((state) => state.createListing.leaseType),
+    accommodation_type: useSelector<ReducersList, number>(
+      (state) => state.createListing.accommodationType
+    ),
+    stay_with_host: useSelector<ReducersList, number>((state) => state.createListing.stayWithHost),
+    guest_recommendation: useSelector<ReducersList, number>(
+      (state) => state.createListing.guestRecommendation
+    ),
+    max_guest: useSelector<ReducersList, number>((state) => state.createListing.maxGuest),
+    number_bedrooms: useSelector<ReducersList, number>(
+      (state) => state.createListing.bedRoomsNumber
+    ),
+    number_bathroom: useSelector<ReducersList, number>(
+      (state) => state.createListing.bathroomNumber
+    ),
+    address: useSelector<ReducersList, string>((state) => state.createListing.address),
+    building: useSelector<ReducersList, string>((state) => state.createListing.building),
+    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate)
   };
 
   const getStepContent = (step) => {
@@ -43,7 +66,10 @@ const RoomCreateListing = () => {
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={'/host/create-listing/123/detail'}
-        handleAPI={handleCreateRoom}
+        handleAPI={() => {
+          handleCreateRoom(data).then((res) => console.log(res));
+        }}
+        submitEachStep={true}
       />
       {/* </CreateListingContext.Provider> */}
     </Fragment>
