@@ -1,18 +1,15 @@
-import { createStyles, makeStyles, Theme, Grid } from '@material-ui/core';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
+import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import _ from 'lodash';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
-import UppyImage from './UppyImage';
-import { useDispatch, useSelector } from 'react-redux';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  ImageReducerAction,
-  getDataImages
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { Dispatch } from 'redux';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import UppyImage from './UppyImage';
 interface IProps {
   classes?: any;
 }
@@ -130,7 +127,7 @@ const UploadImage: FC<IProps> = (props) => {
             </Grid>
             <Grid item xs={11}>
               <UppyImage
-                label={t('details:images:labelFurnitures')}
+                label={t('details:images:labelOutdoors')}
                 subLabel={t('details:images:subLabelOutdoors')}
                 typeImage={9}
                 typeUpload={{ type: 'setOutdoorsImage' }}
@@ -140,8 +137,8 @@ const UploadImage: FC<IProps> = (props) => {
           </Grid>
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

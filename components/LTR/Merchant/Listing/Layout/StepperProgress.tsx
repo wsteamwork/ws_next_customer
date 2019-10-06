@@ -1,21 +1,11 @@
-import React, { FC, useState, Dispatch, SetStateAction } from 'react';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import { Button, Hidden, StepConnector, StepIcon, Theme, Typography, withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/';
-import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import {
-  Typography,
-  Button,
-  Theme,
-  StepConnector,
-  withStyles,
-  StepIcon,
-  MobileStepper,
-  Hidden
-} from '@material-ui/core';
+import Stepper from '@material-ui/core/Stepper';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
-import Router from 'next/router';
+import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface IProps {
   classes?: any;

@@ -2,15 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="Buoc 3 - Gia dich vu">
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/Requests/LTR/Services/ServicesRequests.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/Requests/LTR/Services/ServicesResponses.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/price.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/price.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/Redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mixins.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mixins.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,44 +32,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
+              <folding>
+                <element signature="e#0#76#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="116" selection-start-line="116" selection-end-line="116" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
+            <state relative-caret-position="378">
+              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
               <folding>
-                <element signature="e#0#78#0" expanded="true" />
+                <element signature="e#0#77#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Amenities/AmenitiesResponses.ts">
+        <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+            <state relative-caret-position="115">
+              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Services/ServicesResponses.ts">
+        <entry file="file://$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="33" selection-start-column="17" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="115">
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -77,36 +116,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Animation</find>
-      <find>useMe</find>
-      <find>switch</find>
-      <find>Dialog</find>
-      <find>TransitionComponent</find>
-      <find>comparionList</find>
-      <find>schedule</find>
-      <find>isDayBlocked</find>
-      <find>state.roomPage</find>
-      <find>rooms-pagination</find>
-      <find>paginat</find>
-      <find>RenderDay</find>
-      <find>_renderDayContents</find>
-      <find>DayPickerRangeController</find>
-      <find>emty</find>
-      <find>FocusedInputShape</find>
-      <find>eact-dates</find>
-      <find>CompareRooms.tsx</find>
-      <find>filterRooms</find>
-      <find>.listRoomContainerWithoutSlickCustom</find>
-      <find>.roomCardListing</find>
-      <find>FavoriteAnimation</find>
-      <find>image-gallery-image</find>
-      <find>amenities</find>
-      <find>lang</find>
-      <find>moment</find>
-      <find>NumberFormat</find>
-      <find>id=&quot;outlined-adornment-amount&quot;</find>
-      <find>price1_3</find>
-      <find>router</find>
+      <find>registerAccount</find>
+      <find>surchargeOvertime</find>
+      <find>priceDay</find>
+      <find>surchargeAddingPeople</find>
+      <find>priceHour</find>
+      <find>cleaningService</find>
+      <find>ValuesPrice</find>
+      <find>priceBasic</find>
+      <find>price2_3</find>
+      <find>price3_6</find>
+      <find>price6_12</find>
+      <find>price12</find>
+      <find>term_6_month</find>
+      <find>handleChange</find>
+      <find>handleBlur</find>
+      <find>numeral</find>
+      <find>DetailsReducerState</find>
+      <find>DetailsReducerAction</find>
+      <find>PricesReducerState</find>
+      <find>StepPricesReducerState</find>
+      <find>StepPricesReducerAction</find>
+      <find>'this field is required', 'khong phai kieu so'</find>
+      <find>&lt;TextField</find>
+      <find>&amp;&amp; (</find>
+      <find>%</find>
+      <find>Giảm</find>
+      <find>setLivingRoomImage</find>
+      <find>BaseGetRequestParams</find>
+      <find>AxiosRes&lt;</find>
+      <find>setServices</find>
     </findStrings>
     <dirStrings>
       <dir>D:\VNP\ws_next_customer\node_modules</dir>
@@ -116,30 +155,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="duy_Step3_servicesfee#2" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/components/Room/BoxBooking/DateRangeSingle/DateSingle.tsx" />
-        <option value="$PROJECT_DIR$/components/Rooms/VisitedRooms/VisitedRoom.tsx" />
-        <option value="$PROJECT_DIR$/components/Rooms/VisitedRooms/index.tsx" />
-        <option value="$PROJECT_DIR$/store/Redux/Reducers/Room/CompareRooms.ts" />
-        <option value="$PROJECT_DIR$/store/Context/Room/RoomListContext.ts" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RatingDetail/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomReview/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxBooking/DateRangeSingle/DateRangeCompareRoom.ts" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomAmenities/index.tsx" />
-        <option value="$PROJECT_DIR$/pages/rooms/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Rooms/FilterActions/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Rooms/RoomListing.tsx" />
         <option value="$PROJECT_DIR$/styles/components/listRoom/index.scss" />
-        <option value="$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx" />
         <option value="$PROJECT_DIR$/components/Rooms/Lotte/FavoriteAnimation.jsx" />
         <option value="$PROJECT_DIR$/styles/components/roomCardListing/index.scss" />
         <option value="$PROJECT_DIR$/styles/pages/room/index.scss" />
@@ -159,28 +182,45 @@
         <option value="$PROJECT_DIR$/translations/room/room-vi.json" />
         <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/TablePrices/index.tsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.ts" />
-        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx" />
         <option value="$PROJECT_DIR$/pages/collection/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/LongTerm.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/index.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx" />
         <option value="$PROJECT_DIR$/pages/host/create-listing/price.tsx" />
         <option value="$PROJECT_DIR$/types/Requests/LTR/Services/ServicesRequests.ts" />
         <option value="$PROJECT_DIR$/types/Requests/LTR/Services/ServicesResponses.ts" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/CardImageCaption.tsx" />
+        <option value="$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx" />
+        <option value="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceShortTerm.ts" />
+        <option value="$PROJECT_DIR$/store/Redux/Reducers/Home/roomHomepage.ts" />
+        <option value="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/priceShortTerm.ts" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx" />
+        <option value="$PROJECT_DIR$/store/Redux/Reducers/index.ts" />
+        <option value="$PROJECT_DIR$/store/Redux/index.ts" />
+        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx" />
+        <option value="$PROJECT_DIR$/utils/mixins.ts" />
+        <option value="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm.ts" />
+        <option value="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice.ts" />
+        <option value="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts" />
+        <option value="$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx" />
+        <option value="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="width" value="1710" />
-    <option name="height" value="1050" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -240,7 +280,7 @@
               <item name="Merchant" type="462c0819:PsiDirectoryNode" />
               <item name="Listing" type="462c0819:PsiDirectoryNode" />
               <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
-              <item name="Amenities" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
@@ -251,13 +291,16 @@
               <item name="Listing" type="462c0819:PsiDirectoryNode" />
               <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
               <item name="Step3" type="462c0819:PsiDirectoryNode" />
+              <item name="LongTerm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="ReusableComponents" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="Layout" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
@@ -273,36 +316,82 @@
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="host" type="462c0819:PsiDirectoryNode" />
+              <item name="create-listing" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="host" type="462c0819:PsiDirectoryNode" />
+              <item name="create-listing" type="462c0819:PsiDirectoryNode" />
+              <item name="[id]" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+              <item name="Reducers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+              <item name="Reducers" type="462c0819:PsiDirectoryNode" />
               <item name="LTR" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+              <item name="Reducers" type="462c0819:PsiDirectoryNode" />
               <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Amenities" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+              <item name="Reducers" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="store" type="462c0819:PsiDirectoryNode" />
+              <item name="Redux" type="462c0819:PsiDirectoryNode" />
+              <item name="Reducers" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
               <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -334,6 +423,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
@@ -342,7 +432,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\VNP\ws_next_customer\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="D:\VNP\ws_next_customer\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -430,6 +520,14 @@
       <workItem from="1569551715243" duration="10667000" />
       <workItem from="1569634386052" duration="11026000" />
       <workItem from="1569809646246" duration="9728000" />
+      <workItem from="1569895821892" duration="20005000" />
+      <workItem from="1569981903748" duration="24424000" />
+      <workItem from="1570113237099" duration="6201000" />
+      <workItem from="1570152880780" duration="27043000" />
+      <workItem from="1570197450864" duration="10869000" />
+      <workItem from="1570239625413" duration="42237000" />
+      <workItem from="1570327018388" duration="7302000" />
+      <workItem from="1570356354631" duration="971000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -547,7 +645,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="785232000" />
+    <option name="totallyTimeSpent" value="944970000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -559,7 +657,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937685" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947312" weight="0.1928651" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49894625" weight="0.1928651" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -567,8 +665,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3277592" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021075" side_tool="true" weight="0.12040134" />
-      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49789253" visible="true" weight="0.20735785" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50316125" side_tool="true" weight="0.22408026" />
+      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49683878" visible="true" weight="0.23522854" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32884398" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -638,401 +736,412 @@
     <option name="LAST_COMMIT_MESSAGE" value="Buoc 3 - Gia dich vu" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/room/room-en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1127">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/room/room-vi.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1127">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/moment/moment.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1027">
-          <caret line="576" column="29" selection-start-line="576" selection-start-column="29" selection-end-line="576" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/TablePrices/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="137" column="45" lean-forward="true" selection-start-line="137" selection-start-column="45" selection-end-line="137" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/node_modules/redux-persist/lib/storage/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/types/Requests/Profile/ProfileResponse.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        <state relative-caret-position="-368">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/node/globals.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-664">
-          <caret line="165" column="12" selection-start-line="165" selection-start-column="12" selection-end-line="165" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/ErrorNotify/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-633">
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/host/index.tsx">
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/Room/CompareRooms.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/UppyImage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-472">
-          <caret line="53" column="29" lean-forward="true" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="36" column="11" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/CardTextarea.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-431">
-          <caret line="83" column="6" selection-start-line="83" selection-start-column="6" selection-end-line="83" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/next-server/dist/lib/utils.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="84" column="17" lean-forward="true" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/Home/roomHomepage.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="135" column="8" lean-forward="true" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+        <state relative-caret-position="414">
+          <caret line="132" column="6" selection-start-line="132" selection-start-column="6" selection-end-line="132" selection-end-column="6" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/collection/index.tsx">
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/Profile/profile.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/next/types/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
-          <caret line="161" column="49" selection-start-line="161" selection-start-column="49" selection-end-line="162" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/RadioGroup/RadioGroup.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/FormControlLabel/FormControlLabel.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="17" column="14" lean-forward="true" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Hidden/Hidden.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Amenities/OutlinedGrid.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/ReusableComponents/Select/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/detail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="21" selection-start-line="21" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/axiosInstance.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="98" column="59" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/host/create-listing/basic.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="62" />
+        <state>
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/MySnackbarContentWrapper.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1771">
-          <caret line="83" column="155" selection-start-line="83" selection-start-column="155" selection-end-line="83" selection-end-column="155" />
-          <folding>
-            <element signature="e#0#70#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="292">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx">
+    <entry file="file://$PROJECT_DIR$/node_modules/formik/dist/types.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        <state relative-caret-position="350">
+          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="12" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#80#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-214">
+          <caret line="42" column="6" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/price.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Auth/Signup/FormSignup/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="767">
+          <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Amenities/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/CardTextarea.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="61" lean-forward="true" selection-start-line="7" selection-start-column="61" selection-end-line="7" selection-end-column="61" />
+        <state relative-caret-position="1427">
+          <caret line="100" column="29" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Amenities/AmenitiesRequests.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/InputBase/InputBase.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-828">
+          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Input/Input.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
+          <caret line="4" column="59" lean-forward="true" selection-start-line="4" selection-start-column="59" selection-end-line="4" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Services/ServicesRequests.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/formik/dist/Formik.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="230">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom.tsx">
+    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2053">
+          <caret line="6938" column="10" selection-start-line="6938" selection-start-column="10" selection-end-line="6938" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-number-format/typings/number_format.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="502" column="14" selection-start-line="502" selection-start-column="14" selection-end-line="502" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/TextField/TextField.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+          <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/node/querystring.d.ts">
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/next-server/dist/lib/router/router.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/next/dist/client/with-router.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/Context/GlobalContext.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Amenities/CardAmenities.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="71" column="18" lean-forward="true" selection-start-line="71" selection-start-column="18" selection-end-line="71" selection-end-column="18" />
+        <state relative-caret-position="115">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1109">
+          <caret line="320" column="12" selection-start-line="320" selection-start-column="12" selection-end-line="320" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#89#0" expanded="true" />
+            <element signature="e#3226#3690#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/NumberFormatCustom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Booking/BookingRequests.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-890" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Booking/BookingResponses.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="50" column="26" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/i18next/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12105">
+          <caret line="975" column="14" selection-start-line="975" selection-start-column="14" selection-end-line="975" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/mixins.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="130" column="9" selection-start-line="130" selection-start-column="9" selection-end-line="130" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="79" column="24" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Images/ImageResponses.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Context/LTR/ListingDetailContext.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1373">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/UppyImage.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="43" column="83" selection-start-line="43" selection-start-column="83" selection-end-line="43" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="112" column="19" lean-forward="true" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step2/images.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/profile/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-115">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+        <state relative-caret-position="329">
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx">
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/icons/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="3358" column="13" selection-start-line="3358" selection-start-column="13" selection-end-line="3358" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Profile/MenuProfile.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="95" column="36" lean-forward="true" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/InputGlobal/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2063">
+          <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#935#1229#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="32" column="53" lean-forward="true" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Services/ServicesResponses.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="33" selection-start-column="17" selection-end-column="33" />
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Amenities/AmenitiesResponses.ts">
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
-          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#21890#25397#0" />
+            <element signature="e#25415#26083#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="32" column="98" selection-start-line="32" selection-start-column="98" selection-end-line="32" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/PriceShortTerm/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/LongTerm/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="116" selection-start-line="116" selection-end-line="116" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
+        <state relative-caret-position="378">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
           <folding>
-            <element signature="e#0#78#0" expanded="true" />
+            <element signature="e#0#77#0" expanded="true" />
           </folding>
         </state>
       </provider>

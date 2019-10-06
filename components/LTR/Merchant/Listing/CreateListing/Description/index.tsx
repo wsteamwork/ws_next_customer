@@ -1,21 +1,17 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DescriptionReducerAction, getDataDescription } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Formik, FormikProps } from 'formik';
-import React, { FC, Fragment, useContext, useMemo, useEffect } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import * as Yup from 'yup';
 import CardTextarea from './CardTextarea';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  getDataDescription,
-  DescriptionReducerAction
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
-import { Dispatch } from 'redux';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   classes?: any;
 }
@@ -73,9 +69,9 @@ const Description: FC<IProps> = (props) => {
   const description = useSelector<ReducersList, string>((state) => state.description.description);
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
-
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+
   const id = router.query.id;
   useEffect(() => {
     getDataDescription(id, dispatch_des);
@@ -86,13 +82,13 @@ const Description: FC<IProps> = (props) => {
   }, []);
 
   useMemo(() => {
-    if(name.length < 10 || description.length < 50 ) {
+    if (name.length < 10 || description.length < 50) {
       dispatch_detail({ type: 'setDisableNext', payload: true });
     }
     else {
       dispatch_detail({ type: 'setDisableNext', payload: false });
     }
-  }, [name,description]);
+  }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -126,208 +122,208 @@ const Description: FC<IProps> = (props) => {
           handleChange,
           handleBlur,
         }: FormikProps<MyDescription>) => (
-          <form onSubmit={handleSubmit}>
-            <Grid container justify="center" alignContent="center">
-              <Grid item xs={11}>
-                <CardTextarea
-                  name="name"
-                  label={t('details:listingName')}
-                  sub_label={t('details:subName')}
-                  value={values.name.replace(/\s+/g, ' ')}
-                  classTextField={
-                    !!(values.name.length < 15 && touched!.name && errors.name)
-                      ? 'textarea error_textarea'
-                      : 'textarea'
-                  }
-                  show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
-                  error_message={errors.name ? errors.name : t('details:defaultError')}
-                  rows={1}
-                  rowsMax={1}
-                  max_char={100}
-                  multiline={true}
-                  classMaxChar={
-                    !!(values.name.length < 15 && touched!.name && errors.name)
-                      ? 'error_char'
-                      : 'remain_char'
-                  }
-                  InputProps={{
-                    classes: {
-                      notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
-                        ? classes.notchedOutline
-                        : ''
-                    }
-                  }}
-                  autoFocus={true}
-                  inputProps={{ maxLength: 100 }}
-                  handleChange={handleChange}
-                  handleBlur={(e) => {
-                    handleBlur(e);
-                    if (e.currentTarget.value.length > 14) {
-                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
-                    }
-                  }}
-                />
-
-                <Divider className={classes.normal_divider} />
-
-                <CardTextarea
-                  name="description"
-                  label={t('details:listingDes')}
-                  sub_label={t('details:subDes')}
-                  value={values.description.replace(/\s+/g, ' ')}
-                  classTextField={
-                    !!(values.description.length < 50 && touched!.description && errors.description)
-                      ? 'textarea error_textarea'
-                      : 'textarea'
-                  }
-                  show_error={
-                    !!(values.description.length < 50 && touched!.description && errors.description)
-                  }
-                  error_message={
-                    values.description.length < 50 ? errors.description : t('details:defaultError')
-                  }
-                  title_tooltips={
-                    <Fragment>
-                      <Typography color="inherit">{t('details:examples')}</Typography>
-                      <Typography color="inherit">{t('details:desExample1')}</Typography>
-                      <Typography color="inherit">{t('details:desExample2')}</Typography>
-                    </Fragment>
-                  }
-                  rows={4}
-                  rowsMax={9}
-                  max_char={500}
-                  multiline={true}
-                  classMaxChar={
-                    !!(values.description.length < 50 && touched!.description && errors.description)
-                      ? 'error_char'
-                      : 'remain_char'
-                  }
-                  InputProps={{
-                    classes: {
-                      notchedOutline: !!(
-                        values.description.length < 50 &&
-                        touched!.description &&
-                        errors.description
-                      )
-                        ? classes.notchedOutline
-                        : ''
-                    }
-                  }}
-                  inputProps={{ maxLength: 500 }}
-                  placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
-                  handleChange={handleChange}
-                  handleBlur={(e) => {
-                    handleBlur(e);
-                    if (e.currentTarget.value.length > 49) {
-                      dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
-                    }
-                  }}
-                />
-
-                <Divider className={classes.normal_divider} />
-                <section>
-                  <Typography variant="h1" gutterBottom className="label main_label">
-                    {t('details:addMoreInfo')}
-                  </Typography>
-                  <Grid item className="normal_text">
-                    <span>{t('details:subAddMore')}</span>
-                  </Grid>
-                </section>
-                <Grid item className={classes.margin_top}>
+            <form onSubmit={handleSubmit}>
+              <Grid container justify="center" alignContent="center">
+                <Grid item xs={11}>
                   <CardTextarea
-                    name="space"
-                    label={t('details:listingSpace')}
-                    sub_textarea={true}
-                    sub_label={t('details:subSpace')}
-                    value={values.space}
+                    name="name"
+                    label={t('details:listingName')}
+                    sub_label={t('details:subName')}
+                    value={values.name.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(touched!.space && errors.space) ? 'textarea error_textarea' : 'textarea'
+                      !!(values.name.length < 15 && touched!.name && errors.name)
+                        ? 'textarea error_textarea'
+                        : 'textarea'
                     }
-                    show_error={!!(touched!.space && errors.space)}
-                    error_message={touched.space ? errors.space : t('details:defaultError')}
-                    title_tooltips={
-                      <Fragment>
-                        <Typography color="inherit">{t('details:examples')}</Typography>
-                        <Typography color="inherit">{t('details:spaceExample1')}</Typography>
-                        <Typography color="inherit">{t('details:spaceExample2')}</Typography>
-                        <Typography color="inherit">{t('details:spaceExample3')}</Typography>
-                      </Fragment>
-                    }
-                    rows={4}
-                    rowsMax={9}
-                    max_char={1000}
+                    show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
+                    error_message={errors.name ? errors.name : t('details:defaultError')}
+                    rows={1}
+                    rowsMax={1}
+                    max_char={100}
                     multiline={true}
-                    classMaxChar={!!(touched!.space && errors.space) ? 'error_char' : 'remain_char'}
+                    classMaxChar={
+                      !!(values.name.length < 15 && touched!.name && errors.name)
+                        ? 'error_char'
+                        : 'remain_char'
+                    }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(touched!.space && errors.space)
+                        notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
                           ? classes.notchedOutline
                           : ''
                       }
                     }}
-                    inputProps={{ maxLength: 1000 }}
-                    placeholder={
-                      width !== 'xl' && width !== 'lg'
-                        ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
-                        : ''
-                    }
+                    autoFocus={true}
+                    inputProps={{ maxLength: 100 }}
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                      if (e.currentTarget.value.length > 14) {
+                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                      }
                     }}
                   />
-                </Grid>
 
-                <Grid item className={classes.margin_top}>
+                  <Divider className={classes.normal_divider} />
+
                   <CardTextarea
-                    name="rules"
-                    label={t('details:listingRules')}
-                    sub_textarea={true}
-                    sub_label={t('details:subRules')}
-                    value={values.rules}
+                    name="description"
+                    label={t('details:listingDes')}
+                    sub_label={t('details:subDes')}
+                    value={values.description.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(touched!.rules && errors.rules) ? 'textarea error_textarea' : 'textarea'
+                      !!(values.description.length < 50 && touched!.description && errors.description)
+                        ? 'textarea error_textarea'
+                        : 'textarea'
                     }
-                    show_error={!!(touched!.rules && errors.rules)}
-                    error_message={touched.rules ? errors.rules : t('details:defaultError')}
+                    show_error={
+                      !!(values.description.length < 50 && touched!.description && errors.description)
+                    }
+                    error_message={
+                      values.description.length < 50 ? errors.description : t('details:defaultError')
+                    }
                     title_tooltips={
                       <Fragment>
                         <Typography color="inherit">{t('details:examples')}</Typography>
-                        <Typography color="inherit">{t('details:rulesExample1')}</Typography>
-                        <Typography color="inherit">{t('details:rulesExample2')}</Typography>
-                        <Typography color="inherit">{t('details:rulesExample3')}</Typography>
+                        <Typography color="inherit">{t('details:desExample1')}</Typography>
+                        <Typography color="inherit">{t('details:desExample2')}</Typography>
                       </Fragment>
                     }
                     rows={4}
                     rowsMax={9}
                     max_char={500}
                     multiline={true}
-                    classMaxChar={!!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'}
+                    classMaxChar={
+                      !!(values.description.length < 50 && touched!.description && errors.description)
+                        ? 'error_char'
+                        : 'remain_char'
+                    }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(touched!.rules && errors.rules)
+                        notchedOutline: !!(
+                          values.description.length < 50 &&
+                          touched!.description &&
+                          errors.description
+                        )
                           ? classes.notchedOutline
                           : ''
                       }
                     }}
                     inputProps={{ maxLength: 500 }}
-                    placeholder={
-                      width !== 'xl' && width !== 'lg'
-                        ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`
-                        : ''
-                    }
+                    placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      dispatchDescription({ type: 'setRules' }, e.currentTarget.value);
+                      if (e.currentTarget.value.length > 49) {
+                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                      }
                     }}
                   />
+
+                  <Divider className={classes.normal_divider} />
+                  <section>
+                    <Typography variant="h1" gutterBottom className="label main_label">
+                      {t('details:addMoreInfo')}
+                    </Typography>
+                    <Grid item className="normal_text">
+                      <span>{t('details:subAddMore')}</span>
+                    </Grid>
+                  </section>
+                  <Grid item className={classes.margin_top}>
+                    <CardTextarea
+                      name="space"
+                      label={t('details:listingSpace')}
+                      sub_textarea={true}
+                      sub_label={t('details:subSpace')}
+                      value={values.space}
+                      classTextField={
+                        !!(touched!.space && errors.space) ? 'textarea error_textarea' : 'textarea'
+                      }
+                      show_error={!!(touched!.space && errors.space)}
+                      error_message={touched.space ? errors.space : t('details:defaultError')}
+                      title_tooltips={
+                        <Fragment>
+                          <Typography color="inherit">{t('details:examples')}</Typography>
+                          <Typography color="inherit">{t('details:spaceExample1')}</Typography>
+                          <Typography color="inherit">{t('details:spaceExample2')}</Typography>
+                          <Typography color="inherit">{t('details:spaceExample3')}</Typography>
+                        </Fragment>
+                      }
+                      rows={4}
+                      rowsMax={9}
+                      max_char={1000}
+                      multiline={true}
+                      classMaxChar={!!(touched!.space && errors.space) ? 'error_char' : 'remain_char'}
+                      InputProps={{
+                        classes: {
+                          notchedOutline: !!(touched!.space && errors.space)
+                            ? classes.notchedOutline
+                            : ''
+                        }
+                      }}
+                      inputProps={{ maxLength: 1000 }}
+                      placeholder={
+                        width !== 'xl' && width !== 'lg'
+                          ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
+                          : ''
+                      }
+                      handleChange={handleChange}
+                      handleBlur={(e) => {
+                        handleBlur(e);
+                        dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item className={classes.margin_top}>
+                    <CardTextarea
+                      name="rules"
+                      label={t('details:listingRules')}
+                      sub_textarea={true}
+                      sub_label={t('details:subRules')}
+                      value={values.rules}
+                      classTextField={
+                        !!(touched!.rules && errors.rules) ? 'textarea error_textarea' : 'textarea'
+                      }
+                      show_error={!!(touched!.rules && errors.rules)}
+                      error_message={touched.rules ? errors.rules : t('details:defaultError')}
+                      title_tooltips={
+                        <Fragment>
+                          <Typography color="inherit">{t('details:examples')}</Typography>
+                          <Typography color="inherit">{t('details:rulesExample1')}</Typography>
+                          <Typography color="inherit">{t('details:rulesExample2')}</Typography>
+                          <Typography color="inherit">{t('details:rulesExample3')}</Typography>
+                        </Fragment>
+                      }
+                      rows={4}
+                      rowsMax={9}
+                      max_char={500}
+                      multiline={true}
+                      classMaxChar={!!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'}
+                      InputProps={{
+                        classes: {
+                          notchedOutline: !!(touched!.rules && errors.rules)
+                            ? classes.notchedOutline
+                            : ''
+                        }
+                      }}
+                      inputProps={{ maxLength: 500 }}
+                      placeholder={
+                        width !== 'xl' && width !== 'lg'
+                          ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`
+                          : ''
+                      }
+                      handleChange={handleChange}
+                      handleBlur={(e) => {
+                        handleBlur(e);
+                        dispatchDescription({ type: 'setRules' }, e.currentTarget.value);
+                      }}
+                    />
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </form>
-        )}></Formik>
+            </form>
+          )}></Formik>
     </Fragment>
   );
 };

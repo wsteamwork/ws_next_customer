@@ -1,24 +1,16 @@
-import React, { FC, ChangeEvent, useState, useEffect } from 'react';
-import {
-  Grid,
-  FormControlLabel,
-  createStyles,
-  Theme,
-  Typography,
-  withStyles,
-  Checkbox
-} from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/styles';
-import OutlinedDiv from './OutlinedGrid';
-import mainColor from '@/styles/constants/colors';
-import { CheckboxProps } from '@material-ui/core/Checkbox';
-import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-import { Dispatch } from 'redux';
-import { useDispatch, useSelector } from 'react-redux';
-import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import mainColor from '@/styles/constants/colors';
+import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
+import { Checkbox, createStyles, FormControlLabel, Grid, Theme, Typography, withStyles } from '@material-ui/core';
+import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/styles';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import OutlinedDiv from './OutlinedGrid';
 export const CustomCheckbox = withStyles({
   root: {
     color: mainColor.primary,
@@ -34,7 +26,7 @@ interface IProps {
   sub_label?: string;
   amenities: AmenitiesIndexRes[];
   dataClick?: number[];
-  typeUpload: {type: any};
+  typeUpload: { type: any };
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -66,12 +58,12 @@ const CardAmenities: FC<IProps> = (props) => {
     }
   };
   useEffect(() => {
-    if(countAmenities < 10 ) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    }
-    else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
+    // if (countAmenities < 10) {
+    //   dispatch_detail({ type: 'setDisableNext', payload: true });
+    // }
+    // else {
+    dispatch_detail({ type: 'setDisableNext', payload: false });
+    // }
   }, [countAmenities]);
   return (
     <OutlinedDiv label={label}>

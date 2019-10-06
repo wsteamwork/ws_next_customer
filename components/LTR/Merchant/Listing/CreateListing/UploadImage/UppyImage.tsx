@@ -1,21 +1,20 @@
-import React, { FC, Fragment, useEffect, useMemo } from 'react';
-import { Grid, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
+import { IMAGE_STORAGE_ORIGINAL } from '@/utils/store/global';
+import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
-import XHRUpload from '@uppy/xhr-upload';
-import { Dashboard } from '@uppy/react';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
-import '@uppy/webcam/dist/style.css';
+import { Dashboard } from '@uppy/react';
 import '@uppy/url/dist/style.css';
-import 'uppy/dist/uppy.min.css';
+import '@uppy/webcam/dist/style.css';
+import XHRUpload from '@uppy/xhr-upload';
 import fetch from 'isomorphic-fetch';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { Dispatch } from 'redux';
-import { useDispatch } from 'react-redux';
-import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import React, { FC, Fragment, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { axios } from '@/utils/axiosInstance';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import 'uppy/dist/uppy.min.css';
 interface IProps {
   classes?: any;
   label?: string;
@@ -60,10 +59,10 @@ const UppyImage: FC<IProps> = (props) => {
       dispatch_detail({ type: 'setDisableNext', payload: false });
     }
   }, [initImages]);
-  
+
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
-      let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
+      let img = `${IMAGE_STORAGE_ORIGINAL}` + arrImg[i].name;
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
@@ -73,12 +72,12 @@ const UppyImage: FC<IProps> = (props) => {
           });
         })
         .catch((err) => console.error(err));
-        uppy.getFiles().forEach((file) => {
-          uppy.setFileState(file.id, {
-            progress: { uploadComplete: true, uploadStarted: true }
-          });
+      uppy.getFiles().forEach((file) => {
+        uppy.setFileState(file.id, {
+          progress: { uploadComplete: true, uploadStarted: true }
         });
-      }
+      });
+    }
   };
   initImage(initImages);
   const uppy = Uppy({
@@ -127,7 +126,7 @@ const UppyImage: FC<IProps> = (props) => {
       maxFileSize: 250000000,
       minNumberOfFiles: 1,
       maxNumberOfFiles: maxImage ? maxImage : 20,
-      allowedFileTypes:  ['image/*', '.heic', '.heif']
+      allowedFileTypes: ['image/*', '.heic', '.heif']
     },
     onBeforeFileAdded: (currentFile, files) => {
       if (currentFile.meta) {
@@ -148,7 +147,7 @@ const UppyImage: FC<IProps> = (props) => {
     }
   })
     .use(XHRUpload, {
-      endpoint: 'http://ws-api.nhat/merchant-api/upload-image/',
+      endpoint: 'http://ws_api.lc/merchant-api/upload-image/',
       fieldName: 'file[]',
       limit: 20,
       formData: true

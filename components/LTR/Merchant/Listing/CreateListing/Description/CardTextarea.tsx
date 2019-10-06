@@ -1,11 +1,9 @@
-import React, { FC, Fragment, useContext } from 'react';
-import { Theme, withStyles, FormControl } from '@material-ui/core';
-import { Grid, Typography } from '@material-ui/core';
-import ErrorNotify from './ErrorNotify';
-import Tooltip from '@material-ui/core/Tooltip';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { TextField } from '@material-ui/core';
+import { FormControl, Grid, TextField, Theme, Typography, withStyles } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import ErrorNotify from './ErrorNotify';
 
 interface IProps {
   classes?: any;

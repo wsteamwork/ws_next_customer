@@ -1,13 +1,13 @@
-import React, { FC, Fragment, useEffect } from 'react';
-import { createStyles, makeStyles, Theme, Grid } from '@material-ui/core';
-import _ from 'lodash';
-import CardImageCaption from './CardImageCaption';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { useSelector, useDispatch } from 'react-redux';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { Dispatch } from 'redux';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import _ from 'lodash';
+import React, { FC, Fragment, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import CardImageCaption from './CardImageCaption';
 
 interface IProps {
   classes?: any;
@@ -88,8 +88,8 @@ const ImageCaption: FC<IProps> = (props) => {
               arrImage={bedrooms[`bedroom_${i + 1}`].images}
             />
           ) : (
-            ''
-          )
+              ''
+            )
         )}
       {countBathRoom &&
         _.times(countBathRoom, (i) =>
@@ -104,8 +104,8 @@ const ImageCaption: FC<IProps> = (props) => {
               arrImage={bathrooms[`bathroom_${i + 1}`].images}
             />
           ) : (
-            ''
-          )
+              ''
+            )
         )}
       {kitchens.images.length && (
         <CardImageCaption

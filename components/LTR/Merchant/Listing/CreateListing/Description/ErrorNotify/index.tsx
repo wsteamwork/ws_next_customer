@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid } from '@material-ui/core';
+import { Grid, Theme } from '@material-ui/core';
 import { ErrorOutline } from '@material-ui/icons';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment } from 'react';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -42,8 +42,8 @@ const ErrorNotify: FC<IProps> = (props) => {
           {errorMessage}
         </Grid>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

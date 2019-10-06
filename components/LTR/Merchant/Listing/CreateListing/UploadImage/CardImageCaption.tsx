@@ -1,14 +1,13 @@
-import React, { FC, Fragment, useState, ChangeEvent } from 'react';
-import { createStyles, makeStyles, Theme, Typography, Grid, TextField } from '@material-ui/core';
-import _ from 'lodash';
+import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { createStyles, Grid, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import React, { ChangeEvent, FC, Fragment, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { useTranslation } from 'react-i18next';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 interface IProps {
   classes?: any;

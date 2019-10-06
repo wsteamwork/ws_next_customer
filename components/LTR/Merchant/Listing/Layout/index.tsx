@@ -1,9 +1,9 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-
 import GridContainer from '@/components/Layout/Grid/Container';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import HeaderNav from './HeaderNavigation';
 import StepperProgress from './StepperProgress';
+
 
 interface IProps {
   title: string;
@@ -14,7 +14,7 @@ interface IProps {
     nextLink: string
   ) => any;
   getSteps: () => Array<string>;
-  nextLink: string;
+  nextLink?: string;
   disableNext?: boolean;
   handleAPI?: () => any;
 }

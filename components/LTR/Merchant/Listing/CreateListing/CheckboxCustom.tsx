@@ -1,13 +1,11 @@
-import React, { FC, useState, Dispatch, useEffect } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
-import Checkbox from '@material-ui/core/Checkbox';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import { FormGroup, FormControlLabel } from '@material-ui/core';
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { FormControlLabel, FormGroup } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface IProps {
   classes?: any;
