@@ -31,7 +31,9 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
         'iProfile',
         'promotion',
         'notifications',
-        'description'
+        'description',
+        'priceTerm',
+        'stepPrice'
       ]
     };
 

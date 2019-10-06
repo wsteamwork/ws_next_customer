@@ -1,4 +1,4 @@
-import React, { Fragment, FC, useState, useEffect, ChangeEvent } from 'react';
+import React, { FC, useState, useEffect, ChangeEvent, useMemo } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import {
   Theme,
@@ -6,7 +6,7 @@ import {
   RadioGroup,
   Collapse,
   Zoom,
-  Checkbox, InputAdornment, TextField
+  Checkbox, InputAdornment, Select, OutlinedInput
 } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,14 @@ import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { ServicesIndexRes } from '@/types/Requests/LTR/Services/ServicesResponses';
 import _ from 'lodash';
-import update from 'immutability-helper';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { typeService, serviceFeeType, IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
+import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
+import { ReducersList } from '@/store/Redux/Reducers';
+
 interface IProps {
   classes?: any
 }
@@ -51,7 +58,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     rowCheckPrice:{
       padding:'8px 0'
-    }
+    },
   })
 );
 
@@ -61,34 +68,57 @@ const ServiceFee: FC<IProps> = (props) => {
   const {} = props;
   const [selectedValue, setSelectedValue] = React.useState<any>(0);
   const [services, setServices] = useState<ServicesIndexRes[]>([]);
+  const [serviceFeeType, setServiceFeeType] = useState<serviceFeeType[]>([]);
   const [serviceOpt, setServiceOtp] = useState<number[]>([]);
-  const [included_fee, setIncludedFee] = useState<ValuesPrice[]>([]);
+  const [included_fee, setIncludedFee] = useState<typeService[]>([]);
+  const dispatch = useDispatch<Dispatch<PriceTermActions>>();
+  const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
+  const priceser = useSelector<ReducersList,IServicesFee>((state) => state.priceTerm.serviceFee);
 
-  const getAmenities = async () => {
+  const getServices = async () => {
     const url = `services`;
     const res: AxiosRes<any> = await axios_merchant.get(url);
     setServices(res.data.data);
   };
 
+  const getServiceFeeType = async () => {
+    const url = `service-type/calculate-service-fee-type`;
+    const res: AxiosRes<serviceFeeType[]> = await axios_merchant.get(url);
+    // @ts-ignore
+    setServiceFeeType(res.data);
+  };
+
   useEffect(() => {
-      getAmenities();
+    dispatchStep({type:'setStep', payload:'tab3'});
+    getServices();
+    getServiceFeeType();
   }, []);
 
   useEffect(() => {
-    let defaultService = [];
+    let defaultService:typeService[] = [];
     if (services.length){
-          _.map(services, (o,i) => (
-            defaultService = [...defaultService,{id: i + 1, value: 0, included: 0 }]
-          ));
+      _.map(services, (o,i) => {
+        if (selectedValue === 0) {
+           defaultService = [...defaultService, { id: o.id, value: 0, included: 1, calculate_function: 3 }]
+        } else {
+           defaultService = [...defaultService, { id: o.id, value: 0, included: 0, calculate_function: 3 }]
+        }
+      });
     }
     setIncludedFee(defaultService);
-  }, [services]);
+    dispatch({type:'setServiceFee', payload:{included_fee: included_fee}});
+  }, [services,selectedValue]);
+
+  useMemo(() => {
+    dispatch({type:'setServiceFee', payload:{included_fee: included_fee}});
+  }, [included_fee]);
 
   const handlePrice = (id:number, include:boolean) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    let obj: ValuesPrice = {
+    let obj: typeService = {
       id: id,
       value: parseInt(event.target.value),
-      included:include ? 1 : 0
+      included:include ? 1 : 0,
+      calculate_function: 3
     };
 
     const dataUnCheck = included_fee.filter((item) => item.id !== id);
@@ -99,14 +129,24 @@ const ServiceFee: FC<IProps> = (props) => {
     if (event.target.checked) {
       included_fee.sort((a, b) => a.id - b.id);
       setServiceOtp([...serviceOpt, id]);
-      let newObj = {id: id, value: included_fee[id-1].value , included:  1};
+      let newObj = {
+        id: id,
+        value: included_fee[id-1].value ,
+        included: 1,
+        calculate_function: 3
+      };
       const dataCheck = included_fee.filter((item) => item.id !== id);
       setIncludedFee([...dataCheck, newObj]);
     } else {
       included_fee.sort((a, b) => a.id - b.id);
       const dataCheckboxUnCheck = serviceOpt.filter((i) => i !== id);
       setServiceOtp(dataCheckboxUnCheck);
-      let newObj = {id: id, value: included_fee[id-1].value, included:  0};
+      let newObj = {
+        id: id,
+        value: included_fee[id-1].value,
+        included: 0,
+        calculate_function: 3
+      };
       const dataCheck = included_fee.filter((item) => item.id !== id);
       setIncludedFee([...dataCheck, newObj]);
     }
@@ -116,8 +156,28 @@ const ServiceFee: FC<IProps> = (props) => {
     setSelectedValue(parseInt((event.target as HTMLInputElement).value));
   };
 
+  const blurPrice = () =>{
+    dispatch({type:'setServiceFee', payload:{included_fee: included_fee}})
+  };
+
+  const changeSelect = (id: number) => (event: React.ChangeEvent<HTMLInputElement>) =>{
+    for (let i in included_fee) {
+      if (included_fee[i].id == id) {
+        included_fee[i].calculate_function = parseInt(event.target.value);
+        setIncludedFee(included_fee);
+        dispatch({type:'setServiceFee', payload:{included_fee: included_fee}});
+        break; //Stop this loop, we found it!
+      }
+    }
+  };
+
+  const closeSelect =(event: React.ChangeEvent<HTMLInputElement>)=>{
+    dispatch({type:'setServiceFee', payload:{included_fee: included_fee}})
+  };
+
   return (
     <div>
+      <ValidatorForm onSubmit={()=>{return null}}>
       <div>
       <h1 className={classes.bigTitle}>
         Lựa chọn gói dịch vụ
@@ -130,7 +190,7 @@ const ServiceFee: FC<IProps> = (props) => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <RadioCustom label={"Trọn gói dịch vụ"}
-                               descr={"Giá này đã bao gồm wifi, điện, nước, phí môi trường,..."}
+                               descr={"Giá cho thuê phòng đã bao gồm các dịch vụ: wifi, điện, nước, phí môi trường,..."}
                                value={String(0)}/>
                 </Grid>
                 <Grid item xs={6}>
@@ -145,7 +205,7 @@ const ServiceFee: FC<IProps> = (props) => {
       </Grid>
     </div>
 
-      <Collapse  in={!!selectedValue}>
+      <Collapse in={!!selectedValue}>
         <div>
           <h1 className={classes.bigTitle}>
             Giá dịch vụ bán lẻ
@@ -163,19 +223,49 @@ const ServiceFee: FC<IProps> = (props) => {
                         label={o.type_txt}
                       />
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={7}>
                       <Zoom in={serviceOpt.some((x) => x === o.id)}>
-                        <TextField
-                          id={o.id.toString()}
-                          variant="outlined"
-                          // value={included_fee ? 0 : included_fee[i].value}
-                          onChange={handlePrice(o.id, serviceOpt.some((x) => x === o.id))}
-                          InputProps={{
-                            id:o.id.toString(),
-                            inputComponent: NumberFormatCustom as any,
-                            endAdornment: <InputAdornment position="start"> đ/người/tháng </InputAdornment>,
-                          }}
-                        />
+                        <Grid container spacing={2}>
+                          <Grid item xs={8}>
+                            <TextValidator
+                              validators={['required', 'isNumber']}
+                              errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này']}
+                              id={o.id.toString()}
+                              variant="outlined"
+                              // value={included_fee ? 0 : included_fee[i].value}
+                              onChange={handlePrice(o.id, serviceOpt.some((x) => x === o.id))}
+                              onBlur={blurPrice}
+                              InputProps={{
+                                id:o.id.toString(),
+                                inputComponent: NumberFormatCustom as any,
+                                endAdornment: <InputAdornment position="start"> đ </InputAdornment>,
+                              }}
+                            />
+                          </Grid>
+                          <Grid item xs={4}>
+                            <FormControl variant="outlined" fullWidth>
+                              {/* <InputLabel htmlFor="Gender">Giới tính</InputLabel> */}
+                              <Select
+                                native
+                                // value={0}
+                                onChange={changeSelect(o.id)}
+                                onClose={closeSelect}
+                                inputProps={{
+                                  className: 'outlineInput'
+                                }}
+                                input={
+                                  <OutlinedInput
+                                    name={o.type_txt}
+                                    labelWidth={0}
+                                  />
+                                }>
+                                {serviceFeeType.map((o,i)=>(
+                                  <option key={i} value={o.id}>{o.value}</option>
+                                ))}
+                              </Select>
+                            </FormControl>
+                          </Grid>
+                        </Grid>
                       </Zoom>
                     </Grid>
                   </Grid>
@@ -185,6 +275,7 @@ const ServiceFee: FC<IProps> = (props) => {
           </Grid>
         </div>
       </Collapse>
+      </ValidatorForm>
     </div>
   );
 };

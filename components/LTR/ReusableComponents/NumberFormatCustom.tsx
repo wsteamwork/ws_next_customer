@@ -5,8 +5,8 @@ import NumberFormat from "react-number-format";
 
 interface NumberFormatCustomProps {
   classes?: any
-  inputRef: (instance: NumberFormat | null) => void;
-  onChange: (event: { target: { value: string } }) => void;
+  inputRef?: (instance: NumberFormat | null) => void;
+  onChange?: (event: { target: { value: string } }) => void;
 }
 
 const useStyles = makeStyles<Theme, NumberFormatCustomProps>((theme: Theme) =>
@@ -32,6 +32,7 @@ const NumberFormatCustom: FC<NumberFormatCustomProps> = (props) => {
         });
       }}
       thousandSeparator
+      allowEmptyFormatting={false}
     />
   );
 };

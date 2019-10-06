@@ -1,20 +1,26 @@
-import React, { Fragment, FC, useState, Dispatch, SetStateAction } from 'react';
+import React, { Fragment, FC, useState, useMemo, useEffect } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, TextField, InputAdornment, Divider, Button } from '@material-ui/core';
+import { Theme, Grid, Typography, InputAdornment, Divider, Button } from '@material-ui/core';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
-import ServiceFee from '@/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee';
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import { IPriceLongTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
+import { calcPercentage } from '@/utils/mixins';
 
 interface IProps {
   classes?: any;
 }
 
-interface ValuesPrice {
-  priceBasic: number;
-  price2_3: number;
-  price3_6: number;
-  price6_12: number;
-  price12: number;
+interface IPercent {
+  term_1_month: string,
+  term_2_month: string,
+  term_3_month: string,
+  term_6_month: string,
+  term_12_month: string,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -42,7 +48,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     txtPercent:{
-      color:'tomato'
+      color:'#2196f3'
     }
   })
 );
@@ -50,226 +56,269 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const LongTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { } = props;
-  const [price, setPrice] = useState<ValuesPrice>({
-    priceBasic: null,
-    price2_3: null,
-    price3_6: null,
-    price6_12: null,
-    price12: null,
+  const priceLong = useSelector<ReducersList,IPriceLongTerm>((state) => state.priceTerm.priceLT);
+  const dispatch = useDispatch<Dispatch<PriceTermActions>>();
+  const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
+
+  const [price, setPrice] = useState<IPriceLongTerm>({
+    term_1_month: priceLong ? priceLong.term_1_month : 0,
+    term_2_month: priceLong ? priceLong.term_2_month : 0,
+    term_3_month: priceLong ? priceLong.term_3_month : 0,
+    term_6_month: priceLong ? priceLong.term_6_month : 0,
+    term_12_month: priceLong ? priceLong.term_12_month : 0,
   });
-  const [pricePercent, setPricePercent] = useState<ValuesPrice>({
-    priceBasic: null,
-    price2_3: null,
-    price3_6: null,
-    price6_12: null,
-    price12: null,
+  const [pricePercent, setPricePercent] = useState<IPercent>({
+    term_1_month: '',
+    term_2_month: '',
+    term_3_month: '',
+    term_6_month: '',
+    term_12_month: '',
   });
 
-  const handleChange = (name: keyof ValuesPrice) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    dispatchStep({type:'setStep', payload:'tab2'});
+  }, []);
+
+  useEffect(() => {
+    dispatch({type:'setPriceLT', payload:{...price}});
+  }, [price]);
+
+  const handleChange = (name: keyof IPriceLongTerm) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrice({
       ...price,
-      [name]: event.target.value,
+      [name]: parseInt(event.target.value),
     });
     setPricePercent({
       ...pricePercent,
-      [name]: 100 - (parseInt(event.target.value) / price.priceBasic * 100),
+      [name]: calcPercentage(parseInt(event.target.value), price.term_1_month)
     })
   };
 
-  const handleTip = (typePrice: keyof ValuesPrice, percent: number) => {
+  const handleTip = (typePrice: keyof IPriceLongTerm, percent: number) => {
     setPrice({
       ...price,
-      [typePrice]: price.priceBasic - (price.priceBasic * percent),
+      [typePrice]: price.term_1_month - (price.term_1_month * percent),
     });
+
+    dispatch({type:'setPriceLT', payload:{...price}});
   };
+
+  const handleBlur = () =>{
+    dispatch({type:'setPriceLT', payload:{...price}});
+  };
+
+  useMemo(() =>{
+    if(!priceLong || !(price.term_1_month && price.term_2_month && price.term_3_month && price.term_6_month && price.term_12_month)) {
+      dispatchStep({ type: 'setDisableNext', payload: true });
+    }else {
+      dispatchStep({ type: 'setDisableNext', payload: false });
+    }
+  },[price,priceLong]);
 
   return (
     <Fragment>
-    <div>
-      <div>
-        <h1 className={classes.bigTitle}>
-          Giá cơ bản
-        </h1>
+      <ValidatorForm onSubmit={()=>{return null}}>
+        <div>
+          <div>
+            <h1 className={classes.bigTitle}>
+              Giá cơ bản
+            </h1>
 
-        <Grid container justify='center'>
-          <Grid item xs={11}>
-            <Typography className={classes.title} variant='h6' gutterBottom>
-              Giá theo tháng (chưa tính hóa đơn)
-            </Typography>
+            <Grid container justify='center'>
+              <Grid item xs={11}>
+                <Typography className={classes.title} variant='h6' gutterBottom>
+                  Giá theo tháng (chưa tính hóa đơn)
+                </Typography>
 
-            <Typography className={classes.subTitle} variant='subtitle2' gutterBottom>
-              Đây là giá tối thiểu từ 1 tháng - 2 tháng
-            </Typography>
+                <Typography className={classes.subTitle} variant='subtitle2' gutterBottom>
+                  Đây là giá tối thiểu từ 1 tháng - 2 tháng
+                </Typography>
 
-            <TextField
-              variant="outlined"
-              value={price.priceBasic}
-              onChange={handleChange('priceBasic')}
-              InputProps={{
-                inputComponent: NumberFormatCustom as any,
-                startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
-              }}
-            />
-
-            <div className={classes.rowMargin}>
-              <span>Gợi ý: </span>
-              <Button color='primary' className={classes.btnTip} >
-                10.000.000
-              </Button>
-              <span> là giá trung bình của khu vực Ba Đình </span>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-
-      <div>
-        <h1 className={classes.bigTitle}>
-          Giá theo kì hạn
-        </h1>
-
-        <Grid container justify='center'>
-          <Grid item xs={11}>
-            <Typography className={classes.title} variant='h6' gutterBottom>
-              Kì hạn 2 - 3 tháng
-            </Typography>
-
-            <Grid container spacing={4} alignItems='center'>
-              <Grid item >
-                <TextField
-                  disabled={!price.priceBasic}
+                <TextValidator
+                  validators={['required', 'isNumber', 'minNumber:500000']}
+                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này','Giá tối thiểu của hình thức thuê theo tháng là : 500.000']}
                   variant="outlined"
-                  value={price.price2_3}
-                  onChange={handleChange('price2_3')}
+                  value={price.term_1_month}
+                  onChange={handleChange('term_1_month')}
+                  onBlur={handleBlur}
                   InputProps={{
                     inputComponent: NumberFormatCustom as any,
                     startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
                   }}
                 />
+
+                {/*<div className={classes.rowMargin}>*/}
+                {/*  <span>Gợi ý: </span>*/}
+                {/*  <Button color='primary' className={classes.btnTip} >*/}
+                {/*    10.000.000*/}
+                {/*  </Button>*/}
+                {/*  <span> là giá trung bình của khu vực Ba Đình </span>*/}
+                {/*</div>*/}
               </Grid>
-              {price.price2_3 && (
-                <Grid item xs>
-                  <Typography className={classes.txtPercent}>Giảm {pricePercent.price2_3}% so với giá cơ bản </Typography>
-                </Grid>
-              )}
             </Grid>
+          </div>
 
-            <div className={classes.rowMargin}>
-              <span>Gợi ý: </span>
-              <Button color='primary' className={classes.btnTip} disabled={!price.priceBasic}
-                      onClick={()=>handleTip('price2_3', 0.05)}>
-                5%
-              </Button>
-              <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
-            </div>
-            <Divider className={classes.divider}/>
-          </Grid>
-          <Grid item xs={11}>
-            <Typography className={classes.title} variant='h6' gutterBottom>
-              Kì hạn 3 - 6 tháng
-            </Typography>
+          <div>
+            <h1 className={classes.bigTitle}>
+              Giá theo kì hạn
+            </h1>
 
-            <Grid container spacing={4} alignItems='center'>
-              <Grid item >
-                <TextField
-                  disabled={!price.priceBasic}
-                  variant="outlined"
-                  value={price.price3_6}
-                  onChange={handleChange('price3_6')}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom as any,
-                    startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
-                  }}
-                />
+            <Grid container justify='center'>
+              <Grid item xs={11}>
+                <Typography className={classes.title} variant='h6' gutterBottom>
+                  Kì hạn 2 - 3 tháng
+                </Typography>
+
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item >
+                    <TextValidator
+                      validators={['required', 'isNumber']}
+                      errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này']}
+                      disabled={!price.term_1_month}
+                      variant="outlined"
+                      value={price.term_2_month}
+                      onChange={handleChange('term_2_month')}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
+                      }}
+                    />
+                  </Grid>
+                  {price.term_2_month ? (
+                    <Grid item xs>
+                      <Typography className={classes.txtPercent}><b>{pricePercent.term_2_month}</b> so với giá cơ bản </Typography>
+                    </Grid>
+                  ):''}
+                </Grid>
+
+                <div className={classes.rowMargin}>
+                  <span>Gợi ý: </span>
+                  <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
+                          onClick={()=>handleTip('term_2_month', 0.03)}>
+                    3%
+                  </Button>
+                  <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
+                </div>
+                <Divider className={classes.divider}/>
               </Grid>
-              {price.price3_6 && (
-                <Grid item xs>
-                  <Typography className={classes.txtPercent}>Giảm {pricePercent.price3_6}% so với giá cơ bản </Typography>
+              <Grid item xs={11}>
+                <Typography className={classes.title} variant='h6' gutterBottom>
+                  Kì hạn 3 - 6 tháng
+                </Typography>
+
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item >
+                    <TextValidator
+                      validators={['required', 'isNumber']}
+                      errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này']}
+                      disabled={!price.term_1_month}
+                      variant="outlined"
+                      value={price.term_3_month}
+                      onChange={handleChange('term_3_month')}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
+                      }}
+                    />
+                  </Grid>
+                  {price.term_3_month ? (
+                    <Grid item xs>
+                      <Typography className={classes.txtPercent}><b>{pricePercent.term_3_month}</b> so với giá cơ bản </Typography>
+                    </Grid>
+                  ):''}
                 </Grid>
-              )}
-            </Grid>
 
-            <div className={classes.rowMargin}>
-              <span>Gợi ý: </span>
-              <Button color='primary' className={classes.btnTip} disabled={!price.priceBasic}
-                      onClick={()=>handleTip('price3_6', 0.05)}>
-                5%
-              </Button>
-              <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
-            </div>
-            <Divider className={classes.divider}/>
-          </Grid>
-
-          <Grid item xs={11}>
-            <Typography className={classes.title} variant='h6' gutterBottom>
-              Kì hạn 6 - 12 tháng
-            </Typography>
-
-            <Grid container spacing={4} alignItems='center'>
-              <Grid item >
-                <TextField
-                  disabled={!price.priceBasic}
-                  variant="outlined"
-                  value={price.price3_6}
-                  onChange={handleChange('price3_6')}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom as any,
-                    startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
-                  }}
-                />
+                <div className={classes.rowMargin}>
+                  <span>Gợi ý: </span>
+                  <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
+                          onClick={()=>handleTip('term_3_month', 0.05)}>
+                    5%
+                  </Button>
+                  <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
+                </div>
+                <Divider className={classes.divider}/>
               </Grid>
-              {price.price3_6 && (
-                <Grid item xs>
-                  <Typography className={classes.txtPercent}>Giảm {pricePercent.price3_6}% so với giá cơ bản </Typography>
+
+              <Grid item xs={11}>
+                <Typography className={classes.title} variant='h6' gutterBottom>
+                  Kì hạn 6 - 12 tháng
+                </Typography>
+
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item >
+                    <TextValidator
+                      validators={['required', 'isNumber']}
+                      errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này']}
+                      disabled={!price.term_1_month}
+                      variant="outlined"
+                      value={price.term_6_month}
+                      onChange={handleChange('term_6_month')}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
+                      }}
+                    />
+                  </Grid>
+                  {price.term_6_month ? (
+                    <Grid item xs>
+                      <Typography className={classes.txtPercent}><b>{pricePercent.term_6_month}</b> so với giá cơ bản </Typography>
+                    </Grid>
+                  ):''}
                 </Grid>
-              )}
-            </Grid>
-            <div className={classes.rowMargin}>
-              <span>Gợi ý: </span>
-              <Button color='primary' className={classes.btnTip} disabled={!price.priceBasic}
-                      onClick={()=>handleTip('price3_6', 0.1)}>
-                10%
-              </Button>
-              <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
-            </div>
-            <Divider className={classes.divider}/>
-          </Grid>
-
-          <Grid item xs={11}>
-            <Typography className={classes.title} variant='h6' gutterBottom>
-              Kì hạn từ 1 năm trở lên
-            </Typography>
-
-            <Grid container spacing={4} alignItems='center'>
-              <Grid item >
-                <TextField
-                  disabled={!price.priceBasic}
-                  variant="outlined"
-                  value={price.price12}
-                  onChange={handleChange('price12')}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom as any,
-                    startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
-                  }}
-                />
+                <div className={classes.rowMargin}>
+                  <span>Gợi ý: </span>
+                  <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
+                          onClick={()=>handleTip('term_6_month', 0.1)}>
+                    10%
+                  </Button>
+                  <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
+                </div>
+                <Divider className={classes.divider}/>
               </Grid>
-              {price.price12 && (
-                <Grid item xs>
-                  <Typography className={classes.txtPercent}>Giảm {pricePercent.price12}% so với giá cơ bản </Typography>
+
+              <Grid item xs={11}>
+                <Typography className={classes.title} variant='h6' gutterBottom>
+                  Kì hạn từ 1 năm trở lên
+                </Typography>
+
+                <Grid container spacing={4} alignItems='center'>
+                  <Grid item >
+                    <TextValidator
+                      validators={['required', 'isNumber']}
+                      errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này']}
+                      disabled={!price.term_1_month}
+                      variant="outlined"
+                      value={price.term_12_month}
+                      onChange={handleChange('term_12_month')}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>,
+                      }}
+                    />
+                  </Grid>
+                  {price.term_12_month ? (
+                    <Grid item xs>
+                      <Typography className={classes.txtPercent}><b>{pricePercent.term_12_month}</b> so với giá cơ bản </Typography>
+                    </Grid>
+                  ):''}
                 </Grid>
-              )}
+                <div className={classes.rowMargin}>
+                  <span>Gợi ý: </span>
+                  <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
+                          onClick={()=>handleTip('term_12_month', 0.15)}>
+                    15%
+                  </Button>
+                  <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
+                </div>
+              </Grid>
             </Grid>
-            <div className={classes.rowMargin}>
-              <span>Gợi ý: </span>
-              <Button color='primary' className={classes.btnTip} disabled={!price.priceBasic}
-                      onClick={()=>handleTip('price12', 0.15)}>
-                15%
-              </Button>
-              <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-    </div>
+          </div>
+        </div>
+      </ValidatorForm>
     </Fragment>
   );
 };

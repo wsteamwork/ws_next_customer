@@ -33,6 +33,15 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import {
+  PriceTermState,
+  PriceTermActions,
+  PriceTermReducer
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import {
+  StepPricesState,
+  StepPricesActions, stepPricesReducer
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -48,6 +57,8 @@ export type ReducersType = {
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
   description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
   createListing: Reducer<CreateListingState, CreateListingActions>;
+  priceTerm: Reducer<PriceTermState,PriceTermActions>;
+  stepPrice: Reducer<StepPricesState,StepPricesActions>
 };
 
 export type ReducersList = {
@@ -64,6 +75,8 @@ export type ReducersList = {
   notifications: NotificationReducerState;
   description: DescriptionReducerState;
   createListing: CreateListingState;
+  priceTerm: PriceTermState;
+  stepPrice: StepPricesState
 };
 
 export type ReducresActions =
@@ -79,7 +92,9 @@ export type ReducresActions =
   | CompareRoomsActions
   | PomotionActions
   | DescriptionReducerAction
-  | CreateListingActions;
+  | CreateListingActions
+  | PriceTermActions
+  | StepPricesActions
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -94,7 +109,9 @@ const reducers: ReducersType = {
   notifications: notificationReducer,
   compareRooms: ComparisonListReducer,
   description: descriptionReducer,
-  createListing: createListingReducer
+  createListing: createListingReducer,
+  priceTerm: PriceTermReducer,
+  stepPrice: stepPricesReducer
 };
 
 export interface NextContextPage extends NextPageContext {
