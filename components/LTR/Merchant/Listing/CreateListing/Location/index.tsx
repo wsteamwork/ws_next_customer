@@ -1,6 +1,6 @@
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useState, Dispatch } from 'react';
+import React, { FC, useState, Dispatch, useEffect } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-interface IProps {}
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -31,7 +31,7 @@ const Location: FC<IProps> = (props) => {
   const [coordinate, setCoordinate] = useState<Coordinate>(null);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
 
-  const onClickMap = (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => {
+  const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
     let lng = e.latLng.lng();
     setCoordinate({
@@ -50,14 +50,18 @@ const Location: FC<IProps> = (props) => {
     <GoogleMap
       defaultZoom={15}
       defaultCenter={props.defaultCenter}
-      // onClick={props.onClickMap}
+      onClick={props.onClickMap}
       // defaultOptions={{ draggable: false }}
       onDrag={onDrag}>
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
 
-  console.log(defaultCenter);
+  useEffect(() => {
+    console.log(coordinate)
+  }, [coordinate])
+
+
   const handleChange = (event) => {
     setAddress(event.target.value);
   };
