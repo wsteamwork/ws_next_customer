@@ -1,4 +1,4 @@
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControlLabel, FormGroup } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';

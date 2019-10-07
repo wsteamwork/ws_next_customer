@@ -14,7 +14,7 @@ import { Dispatch } from 'redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {
   StepPricesActions,
   getListingPrices,
@@ -27,26 +27,26 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    title:{
+    title: {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: '1.375em',
       color: 'rgb(118, 118, 118)',
     },
-    bigTitle:{
-      margin:'32px 0'
+    bigTitle: {
+      margin: '32px 0'
     },
-    divider:{
-      margin:'16px 0'
+    divider: {
+      margin: '16px 0'
     }
   })
 );
 
 const PriceShortTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const listing = useSelector<ReducersList, any>((state) => state.stepPrice.listing);
-  const priceShort = useSelector<ReducersList,IPriceShortTerm>((state) => state.priceTerm.priceST);
+  const priceShort = useSelector<ReducersList, IPriceShortTerm>((state) => state.priceTerm.priceST);
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
 
@@ -55,12 +55,12 @@ const PriceShortTerm: FC<IProps> = (props) => {
     price_day: priceShort ? priceShort.price_day : 0,
     price_hour: priceShort ? priceShort.price_hour : 0,
     price_charge_guest: priceShort ? priceShort.price_charge_guest : 0,
-    price_after_hour:priceShort ? priceShort.price_after_hour : 0,
+    price_after_hour: priceShort ? priceShort.price_after_hour : 0,
     cleaning_fee: priceShort ? priceShort.cleaning_fee : 0,
   });
 
   useEffect(() => {
-    dispatchStep({type:'setStep', payload:'tab1'});
+    dispatchStep({ type: 'setStep', payload: 'tab1' });
     // getListingPrices(id, dispatchStep)
     //   .catch(err => {
     //     console.log(err);
@@ -74,21 +74,21 @@ const PriceShortTerm: FC<IProps> = (props) => {
     });
   };
 
-  const blurPrice = ()=>{
-    dispatch({type:'setPriceST', payload:{...price}});
+  const blurPrice = () => {
+    dispatch({ type: 'setPriceST', payload: { ...price } });
   };
 
-  useMemo(() =>{
-    if(!priceShort || (price.price_day < 100000 || !price.price_day)) {
+  useMemo(() => {
+    if (!priceShort || (price.price_day < 100000 || !price.price_day)) {
       dispatchStep({ type: 'setDisableNext', payload: true });
-    }else {
+    } else {
       dispatchStep({ type: 'setDisableNext', payload: false });
     }
-  },[price,priceShort]);
+  }, [price, priceShort]);
 
   return listing && (
     <Grid container>
-      <ValidatorForm onSubmit={()=>{return null}}>
+      <ValidatorForm onSubmit={() => { return null }}>
         <div>
           <h1 className={classes.bigTitle}>
             Giá cơ bản
@@ -110,7 +110,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 required>
                 <TextValidator
                   validators={['required', 'isNumber', 'minNumber:100000']}
-                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này','Giá tối thiểu của hình thức thuê theo ngày là : 100.000đ']}
+                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này', 'Giá tối thiểu của hình thức thuê theo ngày là : 100.000đ']}
                   name='price_day'
                   variant="outlined"
                   value={price.price_day}
@@ -126,7 +126,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
 
             {listing.short_term_rent_type.rent_type === 3 ? (
               <Grid item xs={11}>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
 
                 <Typography className={classes.title} variant='h6' gutterBottom>
                   Giá theo giờ
@@ -137,8 +137,8 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 </Typography>
 
                 <TextValidator
-                  validators={['required', 'isNumber','minNumber:50000']}
-                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này','Giá tối thiểu của hình thức thuê theo giờ là : 50.000đ']}
+                  validators={['required', 'isNumber', 'minNumber:50000']}
+                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này', 'Giá tối thiểu của hình thức thuê theo giờ là : 50.000đ']}
                   id="outlined-adornment-amount"
                   variant="outlined"
                   value={price.price_hour}
@@ -185,7 +185,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
 
             {listing.short_term_rent_type.rent_type === 3 ? (
               <Grid item xs={11}>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
 
                 <Typography className={classes.title} variant='h6' gutterBottom>
                   Phụ thu khi khách ở thêm giờ

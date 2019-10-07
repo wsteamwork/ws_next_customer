@@ -1,9 +1,7 @@
-import Cookies from 'universal-cookie';
-import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
+import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
+import { Dispatch, Reducer } from 'redux';
 
 export type DescriptionReducerState = {
   room_id: number;
@@ -71,4 +69,3 @@ export const getDataDescription = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
-

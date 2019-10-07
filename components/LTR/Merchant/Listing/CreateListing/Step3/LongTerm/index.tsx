@@ -6,7 +6,7 @@ import { IPriceLongTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTe
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { calcPercentage } from '@/utils/mixins';
@@ -25,30 +25,30 @@ interface IPercent {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    title:{
+    title: {
       fontSize: 16,
       fontWeight: 600,
       lineHeight: '1.375em',
       color: 'rgb(118, 118, 118)',
     },
-    bigTitle:{
-      margin:'24px 0'
+    bigTitle: {
+      margin: '24px 0'
     },
-    divider:{
-      margin:'32px 0'
+    divider: {
+      margin: '32px 0'
     },
-    rowMargin:{
-      marginTop:12
+    rowMargin: {
+      marginTop: 12
     },
-    btnTip:{
+    btnTip: {
       padding: '0px 8px',
-      minWidth:0,
-      '&:hover':{
+      minWidth: 0,
+      '&:hover': {
         textDecoration: 'underline',
       }
     },
-    txtPercent:{
-      color:'#2196f3'
+    txtPercent: {
+      color: '#2196f3'
     }
   })
 );
@@ -56,7 +56,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const LongTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { } = props;
-  const priceLong = useSelector<ReducersList,IPriceLongTerm>((state) => state.priceTerm.priceLT);
+  const priceLong = useSelector<ReducersList, IPriceLongTerm>((state) => state.priceTerm.priceLT);
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
 
@@ -76,11 +76,11 @@ const LongTerm: FC<IProps> = (props) => {
   });
 
   useEffect(() => {
-    dispatchStep({type:'setStep', payload:'tab2'});
+    dispatchStep({ type: 'setStep', payload: 'tab2' });
   }, []);
 
   useEffect(() => {
-    dispatch({type:'setPriceLT', payload:{...price}});
+    dispatch({ type: 'setPriceLT', payload: { ...price } });
   }, [price]);
 
   const handleChange = (name: keyof IPriceLongTerm) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,24 +100,24 @@ const LongTerm: FC<IProps> = (props) => {
       [typePrice]: price.term_1_month - (price.term_1_month * percent),
     });
 
-    dispatch({type:'setPriceLT', payload:{...price}});
+    dispatch({ type: 'setPriceLT', payload: { ...price } });
   };
 
-  const handleBlur = () =>{
-    dispatch({type:'setPriceLT', payload:{...price}});
+  const handleBlur = () => {
+    dispatch({ type: 'setPriceLT', payload: { ...price } });
   };
 
-  useMemo(() =>{
-    if(!priceLong || !(price.term_1_month && price.term_2_month && price.term_3_month && price.term_6_month && price.term_12_month)) {
+  useMemo(() => {
+    if (!priceLong || !(price.term_1_month && price.term_2_month && price.term_3_month && price.term_6_month && price.term_12_month)) {
       dispatchStep({ type: 'setDisableNext', payload: true });
-    }else {
+    } else {
       dispatchStep({ type: 'setDisableNext', payload: false });
     }
-  },[price,priceLong]);
+  }, [price, priceLong]);
 
   return (
     <Fragment>
-      <ValidatorForm onSubmit={()=>{return null}}>
+      <ValidatorForm onSubmit={() => { return null }}>
         <div>
           <div>
             <h1 className={classes.bigTitle}>
@@ -136,7 +136,7 @@ const LongTerm: FC<IProps> = (props) => {
 
                 <TextValidator
                   validators={['required', 'isNumber', 'minNumber:500000']}
-                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này','Giá tối thiểu của hình thức thuê theo tháng là : 500.000']}
+                  errorMessages={['Bạn cần nhập giá cho trường này', 'Bạn cần nhập giá cho trường này', 'Giá tối thiểu của hình thức thuê theo tháng là : 500.000']}
                   variant="outlined"
                   value={price.term_1_month}
                   onChange={handleChange('term_1_month')}
@@ -189,18 +189,18 @@ const LongTerm: FC<IProps> = (props) => {
                     <Grid item xs>
                       <Typography className={classes.txtPercent}><b>{pricePercent.term_2_month}</b> so với giá cơ bản </Typography>
                     </Grid>
-                  ):''}
+                  ) : ''}
                 </Grid>
 
                 <div className={classes.rowMargin}>
                   <span>Gợi ý: </span>
                   <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
-                          onClick={()=>handleTip('term_2_month', 0.03)}>
+                    onClick={() => handleTip('term_2_month', 0.03)}>
                     3%
                   </Button>
                   <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
                 </div>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
               </Grid>
               <Grid item xs={11}>
                 <Typography className={classes.title} variant='h6' gutterBottom>
@@ -227,18 +227,18 @@ const LongTerm: FC<IProps> = (props) => {
                     <Grid item xs>
                       <Typography className={classes.txtPercent}><b>{pricePercent.term_3_month}</b> so với giá cơ bản </Typography>
                     </Grid>
-                  ):''}
+                  ) : ''}
                 </Grid>
 
                 <div className={classes.rowMargin}>
                   <span>Gợi ý: </span>
                   <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
-                          onClick={()=>handleTip('term_3_month', 0.05)}>
+                    onClick={() => handleTip('term_3_month', 0.05)}>
                     5%
                   </Button>
                   <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
                 </div>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
               </Grid>
 
               <Grid item xs={11}>
@@ -266,17 +266,17 @@ const LongTerm: FC<IProps> = (props) => {
                     <Grid item xs>
                       <Typography className={classes.txtPercent}><b>{pricePercent.term_6_month}</b> so với giá cơ bản </Typography>
                     </Grid>
-                  ):''}
+                  ) : ''}
                 </Grid>
                 <div className={classes.rowMargin}>
                   <span>Gợi ý: </span>
                   <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
-                          onClick={()=>handleTip('term_6_month', 0.1)}>
+                    onClick={() => handleTip('term_6_month', 0.1)}>
                     10%
                   </Button>
                   <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>
                 </div>
-                <Divider className={classes.divider}/>
+                <Divider className={classes.divider} />
               </Grid>
 
               <Grid item xs={11}>
@@ -304,12 +304,12 @@ const LongTerm: FC<IProps> = (props) => {
                     <Grid item xs>
                       <Typography className={classes.txtPercent}><b>{pricePercent.term_12_month}</b> so với giá cơ bản </Typography>
                     </Grid>
-                  ):''}
+                  ) : ''}
                 </Grid>
                 <div className={classes.rowMargin}>
                   <span>Gợi ý: </span>
                   <Button color='primary' className={classes.btnTip} disabled={!price.term_1_month}
-                          onClick={()=>handleTip('term_12_month', 0.15)}>
+                    onClick={() => handleTip('term_12_month', 0.15)}>
                     15%
                   </Button>
                   <span> là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì hạn này </span>

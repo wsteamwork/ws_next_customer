@@ -1,6 +1,6 @@
-import { axios_merchant } from '@/utils/axiosInstance';
 import { createContext, Dispatch, Reducer } from 'react';
 import { updateObject } from '../utility';
+// import { headers } from '@/utils/axiosInstance.ts';
 
 export const CreateListingContext = createContext<ICreateListingContext>(
   null as ICreateListingContext
@@ -58,83 +58,4 @@ export const CreateListingReducer: Reducer<CreateListingState, CreateListingActi
     default:
       return state;
   }
-};
-
-const createFirstTab = async (data: any, dispatch: Dispatch<CreateListingAction>) => {
-  dispatch({ type: 'setLeaseType', payload: data });
-  dispatch({ type: 'setAccommodationType', payload: data });
-  dispatch({ type: 'setStayWithHost', payload: data });
-};
-
-export const handleCreateRoom = async (token?: string, initLanguage: string = 'vi') => {
-  const headers = token && {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Accept-Language': initLanguage
-    }
-  };
-  const response = await axios_merchant.post(`long-term/room/create`, {
-    step1: {
-      tab1: {
-        lease_type: 2,
-        accommodation_type: 2,
-        stay_with_host: 1
-      },
-      tab2: {
-        guest: {
-          recommendation: 4,
-          max_additional_guest: 4
-        },
-        bedrooms: {
-          bedroom_1: {
-            number_bed: 1,
-            beds: [
-              {
-                number_bed: 1,
-                size: 3
-              },
-              {
-                number_bed: 2,
-                size: 1
-              }
-            ],
-            area: 15
-          },
-          bedroom_2: {
-            beds: [
-              {
-                number_bed: 1,
-                size: 3
-              },
-              {
-                number_bed: 2,
-                size: 1
-              }
-            ],
-            number_bed: 3,
-            area: 15
-          },
-          number_bedroom: 2
-        }
-      },
-      tab3: {
-        bathrooms: {
-          number_bathroom: 2
-        }
-      },
-      tab4: {
-        address: '102 Thai Thinh',
-        building: 'Ha Thanh Plaza',
-        city_id: 2,
-        district_id: 102,
-        latitude: '102',
-        longitude: '39'
-      }
-    }
-  });
-
-  if (response) {
-    console.log('before next');
-  }
-  return response.data;
 };

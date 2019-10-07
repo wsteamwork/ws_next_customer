@@ -1,7 +1,8 @@
 import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
 import {
   amenitiesReducer,
-  AmenitiesReducerAction
+  AmenitiesReducerAction,
+  AmenitiesReducerState
 } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import {
   PriceTermActions,
@@ -31,8 +32,7 @@ import {
   CreateListingActions,
   createListingReducer,
   CreateListingState
-} from './LTR/CreateListing';
-import { AmenitiesReducerState } from './LTR/CreateListing/Step2/amenities';
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import {
   descriptionReducer,
   DescriptionReducerAction,
@@ -117,7 +117,6 @@ export type ReducresActions =
   | AmenitiesReducerAction
   | ImageReducerAction
   | DetailsReducerAction
-  | CreateListingActions
   | CreateListingActions
   | PriceTermActions
   | StepPricesActions;

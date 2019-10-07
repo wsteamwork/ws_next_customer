@@ -5,7 +5,6 @@ import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
-import { AxiosResponse } from 'axios';
 
 interface IProps {
   steps?: string[];
@@ -14,10 +13,28 @@ interface IProps {
   setActiveStep: Dispatch<SetStateAction<number>>;
   disableNext?: boolean;
   handleAPI?: () => Promise<any>;
+  submitEachStep?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, disableNext, handleAPI } = props;
+  const {
+    steps,
+    activeStep,
+    nextLink,
+    setActiveStep,
+    disableNext,
+    handleAPI,
+    submitEachStep
+  } = props;
+
+  const handleFinish = async () => {
+    try {
+      const result = await handleAPI();
+      if (result) {
+        nextStep();
+      }
+    } catch (error) { }
+  };
 
   const nextStep = () => {
     if (activeStep === steps.length - 1) {
@@ -29,9 +46,13 @@ const BottomNavigation: FC<IProps> = (props) => {
 
   const handleNext = async () => {
     try {
-      const result = await handleAPI();
-      if (result) {
-        nextStep()
+      if (!submitEachStep) {
+        const result = await handleAPI();
+        if (result) {
+          nextStep();
+        }
+      } else {
+        nextStep();
       }
     } catch (error) { }
   };

@@ -16,9 +16,11 @@ interface IProps {
     setActiveStep: Dispatch<SetStateAction<number>>,
     nextLink: string
   ) => any;
-  nextLink: string;
+  nextLink?: string;
   disableNext?: boolean;
-  handleAPI?: () => any
+  handleAPI?: () => any;
+  submitEachStep?: boolean;
+
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({
@@ -78,7 +80,7 @@ const QontoStepIcon = withStyles({
 const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
-  const { getSteps, getStepContent, nextLink, disableNext, handleAPI } = props;
+  const { getSteps, getStepContent, nextLink, disableNext, handleAPI, submitEachStep } = props;
   const [activeStep, setActiveStep] = useState<number>(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -136,6 +138,7 @@ const StepperProgress: FC<IProps> = (props) => {
                 nextLink={nextLink}
                 disableNext={disableNext}
                 handleAPI={handleAPI}
+                submitEachStep={submitEachStep}
               />
             </div>
           )}

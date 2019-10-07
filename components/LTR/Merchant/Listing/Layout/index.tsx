@@ -11,16 +11,18 @@ interface IProps {
     step: number,
     steps: string[],
     setActiveStep: Dispatch<SetStateAction<number>>,
-    nextLink: string
+    nextLink?: string
   ) => any;
   getSteps: () => Array<string>;
   nextLink?: string;
   disableNext?: boolean;
   handleAPI?: () => any;
+  submitEachStep?: boolean;
+
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { title, getStepContent, getSteps, nextLink, disableNext, handleAPI } = props;
+  const { title, getStepContent, getSteps, nextLink, disableNext, handleAPI, submitEachStep } = props;
 
   return (
     <Grid className="listing-container">
@@ -30,7 +32,14 @@ const Layout: FC<IProps> = (props) => {
         md={10}
         className="listing-content"
         classNameItem="listing-content-wrapper">
-        <StepperProgress getSteps={getSteps} getStepContent={getStepContent} nextLink={nextLink} disableNext={disableNext} handleAPI={handleAPI} />
+        <StepperProgress
+          getSteps={getSteps}
+          getStepContent={getStepContent}
+          nextLink={nextLink}
+          handleAPI={handleAPI}
+          disableNext={disableNext}
+          submitEachStep={submitEachStep}
+        />
       </GridContainer>
     </Grid>
   );

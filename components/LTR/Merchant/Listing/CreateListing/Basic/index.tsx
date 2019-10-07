@@ -1,14 +1,13 @@
-import React, { FC, useState, Dispatch, useEffect, ChangeEvent } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
-import { Formik, FormikActions, FormikProps } from 'formik';
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
-import { useDispatch, useSelector } from 'react-redux';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Router from 'next/router';
-import { FormControlLabel, Checkbox } from '@material-ui/core';
+import { Formik, FormikActions, FormikProps } from 'formik';
+import React, { ChangeEvent, Dispatch, FC, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 interface IProps {
   classes?: any;
 }
@@ -28,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
 const Basic: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [stayWithHost, setStayWithHost] = useState<boolean>(false);
+  const [roomType, setRoomType] = useState<number>(null);
+
+  const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+
+  useEffect(() => {
+    getRoomType(setRoomTypesData);
+  }, []);
 
   const handleChangeCheckBox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setStayWithHost(checked);
@@ -40,13 +46,6 @@ const Basic: FC<IProps> = (props) => {
       payload: stayWithHost ? 1 : 0
     });
   }, [stayWithHost]);
-  const propertyType: Array<string> = [
-    'Nhà riêng',
-    'Chung cư',
-    'Biệt thự Villa',
-    'Phòng riêng',
-    'Khách sạn'
-  ];
 
   const initFormValue: FormValues = {
     lease_type: null,
@@ -61,6 +60,13 @@ const Basic: FC<IProps> = (props) => {
       accommodation_type: values.accommodation_type,
       stay_with_host: values.stay_with_host
     };
+  };
+
+  const callBackOnChange = (value: string) => {
+    dispatch({
+      type: 'SET_ACCOMMODATION_TYPE',
+      payload: parseInt(value)
+    });
   };
 
   return (
@@ -81,35 +87,36 @@ const Basic: FC<IProps> = (props) => {
           handleBlur,
           isSubmitting
         }: FormikProps<FormValues>) => (
-          <form onSubmit={handleSubmit}>
-            {/* onSubmit={handleSubmit} */}
-            <CheckboxCustom />
+            <form onSubmit={handleSubmit}>
+              {/* onSubmit={handleSubmit} */}
+              <CheckboxCustom />
 
-            <Grid style={{ width: 'calc(50% - 8px)' }}>
-              {/* <h3>Loại Căn hộ: </h3> */}
-              <Select
-                name="accommodation_type"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.accommodation_type}
-                title="Loại Căn hộ: "
-                options={propertyType}
-              />
-            </Grid>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  disableRipple
-                  classes={{ checked: classes.checked }}
-                  checked={stayWithHost}
-                  onChange={handleChangeCheckBox}
-                  value="stayWithHost"
+              <Grid style={{ width: 'calc(50% - 8px)' }}>
+                {/* <h3>Loại Căn hộ: </h3> */}
+                <SelectCustom
+                  name="accommodation_type"
+                  // onChange={handleChangeSelect}
+                  onBlur={handleBlur}
+                  value={roomType}
+                  title="Loại Căn hộ: "
+                  options={roomTypesData}
+                  callBackOnChange={callBackOnChange}
                 />
-              }
-              label="Bạn có đang ở trong căn hộ này không?"
-            />
-          </form>
-        )}
+              </Grid>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    disableRipple
+                    classes={{ checked: classes.checked }}
+                    checked={stayWithHost}
+                    onChange={handleChangeCheckBox}
+                    value="stayWithHost"
+                  />
+                }
+                label="Bạn có đang ở trong căn hộ này không?"
+              />
+            </form>
+          )}
       />
     </div>
   );
