@@ -60,10 +60,16 @@ export const getDataDescription = async (
     const room_id = res.data.data.room_id;
     const about_room = res.data.data.about_room;
     dispatch({ type: 'setRoomId', payload: room_id });
-    dispatch({ type: 'setName', payload: about_room ? about_room.name : '' });
-    dispatch({ type: 'setDescription', payload: about_room ? about_room.description : '' });
-    dispatch({ type: 'setSpace', payload: about_room ? about_room.space : '' });
-    dispatch({ type: 'setRules', payload: about_room ? about_room.note : '' });
+    dispatch({ type: 'setName', payload: about_room && about_room.name ? about_room.name : '' });
+    dispatch({
+      type: 'setDescription',
+      payload: about_room && about_room.description ? about_room.description : ''
+    });
+    dispatch({ type: 'setSpace', payload: about_room && about_room.space ? about_room.space : '' });
+    dispatch({
+      type: 'setRules',
+      payload: about_room && about_room.note ? about_room.note : ''
+    });
     return about_room;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
