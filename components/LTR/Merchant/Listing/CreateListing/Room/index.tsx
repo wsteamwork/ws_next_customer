@@ -1,30 +1,50 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, { Dispatch, FC, useState } from 'react';
+import React, { Dispatch, FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddBedRoom from './AddBedRoom';
-interface IProps { }
+interface IProps {}
 
 const Room: FC<IProps> = (props) => {
   const [guest, setGuest] = useState<number>(0);
   const [maxGuest, setMaxGuest] = useState<number>(0);
-
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const bedRoomsNumber = useSelector<ReducersList, number>(
     (state) => state.createListing.bedRoomsNumber
   );
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_GUEST_RECOMMENDATION',
+      payload: guest
+    });
+  }, [guest]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'SET_MAX_GUEST',
+      payload: maxGuest
+    });
+  }, [maxGuest]);
   const bedRoomsNumberArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);
-  console.log(bedRoomsNumber)
 
   const callBackOnChange = (value: any) => {
-    console.log('callbacl');
+    let bedRooms = Array.from(
+      new Array(parseInt(value)),
+      (val: any, index: number) => `bedroom_${++index}`
+    );
+    console.log(bedRooms);
+    // dispatch({
+    //   type: 'SET_BEDROOMS',
+    //   payload: bedRooms
+    // });
     dispatch({
       type: 'SET_BEDROOMS_NUMBER',
-      payload: value
+      payload: parseInt(value)
     });
   };
 
@@ -62,7 +82,7 @@ const Room: FC<IProps> = (props) => {
         Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn
       </h3>
 
-      {bedRoomsNumberArray(+bedRoomsNumber).map((number) => (
+      {bedRoomsNumberArray(bedRoomsNumber).map((number) => (
         <AddBedRoom roomNumber={number} />
       ))}
     </div>

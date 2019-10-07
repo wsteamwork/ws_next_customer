@@ -1,20 +1,16 @@
-import React, { FC, ChangeEvent, useState } from 'react';
-import {
-  Grid,
-  FormControlLabel,
-  createStyles,
-  Theme,
-  Typography,
-  withStyles,
-  Checkbox
-} from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/styles';
-import OutlinedDiv from './OutlinedGrid';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import mainColor from '@/styles/constants/colors';
-import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-
+import { Checkbox, createStyles, FormControlLabel, Grid, Theme, Typography, withStyles } from '@material-ui/core';
+import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/styles';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import OutlinedDiv from './OutlinedGrid';
 export const CustomCheckbox = withStyles({
   root: {
     color: mainColor.primary,
@@ -29,6 +25,8 @@ interface IProps {
   label: string;
   sub_label?: string;
   amenities: AmenitiesIndexRes[];
+  dataClick?: number[];
+  typeUpload: { type: any };
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -42,17 +40,31 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const CardAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { label, sub_label, amenities } = props;
-  const [dataClick, setDataClick] = useState<number[]>([]);
-  console.log(dataClick);
+  const { label, sub_label, amenities, dataClick, typeUpload } = props;
+  const dispatch = useDispatch<Dispatch<AmenitiesReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const countAmenities = useSelector<ReducersList, number>((state) => state.amenities.count_amenities);
+  const [newDataClick, setNewDataClick] = useState<number[]>(dataClick);
   const handleChange = (id: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
-      setDataClick([...dataClick, id]);
+      setNewDataClick([...newDataClick, id]);
+      dispatch({ type: typeUpload.type, payload: [...newDataClick, id] });
+      dispatch({ type: 'setCountAmenities', payload: countAmenities + 1 });
     } else {
-      const dataCheckboxUnCheck = dataClick.filter((i) => i !== id);
-      setDataClick(dataCheckboxUnCheck);
+      let dataCheckboxUnCheck = newDataClick.filter((i) => i !== id);
+      setNewDataClick(dataCheckboxUnCheck);
+      dispatch({ type: typeUpload.type, payload: dataCheckboxUnCheck });
+      dispatch({ type: 'setCountAmenities', payload: countAmenities - 1 });
     }
   };
+  useEffect(() => {
+    // if (countAmenities < 10) {
+    //   dispatch_detail({ type: 'setDisableNext', payload: true });
+    // }
+    // else {
+    dispatch_detail({ type: 'setDisableNext', payload: false });
+    // }
+  }, [countAmenities]);
   return (
     <OutlinedDiv label={label}>
       <Grid container>
@@ -60,13 +72,13 @@ const CardAmenities: FC<IProps> = (props) => {
           <Typography>{sub_label}</Typography>
         </Grid>
         {amenities.map((o) => (
-          <Grid item xs={6} key={o.id}>
+          <Grid item xs={12} sm={6} key={o.id}>
             <FormControlLabel
               control={
                 <CustomCheckbox
                   name={o.id.toString()}
                   onChange={handleChange(o.id)}
-                  checked={dataClick.some((x) => x === o.id)}
+                  checked={newDataClick.some((x) => x === o.id)}
                   value={o.id.toString()}
                   color="primary"
                 />

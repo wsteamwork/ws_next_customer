@@ -1,14 +1,20 @@
-import React, { FC, useState, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC, useState, Dispatch, useEffect } from 'react';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { useDispatch } from 'react-redux';
 
-interface IProps {
-  
-}
+interface IProps {}
 
 const Bathroom: FC<IProps> = (props) => {
   const [bathroom, setBathroom] = useState<number>(0);
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  useEffect(() => {
+    dispatch({
+      type: 'SET_BATHROOM_NUMBER',
+      payload: bathroom
+    });
+  }, [bathroom]);
   return (
     <div className="step1-tab3-bathroom">
       <Grid className="createListing-title">

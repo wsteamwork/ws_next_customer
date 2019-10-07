@@ -1,14 +1,12 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
-import GoogleMap from 'google-map-react';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Theme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import GoogleMap from 'google-map-react';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any;
@@ -41,9 +39,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const BoxMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const {room} = props;
+  const { room } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-
   return (
     room && (
       <div>
@@ -63,27 +60,26 @@ const BoxMap: FC<IProps> = (props) => {
             }}
             defaultZoom={15}
             defaultCenter={{
-              lat: parseFloat(room.latitude),
-              lng: parseFloat(room.longitude)
+              lat: room.latitude ? parseFloat(room.latitude) : 0,
+              lng: room.longitude ? parseFloat(room.longitude) : 0
             }}
             yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) =>
-              new maps.Circle({
-                strokeColor: '#FCAB70',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#FDBF68',
-                fillOpacity: 0.3,
-                map,
-                center: {
-                  lat: parseFloat(room.latitude),
-                  lng: parseFloat(room.longitude)
-                  // lat: 21.0479552,
-                  // lng: 105.8368719
-                },
-                radius: 400
-              })
-            }
+            onGoogleApiLoaded={({ map, maps }) => {
+              room.latitude ?
+                new maps.Circle({
+                  strokeColor: '#FCAB70',
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: '#FDBF68',
+                  fillOpacity: 0.3,
+                  map,
+                  center: {
+                    lat: room.latitude,
+                    lng: room.longitude
+                  },
+                  radius: 400
+                }) : null
+            }}
           />
         </div>
       </div>

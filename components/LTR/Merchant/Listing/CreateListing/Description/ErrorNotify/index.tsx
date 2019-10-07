@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid } from '@material-ui/core';
+import { Grid, Theme } from '@material-ui/core';
 import { ErrorOutline } from '@material-ui/icons';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment } from 'react';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -14,11 +14,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       border: 'solid 1px #ff7272',
       borderRadius: '0 0 3px 3px',
       [theme!.breakpoints!.down!('xs')]: {
-        fontSize: '14px',
+        fontSize: '14px'
       },
       [theme!.breakpoints!.down!('sm')]: {
-        fontSize: '14px',
-      },
+        fontSize: '14px'
+      }
     },
     error_icon: {
       marginRight: theme.spacing(1)

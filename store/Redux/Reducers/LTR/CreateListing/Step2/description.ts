@@ -1,9 +1,10 @@
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { Dispatch, Reducer } from 'redux';
 
 export type DescriptionReducerState = {
+  room_id: number;
   name: string;
   description: string;
   space: string;
@@ -12,6 +13,7 @@ export type DescriptionReducerState = {
 };
 
 export const init: DescriptionReducerState = {
+  room_id: null,
   name: '',
   description: '',
   space: '',
@@ -20,6 +22,7 @@ export const init: DescriptionReducerState = {
 };
 
 export type DescriptionReducerAction =
+  | { type: 'setRoomId'; payload: number }
   | { type: 'setName'; payload: string }
   | { type: 'setDescription'; payload: string }
   | { type: 'setSpace'; payload: string }
@@ -31,6 +34,8 @@ export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionRed
   action: DescriptionReducerAction
 ): DescriptionReducerState => {
   switch (action.type) {
+    case 'setRoomId':
+      return updateObject(state, { room_id: action.payload });
     case 'setName':
       return updateObject(state, { name: action.payload });
     case 'setDescription':
@@ -51,8 +56,10 @@ export const getDataDescription = async (
   dispatch: Dispatch<DescriptionReducerAction>
 ): Promise<any> => {
   try {
-    const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
+    const room_id = res.data.data.room_id;
     const about_room = res.data.data.about_room;
+    dispatch({ type: 'setRoomId', payload: room_id });
     dispatch({ type: 'setName', payload: about_room ? about_room.name : '' });
     dispatch({ type: 'setDescription', payload: about_room ? about_room.description : '' });
     dispatch({ type: 'setSpace', payload: about_room ? about_room.space : '' });

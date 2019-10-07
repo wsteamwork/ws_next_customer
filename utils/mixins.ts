@@ -122,3 +122,13 @@ export const getFirstLetterOfName = (name: string) => {
   let itemLast = splitName.slice(-1).pop();
   return itemLast!.substring(0, 1);
 };
+
+export const calcPercentage = (portion:number, total:number) => {
+  const percent = parseInt(((portion/total) * 100).toFixed(2));
+
+  if (portion > total){
+    return `+ ${percent}%`;
+  }else {
+    return `- ${100-percent}%`;
+  }
+};

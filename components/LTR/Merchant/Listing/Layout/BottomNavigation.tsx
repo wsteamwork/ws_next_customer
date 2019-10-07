@@ -5,18 +5,36 @@ import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
-import axios from 'axios';
-import { RoomIndexContext, getRooms } from '@/store/Context/Room/RoomListContext';
+
 interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
   setActiveStep: Dispatch<SetStateAction<number>>;
   disableNext?: boolean;
+  handleAPI?: () => Promise<any>;
+  submitEachStep?: boolean;
 }
 
 const BottomNavigation: FC<IProps> = (props) => {
-  const { steps, activeStep, nextLink, setActiveStep, disableNext } = props;
+  const {
+    steps,
+    activeStep,
+    nextLink,
+    setActiveStep,
+    disableNext,
+    handleAPI,
+    submitEachStep
+  } = props;
+
+  const handleFinish = async () => {
+    try {
+      const result = await handleAPI();
+      if (result) {
+        nextStep();
+      }
+    } catch (error) { }
+  };
 
   const nextStep = () => {
     if (activeStep === steps.length - 1) {
@@ -25,19 +43,18 @@ const BottomNavigation: FC<IProps> = (props) => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
-  const getAPI = async () => {
-    const res: any = await setTimeout(() => console.log('3sec', 3000));
-    //axios.get('https://dev.westay.vn/customer-api/rooms')
-    return res;
-  };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     try {
-      getAPI().then((res) => {
-        console.log(res);
+      if (!submitEachStep) {
+        const result = await handleAPI();
+        if (result) {
+          nextStep();
+        }
+      } else {
         nextStep();
-      });
-    } catch (error) {}
+      }
+    } catch (error) { }
   };
 
   const handleBack = () => {
@@ -68,7 +85,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+            <ButtonGlobal onClick={handleNext} disabled={disableNext} type="submit">
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </ButtonGlobal>
           }

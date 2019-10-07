@@ -27,5 +27,39 @@
     "space1000Character": "Warning ! The space must not exceed 1000 characters",
     "rules500Character": "Warning ! The rules must not exceed 500 characters",
     "defaulError": "An error occurred",
-    "remainChar": "characters remaining."
+    "remainChar": "characters remaining.",
+    "titleStep": "Step 2: Listing Details",
+    "tab1": "Descriptions",
+    "tab2": "Amenities",
+    "tab3": "Post Images",
+    "tab4": "Images Caption",
+    "amenities": {
+        "titleAmenities": "Please select the facilities and equipment in the apartment that you provide when guests book.",
+        "subTitleAmenities": "(Please select at least 10 amenities before next)",
+        "subLabelFacilities": "Facilities often look for these when booking homes",
+        "subLabelBathrooms": "The bathroom, toilet facilities as well as what many travelers use",
+        "subLabelKitchens": "Facilities and amenities that allow travelers to eat and drink comfortably",
+        "subLabelEntertainments": "Facilities and amenities that allow travelers to eat and drink comfortably",
+        "subLabelOutdoors": "Amenities, service offer outside the apartment",
+        "subLabelOtherAmen": "Additional amenities in the apartment"
+    },
+    "images": {
+        "labelAvatar": "Apartment avatar image",
+        "subLabelAvatar": "Please post 1 image to represent your apartment",
+        "labelCover": "Apartment cover photo",
+        "subLabelCover": "Please post 1 cover photo for your apartment",
+        "labelLivingRooms": "Image living room",
+        "subLabelLivingRooms": "Please post all living room photos for your apartment",
+        "labelBedRooms": "Image bedrooms",
+        "subLabelBedRooms": "Please post all bedrooms photos for your apartment",
+        "labelBathRooms": "Image bathrooms",
+        "subLabelBathRooms": "Please post all bathrooms photos for your apartment",
+        "labelKitchens": "Image Kitchens",
+        "subLabelKitchens": "Please post all kitchens photos for your apartment",
+        "labelFurnitures": "Photo amenities, interior furniture",
+        "subLabelFurnitures": "Please post all the photos, amenities, furniture for your apartment",
+        "labelOutdoors": "Photo entrance, outdoor areas",
+        "subLabelOutdoors": "Please post photos of the entrance, ooutdoorareas for your apartment",
+        "addCaption": "Add caption"
+    }
 }

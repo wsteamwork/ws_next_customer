@@ -92,6 +92,8 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png" />
+          <script
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}&libraries=places,drawing,geometry`}></script>
         </Head>
         <body>
           <Main />

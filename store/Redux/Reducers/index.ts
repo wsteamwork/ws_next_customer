@@ -1,5 +1,20 @@
 import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
 import {
+  amenitiesReducer,
+  AmenitiesReducerAction,
+  AmenitiesReducerState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import {
+  PriceTermActions,
+  PriceTermReducer,
+  PriceTermState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import {
+  StepPricesActions,
+  stepPricesReducer,
+  StepPricesState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
+import {
   CompareRoomsActions,
   CompareRoomsState,
   ComparisonListReducer
@@ -17,12 +32,22 @@ import {
   CreateListingActions,
   createListingReducer,
   CreateListingState
-} from './LTR/CreateListing';
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import {
   descriptionReducer,
   DescriptionReducerAction,
   DescriptionReducerState
 } from './LTR/CreateListing/Step2/description';
+import {
+  detailsReducer,
+  DetailsReducerAction,
+  DetailsReducerState
+} from './LTR/CreateListing/Step2/details';
+import {
+  imageReducer,
+  ImageReducerAction,
+  ImageReducerState
+} from './LTR/CreateListing/Step2/images';
 import {
   notificationReducer,
   NotificationReducerAction,
@@ -47,7 +72,12 @@ export type ReducersType = {
   promotion: Reducer<PomotionState, PomotionActions>;
   notifications: Reducer<NotificationReducerState, NotificationReducerAction>;
   description: Reducer<DescriptionReducerState, DescriptionReducerAction>;
+  amenities: Reducer<AmenitiesReducerState, AmenitiesReducerAction>;
+  images: Reducer<ImageReducerState, ImageReducerAction>;
+  details: Reducer<DetailsReducerState, DetailsReducerAction>;
   createListing: Reducer<CreateListingState, CreateListingActions>;
+  priceTerm: Reducer<PriceTermState, PriceTermActions>;
+  stepPrice: Reducer<StepPricesState, StepPricesActions>;
 };
 
 export type ReducersList = {
@@ -63,7 +93,12 @@ export type ReducersList = {
   promotion: PomotionState;
   notifications: NotificationReducerState;
   description: DescriptionReducerState;
+  amenities: AmenitiesReducerState;
+  images: ImageReducerState;
+  details: DetailsReducerState;
   createListing: CreateListingState;
+  priceTerm: PriceTermState;
+  stepPrice: StepPricesState;
 };
 
 export type ReducresActions =
@@ -79,7 +114,12 @@ export type ReducresActions =
   | CompareRoomsActions
   | PomotionActions
   | DescriptionReducerAction
-  | CreateListingActions;
+  | AmenitiesReducerAction
+  | ImageReducerAction
+  | DetailsReducerAction
+  | CreateListingActions
+  | PriceTermActions
+  | StepPricesActions;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -94,7 +134,12 @@ const reducers: ReducersType = {
   notifications: notificationReducer,
   compareRooms: ComparisonListReducer,
   description: descriptionReducer,
-  createListing: createListingReducer
+  amenities: amenitiesReducer,
+  images: imageReducer,
+  details: detailsReducer,
+  createListing: createListingReducer,
+  priceTerm: PriceTermReducer,
+  stepPrice: stepPricesReducer
 };
 
 export interface NextContextPage extends NextPageContext {

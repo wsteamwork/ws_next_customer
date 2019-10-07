@@ -1,9 +1,9 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-
 import GridContainer from '@/components/Layout/Grid/Container';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import HeaderNav from './HeaderNavigation';
 import StepperProgress from './StepperProgress';
+
 
 interface IProps {
   title: string;
@@ -11,14 +11,18 @@ interface IProps {
     step: number,
     steps: string[],
     setActiveStep: Dispatch<SetStateAction<number>>,
-    nextLink: string
+    nextLink?: string
   ) => any;
   getSteps: () => Array<string>;
-  nextLink: string;
+  nextLink?: string;
+  disableNext?: boolean;
+  handleAPI?: () => any;
+  submitEachStep?: boolean;
+
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { title, getStepContent, getSteps, nextLink } = props;
+  const { title, getStepContent, getSteps, nextLink, disableNext, handleAPI, submitEachStep } = props;
 
   return (
     <Grid className="listing-container">
@@ -28,7 +32,14 @@ const Layout: FC<IProps> = (props) => {
         md={10}
         className="listing-content"
         classNameItem="listing-content-wrapper">
-        <StepperProgress getSteps={getSteps} getStepContent={getStepContent} nextLink={nextLink} />
+        <StepperProgress
+          getSteps={getSteps}
+          getStepContent={getStepContent}
+          nextLink={nextLink}
+          handleAPI={handleAPI}
+          disableNext={disableNext}
+          submitEachStep={submitEachStep}
+        />
       </GridContainer>
     </Grid>
   );

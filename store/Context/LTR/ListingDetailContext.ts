@@ -89,6 +89,7 @@ export const getListingDetail = async (
     const res: AxiosRes<any> = await axios.get(`long-term-rooms/${id}`);
     dispatch({ type: 'setListing', payload: res.data.data });
   } catch (error) {
+    console.log(error);
     // Router.push('/');
   }
 };

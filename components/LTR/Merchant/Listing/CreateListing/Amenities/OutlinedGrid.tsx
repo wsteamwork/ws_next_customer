@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import TextField from "@material-ui/core/TextField";
 import { createStyles, makeStyles, Theme } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import React, { FC } from "react";
 
 interface IProps {
   classes?: any;
@@ -11,7 +11,7 @@ interface IProps {
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     wrapper: {
-      marginBottom: theme.spacing(6)
+      marginTop: theme.spacing(6)
     },
     inputLabel: {
       fontSize: "24px",
@@ -24,7 +24,7 @@ const InputComponent = ({ inputRef, ...other }) => <div {...other} />;
 
 const OutlinedDiv: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {children, label} = props;
+  const { children, label } = props;
   return (
     <TextField
       className={classes.wrapper}

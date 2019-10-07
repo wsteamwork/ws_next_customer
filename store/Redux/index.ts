@@ -1,9 +1,9 @@
-import { applyMiddleware, createStore } from 'redux';
-import { PersistConfig } from 'redux-persist';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import thunk from 'redux-thunk';
 import rootReducer from '@/store/Redux/Reducers/index';
 import { MakeStore } from 'next-redux-wrapper';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { PersistConfig } from 'redux-persist';
+import thunk from 'redux-thunk';
 
 export const windowExist = process.browser && typeof window !== undefined;
 
@@ -31,7 +31,12 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
         'iProfile',
         'promotion',
         'notifications',
-        'description'
+        'description',
+        'amenities',
+        'images',
+        'details',
+        'priceTerm',
+        'stepPrice'
       ]
     };
 

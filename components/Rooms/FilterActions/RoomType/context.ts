@@ -35,7 +35,7 @@ type ReturnUseCheckBox = {
   handleRemove: MouseEventHandler;
   roomTypes: number[];
 };
-
+ 
 export const useRoomTypeChecbox = (
   setOpen?: Dispatch<SetStateAction<boolean>>,
   dataClick?: number[],

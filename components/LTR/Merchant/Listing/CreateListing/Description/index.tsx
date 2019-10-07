@@ -1,23 +1,19 @@
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { IListingDetailContext, ListingDetailContext } from '@/store/Context/LTR/ListingDetailContext';
-import { DescriptionReq } from '@/types/Requests/LTR/Description/DescriptionRequests';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios_merchant } from '@/utils/axiosInstance';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DescriptionReducerAction, getDataDescription } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import createStyles from '@material-ui/core/styles/createStyles';
-import { Formik, FormikActions, FormikProps } from 'formik';
-import React, { Dispatch, FC, Fragment, SetStateAction, useContext, useMemo } from 'react';
+import { Formik, FormikProps } from 'formik';
+import React, { FC, Fragment, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import * as Yup from 'yup';
 import CardTextarea from './CardTextarea';
 interface IProps {
   classes?: any;
-  activeStep: number;
-  steps: string[];
-  setActiveStep: Dispatch<SetStateAction<number>>;
-  nextLink: string;
 }
 
 interface MyDescription {
@@ -52,7 +48,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       margin: theme.spacing(3, 0)
     },
     margin_top: {
-      marginTop: theme.spacing(3)
+      marginTop: '32px !important'
     },
     notchedOutline: {
       border: 'none',
@@ -65,50 +61,51 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Description: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { activeStep, steps, setActiveStep, nextLink } = props;
   const { t } = useTranslation();
-  const { width } = useContext(GlobalContext);
+  const { width, router } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
-  const { state, dispatch } = useContext<IListingDetailContext>(ListingDetailContext);
-  const { listing } = state;
-  // const about_room = useSelector<ReducersList, Descrip>(
-  //   (state) => state.description;
-  // );
 
-  // useEffect(() => {
-  //   getDataDescription(11743, dispatch);
-  // }, [about_room]);
+  const name = useSelector<ReducersList, string>((state) => state.description.name);
+  const description = useSelector<ReducersList, string>((state) => state.description.description);
+  const space = useSelector<ReducersList, string>((state) => state.description.space);
+  const rules = useSelector<ReducersList, string>((state) => state.description.rules);
+  const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+
+  const id = router.query.id;
+  useEffect(() => {
+    getDataDescription(id, dispatch_des);
+  }, [id]);
+
+  useEffect(() => {
+    dispatch_detail({ type: 'setStep', payload: 'tab1' });
+  }, []);
+
+  useMemo(() => {
+    if (name.length < 10 || description.length < 50) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    }
+    else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
+  }, [name, description]);
+
+  const handleSubmitForm: any = () => {
+    return {};
+  };
 
   const formikInit: MyDescription = useMemo<MyDescription>(() => {
     return {
-      name: listing && listing.about_room.name ? listing.about_room.name : '',
-      description: listing && listing.about_room.description ? listing.about_room.description : '',
-      space: listing && listing.about_room.space ? listing.about_room.space : '',
-      rules: listing && listing.about_room.note ? listing.about_room.note : ''
+      name: name,
+      description: description,
+      space: space,
+      rules: rules
     };
-  }, [listing]);
+  }, [name, description, space, rules]);
 
-  const handleSubmitForm = async (values: MyDescription, actions: FormikActions<MyDescription>) => {
-    const data: DescriptionReq = {
-      name: values.name,
-      description: values.description,
-      space: values.space,
-      rules: values.rules
-    };
-    try {
-      const res: AxiosRes<any> = await axios_merchant.post(
-        `long-term/room/step2/tab1/${listing.room_id}`,
-        {
-          step2: {
-            tab1: data
-          }
-        }
-      );
-      actions.setSubmitting(false);
-      console.log('res', res);
-    } catch (error) { }
+  const dispatchDescription = (typeAction, value) => {
+    dispatch_des({ type: typeAction.type, payload: value });
   };
-
   return (
     <Fragment>
       <Formik
@@ -124,12 +121,10 @@ const Description: FC<IProps> = (props) => {
           errors,
           handleChange,
           handleBlur,
-          isSubmitting,
-          validateOnChange
         }: FormikProps<MyDescription>) => (
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" alignContent="center">
-                <Grid item xs={12} className="wrapper">
+                <Grid item xs={11}>
                   <CardTextarea
                     name="name"
                     label={t('details:listingName')}
@@ -158,9 +153,15 @@ const Description: FC<IProps> = (props) => {
                           : ''
                       }
                     }}
+                    autoFocus={true}
                     inputProps={{ maxLength: 100 }}
                     handleChange={handleChange}
-                    handleBlur={handleBlur}
+                    handleBlur={(e) => {
+                      handleBlur(e);
+                      if (e.currentTarget.value.length > 14) {
+                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                      }
+                    }}
                   />
 
                   <Divider className={classes.normal_divider} />
@@ -211,7 +212,12 @@ const Description: FC<IProps> = (props) => {
                     inputProps={{ maxLength: 500 }}
                     placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                     handleChange={handleChange}
-                    handleBlur={handleBlur}
+                    handleBlur={(e) => {
+                      handleBlur(e);
+                      if (e.currentTarget.value.length > 49) {
+                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                      }
+                    }}
                   />
 
                   <Divider className={classes.normal_divider} />
@@ -262,7 +268,10 @@ const Description: FC<IProps> = (props) => {
                           : ''
                       }
                       handleChange={handleChange}
-                      handleBlur={handleBlur}
+                      handleBlur={(e) => {
+                        handleBlur(e);
+                        dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                      }}
                     />
                   </Grid>
 
@@ -305,17 +314,13 @@ const Description: FC<IProps> = (props) => {
                           : ''
                       }
                       handleChange={handleChange}
-                      handleBlur={handleBlur}
+                      handleBlur={(e) => {
+                        handleBlur(e);
+                        dispatchDescription({ type: 'setRules' }, e.currentTarget.value);
+                      }}
                     />
                   </Grid>
                 </Grid>
-                <BottomNavigation
-                  steps={steps}
-                  activeStep={activeStep}
-                  setActiveStep={setActiveStep}
-                  nextLink={nextLink}
-
-                />
               </Grid>
             </form>
           )}></Formik>

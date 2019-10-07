@@ -1,5 +1,7 @@
 import { createContext, Dispatch, Reducer } from 'react';
 import { updateObject } from '../utility';
+// import { headers } from '@/utils/axiosInstance.ts';
+
 export const CreateListingContext = createContext<ICreateListingContext>(
   null as ICreateListingContext
 );
@@ -57,13 +59,3 @@ export const CreateListingReducer: Reducer<CreateListingState, CreateListingActi
       return state;
   }
 };
-
-const createFirstTab = async (data: any, dispatch: Dispatch<CreateListingAction>) => {
-  dispatch({ type: 'setLeaseType', payload: data });
-  dispatch({ type: 'setAccommodationType', payload: data });
-  dispatch({ type: 'setStayWithHost', payload: data });
-};
-
-// const create = async () => {
-//   const res: AxiosResponse<
-// }
