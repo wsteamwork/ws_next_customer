@@ -69,7 +69,7 @@ const ImageCaption: FC<IProps> = (props) => {
       {livingrooms.images.length && (
         <CardImageCaption
           label={t('details:images:labelLivingRooms')}
-          subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
+          // subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
           typeUpload={{ type: 'setLivingRoomImage' }}
           typeImage={7}
           arrImage={livingrooms.images}
@@ -127,7 +127,7 @@ const ImageCaption: FC<IProps> = (props) => {
       )}
       {outdoors.images.length && (
         <CardImageCaption
-          label={t('details:images:labelFurnitures')}
+          label={t('details:images:labelOutdoors')}
           // subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
           typeUpload={{ type: 'setOutdoorsImage' }}
           typeImage={9}

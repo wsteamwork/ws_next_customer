@@ -3,10 +3,18 @@ import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import mainColor from '@/styles/constants/colors';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-import { Checkbox, createStyles, FormControlLabel, Grid, Theme, Typography, withStyles } from '@material-ui/core';
+import {
+  Checkbox,
+  createStyles,
+  FormControlLabel,
+  Grid,
+  Theme,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/styles';
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -43,7 +51,9 @@ const CardAmenities: FC<IProps> = (props) => {
   const { label, sub_label, amenities, dataClick, typeUpload } = props;
   const dispatch = useDispatch<Dispatch<AmenitiesReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
-  const countAmenities = useSelector<ReducersList, number>((state) => state.amenities.count_amenities);
+  const countAmenities = useSelector<ReducersList, number>(
+    (state) => state.amenities.count_amenities
+  );
   const [newDataClick, setNewDataClick] = useState<number[]>(dataClick);
   const handleChange = (id: number) => (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     if (checked === true) {
@@ -58,37 +68,39 @@ const CardAmenities: FC<IProps> = (props) => {
     }
   };
   useEffect(() => {
-    // if (countAmenities < 10) {
-    //   dispatch_detail({ type: 'setDisableNext', payload: true });
-    // }
-    // else {
-    dispatch_detail({ type: 'setDisableNext', payload: false });
-    // }
+    if (countAmenities < 10) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    } else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
   }, [countAmenities]);
-  return (
-    <OutlinedDiv label={label}>
-      <Grid container>
-        <Grid item xs={12} className={classes.subTitle}>
-          <Typography>{sub_label}</Typography>
-        </Grid>
-        {amenities.map((o) => (
-          <Grid item xs={12} sm={6} key={o.id}>
-            <FormControlLabel
-              control={
-                <CustomCheckbox
-                  name={o.id.toString()}
-                  onChange={handleChange(o.id)}
-                  checked={newDataClick.some((x) => x === o.id)}
-                  value={o.id.toString()}
-                  color="primary"
-                />
-              }
-              label={o.comfort_trans[0].name}
-            />
+  return useMemo(
+    () => (
+      <OutlinedDiv label={label}>
+        <Grid container>
+          <Grid item xs={12} className={classes.subTitle}>
+            <Typography>{sub_label}</Typography>
           </Grid>
-        ))}
-      </Grid>
-    </OutlinedDiv>
+          {amenities.map((o) => (
+            <Grid item xs={12} sm={6} key={o.id}>
+              <FormControlLabel
+                control={
+                  <CustomCheckbox
+                    name={o.id.toString()}
+                    onChange={handleChange(o.id)}
+                    checked={newDataClick.some((x) => x === o.id)}
+                    value={o.id.toString()}
+                    color="primary"
+                  />
+                }
+                label={o.comfort_trans[0].name}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </OutlinedDiv>
+    ),
+    [newDataClick]
   );
 };
 
