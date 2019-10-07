@@ -47,10 +47,7 @@ const Amenities: FC<IProps> = (props) => {
   };
 
   useEffect(() => {
-    getDataAmenities(id, dispatch_amen);
-  }, []);
-  useEffect(() => {
-    getDataAmenities(id, dispatch_amen);
+    dispatch_detail({ type: 'setStep', payload: 'tab2' });
   }, []);
 
   useEffect(() => {
