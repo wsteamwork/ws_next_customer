@@ -16,11 +16,11 @@ interface IProps {
 }
 
 interface IPercent {
-  term_1_month: string,
-  term_2_month: string,
-  term_3_month: string,
-  term_6_month: string,
-  term_12_month: string,
+  term_1_month?: string,
+  term_2_month?: string,
+  term_3_month?: string,
+  term_6_month?: string,
+  term_12_month?: string,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -67,12 +67,13 @@ const LongTerm: FC<IProps> = (props) => {
     term_6_month: priceLong ? priceLong.term_6_month : 0,
     term_12_month: priceLong ? priceLong.term_12_month : 0,
   });
+
   const [pricePercent, setPricePercent] = useState<IPercent>({
     term_1_month: '',
     term_2_month: '',
     term_3_month: '',
     term_6_month: '',
-    term_12_month: '',
+    term_12_month: ''
   });
 
   useEffect(() => {

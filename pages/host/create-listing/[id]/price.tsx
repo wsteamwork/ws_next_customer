@@ -11,6 +11,7 @@ import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesF
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import { PriceTermActions, getPrice } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 
 const RoomCreateListing = () => {
   const { router } = useContext(GlobalContext);
@@ -22,12 +23,19 @@ const RoomCreateListing = () => {
   const data_LongTerm = useSelector<ReducersList, IPriceLongTerm>((state => state.priceTerm.priceLT));
   const data_serviceFee = useSelector<ReducersList, IServicesFee>((state => state.priceTerm.serviceFee));
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
+  const dispatchPriceTerm = useDispatch<Dispatch<PriceTermActions>>();
+
+  console.log(listing);
 
   useEffect(() => {
     getListingPrices(id, dispatchStep)
       .catch(err => {
         console.log(err);
       });
+
+    getPrice(id, dispatchPriceTerm).catch(err => {
+      console.log('price term: ' + err)
+    })
   }, []);
 
   const dataST: IPriceST = {
@@ -95,7 +103,7 @@ const RoomCreateListing = () => {
   };
 
   if (!listing) { return null }
-  console.log(listing);
+
   return (
     <Fragment>
       <NextHead

@@ -55,6 +55,7 @@ export const getListingPrices = async (
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const listing = res.data.data;
     const room_id = listing.room_id;
+
     if (listing) {
       dispatch({ type: 'setRoomId', payload: room_id });
       dispatch({ type: 'setListing', payload: listing });
@@ -70,7 +71,7 @@ export const handlePricesListing = async (room_id: number, tab: string, data: an
   const token = cookies.get('_token');
   const headers = token && {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   };
   const response = await axios_merchant.post(
