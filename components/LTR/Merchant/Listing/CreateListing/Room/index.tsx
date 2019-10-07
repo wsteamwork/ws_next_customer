@@ -1,20 +1,26 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddBedRoom from './AddBedRoom';
+import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 interface IProps {}
 
 const Room: FC<IProps> = (props) => {
-  const [guest, setGuest] = useState<number>(0);
-  const [maxGuest, setMaxGuest] = useState<number>(0);
+  const { guestRecommendation, maxGuest, bedRoomsNumber, bedRooms } = useSelector<
+    ReducersList,
+    CreateListingState
+  >((state) => state.createListing);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const bedRoomsNumber = useSelector<ReducersList, number>(
-    (state) => state.createListing.bedRoomsNumber
-  );
+  const [guest, setGuest] = useState<number>(guestRecommendation);
+  const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
+  const [bedRoomsList, setBedRoomsList] = useState<BedRoomReq>(bedRooms);
 
   useEffect(() => {
     dispatch({
@@ -26,26 +32,36 @@ const Room: FC<IProps> = (props) => {
   useEffect(() => {
     dispatch({
       type: 'SET_MAX_GUEST',
-      payload: maxGuest
+      payload: maxGuests
     });
-  }, [maxGuest]);
+  }, [maxGuests]);
+
+  // useEffect(() => {
+  //   console.log(bedRoomsList);
+  //   dispatch({
+  //     type: 'SET_BEDROOMS',
+  //     payload: bedRoomsList
+  //   });
+  // }, [bedRoomsList]);
+
   const bedRoomsNumberArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);
 
   const callBackOnChange = (value: any) => {
-    let bedRooms = Array.from(
-      new Array(parseInt(value)),
-      (val: any, index: number) => `bedroom_${++index}`
-    );
-    console.log(bedRooms);
-    // dispatch({
-    //   type: 'SET_BEDROOMS',
-    //   payload: bedRooms
-    // });
     dispatch({
       type: 'SET_BEDROOMS_NUMBER',
       payload: parseInt(value)
     });
+    let bedRoomsTemp: any = {};
+    for (let i = 1; i <= parseInt(value); i++) {
+      bedRoomsTemp[`bedroom_${i}`] = {
+        number_bed: 0,
+        beds: [],
+        area: 0
+      };
+    }
+    bedRoomsTemp['number_bedroom'] = parseInt(value);
+    setBedRoomsList(bedRoomsTemp);
   };
 
   return (
@@ -62,8 +78,8 @@ const Room: FC<IProps> = (props) => {
         setNumber={setGuest}
         title={'Khách'}></QuantityButtons>
       <QuantityButtons
-        number={maxGuest}
-        setNumber={setMaxGuest}
+        number={maxGuests}
+        setNumber={setMaxGuests}
         title={'Số khách tối đa'}
         containerWidth={'66.67%'}></QuantityButtons>
       <Grid style={{ paddingRight: 10 }}>
@@ -83,7 +99,11 @@ const Room: FC<IProps> = (props) => {
       </h3>
 
       {bedRoomsNumberArray(bedRoomsNumber).map((number) => (
-        <AddBedRoom roomNumber={number} />
+        <AddBedRoom
+          roomNumber={number}
+          bedRoomsList={bedRoomsList}
+          setBedroomsList={setBedRoomsList}
+        />
       ))}
     </div>
   );

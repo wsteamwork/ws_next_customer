@@ -16,12 +16,13 @@ export type CreateListingState = {
   readonly maxGuest: number;
   readonly bedRoomsNumber: number;
   readonly bathroomNumber: number;
-  readonly bedRooms: BedRoomReq[];
+  readonly bedRooms: BedRoomReq;
   readonly address: string;
   readonly building: string;
   readonly city_id: number;
   readonly district_id: number;
   readonly coordinate: Coordinate;
+  readonly listing: any;
 };
 
 export type CreateListingActions =
@@ -31,19 +32,20 @@ export type CreateListingActions =
   | { type: 'SET_GUEST_RECOMMENDATION'; payload: number }
   | { type: 'SET_MAX_GUEST'; payload: number }
   | { type: 'SET_BEDROOMS_NUMBER'; payload: number }
-  | { type: 'SET_BEDROOMS'; payload: BedRoomReq[] }
+  | { type: 'SET_BEDROOMS'; payload: BedRoomReq }
   | { type: 'SET_BATHROOM_NUMBER'; payload: number }
   | { type: 'SET_ADDRESS'; payload: string }
   | { type: 'SET_BUILDING'; payload: string }
   | { type: 'SET_CITY_ID'; payload: number }
   | { type: 'SET_DISTRICT_ID'; payload: number }
-  | { type: 'SET_COORDINATE'; payload: Coordinate };
+  | { type: 'SET_COORDINATE'; payload: Coordinate }
+  | { type: 'SET_LISTING'; payload: any };
 
 const init: CreateListingState = {
   leaseType: null,
   accommodationType: null,
   stayWithHost: null,
-  bedRooms: [],
+  bedRooms: null,
   guestRecommendation: null,
   maxGuest: null,
   bedRoomsNumber: 1,
@@ -52,7 +54,8 @@ const init: CreateListingState = {
   building: '',
   city_id: null,
   district_id: null,
-  coordinate: null
+  coordinate: null,
+  listing: null
 };
 
 export const createListingReducer: Reducer<CreateListingState, CreateListingActions> = (
@@ -86,6 +89,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { district_id: action.payload });
     case 'SET_COORDINATE':
       return updateObject<CreateListingState>(state, { coordinate: action.payload });
+    case 'SET_LISTING':
+      return updateObject<CreateListingState>(state, { listing: action.payload });
 
     default:
       return state;
@@ -98,7 +103,7 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
 //   dispatch({ type: 'SET_STAY_WITH_HOST', payload: data });
 // };
 
-export const handleCreateRoom = async (data: any, token?: string, initLanguage: string = 'vi') => {
+export const handleCreateRoom = async (data: any, dispatch: any, token?: string, initLanguage: string = 'vi') => {
   const headers = token && {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -118,37 +123,7 @@ export const handleCreateRoom = async (data: any, token?: string, initLanguage: 
           recommendation: data.guest_recommendation,
           max_additional_guest: data.max_guest
         },
-        bedrooms: {
-          bedroom_1: {
-            number_bed: 1,
-            beds: [
-              {
-                number_bed: 1,
-                size: 3
-              },
-              {
-                number_bed: 2,
-                size: 1
-              }
-            ],
-            area: 15
-          },
-          bedroom_2: {
-            beds: [
-              {
-                number_bed: 1,
-                size: 3
-              },
-              {
-                number_bed: 2,
-                size: 1
-              }
-            ],
-            number_bed: 3,
-            area: 15
-          },
-          number_bedroom: data.number_bedrooms
-        }
+        bedrooms: data.bedRooms
       },
       tab3: {
         bathrooms: {
@@ -170,6 +145,10 @@ export const handleCreateRoom = async (data: any, token?: string, initLanguage: 
   const response = await axios_merchant.post(`long-term/room/create`, body);
 
   if (response) {
+    dispatch({
+      type: 'SET_LISTING',
+      listing: body
+    });
     console.log(response);
   }
   return response;

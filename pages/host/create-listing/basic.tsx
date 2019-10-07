@@ -35,7 +35,8 @@ const RoomCreateListing = () => {
     ),
     address: useSelector<ReducersList, string>((state) => state.createListing.address),
     building: useSelector<ReducersList, string>((state) => state.createListing.building),
-    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate)
+    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate),
+    bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms)
   };
 
   const getStepContent = (step) => {
@@ -67,7 +68,7 @@ const RoomCreateListing = () => {
         getStepContent={getStepContent}
         nextLink={'/host/create-listing/123/detail'}
         handleAPI={() => {
-          handleCreateRoom(data).then((res) => console.log(res));
+          handleCreateRoom(data, dispatch).then((res) => console.log(res));
         }}
         submitEachStep={true}
       />

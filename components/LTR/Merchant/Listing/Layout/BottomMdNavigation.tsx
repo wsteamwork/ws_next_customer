@@ -11,11 +11,12 @@ interface IProps {
   handleBack: () => void;
   steps: Array<string>;
   handleNext: () => Promise<any>;
+  handleFinish: () => Promise<any>;
   disableNext?: boolean;
 }
 
 const BottomMdNavigation: FC<IProps> = (props) => {
-  const { activeStep, handleBack, steps, handleNext, disableNext } = props;
+  const { activeStep, handleBack, steps, handleNext, handleFinish, disableNext } = props;
 
   return (
     <GridContainer
@@ -25,17 +26,21 @@ const BottomMdNavigation: FC<IProps> = (props) => {
       <Grid container item xs={7} className="bottom-navigation-inner-container">
         <Grid item className="bottom-navigation-inner-wrapper">
           <Grid className="prev-button">
-            <Button
-              className="prev-link"
-              onClick={handleBack}>
+            <Button className="prev-link" onClick={handleBack}>
               <FontAwesomeIcon icon={faChevronLeft} size="2x" color="#fa991c"></FontAwesomeIcon>
               <span className="prev-title">Back</span>
             </Button>
           </Grid>
           <Grid className="next-button">
-            <ButtonGlobal onClick={handleNext} disabled={disableNext} type="submit">
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ButtonGlobal>
+            {activeStep === steps.length - 1 ? (
+              <ButtonGlobal onClick={handleFinish} disabled={disableNext}>
+                Finish
+              </ButtonGlobal>
+            ) : (
+              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                Next
+              </ButtonGlobal>
+            )}
           </Grid>
         </Grid>
       </Grid>
@@ -43,7 +48,7 @@ const BottomMdNavigation: FC<IProps> = (props) => {
   );
 };
 BottomMdNavigation.defaultProps = {
-  disableNext: false,
+  disableNext: false
 };
 
 export default BottomMdNavigation;

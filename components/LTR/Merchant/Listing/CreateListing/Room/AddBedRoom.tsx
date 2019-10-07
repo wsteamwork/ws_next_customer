@@ -1,4 +1,4 @@
-import React, { FC, useState, Dispatch } from 'react';
+import React, { FC, useState, Dispatch, SetStateAction } from 'react';
 import Grid from '@material-ui/core/Grid/Grid';
 import Select from '@/components/ReusableComponents/SelectCustom';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -8,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import { FormGroup, Button, Collapse } from '@material-ui/core';
-import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/CheckboxCustom';
+import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -18,10 +18,12 @@ import {
 import { ReducersList } from '@/store/Redux/Reducers';
 interface IProps {
   roomNumber?: number;
+  bedRoomsList?: any;
+  setBedroomsList?: Dispatch<SetStateAction<any>>;
 }
 
 const BedRoom: FC<IProps> = (props) => {
-  const { roomNumber } = props;
+  const { roomNumber, bedRoomsList, setBedroomsList } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [guest, setGuest] = useState<number>(0);
   const [maxGuest, setMaxGuest] = useState<number>(0);
@@ -38,17 +40,23 @@ const BedRoom: FC<IProps> = (props) => {
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
   const handleToggleAddBedRoom = () => {
     if (isAddBedRoom) {
-      let bedroomsTemp: any[] = bedRooms.slice();
-      bedroomsTemp.find((value, index) => {
-        console.log(value);
+      if (bedRoomsList.hasOwnProperty(`bedroom_${roomNumber}`)) {
+        let bedsList = [];
+        let bedRoomsListTemp = bedRoomsList;
+        if (single > 0) bedsList.push({ number_bed: single, size: 1 });
+        if (double > 0) bedsList.push({ number_bed: double, size: 2 });
+        if (king > 0) bedsList.push({ number_bed: king, size: 3 });
+        if (queen > 0) bedsList.push({ number_bed: queen, size: 4 });
+        bedRoomsListTemp[`bedroom_${roomNumber}`].beds = bedsList;
+        bedRoomsListTemp[`bedroom_${roomNumber}`][`number_bed`] = totalBeds;
+        console.log(bedRoomsListTemp)
+        dispatch({
+          type: 'SET_BEDROOMS',
+          payload: bedRoomsListTemp
+        });
         
-      });
+      }
     }
-
-    // dispatch({
-    //   type: 'SET_BEDROOMS',
-    //   payload: maxGuest
-    // });
     setIsAddBedRoom(!isAddBedRoom);
   };
 
