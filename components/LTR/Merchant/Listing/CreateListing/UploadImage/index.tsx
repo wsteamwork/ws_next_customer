@@ -130,7 +130,7 @@ const UploadImage: FC<IProps> = (props) => {
             </Grid>
             <Grid item xs={11}>
               <UppyImage
-                label={t('details:images:labelFurnitures')}
+                label={t('details:images:labelOutdoors')}
                 subLabel={t('details:images:subLabelOutdoors')}
                 typeImage={9}
                 typeUpload={{ type: 'setOutdoorsImage' }}
