@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as Yup from 'yup';
 import CardTextarea from './CardTextarea';
+import { getDataAmenities, AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 interface IProps {
   classes?: any;
 }
@@ -71,6 +72,7 @@ const Description: FC<IProps> = (props) => {
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
 
   const id = router.query.id;
   useEffect(() => {
@@ -79,6 +81,10 @@ const Description: FC<IProps> = (props) => {
 
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab1' });
+  }, []);
+
+  useEffect(() => {
+    getDataAmenities(id, dispatch_amen);
   }, []);
 
   useMemo(() => {
