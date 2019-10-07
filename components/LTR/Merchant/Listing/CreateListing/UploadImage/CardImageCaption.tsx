@@ -1,6 +1,6 @@
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { createStyles, Grid, makeStyles, TextField, Theme, Typography } from '@material-ui/core';
+import { createStyles, Grid, makeStyles, TextField, Theme, Typography, CardActions, Tooltip } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,6 +8,8 @@ import React, { ChangeEvent, FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
   classes?: any;
@@ -33,15 +35,31 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     card: {
-      // boxShadow: 'none'
+      position: 'relative'
     },
     media: {
-      height: (props) => (props.typeImage === 1 || props.typeImage === 4 ? 250 : 250),
+      height: 250,
       border: '3px solid #ededed',
       borderRadius: 5
     },
     marginLabel: {
       marginBottom: theme.spacing(2)
+    },
+    cardAction: {
+      color: '#ffffff',
+      padding: theme.spacing(0, 1),
+      position: 'absolute',
+      top: '7%',
+      left: '5%',
+      zIndex: 10,
+      boxSizing: 'border-box',
+      display: 'flex',
+      cursor: 'pointer',
+      width: '30px',
+      height: '30px',
+      backgroundColor: '#484848',
+      border: '1px solid lightgray',
+      borderRadius: '50%'
     }
   })
 );
@@ -63,6 +81,11 @@ const CardImageCaption: FC<IProps> = (props) => {
     values[index].caption = event.target.value;
     setValues(values);
   };
+  const handleRemoveImage = (index: number) => {
+    let newValues = values.splice(index, 1);
+    setValues(newValues);
+    handleBlur();
+  };
 
   return (
     <Fragment>
@@ -79,8 +102,20 @@ const CardImageCaption: FC<IProps> = (props) => {
         </Grid>
         <Grid container spacing={3}>
           {values.map((img, index) => (
-            <Grid item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
-              <Card className={classes.card}>
+            <Grid className={classes.card} item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
+              {values.length > 1 ? (
+                <Tooltip title="Xóa ảnh" placement="right" classes={{ tooltip: 'tooltip' }}>
+                  <CardActions
+                    onClick={() => handleRemoveImage(index)}
+                    className={classes.cardAction}
+                    disableSpacing>
+                      <FontAwesomeIcon icon={faTrashAlt} size="1x"></FontAwesomeIcon>
+                  </CardActions>
+                </Tooltip>
+              ) : (
+                ''
+              )}
+              <Card >
                 <CardMedia
                   className={classes.media}
                   image={IMAGE_STORAGE_LG + img.name}

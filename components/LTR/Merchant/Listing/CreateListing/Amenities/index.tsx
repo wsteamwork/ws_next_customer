@@ -1,6 +1,9 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import {
+  AmenitiesReducerAction,
+  getDataAmenities
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
@@ -45,7 +48,9 @@ const Amenities: FC<IProps> = (props) => {
 
   useEffect(() => {
     getDataAmenities(id, dispatch_amen);
-    dispatch_detail({ type: 'setStep', payload: 'tab2' });
+  }, []);
+  useEffect(() => {
+    getDataAmenities(id, dispatch_amen);
   }, []);
 
   useEffect(() => {
@@ -69,67 +74,67 @@ const Amenities: FC<IProps> = (props) => {
               label={amenities['facilities'][0].type_txt}
               sub_label={t('details:amenities:subLabelFacilities')}
               amenities={amenities['facilities']}
-              dataClick={facilitiesClick.length ? facilitiesClick : []}
+              dataClick={facilitiesClick}
               typeUpload={{ type: 'setFacilities' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
           {amenities['bathrooms'] ? (
             <CardAmenities
               label={amenities['bathrooms'][0].type_txt}
               sub_label={t('details:amenities:subLabelBathrooms')}
               amenities={amenities['bathrooms']}
-              dataClick={bathroomsClick.length ? bathroomsClick : []}
+              dataClick={bathroomsClick}
               typeUpload={{ type: 'setBathRooms' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
           {amenities['kitchens'] ? (
             <CardAmenities
               label={amenities['kitchens'][0].type_txt}
               sub_label={t('details:amenities:subLabelKitchens')}
               amenities={amenities['kitchens']}
-              dataClick={kitchensClick.length ? kitchensClick : []}
+              dataClick={kitchensClick}
               typeUpload={{ type: 'setKitChens' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
           {amenities['entertainments'] ? (
             <CardAmenities
               label={amenities['entertainments'][0].type_txt}
               sub_label={t('details:amenities:subLabelEntertainments')}
               amenities={amenities['entertainments']}
-              dataClick={entertainmentClick.length ? entertainmentClick : []}
+              dataClick={entertainmentClick}
               typeUpload={{ type: 'setEntertainment' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
           {amenities['outdoors'] ? (
             <CardAmenities
               label={amenities['outdoors'][0].type_txt}
               sub_label={t('details:amenities:subLabelOutdoors')}
               amenities={amenities['outdoors']}
-              dataClick={outdoorsClick.length ? outdoorsClick : []}
+              dataClick={outdoorsClick}
               typeUpload={{ type: 'setOutdoors' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
           {amenities['others'] ? (
             <CardAmenities
               label={amenities['others'][0].type_txt}
               sub_label={t('details:amenities:subLabelOtherAmen')}
               amenities={amenities['others']}
-              dataClick={othersClick.length ? othersClick : []}
+              dataClick={othersClick}
               typeUpload={{ type: 'setOthers' }}
             />
           ) : (
-              ''
-            )}
+            ''
+          )}
         </Grid>
       </Grid>
     </Fragment>
