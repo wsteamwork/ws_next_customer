@@ -36,13 +36,6 @@ const Room: FC<IProps> = (props) => {
     });
   }, [maxGuests]);
 
-  // useEffect(() => {
-  //   console.log(bedRoomsList);
-  //   dispatch({
-  //     type: 'SET_BEDROOMS',
-  //     payload: bedRoomsList
-  //   });
-  // }, [bedRoomsList]);
 
   const bedRoomsNumberArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);

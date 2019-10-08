@@ -48,8 +48,8 @@ const init: CreateListingState = {
   accommodationType: null,
   stayWithHost: null,
   bedRooms: null,
-  guestRecommendation: null,
-  maxGuest: null,
+  guestRecommendation: 0,
+  maxGuest: 0,
   bedRoomsNumber: 1,
   bathroomNumber: 0,
   address: '',
@@ -94,7 +94,7 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { coordinate: action.payload });
     case 'SET_LISTING':
       return updateObject<CreateListingState>(state, { listing: action.payload });
-      case 'SET_ID_LISTING':
+    case 'SET_ID_LISTING':
       return updateObject<CreateListingState>(state, { id_listing: action.payload });
 
     default:
@@ -108,7 +108,12 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
 //   dispatch({ type: 'SET_STAY_WITH_HOST', payload: data });
 // };
 
-export const handleCreateRoom = async (data: any, dispatch: any, token?: string, initLanguage: string = 'vi') => {
+export const handleCreateRoom = async (
+  data: any,
+  dispatch: any,
+  token?: string,
+  initLanguage: string = 'vi'
+) => {
   const headers = token && {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -138,21 +143,16 @@ export const handleCreateRoom = async (data: any, dispatch: any, token?: string,
       tab4: {
         address: data.address,
         building: data.building,
-        city_id: 2,
-        district_id: 102,
+        city_id: data.city_id,
+        district_id: data.district_id,
         latitude: parseFloat(data.coordinate.lat),
         longitude: parseFloat(data.coordinate.long)
       }
     }
   };
-  console.log(body);
+ 
 
   const response = await axios_merchant.post(`long-term/room/create`, body);
-
-  if (response) {
-    
-    console.log(response);
-  }
   return response;
 };
 

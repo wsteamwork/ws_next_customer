@@ -49,7 +49,7 @@ const BedRoom: FC<IProps> = (props) => {
         if (queen > 0) bedsList.push({ number_bed: queen, size: 4 });
         bedRoomsListTemp[`bedroom_${roomNumber}`].beds = bedsList;
         bedRoomsListTemp[`bedroom_${roomNumber}`][`number_bed`] = totalBeds;
-        console.log(bedRoomsListTemp)
+
         dispatch({
           type: 'SET_BEDROOMS',
           payload: bedRoomsListTemp

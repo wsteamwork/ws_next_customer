@@ -39,7 +39,9 @@ const RoomCreateListing = () => {
     address: useSelector<ReducersList, string>((state) => state.createListing.address),
     building: useSelector<ReducersList, string>((state) => state.createListing.building),
     coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate),
-    bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms)
+    bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms),
+    city_id: useSelector<ReducersList, any>((state) => state.createListing.city_id),
+    district_id: useSelector<ReducersList, any>((state) => state.createListing.district_id)
   };
 
   const getStepContent = (step) => {

@@ -10,6 +10,8 @@ import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { axios_merchant } from '@/utils/axiosInstance';
+import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 interface IProps {}
 
 interface Coordinate {
@@ -32,43 +34,22 @@ const Location: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [coordinate, setCoordinate] = useState<Coordinate>(null);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
-  const [citiesList, setCitiesList] = useState<any[]>([]);
-
-  const getCities = async () => {
-    try {
-      const res = await axios_merchant.get(`/cities`);
-      return res
-    } catch (error) {}
-  };
+  const [district, setDistrict] = useState<number>(null);
+  const [districtList, setDistrictList] = useState<any[]>(null);
+  const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
 
   useEffect(() => {
-    getCities().then((res) => {
-      setCitiesList(res.data.data.map(city => city.name));
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(coordinate);
     dispatch({
       type: 'SET_COORDINATE',
       payload: coordinate
     });
   }, [coordinate]);
   useEffect(() => {
-    console.log(addressInput);
     dispatch({
       type: 'SET_ADDRESS',
       payload: addressInput
     });
   }, [addressInput]);
-  useEffect(() => {
-    console.log(buildingInput);
-
-    dispatch({
-      type: 'SET_BUILDING',
-      payload: buildingInput
-    });
-  }, [buildingInput]);
 
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
@@ -89,21 +70,33 @@ const Location: FC<IProps> = (props) => {
   };
 
   const onSuggestSelect = (place: Suggest) => {
-    const {
-      location: { lat, lng },
-      label
-    } = place;
-    setCoordinate({
-      lat,
-      lng
-    });
+    if (place) {
+      let { lat, lng } = place.location;
+      setCoordinate({
+        lat,
+        lng
+      });
+      setDefaultCenter({
+        lat,
+        lng
+      });
+      setAddress(place.label);
+    }
+  };
 
-    setDefaultCenter({
-      lat,
-      lng
+  const callBackOnChange = (value) => {
+    setDistrict(value);
+    dispatch({
+      type: 'SET_DISTRICT_ID',
+      payload: parseInt(value)
     });
+  };
 
-    setAddress(label);
+  const handleBlur = () => {
+    dispatch({
+      type: 'SET_BUILDING',
+      payload: buildingInput
+    });
   };
 
   return (
@@ -114,53 +107,57 @@ const Location: FC<IProps> = (props) => {
           Khách sẽ chỉ biết được địa chỉ chính xác sau khi đặt phòng thành công
         </Grid>
       </Grid>
-      <h3>Địa chỉ</h3>
+      <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
       <Geosuggest
-        initialValue={addressInput}
         country="vn"
-        placeholder="Start typing!"
+        placeholder="Nhập địa chỉ"
         onSuggestSelect={onSuggestSelect}
         location={new google.maps.LatLng(53.558572, 9.9278215)}
         radius={20}
-        autoActivateFirstSuggest
       />
-      <h3>Toà nhà (Tuỳ chọn)</h3>
-      <Grid style={{ width: 'calc(80% - 8px)' }}>
-        <FormControl variant="outlined">
+      <Grid style={{ width: 'calc(80% - 8px)', margin: '20px 0' }}>
+        <h3 style={{ color: '#767676' }}>Toà nhà (Tuỳ chọn)</h3>
+
+        <FormControl fullWidth variant="outlined">
           <OutlinedInput
-            fullWidth
-            placeholder="Số căn hộ + Mã chung cư"
+            placeholder="Nhập số căn hộ"
             id="component-outlined"
             value={buildingInput}
             onChange={handleChange}
+            onBlur={handleBlur}
             labelWidth={0}
           />
         </FormControl>
       </Grid>
       <Grid style={{ display: 'flex' }}>
-        <Grid>
-          <h3>Thành phố</h3>
-          <FormControl variant="outlined">
-            <OutlinedInput
-              fullWidth
-              id="component-outlined"
-              // value={a}
-              // onChange={handleChange}
-              labelWidth={0}
+        <Grid style={{ paddingRight: 20 }}>
+          <Grid style={{ margin: '32px 0' }}>
+            <h3
+              style={{
+                color: '#767676',
+                paddingBottom: 8,
+                fontSize: 16,
+                fontWeight: 600,
+                lineHeight: '1.375em'
+              }}>
+              Thành phố
+            </h3>
+            <CitiesList
+              setDistrictList={setDistrictList}
+              setDisabledDistrictField={setDisabledDistrictField}
             />
-          </FormControl>
+          </Grid>
         </Grid>
         <Grid>
-          <h3>Quận Huyện</h3>
-          <FormControl variant="outlined">
-            <OutlinedInput
-              fullWidth
-              id="component-outlined"
-              // value={address}
-              // onChange={handleChange}
-              labelWidth={0}
-            />
-          </FormControl>
+          <SelectCustom
+            name="district"
+            // onChange={handleChangeSelect}
+            value={district}
+            options={districtList}
+            title="Quận huyện"
+            callBackOnChange={callBackOnChange}
+            disabled={disabledDistrictField}
+          />
         </Grid>
       </Grid>
       <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>

@@ -61,7 +61,7 @@ const Basic: FC<IProps> = (props) => {
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
-    console.log('handle submit');
+
     const data: any = {
       lease_type: values.lease_type,
       accommodation_type: values.accommodation_type,
