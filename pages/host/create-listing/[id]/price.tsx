@@ -12,6 +12,7 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { PriceTermActions, getPrice } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { ProcessReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/process';
 
 const RoomCreateListing = () => {
   const { router } = useContext(GlobalContext);
@@ -19,13 +20,12 @@ const RoomCreateListing = () => {
   const listing = useSelector<ReducersList, any>((state) => state.stepPrice.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.stepPrice.step);
   const disable_next = useSelector<ReducersList, boolean>((state) => state.stepPrice.disable_next);
+  const dispatch_process = useDispatch<Dispatch<ProcessReducerAction>>();
   const data_ShortTerm = useSelector<ReducersList, IPriceShortTerm>((state => state.priceTerm.priceST));
   const data_LongTerm = useSelector<ReducersList, IPriceLongTerm>((state => state.priceTerm.priceLT));
   const data_serviceFee = useSelector<ReducersList, IServicesFee>((state => state.priceTerm.serviceFee));
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
   const dispatchPriceTerm = useDispatch<Dispatch<PriceTermActions>>();
-
-  console.log(listing);
 
   useEffect(() => {
     getListingPrices(id, dispatchStep)
@@ -36,6 +36,10 @@ const RoomCreateListing = () => {
     getPrice(id, dispatchPriceTerm).catch(err => {
       console.log('price term: ' + err)
     })
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('currentStep', '3');
+    dispatch_process({ type: 'setActiveStepListing', payload: '3' });
   }, []);
 
   const dataST: IPriceST = {

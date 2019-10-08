@@ -5,7 +5,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   classes?: any;
@@ -81,8 +83,12 @@ const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const theme = useTheme();
   const { getSteps, getStepContent, nextLink, disableNext, handleAPI, submitEachStep } = props;
+
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [skipped, setSkipped] = React.useState(new Set());
+  useEffect(() => {
+    setActiveStep(parseInt(localStorage.getItem('currentTab')) || 0);
+  }, [activeStep]); 
+
   const steps = getSteps();
 
   const handleReset = () => {

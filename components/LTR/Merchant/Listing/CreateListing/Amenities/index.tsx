@@ -21,8 +21,8 @@ const Amenities: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const id = router.query.id;
-  const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
   // const commonClick = useSelector<ReducersList, number[]>((state) => state.amenities.common);
   // const livingRoomsClick = useSelector<ReducersList, number[]>(
   //   (state) => state.amenities.livingrooms
@@ -48,6 +48,7 @@ const Amenities: FC<IProps> = (props) => {
 
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab2' });
+    getDataAmenities(id, dispatch_amen);
   }, []);
 
   useEffect(() => {

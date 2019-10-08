@@ -3,14 +3,18 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
-import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
+import React, { FC, Fragment, SetStateAction, useEffect } from 'react';
 import BottomMdNavigation from './BottomMdNavigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { ProcessReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/process';
+import { Dispatch } from 'redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
-  setActiveStep: Dispatch<SetStateAction<number>>;
+  setActiveStep: any;
   disableNext?: boolean;
   handleAPI?: () => Promise<any>;
   submitEachStep?: boolean;
@@ -26,7 +30,17 @@ const BottomNavigation: FC<IProps> = (props) => {
     handleAPI,
     submitEachStep
   } = props;
-
+  const currentActiveStep = useSelector<ReducersList, string>((state) => state.process.currentActiveStep);
+  useEffect(() => {
+    let step = localStorage.getItem('currentStep');
+    if (window.performance) {
+      if (!(performance.navigation.type == 1) && step === currentActiveStep) {
+        localStorage.setItem('currentTab', '0');
+      }
+    }
+    console.log(123)
+  }, [currentActiveStep]);
+  
   const handleFinish = async () => {
     try {
       const result = await handleAPI();
@@ -40,7 +54,9 @@ const BottomNavigation: FC<IProps> = (props) => {
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {
+      console.log(123)
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      localStorage.setItem('currentTab', String(activeStep + 1));
     }
   };
 
@@ -62,6 +78,7 @@ const BottomNavigation: FC<IProps> = (props) => {
       Router.back();
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
+      localStorage.setItem('currentTab', String(activeStep - 1));
     }
   };
 
