@@ -1,7 +1,7 @@
-import React, { FC, useEffect, SetStateAction, Dispatch, ChangeEvent } from 'react';
+import { Grid, OutlinedInput } from '@material-ui/core';
 import Select, { SelectProps } from '@material-ui/core/Select';
-import { Theme, OutlinedInput, Grid } from '@material-ui/core';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import React, { ChangeEvent } from 'react';
 
 interface IProps<T> extends SelectProps {
   value?: T;
@@ -28,13 +28,13 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
   const optionsRender = () => {
     return options && !disabled
       ? options.map((item, i) => {
-          console.log(item);
-          return (
-            <option key={i} value={unit ? item : item.id}>
-              {unit ? item + unit : item.value}
-            </option>
-          );
-        })
+        // console.log(item);
+        return (
+          <option key={i} value={unit ? item : item.id}>
+            {unit ? item + unit : item.value}
+          </option>
+        );
+      })
       : null;
   };
 

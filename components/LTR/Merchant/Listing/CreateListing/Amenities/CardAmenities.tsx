@@ -67,13 +67,13 @@ const CardAmenities: FC<IProps> = (props) => {
       dispatch({ type: 'setCountAmenities', payload: countAmenities - 1 });
     }
   };
-  useEffect(() => {
-    if (countAmenities < 10) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    } else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
-  }, [countAmenities]);
+  // useEffect(() => {
+  //   if (countAmenities < 10) {
+  //     dispatch_detail({ type: 'setDisableNext', payload: true });
+  //   } else {
+  //     dispatch_detail({ type: 'setDisableNext', payload: false });
+  //   }
+  // }, [countAmenities]);
   return useMemo(
     () => (
       <OutlinedDiv label={label}>

@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, FC } from 'react';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next';
-import { createStyles, Theme, Grid, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { createStyles, Divider, Grid, Theme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
 }
@@ -45,11 +45,11 @@ const ProcessListing: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider/>
+            <Divider />
             <Grid>
               <Grid container item xs={12}>
                 <Typography variant="h6" component="h3">
-                    Bước 2: Thông tin chi tiết
+                  Bước 2: Thông tin chi tiết
                 </Typography>
                 <Grid item xs={10}>
                   <Typography component="p">Mô tả, tiện ích, hình ảnh</Typography>
@@ -61,11 +61,11 @@ const ProcessListing: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider/>
+            <Divider />
             <Grid>
               <Grid container item xs={12}>
                 <Typography variant="h6" component="h3">
-                    Bước 3: Chính sách và thiết lập giá
+                  Bước 3: Chính sách và thiết lập giá
                 </Typography>
                 <Grid item xs={10}>
                   <Typography component="p">Chính sách, giá căn hộ</Typography>
@@ -77,7 +77,7 @@ const ProcessListing: FC<IProps> = (props) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider/>
+            <Divider />
           </Paper>
         </Grid>
       </Grid>

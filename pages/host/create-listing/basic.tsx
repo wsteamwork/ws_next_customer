@@ -5,16 +5,14 @@ import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  handleCreateRoom,
-  CreateListingActions
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import React, { Fragment, useReducer, Dispatch } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { CreateListingActions, handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import React, { Dispatch, Fragment, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const idListing = useSelector<ReducersList, any>((state) => state.createListing.id_listing);
+  const [idListing, setIdListing] = useState<number>(null);
+  const currentState = useSelector<ReducersList, any>((state) => state);
 
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
@@ -72,14 +70,7 @@ const RoomCreateListing = () => {
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={`/host/create-listing/${idListing}/detail`}
-        handleAPI={() => {
-          handleCreateRoom(data, dispatch).then((res) => {
-            dispatch({
-              type: 'SET_LISTING',
-              payload: res.data.data
-            });
-          });
-        }}
+        handleAPI={() => handleCreateRoom(data, dispatch)}
         submitEachStep={true}
       />
       {/* </CreateListingContext.Provider> */}

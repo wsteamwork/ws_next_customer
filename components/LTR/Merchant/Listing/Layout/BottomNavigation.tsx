@@ -32,9 +32,12 @@ const BottomNavigation: FC<IProps> = (props) => {
     try {
       const result = await handleAPI();
       if (result) {
-        Router.push(nextLink);
+        // console.log(result);
+        Router.push(`/host/create-listing/${result.data.data.id}/detail`);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   // const nextStep = () => {
@@ -52,12 +55,18 @@ const BottomNavigation: FC<IProps> = (props) => {
       if (!submitEachStep) {
         const result = await handleAPI();
         if (result) {
-          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          if (activeStep === steps.length - 1) {
+            console.log('router push ', nextLink);
+            Router.push(nextLink);
+          } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          }
+
         }
       } else {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleBack = () => {
@@ -78,6 +87,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           steps={steps}
           activeStep={activeStep}
           disableNext={disableNext}
+          submitEachStep={submitEachStep}
         />
       </Hidden>
 
@@ -90,14 +100,14 @@ const BottomNavigation: FC<IProps> = (props) => {
           className="mobile-stepper"
           nextButton={
             activeStep === steps.length - 1 ? (
-              <ButtonGlobal onClick={handleFinish} disabled={disableNext}>
+              <ButtonGlobal onClick={submitEachStep ? handleFinish : handleNext} disabled={disableNext}>
                 Finish
               </ButtonGlobal>
             ) : (
-              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-                Next
+                <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                  Next
               </ButtonGlobal>
-            )
+              )
           }
           backButton={
             <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>

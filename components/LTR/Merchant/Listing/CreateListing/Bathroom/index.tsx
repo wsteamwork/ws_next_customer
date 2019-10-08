@@ -1,14 +1,11 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useState, Dispatch, useEffect } from 'react';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-interface IProps {}
+interface IProps { }
 
 const Bathroom: FC<IProps> = (props) => {
   const { bathroomNumber } = useSelector<ReducersList, CreateListingState>(

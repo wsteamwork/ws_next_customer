@@ -4,19 +4,15 @@ import UploadImage from '@/components/LTR/Merchant/Listing/CreateListing/UploadI
 import ImageCaption from '@/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
-
-import React, { Fragment, useEffect, useContext } from 'react';
-import {
-  handleDetailsListing,
-  getListingDetails,
-  DetailsReducerAction
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { Dispatch } from 'redux';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DetailsReducerAction, getListingDetails, handleDetailsListing } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+
 
 const RoomCreateListing = () => {
   const { t } = useTranslation();

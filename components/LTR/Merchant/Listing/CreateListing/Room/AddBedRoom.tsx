@@ -1,21 +1,10 @@
-import React, { FC, useState, Dispatch, SetStateAction } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
-import Select from '@/components/ReusableComponents/SelectCustom';
-import Checkbox from '@material-ui/core/Checkbox';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import { FormGroup, Button, Collapse } from '@material-ui/core';
-import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { Button, Collapse } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 interface IProps {
   roomNumber?: number;
   bedRoomsList?: any;
@@ -23,10 +12,8 @@ interface IProps {
 }
 
 const BedRoom: FC<IProps> = (props) => {
-  const { roomNumber, bedRoomsList, setBedroomsList } = props;
+  const { roomNumber, bedRoomsList } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const [guest, setGuest] = useState<number>(0);
-  const [maxGuest, setMaxGuest] = useState<number>(0);
   const [bed, setBed] = useState<number>(0);
   const [single, setSingle] = useState<number>(0);
   const [double, setDouble] = useState<number>(0);
@@ -40,6 +27,7 @@ const BedRoom: FC<IProps> = (props) => {
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
   const handleToggleAddBedRoom = () => {
     if (isAddBedRoom) {
+      // console.log(bedRoomsList);
       if (bedRoomsList.hasOwnProperty(`bedroom_${roomNumber}`)) {
         let bedsList = [];
         let bedRoomsListTemp = bedRoomsList;
@@ -54,7 +42,7 @@ const BedRoom: FC<IProps> = (props) => {
           type: 'SET_BEDROOMS',
           payload: bedRoomsListTemp
         });
-        
+
       }
     }
     setIsAddBedRoom(!isAddBedRoom);

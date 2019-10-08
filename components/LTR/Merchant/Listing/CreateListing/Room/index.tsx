@@ -1,15 +1,12 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, { Dispatch, FC, useState, useEffect } from 'react';
+import React, { Dispatch, FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddBedRoom from './AddBedRoom';
-import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 interface IProps {}
 
 const Room: FC<IProps> = (props) => {
@@ -22,6 +19,20 @@ const Room: FC<IProps> = (props) => {
   const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
   const [bedRoomsList, setBedRoomsList] = useState<BedRoomReq>(bedRooms);
 
+useEffect(() => {
+   if (bedRoomsNumber) {
+     let bedRoomsTemp: any = {};
+     for (let i = 1; i <= bedRoomsNumber; i++) {
+       bedRoomsTemp[`bedroom_${i}`] = {
+         number_bed: 0,
+         beds: [],
+         area: 0
+       };
+     }
+     bedRoomsTemp['number_bedroom'] = bedRoomsNumber;
+     setBedRoomsList(bedRoomsTemp);
+   }
+ }, []);
   useEffect(() => {
     dispatch({
       type: 'SET_GUEST_RECOMMENDATION',

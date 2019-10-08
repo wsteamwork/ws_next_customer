@@ -5,13 +5,13 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { getPrice, PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { getListingPrices, handlePricesListing, StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { IPriceLongTerm, IPriceLT, IPriceShortTerm, IPriceST } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
 import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { PriceTermActions, getPrice } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 
 const RoomCreateListing = () => {
   const { router } = useContext(GlobalContext);
@@ -25,7 +25,7 @@ const RoomCreateListing = () => {
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
   const dispatchPriceTerm = useDispatch<Dispatch<PriceTermActions>>();
 
-  console.log(listing);
+  // console.log(listing);
 
   useEffect(() => {
     getListingPrices(id, dispatchStep)
@@ -34,7 +34,7 @@ const RoomCreateListing = () => {
       });
 
     getPrice(id, dispatchPriceTerm).catch(err => {
-      console.log('price term: ' + err)
+      // console.log('price term: ' + err)
     })
   }, []);
 

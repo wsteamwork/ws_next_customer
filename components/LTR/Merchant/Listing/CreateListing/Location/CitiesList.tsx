@@ -1,28 +1,14 @@
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { axios, axios_merchant } from '@/utils/axiosInstance';
-import { MenuItem, Paper, TextField, OutlinedInput } from '@material-ui/core';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
-import { Close, SearchRounded } from '@material-ui/icons';
-import HomeIcon from '@material-ui/icons/HomeRounded';
-import LocationIcon from '@material-ui/icons/LocationOnRounded';
-import { withStyles } from '@material-ui/styles';
+import { MenuItem, OutlinedInput, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 // @ts-ignore
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import React, {
-  ChangeEvent,
-  FC,
-  useContext,
-  useState,
-  useEffect,
-  SetStateAction,
-  Dispatch
-} from 'react';
-import Autosuggest from 'react-autosuggest';
-import { useTranslation } from 'react-i18next';
-import { connect, useDispatch } from 'react-redux';
-import { compose } from 'recompose';
 import deburr from 'lodash/deburr';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import Autosuggest from 'react-autosuggest';
+import { useDispatch } from 'react-redux';
 interface Iprops {
   //   classes?: any;
   setDistrictList: Dispatch<SetStateAction<any[]>>;
@@ -73,15 +59,15 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
 
   const getCities = async () => {
     try {
-      const res = await axios_merchant.get(`/cities`);
+      const res = await axios.get(`/cities`);
       return res;
-    } catch (error) {}
+    } catch (error) { }
   };
   const getDistricts = async () => {
     try {
-      const res = await axios_merchant.get(`/districts?city_id=${city_id}`);
+      const res = await axios.get(`/districts?city_id=${city_id}`);
       return res;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -112,7 +98,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   }, []);
 
   function renderInputComponent(inputProps) {
-    const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+    const { classes, inputRef = () => { }, ref, ...other } = inputProps;
 
     return (
       <OutlinedInput
@@ -153,15 +139,15 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     return inputLength === 0
       ? []
       : suggestionsList.filter((suggestion) => {
-          const keep =
-            count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
+        const keep =
+          count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
 
-          if (keep) {
-            count += 1;
-          }
+        if (keep) {
+          count += 1;
+        }
 
-          return keep;
-        });
+        return keep;
+      });
   }
   function renderSuggestion(suggestion, { query, isHighlighted }) {
     const matches = match(suggestion.name, query);

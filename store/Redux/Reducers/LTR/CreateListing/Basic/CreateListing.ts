@@ -44,14 +44,14 @@ export type CreateListingActions =
   | { type: 'SET_ID_LISTING'; payload: number };
 
 const init: CreateListingState = {
-  leaseType: null,
-  accommodationType: null,
-  stayWithHost: null,
+  leaseType: 3,
+  accommodationType: 2,
+  stayWithHost: 0,
   bedRooms: null,
   guestRecommendation: 0,
   maxGuest: 0,
   bedRoomsNumber: 1,
-  bathroomNumber: 0,
+  bathroomNumber: 1,
   address: '',
   building: '',
   city_id: null,
@@ -150,9 +150,14 @@ export const handleCreateRoom = async (
       }
     }
   };
- 
 
   const response = await axios_merchant.post(`long-term/room/create`, body);
+
+  dispatch({
+    type: 'SET_LISTING',
+    payload: response.data.data
+  });
+
   return response;
 };
 
