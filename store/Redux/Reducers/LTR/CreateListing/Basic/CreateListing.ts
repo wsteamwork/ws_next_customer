@@ -23,6 +23,7 @@ export type CreateListingState = {
   readonly district_id: number;
   readonly coordinate: Coordinate;
   readonly listing: any;
+  readonly id_listing: number;
 };
 
 export type CreateListingActions =
@@ -39,7 +40,8 @@ export type CreateListingActions =
   | { type: 'SET_CITY_ID'; payload: number }
   | { type: 'SET_DISTRICT_ID'; payload: number }
   | { type: 'SET_COORDINATE'; payload: Coordinate }
-  | { type: 'SET_LISTING'; payload: any };
+  | { type: 'SET_LISTING'; payload: any }
+  | { type: 'SET_ID_LISTING'; payload: number };
 
 const init: CreateListingState = {
   leaseType: null,
@@ -55,7 +57,8 @@ const init: CreateListingState = {
   city_id: null,
   district_id: null,
   coordinate: null,
-  listing: null
+  listing: null,
+  id_listing: 0
 };
 
 export const createListingReducer: Reducer<CreateListingState, CreateListingActions> = (
@@ -91,6 +94,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { coordinate: action.payload });
     case 'SET_LISTING':
       return updateObject<CreateListingState>(state, { listing: action.payload });
+      case 'SET_ID_LISTING':
+      return updateObject<CreateListingState>(state, { id_listing: action.payload });
 
     default:
       return state;
@@ -145,10 +150,7 @@ export const handleCreateRoom = async (data: any, dispatch: any, token?: string,
   const response = await axios_merchant.post(`long-term/room/create`, body);
 
   if (response) {
-    dispatch({
-      type: 'SET_LISTING',
-      listing: body
-    });
+    
     console.log(response);
   }
   return response;

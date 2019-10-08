@@ -9,6 +9,7 @@ import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { axios_merchant } from '@/utils/axiosInstance';
 interface IProps {}
 
 interface Coordinate {
@@ -29,11 +30,22 @@ const Location: FC<IProps> = (props) => {
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  // const { latitude, longitude } = useSelector<ReducersList, CreateListingState>(
-  //   (state) => state.createListing
-  // );
   const [coordinate, setCoordinate] = useState<Coordinate>(null);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
+  const [citiesList, setCitiesList] = useState<any[]>([]);
+
+  const getCities = async () => {
+    try {
+      const res = await axios_merchant.get(`/cities`);
+      return res
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getCities().then((res) => {
+      setCitiesList(res.data.data.map(city => city.name));
+    });
+  }, []);
 
   useEffect(() => {
     console.log(coordinate);
@@ -66,20 +78,8 @@ const Location: FC<IProps> = (props) => {
       lng: lng
     });
   };
-  const onDrag = () => {
-    // setCoordinate({
-    //   lat: lat,
-    //   lng: lng
-    // });
-  };
-
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
-    <GoogleMap
-      defaultZoom={15}
-      defaultCenter={props.defaultCenter}
-      onClick={props.onClickMap}
-      // defaultOptions={{ draggable: false }}
-      onDrag={onDrag}>
+    <GoogleMap defaultZoom={15} defaultCenter={props.defaultCenter} onClick={props.onClickMap}>
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -87,11 +87,6 @@ const Location: FC<IProps> = (props) => {
   const handleChange = (event) => {
     setBuilding(event.target.value);
   };
-
-  // const handleBlur = (value) => {
-  //   console.log(value);
-  //   setAddress(value);
-  // };
 
   const onSuggestSelect = (place: Suggest) => {
     const {
@@ -119,7 +114,7 @@ const Location: FC<IProps> = (props) => {
           Khách sẽ chỉ biết được địa chỉ chính xác sau khi đặt phòng thành công
         </Grid>
       </Grid>
-      <h2>Địa chỉ</h2>
+      <h3>Địa chỉ</h3>
       <Geosuggest
         initialValue={addressInput}
         country="vn"
@@ -129,7 +124,7 @@ const Location: FC<IProps> = (props) => {
         radius={20}
         autoActivateFirstSuggest
       />
-      <h2>Toà nhà (Tuỳ chọn)</h2>
+      <h3>Toà nhà (Tuỳ chọn)</h3>
       <Grid style={{ width: 'calc(80% - 8px)' }}>
         <FormControl variant="outlined">
           <OutlinedInput

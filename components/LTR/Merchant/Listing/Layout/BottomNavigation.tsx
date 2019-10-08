@@ -28,22 +28,23 @@ const BottomNavigation: FC<IProps> = (props) => {
   } = props;
 
   const handleFinish = async () => {
-    console.log('finish')
+    console.log('finish');
     try {
       const result = await handleAPI();
       if (result) {
-        // nextStep();
+        Router.push(nextLink);
       }
     } catch (error) {}
   };
 
-  const nextStep = () => {
-    if (activeStep === steps.length - 1) {
-      Router.push(nextLink);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
+  // const nextStep = () => {
+  //   if (activeStep === steps.length - 1) {
+  //     console.log('router push ', nextLink);
+  //     Router.push(nextLink);
+  //   } else {
+  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   }
+  // };
 
   const handleNext = async () => {
     console.log('next');
@@ -51,10 +52,10 @@ const BottomNavigation: FC<IProps> = (props) => {
       if (!submitEachStep) {
         const result = await handleAPI();
         if (result) {
-          nextStep();
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
       } else {
-        nextStep();
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
     } catch (error) {}
   };
