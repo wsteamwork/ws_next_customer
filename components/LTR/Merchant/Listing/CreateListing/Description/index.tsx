@@ -93,7 +93,6 @@ const Description: FC<IProps> = (props) => {
   }, [name, description]);
 
   const handleSubmitForm: any = () => {
-    console.log(1)
     return {};
   };
 

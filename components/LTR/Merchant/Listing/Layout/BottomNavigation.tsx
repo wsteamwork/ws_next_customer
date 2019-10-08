@@ -38,7 +38,6 @@ const BottomNavigation: FC<IProps> = (props) => {
         localStorage.setItem('currentTab', '0');
       }
     }
-    console.log(123)
   }, [currentActiveStep]);
   
   const handleFinish = async () => {
@@ -54,7 +53,6 @@ const BottomNavigation: FC<IProps> = (props) => {
     if (activeStep === steps.length - 1) {
       Router.push(nextLink);
     } else {
-      console.log(123)
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       localStorage.setItem('currentTab', String(activeStep + 1));
     }
