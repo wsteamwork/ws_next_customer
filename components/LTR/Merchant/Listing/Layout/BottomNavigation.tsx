@@ -28,33 +28,36 @@ const BottomNavigation: FC<IProps> = (props) => {
   } = props;
 
   const handleFinish = async () => {
+    console.log('finish');
     try {
       const result = await handleAPI();
       if (result) {
-        nextStep();
+        Router.push(nextLink);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
-  const nextStep = () => {
-    if (activeStep === steps.length - 1) {
-      Router.push(nextLink);
-    } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
-  };
+  // const nextStep = () => {
+  //   if (activeStep === steps.length - 1) {
+  //     console.log('router push ', nextLink);
+  //     Router.push(nextLink);
+  //   } else {
+  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   }
+  // };
 
   const handleNext = async () => {
+    console.log('next');
     try {
       if (!submitEachStep) {
         const result = await handleAPI();
         if (result) {
-          nextStep();
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
       } else {
-        nextStep();
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const handleBack = () => {
@@ -70,6 +73,7 @@ const BottomNavigation: FC<IProps> = (props) => {
       <Hidden smDown>
         <BottomMdNavigation
           handleNext={handleNext}
+          handleFinish={handleFinish}
           handleBack={handleBack}
           steps={steps}
           activeStep={activeStep}
@@ -85,9 +89,15 @@ const BottomNavigation: FC<IProps> = (props) => {
           activeStep={activeStep}
           className="mobile-stepper"
           nextButton={
-            <ButtonGlobal onClick={handleNext} disabled={disableNext} type="submit">
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </ButtonGlobal>
+            activeStep === steps.length - 1 ? (
+              <ButtonGlobal onClick={handleFinish} disabled={disableNext}>
+                Finish
+              </ButtonGlobal>
+            ) : (
+              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                Next
+              </ButtonGlobal>
+            )
           }
           backButton={
             <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>

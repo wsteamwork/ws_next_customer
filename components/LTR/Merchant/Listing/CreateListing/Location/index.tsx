@@ -1,11 +1,16 @@
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
-import { useDispatch } from 'react-redux';
-interface IProps { }
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { axios_merchant } from '@/utils/axiosInstance';
+interface IProps {}
 
 interface Coordinate {
   lat: number;
@@ -19,14 +24,28 @@ interface GoogleMapProps {
 }
 
 const Location: FC<IProps> = (props) => {
-  const [address, setAddress] = useState<string>('');
-  const [building, setBuilding] = useState<string>('');
+  const { address, building } = useSelector<ReducersList, CreateListingState>(
+    (state) => state.createListing
+  );
+  const [addressInput, setAddress] = useState<string>(address);
+  const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  // const { latitude, longitude } = useSelector<ReducersList, CreateListingState>(
-  //   (state) => state.createListing
-  // );
   const [coordinate, setCoordinate] = useState<Coordinate>(null);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
+  const [citiesList, setCitiesList] = useState<any[]>([]);
+
+  const getCities = async () => {
+    try {
+      const res = await axios_merchant.get(`/cities`);
+      return res
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getCities().then((res) => {
+      setCitiesList(res.data.data.map(city => city.name));
+    });
+  }, []);
 
   useEffect(() => {
     console.log(coordinate);
@@ -34,25 +53,22 @@ const Location: FC<IProps> = (props) => {
       type: 'SET_COORDINATE',
       payload: coordinate
     });
-
   }, [coordinate]);
   useEffect(() => {
-    console.log(address);
+    console.log(addressInput);
     dispatch({
       type: 'SET_ADDRESS',
-      payload: address
+      payload: addressInput
     });
-
-  }, [address]);
+  }, [addressInput]);
   useEffect(() => {
-    console.log(building);
+    console.log(buildingInput);
 
     dispatch({
       type: 'SET_BUILDING',
-      payload: building
+      payload: buildingInput
     });
-
-  }, [building]);
+  }, [buildingInput]);
 
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
@@ -62,20 +78,8 @@ const Location: FC<IProps> = (props) => {
       lng: lng
     });
   };
-  const onDrag = () => {
-    // setCoordinate({
-    //   lat: lat,
-    //   lng: lng
-    // });
-  };
-
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
-    <GoogleMap
-      defaultZoom={15}
-      defaultCenter={props.defaultCenter}
-      onClick={props.onClickMap}
-      // defaultOptions={{ draggable: false }}
-      onDrag={onDrag}>
+    <GoogleMap defaultZoom={15} defaultCenter={props.defaultCenter} onClick={props.onClickMap}>
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -83,11 +87,6 @@ const Location: FC<IProps> = (props) => {
   const handleChange = (event) => {
     setBuilding(event.target.value);
   };
-
-  // const handleBlur = (value) => {
-  //   console.log(value);
-  //   setAddress(value);
-  // };
 
   const onSuggestSelect = (place: Suggest) => {
     const {
@@ -115,8 +114,9 @@ const Location: FC<IProps> = (props) => {
           Khách sẽ chỉ biết được địa chỉ chính xác sau khi đặt phòng thành công
         </Grid>
       </Grid>
-      <h2>Địa chỉ</h2>
+      <h3>Địa chỉ</h3>
       <Geosuggest
+        initialValue={addressInput}
         country="vn"
         placeholder="Start typing!"
         onSuggestSelect={onSuggestSelect}
@@ -124,14 +124,14 @@ const Location: FC<IProps> = (props) => {
         radius={20}
         autoActivateFirstSuggest
       />
-      <h2>Toà nhà (Tuỳ chọn)</h2>
+      <h3>Toà nhà (Tuỳ chọn)</h3>
       <Grid style={{ width: 'calc(80% - 8px)' }}>
         <FormControl variant="outlined">
           <OutlinedInput
             fullWidth
             placeholder="Số căn hộ + Mã chung cư"
             id="component-outlined"
-            value={building}
+            value={buildingInput}
             onChange={handleChange}
             labelWidth={0}
           />

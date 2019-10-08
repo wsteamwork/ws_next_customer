@@ -5,7 +5,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   classes?: any;
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckboxCustom: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-
+  const leaseType = useSelector<ReducersList, number>((state) => state.createListing.leaseType);
   const classes = useStyles(props);
   const [state, setState] = useState<any>({
     shortterm: true,
@@ -47,6 +48,32 @@ const CheckboxCustom: FC<IProps> = (props) => {
   const handleChange = (name) => (event) => {
     setState({ ...state, [name]: event.target.checked });
   };
+
+  useEffect(() => {
+    if (leaseType) {
+      if (leaseType == 1) {
+        setState({
+          shortterm: true,
+          longterm: false
+        });
+      } else if (leaseType == 2) {
+        setState({
+          shortterm: false,
+          longterm: true
+        });
+      } else if (leaseType == 3) {
+        setState({
+          shortterm: true,
+          longterm: true
+        });
+      } else {
+        setState({
+          shortterm: false,
+          longterm: false
+        });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     dispatch({

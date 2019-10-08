@@ -4,14 +4,17 @@ import Location from '@/components/LTR/Merchant/Listing/CreateListing/Location';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
-import { CreateListingInit, CreateListingReducer } from '@/store/Context/LTR/CreateListingContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import React, { Fragment, useReducer } from 'react';
-import { useSelector } from 'react-redux';
+import {
+  handleCreateRoom,
+  CreateListingActions
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import React, { Fragment, useReducer, Dispatch } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const RoomCreateListing = () => {
-  const [state, dispatch] = useReducer(CreateListingReducer, CreateListingInit);
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  const idListing = useSelector<ReducersList, any>((state) => state.createListing.id_listing);
 
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
@@ -35,7 +38,8 @@ const RoomCreateListing = () => {
     ),
     address: useSelector<ReducersList, string>((state) => state.createListing.address),
     building: useSelector<ReducersList, string>((state) => state.createListing.building),
-    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate)
+    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate),
+    bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms)
   };
 
   const getStepContent = (step) => {
@@ -65,9 +69,14 @@ const RoomCreateListing = () => {
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={'/host/create-listing/123/detail'}
+        nextLink={`/host/create-listing/${idListing}/detail`}
         handleAPI={() => {
-          handleCreateRoom(data).then((res) => console.log(res));
+          handleCreateRoom(data, dispatch).then((res) => {
+            dispatch({
+              type: 'SET_LISTING',
+              payload: res.data.data
+            });
+          });
         }}
         submitEachStep={true}
       />
