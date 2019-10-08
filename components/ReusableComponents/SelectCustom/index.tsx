@@ -18,22 +18,24 @@ interface IProps<T> extends SelectProps {
 }
 
 const SelectCustom = <T extends any>(props: IProps<T>) => {
-  const { value, options, title, twoThirdWidth, callBackOnChange, unit, onBlur } = props;
+  const { value, options, title, twoThirdWidth, callBackOnChange, unit, onBlur, disabled } = props;
   const [valueInput, setValueInput] = React.useState<T>(value);
   const handleChange = (event: ChangeEvent<{ name?: string; value: T }>) => {
-    console.log(event.target.value);
     setValueInput(event.target.value);
     if (callBackOnChange) callBackOnChange(event.target.value);
   };
 
   const optionsRender = () => {
-    return options.map((item, i) => {
-      return (
-        <option key={i} value={item.id}>
-          {unit ? item + unit : item.value}
-        </option>
-      );
-    });
+    return options && !disabled
+      ? options.map((item, i) => {
+          console.log(item);
+          return (
+            <option key={i} value={unit ? item : item.id}>
+              {unit ? item + unit : item.value}
+            </option>
+          );
+        })
+      : null;
   };
 
   return (
@@ -48,6 +50,7 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
           onChange={handleChange}
           // onBlur={onBlur}
           value={valueInput}
+          defaultValue={value}
           input={
             <OutlinedInput
               name="term-rental"
@@ -56,6 +59,7 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
             />
           }
           displayEmpty
+          disabled={disabled}
           IconComponent={KeyboardArrowDown}>
           {optionsRender()}
         </Select>
