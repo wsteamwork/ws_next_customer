@@ -3,18 +3,10 @@ import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import mainColor from '@/styles/constants/colors';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-import {
-  Checkbox,
-  createStyles,
-  FormControlLabel,
-  Grid,
-  Theme,
-  Typography,
-  withStyles
-} from '@material-ui/core';
+import { Checkbox, createStyles, FormControlLabel, Grid, Theme, Typography, withStyles } from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/styles';
-import React, { ChangeEvent, FC, useEffect, useState, useMemo } from 'react';
+import React, { ChangeEvent, FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';

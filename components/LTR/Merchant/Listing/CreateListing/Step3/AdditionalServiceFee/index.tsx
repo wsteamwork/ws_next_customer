@@ -1,10 +1,10 @@
-import React, { Fragment, FC, Dispatch, SetStateAction } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, RadioGroup, Radio, Typography } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import { Radio, RadioGroup, Theme, Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
+import Grid from '@material-ui/core/Grid';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 
 interface IProps {
   classes?: any;
@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '5px 15px 10px',
       border: '1px solid #767676',
       borderRadius: 4,
-      minHeight:120,
+      minHeight: 120,
     },
     title: {
       fontSize: 16,
@@ -67,7 +67,7 @@ const AdditionalServiceFee: FC<IProps> = (props) => {
                         label="Dịch vụ cung cấp bởi bên thứ 3"
                         control={<Radio color="primary" />}
                         labelPlacement="end"
-                        classes={{label:classes.title}}
+                        classes={{ label: classes.title }}
                       />
                       <Typography style={{ marginTop: 10 }}>Westay sẽ cung cấp đầy đủ những dịch vụ cần thiết cho khách hàng và sẽ hoàn toàn chịu trách nhiệm với những dịch vụ này.</Typography>
                     </div>
@@ -79,7 +79,7 @@ const AdditionalServiceFee: FC<IProps> = (props) => {
                         label="Dịch vụ cung cấp bởi chủ nhà"
                         control={<Radio color="primary" />}
                         labelPlacement="end"
-                        classes={{label:classes.title}}
+                        classes={{ label: classes.title }}
                       />
                       <Typography style={{ marginTop: 10 }}>Chủ nhà sẽ tự cung cấp các dịch vụ cần thiết và Westay hoàn toàn <b> miễn chịu trách nhiệm </b> với những dịch vụ này.</Typography>
                     </div>
@@ -95,7 +95,7 @@ const AdditionalServiceFee: FC<IProps> = (props) => {
         activeStep={activeStep}
         setActiveStep={setActiveStep}
         nextLink={nextLink}
-        // handleSubmit={handleSubmit}
+      // handleSubmit={handleSubmit}
       />
     </Fragment>
   );

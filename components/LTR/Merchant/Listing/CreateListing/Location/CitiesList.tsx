@@ -1,5 +1,5 @@
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { axios, axios_merchant } from '@/utils/axiosInstance';
+import { axios } from '@/utils/axiosInstance';
 import { MenuItem, OutlinedInput, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // @ts-ignore

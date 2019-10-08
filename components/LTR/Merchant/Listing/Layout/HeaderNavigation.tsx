@@ -1,8 +1,6 @@
-import React, { Fragment, FC, useState } from 'react';
-import Grid, { GridProps } from '@material-ui/core/Grid/Grid';
-
 import Logo from '@/components/Toolbar/Logo';
-
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC } from 'react';
 interface IProps {
   title: string;
 }

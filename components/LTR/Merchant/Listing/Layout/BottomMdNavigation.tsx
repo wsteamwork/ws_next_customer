@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import Grid from '@material-ui/core/Grid/Grid';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Button } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC } from 'react';
 
 interface IProps {
   activeStep: number;

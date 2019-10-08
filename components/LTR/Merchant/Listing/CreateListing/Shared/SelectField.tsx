@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { FieldProps } from 'formik';
-
-import { Grid, OutlinedInput, Select, FormControl } from '@material-ui/core';
-import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import { FormControl, Grid, OutlinedInput, Select } from '@material-ui/core';
 import { SelectProps } from '@material-ui/core/Select';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import { FC } from 'react';
+
 
 interface Iprops extends SelectProps {
   title?: string;

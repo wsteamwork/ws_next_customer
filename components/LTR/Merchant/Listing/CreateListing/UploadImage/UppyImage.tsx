@@ -147,7 +147,7 @@ const UppyImage: FC<IProps> = (props) => {
     }
   })
     .use(XHRUpload, {
-      endpoint: 'http://ws_api.lc/merchant-api/upload-image/',
+      endpoint: 'https://dev.westay.vn/merchant-api/upload-image/',
       fieldName: 'file[]',
       limit: 20,
       formData: true

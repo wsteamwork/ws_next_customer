@@ -1,15 +1,15 @@
-import React, { Fragment, FC, useState, useMemo, useEffect } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, InputAdornment, Divider, Button } from '@material-ui/core';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { IPriceLongTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
+import { calcPercentage } from '@/utils/mixins';
+import { Button, Divider, Grid, InputAdornment, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
-import { calcPercentage } from '@/utils/mixins';
 
 interface IProps {
   classes?: any;

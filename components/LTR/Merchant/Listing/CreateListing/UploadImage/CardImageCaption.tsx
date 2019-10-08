@@ -1,6 +1,8 @@
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { createStyles, Grid, makeStyles, TextField, Theme, Typography, CardActions, Tooltip } from '@material-ui/core';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { CardActions, createStyles, Grid, makeStyles, TextField, Theme, Tooltip, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -8,8 +10,6 @@ import React, { ChangeEvent, FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
   classes?: any;
@@ -109,12 +109,12 @@ const CardImageCaption: FC<IProps> = (props) => {
                     onClick={() => handleRemoveImage(index)}
                     className={classes.cardAction}
                     disableSpacing>
-                      <FontAwesomeIcon icon={faTrashAlt} size="1x"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faTrashAlt} size="1x"></FontAwesomeIcon>
                   </CardActions>
                 </Tooltip>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <Card >
                 <CardMedia
                   className={classes.media}
