@@ -58,6 +58,7 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import { ProcessReducerState, ProcessReducerAction, processReducer } from './LTR/CreateListing/process';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -78,6 +79,7 @@ export type ReducersType = {
   createListing: Reducer<CreateListingState, CreateListingActions>;
   priceTerm: Reducer<PriceTermState, PriceTermActions>;
   stepPrice: Reducer<StepPricesState, StepPricesActions>;
+  process: Reducer<ProcessReducerState, ProcessReducerAction>;
 };
 
 export type ReducersList = {
@@ -99,6 +101,7 @@ export type ReducersList = {
   createListing: CreateListingState;
   priceTerm: PriceTermState;
   stepPrice: StepPricesState;
+  process: ProcessReducerState;
 };
 
 export type ReducresActions =
@@ -119,7 +122,8 @@ export type ReducresActions =
   | DetailsReducerAction
   | CreateListingActions
   | PriceTermActions
-  | StepPricesActions;
+  | StepPricesActions
+  | ProcessReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -139,7 +143,8 @@ const reducers: ReducersType = {
   details: detailsReducer,
   createListing: createListingReducer,
   priceTerm: PriceTermReducer,
-  stepPrice: stepPricesReducer
+  stepPrice: stepPricesReducer,
+  process: processReducer
 };
 
 export interface NextContextPage extends NextPageContext {

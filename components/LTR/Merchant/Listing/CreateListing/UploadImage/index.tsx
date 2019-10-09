@@ -14,8 +14,6 @@ interface IProps {
   classes?: any;
 }
 
-const useStyles = makeStyles<Theme>((theme: Theme) => createStyles({}));
-
 const UploadImage: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const { t } = useTranslation();

@@ -5,6 +5,7 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { ProcessReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/process';
 import { getPrice, PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { getListingPrices, handlePricesListing, StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { IPriceLongTerm, IPriceLT, IPriceShortTerm, IPriceST } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
@@ -19,13 +20,12 @@ const RoomCreateListing = () => {
   const listing = useSelector<ReducersList, any>((state) => state.stepPrice.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.stepPrice.step);
   const disable_next = useSelector<ReducersList, boolean>((state) => state.stepPrice.disable_next);
+  const dispatch_process = useDispatch<Dispatch<ProcessReducerAction>>();
   const data_ShortTerm = useSelector<ReducersList, IPriceShortTerm>((state => state.priceTerm.priceST));
   const data_LongTerm = useSelector<ReducersList, IPriceLongTerm>((state => state.priceTerm.priceLT));
   const data_serviceFee = useSelector<ReducersList, IServicesFee>((state => state.priceTerm.serviceFee));
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
   const dispatchPriceTerm = useDispatch<Dispatch<PriceTermActions>>();
-
-  // console.log(listing);
 
   useEffect(() => {
     getListingPrices(id, dispatchStep)
@@ -36,6 +36,10 @@ const RoomCreateListing = () => {
     getPrice(id, dispatchPriceTerm).catch(err => {
       // console.log('price term: ' + err)
     })
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('currentStep', '3');
+    dispatch_process({ type: 'setActiveStepListing', payload: '3' });
   }, []);
 
   const dataST: IPriceST = {

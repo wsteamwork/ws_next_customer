@@ -6,6 +6,8 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { ProcessReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/process';
+import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction, getListingDetails, handleDetailsListing } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import React, { Fragment, useContext, useEffect } from 'react';
@@ -17,12 +19,13 @@ import { Dispatch } from 'redux';
 const RoomCreateListing = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<DetailsReducerAction>>();
+  const dispatch_process = useDispatch<Dispatch<ProcessReducerAction>>();
+  const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const listing = useSelector<ReducersList, any>((state) => state.details.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.details.step);
   const disable_next = useSelector<ReducersList, boolean>((state) => state.details.disable_next);
-
   const data_description = {
     name: useSelector<ReducersList, string>((state) => state.description.name),
     description: useSelector<ReducersList, string>((state) => state.description.description),
@@ -65,6 +68,16 @@ const RoomCreateListing = () => {
       getListingDetails(id, dispatch);
     }
   }, []);
+
+  useEffect(() => {
+    getDataAmenities(id, dispatch_amen);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('currentStep', '2');
+    dispatch_process({ type: 'setActiveStepListing', payload: '2' });
+  }, []);
+
   const getSteps = () => {
     return [t('details:tab1'), t('details:tab2'), t('details:tab3'), t('details:tab4')];
   };

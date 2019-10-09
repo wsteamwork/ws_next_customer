@@ -1,16 +1,18 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
-import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
+import React, { FC, Fragment, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import BottomMdNavigation from './BottomMdNavigation';
 
 interface IProps {
   steps?: string[];
   activeStep?: number;
   nextLink?: string;
-  setActiveStep: Dispatch<SetStateAction<number>>;
+  setActiveStep: any;
   disableNext?: boolean;
   handleAPI?: () => Promise<any>;
   submitEachStep?: boolean;
@@ -26,6 +28,15 @@ const BottomNavigation: FC<IProps> = (props) => {
     handleAPI,
     submitEachStep
   } = props;
+  const currentActiveStep = useSelector<ReducersList, string>((state) => state.process.currentActiveStep);
+  useEffect(() => {
+    let step = localStorage.getItem('currentStep');
+    if (window.performance) {
+      if (!(performance.navigation.type == 1) && step === currentActiveStep) {
+        localStorage.setItem('currentTab', '0');
+      }
+    }
+  }, [currentActiveStep]);
 
   const handleFinish = async () => {
     console.log('finish');
@@ -60,6 +71,8 @@ const BottomNavigation: FC<IProps> = (props) => {
             Router.push(nextLink);
           } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            localStorage.setItem('currentTab', String(activeStep + 1));
+
           }
 
         }
@@ -74,6 +87,7 @@ const BottomNavigation: FC<IProps> = (props) => {
       Router.back();
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
+      localStorage.setItem('currentTab', String(activeStep - 1));
     }
   };
 
