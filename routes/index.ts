@@ -28,4 +28,5 @@ routes
   .add('collection', '/collection/:id')
   .add('/payment/invoice/:uuid', 'payment/invoice')
   .add('/payment/direct/:uuid', 'payment/direct')
+  .add('host', '/host')
   .add('create-listing', 'host/create-listing/:id')
