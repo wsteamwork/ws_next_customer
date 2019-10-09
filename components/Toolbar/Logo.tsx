@@ -13,6 +13,7 @@ interface IProps {
   classes?: any;
   isFooter?: boolean;
   onlyImg?: boolean;
+  href?: string;
 }
 
 const styles: any = (theme: Theme) =>
@@ -35,11 +36,11 @@ const styles: any = (theme: Theme) =>
   });
 
 const Logo: FunctionComponent<IProps> = (props) => {
-  const { classes, isFooter, onlyImg } = props;
+  const { classes, isFooter, onlyImg, href } = props;
 
   return (
     <Fragment>
-      <Link href="/">
+      <Link href={href}>
         <img
           src={onlyImg ? logoOnlyImg : logo}
           className={onlyImg ? classes.onlyImgClass : isFooter ? classes.footer : classes.img}
@@ -48,6 +49,10 @@ const Logo: FunctionComponent<IProps> = (props) => {
       </Link>
     </Fragment>
   );
+};
+
+Logo.defaultProps ={
+  href: '/'
 };
 
 export default compose<IProps, any>(withStyles(styles))(Logo);

@@ -1,14 +1,15 @@
-import React, { Fragment, FC, memo, Dispatch, useContext, SetStateAction } from 'react';
+import React, { Fragment, FC, useContext, Dispatch, SetStateAction, memo, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, ListItemText, ListItem, Divider, List } from '@material-ui/core';
-import { compose } from 'recompose';
-import { withCookies, Cookies } from 'react-cookie';
+import { Theme, ListItem, Avatar, ListItemText, Divider, List, Collapse } from '@material-ui/core';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
-import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import { withCookies, Cookies } from 'react-cookie';
+import { compose } from "recompose";
 
 interface IProps {
-  classes?: any;
+  classes?: any
   setOpen: Dispatch<SetStateAction<boolean>>;
   cookies: Cookies;
 }
@@ -20,14 +21,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       flexDirection: 'column',
       justifyContent: 'space-between',
       height: '100%'
-    },
-    img: {
-      width: '100%',
-      backgroundPosition: 'center',
-      maxHeight: 200,
-      backgroundSize: 'cover',
-      objectFit: 'cover',
-      backgroundRepeat: 'no-repeat'
     },
     signOut: {
       color: '#FFA712',
@@ -55,27 +48,25 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       position: 'relative',
       textDecoration: 'none'
     },
-    hotline: {
-      fontWeight: 800
+    nested: {
+      paddingLeft: theme.spacing(4),
     },
-    becomeHost: {
-      textAlign: 'center',
-      padding: '12px 20px',
-      color: ' #FFFFFF',
-      background: 'linear-gradient(to right, #FFC54D, #FFA712)',
-      boxShadow: 'none',
-      fontWeight: 800,
-      borderRadius: '100px !important'
-    }
+    bigAvatar: {
+      alignSelf: 'center',
+      borderRadius: '50%',
+      width:80,
+      height:80,
+    },
   })
 );
 
-const SideDrawer: FC<IProps> = (props) => {
+const SlideDrawerMerchant: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { setOpen, cookies } = props;
   const { router } = useContext(GlobalContext);
   const isLogin = !!cookies.get('_token');
   const { t } = useTranslation();
+  const [openItem, setOpenItem] = useState<boolean>(false);
 
   const logoutTrigger = () => {
     cookies.remove('_token', { path: '/' });
@@ -91,133 +82,97 @@ const SideDrawer: FC<IProps> = (props) => {
             classes={{
               gutters: classes.listItemGutters
             }}
-            component="a"
-            href="https://merchant.westay.vn"
-            button
-            onClick={() => setOpen(false)}>
-            <ListItemText
-              primary={t('home:becomeAHost')}
-              classes={{
-                primary: classes.becomeHost,
-                root: classes.listItem
-              }}
-            />
-          </ListItem>
-
-          {/* <ListItem button {...to("/")} onClick={() => setOpen(false)}>
-          <ListItemIcon>
-            <Home />
-          </ListItemIcon>
-          <ListItemText
-            primary="Trang chủ"
-            classes={{
-              primary: classes.text
-            }}
-          />
-        </ListItem> */}
-
-          {isLogin ? (
-            <Fragment>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                component="a"
-                href="/"
-                button
-                onClick={() => setOpen(false)}>
-                <ListItemText
-                  primary={t('home:home')}
-                  classes={{
-                    primary: classes.text
-                  }}
-                />
-              </ListItem>
-              <ListItem
-                classes={{
-                  gutters: classes.listItemGutters
-                }}
-                button
-                onClick={() => setOpen(false)}
-                href="/profile">
-                {/* <ListItemIcon>
-                <AccountCircle />
-              </ListItemIcon> */}
-                <ListItemText
-                  primary={t('home:profile')}
-                  classes={{
-                    primary: classes.text
-                  }}
-                />
-              </ListItem>
-            </Fragment>
-          ) : (
-              <Fragment>
-                <ListItem
-                  classes={{
-                    gutters: classes.listItemGutters
-                  }}
-                  button
-                  onClick={() => {
-                    router.push('/auth/signin');
-                  }}>
-                  {/* <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon> */}
-                  <ListItemText
-                    primary={t('home:signIn')}
-                    classes={{
-                      primary: classes.text
-                    }}
-                  />
-                </ListItem>
-                <ListItem
-                  classes={{
-                    gutters: classes.listItemGutters
-                  }}
-                  button
-                  onClick={() => {
-                    router.push('/auth/signup');
-                  }}>
-                  {/* <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon> */}
-                  <ListItemText
-                    primary={t('home:signUp')}
-                    classes={{
-                      primary: classes.text
-                    }}
-                  />
-                </ListItem>
-
-              </Fragment>
-            )}
-        </div>
-
-        <div className="bottom">
-          <ListItem
-            classes={{
-              gutters: classes.listItemGutters
-            }}
-            button>
-            <SwitchLanguage />
-          </ListItem>
-          <ListItem
             button
             onClick={() => setOpen(false)}
-            component="a"
-            href="https://blog.westay.vn/"
+            href="/profile">
+            <Avatar alt = 'Profile' src = {'@/../../../static/images/room_demo.jpg'}
+                    className = {classes.bigAvatar} onClick = {() => alert('Chuyển link')} />
+          </ListItem>
+          <ListItem
             classes={{
               gutters: classes.listItemGutters
-            }}>
+            }}
+            button
+            onClick={() => setOpen(false)}
+            href="/profile">
             <ListItemText
-              primary={t('home:blogContainer:blog')}
+              primary={t('home:profile')}
               classes={{
                 primary: classes.text
               }}
             />
           </ListItem>
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button
+            onClick={() => setOpen(false)}
+            href="/profile">
+            <ListItemText
+              primary={'Danh sách booking'}
+              classes={{
+                primary: classes.text
+              }}
+            />
+          </ListItem>
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button
+            onClick={() => setOpenItem(!openItem)}
+            href="/profile">
+            <ListItemText
+              primary={'Quản lý phòng'}
+              classes={{
+                primary: classes.text
+              }}
+            />
+            {openItem ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
 
+          <Collapse in={openItem} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemText primary="Danh sách phòng" />
+              </ListItem>
+              <ListItem button className={classes.nested}>
+                <ListItemText primary="Đăng phòng" />
+              </ListItem>
+            </List>
+          </Collapse>
+
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button
+            onClick={() => setOpen(false)}
+            href="/profile">
+            <ListItemText
+              primary={'Khuyến mãi'}
+              classes={{
+                primary: classes.text
+              }}
+            />
+          </ListItem>
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button
+            onClick={() => setOpen(false)}
+            href="/profile">
+            <ListItemText
+              primary={'Tin nhắn'}
+              classes={{
+                primary: classes.text
+              }}
+            />
+          </ListItem>
+        </div>
+        <div className="bottom">
           <ListItem
             button
             component="a"
@@ -283,8 +238,8 @@ const SideDrawer: FC<IProps> = (props) => {
               />
             </ListItem>
           ) : (
-              ''
-            )}
+            ''
+          )}
         </div>
       </List>
     </Fragment>
@@ -294,4 +249,4 @@ const SideDrawer: FC<IProps> = (props) => {
 export default compose<IProps, any>(
   withCookies,
   memo
-)(SideDrawer);
+)(SlideDrawerMerchant);

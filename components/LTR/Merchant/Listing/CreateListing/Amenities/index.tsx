@@ -2,6 +2,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Grid, Typography } from '@material-ui/core';
@@ -10,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardAmenities from './CardAmenities';
+
 interface IProps {
   classes?: any;
 }
@@ -29,6 +31,8 @@ const Amenities: FC<IProps> = (props) => {
   const facilitiesClick = useSelector<ReducersList, number[]>(
     (state) => state.amenities.facilities
   );
+  const dispatch_img = useDispatch<Dispatch<ImageReducerAction>>();
+
   const bathroomsClick = useSelector<ReducersList, number[]>((state) => state.amenities.bathrooms);
   const kitchensClick = useSelector<ReducersList, number[]>((state) => state.amenities.kitchens);
   const entertainmentClick = useSelector<ReducersList, number[]>(
@@ -46,6 +50,7 @@ const Amenities: FC<IProps> = (props) => {
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab2' });
     getDataAmenities(id, dispatch_amen);
+    getDataImages(id, dispatch_img);
   }, []);
 
   useEffect(() => {

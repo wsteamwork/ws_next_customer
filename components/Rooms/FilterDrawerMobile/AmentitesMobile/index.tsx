@@ -1,15 +1,14 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
-import _ from 'lodash';
-import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import Paper from '@material-ui/core/Paper/Paper';
-import Grey from '@material-ui/core/colors/grey';
-import Blue from '@material-ui/core/colors/blue';
 import { useExpandableList } from '@/store/Hooks/filterHooks';
-import { Theme, makeStyles, Typography } from '@material-ui/core';
-import { getDataFilter, ResDataFilter, useFilterRoom } from '../../FilterActions/FilterRoom/context';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
+import Checkbox from '@material-ui/core/Checkbox/Checkbox';
+import Blue from '@material-ui/core/colors/blue';
+import Grey from '@material-ui/core/colors/grey';
+import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
+import Paper from '@material-ui/core/Paper/Paper';
+import createStyles from '@material-ui/core/styles/createStyles';
+import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getDataFilter, ResDataFilter, useFilterRoom } from '../../FilterActions/FilterRoom/context';
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setDataClick: Dispatch<SetStateAction<number[]>>;
@@ -69,7 +68,7 @@ const AmentitesMobile: FC<IProps> = (props) => {
         <Fragment>
           {comfortChunks.map((item, i) => (
             <Fragment key={i}>
-              <Typography  variant="subtitle2" className={classes.title}>
+              <Typography variant="subtitle2" className={classes.title}>
                 {item[0]}
               </Typography>
               <ul className={classes.ul}>
@@ -103,8 +102,8 @@ const AmentitesMobile: FC<IProps> = (props) => {
           </Paper>
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };
