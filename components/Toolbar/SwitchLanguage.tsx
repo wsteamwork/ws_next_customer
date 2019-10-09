@@ -45,7 +45,7 @@ const styles: any = (theme: Theme) =>
     }
   });
 
-const StyledMenu = withStyles({
+export const StyledMenu = withStyles({
   paper: {
     border: '1px solid #ebeef5',
     boxShadow: '0 2px 12px 0 rgba(0,0,0,.1)'
@@ -67,7 +67,7 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
+export const StyledMenuItem = withStyles((theme) => ({
   root: {
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
