@@ -1,5 +1,13 @@
 import BottomNavigation from '@/components/LTR/Merchant/Listing/Layout/BottomNavigation';
-import { Button, Hidden, StepConnector, StepIcon, Theme, Typography, withStyles } from '@material-ui/core';
+import {
+  Button,
+  Hidden,
+  StepConnector,
+  StepIcon,
+  Theme,
+  Typography,
+  withStyles
+} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -22,7 +30,6 @@ interface IProps {
   disableNext?: boolean;
   handleAPI?: () => any;
   submitEachStep?: boolean;
-
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => ({
@@ -81,17 +88,20 @@ const QontoStepIcon = withStyles({
 
 const StepperProgress: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const theme = useTheme();
   const { getSteps, getStepContent, nextLink, disableNext, handleAPI, submitEachStep } = props;
 
   const [activeStep, setActiveStep] = useState<number>(0);
-
   useEffect(() => {
-    if(localStorage.getItem('currentTab')){
+    if (localStorage.getItem('currentTab')) {
       let tab = Number(localStorage.getItem('currentTab'));
+      localStorage.setItem('currentTab', String(tab))
       setActiveStep(tab);
     }
-  }, []); 
+    else {
+      localStorage.setItem('currentTab', '0');
+      setActiveStep(0);
+    }
+  }, [activeStep]);
 
   const steps = getSteps();
 
@@ -139,19 +149,19 @@ const StepperProgress: FC<IProps> = (props) => {
             </Button>
           </div>
         ) : (
-            <div>
-              {getStepContent(activeStep, steps, setActiveStep, nextLink)}
-              <BottomNavigation
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                nextLink={nextLink}
-                disableNext={disableNext}
-                handleAPI={handleAPI}
-                submitEachStep={submitEachStep}
-              />
-            </div>
-          )}
+          <div>
+            {getStepContent(activeStep, steps, setActiveStep, nextLink)}
+            <BottomNavigation
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              nextLink={nextLink}
+              disableNext={disableNext}
+              handleAPI={handleAPI}
+              submitEachStep={submitEachStep}
+            />
+          </div>
+        )}
       </Grid>
     </Grid>
   );
