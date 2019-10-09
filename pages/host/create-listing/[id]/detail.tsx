@@ -9,6 +9,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { ProcessReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/process';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction, getListingDetails, handleDetailsListing } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +22,8 @@ const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<DetailsReducerAction>>();
   const dispatch_process = useDispatch<Dispatch<ProcessReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
+  const dispatch_img = useDispatch<Dispatch<ImageReducerAction>>();
+
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const listing = useSelector<ReducersList, any>((state) => state.details.listing);
@@ -71,6 +74,10 @@ const RoomCreateListing = () => {
 
   useEffect(() => {
     getDataAmenities(id, dispatch_amen);
+  }, []);
+
+  useEffect(() => {
+    getDataImages(id, dispatch_img);
   }, []);
 
   useEffect(() => {

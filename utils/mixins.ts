@@ -1,7 +1,7 @@
+import { IncomingMessage } from 'http';
+import _ from 'lodash';
 import moment, { Moment } from 'moment';
 import { ChangeEvent, useMemo } from 'react';
-import _ from 'lodash';
-import { IncomingMessage } from 'http';
 
 export const formatMoney = (
   amount: any,
@@ -123,12 +123,12 @@ export const getFirstLetterOfName = (name: string) => {
   return itemLast!.substring(0, 1);
 };
 
-export const calcPercentage = (portion:number, total:number) => {
-  const percent = parseInt(((portion/total) * 100).toFixed(2));
+export const calcPercentage = (portion: number, total: number) => {
+  const percent = parseInt(((portion / total) * 100).toFixed(2));
 
-  if (portion > total){
+  if (portion > total) {
     return `+ ${percent}%`;
-  }else {
-    return `- ${100-percent}%`;
+  } else {
+    return `- ${100 - percent}%`;
   }
 };
