@@ -1,13 +1,9 @@
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { IMAGE_STORAGE_ORIGINAL } from '@/utils/store/global';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Uppy from '@uppy/core';
 import '@uppy/core/dist/style.css';
-import '@uppy/dashboard/dist/style.css';
 import { Dashboard } from '@uppy/react';
-import '@uppy/url/dist/style.css';
-import '@uppy/webcam/dist/style.css';
 import XHRUpload from '@uppy/xhr-upload';
 import fetch from 'isomorphic-fetch';
 import React, { FC, Fragment, useEffect, useMemo } from 'react';
@@ -43,7 +39,7 @@ const UppyImage: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { label, subLabel, initImages, height, maxImage, typeUpload, type_txt, typeImage } = props;
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
-  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  // const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   useEffect(() => {
     if (type_txt) {
       dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
@@ -62,7 +58,7 @@ const UppyImage: FC<IProps> = (props) => {
 
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {
-      let img = `${IMAGE_STORAGE_ORIGINAL}` + arrImg[i].name;
+      let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
       await fetch(img)
         .then((res) => res.blob())
         .then((blob) => {
@@ -70,13 +66,14 @@ const UppyImage: FC<IProps> = (props) => {
             name: arrImg[i].name,
             data: blob
           });
+          uppy.getFiles().forEach((file) => {
+            uppy.setFileState(file.id, {
+              progress: { uploadComplete: true, uploadStarted: true }
+            });
+          });
         })
         .catch((err) => console.error(err));
-      uppy.getFiles().forEach((file) => {
-        uppy.setFileState(file.id, {
-          progress: { uploadComplete: true, uploadStarted: true }
-        });
-      });
+
     }
   };
   initImage(initImages);
@@ -140,7 +137,10 @@ const UppyImage: FC<IProps> = (props) => {
           timestamp +
           '_' +
           currentFile.name;
-        let modifiedFile = Object.assign({}, currentFile, { name: newName });
+        let modifiedFile = Object.assign({}, currentFile, {
+          name: newName
+        });
+        // console.log(modifiedFile);
         return modifiedFile;
       }
       return currentFile;
@@ -155,19 +155,21 @@ const UppyImage: FC<IProps> = (props) => {
     .on('complete', (result) => {
       let imgs = initImages;
       result.successful.map((res) => {
-        let img = { name: res.meta.name, caption: '', type: typeImage };
+        let img = { name: res.meta.name.split('.')[0] + '.jpg', caption: '', type: typeImage };
         imgs = [...imgs, img];
       });
-      if (type_txt) {
-        dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
-      } else {
-        dispatch({ type: typeUpload.type, payload: { images: imgs } });
-      }
+
       uppy.getFiles().forEach((file) => {
         uppy.setFileState(file.id, {
           progress: { uploadComplete: true, uploadStarted: true }
         });
       });
+
+      if (type_txt) {
+        dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
+      } else {
+        dispatch({ type: typeUpload.type, payload: { images: imgs } });
+      }
     })
     .on('file-removed', (file) => {
       let index = initImages.findIndex((i) => i.name === file.name);
@@ -210,7 +212,7 @@ const UppyImage: FC<IProps> = (props) => {
         </Grid>
       </Fragment>
     ),
-    [initImages]
+    []
   );
 };
 

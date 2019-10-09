@@ -3,7 +3,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import _ from 'lodash';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
