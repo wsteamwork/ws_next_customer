@@ -29,3 +29,4 @@ routes
   .add('/payment/invoice/:uuid', 'payment/invoice')
   .add('/payment/direct/:uuid', 'payment/direct')
   .add('create-listing', 'host/create-listing/:id')
+  .add('room-list', 'host/room-list')
