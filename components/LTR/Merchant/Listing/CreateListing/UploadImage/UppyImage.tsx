@@ -147,9 +147,10 @@ const UppyImage: FC<IProps> = (props) => {
     }
   })
     .use(XHRUpload, {
-      endpoint: 'https://dev.westay.vn/customer-api/upload-image/',
+      endpoint: 'https://dev.westay.vn/customer-api/upload-image',
       fieldName: 'file[]',
       limit: 20,
+      method: 'post',
       formData: true
     })
     .on('complete', (result) => {
