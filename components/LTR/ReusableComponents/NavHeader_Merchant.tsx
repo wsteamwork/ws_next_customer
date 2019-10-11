@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 import { withCookies } from 'react-cookie';
 import { compose } from "recompose";
 import SlideDrawerMerchant from '@/components/LTR/ReusableComponents/SlideDrawerMerchant';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   classes?: any,
@@ -96,7 +97,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
   const {}                      = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-
+  const { router } = useContext(GlobalContext);
   function handleSwitch(event: MouseEvent<HTMLElement>) {
     setAnchorEl(event.currentTarget);
   }
@@ -104,6 +105,9 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
   function handleClose() {
     setAnchorEl(null);
   }
+  const openLink = (url: string) => {
+    router.push(url);
+  };
 
   return (
     <div style = {{ backgroundColor: '#F9F9FC' }}>
@@ -138,7 +142,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                         keepMounted
                         open = {Boolean(anchorEl)}
                         onClose = {handleClose}>
-                        <StyledMenuItem onClick = {() => alert('Chuyển link')}>
+                        <StyledMenuItem onClick = {() => openLink('/host/room-list')}>
                           {/*<ListItemIcon>*/}
                           {/*  <ArrowDown/>*/}
                           {/*</ListItemIcon>*/}

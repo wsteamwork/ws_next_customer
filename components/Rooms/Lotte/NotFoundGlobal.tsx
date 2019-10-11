@@ -6,9 +6,11 @@ import { Typography } from '@material-ui/core';
 interface IProps {
   height?: number;
   width?: number;
+  content: string;
 }
 
-const NotFoundNotification: ComponentType<IProps> = (props) => {
+const NotFoundGlobal: ComponentType<IProps> = (props) => {
+  const { content } = props;
   const defaultOptions: any = {
     loop: true,
     animationData: animationData,
@@ -26,10 +28,10 @@ const NotFoundNotification: ComponentType<IProps> = (props) => {
         width={props.width || 70}
       />
       <Typography variant="h6" style={{ textAlign: 'center' }}>
-        Hiện tại bạn chưa có thông báo mới nào.
+        {content}
       </Typography>
     </span>
   );
 };
 
-export default NotFoundNotification;
+export default NotFoundGlobal;

@@ -6,17 +6,21 @@ import {
   Theme,
   Paper,
   IconButton,
-  Hidden
+  Hidden,
+  Tooltip
 } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/styles';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import EditIcon from '@material-ui/icons/Edit';
 import SearchIcon from '@material-ui/icons/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends, faBed, faBath, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import numeral from 'numeral';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 interface IProps {
   classes?: any;
   room: any;
@@ -27,7 +31,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginBottom: theme.spacing(3)
     },
     paper: {
-      padding: '24px'
+      padding: '16px'
     },
     title: {
       fontWeight: 600
@@ -45,6 +49,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       border: '1px solid #efefef',
       borderRadius: '10px'
     },
+    imgDefault: {
+      width: 140,
+      height: 40,
+      margin: 'auto'
+    },
     widthImg: {
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
@@ -53,6 +62,22 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         maxWidth: 160
       }
+    },
+    wrapperImage: {
+      display: 'flex',
+      alignItems: 'center',
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 140
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: 117
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: 94
+      },
+      backgroundColor: '#3d5c5c',
+      border: '1px solid #ffffff',
+      borderRadius: '10px'
     },
     roomName: {
       fontSize: '1.2rem',
@@ -71,9 +96,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       margin: '5px 0'
     },
     priceDay: {
+      display: 'flex',
       fontSize: 14,
       [theme.breakpoints.down('sm')]: {
-        fontSize: 13
+        fontSize: 12
+      }
+    },
+    priceAll: {
+      display: 'flex',
+      fontWeight: 600,
+      fontSize: 14,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 12
       }
     },
     link: {
@@ -102,7 +136,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       alignItems: 'center'
     },
     marginLabel: {
-      margin: '24px 0'
+      margin: '16px 0'
     },
     wrapperIcon: {
       maxWidth: 140
@@ -117,6 +151,20 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         background: '#3E93F8',
         color: '#fff'
       }
+    },
+    IconImage: {
+      backgroundColor: '#E1E8F7',
+      color: '#3E93F8',
+      padding: 8,
+      marginLeft: 8,
+      '&:hover': {
+        background: '#3E93F8',
+        color: '#fff'
+      }
+    },
+    sizeImage: {
+      width: '1.5rem',
+      height: '1.5rem'
     },
     customIcon: {
       color: '#767676'
@@ -140,8 +188,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     imgDetail: {
       height: 45,
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         height: 40
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: 35
+      },
+      [theme.breakpoints.down('xs')]: {
+        height: 30
       }
     },
     marginProcess: {
@@ -152,17 +206,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     subLabel: {
       fontWeight: 600,
-      fontSize: 16,
+      fontSize: 14,
       [theme.breakpoints.down('sm')]: {
-        fontSize: 15
+        fontSize: 13
       },
       [theme.breakpoints.down('xs')]: {
-        fontSize: 13
+        fontSize: 12
       }
     },
     btnShowSmUp: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'start',
+      justifyContent: 'flex-end'
     }
   })
 );
@@ -170,6 +225,7 @@ const RoomCardItem: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { room } = props;
+  const { router } = useContext(GlobalContext);
   const BorderLinearProgress = withStyles({
     root: {
       height: 6,
@@ -183,6 +239,13 @@ const RoomCardItem: FC<IProps> = (props) => {
     }
   })(LinearProgress);
 
+  const openUpdateRoom = (room_id: number) => {
+    router.push(`/host/update-room/${room_id}`);
+  };
+  const openPreviewRoom = (room_id: number) => {
+    router.push(`/host/preview-room/${room_id}`);
+  };
+
   return (
     <Fragment>
       <Grid container justify="center" alignContent="center" className={classes.root}>
@@ -191,28 +254,52 @@ const RoomCardItem: FC<IProps> = (props) => {
             <Grid container item xs={12}>
               <Grid item xs={12}>
                 <Grid container>
-                  <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
-                    <img
-                      className={classes.img}
-                      src={`https://a0.muscache.com/im/pictures/21e3f50a-9471-433f-9fb3-b852aa12814a.jpg?aki_policy=xx_large`}
-                      alt="Westay - Homestay cho người việt"
-                    />
-                  </Grid>
+                  {room.avatar && room.avatar.images.length ? (
+                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <img
+                        className={classes.img}
+                        src={IMAGE_STORAGE_LG + room.avatar.images[0].name}
+                        alt="Westay - Homestay cho người việt"
+                      />
+                    </Grid>
+                  ) : (
+                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <Grid className={classes.wrapperImage}>
+                        <img
+                          src={'/static/images/camera.svg'}
+                          alt="Camera"
+                          className={classes.imgDefault}
+                        />
+                      </Grid>
+                    </Grid>
+                  )}
                   <Hidden smUp>
                     <Grid item xs={5} className={classes.btnShowSmUp}>
                       <Grid item>
-                        <IconButton
-                          color="primary"
-                          className={classes.IconButton}
-                          aria-label="Edit">
-                          <EditIcon className={classes.sizeButton} />
-                        </IconButton>
-                        <IconButton
-                          color="primary"
-                          className={classes.IconButton}
-                          aria-label="Search">
-                          <SearchIcon className={classes.sizeButton} />
-                        </IconButton>
+                        <Tooltip
+                          title="Cập nhật phòng"
+                          placement="bottom"
+                          classes={{ tooltip: 'tooltip' }}>
+                          <IconButton
+                            color="primary"
+                            className={classes.IconButton}
+                            aria-label="Edit"
+                            onClick={() => openUpdateRoom(room.id)}>
+                            <EditIcon className={classes.sizeButton} />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          title="Xem trước phòng"
+                          placement="bottom"
+                          classes={{ tooltip: 'tooltip' }}>
+                          <IconButton
+                            color="primary"
+                            className={classes.IconButton}
+                            aria-label="Search"
+                            onClick={() => openPreviewRoom(room.id)}>
+                            <SearchIcon className={classes.sizeButton} />
+                          </IconButton>
+                        </Tooltip>
                       </Grid>
                     </Grid>
                   </Hidden>
@@ -223,29 +310,45 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <span>
                             <Link href="/terms-and-conditions" className={classes.roomName}>
                               {room.about_room ? room.about_room.name : 'Chưa có tên căn hộ'}
-                              <img
-                                src={'/static/images/verified.svg'}
-                                alt="Verified"
-                                className={classes.iconVerified}
-                              />
+                              {room.short_term_room.status === 1 ? (
+                                <img
+                                  src={'/static/images/verified.svg'}
+                                  alt="Verified"
+                                  className={classes.iconVerified}
+                                />
+                              ) : (
+                                ''
+                              )}
                             </Link>
                           </span>
                         </Grid>
                         <Hidden xsDown>
                           <Grid container item xs={2} justify="flex-end">
                             <Grid item>
-                              <IconButton
-                                color="primary"
-                                className={classes.IconButton}
-                                aria-label="Edit">
-                                <EditIcon className={classes.sizeButton} />
-                              </IconButton>
-                              <IconButton
-                                color="primary"
-                                className={classes.IconButton}
-                                aria-label="Search">
-                                <SearchIcon className={classes.sizeButton} />
-                              </IconButton>
+                              <Tooltip
+                                title="Cập nhật phòng"
+                                placement="bottom"
+                                classes={{ tooltip: 'tooltip' }}>
+                                <IconButton
+                                  color="primary"
+                                  className={classes.IconButton}
+                                  aria-label="Edit"
+                                  onClick={() => openUpdateRoom(room.id)}>
+                                  <EditIcon className={classes.sizeButton} />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip
+                                title="Xem trước phòng"
+                                placement="bottom"
+                                classes={{ tooltip: 'tooltip' }}>
+                                <IconButton
+                                  color="primary"
+                                  className={classes.IconButton}
+                                  aria-label="Search"
+                                  onClick={() => openPreviewRoom(room.id)}>
+                                  <SearchIcon className={classes.sizeButton} />
+                                </IconButton>
+                              </Tooltip>
                             </Grid>
                           </Grid>
                         </Hidden>
@@ -257,11 +360,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faUserFriends}></FontAwesomeIcon>
+                                  icon={faDoorOpen}></FontAwesomeIcon>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  3 khách
+                                  60 m<sup>2</sup>
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -271,11 +374,29 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
+                                  icon={faUserFriends}></FontAwesomeIcon>
+                              </Grid>
+                              <Grid className={classes.nameIcon} item xs={10}>
+                                <Typography variant="subtitle1" className={classes.priceDay}>
+                                  {room.guests
+                                    ? room.guests.recommendation + room.guests.max_additional_guest
+                                    : '0'}{' '}
+                                  khách
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+
+                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                            <Grid container>
+                              <Grid item xs={2} className={classes.spanIcon}>
+                                <FontAwesomeIcon
+                                  className={classes.customIcon}
                                   icon={faBed}></FontAwesomeIcon>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  2 giường
+                                  {room.bedrooms.number_bedroom} phòng ngủ
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -289,21 +410,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                {room.bathrooms.number_bathroom} phòng tắm
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
-                            <Grid container>
-                              <Grid item xs={2} className={classes.spanIcon}>
-                                <FontAwesomeIcon
-                                  className={classes.customIcon}
-                                  icon={faDoorOpen}></FontAwesomeIcon>
-                              </Grid>
-                              <Grid className={classes.nameIcon} item xs={10}>
-                                <Typography variant="subtitle1" className={classes.priceDay}>
-                                {room.bedrooms.number_bedroom} phòng ngủ
+                                  {room.bathrooms.number_bathroom} phòng tắm
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -312,21 +419,81 @@ const RoomCardItem: FC<IProps> = (props) => {
                       </Grid>
                       <Grid container>
                         <Grid item xs={12} lg={6} className={classes.infoRoomName}>
-                          <Typography variant="subtitle1" className={classes.priceDay}>
-                            1.000.000 vnđ/ 1ngày - 500.000 vnđ/ 4giờ
-                          </Typography>
+                          {room.short_term_room.rent_type === 3 ? (
+                            <Typography variant="body1" className={classes.priceAll}>
+                              {room.status === 1 ? (
+                                <span>
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  1tháng &#8226;
+                                </span>
+                              ) : (
+                                ''
+                              )}
+                              <span>
+                                &nbsp;
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ 1ngày
+                                &#8226;
+                              </span>
+                              <span>
+                                &nbsp;
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ 4giờ
+                              </span>
+                            </Typography>
+                          ) : (
+                            ''
+                          )}
+                          {room.short_term_room.rent_type === 2 ? (
+                            <Typography variant="body1" className={classes.priceAll}>
+                              {room.status === 1 ? (
+                                <span>
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  1tháng &#8226;
+                                </span>
+                              ) : (
+                                ''
+                              )}
+                              <span>
+                                &nbsp;
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ 1ngày
+                              </span>
+                            </Typography>
+                          ) : (
+                            ''
+                          )}
+                          {room.short_term_room.rent_type === 1 ? (
+                            <Typography variant="body1" className={classes.priceAll}>
+                              {room.status === 1 ? (
+                                <span>
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  1tháng &#8226;
+                                </span>
+                              ) : (
+                                ''
+                              )}
+                              <span>
+                                &nbsp;
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ 4giờ
+                              </span>
+                            </Typography>
+                          ) : (
+                            ''
+                          )}
                         </Grid>
-                        <Grid container item xs={12} lg={6}>
-                          <Grid item xs={12} className={classes.process}>
-                            <BorderLinearProgress
-                              className={classes.marginProcess}
-                              variant="determinate"
-                              color="secondary"
-                              value={50}
-                            />
-                            <span> 78%</span>
+                        {room.percent < 100 ? (
+                          <Grid container item xs={12} lg={6}>
+                            <Grid item xs={12} className={classes.process}>
+                              <BorderLinearProgress
+                                className={classes.marginProcess}
+                                variant="determinate"
+                                color="secondary"
+                                value={room.percent}
+                              />
+                              <span> {room.percent}%</span>
+                            </Grid>
                           </Grid>
-                        </Grid>
+                        ) : (
+                          ''
+                        )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -336,7 +503,7 @@ const RoomCardItem: FC<IProps> = (props) => {
             <Divider className={classes.marginLabel} />
             <Grid className={classes.price}>
               <Grid container spacing={1}>
-                <Grid item xs={6} sm={6} md={3} lg xl={3}>
+                <Grid item xs={6} sm={4} md lg xl={3}>
                   <Grid container>
                     <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
                       <img
@@ -355,26 +522,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={6} sm={6} md={3} lg xl={3}>
-                  <Grid container>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
-                      <img
-                        src={room.instant_book === 1 ? '/static/images/flash.svg' : '/static/images/flashWhite.svg'}
-                        alt="Flash"
-                        className={classes.imgDetail}
-                      />
-                    </Grid>
-                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
-                      <Typography variant="subtitle1" className={classes.priceDay}>
-                        Loại đặt phòng
-                      </Typography>
-                      <Typography variant={'body1'} className={classes.subLabel}>
-                       {room.instant_book === 1 ? "Đặt nhanh" : room.instant_book_txt}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+
+                <Grid item xs={6} sm={4} md lg xl={3}>
                   <Grid container>
                     <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
                       <img
@@ -385,15 +534,61 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Thuê theo
+                        Ngắn hạn
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
-                        Cả ngày và giờ
+                        {room.short_term_rent_type.rent_type === 3
+                          ? 'Ngày và giờ'
+                          : room.short_term_rent_type.rent_type_txt}
                       </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+
+                <Grid item xs={6} sm={4} md lg xl={3}>
+                  <Grid container>
+                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                      <img
+                        src={'/static/images/longterm.svg'}
+                        alt="Rent Type"
+                        className={classes.imgDetail}
+                      />
+                    </Grid>
+                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                      <Typography variant="subtitle1" className={classes.priceDay}>
+                        Dài hạn
+                      </Typography>
+                      <Typography variant={'body1'} className={classes.subLabel}>
+                        {room.status === 0 ? 'Đang khóa' : 'Theo tháng'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={6} sm={4} md lg xl={3}>
+                  <Grid container>
+                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                      <img
+                        src={
+                          room.instant_book === 1
+                            ? '/static/images/flash.svg'
+                            : '/static/images/flashWhite.svg'
+                        }
+                        alt="Flash"
+                        className={classes.imgDetail}
+                      />
+                    </Grid>
+                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                      <Typography variant="subtitle1" className={classes.priceDay}>
+                        Loại đặt phòng
+                      </Typography>
+                      <Typography variant={'body1'} className={classes.subLabel}>
+                        {room.instant_book_txt}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={6} sm={4} md lg xl={3}>
                   <Grid container>
                     <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
                       <img
@@ -407,7 +602,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                         Chính sách hủy
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
-                        Strict
+                      {room.short_term_room.settings.booking_cancel_type_text}
                       </Typography>
                     </Grid>
                   </Grid>

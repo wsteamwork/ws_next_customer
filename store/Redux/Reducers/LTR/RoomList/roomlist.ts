@@ -2,22 +2,20 @@ import { AxiosRes, Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { Reducer, Dispatch } from 'redux';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 export type RoomListReducerState = {
-  readonly roomlist: any[];
-  readonly meta: Pagination | null;
+  readonly roomlist: LTRoomIndexRes[];
   error: boolean;
 };
 
 export const init: RoomListReducerState = {
   roomlist: [],
-  meta: null,
   error: false
 };
 
 export type RoomListReducerAction =
-  | { type: 'setRoomList'; payload: any[]; meta?: Pagination | null  }
-  | { type: 'setMeta'; meta: Pagination }
+  | { type: 'setRoomList'; payload: LTRoomIndexRes[]; meta?: Pagination | null  }
   | { type: 'setError'; payload: boolean };
 
 export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerAction> = (
@@ -27,8 +25,6 @@ export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerActio
   switch (action.type) {
     case 'setRoomList':
       return updateObject(state, { roomlist: action.payload });
-    case 'setMeta':
-        return updateObject(state, { meta: action.meta });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -42,7 +38,6 @@ export const getRoomList = async (
   try {
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms`);
     const roomlist = res.data.data;
-    console.log(res);
     if (roomlist) {
       dispatch({ type: 'setRoomList', payload: roomlist });
     }
