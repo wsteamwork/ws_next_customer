@@ -1,30 +1,32 @@
-import {
-  createStyles,
-  Divider,
-  Grid,
-  Link,
-  Theme,
-  Paper,
-  IconButton,
-  Hidden,
-  Tooltip
-} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles, withStyles } from '@material-ui/styles';
-import React, { FC, Fragment, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import EditIcon from '@material-ui/icons/Edit';
-import SearchIcon from '@material-ui/icons/Search';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends, faBed, faBath, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import numeral from 'numeral';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Theme } from '@material-ui/core';
+import Tooltip from '@material-ui/core/Tooltip';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
+import SearchIcon from '@material-ui/icons/Search';
+import { makeStyles, withStyles } from '@material-ui/styles';
+import numeral from 'numeral';
+import React, { FC, Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
   room: any;
 }
+
+const HtmlTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 400,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dce0e0'
+  }
+}))(Tooltip);
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
@@ -50,7 +52,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: '10px'
     },
     imgDefault: {
-      width: 140,
+      width: 160,
       height: 40,
       margin: 'auto'
     },
@@ -58,7 +60,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
         marginBottom: 8,
-        maxHeight: 94
+        maxHeight: 100
       },
       [theme.breakpoints.up('md')]: {
         maxWidth: 160,
@@ -271,16 +273,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
-                      <Grid className={classes.wrapperImage}>
-                        <img
-                          src={'/static/images/camera.svg'}
-                          alt="Camera"
-                          className={classes.imgDefault}
-                        />
+                      <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                        <Grid className={classes.wrapperImage}>
+                          <img
+                            src={'/static/images/camera.svg'}
+                            alt="Camera"
+                            className={classes.imgDefault}
+                          />
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  )}
+                    )}
                   <Hidden smUp>
                     <Grid item xs={5} className={classes.btnShowSmUp}>
                       <Grid item>
@@ -325,8 +327,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   className={classes.iconVerified}
                                 />
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                             </Link>
                           </span>
                         </Grid>
@@ -435,10 +437,10 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               <span>
-                                 &nbsp;
+                                &nbsp;
                                 {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
                                 &nbsp; &#8226;
                               </span>
@@ -448,8 +450,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </span>
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                           {room.short_term_room.rent_type === 2 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -458,16 +460,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               <span>
-                                 &nbsp;
+                                &nbsp;
                                 {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
                               </span>
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                           {room.short_term_room.rent_type === 1 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -476,16 +478,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               <span>
                                 &nbsp;
                                 {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                         </Grid>
                         {room.percent < 100 ? (
                           <Grid container item xs={12} lg={6}>
@@ -500,8 +502,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </Grid>
                           </Grid>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -522,7 +524,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                      {t('roomlist:roomType')}
+                        {t('roomlist:roomType')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.accommodation_type_txt}
@@ -542,11 +544,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                      {t('roomlist:shortTerm')}
+                        {t('roomlist:shortTerm')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.short_term_rent_type.rent_type === 3
-                          ? t('roomlist:dayAndHour') 
+                          ? t('roomlist:dayAndHour')
                           : room.short_term_rent_type.rent_type_txt}
                       </Typography>
                     </Grid>
@@ -564,7 +566,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                      {t('roomlist:longTerm')}
+                        {t('roomlist:longTerm')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.status === 0 ? t('roomlist:locked') : t('roomlist:byMonth')}
@@ -588,7 +590,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                      {t('roomlist:rentType')}
+                        {t('roomlist:rentType')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.instant_book_txt}
@@ -597,30 +599,35 @@ const RoomCardItem: FC<IProps> = (props) => {
                   </Grid>
                 </Grid>
                 <Grid item xs={6} sm={4} md lg xl={3}>
-                  <Grid container>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
-                      <img
-                        src={'/static/images/policy.svg'}
-                        alt="Policy"
-                        className={classes.imgDetail}
-                      />
+                  <HtmlTooltip
+                    placement="bottom-end"
+                    title={room.short_term_room.settings.booking_cancel_text}
+                  >
+                    <Grid container>
+                      <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                        <img
+                          src={'/static/images/policy.svg'}
+                          alt="Policy"
+                          className={classes.imgDetail}
+                        />
+                      </Grid>
+                      <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                        <Typography variant="subtitle1" className={classes.priceDay}>
+                          {t('roomlist:policy')}
+                        </Typography>
+                        <Typography variant={'body1'} className={classes.subLabel}>
+                          {room.short_term_room.settings.booking_cancel_type_text}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
-                      <Typography variant="subtitle1" className={classes.priceDay}>
-                      {t('roomlist:policy')}
-                      </Typography>
-                      <Typography variant={'body1'} className={classes.subLabel}>
-                      {room.short_term_room.settings.booking_cancel_type_text}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+                  </HtmlTooltip>
                 </Grid>
               </Grid>
             </Grid>
           </Paper>
         </Grid>
       </Grid>
-    </Fragment>
+    </Fragment >
   );
 };
 export default RoomCardItem;

@@ -1,24 +1,24 @@
+import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 import { ReducersList } from '@/store/Redux/Reducers';
-import React, { FC, Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
-import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
-import RoomCardItem from './RoomCardItem';
-import { Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { getRoomList, RoomListReducerAction } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
-import { animateScroll as scroll } from 'react-scroll/modules';
-import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll/modules';
+import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
+import { Dispatch } from 'redux';
+import RoomCardItem from './RoomCardItem';
 interface IProps {
   classes?: any;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
-      margin: theme.spacing(3,0),
+      margin: theme.spacing(3, 0),
     },
   })
 );
@@ -64,8 +64,8 @@ const RoomListHost: FC<IProps> = (props) => {
       {roomlist.length ? (
         collectRoom.map((o) => <RoomCardItem key={o.id} room={o} />)
       ) : (
-        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')}/>
-      )}
+          <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
+        )}
       {roomlist.length > 10 ? (
         <Pagination
           className="rooms-pagination"
@@ -76,8 +76,8 @@ const RoomListHost: FC<IProps> = (props) => {
           onChange={ChangePage}
         />
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

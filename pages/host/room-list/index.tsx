@@ -1,7 +1,7 @@
-import { NextPage } from 'next';
-import React, { Fragment } from 'react';
 import RoomListHost from '@/components/LTR/Merchant/Listing/RoomList';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
+import { NextPage } from 'next';
+import React, { Fragment } from 'react';
 
 const RoomList: NextPage = (props) => {
   return (
