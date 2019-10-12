@@ -37,7 +37,8 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
         'details',
         'priceTerm',
         'stepPrice',
-        'process'
+        'process',
+        'roomlist'
       ]
     };
 

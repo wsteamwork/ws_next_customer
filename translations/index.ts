@@ -29,6 +29,8 @@ import promotion_vi from './promotion/promotion-vi.json';
 import promotion_en from './promotion/promotion-en.json';
 import details_en from './LongTermRental/listing/details/details-en.json';
 import details_vi from './LongTermRental/listing/details/details-vi.json';
+import roomlist_en from './LongTermRental/listing/roomlist/roomlist-en.json';
+import roomlist_vi from './LongTermRental/listing/roomlist/roomlist-vi.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -62,7 +64,8 @@ i18n
         reviews: reviews_en,
         shared: shared_en,
         promotion: promotion_en,
-        details: details_en
+        details: details_en,
+        roomlist: roomlist_en
       },
       vi: {
         home: home_vi,
@@ -77,7 +80,9 @@ i18n
         reviews: reviews_vi,
         shared: shared_vi,
         promotion: promotion_vi,
-        details: details_vi
+        details: details_vi,
+        roomlist: roomlist_vi,
+
       }
     },
 

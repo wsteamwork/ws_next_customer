@@ -11,8 +11,8 @@ import NotificationList from './NotificationList';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import Router from 'next/router';
-import NotFoundNotification from '../Rooms/Lotte/NotFoundNotification';
 import { NotificationIndexRes } from '@/types/Requests/Notification/NotificationResponse';
+import NotFoundNotification from '../Rooms/Lotte/NotFoundNotification';
 
 interface IProps {
   classes?: any;
