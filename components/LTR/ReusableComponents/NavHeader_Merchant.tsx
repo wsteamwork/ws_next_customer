@@ -1,4 +1,4 @@
-import React, { Fragment, FC, useState, MouseEvent, useContext } from 'react';
+import React, { FC, useState, MouseEvent, useContext } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import {
   Theme,
@@ -10,17 +10,14 @@ import {
   Grid,
   Zoom,
   Tooltip,
-  Icon,
-  ListItemIcon, ListItemText, Hidden, SwipeableDrawer, List, ListItem, Divider
+  ListItemText, Hidden, SwipeableDrawer
 } from '@material-ui/core';
-import GridContainer from '@/components/Layout/Grid/Container';
 import Logo from '@/components/Toolbar/Logo';
 import ExitToAppIcon from '@material-ui/icons/ExitToAppRounded';
 import ArrowDown from '@material-ui/icons/KeyboardArrowDownRounded';
 import PolicyIcon from '@material-ui/icons/GavelRounded';
 import { StyledMenuItem, StyledMenu } from '@/components/Toolbar/SwitchLanguage';
 import IconMenu from '@material-ui/icons/MenuRounded';
-import { useTranslation } from 'react-i18next';
 import { withCookies } from 'react-cookie';
 import { compose } from "recompose";
 import SlideDrawerMerchant from '@/components/LTR/ReusableComponents/SlideDrawerMerchant';
@@ -90,7 +87,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const NavHeader_Merchant: FC<IProps> = (props) => {
   const classes                 = useStyles(props);
-  const {}                      = props;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
@@ -103,6 +99,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
   }
   const openLink = (url: string) => {
     router.push(url);
+    setAnchorEl(null);
   };
 
   return (
