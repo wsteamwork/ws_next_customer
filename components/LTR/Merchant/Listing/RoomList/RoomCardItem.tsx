@@ -218,6 +218,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       alignItems: 'start',
       justifyContent: 'flex-end'
+    },
+    percent: {
+      fontWeight: 600
     }
   })
 );
@@ -240,7 +243,7 @@ const RoomCardItem: FC<IProps> = (props) => {
   })(LinearProgress);
 
   const openUpdateRoom = (room_id: number) => {
-    router.push(`/host/update-room/${room_id}`);
+    router.push(`/host/create-listing/${room_id}/process`);
   };
   const openPreviewRoom = (room_id: number) => {
     router.push(`/host/preview-room/${room_id}`);
@@ -488,7 +491,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 color="secondary"
                                 value={room.percent}
                               />
-                              <span> {room.percent}%</span>
+                              <span className={classes.percent}> {room.percent}%</span>
                             </Grid>
                           </Grid>
                         ) : (
