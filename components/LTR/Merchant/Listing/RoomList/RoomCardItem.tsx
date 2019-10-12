@@ -60,7 +60,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         marginBottom: 8
       },
       [theme.breakpoints.up('md')]: {
-        maxWidth: 160
+        maxWidth: 160,
+        maxHeight: 105
+      },
+      [theme.breakpoints.up('sm')]: {
+        maxHeight: 117
+      },
+      [theme.breakpoints.up('xs')]: {
+        maxHeight: 94
       }
     },
     wrapperImage: {
@@ -280,7 +287,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     <Grid item xs={5} className={classes.btnShowSmUp}>
                       <Grid item>
                         <Tooltip
-                          title="Cập nhật phòng"
+                          title={t('roomlist:tooltipUpdateRoom')}
                           placement="bottom"
                           classes={{ tooltip: 'tooltip' }}>
                           <IconButton
@@ -292,7 +299,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </IconButton>
                         </Tooltip>
                         <Tooltip
-                          title="Xem trước phòng"
+                          title={t('roomlist:tooltipPreviewRoom')}
                           placement="bottom"
                           classes={{ tooltip: 'tooltip' }}>
                           <IconButton
@@ -312,7 +319,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                         <Grid item xs={12} sm={10} className={classes.infoRoomName}>
                           <span>
                             <Link href="/terms-and-conditions" className={classes.roomName}>
-                              {room.about_room ? room.about_room.name : 'Chưa có tên căn hộ'}
+                              {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
                                 <img
                                   src={'/static/images/verified.svg'}
@@ -329,7 +336,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <Grid container item xs={2} justify="flex-end">
                             <Grid item>
                               <Tooltip
-                                title="Cập nhật phòng"
+                                title={t('roomlist:tooltipUpdateRoom')}
                                 placement="bottom"
                                 classes={{ tooltip: 'tooltip' }}>
                                 <IconButton
@@ -341,7 +348,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 </IconButton>
                               </Tooltip>
                               <Tooltip
-                                title="Xem trước phòng"
+                                title={t('roomlist:tooltipPreviewRoom')}
                                 placement="bottom"
                                 classes={{ tooltip: 'tooltip' }}>
                                 <IconButton
@@ -384,7 +391,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {room.guests
                                     ? room.guests.recommendation + room.guests.max_additional_guest
                                     : '0'}{' '}
-                                  khách
+                                  {t('roomlist:numberGuest')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -399,7 +406,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bedrooms.number_bedroom} phòng ngủ
+                                  {room.bedrooms.number_bedroom} {t('roomlist:numberBedroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -413,7 +420,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bathrooms.number_bathroom} phòng tắm
+                                  {room.bathrooms.number_bathroom} {t('roomlist:numberBathroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -427,19 +434,19 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  1tháng &#8226;
+                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
                                 ''
                               )}
                               <span>
-                                &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ 1ngày
-                                &#8226;
+                                 &nbsp;
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
+                                &nbsp; &#8226;
                               </span>
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ 4giờ
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
@@ -450,14 +457,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  1tháng &#8226;
+                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
                                 ''
                               )}
                               <span>
-                                &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ 1ngày
+                                 &nbsp;
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
                               </span>
                             </Typography>
                           ) : (
@@ -468,14 +475,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  1tháng &#8226;
+                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
                                 ''
                               )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ 4giờ
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
@@ -517,7 +524,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Loại phòng
+                      {t('roomlist:roomType')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.accommodation_type_txt}
@@ -537,11 +544,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Ngắn hạn
+                      {t('roomlist:shortTerm')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.short_term_rent_type.rent_type === 3
-                          ? 'Ngày và giờ'
+                          ? t('roomlist:dayAndHour') 
                           : room.short_term_rent_type.rent_type_txt}
                       </Typography>
                     </Grid>
@@ -559,10 +566,10 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Dài hạn
+                      {t('roomlist:longTerm')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
-                        {room.status === 0 ? 'Đang khóa' : 'Theo tháng'}
+                        {room.status === 0 ? t('roomlist:locked') : t('roomlist:byMonth')}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -583,7 +590,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Loại đặt phòng
+                      {t('roomlist:rentType')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.instant_book_txt}
@@ -602,7 +609,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
-                        Chính sách hủy
+                      {t('roomlist:policy')}
                       </Typography>
                       <Typography variant={'body1'} className={classes.subLabel}>
                       {room.short_term_room.settings.booking_cancel_type_text}

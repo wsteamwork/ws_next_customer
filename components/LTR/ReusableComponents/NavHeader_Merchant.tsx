@@ -16,7 +16,7 @@ import Logo from '@/components/Toolbar/Logo';
 import ExitToAppIcon from '@material-ui/icons/ExitToAppRounded';
 import ArrowDown from '@material-ui/icons/KeyboardArrowDownRounded';
 import PolicyIcon from '@material-ui/icons/GavelRounded';
-import { StyledMenuItem, StyledMenu } from '@/components/Toolbar/SwitchLanguage';
+import SwitchLanguage, { StyledMenuItem, StyledMenu } from '@/components/Toolbar/SwitchLanguage';
 import IconMenu from '@material-ui/icons/MenuRounded';
 import { withCookies } from 'react-cookie';
 import { compose } from "recompose";
@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     avatar: {
       alignSelf: 'center',
-      borderRadius: 4,
+      borderRadius: '50%',
       cursor: 'pointer'
     },
     divActions: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     IconExit: {
       backgroundColor: '#FAE4FA',
       color: '#FD27EB',
-      borderRadius: 4,
+      borderRadius: '50%',
       padding: 8,
       '&:hover': {
         background: '#FD27EB',
@@ -61,7 +61,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     IconPolicy: {
       backgroundColor: '#DCEEF2',
       color: '#1DC9B7',
-      borderRadius: 4,
+      borderRadius: '50%',
       padding: 8,
       '&:hover': {
         background: '#1DC9B7',
@@ -157,6 +157,9 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                 </Grid>
                 <Grid item>
                   <Grid container spacing = {2} alignItems = 'center' justify = 'flex-end'>
+                    <Grid item>
+                      <SwitchLanguage />
+                    </Grid>
                     <Grid item>
                       <Tooltip TransitionComponent = {Zoom} title = 'Chính sách và điều khoản'>
                         <IconButton color = 'primary' className = {classes.IconPolicy} aria-label = 'Policy'>

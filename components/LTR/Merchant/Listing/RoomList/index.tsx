@@ -11,6 +11,7 @@ import localeInfo from 'rc-pagination/lib/locale/vi_VN';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
 }
@@ -22,11 +23,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 const RoomListHost: FC<IProps> = (props) => {
+  const { t } = useTranslation();
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize] = useState<number>(3);
+  const [pageSize] = useState<number>(10);
 
   const indexOfLast = currentPage * pageSize;
   const indexOfFirst = indexOfLast - pageSize;
@@ -57,14 +59,14 @@ const RoomListHost: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Grid container justify="center" alignContent="center" className={classes.title}>
-        <h2>Danh sách phòng</h2>
+        <h2>{t('roomlist:titleName')}</h2>
       </Grid>
       {roomlist.length ? (
         collectRoom.map((o) => <RoomCardItem key={o.id} room={o} />)
       ) : (
-        <NotFoundGlobal height={300} width={250} content="Danh sách phòng hiện tại chưa có"/>
+        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')}/>
       )}
-      {roomlist.length > 3 ? (
+      {roomlist.length > 10 ? (
         <Pagination
           className="rooms-pagination"
           total={roomlist.length}

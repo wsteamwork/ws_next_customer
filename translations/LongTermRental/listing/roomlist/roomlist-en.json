@@ -1,0 +1,21 @@
+{ 
+    "titleName": "Room List", 
+    "contentNotFound": "The current room list is not displayed, please wait a moment", 
+    "tooltipUpdateRoom": "Update Room",
+    "tooltipPreviewRoom": "Preview Room",
+    "noNameRoom": "No Room Name",
+    "numberGuest": "guests",
+    "numberBedroom": "bedrooms",
+    "numberBathroom": "bathrooms",
+    "onePerMonth": "1month",
+    "onePerDay": "1day",
+    "onePerHour": "4hour",
+    "roomType": "Room type",
+    "dayAndHour": "Day and hour",
+    "shortTerm": "Short-term",
+    "longTerm": "Long-term",
+    "locked": "Locked",
+    "byMonth": "Monthly",
+    "rentType": "Rent type",
+    "policy": "Cancel policy"
+}
