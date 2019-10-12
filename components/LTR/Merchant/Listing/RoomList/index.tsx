@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
 import RoomCardItem from './RoomCardItem';
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles, createStyles, Theme } from '@material-ui/core';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
@@ -14,7 +14,15 @@ import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 interface IProps {
   classes?: any;
 }
+const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
+  createStyles({
+    title: {
+      margin: theme.spacing(3,0),
+    },
+  })
+);
 const RoomListHost: FC<IProps> = (props) => {
+  const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -48,7 +56,7 @@ const RoomListHost: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Grid container justify="center" alignContent="center">
+      <Grid container justify="center" alignContent="center" className={classes.title}>
         <h2>Danh sách phòng</h2>
       </Grid>
       {roomlist.length ? (

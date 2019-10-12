@@ -6,7 +6,7 @@ import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Me
 const RoomList: NextPage = (props) => {
   return (
     <Fragment>
-      {/* <NavHeader_Merchant /> */}
+      <NavHeader_Merchant />
       <RoomListHost />
     </Fragment>
   );

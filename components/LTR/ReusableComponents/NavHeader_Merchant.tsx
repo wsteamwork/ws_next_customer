@@ -41,10 +41,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 4,
       color: '#74788d',
       textTransform: 'initial'
-      // '&:visited':{
-      //   background: '#F3A92F',
-      //   color:'#fff',
-      // }
     },
     avatar: {
       alignSelf: 'center',
@@ -111,7 +107,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
 
   return (
     <div style = {{ backgroundColor: '#F9F9FC' }}>
-      <GridContainer xs = {12}>
+      <Grid container item xs={12}>
         <AppBar
           elevation = {0}
           position = 'static'
@@ -143,15 +139,9 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                         open = {Boolean(anchorEl)}
                         onClose = {handleClose}>
                         <StyledMenuItem onClick = {() => openLink('/host/room-list')}>
-                          {/*<ListItemIcon>*/}
-                          {/*  <ArrowDown/>*/}
-                          {/*</ListItemIcon>*/}
                           <ListItemText primary = 'Danh sách phòng' />
                         </StyledMenuItem>
                         <StyledMenuItem onClick = {() => alert('Chuyển link')}>
-                          {/*<ListItemIcon>*/}
-                          {/*  <ArrowDown/>*/}
-                          {/*</ListItemIcon>*/}
                           <ListItemText primary = 'Đăng phòng' />
                         </StyledMenuItem>
                       </StyledMenu>
@@ -215,7 +205,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
             </Hidden>
           </Toolbar>
         </AppBar>
-      </GridContainer>
+      </Grid>
     </div>
   );
 };
