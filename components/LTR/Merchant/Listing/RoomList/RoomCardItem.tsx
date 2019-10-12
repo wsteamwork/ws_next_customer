@@ -57,7 +57,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     widthImg: {
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
-        marginBottom: 8
+        marginBottom: 8,
+        maxHeight: 94
       },
       [theme.breakpoints.up('md')]: {
         maxWidth: 160,
@@ -66,9 +67,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         maxHeight: 117
       },
-      [theme.breakpoints.up('xs')]: {
-        maxHeight: 94
-      }
     },
     wrapperImage: {
       display: 'flex',
