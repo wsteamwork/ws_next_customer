@@ -9,7 +9,7 @@ interface Coordinate {
 }
 
 export type CreateListingState = {
-  readonly leaseType: number;
+  readonly leaseType: string[];
   readonly accommodationType: number;
   readonly stayWithHost: number;
   readonly guestRecommendation: number;
@@ -27,7 +27,7 @@ export type CreateListingState = {
 };
 
 export type CreateListingActions =
-  | { type: 'SET_LEASE_TYPE'; payload: number }
+  | { type: 'SET_LEASE_TYPE'; payload: string[] }
   | { type: 'SET_ACCOMMODATION_TYPE'; payload: number }
   | { type: 'SET_STAY_WITH_HOST'; payload: number }
   | { type: 'SET_GUEST_RECOMMENDATION'; payload: number }
@@ -44,7 +44,7 @@ export type CreateListingActions =
   | { type: 'SET_ID_LISTING'; payload: number };
 
 const init: CreateListingState = {
-  leaseType: 3,
+  leaseType: [],
   accommodationType: 2,
   stayWithHost: 0,
   bedRooms: null,

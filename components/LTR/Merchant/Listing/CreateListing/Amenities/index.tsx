@@ -1,6 +1,6 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { AmenitiesReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
@@ -20,11 +20,7 @@ const Amenities: FC<IProps> = (props) => {
   const id = router.query.id;
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
-  // const commonClick = useSelector<ReducersList, number[]>((state) => state.amenities.common);
-  // const livingRoomsClick = useSelector<ReducersList, number[]>(
-  //   (state) => state.amenities.livingrooms
-  // );
-  // const bedroomsClick = useSelector<ReducersList, number[]>((state) => state.amenities.bedrooms);
+
   const outdoorsClick = useSelector<ReducersList, number[]>((state) => state.amenities.outdoors);
   const facilitiesClick = useSelector<ReducersList, number[]>(
     (state) => state.amenities.facilities

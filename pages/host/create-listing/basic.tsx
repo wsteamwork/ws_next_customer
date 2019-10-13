@@ -19,7 +19,7 @@ const RoomCreateListing = () => {
   };
 
   const data = {
-    lease_type: useSelector<ReducersList, number>((state) => state.createListing.leaseType),
+    lease_type: useSelector<ReducersList, string[]>((state) => state.createListing.leaseType),
     accommodation_type: useSelector<ReducersList, number>(
       (state) => state.createListing.accommodationType
     ),

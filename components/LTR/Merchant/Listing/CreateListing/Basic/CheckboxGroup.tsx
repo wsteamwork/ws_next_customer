@@ -7,9 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import classNames from 'classnames';
 
 interface IProps {
   classes?: any;
+  value?: any;
+  error?: any;
+  label?: any;
+  className?: any;
+  id?: any;
+  touched?: any;
+  onChange?: any;
+  onBlur?: any;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -36,64 +45,71 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CheckboxCustom: FC<IProps> = (props) => {
-  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  // const leaseType = useSelector<ReducersList, number>((state) => state.createListing.leaseType);
+const InputFeedback = ({ error }) =>
+  error ? <div className={classNames('input-feedback')}>{error}</div> : null;
+
+const CheckboxGroup: FC<IProps> = (props) => {
+  const { value, error, touched, label, className, children, onChange, onBlur, id } = props;
+  // const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  // const leaseType = useSelector<ReducersList, string[]>((state) => state.createListing.leaseType);
   const classes = useStyles(props);
-  const [state, setState] = useState<any>({
-    shortterm: true,
-    longterm: false
-  });
-  const { shortterm, longterm } = state;
-  const handleChange = (name) => (event) => {
-    setState({ ...state, [name]: event.target.checked });
+  // const [state, setState] = useState<any>({
+  //   shortterm: true,
+  //   longterm: false
+  // });
+  // const { shortterm, longterm } = state;
+  //   const handleChange = (name) => (event) => {
+  //     setState({ ...state, [name]: event.target.checked });
+  //   };
+
+  const handleChange = (event) => {
+    const target = event.currentTarget;
+    console.log(value);
+    console.log(target.id);
+    console.log(target.checked);
+    let valueArray = [...value] || [];
+    // let valueArray = [];
+
+    if (target.checked) {
+      valueArray.push(target.id);
+    } else {
+      valueArray.splice(valueArray.indexOf(target.id), 1);
+    }
+    // console.log(valueArray);
+    console.log('valueArray', valueArray);
+
+    onChange(id, valueArray);
   };
 
-  // useEffect(() => {
-  //   if (leaseType) {
-  //     if (leaseType == 1) {
-  //       setState({
-  //         shortterm: true,
-  //         longterm: false
-  //       });
-  //     } else if (leaseType == 2) {
-  //       setState({
-  //         shortterm: false,
-  //         longterm: true
-  //       });
-  //     } else if (leaseType == 3) {
-  //       setState({
-  //         shortterm: true,
-  //         longterm: true
-  //       });
-  //     } else {
-  //       setState({
-  //         shortterm: false,
-  //         longterm: false
-  //       });
-  //     }
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'SET_LEASE_TYPE',
-  //     payload:
-  //       shortterm && !longterm ? 1 : !shortterm && longterm ? 2 : shortterm && longterm ? 3 : null
-  //   });
-  // }, [state]);
-
-  const error = [shortterm, longterm].filter((v) => v).length !== 2;
+  const handleBlur = () => {
+    // take care of touched
+    onBlur(id, true);
+  };
 
   return (
     <Grid className={classes.container}>
       {/* <h3>Hình thức thuê: </h3> */}
 
       <FormControl component="fieldset" fullWidth>
-        <Grid className={classes.title}>Hình thức thuê</Grid>
+        <Grid className={classes.title}>{label}</Grid>
         <FormGroup row>
           <Grid container spacing={2}>
-            <Grid item xs={6} className={classes.checkboxItem}>
+            {children
+              ? React.Children.map(children, (child: any) => {
+                  if (child.props) console.log(value.includes(child.props.id));
+                  return child.props
+                    ? React.cloneElement(child, {
+                        field: {
+                          value: value.includes(child.props.id),
+                          onChange: handleChange,
+                          onBlur: handleBlur
+                        }
+                      })
+                    : '';
+                })
+              : ''}
+            {touched && <InputFeedback error={error} />}
+            {/* <Grid item xs={6} className={classes.checkboxItem}>
               <div className={classes.checkboxItemWrapper}>
                 <FormControlLabel
                   control={
@@ -126,7 +142,7 @@ const CheckboxCustom: FC<IProps> = (props) => {
                 />
                 <div style={{ marginTop: 5 }}>Thời gian thuê tối thiểu 1 tháng</div>
               </div>
-            </Grid>
+            </Grid>*/}
           </Grid>
         </FormGroup>
       </FormControl>
@@ -134,4 +150,4 @@ const CheckboxCustom: FC<IProps> = (props) => {
   );
 };
 
-export default CheckboxCustom;
+export default CheckboxGroup;

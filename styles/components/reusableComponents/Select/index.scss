@@ -9,6 +9,11 @@
     color: rgb(118, 118, 118);
     margin: 0;
   }
+  .select {
+    &:focus {
+      background-color: transparent;
+    }
+  }
   .icon {
     margin-right: 10px;
   }
