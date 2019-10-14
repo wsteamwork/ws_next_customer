@@ -5,14 +5,19 @@ import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  handleCreateRoom
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import React, { Dispatch, Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [idListing, setIdListing] = useState<number>(null);
-  const currentState = useSelector<ReducersList, any>((state) => state);
+  const disableSubmit = useSelector<ReducersList, boolean>(
+    (state) => state.createListing.disableSubmit
+  );
 
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
@@ -72,6 +77,8 @@ const RoomCreateListing = () => {
         nextLink={`/host/create-listing/${idListing}/detail`}
         handleAPI={() => handleCreateRoom(data, dispatch)}
         submitEachStep={true}
+        disableSubmit={disableSubmit}
+
       />
       {/* </CreateListingContext.Provider> */}
     </Fragment>

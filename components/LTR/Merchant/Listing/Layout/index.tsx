@@ -4,7 +4,6 @@ import React, { Dispatch, FC, SetStateAction } from 'react';
 import HeaderNav from './HeaderNavigation';
 import StepperProgress from './StepperProgress';
 
-
 interface IProps {
   title: string;
   getStepContent: (
@@ -18,11 +17,20 @@ interface IProps {
   disableNext?: boolean;
   handleAPI?: () => any;
   submitEachStep?: boolean;
-
+  disableSubmit?: boolean;
 }
 
 const Layout: FC<IProps> = (props) => {
-  const { title, getStepContent, getSteps, nextLink, disableNext, handleAPI, submitEachStep } = props;
+  const {
+    title,
+    getStepContent,
+    getSteps,
+    nextLink,
+    disableNext,
+    handleAPI,
+    submitEachStep,
+    disableSubmit
+  } = props;
 
   return (
     <Grid className="listing-container">
@@ -38,6 +46,7 @@ const Layout: FC<IProps> = (props) => {
           nextLink={nextLink}
           handleAPI={handleAPI}
           disableNext={disableNext}
+          disableSubmit={disableSubmit}
           submitEachStep={submitEachStep}
         />
       </GridContainer>

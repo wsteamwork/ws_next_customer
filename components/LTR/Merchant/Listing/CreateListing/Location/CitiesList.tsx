@@ -13,6 +13,9 @@ interface Iprops {
   //   classes?: any;
   setDistrictList: Dispatch<SetStateAction<any[]>>;
   setDisabledDistrictField: Dispatch<SetStateAction<boolean>>;
+  valueCity: string;
+  onBlur: any;
+  onChange: any;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const CitiesList: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
   //   const { classes } = props;
-  const { setDistrictList, setDisabledDistrictField } = props;
+  const { setDistrictList, setDisabledDistrictField, valueCity, onChange, onBlur } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [stateSuggestions, setStateSuggestions] = useState<any[]>([]);
   const [suggestionsList, setSuggestionsList] = useState<any[]>([]);
@@ -61,13 +64,13 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     try {
       const res = await axios.get(`/cities`);
       return res;
-    } catch (error) { }
+    } catch (error) {}
   };
   const getDistricts = async () => {
     try {
       const res = await axios.get(`/districts?city_id=${city_id}`);
       return res;
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -98,7 +101,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   }, []);
 
   function renderInputComponent(inputProps) {
-    const { classes, inputRef = () => { }, ref, ...other } = inputProps;
+    const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
     return (
       <OutlinedInput
@@ -139,15 +142,15 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     return inputLength === 0
       ? []
       : suggestionsList.filter((suggestion) => {
-        const keep =
-          count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
+          const keep =
+            count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
 
-        if (keep) {
-          count += 1;
-        }
+          if (keep) {
+            count += 1;
+          }
 
-        return keep;
-      });
+          return keep;
+        });
   }
   function renderSuggestion(suggestion, { query, isHighlighted }) {
     const matches = match(suggestion.name, query);
@@ -176,10 +179,12 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
 
   const handleChange = (name) => (event, { newValue }) => {
     setDisabledDistrictField(true);
-    setState({
-      ...state,
-      [name]: newValue
-    });
+    // setState({
+    //   ...state,
+    //   [name]: newValue
+    // });
+    onChange(name, newValue);
+    console.log(valueCity);
   };
   function getSuggestionValue(suggestion) {
     setCityId(suggestion.id);
@@ -190,6 +195,10 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     });
     return suggestion.name;
   }
+
+  const handleBlur = () => {
+    onBlur('city', true);
+  };
 
   const autosuggestProps = {
     renderInputComponent,
@@ -206,8 +215,9 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
         classes,
         id: 'react-autosuggest-sksimple',
         placeholder: 'Chọn thành phố',
-        value: state.city,
-        onChange: handleChange('city')
+        value: valueCity,
+        onChange: handleChange('city'),
+        onBlur: handleBlur
       }}
       theme={{
         container: classes.container,

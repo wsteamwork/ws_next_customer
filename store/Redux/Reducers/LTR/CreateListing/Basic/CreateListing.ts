@@ -24,6 +24,7 @@ export type CreateListingState = {
   readonly coordinate: Coordinate;
   readonly listing: any;
   readonly id_listing: number;
+  readonly disableSubmit: boolean;
 };
 
 export type CreateListingActions =
@@ -41,7 +42,8 @@ export type CreateListingActions =
   | { type: 'SET_DISTRICT_ID'; payload: number }
   | { type: 'SET_COORDINATE'; payload: Coordinate }
   | { type: 'SET_LISTING'; payload: any }
-  | { type: 'SET_ID_LISTING'; payload: number };
+  | { type: 'SET_ID_LISTING'; payload: number }
+  | { type: 'SET_DISABLE_SUBMIT'; payload: boolean };
 
 const init: CreateListingState = {
   leaseType: 3,
@@ -58,7 +60,8 @@ const init: CreateListingState = {
   district_id: null,
   coordinate: null,
   listing: null,
-  id_listing: 0
+  id_listing: 0,
+  disableSubmit: false
 };
 
 export const createListingReducer: Reducer<CreateListingState, CreateListingActions> = (
@@ -96,6 +99,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { listing: action.payload });
     case 'SET_ID_LISTING':
       return updateObject<CreateListingState>(state, { id_listing: action.payload });
+    case 'SET_DISABLE_SUBMIT':
+      return updateObject<CreateListingState>(state, { disableSubmit: action.payload });
 
     default:
       return state;
