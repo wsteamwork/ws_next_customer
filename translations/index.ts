@@ -31,6 +31,8 @@ import details_en from './LongTermRental/listing/details/details-en.json';
 import details_vi from './LongTermRental/listing/details/details-vi.json';
 import roomlist_en from './LongTermRental/listing/roomlist/roomlist-en.json';
 import roomlist_vi from './LongTermRental/listing/roomlist/roomlist-vi.json';
+import basic_en from './LongTermRental/listing/basic/basic-en.json';
+import basic_vi from './LongTermRental/listing/basic/basic-vi.json';
 
 const languageDetector = {
   init: Function.prototype,
@@ -65,7 +67,8 @@ i18n
         shared: shared_en,
         promotion: promotion_en,
         details: details_en,
-        roomlist: roomlist_en
+        roomlist: roomlist_en,
+        basic: basic_en
       },
       vi: {
         home: home_vi,
@@ -82,7 +85,7 @@ i18n
         promotion: promotion_vi,
         details: details_vi,
         roomlist: roomlist_vi,
-
+        basic: basic_vi
       }
     },
 

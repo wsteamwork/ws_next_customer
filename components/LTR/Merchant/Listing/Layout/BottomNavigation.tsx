@@ -14,6 +14,7 @@ interface IProps {
   nextLink?: string;
   setActiveStep: any;
   disableNext?: boolean;
+  disableSubmit?: boolean;
   handleAPI?: () => Promise<any>;
   submitEachStep?: boolean;
 }
@@ -25,10 +26,13 @@ const BottomNavigation: FC<IProps> = (props) => {
     nextLink,
     setActiveStep,
     disableNext,
+    disableSubmit,
     handleAPI,
     submitEachStep
   } = props;
-  const currentActiveStep = useSelector<ReducersList, string>((state) => state.process.currentActiveStep);
+  const currentActiveStep = useSelector<ReducersList, string>(
+    (state) => state.process.currentActiveStep
+  );
   useEffect(() => {
     let step = localStorage.getItem('currentStep');
     if (window.performance) {
@@ -47,7 +51,7 @@ const BottomNavigation: FC<IProps> = (props) => {
         Router.push(`/host/create-listing/${result.data.data.id}/detail`);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -72,14 +76,12 @@ const BottomNavigation: FC<IProps> = (props) => {
           } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
             localStorage.setItem('currentTab', String(activeStep + 1));
-
           }
-
         }
       } else {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const handleBack = () => {
@@ -101,6 +103,7 @@ const BottomNavigation: FC<IProps> = (props) => {
           steps={steps}
           activeStep={activeStep}
           disableNext={disableNext}
+          disableSubmit={disableSubmit}
           submitEachStep={submitEachStep}
         />
       </Hidden>
@@ -114,14 +117,16 @@ const BottomNavigation: FC<IProps> = (props) => {
           className="mobile-stepper"
           nextButton={
             activeStep === steps.length - 1 ? (
-              <ButtonGlobal onClick={submitEachStep ? handleFinish : handleNext} disabled={disableNext}>
+              <ButtonGlobal
+                onClick={submitEachStep ? handleFinish : handleNext}
+                disabled={disableSubmit ? disableSubmit : disableNext}>
                 Finish
               </ButtonGlobal>
             ) : (
-                <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-                  Next
+              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                Next
               </ButtonGlobal>
-              )
+            )
           }
           backButton={
             <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>

@@ -13,11 +13,21 @@ interface IProps {
   handleNext: () => Promise<any>;
   handleFinish: () => Promise<any>;
   disableNext?: boolean;
+  disableSubmit?: boolean;
   submitEachStep: boolean;
 }
 
 const BottomMdNavigation: FC<IProps> = (props) => {
-  const { activeStep, handleBack, steps, handleNext, handleFinish, disableNext, submitEachStep } = props;
+  const {
+    activeStep,
+    handleBack,
+    steps,
+    handleNext,
+    handleFinish,
+    disableNext,
+    disableSubmit,
+    submitEachStep
+  } = props;
 
   return (
     <GridContainer
@@ -34,14 +44,16 @@ const BottomMdNavigation: FC<IProps> = (props) => {
           </Grid>
           <Grid className="next-button">
             {activeStep === steps.length - 1 ? (
-              <ButtonGlobal onClick={submitEachStep ? handleFinish : handleNext} disabled={disableNext}>
+              <ButtonGlobal
+                onClick={submitEachStep ? handleFinish : handleNext}
+                disabled={disableSubmit ? disableSubmit : disableNext}>
                 Finish
               </ButtonGlobal>
             ) : (
-                <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-                  Next
+              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                Next
               </ButtonGlobal>
-              )}
+            )}
           </Grid>
         </Grid>
       </Grid>
