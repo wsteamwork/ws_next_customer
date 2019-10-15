@@ -1,6 +1,9 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { Button, Collapse } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, SetStateAction, useState } from 'react';
@@ -22,7 +25,7 @@ const BedRoom: FC<IProps> = (props) => {
   const { bedRooms } = useSelector<ReducersList, CreateListingState>(
     (state) => state.createListing
   );
-  const totalBeds = [single, double, king, bed].reduce((a, b) => a + b, 0);
+  const totalBeds = [single, double, king, bed, queen].reduce((a, b) => a + b, 0);
 
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
   const handleToggleAddBedRoom = () => {
@@ -42,7 +45,6 @@ const BedRoom: FC<IProps> = (props) => {
           type: 'SET_BEDROOMS',
           payload: bedRoomsListTemp
         });
-
       }
     }
     setIsAddBedRoom(!isAddBedRoom);
@@ -59,40 +61,35 @@ const BedRoom: FC<IProps> = (props) => {
   return (
     <Grid className="add-bedroom-container">
       <Grid container className="add-bedroom-container__wrapper">
-        <Grid item sm={6} className="add-room-container__title">
+        <Grid item xs={6} className="add-room-container__title">
           <h3>Phòng ngủ {roomNumber}</h3>
         </Grid>
-        <Grid item sm={6} className="add-bedroom-container__counting">
+        <Grid item xs={6} className="add-bedroom-container__counting">
           <p>{totalBeds} giường</p>
           {!isAddBedRoom ? <Grid>{renderBedroomInfo()}</Grid> : ' '}
         </Grid>
 
-        <Grid item sm={12} className="counting-open">
+        <Grid item xs={12} className="counting-open">
           {/* <h3>Phòng ngủ 1</h3> */}
           <Collapse in={isAddBedRoom}>
-            <QuantityButtons
-              number={single}
-              setNumber={setSingle}
-              title={'Đơn'}
-              containerWidth={'66.67%'}></QuantityButtons>
-            <QuantityButtons
-              number={double}
-              setNumber={setDouble}
-              title={'Đôi'}
-              containerWidth={'66.67%'}></QuantityButtons>
-            <QuantityButtons
-              number={king}
-              setNumber={setKing}
-              title={'King'}
-              containerWidth={'66.67%'}></QuantityButtons>
-            <QuantityButtons
-              number={queen}
-              setNumber={setQueen}
-              title={'Queen'}
-              containerWidth={'66.67%'}></QuantityButtons>
+            <Grid item xs={8}>
+              <QuantityButtons
+                number={single}
+                setNumber={setSingle}
+                title={'Đơn'}></QuantityButtons>
+              <QuantityButtons
+                number={double}
+                setNumber={setDouble}
+                title={'Đôi'}></QuantityButtons>
+              <QuantityButtons number={king} setNumber={setKing} title={'King'}></QuantityButtons>
+              <QuantityButtons
+                number={queen}
+                setNumber={setQueen}
+                title={'Queen'}></QuantityButtons>
+            </Grid>
           </Collapse>
         </Grid>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <Button className="add-room-button" onClick={handleToggleAddBedRoom}>
             {isAddBedRoom ? 'Xong' : 'Thêm giường'}
           </Button>

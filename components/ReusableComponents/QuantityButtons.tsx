@@ -9,12 +9,11 @@ interface Iprops {
   title: string;
   number: number;
   setNumber: Dispatch<SetStateAction<number>>;
-  containerWidth?: string;
   step?: number;
 }
 
 const QuantityButtons: FC<Iprops> = (props) => {
-  const { icon, title, number, setNumber, containerWidth, step } = props;
+  const { icon, title, number, setNumber, step } = props;
 
   const handleDecrement = () => {
     if (number === 0) {
@@ -38,8 +37,7 @@ const QuantityButtons: FC<Iprops> = (props) => {
   return (
     <Grid
       container
-      className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}
-      style={{ width: containerWidth }}>
+      className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}>
       <Grid item xs={8} className="flex_columCenter">
         <p>
           {icon ? (
