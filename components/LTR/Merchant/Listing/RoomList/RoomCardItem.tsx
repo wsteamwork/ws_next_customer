@@ -52,7 +52,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: '10px'
     },
     imgDefault: {
-      width: 160,
+      width: 140,
       height: 40,
       margin: 'auto'
     },
@@ -60,7 +60,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       [theme.breakpoints.down('xs')]: {
         marginBottom: 8,
-        maxHeight: 100
+        maxHeight: 94
       },
       [theme.breakpoints.up('md')]: {
         maxWidth: 160,
