@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import deepEqual from 'lodash.isequal';
-interface IProps {}
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -40,7 +40,7 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     address: Yup.string()
       .required(t('basic:addressRequired')),
-      // .max(100, t('details:name100Character')),
+    // .max(100, t('details:name100Character')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
 
@@ -146,7 +146,7 @@ const Location: FC<IProps> = (props) => {
   };
 
   const handleChangeAddress = (setFieldValue: any) => (value: any) => {
-    console.log(value);
+    // console.log(value);
     setFieldValue('address', value);
   };
 
@@ -183,7 +183,7 @@ const Location: FC<IProps> = (props) => {
           const hasChanged = !deepEqual(values, initialValues);
           const hasErrors = Object.keys(errors).length > 0;
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
-          console.log(!hasChanged || hasErrors || isSubmitting);
+          // console.log(!hasChanged || hasErrors || isSubmitting);
 
           return (
             <form onSubmit={handleSubmit}>

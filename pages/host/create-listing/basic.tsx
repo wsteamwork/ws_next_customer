@@ -9,12 +9,15 @@ import {
   CreateListingActions,
   handleCreateRoom
 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import React, { Dispatch, Fragment, useState } from 'react';
+import React, { Dispatch, Fragment, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [idListing, setIdListing] = useState<number>(null);
+  const { router } = useContext(GlobalContext);
+  console.log(router);
   const disableSubmit = useSelector<ReducersList, boolean>(
     (state) => state.createListing.disableSubmit
   );
@@ -47,6 +50,8 @@ const RoomCreateListing = () => {
     district_id: useSelector<ReducersList, any>((state) => state.createListing.district_id)
   };
 
+  const uid = router.query.uid;
+  console.log(uid);
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -75,7 +80,7 @@ const RoomCreateListing = () => {
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={`/host/create-listing/${idListing}/detail`}
-        handleAPI={() => handleCreateRoom(data, dispatch)}
+        handleAPI={() => handleCreateRoom(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}
 

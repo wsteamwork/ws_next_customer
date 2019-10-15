@@ -116,6 +116,7 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
 export const handleCreateRoom = async (
   data: any,
   dispatch: any,
+  uid: any,
   token?: string,
   initLanguage: string = 'vi'
 ) => {
@@ -156,7 +157,7 @@ export const handleCreateRoom = async (
     }
   };
 
-  const response = await axios_merchant.post(`long-term/room/create`, body);
+  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body);
 
   dispatch({
     type: 'SET_LISTING',
