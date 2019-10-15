@@ -1,21 +1,18 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
+import classNames from 'classnames';
+import { Formik, FormikActions, FormikProps } from 'formik';
+import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, FormikActions, FormikProps } from 'formik';
-import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
-import deepEqual from 'lodash.isequal';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
 interface IProps { }
 
 interface Coordinate {
