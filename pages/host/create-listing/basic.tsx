@@ -4,14 +4,11 @@ import Location from '@/components/LTR/Merchant/Listing/CreateListing/Location';
 import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
-import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  handleCreateRoom
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import React, { Dispatch, Fragment, useState, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { CreateListingActions, handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import React, { Dispatch, Fragment, useContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
@@ -51,7 +48,7 @@ const RoomCreateListing = () => {
   };
 
   const uid = router.query.uid;
-  console.log(uid);
+  // console.log(uid);
   const getStepContent = (step) => {
     switch (step) {
       case 0:

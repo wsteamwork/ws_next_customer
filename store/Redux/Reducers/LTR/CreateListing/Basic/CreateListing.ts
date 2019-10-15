@@ -152,7 +152,7 @@ export const handleCreateRoom = async (
         city_id: data.city_id,
         district_id: data.district_id,
         latitude: parseFloat(data.coordinate.lat),
-        longitude: parseFloat(data.coordinate.long)
+        longitude: parseFloat(data.coordinate.lng)
       }
     }
   };

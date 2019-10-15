@@ -32,14 +32,14 @@ interface GoogleMapProps {
 interface FormValues {
   address: string;
   city: string;
+  building: string;
 }
 
 const useValidatation = () => {
   const { t } = useTranslation();
 
   const FormValidationSchema = Yup.object().shape({
-    address: Yup.string()
-      .required(t('basic:addressRequired')),
+    address: Yup.string().required(t('basic:addressRequired')),
     // .max(100, t('details:name100Character')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
@@ -124,7 +124,7 @@ const Location: FC<IProps> = (props) => {
     });
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e) => {
     dispatch({
       type: 'SET_BUILDING',
       payload: buildingInput
@@ -133,7 +133,8 @@ const Location: FC<IProps> = (props) => {
 
   const initFormValue: FormValues = {
     address: '',
-    city: ''
+    city: '',
+    building: ''
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
@@ -210,9 +211,19 @@ const Location: FC<IProps> = (props) => {
                   <OutlinedInput
                     placeholder="Nhập số căn hộ"
                     id="component-outlined"
-                    value={buildingInput}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    value={values.building}
+                    onChange={(e) => {
+                      setFieldValue('building', e.target.value);
+                    }}
+                    onBlur={(e: any) => {
+                      handleBlur(e);
+                      console.log(e.currentTarget.value);
+
+                      dispatch({
+                        type: 'SET_BUILDING',
+                        payload: e.currentTarget.value
+                      });
+                    }}
                     labelWidth={0}
                   />
                 </FormControl>
@@ -235,8 +246,10 @@ const Location: FC<IProps> = (props) => {
                       // onBlur={handleBlur}
                       valueCity={values.city}
                       onBlur={setFieldTouched}
+                      districtList={districtList}
                       setDistrictList={setDistrictList}
                       setDisabledDistrictField={setDisabledDistrictField}
+                      setDistrict={setDistrict}
                     />
                     {touched.city && <InputFeedback error={errors.city} />}
                   </Grid>

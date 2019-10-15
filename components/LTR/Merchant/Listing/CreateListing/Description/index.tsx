@@ -120,7 +120,7 @@ const Description: FC<IProps> = (props) => {
           touched,
           errors,
           handleChange,
-          handleBlur,
+          handleBlur
         }: FormikProps<MyDescription>) => (
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" alignContent="center">
@@ -270,6 +270,7 @@ const Description: FC<IProps> = (props) => {
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
+                        // console.log(e.currentTarget.value);
                         dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
                       }}
                     />

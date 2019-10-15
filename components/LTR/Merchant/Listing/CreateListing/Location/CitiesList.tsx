@@ -9,13 +9,16 @@ import deburr from 'lodash/deburr';
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { useDispatch } from 'react-redux';
+import { cleanAccents } from '@/utils/mixins';
 interface Iprops {
   //   classes?: any;
   setDistrictList: Dispatch<SetStateAction<any[]>>;
   setDisabledDistrictField: Dispatch<SetStateAction<boolean>>;
   valueCity: string;
+  districtList: any[];
   onBlur: any;
   onChange: any;
+  setDistrict: any;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +52,15 @@ const useStyles = makeStyles((theme) => ({
 const CitiesList: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
   //   const { classes } = props;
-  const { setDistrictList, setDisabledDistrictField, valueCity, onChange, onBlur } = props;
+  const {
+    setDistrictList,
+    setDisabledDistrictField,
+    valueCity,
+    onChange,
+    onBlur,
+    setDistrict,
+    districtList
+  } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [stateSuggestions, setStateSuggestions] = useState<any[]>([]);
   const [suggestionsList, setSuggestionsList] = useState<any[]>([]);
@@ -64,26 +75,36 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     try {
       const res = await axios.get(`/cities`);
       return res;
-    } catch (error) {}
+    } catch (error) { }
   };
   const getDistricts = async () => {
     try {
       const res = await axios.get(`/districts?city_id=${city_id}`);
       return res;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
-    getDistricts().then((res) =>
-      setDistrictList(
-        res.data.data.map((district) => {
-          let obj = {};
-          obj['value'] = district.name;
-          obj['id'] = district.id;
-          return obj;
-        })
-      )
-    );
+    getDistricts()
+      .then((res) => {
+        return setDistrictList(
+          res.data.data.map((district) => {
+            let obj = {};
+            obj['value'] = district.name;
+            obj['id'] = district.id;
+            return obj;
+          })
+        );
+      })
+      .then(() => {
+        if (districtList) {
+          setDistrict(districtList[0].id);
+          dispatch({
+            type: 'SET_DISTRICT_ID',
+            payload: parseInt(districtList[0].id)
+          });
+        }
+      });
     if (city_id > 0) setDisabledDistrictField(false);
   }, [city_id]);
 
@@ -101,7 +122,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   }, []);
 
   function renderInputComponent(inputProps) {
-    const { classes, inputRef = () => {}, ref, ...other } = inputProps;
+    const { classes, inputRef = () => { }, ref, ...other } = inputProps;
 
     return (
       <OutlinedInput
@@ -118,19 +139,6 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
         {...other}
         labelWidth={0}
       />
-      //   <TextField
-      //     fullWidth
-      //     InputProps={{
-      //       inputRef: (node) => {
-      //         ref(node);
-      //         inputRef(node);
-      //       },
-      //       classes: {
-      //         input: classes.input
-      //       }
-      //     }}
-      //     {...other}
-      //   />
     );
   }
 
@@ -142,15 +150,17 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     return inputLength === 0
       ? []
       : suggestionsList.filter((suggestion) => {
-          const keep =
-            count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
+        const keep =
+          count < 5 &&
+          cleanAccents(suggestion.name.slice(0, inputLength).toLowerCase()) ===
+          cleanAccents(inputValue);
 
-          if (keep) {
-            count += 1;
-          }
+        if (keep) {
+          count += 1;
+        }
 
-          return keep;
-        });
+        return keep;
+      });
   }
   function renderSuggestion(suggestion, { query, isHighlighted }) {
     const matches = match(suggestion.name, query);
@@ -184,7 +194,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     //   [name]: newValue
     // });
     onChange(name, newValue);
-    console.log(valueCity);
+    // console.log(valueCity);
   };
   function getSuggestionValue(suggestion) {
     setCityId(suggestion.id);
