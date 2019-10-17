@@ -1,3 +1,4 @@
+import { listingDetailsReducer, ListingDetailsReducerState, ListingDetailsReducerAction } from './LTR/UpdateListing/listingdetails';
 import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
 import {
   amenitiesReducer,
@@ -82,6 +83,7 @@ export type ReducersType = {
   stepPrice: Reducer<StepPricesState, StepPricesActions>;
   process: Reducer<ProcessReducerState, ProcessReducerAction>;
   roomlist: Reducer<RoomListReducerState, RoomListReducerAction>;
+  listingdetails: Reducer<ListingDetailsReducerState, ListingDetailsReducerAction>;
 };
 
 export type ReducersList = {
@@ -105,6 +107,7 @@ export type ReducersList = {
   stepPrice: StepPricesState;
   process: ProcessReducerState;
   roomlist: RoomListReducerState;
+  listingdetails: ListingDetailsReducerState;
 };
 
 export type ReducresActions =
@@ -127,7 +130,8 @@ export type ReducresActions =
   | PriceTermActions
   | StepPricesActions
   | ProcessReducerAction
-  | RoomListReducerAction;
+  | RoomListReducerAction
+  | ListingDetailsReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -149,7 +153,8 @@ const reducers: ReducersType = {
   priceTerm: PriceTermReducer,
   stepPrice: stepPricesReducer,
   process: processReducer,
-  roomlist: roomListReducer
+  roomlist: roomListReducer,
+  listingdetails: listingDetailsReducer
 };
 
 export interface NextContextPage extends NextPageContext {

@@ -30,4 +30,5 @@ routes
   .add('/payment/direct/:uuid', 'payment/direct')
   .add('host', '/host')
   .add('create-listing', 'host/create-listing/:id')
+  .add('update-listing', 'host/update-listing/:id')
   .add('room-list', 'host/room-list')

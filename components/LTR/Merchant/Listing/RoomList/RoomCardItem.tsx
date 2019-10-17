@@ -441,12 +441,12 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ{t('roomlist:onePerDay')}
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
                                 &nbsp; &#8226;
                               </span>
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{t('roomlist:onePerHour')}
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
