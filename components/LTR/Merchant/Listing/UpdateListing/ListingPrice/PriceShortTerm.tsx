@@ -63,7 +63,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 </span>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.marginXs}>
-                Phụ thu khách ở thêm giờ:{' '}
+                Phụ thu thêm giờ:{' '}
                 <span className={classes.name}>
                   {numeral(listing.short_term_room.price_after_hour).format('0,0')} vnđ
                 </span>

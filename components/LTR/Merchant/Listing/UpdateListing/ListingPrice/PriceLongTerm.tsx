@@ -60,7 +60,7 @@ const PriceLongTerm: FC<IProps> = (props) => {
                 </span>
               </Grid>
               <Grid item xs={12} sm={6}>
-                Kì hạn từ 1 năm trở lên:{' '}
+                Kì hạn 1 năm trở lên:{' '}
                 <span className={classes.name}>
                   {numeral(listing.prices.prices.term_12_month).format('0,0')} vnđ
                 </span>
