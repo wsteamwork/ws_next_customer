@@ -2,7 +2,6 @@ import React, { FC, Fragment, useEffect, useContext } from 'react';
 import { createStyles, Grid, Theme, AppBar, Tabs, withStyles, Tab, Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
-import CardWrapperItem from '@/components/LTR/Merchant/Listing/UpdateListing/CardWrapperItem';
 import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/ListingDetails';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
@@ -16,6 +15,7 @@ import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
+import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
 interface IProps {
   classes?: any;
 }
@@ -95,8 +95,8 @@ const TabPanel = (props: TabPanelProps) => {
 
 const a11yProps = (index: any) => {
   return {
-    id: `scrollable-force-tab-${index}`,
-    'aria-controls': `scrollable-force-tabpanel-${index}`
+    id: `scrollable-prevent-tab-${index}`,
+    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
   };
 };
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -111,7 +111,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: theme.typography.fontWeightBold,
       color: '#484848',
       fontSize: 24
-    },
+    }
   })
 );
 
@@ -147,6 +147,7 @@ const UpdateListing: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
+      <NavHeader_Merchant />
       {listing ? (
         <Grid container justify="center" alignContent="center">
           <Grid item xs={11} sm={10} md={8} lg={6} className={classes.marginLabel}>
@@ -157,12 +158,17 @@ const UpdateListing: FC<IProps> = (props) => {
             </Grid>
             <Grid className={classes.root}>
               <AppBar position="static" color="inherit" className={classes.wrapperTab}>
-                <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-                  <AntTab label="Chi tiết phòng" />
-                  <AntTab label="Ảnh phòng" />
-                  <AntTab label="Giá phòng" />
-                  <AntTab label="Chế độ đặt phòng" />
-                  <AntTab label="Lịch trống phòng" />
+                <AntTabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="ant example"
+                  variant="scrollable"
+                  scrollButtons="off">
+                  <AntTab label="Chi tiết phòng" {...a11yProps(0)} />
+                  <AntTab label="Ảnh phòng" {...a11yProps(1)}/>
+                  <AntTab label="Giá phòng" {...a11yProps(2)}/>
+                  <AntTab label="Chế độ đặt phòng" {...a11yProps(3)}/>
+                  <AntTab label="Lịch trống phòng" {...a11yProps(4)}/>
                 </AntTabs>
                 <Typography className={classes.padding} />
               </AppBar>
