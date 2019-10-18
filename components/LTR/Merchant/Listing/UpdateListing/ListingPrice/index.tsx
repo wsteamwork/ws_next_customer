@@ -12,7 +12,7 @@ interface IProps {
 const ListingPrice: FC<IProps> = (props) => {
   return (
     <Grid container alignContent="center">
-      <Grid item xs={12} sm={10} >
+      <Grid item xs={12} sm={10} lg={9}>
         <PriceShortTerm />
         <WeekdayPrice />
         <PriceLongTerm />

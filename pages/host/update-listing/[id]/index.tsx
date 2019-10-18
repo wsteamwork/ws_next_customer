@@ -150,7 +150,7 @@ const UpdateListing: FC<IProps> = (props) => {
       <NavHeader_Merchant />
       {listing ? (
         <Grid container justify="center" alignContent="center">
-          <Grid item xs={11} sm={10} md={8} lg={6} className={classes.marginLabel}>
+          <Grid item xs={11} sm={10} md={8} lg={7} className={classes.marginLabel}>
             <Grid container className={classes.marginLabel}>
               <Typography variant="subtitle1" className={classes.name}>
                 {listing.about_room.name}
