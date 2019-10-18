@@ -133,8 +133,16 @@ const UpdateListing: FC<IProps> = (props) => {
       getListingDetails(id, dispatch);
     }
   }, []);
+  useEffect(() => {
+    if (localStorage.getItem('tabUpdate')) {
+      let tab = Number(localStorage.getItem('tabUpdate'));
+      setValue(tab);
+    }
+  }, []);
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    localStorage.setItem('tabUpdate', String(newValue));
   };
   return (
     <Fragment>
@@ -164,7 +172,7 @@ const UpdateListing: FC<IProps> = (props) => {
               <ListingPolicy />
             </TabPanel>
             <TabPanel value={value} index={4}>
-              <CardWrapperItem title="Tên và mô tả" />
+              Đang cập nhật...
             </TabPanel>
           </Grid>
         </Grid>

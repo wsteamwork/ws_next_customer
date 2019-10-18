@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     marginBottom: {
       [theme.breakpoints.down('xs')]: {
         marginBottom: theme.spacing(1)
-      },
+      }
     },
     rentType: {
       fontWeight: theme.typography.fontWeightBold,
@@ -38,12 +38,10 @@ const RentTypePolicy: FC<IProps> = (props) => {
           </Typography>
           <Grid container>
             <Grid item xs={12} sm={6} className={classes.marginBottom}>
-              Giờ nhận phòng:{' '}
-              <span className={classes.rentType}>14:00 PM</span>
+              Giờ nhận phòng: <span className={classes.rentType}>14:00 PM</span>
             </Grid>
             <Grid item xs={12} sm={6}>
-            Giờ trả phòng:{' '}
-              <span className={classes.rentType}>12:00 PM</span>
+              Giờ trả phòng: <span className={classes.rentType}>12:00 PM</span>
             </Grid>
           </Grid>
         </CardWrapperItem>
