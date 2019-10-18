@@ -134,9 +134,15 @@ const UpdateListing: FC<IProps> = (props) => {
     }
   }, []);
   useEffect(() => {
-    if (localStorage.getItem('tabUpdate')) {
-      let tab = Number(localStorage.getItem('tabUpdate'));
-      setValue(tab);
+    if (localStorage.getItem('tabUpdate') && localStorage.getItem('currentRoom')) {
+      if(localStorage.getItem('currentRoom') === id) {
+        let tab = Number(localStorage.getItem('tabUpdate'));
+        setValue(tab);
+      }
+      else {
+        localStorage.setItem('currentRoom', String(id));
+        setValue(0);
+      }
     }
   }, []);
 
