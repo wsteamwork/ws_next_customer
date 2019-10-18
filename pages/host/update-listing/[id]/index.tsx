@@ -24,6 +24,7 @@ import { Dispatch } from 'redux';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
+import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 interface IProps {
   classes?: any;
 }
@@ -160,7 +161,7 @@ const UpdateListing: FC<IProps> = (props) => {
               <ListingPrice />
             </TabPanel>
             <TabPanel value={value} index={3}>
-              <CardWrapperItem title="Tên và mô tả" />
+              <ListingPolicy />
             </TabPanel>
             <TabPanel value={value} index={4}>
               <CardWrapperItem title="Tên và mô tả" />
