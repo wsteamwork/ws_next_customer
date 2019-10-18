@@ -1,14 +1,5 @@
 import React, { FC, Fragment, useEffect, useContext } from 'react';
-import {
-  createStyles,
-  Grid,
-  Theme,
-  AppBar,
-  Tabs,
-  withStyles,
-  Tab,
-  Box,
-} from '@material-ui/core';
+import { createStyles, Grid, Theme, AppBar, Tabs, withStyles, Tab, Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import CardWrapperItem from '@/components/LTR/Merchant/Listing/UpdateListing/CardWrapperItem';
@@ -115,7 +106,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     wrapperTab: {
       boxShadow: 'none'
-    }
+    },
+    name: {
+      fontWeight: theme.typography.fontWeightBold,
+      color: '#484848',
+      fontSize: 24
+    },
   })
 );
 
@@ -135,11 +131,10 @@ const UpdateListing: FC<IProps> = (props) => {
   }, []);
   useEffect(() => {
     if (localStorage.getItem('tabUpdate') && localStorage.getItem('currentRoom')) {
-      if(localStorage.getItem('currentRoom') === id) {
+      if (localStorage.getItem('currentRoom') === id) {
         let tab = Number(localStorage.getItem('tabUpdate'));
         setValue(tab);
-      }
-      else {
+      } else {
         localStorage.setItem('currentRoom', String(id));
         setValue(0);
       }
@@ -152,37 +147,46 @@ const UpdateListing: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      <Grid container justify="center" alignContent="center">
-        <Grid item xs={11} sm={10} md={8} lg={6} className={classes.marginLabel}>
-          <Grid className={classes.root}>
-            <AppBar position="static" color="inherit" className={classes.wrapperTab}>
-              <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-                <AntTab label="Chi tiết phòng" />
-                <AntTab label="Ảnh phòng" />
-                <AntTab label="Giá phòng" />
-                <AntTab label="Chế độ đặt phòng" />
-                <AntTab label="Lịch trống phòng" />
-              </AntTabs>
-              <Typography className={classes.padding} />
-            </AppBar>
-            <TabPanel value={value} index={0}>
-              <ListingDetails />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-            <ListingImage />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              <ListingPrice />
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-              <ListingPolicy />
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-              Đang cập nhật...
-            </TabPanel>
+      {listing ? (
+        <Grid container justify="center" alignContent="center">
+          <Grid item xs={11} sm={10} md={8} lg={6} className={classes.marginLabel}>
+            <Grid container className={classes.marginLabel}>
+              <Typography variant="subtitle1" className={classes.name}>
+                {listing.about_room.name}
+              </Typography>
+            </Grid>
+            <Grid className={classes.root}>
+              <AppBar position="static" color="inherit" className={classes.wrapperTab}>
+                <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+                  <AntTab label="Chi tiết phòng" />
+                  <AntTab label="Ảnh phòng" />
+                  <AntTab label="Giá phòng" />
+                  <AntTab label="Chế độ đặt phòng" />
+                  <AntTab label="Lịch trống phòng" />
+                </AntTabs>
+                <Typography className={classes.padding} />
+              </AppBar>
+              <TabPanel value={value} index={0}>
+                <ListingDetails />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                <ListingImage />
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                <ListingPrice />
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                <ListingPolicy />
+              </TabPanel>
+              <TabPanel value={value} index={4}>
+                Đang cập nhật...
+              </TabPanel>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        ''
+      )}
     </Fragment>
   );
 };
