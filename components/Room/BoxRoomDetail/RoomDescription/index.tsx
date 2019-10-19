@@ -44,14 +44,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 
 interface IProps {
-  room: RoomIndexRes,
+  description: string,
+  space: string,
+  note: string,
 }
 
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const { room } = props;
+  const { description,note,space } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
@@ -69,16 +71,18 @@ const RoomDescription: FC<IProps> = (props) => {
   };
 
   const notFoundContent = `<p> ${t('room:notFoundContent')} </p>`;
+  const desHTML = description ? `<div> ${description} </div>` : '';
+  const spaceHTML = space ? `<div> ${space} </div>` : '';
+  const noteHTML = note ? `<div> ${note} </div>` : '';
 
   return (
-    room && (
       <Fragment>
         <Grid container className={classes.root}>
           <Grid item xs={12}>
             <Typography variant="h5" className={classes.name}>
               {t('rooms:description')}
             </Typography>
-            {ReactHtmlParser(isPreviewPage && !room.details.data[0].description ? notFoundContent : room.details.data[0].description, {
+            {ReactHtmlParser(isPreviewPage && !desHTML ? notFoundContent : desHTML, {
               transform: transformHtmlContent
             })}
           </Grid>
@@ -88,7 +92,7 @@ const RoomDescription: FC<IProps> = (props) => {
                 <Typography variant='subtitle2' className={classes.title}>
                   {t('room:space')}
                 </Typography>
-                {ReactHtmlParser(isPreviewPage && !room.details.data[0].space ? notFoundContent : room.details.data[0].space, {
+                {ReactHtmlParser(isPreviewPage && !spaceHTML ? notFoundContent : spaceHTML, {
                   transform: transformHtmlContent
                 })}
               </Grid>
@@ -96,7 +100,7 @@ const RoomDescription: FC<IProps> = (props) => {
                 <Typography variant='subtitle2' className={classes.title}>
                   {t('room:rules')}
                 </Typography>
-                {ReactHtmlParser(isPreviewPage && !room.details.data[0].note ? notFoundContent : room.details.data[0].note, {
+                {ReactHtmlParser(isPreviewPage && !noteHTML ? notFoundContent : noteHTML, {
                   transform: transformHtmlContent
                 })}
               </Grid>
@@ -111,7 +115,6 @@ const RoomDescription: FC<IProps> = (props) => {
             )}
         </Grid>
       </Fragment>
-    )
   );
 };
 
