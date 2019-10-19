@@ -23,6 +23,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       width: '100%',
       marginTop: theme.spacing(3),
+      borderRadius: 8,
+      overflow: 'hidden',
     },
     name: {
       fontWeight: 900,
@@ -39,23 +41,24 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-const StyledTableCell = withStyles((theme: Theme) =>
+export const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: '#6b6b6b',
       color: theme.palette.common.white,
     },
     body: {
       fontSize: 14,
+      border:'none'
     },
   }),
 )(TableCell);
 
-const StyledTableRow = withStyles((theme: Theme) =>
+export const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
       '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: '#f6f6f6',
       },
     },
   }),
@@ -91,7 +94,7 @@ const TablePrices: FC<IProps> = (props) => {
         {t('room:feeList')}
       </Typography>
 
-      <Paper className={classes.root}>
+      <Paper className={classes.root} elevation={0}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
