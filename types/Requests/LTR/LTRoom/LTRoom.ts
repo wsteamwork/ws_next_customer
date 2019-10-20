@@ -28,8 +28,8 @@ export interface LTRoomIndexRes {
   included_services: string[];
   not_included_services: string[];
   bedrooms: any;
-  // bathrooms: numberBathroom,
-  bathrooms: any;
+  bathrooms: numberBathroom;
+  // bathrooms: any;
   avatar: ImagesRes;
   cover_photo: ImagesRes;
   outdoors: ImagesRes;
@@ -81,14 +81,12 @@ export type LTRoomScheduleRes = {
 };
 
 export interface pricesLT {
-  prices: IPriceLongTerm;
+  prices: detailPriceLT[];
   included_fee: typeService[];
 }
 
 export interface numberBathroom {
   number_bathroom: number;
-  prices: detailPriceLT[];
-  included_fee: typeService[];
 }
 
 export interface detailPriceLT {

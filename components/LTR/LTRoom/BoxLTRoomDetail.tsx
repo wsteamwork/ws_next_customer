@@ -1,15 +1,13 @@
-import { Grid, Paper, Theme, Button } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment } from 'react';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
-import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
 import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
+import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
 import BoxMap from '@/components/Room/BoxMap';
-import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
-import ScrollableAnchor from 'react-scrollable-anchor'
-import GridContainer from '@/components/Layout/Grid/Container';
+import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
+import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { Grid, Paper, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment } from 'react';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -48,15 +46,15 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item xs={11}>
                 <RoomBasic showBed={false}
-                           name={room.about_room.name}
-                           id={room.id}
-                           bathroom={room.bathrooms.number_bathroom}
-                           max_additional_guest={room.guests.max_additional_guest}
-                           max_guest={room.guests.recommendation}
-                           number_room={room.bedrooms.number_bedroom}
-                           totalComforts={room.total_comforts}
-                           avg_rating={room.rating.avg_avg_rating}
-                           avg_rating_txt={room.rating.avg_avg_rating_txt}/>
+                  name={room.about_room.name}
+                  id={room.id}
+                  bathroom={room.bathrooms.number_bathroom}
+                  max_additional_guest={room.guests.max_additional_guest}
+                  max_guest={room.guests.recommendation}
+                  number_room={room.bedrooms.number_bedroom}
+                  totalComforts={room.total_comforts}
+                  avg_rating={room.rating.avg_avg_rating}
+                  avg_rating_txt={room.rating.avg_avg_rating_txt} />
               </Grid>
             </Grid>
             <Grid container spacing={1}>
@@ -66,25 +64,25 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 </div>
                 <div className={classes.rowMargin}>
                   <BoxListImageRoom livingrooms={room.livingrooms} outdoors={room.outdoors} furnitures={room.furnitures} cover_photo={room.cover_photo}
-                                    kitchens={room.kitchens} bedrooms={room.bedrooms} bathrooms={room.bathrooms} roomName={room.about_room.name}/>
+                    kitchens={room.kitchens} bedrooms={room.bedrooms} bathrooms={room.bathrooms} roomName={room.about_room.name} />
                 </div>
                 <div className={classes.rowMargin}>
                   <BoxAmenities facilities={room.comforts.facilities}
-                                bedrooms={room.comforts.bedrooms}
-                                bathrooms={room.comforts.bathrooms}
-                                outdoors={room.comforts.outdoors}
-                                others={room.comforts.others}
-                                entertainment={room.comforts.entertainment}
-                                livingrooms={room.comforts.livingrooms}
-                                common={room.comforts.common}
-                                kitchens={room.comforts.kitchens}
+                    bedrooms={room.comforts.bedrooms}
+                    bathrooms={room.comforts.bathrooms}
+                    outdoors={room.comforts.outdoors}
+                    others={room.comforts.others}
+                    entertainment={room.comforts.entertainment}
+                    livingrooms={room.comforts.livingrooms}
+                    common={room.comforts.common}
+                    kitchens={room.comforts.kitchens}
                   />
                 </div>
                 <div className={classes.rowMargin}>
                   <BoxTablePrices prices={room.prices.prices}
-                                  included_fee={room.prices.included_fee}
-                                  included_services={room.included_services}
-                                  not_included_services={room.not_included_services}
+                    included_fee={room.prices.included_fee}
+                    included_services={room.included_services}
+                    not_included_services={room.not_included_services}
                   />
                 </div>
               </Grid>
