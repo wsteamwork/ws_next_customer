@@ -1,14 +1,11 @@
-import { IPriceLongTerm, IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
+import { IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
 import { typeService } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { TransformerInclude } from '@/types/Requests/ResponseTemplate';
-import { UserReviewRes, RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexResponse';
-import { MediaIndexRes } from '@/types/Requests/Media/MediaIndexResponse';
 import { CityRes } from '@/types/Requests/Cities/CityResponse';
 import { DistrictRes } from '@/types/Requests/Districts/DistrictResponse';
-import { PlaceIndexResponse } from '@/types/Requests/Places/PlaceIndexResponse';
-import { RoomDetails, Merchant } from '@/types/Requests/Rooms/RoomResponses';
+import { Merchant } from '@/types/Requests/Rooms/RoomResponses';
 
 export interface LTRoomIndexRes {
   id: number,
@@ -22,7 +19,7 @@ export interface LTRoomIndexRes {
   included_services: string[],
   not_included_services: string[],
   bedrooms: any,
-  bathrooms: numberBathroom,
+  bathrooms: any,
   avatar: ImagesRes,
   cover_photo: ImagesRes,
   outdoors: ImagesRes,
@@ -50,19 +47,18 @@ export interface LTRoomIndexRes {
   refund_settings: string[],
   payment_method: number | null,
   minimum_month: string,
+  status_txt: string,
   city_id: number,
   district_id: number,
   percent: number,
+  status: number,
+  merchant_status: number,
+  total_comforts: number,
   comission: string | null,
   comforts:detailcomforts,
-  details: TransformerInclude<RoomDetails[]>;
-  user: TransformerInclude<UserReviewRes>;
-  media: TransformerInclude<MediaIndexRes[]>;
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
   merchant: TransformerInclude<Merchant>;
-  places: TransformerInclude<PlaceIndexResponse[]>;
-  reviews: TransformerInclude<RoomReviewIndexResponse[]>;
 }
 
 export type LTRoomScheduleRes = {
@@ -70,12 +66,13 @@ export type LTRoomScheduleRes = {
 };
 
 export interface pricesLT {
-  prices: IPriceLongTerm,
+  prices: detailPriceLT[],
   included_fee: typeService[]
 }
 
-export interface numberBathroom {
-  number_bathroom:number
+export interface detailPriceLT {
+  term: string,
+  price:number
 }
 
 export interface aboutRoom {
@@ -111,12 +108,13 @@ export interface detailrating {
 }
 
 export interface detailcomforts {
-  common: AmenitiesIndexRes,
-  livingrooms: AmenitiesIndexRes,
-  bedrooms: AmenitiesIndexRes,
-  kitchens: AmenitiesIndexRes,
-  bathrooms: AmenitiesIndexRes,
-  others: AmenitiesIndexRes,
-  entertainment: AmenitiesIndexRes,
-  facilities: AmenitiesIndexRes,
+  common: AmenitiesIndexRes[],
+  livingrooms: AmenitiesIndexRes[],
+  bedrooms: AmenitiesIndexRes[],
+  kitchens: AmenitiesIndexRes[],
+  bathrooms: AmenitiesIndexRes[],
+  others: AmenitiesIndexRes[],
+  entertainment: AmenitiesIndexRes[],
+  facilities: AmenitiesIndexRes[],
+  outdoors: AmenitiesIndexRes[],
 }

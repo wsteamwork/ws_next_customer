@@ -28,10 +28,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         borderRadius: '0 !important'
       },
       [theme.breakpoints.up('md')]: {
-        maxWidth: '15rem !important'
+        maxWidth: '15rem'
       },
       [theme.breakpoints.up('lg')]: {
-        maxWidth: '18rem !important'
+        maxWidth: '18rem'
       }
     },
     content: {
@@ -98,44 +98,48 @@ interface IProps {
   fontSize?: string | number;
   border?: string;
   borderRadius?: string | number;
-  room?: RoomIndexRes;
+  id:number;
+  avatar:string;
+  avatar_url:string;
+  name:string;
+  number_room:number;
 }
 
 const HostInfo: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-
-  const merchant = !!room && room.merchant.data;
+  const {id, avatar, avatar_url, name, number_room} = props;
+  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  //
+  // const merchant = !!room && room.merchant.data;
 
   return (
-    room && (
       <Paper className={classes.paper}>
-        <Link href={`/user/${merchant.id}`}>
+        <Link href={`/user/${id}`}>
           <a className={classes.link}>
             <Grid container>
               <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{ position: 'relative' }}>
                 <Avatar
-                  alt={merchant.avatar}
-                  src={merchant.avatar_url !== '' ? merchant.avatar_url : '/static/images/avatar_default.png'}
+                  alt={avatar}
+                  src={avatar_url !== '' ? avatar_url : '/static/images/avatar_default.png'}
                   className={classes.avatar}
                 />
               </Grid>
               <Grid item xs={9} sm={8} md={8} lg={8} xl={9}>
                 <Grid item xs className={classes.content}>
-                  <Typography className={classes.userName}>{merchant.name}</Typography>
+                  <Typography className={classes.userName}>{name}</Typography>
                   <Grid container className={classes.price}>
                     <Grid item sm={2} md={3} lg={3}>
                       <Typography variant='subtitle1' className={classes.icon}>
-                        <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
-                        {merchant.number_room}
+                        <FontAwesomeIcon className={classes.icon} icon={faHome}/>
+                        {number_room}
                       </Typography>
                     </Grid>
                     <Grid item sm={10} md={9} lg={9}>
                       <Typography variant='subtitle1' className={classes.certificate}>
                         <FontAwesomeIcon
                           className={classes.icon}
-                          icon={faCheckCircle}></FontAwesomeIcon>
+                          icon={faCheckCircle}/>
                         {t('rooms:verified')}
                       </Typography>
                     </Grid>
@@ -146,7 +150,6 @@ const HostInfo: FC<IProps> = (props) => {
           </a>
         </Link>
       </Paper>
-    )
   );
 };
 

@@ -20,6 +20,7 @@ export const Link = routes.Link;
 
 routes
   .add('room', '/room/:id')
+  .add('long-term-room', '/long-term-room/:id')
   .add('preview-room', '/preview-room/:id')
   .add('user', '/user/:id')
   .add('booking-cancel', '/booking-cancel/:id')

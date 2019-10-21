@@ -26,6 +26,7 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
       blacklist: [
         'roomHomepage',
         'roomPage',
+        'ltroomPage',
         'book',
         'userProfile',
         'iProfile',

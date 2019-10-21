@@ -10,15 +10,28 @@ import {
   faUserFriends,
   faBed,
   faBath,
-  faDoorOpen
+  faDoorOpen,
+  faRulerCombined
 } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface IProps {
-  room: RoomIndexRes,
+  name: string,
+  id: number,
+  max_guest:number,
+  max_additional_guest:number,
+  number_bed?:number,
+  number_room:number,
+  bathroom:number,
+  totalComforts:number,
+  avg_rating:number,
+  total_area?:number,
+  avg_rating_txt:string,
+  showBed?:boolean,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -44,7 +57,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { room } = props;
+  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area} = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
@@ -59,102 +72,123 @@ const RoomBasic: FC<IProps> = (props) => {
           <FontAwesomeIcon
             key={i}
             className={classes.iconHeartBlue}
-            icon={faHeart}></FontAwesomeIcon>
+            icon={faHeart}/>
         );
       } else {
         arr.push(
           <FontAwesomeIcon
             key={i}
             className={classes.iconHeartWhite}
-            icon={faHeart}></FontAwesomeIcon>
+            icon={faHeart}/>
         );
       }
       i++;
     }
     return arr;
   };
+
   return (
-    room && (
-      <Grid container>
-        <Grid item xs={12}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography variant="h5" className={classes.roomName}>
-                {isPreviewPage && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="h5" className={classes.roomId}>
-                Room No. {room.id}
-              </Typography>
+    <Grid container>
+      <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Typography variant="h5" className={classes.roomName}>
+              {isPreviewPage && !name ? t('room:updateRoomName') : name}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h5" className={classes.roomId}>
+              Room No. {id}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <div>
+              <span>{arrMenuItem(avg_rating)}</span>
+              <span>
+                {avg_rating} &#8208; {avg_rating_txt}
+              </span>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid container spacing={1}>
+          <Grid item xs={6} sm={6} md={3} lg xl={3}>
+            <Grid container alignItems='center'>
+              <Grid item xs={2} sm={2}>
+                <FontAwesomeIcon icon={faUserFriends}/>
+              </Grid>
+              <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                <Typography variant={'body2'}>
+                  {max_guest + max_additional_guest} {t('rooms:guests')}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <div>
-                <span>{arrMenuItem(room.avg_rating)}</span>
-                <span>
-                  {room.avg_rating} &#8208; {room.avg_rating_txt}
-                </span>
-              </div>
+
+          {showBed ? (
+            <Grid item xs={6} sm={6} md={3} lg xl={3}>
+              <Grid container alignItems='center'>
+                <Grid item xs={2} sm={2}>
+                  <FontAwesomeIcon icon={faBed}/>
+                </Grid>
+                <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                  <Typography variant={'body2'}>
+                    {number_bed} {t('rooms:beds')}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid item xs={6} sm={6} md={3} lg xl={3}>
+              <Grid container alignItems='center'>
+                <Grid item xs={2} sm={2}>
+                  <FontAwesomeIcon icon={faRulerCombined}/>
+                </Grid>
+                <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                  <Typography variant={'body2'}>
+                    {total_area} m<sup>2</sup>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
+
+          <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+            <Grid container alignItems='center'>
+              <Grid item xs={2} sm={2}>
+                <FontAwesomeIcon icon={faBath}/>
+              </Grid>
+              <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                <Typography variant={'body2'}>
+                  {
+                    bathroom > 0 ? `${bathroom} ${t('rooms:bathrooms')}` : `${totalComforts} ${t('rooms:amenitiesLower')}`
+                  }
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-          <Grid container spacing={1}>
-            <Grid item xs={6} sm={6} md={3} lg xl={3}>
-              <Grid container>
-                <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faUserFriends}></FontAwesomeIcon>
-                </Grid>
-                <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                  <Typography variant={'body2'}>
-                    {room.max_guest + room.max_additional_guest} {t('rooms:guests')}
-                  </Typography>
-                </Grid>
+          <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+            <Grid container alignItems='center'>
+              <Grid item xs={2} sm={2}>
+                <FontAwesomeIcon icon={faDoorOpen}/>
               </Grid>
-            </Grid>
-            <Grid item xs={6} sm={6} md={3} lg xl={3}>
-              <Grid container>
-                <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faBed}></FontAwesomeIcon>
-                </Grid>
-                <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                  <Typography variant={'body2'}>
-                    {room.number_bed} {t('rooms:beds')}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
-              <Grid container>
-                <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faBath}></FontAwesomeIcon>
-                </Grid>
-                <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                  <Typography variant={'body2'}>
-                    {
-                      room.bathroom > 0 ? `${room.bathroom} ${t('rooms:bathrooms')}` : `${room.comforts.data.length} ${t('rooms:amenitiesLower')}`
-                    }
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
-              <Grid container>
-                <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faDoorOpen}></FontAwesomeIcon>
-                </Grid>
-                <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                  <Typography variant={'body2'}>
-                    {room.number_room} {t('rooms:rooms')}
-                  </Typography>
-                </Grid>
+              <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                <Typography variant={'body2'}>
+                  {number_room} {t('rooms:rooms')}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-    )
+    </Grid>
   );
+};
+
+RoomBasic.defaultProps ={
+  showBed:true,
+  number_bed:0
 };
 
 export default RoomBasic;

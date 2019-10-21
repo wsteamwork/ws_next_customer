@@ -1,5 +1,9 @@
-import { listingDetailsReducer, ListingDetailsReducerState, ListingDetailsReducerAction } from './LTR/UpdateListing/listingdetails';
 import reuderBooking, { BookingAction, BookingState } from '@/store/Redux/Reducers/Booking/booking';
+import {
+  CreateListingActions,
+  createListingReducer,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import {
   amenitiesReducer,
   AmenitiesReducerAction,
@@ -16,6 +20,11 @@ import {
   StepPricesState
 } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import {
+  ltroomReducer,
+  LTRoomReducerAction,
+  LTRoomReducerState
+} from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
+import {
   CompareRoomsActions,
   CompareRoomsState,
   ComparisonListReducer
@@ -30,10 +39,10 @@ import { combineReducers, Reducer, Store } from 'redux';
 import { BookActions, bookReducer, BookState } from './Book/book';
 import { RoomHomepageAction, roomHomepageReducer, RoomHomepageState } from './Home/roomHomepage';
 import {
-  CreateListingActions,
-  createListingReducer,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+  processReducer,
+  ProcessReducerAction,
+  ProcessReducerState
+} from './LTR/CreateListing/process';
 import {
   descriptionReducer,
   DescriptionReducerAction,
@@ -50,6 +59,16 @@ import {
   ImageReducerState
 } from './LTR/CreateListing/Step2/images';
 import {
+  roomListReducer,
+  RoomListReducerAction,
+  RoomListReducerState
+} from './LTR/RoomList/roomlist';
+import {
+  listingDetailsReducer,
+  ListingDetailsReducerAction,
+  ListingDetailsReducerState
+} from './LTR/UpdateListing/listingdetails';
+import {
   notificationReducer,
   NotificationReducerAction,
   NotificationReducerState
@@ -59,14 +78,13 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
-import { ProcessReducerState, ProcessReducerAction, processReducer } from './LTR/CreateListing/process';
-import { RoomListReducerAction, RoomListReducerState, roomListReducer } from './LTR/RoomList/roomlist';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
   booking: Reducer<BookingState, BookingAction>;
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
   roomPage: Reducer<RoomReducerState, RoomReducerAction>;
+  ltroomPage: Reducer<LTRoomReducerState, LTRoomReducerAction>;
   book: Reducer<BookState, BookActions>;
   userProfile: Reducer<UserProfileState, UserProfileActions>;
   iProfile: Reducer<ProfileState, ProfileAction>;
@@ -91,6 +109,7 @@ export type ReducersList = {
   booking: BookingState;
   roomHomepage: RoomHomepageState;
   roomPage: RoomReducerState;
+  ltroomPage: LTRoomReducerState;
   book: BookState;
   userProfile: UserProfileState;
   iProfile: ProfileState;
@@ -115,6 +134,7 @@ export type ReducresActions =
   | RoomHomepageAction
   | BookingAction
   | RoomReducerAction
+  | LTRoomReducerAction
   | BookActions
   | UserProfileActions
   | ProfileAction
@@ -131,13 +151,15 @@ export type ReducresActions =
   | StepPricesActions
   | ProcessReducerAction
   | RoomListReducerAction
-  | ListingDetailsReducerAction;
+  | ListingDetailsReducerAction
+  | ProcessReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
   booking: reuderBooking,
   roomHomepage: roomHomepageReducer,
   roomPage: roomReducer,
+  ltroomPage: ltroomReducer,
   book: bookReducer,
   userProfile: userProfileReducer,
   iProfile: iProfileReducer,
