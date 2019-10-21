@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DialogFullImage from './DialogFullImage';
 
 interface IProps {
   classes?: any,
