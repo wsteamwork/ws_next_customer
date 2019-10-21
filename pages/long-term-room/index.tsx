@@ -59,7 +59,9 @@ const LongtermRoom: NextPage = () => {
           <Fragment>
             {ltroom ? (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <BoxImageLT roomName={ltroom.about_room.name} livingrooms={ltroom.livingrooms} bathrooms={ltroom.bathrooms} bedrooms={ltroom.bedrooms} cover_photo={ltroom.cover_photo} />
+                <BoxImageLT roomName={ltroom.about_room.name} livingrooms={ltroom.livingrooms}
+                            kitchens={ltroom.kitchens} bathrooms={ltroom.bathrooms} furnitures={ltroom.furnitures}
+                            bedrooms={ltroom.bedrooms} cover_photo={ltroom.cover_photo} />
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
                     <BoxLTRoomDetail room={ltroom} />

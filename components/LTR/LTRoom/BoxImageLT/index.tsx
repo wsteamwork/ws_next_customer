@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme, Grid } from '@material-ui/core';
 import Slider from 'react-animated-slider';
@@ -19,6 +19,12 @@ interface IProps {
   bathrooms: any,
 }
 
+interface IArrayImage {
+  imgURL: string,
+  title: string,
+  subTitle: string
+}
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
@@ -36,33 +42,56 @@ const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { roomName, livingrooms, cover_photo, outdoors, furnitures, kitchens, bedrooms, bathrooms } = props;
 
-  const imgContent = [
+  let arrImage:IArrayImage[] = [
     {
       imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
       title: '',
       subTitle: cover_photo.images[0].caption
-    },
-    // {
-    //   imgURL: `${IMAGE_STORAGE_LG + livingrooms.images[0].name}`,
-    //   title:'Phòng khách',
-    //   subTitle: livingrooms.images[0].caption
-    // },
-    // {
-    //   imgURL: `${IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name}`,
-    //   title: 'Phòng ngủ',
-    //   subTitle: bedrooms.bedroom_1.images[0].caption
-    // },
-    // {
-    //   imgURL: `${IMAGE_STORAGE_LG + bathrooms.bathroom_1.images[0].name}`,
-    //   title: 'Phòng tắm',
-    //   subTitle: bathrooms.bathroom_1.images[0].caption
-    // }
+    }
   ];
+
+  const funcPushImage = useMemo(()=>{
+    if (livingrooms.images && livingrooms.images.length){
+      arrImage.push({
+        imgURL: `${IMAGE_STORAGE_LG + livingrooms.images[0].name}`,
+        title:'Phòng khách',
+        subTitle: livingrooms.images[0].caption
+      })
+    }
+    if (bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images.length){
+      arrImage.push({
+        imgURL: `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}`,
+        title: 'Phòng ngủ',
+        subTitle: bedrooms['bedroom_1'].images[0].caption
+      })
+    }
+    if (bathrooms['bathroom_1'] && bathrooms['bathroom_1'].images.length){
+      arrImage.push({
+        imgURL: `${bathrooms.bathroom_1 ? IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name : ''}`,
+        title: 'Phòng tắm',
+        subTitle: `${bathrooms.bathroom_1 ? bathrooms['bathroom_1'].images[0].caption : ''}`
+      })
+    }
+    if (kitchens.images.length && kitchens.images){
+      arrImage.push({
+        imgURL: `${IMAGE_STORAGE_LG + kitchens.images[0].name}`,
+        title:'Phòng bếp',
+        subTitle: kitchens.images[0].caption
+      })
+    }
+    if (furnitures.images.length && furnitures.images){
+      arrImage.push({
+        imgURL: `${IMAGE_STORAGE_LG + furnitures.images[0].name}`,
+        title:'Nội thất',
+        subTitle: furnitures.images[0].caption
+      })
+    }
+  },[]);
 
   return (
     <Grid container spacing={1} className={classes.boxContainer}>
       <Slider className="slider-wrapper" autoplay={3000}>
-        {imgContent.map((item, i) => (
+        {arrImage.map((item, i) => (
           <div
             key={i}
             className="slider-content"
