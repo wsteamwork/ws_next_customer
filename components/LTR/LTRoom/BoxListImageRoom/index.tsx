@@ -226,16 +226,16 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
       </Grid>
 
-      {/*<DialogFullImage open={openFullImage} handleClose={()=>setOpenFullImage(false)}*/}
-      {/*                 livingrooms={livingrooms}*/}
-      {/*                 kitchens={kitchens}*/}
-      {/*                 cover_photo={cover_photo}*/}
-      {/*                 bathrooms={bathrooms}*/}
-      {/*                 bedrooms={bedrooms}*/}
-      {/*                 outdoors={outdoors}*/}
-      {/*                 furnitures={furnitures}*/}
-      {/*                 roomName={roomName}*/}
-      {/*/>*/}
+      <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}
+        livingrooms={livingrooms}
+        kitchens={kitchens}
+        cover_photo={cover_photo}
+        bathrooms={bathrooms}
+        bedrooms={bedrooms}
+        outdoors={outdoors}
+        furnitures={furnitures}
+        roomName={roomName}
+      />
     </Fragment>
   );
 };
