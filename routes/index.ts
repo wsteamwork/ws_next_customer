@@ -20,6 +20,7 @@ export const Link = routes.Link;
 
 routes
   .add('room', '/room/:id')
+  .add('long-term-room', '/long-term-room/:id')
   .add('preview-room', '/preview-room/:id')
   .add('user', '/user/:id')
   .add('booking-cancel', '/booking-cancel/:id')
@@ -30,4 +31,5 @@ routes
   .add('/payment/direct/:uuid', 'payment/direct')
   .add('host', '/host')
   .add('create-listing', 'host/create-listing/:id')
+  .add('update-listing', 'host/update-listing/:id')
   .add('room-list', 'host/room-list')

@@ -1,4 +1,3 @@
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from '@material-ui/core';
@@ -9,8 +8,11 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-  classes?: any;
-  room: RoomIndexRes
+  classes?: any,
+  district:string,
+  city:string,
+  latitude:string,
+  longitude:string
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -39,51 +41,49 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const BoxMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { room } = props;
+  const { district, city, latitude, longitude } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   return (
-    room && (
-      <div>
-        <Typography variant="h5" className={classes.title}>
-          {t('room:map')}
-        </Typography>
+    <div>
+      <Typography variant="h5" className={classes.title}>
+        {t('room:map')}
+      </Typography>
 
-        <Typography variant="subtitle1" className={classes.txtAddress}>
-          <FontAwesomeIcon className={classes.icon} icon={faMapSigns} />
-          {room.district.data.name}, {room.city.data.name}
-        </Typography>
+      <Typography variant="subtitle1" className={classes.txtAddress}>
+        <FontAwesomeIcon className={classes.icon} icon={faMapSigns} />
+        {district}, {city}
+      </Typography>
 
-        <div className={classes.root}>
-          <GoogleMap
-            bootstrapURLKeys={{
-              key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
-            }}
-            defaultZoom={15}
-            defaultCenter={{
-              lat: room.latitude ? parseFloat(room.latitude) : 0,
-              lng: room.longitude ? parseFloat(room.longitude) : 0
-            }}
-            yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => {
-              room.latitude ?
-                new maps.Circle({
-                  strokeColor: '#FCAB70',
-                  strokeOpacity: 0.8,
-                  strokeWeight: 2,
-                  fillColor: '#FDBF68',
-                  fillOpacity: 0.3,
-                  map,
-                  center: {
-                    lat: room.latitude,
-                    lng: room.longitude
-                  },
-                  radius: 400
-                }) : null
-            }}
-          />
-        </div>
+      <div className={classes.root}>
+        <GoogleMap
+          bootstrapURLKeys={{
+            key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
+          }}
+          defaultZoom={15}
+          defaultCenter={{
+            lat: latitude ? parseFloat(latitude) : 0,
+            lng: longitude ? parseFloat(longitude) : 0
+          }}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => {
+            latitude ?
+              new maps.Circle({
+                strokeColor: '#FCAB70',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FDBF68',
+                fillOpacity: 0.3,
+                map,
+                center: {
+                  lat: parseFloat(latitude),
+                  lng: parseFloat(longitude)
+                },
+                radius: 400
+              }) : null
+          }}
+        />
       </div>
-    )
+    </div>
   );
 };
 

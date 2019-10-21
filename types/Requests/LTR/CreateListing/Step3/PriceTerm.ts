@@ -12,7 +12,10 @@ export interface IPriceShortTerm {
   price_day: number,
   price_hour: number,
   price_after_hour: number,
-  cleaning_fee:number
+  cleaning_fee:number,
+  is_discount?: number,
+  price_day_discount?: number,
+  price_hour_discount?: number,
 }
 
 export interface IPriceLongTerm {
