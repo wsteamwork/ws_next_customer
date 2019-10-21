@@ -1,23 +1,21 @@
-import React, { Fragment, FC, useState, MouseEvent, useRef, useEffect } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, ButtonBase } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { ButtonBase, Grid, Theme } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import DialogFullImage from '@/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage';
-import { any } from 'prop-types';
 
 interface IProps {
   classes?: any,
-  livingrooms:ImagesRes,
+  livingrooms: ImagesRes,
   outdoors: ImagesRes,
   furnitures: ImagesRes,
   kitchens: ImagesRes,
   cover_photo: ImagesRes,
   bedrooms: any,
   bathrooms: any,
-  roomName:string
+  roomName: string
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -26,21 +24,21 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 900,
       margin: '1rem 0 0.35rem 0'
     },
-    marginImage:{
+    marginImage: {
       margin: '16px 0 0'
     },
-    images:{
-      width:'100%',
-      borderRadius:4,
-      cursor:'pointer',
-      maxHeight:150,
-      height:150,
-      objectFit:'cover'
+    images: {
+      width: '100%',
+      borderRadius: 4,
+      cursor: 'pointer',
+      maxHeight: 150,
+      height: 150,
+      objectFit: 'cover'
     },
     btnImage: {
       position: 'relative',
-      borderRadius:4,
-      overflow:'hidden',
+      borderRadius: 4,
+      overflow: 'hidden',
       verticalAlign: 'initial',
       [theme.breakpoints.down('xs')]: {
         width: '100% !important', // Overrides inline-style
@@ -93,8 +91,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       position: 'relative',
       padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
       [theme.breakpoints.down('xs')]: {
-        fontSize:16,
-        padding:'12px 8px'
+        fontSize: 16,
+        padding: '12px 8px'
       },
     },
     imageMarked: {
@@ -112,7 +110,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxListImageRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName} = props;
+  const { livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
   const { t } = useTranslation();
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
 
@@ -131,100 +129,101 @@ const BoxListImageRoom: FC<IProps> = (props) => {
       </Typography>
 
       <Grid container spacing={2} alignItems='baseline'>
-        {livingrooms &&  livingrooms.images.length ? (
+        {livingrooms && livingrooms.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src = {IMAGE_STORAGE_LG + livingrooms.images[0].name} alt = {livingrooms.images[0].name} className={classes.images}/>
+              <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].name} className={classes.images} />
               <Typography variant='subtitle2'>
                 Phòng khách
               </Typography>
             </div>
           </Grid>
-        ) : <Fragment/> }
+        ) : <Fragment />}
 
         {bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src = {IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name} alt = {bedrooms.bedroom_1.images[0].caption} className={classes.images}/>
+              <img src={IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name} alt={bedrooms.bedroom_1.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
                 Phòng ngủ
               </Typography>
             </div>
           </Grid>
-        ) : <Fragment/>}
+        ) : <Fragment />}
 
         {bathrooms['bathroom_1'] && bathrooms['bathroom_1'].images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src = {IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name} alt = {bathrooms['bathroom_1'].images[0].caption} className={classes.images}/>
+              <img src={IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name} alt={bathrooms['bathroom_1'].images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
                 Phòng tắm
               </Typography>
             </div>
           </Grid>
-        ) : <Fragment/>}
+        ) : <Fragment />}
 
         {kitchens.images.length && kitchens.images ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src = {IMAGE_STORAGE_LG + kitchens.images[0].name} alt = {kitchens.images[0].caption} className={classes.images}/>
+              <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
                 Phòng bếp
               </Typography>
             </div>
           </Grid>
-        ) : <Fragment/>}
+        ) : <Fragment />}
 
         {furnitures.images.length && furnitures.images ? (
-        <Grid item xs={6} sm={3}>
-          <div className={classes.marginImage} onClick={toggle}>
-            <img src = {IMAGE_STORAGE_LG + furnitures.images[0].name} alt = {furnitures.images[0].caption} className={classes.images}/>
-            <Typography variant='subtitle2'>
-              Nội thất
+          <Grid item xs={6} sm={3}>
+            <div className={classes.marginImage} onClick={toggle}>
+              <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.images} />
+              <Typography variant='subtitle2'>
+                Nội thất
             </Typography>
-          </div>
-        </Grid>
-        ): <Fragment/>}
+            </div>
+          </Grid>
+        ) : <Fragment />}
 
         {outdoors.images.length && outdoors.images ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src = {IMAGE_STORAGE_LG + outdoors.images[0].name} alt = {outdoors.images[0].caption} className={classes.images}/>
+              <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
                 Ngoài trời
               </Typography>
             </div>
           </Grid>
-        ) : <Fragment/>}
-
-        <Grid item xs={6} sm={3}>
-          <ButtonBase
-            onClick={toggle}
-            focusRipple
-            className={classes.btnImage}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: '100%',
-            }}
-          >
-            <img src={IMAGE_STORAGE_LG + cover_photo.images[0].name} alt='cover' className={classes.images}/>
-          <span
-            className={classes.imageSrc}
-          />
-            <span className={classes.imageBackdrop} />
-            <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              className={classes.imageTitle}
+        ) : <Fragment />}
+        {cover_photo.images && cover_photo.images.length ? (
+          <Grid item xs={6} sm={3}>
+            <ButtonBase
+              onClick={toggle}
+              focusRipple
+              className={classes.btnImage}
+              focusVisibleClassName={classes.focusVisible}
+              style={{
+                width: '100%',
+              }}
             >
-              Xem tất cả ảnh
+              <img src={IMAGE_STORAGE_LG + cover_photo.images[0].name} alt='cover' className={classes.images} />
+              <span
+                className={classes.imageSrc}
+              />
+              <span className={classes.imageBackdrop} />
+              <span className={classes.imageButton}>
+                <Typography
+                  component="span"
+                  variant="subtitle1"
+                  color="inherit"
+                  className={classes.imageTitle}
+                >
+                  Xem tất cả ảnh
               <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-          </ButtonBase>
-        </Grid>
+                </Typography>
+              </span>
+            </ButtonBase>
+          </Grid>
+        ) : <Fragment />}
       </Grid>
 
       {/*<DialogFullImage open={openFullImage} handleClose={()=>setOpenFullImage(false)}*/}

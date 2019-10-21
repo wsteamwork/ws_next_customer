@@ -1,14 +1,13 @@
-import React, { Fragment, FC, MouseEvent, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Hidden } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
+import DialogFullAmenities from '@/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
-import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
+import { Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Orange from '@material-ui/core/colors/orange';
-import DialogFullAmenities from '@/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, MouseEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
@@ -29,8 +28,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 900,
       margin: '1rem 0 0.35rem 0'
     },
-    rowMargin:{
-      marginTop:24,
+    rowMargin: {
+      marginTop: 24,
     },
     nameIcon: {
       display: 'flex',
@@ -41,13 +40,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       width: 24,
       height: 24
     },
-    roomName:{
-      margin:'24px 0 12px',
-      fontWeight:700,
+    roomName: {
+      margin: '24px 0 12px',
+      fontWeight: 700,
     },
     button: {
       color: Orange[500],
-      margin:'30px 0 16px',
+      margin: '30px 0 16px',
       '&:hover': {
         backgroundColor: '#fff'
       },
@@ -95,7 +94,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {facilities, bedrooms, kitchens, bathrooms, livingrooms, common, entertainment, others, outdoors} = props;
+  const { facilities, bedrooms, kitchens, bathrooms, livingrooms, common, entertainment, others, outdoors } = props;
   const { t } = useTranslation();
   const [openFullAmen, setOpenFullAmen] = useState<boolean>(false);
 
@@ -120,57 +119,57 @@ const BoxAmenities: FC<IProps> = (props) => {
         {facilities === undefined || facilities.length === 0 ? (
           <Typography>Không có dữ liệu</Typography>
         ) : (
-          <Grid container spacing={2}>
-          {facilities.map((o,i)=>{
-            if (i < 6) return (
-              <Fragment key={i}>
-                <Grid item container xs={6} sm={4} spacing={2}>
-                  <Grid item >
-                    <img
-                      src={o.icon}
-                      alt={o.type_txt}
-                      className={classes.roomAmenitiesIcon}
-                    />
-                  </Grid>
-                  <Grid className={classes.nameIcon} item xs>
-                    <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                  </Grid>
-                </Grid>
-              </Fragment>
-            )
-          })}
-        </Grid>
-        )}
+            <Grid container spacing={2}>
+              {facilities.map((o, i) => {
+                if (i < 6) return (
+                  <Fragment key={i}>
+                    <Grid item container xs={6} sm={4} spacing={2}>
+                      <Grid item >
+                        <img
+                          src={o.icon}
+                          alt={o.type_txt}
+                          className={classes.roomAmenitiesIcon}
+                        />
+                      </Grid>
+                      <Grid className={classes.nameIcon} item xs>
+                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Fragment>
+                )
+              })}
+            </Grid>
+          )}
       </div>
 
       <div>
         <Typography variant='subtitle1' className={classes.roomName}>
-         Phòng ngủ
+          Phòng ngủ
         </Typography>
         {bedrooms === undefined || bedrooms.length === 0 ? (
           <Typography>Không có dữ liệu</Typography>
         ) : (
-          <Grid container spacing={2}>
-            {bedrooms.map((o,i)=>{
-              if (i < 6) return (
-                <Fragment key={i}>
-                  <Grid item container xs={6} sm={4} spacing={2}>
-                    <Grid item >
-                      <img
-                        src={o.icon}
-                        alt={o.type_txt}
-                        className={classes.roomAmenitiesIcon}
-                      />
+            <Grid container spacing={2}>
+              {bedrooms.map((o, i) => {
+                if (i < 6) return (
+                  <Fragment key={i}>
+                    <Grid item container xs={6} sm={4} spacing={2}>
+                      <Grid item >
+                        <img
+                          src={o.icon}
+                          alt={o.type_txt}
+                          className={classes.roomAmenitiesIcon}
+                        />
+                      </Grid>
+                      <Grid className={classes.nameIcon} item xs>
+                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                      </Grid>
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs>
-                      <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                    </Grid>
-                  </Grid>
-                </Fragment>
-              )
-            })}
-          </Grid>
-        )}
+                  </Fragment>
+                )
+              })}
+            </Grid>
+          )}
       </div>
 
       <div>
@@ -180,36 +179,36 @@ const BoxAmenities: FC<IProps> = (props) => {
         {bathrooms === undefined || bathrooms.length === 0 ? (
           <Typography>Không có dữ liệu</Typography>
         ) : (
-          <Grid container spacing={2}>
-            {bathrooms.map((o,i)=>{
-              if (i < 6) return (
-                <Fragment key={i}>
-                  <Grid item container xs={6} sm={4} spacing={2}>
-                    <Grid item>
-                      <img
-                        src={o.icon}
-                        alt={o.type_txt}
-                        className={classes.roomAmenitiesIcon}
-                      />
+            <Grid container spacing={2}>
+              {bathrooms.map((o, i) => {
+                if (i < 6) return (
+                  <Fragment key={i}>
+                    <Grid item container xs={6} sm={4} spacing={2}>
+                      <Grid item>
+                        <img
+                          src={o.icon}
+                          alt={o.type_txt}
+                          className={classes.roomAmenitiesIcon}
+                        />
+                      </Grid>
+                      <Grid className={classes.nameIcon} item xs>
+                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                      </Grid>
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs>
-                      <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                    </Grid>
-                  </Grid>
-                </Fragment>
-              )
-            })}
-          </Grid>
-        )}
+                  </Fragment>
+                )
+              })}
+            </Grid>
+          )}
       </div>
       <Button onClick={toggle} className={classes.button} size='small'>
         &#8230; {t('rooms:readMore')}
       </Button>
 
-      <DialogFullAmenities open={openFullAmen} handleClose={()=>setOpenFullAmen(false)}
-                           facilities={facilities} kitchens={kitchens} bedrooms={bedrooms}
-                           bathrooms={bathrooms} common={common} livingrooms={livingrooms}
-                           entertainment={entertainment} others={others} outdoors={outdoors}/>
+      <DialogFullAmenities open={openFullAmen} handleClose={() => setOpenFullAmen(false)}
+        facilities={facilities} kitchens={kitchens} bedrooms={bedrooms}
+        bathrooms={bathrooms} common={common} livingrooms={livingrooms}
+        entertainment={entertainment} others={others} outdoors={outdoors} />
     </Fragment>
   );
 };
