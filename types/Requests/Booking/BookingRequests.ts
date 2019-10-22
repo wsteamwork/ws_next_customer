@@ -32,6 +32,20 @@ export interface BookingCreateReq {
   booking_purpose?: number;
 }
 
+export interface LTBookingCreateReq {
+  name: string;
+  phone: string;
+  email: string;
+  long_term_room_id: number;
+  move_in: string;
+  move_out: string;
+  note: string;
+  guests: {
+    total_guests: number;
+  };
+  source: number;
+}
+
 export interface BookingPriceCalculatorReq {
   room_id: number;
   checkin: string;
@@ -58,4 +72,17 @@ export interface BookingPayment {
 export interface BookingIndexParams extends BaseGetRequestParams {
   status?: number;
   size?: number;
+}
+
+export interface LTBookingReq {
+  long_term_room_id: number;
+  move_in: string;
+  move_out: string;
+  number_of_guests?: number;
+}
+
+export interface LTBookingPriceCalculatorReq {
+  long_term_room_id: number;
+  move_in: string;
+  move_out: string;
 }

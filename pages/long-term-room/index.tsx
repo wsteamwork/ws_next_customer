@@ -13,8 +13,13 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useMemo } from 'react';
+import React, { Fragment, useContext, useMemo, useReducer } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  BookingStateInit,
+  BookingContext,
+  BookingReducer
+} from '@/store/Context/Booking/BookingContext';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
@@ -54,25 +59,28 @@ const LongtermRoom: NextPage = () => {
       {/*)}*/}
 
       <NavHeader />
+
       {useMemo(
         () => (
           <Fragment>
             {ltroom ? (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <BoxImageLT roomName={ltroom.about_room.name} livingrooms={ltroom.livingrooms} bathrooms={ltroom.bathrooms} bedrooms={ltroom.bedrooms} cover_photo={ltroom.cover_photo} />
+                {/* <BoxImageLT roomName={ltroom.about_room.name} livingrooms={ltroom.livingrooms} bathrooms={ltroom.bathrooms} bedrooms={ltroom.bedrooms} cover_photo={ltroom.cover_photo} /> */}
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
-                    <BoxLTRoomDetail room={ltroom} />
+                    {/* <BoxLTRoomDetail room={ltroom} /> */}
                   </Grid>
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                    <BoxBookingLT priceBasic={ltroom.prices.prices[0].price}
+                    <BoxBookingLT
+                      priceBasic={ltroom.prices.prices[0].price}
                       term={ltroom.prices.prices[0].term}
                       id={ltroom.merchant.data.id}
                       avatar={ltroom.merchant.data.avatar}
                       avatar_url={ltroom.merchant.data.avatar_url}
                       name={ltroom.merchant.data.name}
-                      number_room={ltroom.merchant.data.number_room} />
+                      number_room={ltroom.merchant.data.number_room}
+                    />
                   </Grid>
 
                   {/*<Grid item xs={12}>*/}
@@ -80,15 +88,20 @@ const LongtermRoom: NextPage = () => {
                   {/*</Grid>*/}
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">
-                  <BoxBottomBooking priceBasic={ltroom.prices.prices[0].price} term={ltroom.prices.prices[0].term} />
+                  <BoxBottomBooking
+                    priceBasic={ltroom.prices.prices[0].price}
+                    term={ltroom.prices.prices[0].term}
+                  />
                 </Grid>
-
               </GridContainer>
-            ) : ''}
+            ) : (
+              ''
+            )}
           </Fragment>
         ),
         [ltroom]
       )}
+
       <Footer />
     </Fragment>
   );

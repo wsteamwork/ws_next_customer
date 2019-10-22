@@ -53,6 +53,49 @@ export interface BookingIndexRes {
   cancel: TransformerInclude<CancelReasonRes[]>;
 }
 
+export interface LTBookingIndexRes {
+  id: number;
+  uuid: string;
+  code: string;
+  name: string;
+  phone: string;
+  email: string;
+  email_received: string;
+  name_received: string;
+  phone_received: string;
+  customer_id: number;
+  merchant_id: number;
+  latest_move_in: string;
+  latest_move_out: string;
+  long_term_room_id: number;
+  note: string;
+  coupon: string;
+  price_and_contract: LTPriceAndContract[];
+  guests: LTBookingGuests;
+  type: any;
+  source: string;
+  booking_purpose: string;
+  status_reviews: number;
+  bank_list: any;
+}
+
+interface LTPriceAndContract {
+  price_original: number;
+  deposit: number;
+  price_with_fee: number;
+  range_stay: number;
+  fee_included: any[];
+  fee_not_included: any[];
+  payment_term: number;
+  status: number;
+  move_in: string;
+  move_out: string;
+}
+
+interface LTBookingGuests {
+  total_guests: number;
+}
+
 export interface BookingPriceCalculatorRes {
   checkin: number;
   checkout: number;
@@ -81,4 +124,17 @@ export interface CancelReasonRes {
   code: number;
   code_txt: string;
   note: string;
+}
+
+export interface LTBookingPriceCalculatorRes {
+  price_original: number;
+  deposit: number;
+  price_with_fee: number;
+  range_stay: number;
+  fee_included: any[];
+  fee_not_included: any[];
+  price_per_month: number;
+  last_payment_amount: number;
+  amount_per_payment: number;
+  payment_term: number;
 }

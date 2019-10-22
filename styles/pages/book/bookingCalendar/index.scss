@@ -35,7 +35,7 @@
 
     .box-main__wrapper {
       padding-top: 126px;
-      height: 635px;
+      height: 800px;
       margin: 0px;
     }
     .calendar-picker {
@@ -45,16 +45,62 @@
       position: relative;
       width: 100%;
       float: left;
+
+      // CUSTOMIZE AIRBNB CALENDAR
+      .CalendarMonthGrid__vertical_scrollable {
+        overflow-y: auto;
+      }
+
+      .CalendarDay__default {
+        border: none;
+      }
+
+      // .CalendarDay__selected_span {
+      //   background: #ff9800;
+      // }
     }
   }
 
   .box-price {
-    width: 33.3333%;
-    float: right;
     position: absolute;
-    z-index: 10;
-    top: 182px;
-    width: 320px;
-    right: 0px;
+    top: 200px;
+    width: 328px;
+    right: 125px;
+
+    .price-title {
+      padding-bottom: 16px;
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.375em;
+      color: inherit;
+    }
+    .price-subtitle {
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.375em;
+      color: inherit;
+    }
+
+    .sub-price {
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.375em;
+      color: inherit;
+    }
+
+    .box-price-sub {
+      -webkit-box-align: center;
+      -webkit-box-pack: justify;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+    }
   }
 }

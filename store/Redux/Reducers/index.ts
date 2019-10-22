@@ -78,6 +78,7 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import { LTBookingReducerState, LTBookingAction, ltBookingReducer } from './LTR/LTBooking/ltbooking';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -85,6 +86,7 @@ export type ReducersType = {
   roomHomepage: Reducer<RoomHomepageState, RoomHomepageAction>;
   roomPage: Reducer<RoomReducerState, RoomReducerAction>;
   ltroomPage: Reducer<LTRoomReducerState, LTRoomReducerAction>;
+  ltBooking: Reducer<LTBookingReducerState, LTBookingAction>;
   book: Reducer<BookState, BookActions>;
   userProfile: Reducer<UserProfileState, UserProfileActions>;
   iProfile: Reducer<ProfileState, ProfileAction>;
@@ -110,6 +112,7 @@ export type ReducersList = {
   roomHomepage: RoomHomepageState;
   roomPage: RoomReducerState;
   ltroomPage: LTRoomReducerState;
+  ltBooking: LTBookingReducerState;
   book: BookState;
   userProfile: UserProfileState;
   iProfile: ProfileState;
@@ -135,6 +138,7 @@ export type ReducresActions =
   | BookingAction
   | RoomReducerAction
   | LTRoomReducerAction
+  | LTBookingAction
   | BookActions
   | UserProfileActions
   | ProfileAction
@@ -160,6 +164,7 @@ const reducers: ReducersType = {
   roomHomepage: roomHomepageReducer,
   roomPage: roomReducer,
   ltroomPage: ltroomReducer,
+  ltBooking: ltBookingReducer,
   book: bookReducer,
   userProfile: userProfileReducer,
   iProfile: iProfileReducer,
