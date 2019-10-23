@@ -43,11 +43,9 @@ const BottomNavigation: FC<IProps> = (props) => {
   }, [currentActiveStep]);
 
   const handleFinish = async () => {
-    console.log('finish');
     try {
       const result = await handleAPI();
       if (result) {
-        // console.log(result);
         Router.push(`/host/create-listing/${result.data.data.id}/detail`);
       }
     } catch (error) {
@@ -55,23 +53,12 @@ const BottomNavigation: FC<IProps> = (props) => {
     }
   };
 
-  // const nextStep = () => {
-  //   if (activeStep === steps.length - 1) {
-  //     console.log('router push ', nextLink);
-  //     Router.push(nextLink);
-  //   } else {
-  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   }
-  // };
-
   const handleNext = async () => {
-    console.log('next');
     try {
       if (!submitEachStep) {
         const result = await handleAPI();
         if (result) {
           if (activeStep === steps.length - 1) {
-            console.log('router push ', nextLink);
             Router.push(nextLink);
           } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);

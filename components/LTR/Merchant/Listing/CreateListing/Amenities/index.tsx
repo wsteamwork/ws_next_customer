@@ -22,11 +22,6 @@ const Amenities: FC<IProps> = (props) => {
   const id = router.query.id;
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
-  // const commonClick = useSelector<ReducersList, number[]>((state) => state.amenities.common);
-  // const livingRoomsClick = useSelector<ReducersList, number[]>(
-  //   (state) => state.amenities.livingrooms
-  // );
-  // const bedroomsClick = useSelector<ReducersList, number[]>((state) => state.amenities.bedrooms);
   const outdoorsClick = useSelector<ReducersList, number[]>((state) => state.amenities.outdoors);
   const facilitiesClick = useSelector<ReducersList, number[]>(
     (state) => state.amenities.facilities

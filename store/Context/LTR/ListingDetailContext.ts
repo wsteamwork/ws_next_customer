@@ -90,7 +90,6 @@ export const getListingDetail = async (
     dispatch({ type: 'setListing', payload: res.data.data });
   } catch (error) {
     console.log(error);
-    // Router.push('/');
   }
 };
 

@@ -166,24 +166,3 @@ export const handleCreateRoom = async (
 
   return response;
 };
-
-// export const submitStepOne = async (data: any) => {
-//   const cookies = new Cookies();
-//   const token = cookies.get('_token');
-//   const headers = token && {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     }
-//   };
-//   const response = await axios_merchant.post(
-//     `long-term/room/step2/${tab}/${room_id}`,
-//     {
-//       step2: {
-//         [`${tab}`]: data
-//       }
-//     },
-//     headers
-//   );
-
-//   return response.data;
-// };

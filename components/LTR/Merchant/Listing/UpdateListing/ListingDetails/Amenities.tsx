@@ -7,12 +7,13 @@ import {
   Hidden,
   Button
 } from '@material-ui/core';
-import React, { FC, useState, MouseEvent, Fragment, useEffect } from 'react';
+import React, { FC, useState, MouseEvent, Fragment, useEffect, useContext } from 'react';
 import CardWrapperItem from '../CardWrapperItem';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import _ from 'lodash';
 import AddIcon from '@material-ui/icons/Add';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -57,6 +58,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Amenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggle = (e: MouseEvent<HTMLElement>) => {
@@ -69,11 +72,14 @@ const Amenities: FC<IProps> = (props) => {
     }
     return listing.comforts.facilities;
   };
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/amenities`);
+  };
 
   return (
     <Fragment>
       {!!listing ? (
-        <CardWrapperItem title="Tiện nghi">
+        <CardWrapperItem title="Tiện nghi" onClick={openUpdate}>
           <Grid container spacing={3} className={classes.rowMargin}>
             {!isOpen
               ? _.map(getRenderedItems(), (o, i) =>

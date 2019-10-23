@@ -1,21 +1,29 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { DescriptionReducerAction, getDataDescription } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import React, { FC, Fragment, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+import {
+  DescriptionReducerAction,
+  getDetailDescription
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
+import { Grid, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
-import createStyles from '@material-ui/core/styles/createStyles';
 import { Formik, FormikProps } from 'formik';
-import React, { FC, Fragment, useContext, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as Yup from 'yup';
-import CardTextarea from './CardTextarea';
+import CardTextarea from '../../CreateListing/Description/CardTextarea';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import {
+  ListingDetailsReducerAction,
+  handleUpdateListing
+} from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 interface IProps {
   classes?: any;
 }
-
 interface MyDescription {
   name: string;
   description: string;
@@ -41,9 +49,13 @@ const useValidatation = () => {
 
   return FormValidationSchema;
 };
-
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
+    name: {
+      fontWeight: theme.typography.fontWeightBold,
+      marginBottom: theme.spacing(1),
+      color: '#484848'
+    },
     normal_divider: {
       margin: theme.spacing(3, 0)
     },
@@ -59,39 +71,54 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const Description: FC<IProps> = (props) => {
+const UpdateDescription: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { width, router } = useContext(GlobalContext);
   const FormValidationSchema = useValidatation();
 
+  const room_id = useSelector<ReducersList, number>((state) => state.description.room_id);
   const name = useSelector<ReducersList, string>((state) => state.description.name);
   const description = useSelector<ReducersList, string>((state) => state.description.description);
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
+  const lang = useSelector<ReducersList, string>((state) => state.description.lang);
+  const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
+  const disable_save = useSelector<ReducersList, boolean>(
+    (state) => state.listingdetails.disable_save
+  );
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
-  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<ListingDetailsReducerAction>>();
 
   const id = router.query.id;
   useEffect(() => {
-    getDataDescription(id, dispatch_des);
+    getDetailDescription(id, dispatch_des);
   }, [id]);
-
-  useEffect(() => {
-    dispatch_detail({ type: 'setStep', payload: 'tab1' });
-  }, []);
 
   useMemo(() => {
     if (name.length < 10 || description.length < 50) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    }
-    else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
+      dispatch_detail({ type: 'setDisableSave', payload: true });
+    } else {
+      dispatch_detail({ type: 'setDisableSave', payload: false });
     }
   }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
+  };
+  const updateDescription: any = () => {
+    handleUpdateListing(room_id, {
+      about_room: {
+        vi: {
+          name: name,
+          description: description,
+          space: space,
+          lang: lang,
+          note: rules
+        },
+        en: detail_en
+      }
+    });
   };
 
   const formikInit: MyDescription = useMemo<MyDescription>(() => {
@@ -106,25 +133,27 @@ const Description: FC<IProps> = (props) => {
   const dispatchDescription = (typeAction, value) => {
     dispatch_des({ type: typeAction.type, payload: value });
   };
+
   return (
     <Fragment>
-      <Formik
-        enableReinitialize={true}
-        validateOnChange={true}
-        validationSchema={FormValidationSchema}
-        initialValues={formikInit}
-        onSubmit={handleSubmitForm}
-        render={({
-          values,
-          handleSubmit,
-          touched,
-          errors,
-          handleChange,
-          handleBlur
-        }: FormikProps<MyDescription>) => (
+      <CardWrapperUpdate disabledSave={disable_save} handleSave={updateDescription}>
+        <Formik
+          enableReinitialize={true}
+          validateOnChange={true}
+          validationSchema={FormValidationSchema}
+          initialValues={formikInit}
+          onSubmit={handleSubmitForm}
+          render={({
+            values,
+            handleSubmit,
+            touched,
+            errors,
+            handleChange,
+            handleBlur
+          }: FormikProps<MyDescription>) => (
             <form onSubmit={handleSubmit}>
               <Grid container justify="center" alignContent="center">
-                <Grid item xs={11}>
+                <Grid item xs={12}>
                   <CardTextarea
                     name="name"
                     label={t('details:listingName')}
@@ -172,15 +201,25 @@ const Description: FC<IProps> = (props) => {
                     sub_label={t('details:subDes')}
                     value={values.description.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(
+                        values.description.length < 50 &&
+                        touched!.description &&
+                        errors.description
+                      )
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
                     show_error={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(
+                        values.description.length < 50 &&
+                        touched!.description &&
+                        errors.description
+                      )
                     }
                     error_message={
-                      values.description.length < 50 ? errors.description : t('details:defaultError')
+                      values.description.length < 50
+                        ? errors.description
+                        : t('details:defaultError')
                     }
                     title_tooltips={
                       <Fragment>
@@ -194,7 +233,11 @@ const Description: FC<IProps> = (props) => {
                     max_char={500}
                     multiline={true}
                     classMaxChar={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(
+                        values.description.length < 50 &&
+                        touched!.description &&
+                        errors.description
+                      )
                         ? 'error_char'
                         : 'remain_char'
                     }
@@ -253,7 +296,9 @@ const Description: FC<IProps> = (props) => {
                       rowsMax={9}
                       max_char={1000}
                       multiline={true}
-                      classMaxChar={!!(touched!.space && errors.space) ? 'error_char' : 'remain_char'}
+                      classMaxChar={
+                        !!(touched!.space && errors.space) ? 'error_char' : 'remain_char'
+                      }
                       InputProps={{
                         classes: {
                           notchedOutline: !!(touched!.space && errors.space)
@@ -270,7 +315,6 @@ const Description: FC<IProps> = (props) => {
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        // console.log(e.currentTarget.value);
                         dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
                       }}
                     />
@@ -300,7 +344,9 @@ const Description: FC<IProps> = (props) => {
                       rowsMax={9}
                       max_char={500}
                       multiline={true}
-                      classMaxChar={!!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'}
+                      classMaxChar={
+                        !!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'
+                      }
                       InputProps={{
                         classes: {
                           notchedOutline: !!(touched!.rules && errors.rules)
@@ -325,8 +371,8 @@ const Description: FC<IProps> = (props) => {
               </Grid>
             </form>
           )}></Formik>
+      </CardWrapperUpdate>
     </Fragment>
   );
 };
-
-export default Description;
+export default UpdateDescription;

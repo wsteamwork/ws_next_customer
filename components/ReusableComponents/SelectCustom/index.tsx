@@ -10,7 +10,6 @@ interface IProps<T> extends SelectProps {
   options?: any[];
   title?: string;
   twoThirdWidth?: boolean;
-  // setValue?: Dispatch<SetStateAction<T>>;
   unit?: string;
   onChange?: (e: React.ChangeEvent<any>) => void;
   onBlur?: (e: any) => void;
@@ -28,7 +27,6 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
   const optionsRender = () => {
     return options && !disabled
       ? options.map((item, i) => {
-        // console.log(item);
         return (
           <option key={i} value={unit ? item : item.id}>
             {unit ? item + unit : item.value}
@@ -48,9 +46,8 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
           fullWidth
           classes={{ icon: 'icon' }}
           onChange={handleChange}
-          // onBlur={onBlur}
-          value={valueInput}
-          defaultValue={value}
+          value={value}
+          // defaultValue={value}
           input={
             <OutlinedInput
               name="term-rental"

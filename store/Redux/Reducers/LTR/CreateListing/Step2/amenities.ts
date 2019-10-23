@@ -105,15 +105,7 @@ export const getDataAmenities = async (
     const facilities = amenities.facilities ? amenities.facilities.map((item) => item.id) : [];
     const outdoors = amenities.outdoors ? amenities.outdoors.map((item) => item.id) : [];
     const others = amenities.others ? amenities.others.map((item) => item.id) : [];
-    const count_amenities =
-      livingrooms.length +
-      bedrooms.length +
-      kitchens.length +
-      bathrooms.length +
-      entertainment.length +
-      facilities.length +
-      outdoors.length +
-      others.length;
+    const count_amenities =res.data.data.total_comforts;
 
     dispatch({ type: 'setRoomId', payload: room_id });
     dispatch({ type: 'setLivingRooms', payload: livingrooms });

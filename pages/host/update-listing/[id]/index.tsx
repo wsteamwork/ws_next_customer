@@ -16,6 +16,8 @@ import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/Listin
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
+import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { getDataUpdateListing, UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 interface IProps {
   classes?: any;
 }
@@ -121,6 +123,9 @@ const UpdateListing: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
+  const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
+  
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing
   );
@@ -128,6 +133,9 @@ const UpdateListing: FC<IProps> = (props) => {
     if (!listing) {
       getListingDetails(id, dispatch);
     }
+  }, []);
+  useEffect(() => {
+    getDataAmenities(id, dispatch_amen);
   }, []);
   useEffect(() => {
     if (localStorage.getItem('tabUpdate') && localStorage.getItem('currentRoom')) {

@@ -14,6 +14,8 @@ interface IProps {
   children?: any;
   title: string;
   isShowModal?: boolean;
+  onClick?: any;
+  showBtnUpdate?: boolean;
 }
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -47,7 +49,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const CardWrapperItem: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { children, title } = props;
+  const { children, title, onClick, showBtnUpdate } = props;
   return (
     <Fragment>
       <Grid container className={classes.wrapper}>
@@ -56,15 +58,30 @@ const CardWrapperItem: FC<IProps> = (props) => {
             {title}
           </Typography>
         </Grid>
-        <Grid item xs={4} sm={3} className={classes.wrapperBtn}>
-          <Button size="small" variant="outlined" color="primary" className={classes.button}>
-            Cập nhật
-          </Button>
-        </Grid>
+        {showBtnUpdate ? (
+          <Grid item xs={4} sm={3} className={classes.wrapperBtn}>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              onClick={onClick}>
+              Cập nhật
+            </Button>
+          </Grid>
+        ) : (
+          ''
+        )}
       </Grid>
       {children ? <Grid container>{children}</Grid> : ''}
       <Divider className={classes.divider} />
     </Fragment>
   );
 };
+
+CardWrapperItem.defaultProps = {
+  isShowModal: false,
+  showBtnUpdate: true
+};
+
 export default CardWrapperItem;

@@ -37,7 +37,6 @@ const useValidatation = () => {
 
   const FormValidationSchema = Yup.object().shape({
     address: Yup.string().required(t('basic:addressRequired')),
-    // .max(100, t('details:name100Character')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
 
@@ -135,16 +134,10 @@ const Location: FC<IProps> = (props) => {
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
-    // const data: any = {
-    //   lease_type: values.lease_type,
-    //   accommodation_type: values.accommodation_type,
-    //   stay_with_host: values.stay_with_host
-    // };
     return {};
   };
 
   const handleChangeAddress = (setFieldValue: any) => (value: any) => {
-    // console.log(value);
     setFieldValue('address', value);
   };
 
@@ -181,8 +174,6 @@ const Location: FC<IProps> = (props) => {
           const hasChanged = !deepEqual(values, initialValues);
           const hasErrors = Object.keys(errors).length > 0;
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
-          // console.log(!hasChanged || hasErrors || isSubmitting);
-
           return (
             <form onSubmit={handleSubmit}>
               <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
@@ -214,8 +205,6 @@ const Location: FC<IProps> = (props) => {
                     }}
                     onBlur={(e: any) => {
                       handleBlur(e);
-                      console.log(e.currentTarget.value);
-
                       dispatch({
                         type: 'SET_BUILDING',
                         payload: e.currentTarget.value

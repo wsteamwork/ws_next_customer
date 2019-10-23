@@ -1,8 +1,9 @@
 import { createStyles, makeStyles, Theme, Typography, Grid } from '@material-ui/core';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import CardWrapperItem from '../CardWrapperItem';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface IProps {
   classes?: any;
@@ -29,10 +30,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const Guests: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/number-guest`);
+  };
   return (
     <Fragment>
       {listing ? (
-        <CardWrapperItem title="Thông tin khách">
+        <CardWrapperItem title="Thông tin khách" onClick={openUpdate}>
           <Grid container>
             <Grid item xs={12} sm={6} className={classes.marginBottom}>
               Số khách tiêu chuẩn:{' '}
