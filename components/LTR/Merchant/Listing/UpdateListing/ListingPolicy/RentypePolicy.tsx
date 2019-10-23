@@ -1,8 +1,8 @@
-import { createStyles, makeStyles, Theme, Typography, Grid } from '@material-ui/core';
-import React, { FC, Fragment } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import React, { FC, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 
 interface IProps {
   classes?: any;
@@ -46,8 +46,8 @@ const RentTypePolicy: FC<IProps> = (props) => {
           </Grid>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

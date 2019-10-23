@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
 import React, { FC } from 'react';
+import IncludedFee from './IncludedFee';
 import PriceLongTerm from './PriceLongTerm';
 import PriceShortTerm from './PriceShortTerm';
 import WeekdayPrice from './WeekdayPrice';
-import IncludedFee from './IncludedFee';
 
 interface IProps {
   classes?: any;

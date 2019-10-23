@@ -1,10 +1,10 @@
-import { createStyles, makeStyles, Theme, Typography, Grid, Button } from '@material-ui/core';
-import React, { FC, Fragment, useState, MouseEvent, useContext } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Button, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import React, { FC, Fragment, MouseEvent, useContext, useState } from 'react';
+import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 interface IProps {
   classes?: any;
 }
@@ -69,21 +69,21 @@ const NameAndDescription: FC<IProps> = (props) => {
                   })}
                 </span>
               ) : (
-                <span className={classes.roomName}>
-                  {ReactHtmlParser(listing.about_room.description.substring(0, 150), {
-                    transform: transformHtmlContent
-                  })}
-                  <Button onClick={toggle} className={classes.button}>
-                    &#8230;Xem thêm
+                  <span className={classes.roomName}>
+                    {ReactHtmlParser(listing.about_room.description.substring(0, 150), {
+                      transform: transformHtmlContent
+                    })}
+                    <Button onClick={toggle} className={classes.button}>
+                      &#8230;Xem thêm
                   </Button>
-                </span>
-              )}
+                  </span>
+                )}
             </span>
           </Grid>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

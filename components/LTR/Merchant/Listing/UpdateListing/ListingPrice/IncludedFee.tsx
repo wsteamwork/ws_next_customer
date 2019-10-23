@@ -1,15 +1,10 @@
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  Grid
-} from '@material-ui/core';
-import React, { FC, Fragment} from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import _ from 'lodash';
 import numeral from 'numeral';
+import React, { FC, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 interface IProps {
   classes?: any;
 }
@@ -42,14 +37,14 @@ const IncludedFee: FC<IProps> = (props) => {
                   <span className={classes.name}>{numeral(o.value).format('0,0')} vnđ</span>
                 </Grid>
               ) : (
-                ''
-              )
+                  ''
+                )
             )}
           </Grid>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

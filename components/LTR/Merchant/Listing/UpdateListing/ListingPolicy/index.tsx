@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React, { FC } from 'react';
-import CancelPolicy from './CancelPolicy';
 import BookingPolicy from './BookingPolicy';
+import CancelPolicy from './CancelPolicy';
 import RentTypePolicy from './RentypePolicy';
 
 interface IProps {
@@ -13,7 +13,7 @@ const ListingPolicy: FC<IProps> = (props) => {
     <Grid container alignContent="center">
       <Grid item xs={12} sm={10} lg={9}>
         <BookingPolicy />
-        <RentTypePolicy/>
+        <RentTypePolicy />
         <CancelPolicy />
       </Grid>
     </Grid>

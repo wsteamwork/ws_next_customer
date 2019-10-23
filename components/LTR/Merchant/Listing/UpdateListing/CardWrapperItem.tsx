@@ -1,12 +1,4 @@
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  Grid,
-  Button,
-  Typography,
-  Divider
-} from '@material-ui/core';
+import { Button, createStyles, Divider, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC, Fragment } from 'react';
 
 interface IProps {
@@ -70,8 +62,8 @@ const CardWrapperItem: FC<IProps> = (props) => {
             </Button>
           </Grid>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
       {children ? <Grid container>{children}</Grid> : ''}
       <Divider className={classes.divider} />

@@ -1,22 +1,17 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import React, { useContext, FC, Fragment, useState, useEffect, ChangeEvent, useMemo } from 'react';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
-import Switch from '@material-ui/core/Switch';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import { Grid, Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
-import { useSelector, useDispatch } from 'react-redux';
+import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { RoomTypeData, getRoomType } from '@/components/Rooms/FilterActions/RoomType/context';
-import { Dispatch } from 'redux';
-import {
-  UpdateDetailsState,
-  getDataUpdateListing,
-  UpdateDetailsActions,
-  handleUpdateRentAndRoomType
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { getDataUpdateListing, handleUpdateRentAndRoomType, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { Checkbox, FormControlLabel, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
+import React, { ChangeEvent, FC, Fragment, useContext, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import CardWrapperUpdate from '../CardWrapperUpdate';
 interface IProps {
   classes?: any;
 }

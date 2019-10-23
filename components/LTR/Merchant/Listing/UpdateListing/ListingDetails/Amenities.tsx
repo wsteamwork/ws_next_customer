@@ -1,19 +1,11 @@
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  Grid,
-  Typography,
-  Hidden,
-  Button
-} from '@material-ui/core';
-import React, { FC, useState, MouseEvent, Fragment, useEffect, useContext } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import _ from 'lodash';
-import AddIcon from '@material-ui/icons/Add';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Button, createStyles, Grid, Hidden, makeStyles, Theme, Typography } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import _ from 'lodash';
+import React, { FC, Fragment, MouseEvent, useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 interface IProps {
   classes?: any;
 }
@@ -83,50 +75,50 @@ const Amenities: FC<IProps> = (props) => {
           <Grid container spacing={3} className={classes.rowMargin}>
             {!isOpen
               ? _.map(getRenderedItems(), (o, i) =>
-                  parseInt(i) < 5 ? (
-                    <Grid item xs={6} sm={4} key={i} className={classes.nameIcon}>
-                      <Grid item xs={3} md={3} lg={3} className={classes.wrapperIcon}>
-                        <img
-                          src={o.icon}
-                          alt={o.comfort_trans[0].name}
-                          className={classes.roomAmenitiesIcon}
-                        />
-                      </Grid>
-                      <Grid className={classes.nameIcon} item xs={9} md={9} lg={9}>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                      </Grid>
+                parseInt(i) < 5 ? (
+                  <Grid item xs={6} sm={4} key={i} className={classes.nameIcon}>
+                    <Grid item xs={3} md={3} lg={3} className={classes.wrapperIcon}>
+                      <img
+                        src={o.icon}
+                        alt={o.comfort_trans[0].name}
+                        className={classes.roomAmenitiesIcon}
+                      />
                     </Grid>
-                  ) : (
+                    <Grid className={classes.nameIcon} item xs={9} md={9} lg={9}>
+                      <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                    </Grid>
+                  </Grid>
+                ) : (
                     ''
                   )
-                )
+              )
               : _.map(getRenderedItems(), (item, i) =>
-                  item[1].length ? (
-                    <Fragment key={i}>
-                      <Grid item xs={12}>
-                        <Typography variant="subtitle2" className={classes.name}>
-                          {item[0]}
-                        </Typography>
-                      </Grid>
-                      {_.map(item[1], (o, i) => (
-                        <Grid item xs={6} sm={4} key={i} className={classes.nameIcon}>
-                          <Grid item xs={3} md={3} lg={3} className={classes.wrapperIcon}>
-                            <img
-                              src={o.icon}
-                              alt={o.comfort_trans[0].name}
-                              className={classes.roomAmenitiesIcon}
-                            />
-                          </Grid>
-                          <Grid className={classes.nameIcon} item xs={9} md={9} lg={9}>
-                            <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                          </Grid>
+                item[1].length ? (
+                  <Fragment key={i}>
+                    <Grid item xs={12}>
+                      <Typography variant="subtitle2" className={classes.name}>
+                        {item[0]}
+                      </Typography>
+                    </Grid>
+                    {_.map(item[1], (o, i) => (
+                      <Grid item xs={6} sm={4} key={i} className={classes.nameIcon}>
+                        <Grid item xs={3} md={3} lg={3} className={classes.wrapperIcon}>
+                          <img
+                            src={o.icon}
+                            alt={o.comfort_trans[0].name}
+                            className={classes.roomAmenitiesIcon}
+                          />
                         </Grid>
-                      ))}
-                    </Fragment>
-                  ) : (
+                        <Grid className={classes.nameIcon} item xs={9} md={9} lg={9}>
+                          <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        </Grid>
+                      </Grid>
+                    ))}
+                  </Fragment>
+                ) : (
                     ''
                   )
-                )}
+              )}
 
             {!isOpen ? (
               <Grid item xs={6} sm={4} className={classes.wrapperBtn}>
@@ -138,17 +130,17 @@ const Amenities: FC<IProps> = (props) => {
                 </Hidden>
               </Grid>
             ) : (
-              <Grid item xs={6} sm={4} className={classes.wrapperBtn}>
-                <Button onClick={toggle} className={classes.button}>
-                  Thu gọn
+                <Grid item xs={6} sm={4} className={classes.wrapperBtn}>
+                  <Button onClick={toggle} className={classes.button}>
+                    Thu gọn
                 </Button>
-              </Grid>
-            )}
+                </Grid>
+              )}
           </Grid>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

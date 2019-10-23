@@ -1,14 +1,14 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { ReducersList } from '@/store/Redux/Reducers';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useEffect, useState, Fragment, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import { UpdateDetailsState, getDataUpdateListing, UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Dispatch } from 'redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-interface IProps {}
+import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 
 const UpdateNumberGuest: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
@@ -22,19 +22,19 @@ const UpdateNumberGuest: FC<IProps> = (props) => {
   useEffect(() => {
     getDataUpdateListing(id, dispatch);
   }, [room_id]);
-  
+
   useEffect(() => {
     setGuest(guestRecommendation);
     setMaxGuests(maxGuest);
   }, [guestRecommendation, maxGuest]);
-  
+
   useEffect(() => {
     dispatch({
       type: 'SET_GUEST_RECOMMENDATION',
       payload: guest
     });
   }, [guest]);
-  
+
   useEffect(() => {
     dispatch({
       type: 'SET_MAX_GUEST',

@@ -1,13 +1,13 @@
 import { Grid } from '@material-ui/core';
 import React, { FC } from 'react';
-import NameAndDescription from './NameAndDescription';
 import Amenities from './Amenities';
-import BedRooms from './BedRooms';
 import BathRooms from './BathRooms';
-import RentAndRoomType from './RentAndRoomType';
-import Location from './Location';
-import StatusRoom from './StatusRoom';
+import BedRooms from './BedRooms';
 import Guests from './Guests';
+import Location from './Location';
+import NameAndDescription from './NameAndDescription';
+import RentAndRoomType from './RentAndRoomType';
+import StatusRoom from './StatusRoom';
 
 interface IProps {
   classes?: any;

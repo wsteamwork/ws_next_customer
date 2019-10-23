@@ -1,9 +1,9 @@
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import React, { FC, Fragment, useContext } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import CardWrapperItem from '../CardWrapperItem';
 
 interface IProps {
   classes?: any;
@@ -34,8 +34,8 @@ const Location: FC<IProps> = (props) => {
           </Typography>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

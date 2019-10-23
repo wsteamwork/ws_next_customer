@@ -1,13 +1,8 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  AmenitiesReducerAction,
-  getDataAmenities
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
-import {
-  getDataImages,
-  ImageReducerAction
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
+import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
+import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Grid, Typography } from '@material-ui/core';
@@ -15,12 +10,8 @@ import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
 import CardAmenities from '../../CreateListing/Amenities/CardAmenities';
-import {
-  handleUpdateListing,
-  ListingDetailsReducerAction
-} from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import CardWrapperUpdate from '../CardWrapperUpdate';
 interface IProps {
   classes?: any;
 }
@@ -110,8 +101,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setFacilities' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {amenities['bathrooms'] ? (
               <CardAmenities
                 label={amenities['bathrooms'][0].type_txt}
@@ -121,8 +112,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setBathRooms' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {amenities['kitchens'] ? (
               <CardAmenities
                 label={amenities['kitchens'][0].type_txt}
@@ -132,8 +123,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setKitChens' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {amenities['entertainments'] ? (
               <CardAmenities
                 label={amenities['entertainments'][0].type_txt}
@@ -143,8 +134,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setEntertainment' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {amenities['outdoors'] ? (
               <CardAmenities
                 label={amenities['outdoors'][0].type_txt}
@@ -154,8 +145,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setOutdoors' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
             {amenities['others'] ? (
               <CardAmenities
                 label={amenities['others'][0].type_txt}
@@ -165,8 +156,8 @@ const UpdateAmenities: FC<IProps> = (props) => {
                 typeUpload={{ type: 'setOthers' }}
               />
             ) : (
-              ''
-            )}
+                ''
+              )}
           </Grid>
         </Grid>
       </CardWrapperUpdate>

@@ -1,66 +1,59 @@
 /* global google */
-import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { ReducersList } from '@/store/Redux/Reducers';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useEffect, useState, Fragment, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  UpdateDetailsState,
-  getDataUpdateListing,
-  UpdateDetailsActions
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Dispatch } from 'redux';
-import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import * as Yup from 'yup';
-interface IProps {}
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 interface Coordinate {
-    lat: number;
-    lng: number;
-  }
-  
-  interface GoogleMapProps {
-    defaultCenter: Coordinate | null;
-    coordinate: Coordinate;
-    onClickMap: (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => void;
-  }
-  
-  interface FormValues {
-    address: string;
-    city: string;
-    building: string;
-  }
-  
-  const useValidatation = () => {
-    const { t } = useTranslation();
-  
-    const FormValidationSchema = Yup.object().shape({
-      address: Yup.string().required(t('basic:addressRequired')),
-      city: Yup.string().required(t('basic:cityRequired'))
-    });
-  
-    return FormValidationSchema;
-  };
+  lat: number;
+  lng: number;
+}
+
+interface GoogleMapProps {
+  defaultCenter: Coordinate | null;
+  coordinate: Coordinate;
+  onClickMap: (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => void;
+}
+
+interface FormValues {
+  address: string;
+  city: string;
+  building: string;
+}
+
+const useValidatation = () => {
+  const { t } = useTranslation();
+
+  const FormValidationSchema = Yup.object().shape({
+    address: Yup.string().required(t('basic:addressRequired')),
+    city: Yup.string().required(t('basic:cityRequired'))
+  });
+
+  return FormValidationSchema;
+};
 
 const UpdateLocation: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
-//   const google: any = window.google;  
-//   const { room_id, guestRecommendation, maxGuest } = useSelector<ReducersList, UpdateDetailsState>(
-//     (state) => state.updateDetails
-//   );
-//   const dispatch = useDispatch<Dispatch<UpdateDetailsActions>>();
+  //   const google: any = window.google;  
+  //   const { room_id, guestRecommendation, maxGuest } = useSelector<ReducersList, UpdateDetailsState>(
+  //     (state) => state.updateDetails
+  //   );
+  //   const dispatch = useDispatch<Dispatch<UpdateDetailsActions>>();
   const { address, building, disableSubmit } = useSelector<ReducersList, CreateListingState>(
     (state) => state.createListing
   );
@@ -73,7 +66,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
-  
+
   const FormValidationSchema = useValidatation();
 
   useEffect(() => {

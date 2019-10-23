@@ -1,22 +1,12 @@
-import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import {
-  Button,
-  Collapse,
-  Typography,
-  FormControl,
-  Theme,
-  InputAdornment
-} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { Dispatch, FC, SetStateAction, useState, useEffect, Fragment, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-  UpdateDetailsActions
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-import { makeStyles, createStyles } from '@material-ui/styles';
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
-import UppyImage from '../../CreateListing/UploadImage/UppyImage';
+import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import { UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { Button, Collapse, FormControl, InputAdornment, Theme, Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { useDispatch } from 'react-redux';
 interface IProps {
   roomNumber?: number;
   bedRoomsList?: any;
@@ -189,8 +179,8 @@ const UpdateAddBedRoom: FC<IProps> = (props) => {
           </Grid>
         </Grid>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

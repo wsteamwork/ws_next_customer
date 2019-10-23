@@ -1,27 +1,23 @@
-import { ReducersList } from '@/store/Redux/Reducers';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useEffect, useState, Fragment, useContext, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  UpdateDetailsState,
-  getDataUpdateListing,
-  UpdateDetailsActions
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Dispatch } from 'redux';
-import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
-import UpdateAddBedRoom from './UpdateAddBedRoom';
+import { Theme, Typography } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-import { Typography, Theme } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/styles';
-interface IProps {}
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+import UpdateAddBedRoom from './UpdateAddBedRoom';
+interface IProps { }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     margin: {
-     marginBottom: theme.spacing(4)
+      marginBottom: theme.spacing(4)
     },
   })
 );

@@ -1,9 +1,9 @@
-import { createStyles, makeStyles, Theme, Grid, Typography } from '@material-ui/core';
-import React, { FC, Fragment } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import numeral from 'numeral';
+import React, { FC, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 interface IProps {
   classes?: any;
 }
@@ -42,8 +42,8 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   </span>
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               {listing.short_term_room.rent_type !== 2 ? (
                 <Grid item xs={12} sm={6}>
                   Giá theo giờ:{' '}
@@ -52,8 +52,8 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   </span>
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={6} className={classes.margin}>
@@ -80,8 +80,8 @@ const PriceShortTerm: FC<IProps> = (props) => {
           </Grid>
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

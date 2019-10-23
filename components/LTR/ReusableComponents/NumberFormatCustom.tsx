@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 import NumberFormat from "react-number-format";
 
 interface NumberFormatCustomProps {

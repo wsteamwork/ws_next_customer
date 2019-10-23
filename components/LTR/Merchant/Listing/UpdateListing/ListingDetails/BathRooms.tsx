@@ -1,10 +1,10 @@
-import { createStyles, makeStyles, Theme, Grid, Typography } from '@material-ui/core';
-import React, { FC, Fragment, useContext } from 'react';
-import CardWrapperItem from '../CardWrapperItem';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import _ from 'lodash';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import _ from 'lodash';
+import React, { FC, Fragment, useContext } from 'react';
+import { useSelector } from 'react-redux';
+import CardWrapperItem from '../CardWrapperItem';
 interface IProps {
   classes?: any;
 }
@@ -58,8 +58,8 @@ const BathRooms: FC<IProps> = (props) => {
           ))}
         </CardWrapperItem>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

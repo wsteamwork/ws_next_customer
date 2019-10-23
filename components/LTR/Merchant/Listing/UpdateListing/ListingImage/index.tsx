@@ -1,13 +1,13 @@
 import { Grid } from '@material-ui/core';
 import React, { FC } from 'react';
-import CoverPhoto from '../ListingImage/CoverPhoto';
 import AvatarImage from '../ListingImage/AvatarImage';
-import LivingRooms from '../ListingImage/LivingRooms';
-import Kitchens from '../ListingImage/Kitchens';
+import CoverPhoto from '../ListingImage/CoverPhoto';
 import Furnitures from '../ListingImage/Furnitures';
+import Kitchens from '../ListingImage/Kitchens';
+import LivingRooms from '../ListingImage/LivingRooms';
 import Outdoors from '../ListingImage/Outdoors';
-import BedImage from './BedImage';
 import BathImage from './BathImage';
+import BedImage from './BedImage';
 
 interface IProps {
   classes?: any;

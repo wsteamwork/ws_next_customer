@@ -1,13 +1,13 @@
-import React, { Fragment,FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Radio, Typography } from '@material-ui/core';
+import { Radio, Theme, Typography } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 
 interface IProps {
   classes?: any,
-  label:string,
-  descr:string,
-  value:string,
+  label: string,
+  descr: string,
+  value: string,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -16,7 +16,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '5px 15px 10px',
       border: '1px solid #767676',
       borderRadius: 4,
-      minHeight:120,
+      minHeight: 120,
     },
     title: {
       fontSize: 16,
@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const RadioCustom: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {label, descr, value} = props;
+  const { label, descr, value } = props;
 
   return (
     <div className={classes.checkboxItemWrapper}>
@@ -38,7 +38,7 @@ const RadioCustom: FC<IProps> = (props) => {
         label={label}
         control={<Radio color="primary" />}
         labelPlacement="end"
-        classes={{label:classes.title}}
+        classes={{ label: classes.title }}
       />
       <Typography style={{ marginTop: 10 }}> {descr} </Typography>
     </div>
