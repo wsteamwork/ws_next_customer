@@ -1,25 +1,15 @@
-import React, { FC, Fragment, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  DialogTitle,
-  Typography,
-  IconButton,
-  DialogContent,
-  Grid,
-  Dialog,
-  DialogContentText
-} from '@material-ui/core';
 import { TransitionCustom } from '@/components/Rooms/BottomNav';
-import CloseIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
-import { detailcomforts } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
+import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Theme, Typography } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext } from 'react';
 
 interface IProps {
   classes?: any,
-  open:boolean,
-  handleClose: ()=>void,
+  open: boolean,
+  handleClose: () => void,
   facilities?: AmenitiesIndexRes[],
   bedrooms?: AmenitiesIndexRes[],
   kitchens?: AmenitiesIndexRes[],
@@ -39,30 +29,30 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     dialogTitle: {
-      borderBottom:'1px solid #eee',
-      position:'sticky',
-      top:0,
-      backgroundColor:'#fff'
+      borderBottom: '1px solid #eee',
+      position: 'sticky',
+      top: 0,
+      backgroundColor: '#fff'
     },
     closeButton: {
-      marginRight:16,
-      padding:8,
+      marginRight: 16,
+      padding: 8,
     },
     closeButtonRoot: {
 
     },
-    title:{
-      fontWeight:700,
+    title: {
+      fontWeight: 700,
     },
-    roomName:{
-      margin:'40px 0 12px',
-      fontWeight:700,
-      color:'#323232'
+    roomName: {
+      margin: '40px 0 12px',
+      fontWeight: 700,
+      color: '#323232'
     },
     nameIcon: {
       display: 'flex',
       alignItems: 'center',
-      color:'#323232'
+      color: '#323232'
     },
     roomAmenitiesIcon: {
       verticalAlign: 'bottom',
@@ -75,11 +65,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const DialogFullAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, facilities, bedrooms, kitchens, bathrooms, livingrooms, common, entertainment, others, outdoors } = props;
-  const {width} = useContext(GlobalContext);
+  const { width } = useContext(GlobalContext);
 
   return (
     <Dialog scroll='body' fullWidth fullScreen={width === 'xs'}
-            aria-labelledby="scroll-dialog-title" open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
+      aria-labelledby="scroll-dialog-title" open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
       <DialogTitle id="scroll-dialog-title" disableTypography className={classes.dialogTitle}>
         <IconButton
           className={classes.closeButton}
@@ -87,7 +77,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
           classes={{
             root: classes.closeButtonRoot
           }}>
-          <CloseIcon style={{fontSize:'2rem'}}/>
+          <CloseIcon style={{ fontSize: '2rem' }} />
         </IconButton>
 
         <Typography variant="h6" className={classes.title}>
@@ -96,16 +86,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
       </DialogTitle>
 
       <DialogContent >
-          {facilities === undefined || facilities.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {facilities === undefined || facilities.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Tiện nghi chung
               </Typography>
 
               <Grid container spacing={2}>
-                {facilities.map((o,i)=>(
+                {facilities.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -125,16 +115,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {livingrooms === undefined || livingrooms.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {livingrooms === undefined || livingrooms.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Phòng khách
               </Typography>
 
               <Grid container spacing={2}>
-                {livingrooms.map((o,i)=>(
+                {livingrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -154,16 +144,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {bedrooms === undefined || bedrooms.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {bedrooms === undefined || bedrooms.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Phòng ngủ
               </Typography>
 
               <Grid container spacing={2}>
-                {bedrooms.map((o,i)=>(
+                {bedrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -183,16 +173,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {bathrooms === undefined || bathrooms.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {bathrooms === undefined || bathrooms.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Phòng tắm
               </Typography>
 
               <Grid container spacing={2}>
-                {bathrooms.map((o,i)=>(
+                {bathrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -212,16 +202,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {kitchens === undefined || kitchens.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {kitchens === undefined || kitchens.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Phòng bếp
               </Typography>
 
               <Grid container spacing={2}>
-                {kitchens.map((o,i)=>(
+                {kitchens.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -241,16 +231,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {entertainment === undefined || entertainment.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {entertainment === undefined || entertainment.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Giải trí
               </Typography>
 
               <Grid container spacing={2}>
-                {entertainment.map((o,i)=>(
+                {entertainment.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -270,16 +260,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {outdoors === undefined || outdoors.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {outdoors === undefined || outdoors.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Tiện nghi ngoài trời
               </Typography>
 
               <Grid container spacing={2}>
-                {outdoors.map((o,i)=>(
+                {outdoors.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -299,16 +289,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {common === undefined || common.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {common === undefined || common.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Tiện nghi chung
               </Typography>
 
               <Grid container spacing={2}>
-                {common.map((o,i)=>(
+                {common.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >
@@ -328,16 +318,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
             </div>
           )}
 
-          {others === undefined || others.length === 0 ? (
-            <Fragment/>
-          ) : (
+        {others === undefined || others.length === 0 ? (
+          <Fragment />
+        ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
                 Tiện nghi khác
               </Typography>
 
               <Grid container spacing={2}>
-                {others.map((o,i)=>(
+                {others.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
                       <Grid item >

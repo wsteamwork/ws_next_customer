@@ -1,37 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="Buoc 3 - Gia dich vu">
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/LTRoom/ltroomReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/pages/LTR/room/boxImage/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/pages/LTR/room/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HostInfo/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HostInfo/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/TablePrices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/TablePrices/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Toolbar/DialogComparison.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toolbar/DialogComparison.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/PriceTerm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/Step3/ServicesFee.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,23 +19,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="126" column="37" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#66#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="276">
+              <caret line="67" column="25" lean-forward="true" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx">
+        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6216">
-              <caret line="344" column="38" selection-start-line="344" selection-start-column="38" selection-end-line="344" selection-end-column="38" />
+            <state relative-caret-position="497">
+              <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -68,50 +40,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+            <state relative-caret-position="175">
+              <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="49" />
               <folding>
-                <element signature="e#0#34#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles/pages/LTR/room/index.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="23" selection-start-column="23" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/styles/pages/LTR/room/boxImage/index.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="248" column="17" selection-start-line="248" selection-start-column="17" selection-end-line="248" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="130" column="50" selection-start-line="130" selection-start-column="50" selection-end-line="130" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="215" column="42" lean-forward="true" selection-start-line="215" selection-start-column="42" selection-end-line="215" selection-end-column="42" />
+            <state relative-caret-position="244">
+              <caret line="175" column="24" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
               <folding>
                 <element signature="e#0#85#0" expanded="true" />
               </folding>
@@ -122,21 +64,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+            <state relative-caret-position="273">
+              <caret line="164" column="63" selection-start-line="164" selection-start-column="63" selection-end-line="164" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1633">
+              <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
               <folding>
-                <element signature="e#0#44#0" expanded="true" />
-                <element signature="e#591#662#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/Toolbar/DialogComparison.tsx">
+        <entry file="file://$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="255" column="65" selection-start-line="255" selection-start-column="65" selection-end-line="255" selection-end-column="65" />
+            <state relative-caret-position="2415">
+              <caret line="112" column="32" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -153,8 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>!</find>
-      <find>boxImgSmall</find>
       <find>slider-animations</find>
       <find>button</find>
       <find>Button</find>
@@ -183,6 +131,8 @@
       <find>xs={4}</find>
       <find>label: classes.label</find>
       <find>xs={4} sm={3}</find>
+      <find>useMemo()</find>
+      <find>useMemo</find>
     </findStrings>
     <dirStrings>
       <dir>D:\VNP\ws_next_customer\node_modules</dir>
@@ -192,7 +142,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="duy_Step3_servicesfee#2" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
   </component>
@@ -232,31 +182,32 @@
         <option value="$APPLICATION_CONFIG_DIR$/webstorm64.exe.vmoptions" />
         <option value="$PROJECT_DIR$/styles/pages/LTR/room/index.scss" />
         <option value="$PROJECT_DIR$/store/Redux/index.ts" />
-        <option value="$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts" />
         <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/TablePrices/index.tsx" />
         <option value="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" />
         <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" />
         <option value="$PROJECT_DIR$/components/HostInfo/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" />
-        <option value="$PROJECT_DIR$/pages/long-term-room/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" />
         <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" />
         <option value="$PROJECT_DIR$/components/Toolbar/DialogComparison.tsx" />
         <option value="$PROJECT_DIR$/styles/pages/LTR/room/boxImage/index.scss" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" />
+        <option value="$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts" />
+        <option value="$PROJECT_DIR$/pages/long-term-room/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="width" value="1710" />
-    <option name="height" value="1050" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -266,6 +217,27 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -294,31 +266,13 @@
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="LTRoom" type="462c0819:PsiDirectoryNode" />
-              <item name="BoxImageLT" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="long-term-room" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -567,13 +521,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1137457000" />
+    <option name="totallyTimeSpent" value="1149438000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21801706" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22228146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -588,7 +542,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3277592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50373137" side_tool="true" weight="0.14938684" />
-      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49626866" visible="true" weight="0.10479376" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49626866" visible="true" weight="0.2753623" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32884398" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -801,16 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="107" column="21" lean-forward="true" selection-start-line="107" selection-start-column="21" selection-end-line="107" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Room/BoxImage/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -852,13 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="21" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -937,16 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="70" column="32" selection-start-line="70" selection-start-column="32" selection-end-line="70" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-79">
@@ -960,16 +887,6 @@
           <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="14" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="49" column="22" selection-start-line="49" selection-start-column="22" selection-end-line="49" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1015,16 +932,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
@@ -1049,24 +956,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1633">
+          <caret line="20" column="2" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="35" column="19" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+        <state relative-caret-position="273">
+          <caret line="164" column="63" selection-start-line="164" selection-start-column="63" selection-end-line="164" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="49" />
           <folding>
-            <element signature="e#0#44#0" expanded="true" />
-            <element signature="e#591#662#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2415">
+          <caret line="112" column="32" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="215" column="42" lean-forward="true" selection-start-line="215" selection-start-column="42" selection-end-line="215" selection-end-column="42" />
+        <state relative-caret-position="244">
+          <caret line="175" column="24" selection-start-line="175" selection-start-column="24" selection-end-line="175" selection-end-column="24" />
           <folding>
             <element signature="e#0#85#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="67" column="25" lean-forward="true" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
         </state>
       </provider>
     </entry>
