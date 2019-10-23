@@ -127,6 +127,7 @@ export const useDateRange = (): ReturnUseDateRange => {
       let dateMax = _.find(schedule, (block) => moment(block).diff(date.startDate) > 0);
       setMaxDate(dateMax);
     }
+    console.log(maxDate)
   }, [date.startDate]);
 
   const onNextMonthClick = async (newCurrentMonth: Moment) => {

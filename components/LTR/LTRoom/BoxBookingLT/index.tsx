@@ -47,6 +47,8 @@ const BoxBookingLT: FC<IProps> = (props) => {
     setOpenBookingDialog(false);
   };
 
+  
+
   return (
     <div className={classes.boxContainer}>
       <Typography variant="h6">{formatMoney(priceBasic)} Vnd</Typography>
@@ -67,24 +69,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
         onClose={handleCloseBookingDialog}
         // TransitionComponent={Transition}
       >
-        <Grid
-          style={{
-            zIndex: 102,
-            position: 'absolute',
-            top: 0,
-            width: 100,
-            padding: '0 40px'
-          }}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleCloseBookingDialog}
-            aria-label="close">
-            <CloseIcon />
-          </IconButton>
-        </Grid>
-
-        <BookingCalendar />
+        <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>
 
       <Divider className={classes.rowMargin} />

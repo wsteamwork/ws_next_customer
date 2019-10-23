@@ -1,3 +1,25 @@
+.box-button-clear-dates {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  .button-clear-dates {
+    color: #ff9800;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    margin: 0px;
+    padding: 0px;
+  }
+  .button-clear-dates:hover {
+    text-decoration: underline;
+  }
+}
+
 .booking-calendar {
   &__box-title {
     width: 100%;
@@ -7,6 +29,7 @@
     border-bottom: 1px solid rgb(235, 235, 235);
     border-color: rgb(235, 235, 235);
     .box-title__wrapper {
+      position: relative;
       max-width: 1080px;
       margin: 40px auto 44px;
       width: auto;

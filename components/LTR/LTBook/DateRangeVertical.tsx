@@ -20,11 +20,14 @@ import {
   LTBookingAction,
   LTBookingReducerState
 } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
 
 interface IProps {
   setDisableBooking?: any;
   date?: DateRange;
   setDate?: any;
+  focusedInput?: FocusedInputShape | null;
+  setFocusedInput?: any;
 }
 const DateRangeVertical: FC<IProps> = (props) => {
   // const {
@@ -39,7 +42,7 @@ const DateRangeVertical: FC<IProps> = (props) => {
   // } = useDateRange();
 
   // const dispatch = useDispatch<Dispatch<BookingAction>>();
-  const { setDisableBooking, date, setDate } = props;
+  const { setDisableBooking, date, setDate, focusedInput, setFocusedInput } = props;
   const { router } = useContext(GlobalContext);
   const { id } = router.query;
   const availableDates = useSelector<ReducersList, LTRoomAvailableRes>(
@@ -65,13 +68,15 @@ const DateRangeVertical: FC<IProps> = (props) => {
   useEffect(() => {
     setDisableBooking(!!date.startDate && !!date.endDate);
   }, [date]);
-  const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>('startDate');
+
   const onFocusChange = (focus: FocusedInputShape | null) => {
     setFocusedInput(focus || 'startDate');
   };
 
+  // const [maxDate, setMaxDate] = useState<string | undefined>(undefined);
+
   const useCheckDate = (date: DateRange) => {
-    console.log('useCheckDate');
+    // console.log('useCheckDate');
 
     useEffect(() => {
       if (!!date.startDate && !!date.endDate) {
@@ -135,13 +140,18 @@ const DateRangeVertical: FC<IProps> = (props) => {
 
   const isDayBlocked = (day: Moment) => {
     let arrayAvailableDates = availableDates.move_in.map((dateBlock) => dateBlock.date);
+    // console.log('arrayAvailableDates', arrayAvailableDates);
     let isBlocked;
     if (focusedInput == 'startDate') {
-      if (date.endDate)
+      if (date.endDate == null) {
+        // console.log('day', day.format(DEFAULT_DATE_FORMAT));
         isBlocked = _.indexOf(arrayAvailableDates, day.format(DEFAULT_DATE_FORMAT)) == -1;
+      }
     } else {
       isBlocked = false;
     }
+
+    // console.log('isblocked', isBlocked);
 
     // let isBookingHour = bookingType === 1;
 
@@ -157,14 +167,7 @@ const DateRangeVertical: FC<IProps> = (props) => {
 
   const isOutsideRange = (day: Moment) => day.diff(moment(), 'days') < 0;
 
-  //   const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
-  //     (state) => state.roomPage.priceByDay
-  //   );
-  //   const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay} />;
-
-  //   const _renderMonthText = (day: Moment) => (
-  //     <p className="datePickerBooking__monthText">{day.format('MMMM YYYY')}</p>
-  //   );
+  const _renderDayContents = (day: Moment) => <RenderDay day={day} />;
 
   return useMemo(
     () => (
@@ -187,6 +190,7 @@ const DateRangeVertical: FC<IProps> = (props) => {
         // withPortal={false}
         isDayBlocked={isDayBlocked}
         isOutsideRange={isOutsideRange}
+        renderDayContents={_renderDayContents}
         numberOfMonths={3}
       />
     ),
