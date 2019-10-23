@@ -41,6 +41,7 @@ const RoomCreateListing = () => {
     kitchens: useSelector<ReducersList, number[]>((state) => state.amenities.kitchens),
     bathrooms: useSelector<ReducersList, number[]>((state) => state.amenities.bathrooms),
     entertainment: useSelector<ReducersList, number[]>((state) => state.amenities.entertainment),
+    outdoors: useSelector<ReducersList, number[]>((state) => state.amenities.outdoors),
     others: useSelector<ReducersList, number[]>((state) => state.amenities.others)
   };
   const data_images = {

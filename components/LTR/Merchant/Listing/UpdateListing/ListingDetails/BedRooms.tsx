@@ -1,9 +1,10 @@
 import { createStyles, makeStyles, Theme, Grid, Typography } from '@material-ui/core';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import CardWrapperItem from '../CardWrapperItem';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import _ from 'lodash';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -36,11 +37,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const BedRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
-
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/bedrooms`);
+  };
   return (
     <Fragment>
       {!!listing ? (
-        <CardWrapperItem title={`Phòng ngủ (${listing.bedrooms.number_bedroom})`}>
+        <CardWrapperItem title={`Phòng ngủ (${listing.bedrooms.number_bedroom})`} onClick={openUpdate}>
           {_.times(listing.bedrooms.number_bedroom, (i) => (
             <Fragment key={i}>
               <Grid item xs={12} className={listing.bedrooms.number_bedroom !== (i+1) ? classes.wrapperContent : ''}>

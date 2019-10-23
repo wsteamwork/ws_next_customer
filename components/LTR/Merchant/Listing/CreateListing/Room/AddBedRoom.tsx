@@ -17,20 +17,15 @@ interface IProps {
 const BedRoom: FC<IProps> = (props) => {
   const { roomNumber, bedRoomsList } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const [bed, setBed] = useState<number>(0);
   const [single, setSingle] = useState<number>(0);
   const [double, setDouble] = useState<number>(0);
   const [king, setKing] = useState<number>(0);
   const [queen, setQueen] = useState<number>(0);
-  const { bedRooms } = useSelector<ReducersList, CreateListingState>(
-    (state) => state.createListing
-  );
-  const totalBeds = [single, double, king, bed, queen].reduce((a, b) => a + b, 0);
+  const totalBeds = [single, double, king, queen].reduce((a, b) => a + b, 0);
 
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
   const handleToggleAddBedRoom = () => {
     if (isAddBedRoom) {
-      // console.log(bedRoomsList);
       if (bedRoomsList.hasOwnProperty(`bedroom_${roomNumber}`)) {
         let bedsList = [];
         let bedRoomsListTemp = bedRoomsList;
@@ -70,7 +65,6 @@ const BedRoom: FC<IProps> = (props) => {
         </Grid>
 
         <Grid item xs={12} className="counting-open">
-          {/* <h3>Phòng ngủ 1</h3> */}
           <Collapse in={isAddBedRoom}>
             <Grid item xs={8}>
               <QuantityButtons

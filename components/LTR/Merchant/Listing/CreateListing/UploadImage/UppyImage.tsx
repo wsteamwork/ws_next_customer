@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import 'uppy/dist/uppy.min.css';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   classes?: any;
   label?: string;
@@ -39,7 +40,7 @@ const UppyImage: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { label, subLabel, initImages, height, maxImage, typeUpload, type_txt, typeImage } = props;
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
-  // const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
   useEffect(() => {
     if (type_txt) {
       dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: initImages } } });
@@ -48,13 +49,13 @@ const UppyImage: FC<IProps> = (props) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (initImages.length < 1) {
-  //     dispatch_detail({ type: 'setDisableNext', payload: true });
-  //   } else {
-  //     dispatch_detail({ type: 'setDisableNext', payload: false });
-  //   }
-  // }, [initImages]);
+  useEffect(() => {
+    if (initImages.length < 1) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    } else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
+  }, [initImages]);
 
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {

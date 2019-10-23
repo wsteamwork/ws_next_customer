@@ -1,9 +1,10 @@
 import { createStyles, makeStyles, Theme, Grid, Typography } from '@material-ui/core';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import CardWrapperItem from '../CardWrapperItem';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import _ from 'lodash';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -16,20 +17,27 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     margin: {
       marginBottom: 8,
     },
+    marginTop: {
+      marginTop: 16,
+    }
   })
 );
 
 const BathRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
-
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/bathrooms`);
+  };
   return (
     <Fragment>
       {!!listing ? (
-        <CardWrapperItem title={`Phòng tắm (${listing.bathrooms.number_bathroom})`}>
+        <CardWrapperItem title={`Phòng tắm (${listing.bathrooms.number_bathroom})`} onClick={openUpdate}>
           {_.times(listing.bathrooms.number_bathroom, (i) => (
             <Fragment key={i}>
-              <Grid item xs={6} sm={4}>
+              <Grid item xs={6} sm={4} className={i > 2 ? classes.marginTop : ''}>
                 <Grid item xs={12} className={classes.margin}>
                   <Typography variant="subtitle2" className={classes.name}>
                     Phòng tắm {i + 1}
