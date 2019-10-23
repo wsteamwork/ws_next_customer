@@ -1,20 +1,14 @@
+import { ReducersList } from '@/store/Redux/Reducers';
+import { LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
 import { Grid, Paper, Typography } from '@material-ui/core';
-import moment from 'moment';
 import React, { FC, memo } from 'react';
-import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  BookingPriceCalculatorRes,
-  LTBookingPriceCalculatorRes
-} from '@/types/Requests/Booking/BookingResponses';
-import SettingRoom from './SettingRoom';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import InfoRoom from './InfoRoom';
 import { useTranslation } from 'react-i18next';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { useSelector } from 'react-redux';
+import InfoRoom from './InfoRoom';
+import SettingRoom from './SettingRoom';
 
 const BookingInfoDetail: FC = (props) => {
   const { t } = useTranslation();

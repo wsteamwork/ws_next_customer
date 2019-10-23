@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
-import { Paper, List, ListItem, ListItemText, Typography, Grid } from '@material-ui/core';
-import { Whatshot } from '@material-ui/icons';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import mainColor from '@/styles/constants/colors';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid, List, ListItem, ListItemText, Paper, Typography } from '@material-ui/core';
+import { Whatshot } from '@material-ui/icons';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const RoomHotBook = () => {
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.book.room);

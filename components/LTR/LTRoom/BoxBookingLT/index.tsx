@@ -1,13 +1,11 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import HostInfo from '@/components/HostInfo';
 import { formatMoney } from '@/utils/mixins';
-import { Divider, Theme, Typography, Dialog, Grid, IconButton } from '@material-ui/core';
+import { Divider, Theme, Typography } from '@material-ui/core';
 import { OfflineBoltRounded } from '@material-ui/icons';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
-import CloseIcon from '@material-ui/icons/Close';
 interface IProps {
   classes?: any;
   priceBasic: number;
@@ -50,7 +48,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
 
   const { t } = useTranslation();
 
-  
+
 
   return (
     <div className={classes.boxContainer}>
@@ -66,7 +64,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
         </ButtonGlobal>
       </div>
 
-      
+
 
       <Divider className={classes.rowMargin} />
 

@@ -1,29 +1,22 @@
-import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-
-import React, { Dispatch, FC, Fragment, useEffect, useState, useContext } from 'react';
 import ButtonGlobal from '@/components/ButtonGlobal';
-
-import 'react-dates/initialize';
-
-import CloseIcon from '@material-ui/icons/Close';
-import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
-import moment, { Moment } from 'moment';
-import { Grid, Typography, Divider, IconButton, Hidden, Button, Dialog } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
-import DateRangeVertical from './DateRangeVertical';
-import { BookingContext } from '@/store/Context/Booking/BookingContext';
-import Router from 'next/router';
-import {
-  LTBookingReducerState,
-  LTBookingAction
-} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { formatMoney } from '@/utils/mixins';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
-import { FocusedInputShape } from 'react-dates';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { formatMoney } from '@/utils/mixins';
+import { Button, Dialog, Divider, Grid, Hidden, IconButton, Typography } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import moment from 'moment';
+import Router from 'next/router';
+import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
+import { FocusedInputShape } from 'react-dates';
+import 'react-dates/initialize';
+import { useDispatch, useSelector } from 'react-redux';
+import DateRangeVertical from './DateRangeVertical';
+
+
+
 
 interface Iprops {
   handleCloseBookingDialog: () => void;

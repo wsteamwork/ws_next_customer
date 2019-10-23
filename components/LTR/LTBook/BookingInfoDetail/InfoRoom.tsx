@@ -1,13 +1,11 @@
-import React, { FC } from 'react';
-import { Grid } from '@material-ui/core';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
-import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid } from '@material-ui/core';
+import Link from 'next/link';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 const InfoRoom: FC = () => {
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);

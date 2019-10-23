@@ -1,56 +1,23 @@
-import React, { FC, forwardRef, useState, useContext } from 'react';
-import { Formik, FormikActions, FormikProps } from 'formik';
-import {
-  Paper,
-  Grid,
-  Typography,
-  FormControl,
-  TextField,
-  FormHelperText,
-  FormControlLabel,
-  Checkbox,
-  Collapse,
-  Button,
-  Dialog,
-  Slide,
-  DialogContent,
-  RadioGroup,
-  Radio
-} from '@material-ui/core';
-import * as Yup from 'yup';
-import { CheckboxProps } from '@material-ui/core/Checkbox';
-import { Remove, Add } from '@material-ui/icons';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import Link from 'next/link';
-import { BookingCreateReq, LTBookingCreateReq } from '@/types/Requests/Booking/BookingRequests';
-import moment from 'moment';
-import {
-  BookingPriceCalculatorRes,
-  LTBookingPriceCalculatorRes
-} from '@/types/Requests/Booking/BookingResponses';
-import {
-  DEFAULT_DATE_TIME_FORMAT,
-  INTERNET_BANKING,
-  PENDING,
-  WEBSITE_SRC,
-  AVAILABLE,
-  ONLINE
-} from '@/utils/store/global';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { SlideProps } from '@material-ui/core/Slide';
 import CheckSuccess from '@/components/Loading/CheckSuccess';
-import { useTranslation } from 'react-i18next';
-import { createBooking } from '@/store/Redux/Reducers/Book/book';
-import TooltipPayment from './TooltipPayment';
+import SimpleLoader from '@/components/Loading/SimpleLoader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { createLTBooking, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTBookingCreateReq } from '@/types/Requests/Booking/BookingRequests';
+import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import {
-  LTBookingReducerState,
-  createLTBooking
-} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { WEBSITE_SRC } from '@/utils/store/global';
+import { Checkbox, Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
+import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { SlideProps } from '@material-ui/core/Slide';
+import { Formik, FormikActions, FormikProps } from 'formik';
+import Link from 'next/link';
+import React, { FC, forwardRef, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import TooltipPayment from './TooltipPayment';
 
 type PaymentMethod = 'payment1' | 'payment2';
 
@@ -203,80 +170,80 @@ const BookingForm: FC = () => {
             handleBlur,
             isSubmitting
           }: FormikProps<MyFormValues>) => (
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
-                  <Typography variant="body2" style={{ color: '#b9b8b8' }}>
-                    {t('book:bookingForm:rulesName')}
-                  </Typography>
-                </Grid>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
+                    <Typography variant="body2" style={{ color: '#b9b8b8' }}>
+                      {t('book:bookingForm:rulesName')}
+                    </Typography>
+                  </Grid>
 
-                <Grid item xs={12} lg={6}>
-                  <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="firstName"
-                      name="firstName"
-                      label={t('book:bookingForm:firstName')}
-                      placeholder={t('book:bookingForm:placeFirstName')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.firstName}
-                    />
-                    <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="firstName"
+                        name="firstName"
+                        label={t('book:bookingForm:firstName')}
+                        placeholder={t('book:bookingForm:placeFirstName')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.firstName}
+                      />
+                      <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12} lg={6}>
-                  <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="lastName"
-                      name="lastName"
-                      label={t('book:bookingForm:lastName')}
-                      placeholder={t('book:bookingForm:placeLastName')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.lastName}
-                    />
-                    <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="lastName"
+                        name="lastName"
+                        label={t('book:bookingForm:lastName')}
+                        placeholder={t('book:bookingForm:placeLastName')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.lastName}
+                      />
+                      <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl error={!!(errors.email && touched.email)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="email-booking"
-                      name="email"
-                      label="Email"
-                      placeholder={t('book:bookingForm:placeEmail')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12}>
+                    <FormControl error={!!(errors.email && touched.email)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="email-booking"
+                        name="email"
+                        label="Email"
+                        placeholder={t('book:bookingForm:placeEmail')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                      />
+                      <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12} sm={6} md={6}>
-                  <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="phone-number"
-                      name="phone"
-                      label={t('book:bookingForm:phoneNumber')}
-                      placeholder={t('book:bookingForm:placePhone')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.phone}
-                    />
-                    <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="phone-number"
+                        name="phone"
+                        label={t('book:bookingForm:phoneNumber')}
+                        placeholder={t('book:bookingForm:placePhone')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.phone}
+                      />
+                      <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                {/* <Grid item xs={6}>
+                  {/* <Grid item xs={6}>
                   <FormControl>
                     <FormControlLabel
                       control={
@@ -295,7 +262,7 @@ const BookingForm: FC = () => {
                   </FormControl>
                 </Grid> */}
 
-                {/* <Grid item xs={6}>
+                  {/* <Grid item xs={6}>
                   <FormControl>
                     <FormControlLabel
                       control={
@@ -314,7 +281,7 @@ const BookingForm: FC = () => {
                   </FormControl>
                 </Grid> */}
 
-                {/* <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                   <Collapse in={values.isSomeOneElse}>
                     <Paper className="paperCustom grayPaper" elevation={0} square>
                       <Grid container spacing={2}>
@@ -344,7 +311,7 @@ const BookingForm: FC = () => {
                   </Collapse>
                 </Grid> */}
 
-                {/* <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                   <Button
                     name="addition-services"
                     color="primary"
@@ -355,108 +322,108 @@ const BookingForm: FC = () => {
                   </Button>
                 </Grid> */}
 
-                <Grid item xs={12}>
-                  {/* <Collapse in={isRequest}> */}
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <FormControl fullWidth>
-                        <TextField
-                          variant="outlined"
-                          id="additional-note"
-                          name="additionalNote"
-                          multiline
-                          rows={5}
-                          label={t('book:bookingForm:otherRequirements')}
-                          placeholder={t('book:bookingForm:placeRequirements')}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.additionalNote}
-                        />
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  {/* </Collapse> */}
-                </Grid>
-
-                {ltroom.instant_book === 1 && (
                   <Grid item xs={12}>
-                    <Grid container>
-                      <Grid item>
-                        <FormControl
-                          error={!!(errors.paymentMethod && touched.paymentMethod)}
-                          component="fieldset">
-                          <Typography variant="h6">
-                            {t('book:bookingForm:choosePayment')}
-                          </Typography>
-                          <RadioGroup
-                            name="paymentMethod"
+                    {/* <Collapse in={isRequest}> */}
+                    <Grid container spacing={3}>
+                      <Grid item xs={12}>
+                        <FormControl fullWidth>
+                          <TextField
+                            variant="outlined"
+                            id="additional-note"
+                            name="additionalNote"
+                            multiline
+                            rows={5}
+                            label={t('book:bookingForm:otherRequirements')}
+                            placeholder={t('book:bookingForm:placeRequirements')}
+                            onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values.paymentMethod}
-                            onChange={handleChange}>
-                            <FormControlLabel
-                              value="payment1"
-                              control={<Radio color="primary" />}
-                              label={
-                                <p>
-                                  {t('book:bookingForm:directTransfer')}{' '}
-                                  <TooltipPayment></TooltipPayment>
-                                </p>
-                              }
-                            />
-                            <FormControlLabel
-                              value="payment2"
-                              control={<Radio color="primary" />}
-                              label={
-                                <p>
-                                  {t('book:bookingForm:transferMoney')}{' '}
-                                  <a href="https://www.baokim.vn/" target="_blank">
-                                    Bảo Kim
-                                  </a>
-                                </p>
-                              }
-                            />
-                          </RadioGroup>
-                          <FormHelperText>
-                            {touched.paymentMethod ? errors.paymentMethod : ''}
-                          </FormHelperText>
+                            value={values.additionalNote}
+                          />
                         </FormControl>
                       </Grid>
                     </Grid>
+                    {/* </Collapse> */}
                   </Grid>
-                )}
 
-                <Grid item xs={12}>
-                  <Grid container justify="flex-end">
-                    <Grid item>
-                      <ButtonGlobal
-                        variant="contained"
-                        name="confirm-information"
-                        size="large"
-                        color="primary"
-                        disabled={isSubmitting}
-                        type="submit">
-                        {ltroom && !isSubmitting ? (
-                          t('book:bookingForm:confirmInfo')
-                        ) : (
-                          <SimpleLoader height="45px" width="100%"></SimpleLoader>
-                        )}
-                      </ButtonGlobal>
+                  {ltroom.instant_book === 1 && (
+                    <Grid item xs={12}>
+                      <Grid container>
+                        <Grid item>
+                          <FormControl
+                            error={!!(errors.paymentMethod && touched.paymentMethod)}
+                            component="fieldset">
+                            <Typography variant="h6">
+                              {t('book:bookingForm:choosePayment')}
+                            </Typography>
+                            <RadioGroup
+                              name="paymentMethod"
+                              onBlur={handleBlur}
+                              value={values.paymentMethod}
+                              onChange={handleChange}>
+                              <FormControlLabel
+                                value="payment1"
+                                control={<Radio color="primary" />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:directTransfer')}{' '}
+                                    <TooltipPayment></TooltipPayment>
+                                  </p>
+                                }
+                              />
+                              <FormControlLabel
+                                value="payment2"
+                                control={<Radio color="primary" />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:transferMoney')}{' '}
+                                    <a href="https://www.baokim.vn/" target="_blank">
+                                      Bảo Kim
+                                  </a>
+                                  </p>
+                                }
+                              />
+                            </RadioGroup>
+                            <FormHelperText>
+                              {touched.paymentMethod ? errors.paymentMethod : ''}
+                            </FormHelperText>
+                          </FormControl>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  )}
+
+                  <Grid item xs={12}>
+                    <Grid container justify="flex-end">
+                      <Grid item>
+                        <ButtonGlobal
+                          variant="contained"
+                          name="confirm-information"
+                          size="large"
+                          color="primary"
+                          disabled={isSubmitting}
+                          type="submit">
+                          {ltroom && !isSubmitting ? (
+                            t('book:bookingForm:confirmInfo')
+                          ) : (
+                              <SimpleLoader height="45px" width="100%"></SimpleLoader>
+                            )}
+                        </ButtonGlobal>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Grid container justify="flex-end">
+                      <Grid item>
+                        <Typography variant="subtitle2" style={{ color: '#b3b3b3' }}>
+                          {t('book:bookingForm:notPayment')}
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <Grid container justify="flex-end">
-                    <Grid item>
-                      <Typography variant="subtitle2" style={{ color: '#b3b3b3' }}>
-                        {t('book:bookingForm:notPayment')}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </form>
-          )}
+              </form>
+            )}
         />
       </Paper>
       <Grid item xs={12}>

@@ -1,26 +1,17 @@
-import React, { FC, memo, useMemo, useState, useEffect, Dispatch, useContext } from 'react';
-import 'react-dates/initialize';
-import moment, { Moment } from 'moment';
-import { Grid } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
-import { DayPickerRangeController } from 'react-dates';
-import { DateRange } from '@/store/Redux/Reducers/Booking/booking';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
-import { FocusedInputShape } from 'react-dates';
-import * as _ from 'lodash';
-import { LTRoomAvailableRes } from '@/types/Requests/Rooms/RoomResponses';
-import {
-  BookingContext,
-  getLTCalculatedBookingPrice
-} from '@/store/Context/Booking/BookingContext';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  LTBookingAction,
-  LTBookingReducerState
-} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
+import { getLTCalculatedBookingPrice } from '@/store/Context/Booking/BookingContext';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { DateRange } from '@/store/Redux/Reducers/Booking/booking';
+import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTRoomAvailableRes } from '@/types/Requests/Rooms/RoomResponses';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import * as _ from 'lodash';
+import moment, { Moment } from 'moment';
+import React, { Dispatch, FC, memo, useContext, useEffect, useMemo } from 'react';
+import { DayPickerRangeController, FocusedInputShape } from 'react-dates';
+import 'react-dates/initialize';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface IProps {
   setDisableBooking?: any;
@@ -120,7 +111,7 @@ const DateRangeVertical: FC<IProps> = (props) => {
 
     return {};
   };
-  const {} = useCheckDate(date);
+  const { } = useCheckDate(date);
   useEffect(() => {
     console.log(focusedInput);
   }, [focusedInput]);
