@@ -17,6 +17,8 @@ interface IProps {
   name: string;
   term: string;
   number_room: number;
+  handleOpenBookingDialog: any;
+
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -35,17 +37,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxBookingLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { id, avatar, avatar_url, name, number_room, priceBasic, term } = props;
-  const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
+  const {
+    id,
+    avatar,
+    avatar_url,
+    name,
+    number_room,
+    priceBasic,
+    term,
+    handleOpenBookingDialog,
+  } = props;
+
   const { t } = useTranslation();
-
-  const handleOpenBookingDialog = () => {
-    setOpenBookingDialog(true);
-  };
-
-  const handleCloseBookingDialog = () => {
-    setOpenBookingDialog(false);
-  };
 
   
 
@@ -63,14 +66,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
         </ButtonGlobal>
       </div>
 
-      <Dialog
-        fullScreen
-        open={openBookingDialog}
-        onClose={handleCloseBookingDialog}
-        // TransitionComponent={Transition}
-      >
-        <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
-      </Dialog>
+      
 
       <Divider className={classes.rowMargin} />
 

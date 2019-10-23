@@ -1,7 +1,13 @@
 .box-button-clear-dates {
   position: absolute;
-  top: 0;
-  right: 0px;
+  @include lgDown {
+    top: -24px;
+  }
+  @include lgUp {
+    top: 8px;
+  }
+
+  right: 20px;
   .button-clear-dates {
     color: #ff9800;
     font-size: 16px;
@@ -28,6 +34,12 @@
     z-index: 10;
     border-bottom: 1px solid rgb(235, 235, 235);
     border-color: rgb(235, 235, 235);
+
+    @include lgDown {
+      position: fixed;
+      background: white;
+    }
+
     .box-title__wrapper {
       position: relative;
       max-width: 1080px;
@@ -53,15 +65,20 @@
     margin-left: auto;
     margin-right: auto;
     width: auto;
-    padding-right: 24px;
-    padding-left: 24px;
 
     .box-main__wrapper {
+      @include lgDown {
+        position: relative;
+        height: 100vh;
+      }
       padding-top: 126px;
       height: 800px;
       margin: 0px;
     }
     .calendar-picker {
+      @include lgDown {
+        padding-bottom: 140px;
+      }
       padding-left: 8px;
       padding-right: 8px;
       min-height: 1px;
@@ -78,6 +95,10 @@
         border: none;
       }
 
+      .DayPicker_weekHeader__verticalScrollable {
+        z-index: 999;
+      }
+
       // .CalendarDay__selected_span {
       //   background: #ff9800;
       // }
@@ -86,9 +107,22 @@
 
   .box-price {
     position: absolute;
-    top: 200px;
-    width: 328px;
-    right: 125px;
+    padding-bottom: 15px;
+    align-items: center;
+    @include lgUp {
+      top: 200px;
+      width: 328px;
+      right: 0px;
+    }
+
+    @include lgDown {
+      bottom: 0;
+      z-index: 99;
+      width: 100%;
+      background: white;
+      padding: 0 24px;
+      // position: fixed;
+    }
 
     .price-title {
       padding-bottom: 16px;
@@ -122,8 +156,22 @@
       -webkit-box-pack: justify;
       display: flex;
       justify-content: space-between;
+    }
+
+    .mobile-box-price {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
       padding-bottom: 16px;
     }
+  }
+}
+
+.mobile-box-price-detail {
+  margin-top: 50px;
+  padding: 0 24px;
+  .box-price-sub {
+    display: flex;
+    justify-content: space-between;
   }
 }
