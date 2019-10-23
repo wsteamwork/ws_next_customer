@@ -4,25 +4,22 @@ import { AppBar, Theme, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import numeral from "numeral";
+import numeral from 'numeral';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
-  classes?: any,
-  priceBasic: number,
-  term: string
+  classes?: any;
+  priceBasic: number;
+  term: string;
+  handleOpenBookingDialog: any;
 }
 
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
-  createStyles({
-
-  })
-);
+const useStyles = makeStyles<Theme, IProps>((theme: Theme) => createStyles({}));
 
 const BoxBottomBooking: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { priceBasic, term } = props;
+  const { priceBasic, term, handleOpenBookingDialog } = props;
   const { t } = useTranslation();
 
   return (
@@ -37,16 +34,18 @@ const BoxBottomBooking: FC<IProps> = (props) => {
                     <div>
                       <Typography className={'price'}>
                         {numeral(priceBasic).format('0,0')} Vnd
-                        </Typography>
-                      <Typography variant='subtitle2'>
-                        {term}
                       </Typography>
+                      <Typography variant="subtitle2">{term}</Typography>
                     </div>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item xs={4} sm={3}>
-                <ButtonGlobal padding="0px" width="100%" onClick={() => alert('tính năng hiện tại chưa hoàn thiện')} className='btBook'>
+                <ButtonGlobal
+                  padding="0px"
+                  width="100%"
+                  onClick={handleOpenBookingDialog}
+                  className="btBook">
                   {t('room:boxBooking:bookNow')}
                 </ButtonGlobal>
               </Grid>

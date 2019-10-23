@@ -11,22 +11,29 @@ import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-import { Grid } from '@material-ui/core';
+import { Grid, Dialog } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useMemo, useReducer } from 'react';
+import React, { Fragment, useContext, useMemo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  BookingStateInit,
-  BookingContext,
-  BookingReducer
-} from '@/store/Context/Booking/BookingContext';
+
 import BoxRecommend from '@/components/Room/BoxRecommend';
+import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
   const [] = useVisitedRoom();
+  const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
+
+  const handleOpenBookingDialog = () => {
+    setOpenBookingDialog(true);
+  };
+
+  const handleCloseBookingDialog = () => {
+    setOpenBookingDialog(false);
+  };
+  useEffect(() => console.log(openBookingDialog));
 
   // useEffect(() => {
   //   if (error || !ltroom.status) router.push('/not-found-resource');
@@ -89,7 +96,9 @@ const LongtermRoom: NextPage = () => {
                       avatar_url={ltroom.merchant.data.avatar_url}
                       name={ltroom.merchant.data.name}
                       number_room={ltroom.merchant.data.number_room}
+                      handleOpenBookingDialog={handleOpenBookingDialog}
                     />
+                    {/* <div onClick={()=>setOpenBookingDialog(true)}>test</div>   */}
                   </Grid>
 
                   <Grid item xs={12}>
@@ -100,6 +109,7 @@ const LongtermRoom: NextPage = () => {
                   <BoxBottomBooking
                     priceBasic={ltroom.prices.prices[0].price}
                     term={ltroom.prices.prices[0].term}
+                    handleOpenBookingDialog={handleOpenBookingDialog}
                   />
                 </Grid>
               </GridContainer>
@@ -110,7 +120,14 @@ const LongtermRoom: NextPage = () => {
         ),
         [ltroom]
       )}
-
+      <Dialog
+        fullScreen
+        open={openBookingDialog}
+        onClose={handleCloseBookingDialog}
+        // TransitionComponent={Transition}
+      >
+        <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
+      </Dialog>
       <Footer />
     </Fragment>
   );

@@ -42,8 +42,9 @@ const DateRangeVertical: FC<IProps> = (props) => {
   // } = useDateRange();
 
   // const dispatch = useDispatch<Dispatch<BookingAction>>();
+
   const { setDisableBooking, date, setDate, focusedInput, setFocusedInput } = props;
-  const { router } = useContext(GlobalContext);
+  const { router, width } = useContext(GlobalContext);
   const { id } = router.query;
   const availableDates = useSelector<ReducersList, LTRoomAvailableRes>(
     (state) => state.ltroomPage.availableDates
@@ -173,7 +174,7 @@ const DateRangeVertical: FC<IProps> = (props) => {
     () => (
       <DayPickerRangeController
         // isRTL={false}
-        daySize={60}
+        daySize={width == 'lg' ? 60 : 40}
         orientation="verticalScrollable"
         minimumNights={30}
         startDate={date.startDate}

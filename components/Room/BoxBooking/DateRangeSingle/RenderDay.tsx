@@ -1,4 +1,4 @@
-import React, { FC, useMemo, Fragment } from 'react';
+import React, { FC, useMemo, Fragment, useContext } from 'react';
 import { changeDataPriceByDay } from './context';
 import { Grid, Typography } from '@material-ui/core';
 import { Moment } from 'moment';
@@ -6,6 +6,7 @@ import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 interface Iprops {
   day: Moment;
@@ -17,7 +18,7 @@ const RenderDay: FC<Iprops> = (props) => {
   //   (state) => state.roomPage.priceByDay
   // );
   const { priceByDay } = props;
-
+  const { width } = useContext(GlobalContext);
   const { day } = props;
   const dataPriceByDay = priceByDay
     ? useMemo(() => changeDataPriceByDay(priceByDay), [priceByDay])
@@ -27,7 +28,9 @@ const RenderDay: FC<Iprops> = (props) => {
 
   return (
     <Grid className="dayContents">
-      <Typography style={{ fontSize: 24, fontWeight: 300 }}>{day.date()}</Typography>
+      <Typography style={{ fontSize: width == 'lg' ? 24 : 16, fontWeight: 300 }}>
+        {day.date()}
+      </Typography>
 
       {dataPriceByDay ? (
         <Fragment>
