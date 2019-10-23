@@ -8,19 +8,23 @@ import { Reducer, Dispatch } from 'redux';
 import { ParsedUrlQuery } from 'querystring';
 import { ReducresActions } from '@/store/Redux/Reducers';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { LTRoomAvailableRes, LTAvailableDate } from '@/types/Requests/Rooms/RoomResponses';
 
 export type LTRoomReducerState = {
   readonly room: LTRoomIndexRes | null;
   readonly error: boolean;
+  readonly availableDates: LTRoomAvailableRes;
 };
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
-  | { type: 'setErrorSSRLTRoompage'; payload: boolean };
+  | { type: 'setErrorSSRLTRoompage'; payload: boolean }
+  | { type: 'setAvailableDates'; payload: LTRoomAvailableRes };
 
 export const init: LTRoomReducerState = {
   room: null,
-  error: false
+  error: false,
+  availableDates: null
 };
 
 export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
@@ -32,12 +36,17 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
       return updateObject(state, { room: action.payload });
     case 'setErrorSSRLTRoompage':
       return updateObject(state, { error: action.payload });
+    case 'setAvailableDates':
+      return updateObject(state, { availableDates: action.payload });
     default:
       return state;
   }
 };
 
-export const getLTRoom = async (idRoom: any, initLanguage: string = 'vi'): Promise<LTRoomIndexRes> => {
+export const getLTRoom = async (
+  idRoom: any,
+  initLanguage: string = 'vi'
+): Promise<LTRoomIndexRes> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
     { headers: { 'Accept-Language': initLanguage } }
@@ -45,28 +54,20 @@ export const getLTRoom = async (idRoom: any, initLanguage: string = 'vi'): Promi
 
   return res.data.data;
 };
-//
-// const getRoomRecommend = async (
-//   idRoom: any,
-//   initLanguage: string = 'vi'
-// ): Promise<RoomIndexRes[]> => {
-//   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
-//     `rooms/room_recommend/${idRoom}?include=media,details,city,district`,
-//     { headers: { 'Accept-Language': initLanguage } }
-//   );
-//
-//   return res.data.data;
-// };
-//
-// export const getRoomSchedule = async (
-//   idRoom: any,
-//   initLanguage: string = 'vi'
-// ): Promise<string[]> => {
-//   const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`, {
-//     headers: { 'Accept-Language': initLanguage }
-//   });
-//   return res.data.data.blocks;
-// };
+
+export const getRoomAvailableDate = async (
+  idRoom: any,
+  initLanguage: string = 'vi',
+  date_start: string = moment().format(DEFAULT_DATE_FORMAT)
+): Promise<LTRoomAvailableRes> => {
+  const res: AxiosRes<LTRoomAvailableRes> = await axios.get(`long-term-rooms/available-dates/${idRoom}`, {
+    data: {
+      move_in: date_start
+    },
+    headers: { 'Accept-Language': initLanguage }
+  });
+  return res.data.data;
+};
 //
 // export const getPriceByDay = async (
 //   idRoom: any,
@@ -96,14 +97,16 @@ export const getDataLTRoom = async (
   try {
     const res = await Promise.all([
       getLTRoom(id, initLanguage),
+      getRoomAvailableDate(id, initLanguage)
     ]);
 
-    const [room] = res;
+    const [room, availableDates] = res;
 
     dispatch({ type: 'setLTRoom', payload: room });
+    dispatch({ type: 'setAvailableDates', payload: availableDates });
     dispatch({ type: 'setErrorSSRLTRoompage', payload: false });
-    console.log(res);
-    return { room };
+    // console.log(res);
+    return { room, availableDates };
   } catch (error) {
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
     // console.log(error.response);

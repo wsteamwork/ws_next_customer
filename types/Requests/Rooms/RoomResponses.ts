@@ -84,6 +84,16 @@ export type RoomScheduleRes = {
   blocks: string[];
 };
 
+export type LTRoomAvailableRes = {
+  move_in: LTAvailableDate[];
+  move_out: any[];
+};
+
+export type LTAvailableDate = {
+  date: string;
+  blocked: boolean;
+};
+
 export interface NumberRoomCity {
   city_id: number;
   name_city: string;
@@ -136,13 +146,13 @@ export interface Settings {
 }
 
 export interface PriceSpecialDays {
-  id: number,
-  weekday: number | null,
-  day: string,
-  price_day: number,
-  price_hour: number,
-  price_after_hour: number,
-  price_charge_guest: number,
-  status: number,
-  status_txt: string
+  id: number;
+  weekday: number | null;
+  day: string;
+  price_day: number;
+  price_hour: number;
+  price_after_hour: number;
+  price_charge_guest: number;
+  status: number;
+  status_txt: string;
 }
