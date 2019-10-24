@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     spanShort: {
       fontWeight: theme.typography.fontWeightMedium,
-      marginRight: 16
+      marginRight: 14
     },
     spanLong: {
       fontWeight: theme.typography.fontWeightMedium,

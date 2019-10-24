@@ -1,5 +1,6 @@
-import { Button, createStyles, Divider, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Button, createStyles, Divider, Grid, makeStyles, Theme, Typography, Snackbar } from '@material-ui/core';
 import React, { FC, Fragment } from 'react';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 
 interface IProps {
   classes?: any;
@@ -67,6 +68,7 @@ const CardWrapperItem: FC<IProps> = (props) => {
       </Grid>
       {children ? <Grid container>{children}</Grid> : ''}
       <Divider className={classes.divider} />
+
     </Fragment>
   );
 };

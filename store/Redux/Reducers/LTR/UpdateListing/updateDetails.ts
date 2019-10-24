@@ -5,6 +5,11 @@ import { updateObject } from '@/store/Context/utility';
 import { Dispatch, Reducer } from 'redux';
 import { axios_merchant } from '@/utils/axiosInstance';
 
+interface Coordinate {
+  lat: number;
+  lng: number;
+}
+
 export type UpdateDetailsState = {
   readonly room_id: number;
   readonly accommodationType: number;
@@ -16,6 +21,12 @@ export type UpdateDetailsState = {
   readonly bedRoomsNumber: number;
   readonly bathRooms: any;
   readonly bedRooms: BedRoomReq;
+  readonly address: string;
+  readonly building: string;
+  readonly city_id: number;
+  readonly district_id: number;
+  readonly coordinate: Coordinate;
+  readonly disableSubmit: boolean;
   readonly error: boolean;
 };
 
@@ -30,6 +41,12 @@ export type UpdateDetailsActions =
   | { type: 'SET_BEDROOMS_NUMBER'; payload: number }
   | { type: 'SET_BEDROOMS'; payload: BedRoomReq }
   | { type: 'SET_BATHROOMS'; payload: any }
+  | { type: 'SET_ADDRESS'; payload: string }
+  | { type: 'SET_BUILDING'; payload: string }
+  | { type: 'SET_CITY_ID'; payload: number }
+  | { type: 'SET_DISTRICT_ID'; payload: number }
+  | { type: 'SET_COORDINATE'; payload: Coordinate }
+  | { type: 'SET_DISABLE_SUBMIT'; payload: boolean }
   | { type: 'SET_ERROR'; payload: boolean };
 
 const init: UpdateDetailsState = {
@@ -43,6 +60,12 @@ const init: UpdateDetailsState = {
   bedRooms: null,
   bedRoomsNumber: 1,
   bathRooms: null,
+  address: '',
+  building: '',
+  city_id: null,
+  district_id: null,
+  coordinate: null,
+  disableSubmit: false,
   error: false
 };
 
@@ -71,6 +94,18 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { bedRooms: action.payload });
     case 'SET_BATHROOMS':
       return updateObject<UpdateDetailsState>(state, { bathRooms: action.payload });
+    case 'SET_ADDRESS':
+      return updateObject<UpdateDetailsState>(state, { address: action.payload });
+    case 'SET_BUILDING':
+      return updateObject<UpdateDetailsState>(state, { building: action.payload });
+    case 'SET_CITY_ID':
+      return updateObject<UpdateDetailsState>(state, { city_id: action.payload });
+    case 'SET_DISTRICT_ID':
+      return updateObject<UpdateDetailsState>(state, { district_id: action.payload });
+    case 'SET_COORDINATE':
+      return updateObject<UpdateDetailsState>(state, { coordinate: action.payload });
+    case 'SET_DISABLE_SUBMIT':
+      return updateObject<UpdateDetailsState>(state, { disableSubmit: action.payload });
     case 'SET_ERROR':
       return updateObject(state, { error: action.payload });
     default:
@@ -95,8 +130,19 @@ export const getDataUpdateListing = async (
     dispatch({ type: 'SET_GUEST_RECOMMENDATION', payload: listing.guests.recommendation });
     dispatch({ type: 'SET_MAX_GUEST', payload: listing.guests.max_additional_guest });
     dispatch({ type: 'SET_BEDROOMS_NUMBER', payload: listing.bedrooms.number_bedroom });
-    dispatch({ type: 'SET_BEDROOMS',payload: listing.bedrooms });
-    dispatch({ type: 'SET_BATHROOMS',payload: listing.bathrooms });
+    dispatch({ type: 'SET_BEDROOMS', payload: listing.bedrooms });
+    dispatch({ type: 'SET_BATHROOMS', payload: listing.bathrooms });
+    dispatch({ type: 'SET_ADDRESS', payload: listing.address });
+    dispatch({ type: 'SET_BUILDING', payload: listing.building });
+    dispatch({ type: 'SET_CITY_ID', payload: listing.city_id });
+    dispatch({ type: 'SET_DISTRICT_ID', payload: listing.district_id });
+    dispatch({
+      type: 'SET_COORDINATE',
+      payload: {
+        lat: Number(listing.latitude),
+        lng: Number(listing.longitude)
+      }
+    });
     return listing;
   } catch (error) {
     dispatch({ type: 'SET_ERROR', payload: true });

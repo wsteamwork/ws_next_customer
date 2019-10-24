@@ -5,7 +5,7 @@ import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import { Formik, FormikProps } from 'formik';
-import React, { FC, Fragment, useContext, useEffect, useMemo } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useMemo, useState, SyntheticEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -80,7 +80,9 @@ const UpdateDescription: FC<IProps> = (props) => {
   );
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<ListingDetailsReducerAction>>();
-
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
+  const [statusSnack, setStatusSnack] = useState<string>(null);
   const id = router.query.id;
   useEffect(() => {
     getDetailDescription(id, dispatch_des);
@@ -98,7 +100,7 @@ const UpdateDescription: FC<IProps> = (props) => {
     return {};
   };
   const updateDescription: any = () => {
-    handleUpdateListing(room_id, {
+    const res = handleUpdateListing(room_id, {
       about_room: {
         vi: {
           name: name,
@@ -110,6 +112,15 @@ const UpdateDescription: FC<IProps> = (props) => {
         en: detail_en
       }
     });
+    if(res) {
+      setOpenSnack(true);
+      setMessageSnack("Cập nhật mô tả căn hộ thành công !")
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật mô tả căn hộ thất bại !")
+    }
   };
 
   const formikInit: MyDescription = useMemo<MyDescription>(() => {
@@ -125,9 +136,16 @@ const UpdateDescription: FC<IProps> = (props) => {
     dispatch_des({ type: typeAction.type, payload: value });
   };
 
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
+
   return (
     <Fragment>
-      <CardWrapperUpdate disabledSave={disable_save} handleSave={updateDescription}>
+      <CardWrapperUpdate disabledSave={disable_save} handleSave={updateDescription} openSnack={openSnack} messageSnack={messageSnack} handleCloseSnack={handleCloseSnack}>
         <Formik
           enableReinitialize={true}
           validateOnChange={true}

@@ -6,7 +6,7 @@ import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useState, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -23,6 +23,8 @@ const UpdateBathRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
   const { room_id, bathRooms } = useSelector<ReducersList, UpdateDetailsState>(
     (state) => state.updateDetails
   );
@@ -68,11 +70,20 @@ const UpdateBathRooms: FC<IProps> = (props) => {
         bathrooms: bathRoomsTemp
       });
     }
+    setOpenSnack(true);
+    setMessageSnack("Cập nhật số phòng tắm thành công !");
+  };
+
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
   return (
     <Fragment>
-      <CardWrapperUpdate handleSave={UpdateBathRooms}>
+      <CardWrapperUpdate handleSave={UpdateBathRooms} openSnack={openSnack} messageSnack={messageSnack} handleCloseSnack={handleCloseSnack}>
         <div className="step1-tab3-bathroom">
           <Grid className="createListing-title">
             <Grid className="createListing-heading-1">Số phòng tắm</Grid>

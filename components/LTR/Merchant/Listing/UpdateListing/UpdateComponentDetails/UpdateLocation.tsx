@@ -1,23 +1,29 @@
 /* global google */
+import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import { ReducersList } from '@/store/Redux/Reducers';
+import Grid from '@material-ui/core/Grid/Grid';
+import React, { FC, useEffect, useState, Fragment, useContext, useMemo, SyntheticEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+import {
+  UpdateDetailsState,
+  getDataUpdateListing,
+  UpdateDetailsActions
+} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Dispatch } from 'redux';
+import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
 import * as Yup from 'yup';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-interface IProps { }
+interface IProps {}
 interface Coordinate {
   lat: number;
   lng: number;
@@ -49,45 +55,65 @@ const useValidatation = () => {
 const UpdateLocation: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
-  //   const google: any = window.google;  
-  //   const { room_id, guestRecommendation, maxGuest } = useSelector<ReducersList, UpdateDetailsState>(
-  //     (state) => state.updateDetails
-  //   );
-  //   const dispatch = useDispatch<Dispatch<UpdateDetailsActions>>();
-  const { address, building, disableSubmit } = useSelector<ReducersList, CreateListingState>(
-    (state) => state.createListing
-  );
+  const {
+    room_id,
+    address,
+    building,
+    city_id,
+    district_id,
+    coordinate,
+    disableSubmit
+  } = useSelector<ReducersList, UpdateDetailsState>((state) => state.updateDetails);
+  const dispatch = useDispatch<Dispatch<UpdateDetailsActions>>();
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
-  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const [coordinate, setCoordinate] = useState<Coordinate>(null);
-  const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
-  const [district, setDistrict] = useState<number>(null);
+  const [coordi, setCoordinate] = useState<Coordinate>(coordinate);
+  const [defaultCenter, setDefaultCenter] = useState<Coordinate>({
+    lat: 21.027895,
+    lng: 105.833896
+  });
+  const [district, setDistrict] = useState<number>(district_id);
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
+  const [statusSnack, setStatusSnack] = useState<string>(null);
 
   const FormValidationSchema = useValidatation();
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_DISABLE_SUBMIT',
-      payload: disableSubmitForm
-    });
-  }, [disableSubmitForm]);
+    getDataUpdateListing(id, dispatch);
+  }, [room_id]);
+
+  useMemo(() => {
+    setAddress(address);
+    setBuilding(building);
+    setCoordinate(coordinate);
+    setDistrict(district_id);
+    setDisableSubmit(disableSubmit);
+  }, [address, building, coordinate, district_id, disableSubmit]);
 
   useEffect(() => {
     dispatch({
       type: 'SET_COORDINATE',
-      payload: coordinate
+      payload: coordi
     });
-  }, [coordinate]);
+  }, [coordi]);
   useEffect(() => {
     dispatch({
       type: 'SET_ADDRESS',
       payload: addressInput
     });
   }, [addressInput]);
+
+  useEffect(() => {
+    if (!address.length) {
+      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
+    } else {
+      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
+    }
+  }, [address]);
 
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
@@ -106,7 +132,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const handleChange = (event) => {
     setBuilding(event.target.value);
   };
-
+  
   const onSuggestSelect = (place: Suggest) => {
     if (place) {
       let { lat, lng } = place.location;
@@ -130,33 +156,60 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
   };
 
-  const handleBlur = (e) => {
-    dispatch({
-      type: 'SET_BUILDING',
-      payload: buildingInput
-    });
-  };
-
-  const initFormValue: FormValues = {
-    address: '',
-    city: '',
-    building: ''
-  };
+  const initFormValue: any = useMemo(() => {
+    return {
+      address: address,
+      city: '',
+      building: building
+    };
+  }, [address, city_id, building]);
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
     return {};
   };
 
   const handleChangeAddress = (setFieldValue: any) => (value: any) => {
+    dispatch({
+      type: 'SET_ADDRESS',
+      payload: value
+    });
     setFieldValue('address', value);
   };
 
   const InputFeedback = ({ error }) =>
     error ? <div className={classNames('input-feedback')}>{error}</div> : null;
 
+  const updateLocation: any = () => {
+    const res = handleUpdateListing(room_id, {
+      address: {
+        address: addressInput,
+        building: buildingInput,
+        city_id: city_id,
+        district_id: district_id,
+        latitude: coordi.lat,
+        longitude: coordi.lng
+      }
+    });
+    if(res) {
+      setOpenSnack(true);
+      setMessageSnack("Cập nhật địa chỉ căn hộ thành công !")
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật địa chỉ căn hộ thất bại !")
+    }
+  };
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
+
   return (
     <Fragment>
-      <CardWrapperUpdate>
+      <CardWrapperUpdate disabledSave={disableSubmit} handleSave={updateLocation} openSnack={openSnack} statusSnack={statusSnack} messageSnack={messageSnack} handleCloseSnack={handleCloseSnack}>
         <div className="step1-tab3-location">
           <Grid className="createListing-location">
             <Grid className="createListing-heading-1">Địa chỉ căn hộ của bạn</Grid>
@@ -178,7 +231,6 @@ const UpdateLocation: FC<IProps> = (props) => {
               errors,
               initialValues,
               isSubmitting,
-              handleChange,
               handleBlur,
               setFieldValue,
               setFieldTouched
@@ -193,13 +245,12 @@ const UpdateLocation: FC<IProps> = (props) => {
                     country="vn"
                     placeholder="Nhập địa chỉ"
                     onSuggestSelect={onSuggestSelect}
-                    // location={new google.maps.LatLng(53.558572, 9.9278215)}
                     radius={20}
                     onChange={handleChangeAddress(setFieldValue)}
                     onBlur={() => {
                       setFieldTouched('address', true);
                     }}
-                    value={values.address}
+                    initialValue={addressInput}
                     name="address"
                   />
 
@@ -211,7 +262,7 @@ const UpdateLocation: FC<IProps> = (props) => {
                       <OutlinedInput
                         placeholder="Nhập số căn hộ"
                         id="component-outlined"
-                        value={values.building}
+                        value={buildingInput}
                         onChange={(e) => {
                           setFieldValue('building', e.target.value);
                         }}
@@ -241,7 +292,6 @@ const UpdateLocation: FC<IProps> = (props) => {
                         </h3>
                         <CitiesList
                           onChange={setFieldValue}
-                          // onBlur={handleBlur}
                           valueCity={values.city}
                           onBlur={setFieldTouched}
                           districtList={districtList}
@@ -255,8 +305,7 @@ const UpdateLocation: FC<IProps> = (props) => {
                     <Grid item xs={5}>
                       <SelectCustom
                         name="district"
-                        // onChange={handleChangeSelect}
-                        value={district}
+                        value={district_id}
                         options={districtList}
                         title="Quận huyện"
                         callBackOnChange={callBackOnChange}
@@ -279,7 +328,7 @@ const UpdateLocation: FC<IProps> = (props) => {
               containerElement={<div style={{ height: `300px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
               defaultCenter={defaultCenter}
-              coordinate={coordinate}
+              coordinate={coordi}
               onClickMap={onClickMap}
             />
           )}

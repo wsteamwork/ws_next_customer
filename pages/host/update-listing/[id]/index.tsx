@@ -1,5 +1,15 @@
 import React, { FC, Fragment, useEffect, useContext } from 'react';
-import { createStyles, Grid, Theme, AppBar, Tabs, withStyles, Tab, Box } from '@material-ui/core';
+import {
+  createStyles,
+  Grid,
+  Theme,
+  AppBar,
+  Tabs,
+  withStyles,
+  Tab,
+  Box,
+  Breadcrumbs
+} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/ListingDetails';
@@ -16,8 +26,12 @@ import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/Listin
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
-import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
-import { getDataUpdateListing, UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import {
+  AmenitiesReducerAction,
+  getDataAmenities
+} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import Link from '@material-ui/core/Link';
 interface IProps {
   classes?: any;
 }
@@ -98,7 +112,7 @@ const TabPanel = (props: TabPanelProps) => {
 const a11yProps = (index: any) => {
   return {
     id: `scrollable-prevent-tab-${index}`,
-    'aria-controls': `scrollable-prevent-tabpanel-${index}`,
+    'aria-controls': `scrollable-prevent-tabpanel-${index}`
   };
 };
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -113,6 +127,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: theme.typography.fontWeightBold,
       color: '#484848',
       fontSize: 24
+    },
+    custom_link_bread: {
+      color: '#1d8df7'
     }
   })
 );
@@ -124,8 +141,7 @@ const UpdateListing: FC<IProps> = (props) => {
   const id = router.query.id;
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
-  const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
-  
+
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing
   );
@@ -159,6 +175,19 @@ const UpdateListing: FC<IProps> = (props) => {
       {listing ? (
         <Grid container justify="center" alignContent="center">
           <Grid item xs={11} sm={10} md={8} lg={7} className={classes.marginLabel}>
+            <Breadcrumbs
+              separator={
+                <NavigateNextIcon fontSize="small" className={classes.custom_link_bread} />
+              }
+              aria-label="breadcrumb">
+              <Link href="/" className={classes.custom_link_bread}>
+                Trang chủ
+              </Link>
+              <Link href="/host/room-list" className={classes.custom_link_bread}>
+                Danh sách phòng
+              </Link>
+              <Typography color="textPrimary">Cập nhật phòng</Typography>
+            </Breadcrumbs>
             <Grid container className={classes.marginLabel}>
               <Typography variant="subtitle1" className={classes.name}>
                 {listing.about_room.name}
@@ -173,10 +202,10 @@ const UpdateListing: FC<IProps> = (props) => {
                   variant="scrollable"
                   scrollButtons="off">
                   <AntTab label="Chi tiết phòng" {...a11yProps(0)} />
-                  <AntTab label="Ảnh phòng" {...a11yProps(1)}/>
-                  <AntTab label="Giá phòng" {...a11yProps(2)}/>
-                  <AntTab label="Chế độ đặt phòng" {...a11yProps(3)}/>
-                  <AntTab label="Lịch trống phòng" {...a11yProps(4)}/>
+                  <AntTab label="Ảnh phòng" {...a11yProps(1)} />
+                  <AntTab label="Giá phòng" {...a11yProps(2)} />
+                  <AntTab label="Chế độ đặt phòng" {...a11yProps(3)} />
+                  <AntTab label="Lịch trống phòng" {...a11yProps(4)} />
                 </AntTabs>
                 <Typography className={classes.padding} />
               </AppBar>
