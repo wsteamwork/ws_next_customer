@@ -8,7 +8,7 @@ import { Theme, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useState, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -26,6 +26,9 @@ const UpdateBedRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
+  const [statusSnack, setStatusSnack] = useState<string>(null);
   const { room_id, bedRoomsNumber, bedRooms } = useSelector<ReducersList, UpdateDetailsState>(
     (state) => state.updateDetails
   );
@@ -74,14 +77,30 @@ const UpdateBedRooms: FC<IProps> = (props) => {
   };
 
   const UpdateBedRooms: any = () => {
-    handleUpdateListing(room_id, {
+    const res = handleUpdateListing(room_id, {
       bedrooms: bedRooms
     });
+    if(res) {
+      setOpenSnack(true);
+      setMessageSnack("Cập nhật phòng ngủ thành công !")
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật phòng ngủ căn hộ thất bại !")
+    }
+  };
+
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
   return (
     <Fragment>
-      <CardWrapperUpdate handleSave={UpdateBedRooms}>
+      <CardWrapperUpdate handleSave={UpdateBedRooms} openSnack={openSnack} messageSnack={messageSnack} statusSnack={statusSnack} handleCloseSnack={handleCloseSnack}>
         <div className="step1-tab2-room">
           <Grid style={{ paddingRight: 10 }}>
             <Typography variant="h1" gutterBottom className="label main_label">

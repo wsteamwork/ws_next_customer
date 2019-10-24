@@ -6,7 +6,7 @@ import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Grid, Typography } from '@material-ui/core';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useState, SyntheticEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -42,6 +42,9 @@ const UpdateAmenities: FC<IProps> = (props) => {
     (state) => state.listingdetails.disable_save
   );
   const room_id = useSelector<ReducersList, number>((state) => state.amenities.room_id);
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>(null);
   const getAmenitiesList = async () => {
     const url = `comforts`;
     const res: AxiosRes<any> = await axios_merchant.get(url);
@@ -69,7 +72,7 @@ const UpdateAmenities: FC<IProps> = (props) => {
   }, [countAmenities]);
 
   const updateAmenities: any = () => {
-    handleUpdateListing(room_id, {
+    const res = handleUpdateListing(room_id, {
       comforts: {
         facilities: facilitiesClick,
         kitchens: kitchensClick,
@@ -79,11 +82,27 @@ const UpdateAmenities: FC<IProps> = (props) => {
         others: othersClick
       }
     });
+    if(res) {
+      setOpenSnack(true);
+      setMessageSnack("Cập nhật tiện ích căn hộ thành công !")
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật tiện ích căn hộ thất bại !")
+    }
+  };
+
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
   return (
     <Fragment>
-      <CardWrapperUpdate disabledSave={disable_save} handleSave={updateAmenities}>
+      <CardWrapperUpdate disabledSave={disable_save} handleSave={updateAmenities} openSnack={openSnack} statusSnack={statusSnack} messageSnack={messageSnack} handleCloseSnack={handleCloseSnack}>
         <Grid container justify="center" alignContent="center">
           <Grid item xs={12}>
             <Typography variant="h1" gutterBottom className="label main_label">

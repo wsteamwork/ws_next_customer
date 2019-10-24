@@ -4,7 +4,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, Fragment, useContext, useEffect, useState, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -19,6 +19,10 @@ const UpdateNumberGuest: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<UpdateDetailsActions>>();
   const [guest, setGuest] = useState<number>(guestRecommendation);
   const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
+  const [statusSnack, setStatusSnack] = useState<string>(null);
+
   useEffect(() => {
     getDataUpdateListing(id, dispatch);
   }, [room_id]);
@@ -43,17 +47,33 @@ const UpdateNumberGuest: FC<IProps> = (props) => {
   }, [maxGuests]);
 
   const UpdateGuests: any = () => {
-    handleUpdateListing(room_id, {
+    const res = handleUpdateListing(room_id, {
       guests: {
         recommendation: guest,
         max_additional_guest: maxGuests,
       }
     });
+    if(res) {
+      setOpenSnack(true);
+      setMessageSnack("Cập nhật số lượng khách thành công !")
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật số lượng khách thất bại !")
+    }
+  };
+
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
   return (
     <Fragment>
-      <CardWrapperUpdate handleSave={UpdateGuests}>
+      <CardWrapperUpdate handleSave={UpdateGuests} openSnack={openSnack} messageSnack={messageSnack} statusSnack={statusSnack} handleCloseSnack={handleCloseSnack}>
         <div className="step1-tab2-room">
           <Grid className="createListing-title">
             <Grid className="createListing-heading-1">

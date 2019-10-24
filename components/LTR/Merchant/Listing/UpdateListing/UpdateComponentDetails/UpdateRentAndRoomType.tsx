@@ -8,7 +8,7 @@ import { getDataUpdateListing, handleUpdateRentAndRoomType, UpdateDetailsActions
 import { Checkbox, FormControlLabel, Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import React, { ChangeEvent, FC, Fragment, useContext, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, Fragment, useContext, useEffect, useMemo, useState, SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -81,6 +81,9 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const [statusShortTerm, setStatusShortTerm] = useState<boolean>(!!status_short_term);
   const [statusLongTerm, setStatusLongTerm] = useState<boolean>(!!status_long_term);
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công !");
+  const [statusSnack, setStatusSnack] = useState<string>(null);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
@@ -131,14 +134,29 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   };
 
   const updateRoomType: any = () => {
-    handleUpdateListing(room_id, {
+    const res = handleUpdateListing(room_id, {
       accommodation_type: roomType,
     });
+    if(res) {
+      setOpenSnack(true);
+    }
+    else {
+      setOpenSnack(true);
+      setStatusSnack("error");
+      setMessageSnack("Cập nhật số lượng khách thất bại !")
+    }
+  };
+
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
   };
 
   return (
     <Fragment>
-      <CardWrapperUpdate handleSave={updateRoomType}>
+      <CardWrapperUpdate handleSave={updateRoomType} openSnack={openSnack} messageSnack={messageSnack} statusSnack={statusSnack} handleCloseSnack={handleCloseSnack}>
         <Grid container justify="center" alignContent="center">
           <Grid item xs={12}>
             <Typography variant="h1" gutterBottom className={'label main_label'}>
