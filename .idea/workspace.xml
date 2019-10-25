@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/Home/SearchComponent/TabChangeHome.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTHome/SearchHomeLT.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/SearchAutoSuggestion/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/SearchAutoSuggestion/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/SearchComponent/SearchHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/SearchComponent/SearchHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/MapAndListing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/MapAndListing/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Context/Room/RoomListContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Context/Room/RoomListContext.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/chooseGuestRoom/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/chooseGuestRoom/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/dateRangeSearch/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/dateRangeSearch/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/home/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/home/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/home/home-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/home/home-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/home/home-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/home/home-vi.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,18 +16,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/index.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
@@ -54,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/rooms/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="95" column="23" lean-forward="true" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
+            <state relative-caret-position="521">
+              <caret line="52" column="75" lean-forward="true" selection-start-line="52" selection-start-column="75" selection-end-line="52" selection-end-column="75" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
               </folding>
@@ -75,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/Rooms/SidebarAndListing/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="40" column="40" lean-forward="true" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+            <state relative-caret-position="429">
+              <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -424,7 +398,7 @@
       <workItem from="1571416738491" duration="11214000" />
       <workItem from="1571447415540" duration="17628000" />
       <workItem from="1571901697781" duration="6968000" />
-      <workItem from="1571968409166" duration="11838000" />
+      <workItem from="1571968409166" duration="12853000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -538,17 +512,23 @@
       <option name="project" value="LOCAL" />
       <updated>1569509184596</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="giao dien tab trang chu">
+      <created>1571984036082</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1571984036082</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1168244000" />
+    <option name="totallyTimeSpent" value="1169259000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17697228" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17697228" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -562,8 +542,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3277592" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50373137" side_tool="true" weight="0.14938684" />
-      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49626866" visible="true" weight="0.12040134" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.5042644" side_tool="true" visible="true" weight="0.12040134" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49573562" visible="true" weight="0.12040134" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32884398" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -631,7 +611,8 @@
     <MESSAGE value="Fix compare Room" />
     <MESSAGE value="Buoc 3 - ngan han" />
     <MESSAGE value="Buoc 3 - Gia dich vu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Buoc 3 - Gia dich vu" />
+    <MESSAGE value="giao dien tab trang chu" />
+    <option name="LAST_COMMIT_MESSAGE" value="giao dien tab trang chu" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx">
@@ -949,31 +930,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1871">
           <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-            <element signature="e#331#908#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,16 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/rooms/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="95" column="23" lean-forward="true" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -1037,8 +987,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/Rooms/SidebarAndListing/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
-          <caret line="40" column="40" lean-forward="true" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#331#908#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/rooms/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="52" column="75" lean-forward="true" selection-start-line="52" selection-start-column="75" selection-end-line="52" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
