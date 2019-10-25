@@ -77,25 +77,26 @@ const AntTab = withStyles((theme: Theme) =>
   })
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
-const TabPanel = (props: TabPanelProps) => {
+export const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
     <Typography
       component="div"
+      style={{width:'100%'}}
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0} mt={3}>
+      <Box p={0}>
         {children}
       </Box>
     </Typography>
   );
 };
 
-const a11yProps = (index: any) => {
+export const a11yProps = (index: any) => {
   return {
     id: `scrollable-prevent-tab-${index}`,
     'aria-controls': `scrollable-prevent-tabpanel-${index}`,
@@ -125,7 +126,7 @@ const UpdateListing: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
-  
+
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing
   );

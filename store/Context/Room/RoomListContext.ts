@@ -26,6 +26,7 @@ export interface IRoomIndexContext {
 
 export type RoomIndexAction =
   | { type: 'setRooms'; rooms: RoomIndexRes[]; meta?: Pagination | null }
+  | { type: 'setlongtermRooms'; longtermRooms: RoomIndexRes[]; meta?: Pagination | null }
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoading'; isLoading: boolean }
   | { type: 'setMapOpen'; isMapOpen: boolean }
@@ -33,6 +34,7 @@ export type RoomIndexAction =
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
+  readonly longtermRooms: RoomIndexRes[];
   readonly meta: Pagination | null;
   readonly isLoading: boolean;
   readonly isMapOpen: boolean;
@@ -41,6 +43,7 @@ export type RoomIndexState = {
 
 export const RoomIndexStateInit: RoomIndexState = {
   rooms: [],
+  longtermRooms: [],
   meta: null,
   isLoading: false,
   isMapOpen: false,
@@ -55,6 +58,11 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
     case 'setRooms':
       return updateObject<RoomIndexState>(state, {
         rooms: action.rooms,
+        meta: action.meta || null
+      });
+    case 'setlongtermRooms':
+      return updateObject<RoomIndexState>(state, {
+        longtermRooms: action.longtermRooms,
         meta: action.meta || null
       });
     case 'setMeta':

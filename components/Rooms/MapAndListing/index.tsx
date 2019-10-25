@@ -7,7 +7,7 @@ const MapAndListing = () => {
   const { isMapOpen } = useRefreshListing();
   return useMemo(
     () =>
-      !!isMapOpen ? <MapRoomListing></MapRoomListing> : <SidebarAndListing></SidebarAndListing>,
+      !!isMapOpen ? <MapRoomListing/> : <SidebarAndListing/>,
     [isMapOpen]
   );
 };
