@@ -35,7 +35,7 @@ const RoomCard: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
-
+  // console.log(room.media)
   return (
     <Fragment>
       <Grid className="roomCard">

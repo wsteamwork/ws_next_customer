@@ -86,7 +86,7 @@ const Room: NextPage = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <BoxRecommend />
+                    {/* <BoxRecommend /> */}
                   </Grid>
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">

@@ -14,7 +14,7 @@ const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [idListing, setIdListing] = useState<number>(null);
   const { router } = useContext(GlobalContext);
-  console.log(router);
+  // console.log(router);
   const disableSubmit = useSelector<ReducersList, boolean>(
     (state) => state.createListing.disableSubmit
   );
