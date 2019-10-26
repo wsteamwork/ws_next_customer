@@ -70,3 +70,35 @@ export interface RoomUrlParams {
   sort_price_day?: string;
   discount?: string;
 }
+
+
+// LONG TERM
+export interface LTRoomIndexGetParams extends BaseGetRequestParams, Partial<MapCoords> {
+  name?: string;
+  city_id?: number;
+  district_id?: number;
+  bedrooms?: number;
+  number_guest?: number;
+  accommodation_type?: number;
+  comfort_lists?: string;
+  min_price?: number;
+  max_price?: number;
+  instant_book?: number;
+  discount?: number;
+  page?: number;
+}
+
+export interface LTRoomUrlParams {
+  name?: string;
+  city_id?: number;
+  district_id?: number;
+  bedrooms?: number;
+  number_guest?: number;
+  accommodation_type?: number;
+  comfort_lists?: string;
+  min_price?: number;
+  max_price?: number;
+  instant_book?: number;
+  discount?: number;
+  page?: number;
+}

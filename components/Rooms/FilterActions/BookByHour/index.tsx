@@ -36,10 +36,10 @@ const BookByHour: FC<IProps> = (props) => {
   const handleClick = () => {
     if (bookingType === 2) {
       updateBookingType(1);
-      updateRouter(true, 'rent_type', 1, 'page', 1);
+      updateRouter('/rooms',true, 'rent_type', 1, 'page', 1);
     } else {
       updateBookingType(2);
-      updateRouter(true, 'rent_type', 2, 'page', 1);
+      updateRouter('/rooms',true, 'rent_type', 2, 'page', 1);
     }
   };
 

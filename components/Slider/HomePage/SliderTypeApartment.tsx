@@ -36,7 +36,7 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
   );
 
   const SearchType = (idType: number) => {
-    updateRouter(true, 'type_room', idType);
+    updateRouter('/rooms',true, 'type_room', idType);
   };
 
   const settings = {
@@ -105,7 +105,7 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
             />
             {/* <Swiper {...settings}>
               {_.map(apartments, (obj, i) =>
-                // obj.status === 1 ? 
+                // obj.status === 1 ?
                 (
                   <div key={i} className={classes.paddingGrid}>
                     <CardIntro

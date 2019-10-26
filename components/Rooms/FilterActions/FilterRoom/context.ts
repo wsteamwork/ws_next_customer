@@ -86,7 +86,7 @@ export const useFilterRoom = (
   const handleSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setAmenitiesFilter', amenities: dataClick });
-    updateRouter(false, 'amenities', dataClick, 'page', 1);
+    updateRouter('/rooms',false, 'amenities', dataClick, 'page', 1);
   };
 
   const handleClose = () => {

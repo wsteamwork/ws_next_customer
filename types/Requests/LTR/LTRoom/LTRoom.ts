@@ -35,6 +35,7 @@ export interface LTRoomIndexRes {
   longitude: string,
   accommodation_type: number,
   accommodation_type_txt: string,
+  total_area: number | null,
   guests: detailguest | null,
   rating: detailrating,
   instant_book: number,

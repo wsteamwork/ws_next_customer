@@ -10,9 +10,7 @@ import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import { RoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
-import _ from 'lodash';
-import { ReducresActions, ReducersList } from '..';
-import { Store } from 'redux';
+import { ReducresActions } from '..';
 
 export type RoomHomepageAction =
   | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
@@ -20,7 +18,7 @@ export type RoomHomepageAction =
   | { type: 'setRoomNew'; rooms: RoomIndexRes[] }
   | { type: 'setApartment'; rooms: TypeApartment[] }
   | { type: 'setCollections'; collections: Collections[] }
-  | { type: 'setCollectionById'; collectionById: Collections };
+  | { type: 'setCollectionById'; collectionById: Collections }
 
 export type RoomHomepageState = {
   readonly roomsHot: RoomIndexRes[];
@@ -37,7 +35,7 @@ export const init: RoomHomepageState = {
   roomsNew: [],
   apartments: [],
   collections: [],
-  collectionById: null
+  collectionById: null,
 };
 
 export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction> = (

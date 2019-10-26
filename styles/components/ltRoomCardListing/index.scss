@@ -1,27 +1,20 @@
-.roomCardListing {
-  .slick-slider,
-  .slick-list,
-  .slick-track,
-  .slick-current > div,
-  .slick-slide > div {
-    height: 100%;
-  }
-
+.ltRoomCardListing {
   position: relative;
   color: #484848;
   border: 1px solid #ebebeb;
   border-radius: 4px;
+  margin-top: 24px;
 
   @include xs {
     height: 100%;
   }
 
   @include smUp {
-    height: 200px;
+    height: auto;
   }
 
   @include md {
-    height: 230px;
+    height: auto;
   }
 
   &:hover {
@@ -98,8 +91,8 @@
 
   .boxSave {
     position: absolute;
-    top: -22px;
-    right: -22px;
+    right: -16px;
+    bottom: -12px;
     width: 60px;
     height: 60px;
     text-align: center;
@@ -120,7 +113,7 @@
     vertical-align: middle;
     .cardWrapper {
       height: 100%;
-      padding: 12px 16px;
+      padding: 0 16px 8px;
       box-sizing: border-box;
       .cardContainer {
         position: relative;
@@ -141,20 +134,30 @@
             @include xs {
               margin-bottom: 20px;
             }
-            padding-right: 40px !important;
             .roomName {
               overflow: hidden;
               font-size: 17px;
               font-weight: 700;
               overflow-wrap: break-word;
-              text-overflow: ellipsis;
               color: #484848;
               line-height: 24px;
-              display: flex;
               margin-bottom: 6px;
+              display: -webkit-box;
+              max-height: 52px;
+              height: 52px;
+              -webkit-line-clamp: 2;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
 
               @include xs {
                 margin-bottom: 10px;
+              }
+              .svgQuick{
+                position:relative;
+                top: 7px;
+                margin-right: 8px;
+                -webkit-filter: drop-shadow(2px 3px 2px rgba(246,116,57,.4));
+                filter: drop-shadow(2px 3px 2px rgba(246,116,57,.4));
               }
             }
 
@@ -177,7 +180,6 @@
               font-size: 14px;
               color: #484848;
             }
-
             .ul {
               display: flex;
               padding: 0;
@@ -225,13 +227,10 @@
           }
 
           .boxPrice {
-            right: 0;
-            bottom: 0;
-            text-align: right;
-            @include smUp {
-              position: absolute;
+            margin-top: 12px;
+            .priceBasic{
+              font-weight: 900;
             }
-
             .priceContainer {
               @include lgUp {
                 display: flex;
@@ -283,10 +282,10 @@
           }
           .boxsave {
             position: absolute;
-            top: -10;
-            right: -12;
-            width: 40px;
-            height: 40px;
+            right: -16px;
+            bottom: -8px;
+            width: 60px;
+            height: 60px;
             // tooltipRoomCard: {
             //   position: "relative",
             //   verticalAlign: "top",

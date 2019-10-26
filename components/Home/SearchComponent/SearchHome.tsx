@@ -8,10 +8,21 @@ import CheckboxList from '../CheckboxList/index';
 import TabChangeHome from '@/components/Home/SearchComponent/TabChangeHome';
 import { TabPanel } from '@/pages/host/update-listing/[id]';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Dispatch } from 'redux';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 
 const SearchHome = () => {
   const { t }                   = useTranslation();
-  const [indexTab, setIndexTab] = useState<number>(0);
+  const leaseTypeGlobal = useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const [indexTab, setIndexTab] = useState<number>(leaseTypeGlobal);
+  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
+
+  const changeLeaseTypeGlobal=(i: 0|1)=>{
+    setIndexTab(i);
+    dispatch({ type:'setLeaseTypeGlobal', leaseTypeGlobal: i});
+  };
 
   return useMemo(
     () => (
@@ -20,7 +31,7 @@ const SearchHome = () => {
 
         <GridContainer xs = {12} md = {11} lg={10} classNameItem = 'searchHome__opa' >
           <TabChangeHome value = {indexTab}
-                         onChange={(e,i)=>setIndexTab(i)}
+                         onChange={(e,i)=>changeLeaseTypeGlobal(i)}
                          tab = {[
                            { label: 'Homestay' },
                            { label: 'Thuê dài hạn' }
@@ -45,7 +56,7 @@ const SearchHome = () => {
               </Grid>
 
               <div className="searchHome__content">
-                <SearchHomeLT/>
+                <SearchHomeLT showPlaces/>
               </div>
 
             </GridContainer>

@@ -61,7 +61,7 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: MIN_PRICE, price_day_to: MAX_PRICE });
-    updateRouter(true, 'price_day_from', MIN_PRICE, 'price_day_to', MAX_PRICE);
+    updateRouter('/rooms',true, 'price_day_from', MIN_PRICE, 'price_day_to', MAX_PRICE);
   };
 
   return {

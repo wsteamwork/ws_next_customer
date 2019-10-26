@@ -31,10 +31,10 @@ const Home: NextPage = () => {
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
         url="https://westay.vn"
-        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
+        ogImage="/static/images/Bg_home.4023648f.jpg"/>
 
       <GridContainer xs={12}>
-        <SearchHome></SearchHome>
+        <SearchHome/>
 
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <SliderTypeApartment />
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
             roomData={roomsHot}
             usingSlider={true}
             title={t('home:editorChoice')}
-            render={renderRoom}></ListRoom>
+            render={renderRoom}/>
 
         </GridContainer>
         {/* <HostBecome /> */}

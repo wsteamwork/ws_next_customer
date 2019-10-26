@@ -133,7 +133,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const hanldeSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
-    updateRouter(true, 'price_day_from', price.min, 'price_day_to', price.max, 'page', 1);
+    updateRouter('/rooms',true, 'price_day_from', price.min, 'price_day_to', price.max, 'page', 1);
   };
 
   // usePriceEffect(price, setPrice, state);

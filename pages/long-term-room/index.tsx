@@ -18,6 +18,9 @@ import { useSelector } from 'react-redux';
 
 import BoxRecommend from '@/components/Room/BoxRecommend';
 import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
+import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
+import NextHead from '@/components/NextHead';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
@@ -25,7 +28,6 @@ const LongtermRoom: NextPage = () => {
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
   const [] = useVisitedRoom();
   const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
-
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);
   };
@@ -33,7 +35,6 @@ const LongtermRoom: NextPage = () => {
   const handleCloseBookingDialog = () => {
     setOpenBookingDialog(false);
   };
-  useEffect(() => console.log(openBookingDialog));
 
   // useEffect(() => {
   //   if (error || !ltroom.status) router.push('/not-found-resource');
@@ -52,19 +53,19 @@ const LongtermRoom: NextPage = () => {
 
   return (
     <Fragment>
-      {/*{!!ltroom && (*/}
-      {/*  <NextHead*/}
-      {/*    ogSitename="Westay - Đặt phòng homestay trực tuyến"*/}
-      {/*    title={`${ltroom.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}*/}
-      {/*    description={`${ltroom.accommodation_type_txt} ${*/}
-      {/*      ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'*/}
-      {/*      } ngay tại ${ltroom.district.data.name}, ${*/}
-      {/*      ltroom.city.data.name*/}
-      {/*      }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}*/}
-      {/*    url={`https://westay.vn/ltroom/${ltroom.id}`}*/}
-      {/*    ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {!!ltroom && (
+        <NextHead
+          ogSitename="Westay - Đặt phòng homestay trực tuyến"
+          title={`${ltroom.about_room.name} | Westay - Đặt phòng trực tuyến`}
+          description={`${ltroom.accommodation_type_txt} ${
+            ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'
+            } ngay tại ${ltroom.district.data.name}, ${
+            ltroom.city.data.name
+            }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
+          url={`https://westay.vn/ltroom/${ltroom.id}`}
+          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+        />
+      )}
 
       <NavHeader />
 
@@ -98,7 +99,6 @@ const LongtermRoom: NextPage = () => {
                       number_room={ltroom.merchant.data.number_room}
                       handleOpenBookingDialog={handleOpenBookingDialog}
                     />
-                    {/* <div onClick={()=>setOpenBookingDialog(true)}>test</div>   */}
                   </Grid>
 
                   <Grid item xs={12}>

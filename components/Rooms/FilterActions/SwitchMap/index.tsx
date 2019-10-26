@@ -16,7 +16,7 @@ const SwitchMap: FC = () => {
     }
 
     if (checked === true) {
-      updateRouter(true, 'city_id', null, 'district_id', null);
+      updateRouter('/rooms',true, 'city_id', null, 'district_id', null);
     }
   };
 

@@ -35,7 +35,7 @@ type ReturnUseCheckBox = {
   handleRemove: MouseEventHandler;
   roomTypes: number[];
 };
- 
+
 export const useRoomTypeChecbox = (
   setOpen?: Dispatch<SetStateAction<boolean>>,
   dataClick?: number[],
@@ -76,7 +76,7 @@ export const useRoomTypeChecbox = (
 
   const handleSubmit = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataClick });
-    updateRouter(false, 'type_room', dataClick, 'page', 1);
+    updateRouter('/rooms',false, 'type_room', dataClick, 'page', 1);
     setOpen(false);
   };
 
@@ -88,7 +88,7 @@ export const useRoomTypeChecbox = (
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setRoomTypes', roomTypes: [] });
-    updateRouter(false, 'type_room', '', 'page', 1);
+    updateRouter('/rooms',false, 'type_room', '', 'page', 1);
     setDataClick([]);
   };
 

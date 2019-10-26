@@ -4,7 +4,7 @@ import qs from 'query-string';
 import { AxiosRes, Pagination, BaseResponse, TypeSelect } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import { RoomIndexGetParams, RoomUrlParams, MapCoords } from '@/types/Requests/Rooms/RoomRequests';
+import { RoomIndexGetParams, RoomUrlParams, MapCoords, LTRoomUrlParams, LTRoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
 import { Range } from 'react-input-range';
 import _ from 'lodash';
 import { ComfortIndexGetParams } from '@/types/Requests/Comforts/ComfortRequests';
@@ -12,6 +12,7 @@ import { ComfortIndexRes } from '@/types/Requests/Comforts/ComfortResponses';
 import { AxiosResponse } from 'axios';
 import { NextRouter } from 'next/router';
 import { BaseRouter } from 'next-server/dist/lib/router/router';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 export const MIN_PRICE = 0;
 export const MAX_PRICE = 50000000;
@@ -26,7 +27,7 @@ export interface IRoomIndexContext {
 
 export type RoomIndexAction =
   | { type: 'setRooms'; rooms: RoomIndexRes[]; meta?: Pagination | null }
-  | { type: 'setlongtermRooms'; longtermRooms: RoomIndexRes[]; meta?: Pagination | null }
+  | { type: 'setlongtermRooms'; longtermRooms: LTRoomIndexRes[]; meta?: Pagination | null }
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoading'; isLoading: boolean }
   | { type: 'setMapOpen'; isMapOpen: boolean }
@@ -34,7 +35,7 @@ export type RoomIndexAction =
 
 export type RoomIndexState = {
   readonly rooms: RoomIndexRes[];
-  readonly longtermRooms: RoomIndexRes[];
+  readonly longtermRooms: LTRoomIndexRes[];
   readonly meta: Pagination | null;
   readonly isLoading: boolean;
   readonly isMapOpen: boolean;
@@ -63,7 +64,7 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
     case 'setlongtermRooms':
       return updateObject<RoomIndexState>(state, {
         longtermRooms: action.longtermRooms,
-        meta: action.meta || null
+        meta: action.meta
       });
     case 'setMeta':
       return updateObject<RoomIndexState>(state, { meta: action.meta });
@@ -141,5 +142,38 @@ export const fetchRoomType = async () => {
   return res.data;
 };
 
+// Long term
 
+export const getLTRooms = async (
+  router: NextRouter,
+  coords?: MapCoords
+): Promise<BaseResponse<LTRoomIndexRes[]>> => {
+
+  let params: LTRoomUrlParams = router.query;
+
+  let query: Partial<LTRoomIndexGetParams> = {
+    include: 'city,district,merchant',
+    name: params.name,
+    city_id: params.city_id,
+    district_id: params.district_id,
+    bedrooms: params.bedrooms,
+    number_guest:params.number_guest,
+    min_price: params.min_price,
+    max_price: params.max_price,
+    comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
+    discount: params.discount === null ? 1 : undefined,   // 0,1
+    instant_book: params.instant_book, // 1,2
+    page: params.page
+  };
+
+  if (coords) {
+    query = updateObject(query, coords);
+  }
+
+  const signature = coords ? 'long-term-rooms/room-lat-long' : 'long-term-rooms';
+  const url = `${signature}?${qs.stringify(query)}&limit=12`; // 12 item on 1 Page
+
+  const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(url);
+  return res.data;
+};
 

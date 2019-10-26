@@ -14,7 +14,8 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 
 interface IProps {
-  classes?: any
+  classes?: any,
+  showPlaces: boolean,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -30,7 +31,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SearchHomeLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const {showPlaces} = props;
   const {t} = useTranslation();
   const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
   const cities = useSelector<ReducersList, NumberRoomCity[]>(
@@ -61,25 +62,29 @@ const SearchHomeLT: FC<IProps> = (props) => {
         <SearchAutoSuggestion/>
       </Grid>
       <Grid item xs={3}>
-        <ButtonGlobal padding="0px" width="100%" height={60} onClick={applySearch}>
+        <ButtonGlobal padding="0px" width="100%" height={50} onClick={applySearch}>
           {t('home:searchComponent:search')}
         </ButtonGlobal>
       </Grid>
-      <Grid item xs={9}>
-        <Button variant="contained" className={classes.btnPlace}>
-          <GpsFixed style={{marginRight:8, color:'tomato'}}/>
-          Vị trí của bạn
-        </Button>
-
-        {cities.map((o,i)=> (
-          i < 5 ? (
-            <Button key={i} variant="contained" className={classes.btnPlace}>
-              {o.name_city} ({o.total_rooms})
+      {showPlaces && (
+        <Fragment>
+          <Grid item xs={9}>
+            <Button variant="contained" className={classes.btnPlace}>
+              <GpsFixed style={{marginRight:8, color:'tomato'}}/>
+              Vị trí của bạn
             </Button>
-          ) : (<Fragment key={i}/>)
-        ))}
-      </Grid>
-      <Grid item xs/>
+
+            {cities.map((o,i)=> (
+              i < 5 ? (
+                <Button key={i} variant="contained" className={classes.btnPlace}>
+                  {o.name_city} ({o.total_rooms})
+                </Button>
+              ) : null
+            ))}
+          </Grid>
+          <Grid item xs/>
+        </Fragment>
+      )}
     </Grid>
   );
 };

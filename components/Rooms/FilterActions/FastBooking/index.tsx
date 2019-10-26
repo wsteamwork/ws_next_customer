@@ -27,10 +27,10 @@ const FastBooking: FC = () => {
   const handleClick = () => {
     if (instant_book === 0) {
       dispatch({ type: 'setInstantBook', payload: 1 });
-      updateRouter(true, 'instant_book', 1, 'page', 1);
+      updateRouter('/rooms',true, 'instant_book', 1, 'page', 1);
     } else {
       dispatch({ type: 'setInstantBook', payload: 0 });
-      updateRouter(true, 'instant_book', 0, 'page', 1);
+      updateRouter('/rooms',true, 'instant_book', 0, 'page', 1);
     }
   };
 
