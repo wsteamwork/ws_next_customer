@@ -1,12 +1,10 @@
-import React, { FC, useMemo, Fragment, useContext } from 'react';
-import { changeDataPriceByDay } from './context';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { Grid, Typography } from '@material-ui/core';
 import { Moment } from 'moment';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import React, { FC, Fragment, useContext, useMemo } from 'react';
+import { changeDataPriceByDay } from './context';
 
 interface Iprops {
   day: Moment;
@@ -25,21 +23,19 @@ const RenderDay: FC<Iprops> = (props) => {
     : null;
 
   const date = day.format(DEFAULT_DATE_FORMAT);
-
   return (
     <Grid className="dayContents">
-      <Typography style={{ fontSize: width == 'lg' ? 24 : 16, fontWeight: 300 }}>
+      <Typography style={{ fontSize: 16, fontWeight: 300 }}>
         {day.date()}
       </Typography>
 
-      {dataPriceByDay ? (
+      {dataPriceByDay && dataPriceByDay[date] ? (
         <Fragment>
-          <br></br>
           <span className="dayContents__price">{dataPriceByDay[date].price_day / 1000000}TR</span>
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Grid>
   );
 };
