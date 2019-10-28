@@ -58,12 +58,12 @@ const LongtermRooms: NextPage = () => {
                           </GridContainer>
                         </HeadRoom>
 
-                        <FilterActions hideSearchBar={hideSearchBar} />
+                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
                       </header>
                     )}
                   </Sticky>
                 ) : (
-                    <FilterActions hideSearchBar={hideSearchBar} />
+                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
                 )}
 
                 <MapAndListing/>
@@ -77,9 +77,9 @@ const LongtermRooms: NextPage = () => {
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}
-                <SearchMobile />
+                <SearchHomeLT showPlaces={false}/>
               </GridContainer>
-              <FilterActions />
+              <FilterActions showBookByHour={false}/>
               <MapAndListing/>
               <BottomNav />
             </Hidden>

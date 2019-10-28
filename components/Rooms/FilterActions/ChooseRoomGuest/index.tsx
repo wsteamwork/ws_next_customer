@@ -19,6 +19,7 @@ const ChooseRoomGuest: FC = () => {
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const numberGuest = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
   const numberRoom = useSelector<ReducersList, number>((state) => state.searchFilter.roomsCount);
+  const leaseTypeGlobal = useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const valueInput = useMemo<string>(() => {
     if (numberGuest !== 0 && numberRoom !== 0) {

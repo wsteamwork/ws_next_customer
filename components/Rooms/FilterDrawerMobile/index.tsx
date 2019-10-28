@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       }
     },
     sortMargin: {
-      marginTop: 12
+      marginTop: 24
     },
     title: {
       fontWeight: 700
@@ -71,6 +71,12 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const [open, setOpen] = useState(false);
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypePathName= useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+
+  const queryTypeRoom = leaseTypeGlobal ? Router.query.accommodation_type : Router.query.type_room;
+  const queryAmenities = leaseTypeGlobal ? Router.query.comfort_lists : Router.query.amenities;
+
   const convertParams = (params: string) => {
     if (params) {
       return params.split(',').map((i) => parseInt(i, 10));
@@ -78,8 +84,8 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
       return [];
     }
   };
-  const roomTypeInit = convertParams(Router.query.type_room as string);
-  const amenitiesInit = convertParams(Router.query.amenities as string);
+  const roomTypeInit = convertParams(queryTypeRoom as string);
+  const amenitiesInit = convertParams(queryAmenities as string);
   const [dataRoomType, setDataRoomType] = useState<number[]>(roomTypeInit);
   const [dataAmentites, setDataAmentites] = useState<number[]>(amenitiesInit);
   const filterRoomType = () => {
@@ -88,6 +94,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const filterAmentites = () => {
     dispatch({ type: 'setAmenitiesFilter', amenities: dataAmentites });
   };
+
   const query = {
     type_room: dataRoomType.join(','),
     amenities: dataAmentites.join(','),
@@ -97,14 +104,22 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     price_day_to: price_day_to
   };
 
+  const queryLT = {
+    accommodation_type: dataRoomType.join(','),
+    comfort_lists: dataAmentites.join(','),
+    instant_book: instant_book,
+    min_price: price_day_from,
+    max_price: price_day_to
+  };
+
   const applyFilter = () => {
     setIndex(TAB_LIST);
     filterRoomType();
     filterAmentites();
 
     Router.push({
-      pathname: '/rooms',
-      query: updateObject<any>(Router.query, query)
+      pathname: leaseTypePathName,
+      query: updateObject<any>(Router.query, leaseTypeGlobal ? queryLT : query)
     });
   };
 
@@ -120,16 +135,19 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
       </DialogTitle>
       <DialogContent className={classes.dialog}>
         <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
-          <Grid container item xs={12}>
-            <Grid item xs={6} className={classes.inline}>
-              <Typography variant="subtitle2" className={classes.title}>
-                {t('rooms:filterRooms:bookByHour')}
-              </Typography>
+          {leaseTypeGlobal ? '' : (
+            <Grid container item xs={12}>
+              <Grid item xs={6} className={classes.inline}>
+                <Typography variant="subtitle2" className={classes.title}>
+                  {t('rooms:filterRooms:bookByHour')}
+                </Typography>
+              </Grid>
+              <Grid item xs={6} className={classes.itemRight}>
+                <BookingTypeMobile />
+              </Grid>
             </Grid>
-            <Grid item xs={6} className={classes.itemRight}>
-              <BookingTypeMobile />
-            </Grid>
-          </Grid>
+          )}
+
           <Grid container item xs={12}>
             <Grid item xs={6} className={classes.inline}>
               <Typography variant="subtitle2" className={classes.title}>

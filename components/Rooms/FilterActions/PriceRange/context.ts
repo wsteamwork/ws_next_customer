@@ -11,6 +11,8 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, MIN_PRICE, MAX_PRICE } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import numeral from 'numeral';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 type ReturnUsePriceRange = {
   open: boolean;
@@ -27,6 +29,13 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const { router } = useContext(GlobalContext);
   const { query } = router;
   const { price_day_from, price_day_to } = state;
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  const queryMinPrice = leaseTypeGlobal ? query.min_price : query.price_day_from;
+  const queryMaxPrice = leaseTypeGlobal ? query.max_price : query.price_day_to;
+  const paramMinPrice = leaseTypeGlobal ? 'min_price' : 'price_day_from';
+  const paramMaxPrice = leaseTypeGlobal ? 'max_price' : 'price_day_to';
 
   const checkPrice = useMemo<string>(() => {
     if (price_day_from === MIN_PRICE && price_day_to === MAX_PRICE) {
@@ -41,11 +50,11 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   }, [price_day_from, price_day_to]);
 
   useEffect(() => {
-    if (!!query.price_day_from && !!query.price_day_to) {
+    if (!!queryMinPrice && !!queryMaxPrice) {
       dispatch({
         type: 'setPrices',
-        price_day_from: parseInt(query.price_day_from as string, 10),
-        price_day_to: parseInt(query.price_day_to as string, 10)
+        price_day_from: parseInt(queryMinPrice as string, 10),
+        price_day_to: parseInt(queryMaxPrice as string, 10)
       });
     }
   }, [query]);
@@ -61,7 +70,7 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: MIN_PRICE, price_day_to: MAX_PRICE });
-    updateRouter('/rooms',true, 'price_day_from', MIN_PRICE, 'price_day_to', MAX_PRICE);
+    updateRouter(leaseTypePathName,true, paramMinPrice, MIN_PRICE, paramMaxPrice, MAX_PRICE);
   };
 
   return {

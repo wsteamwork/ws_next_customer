@@ -21,6 +21,7 @@ export type SearchFilterState = {
   readonly endDate: string | null;
   readonly roomRecently: number[];
   readonly leaseTypeGlobal?: 0 | 1; // 0 short term | 1 : long-term
+  readonly leaseTypePathName?: string; // /rooms :short term | /long-term-rooms : long-term
 };
 
 export type SearchFilterAction =
@@ -35,7 +36,7 @@ export type SearchFilterAction =
   | { type: 'SET_SEARCH_DISTRICT'; district_id: number | undefined }
   | { type: 'SET_START_DATE'; payload: string }
   | { type: 'SET_END_DATE'; payload: string }
-  | { type: 'setLeaseTypeGlobal'; leaseTypeGlobal: 0 | 1 };
+  | { type: 'setLeaseTypeGlobal'; leaseTypeGlobal: 0 | 1 ; leaseTypePathName: string};
 
 const init: SearchFilterState = {
   city_id: undefined,
@@ -49,6 +50,7 @@ const init: SearchFilterState = {
   endDate: null,
   roomRecently: [],
   leaseTypeGlobal: 0,
+  leaseTypePathName: '/rooms',
 };
 
 const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
@@ -79,7 +81,7 @@ const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
     case 'SET_END_DATE':
       return updateObject(state, { endDate: action.payload });
     case 'setLeaseTypeGlobal':
-      return updateObject(state, { leaseTypeGlobal: action.leaseTypeGlobal });
+      return updateObject(state, { leaseTypeGlobal: action.leaseTypeGlobal, leaseTypePathName:action.leaseTypePathName });
     default:
       return state;
   }

@@ -12,9 +12,11 @@ import InfoSearch from './InfoSearch';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 interface Iprops {
   hideSearchBar?: boolean;
+  showBookByHour?:boolean;
 }
 
 const FilterActions: FC<Iprops> = (props) => {
+  const {hideSearchBar, showBookByHour} = props;
   const { state } = useContext(RoomIndexContext);
   const { isMapOpen } = state;
   return (
@@ -23,37 +25,43 @@ const FilterActions: FC<Iprops> = (props) => {
       md={11}
       lg={10}
       className={`filterRooms 
-      ${!isMapOpen && props.hideSearchBar ? 'hideSearchBar' : ''}
+      ${!isMapOpen && hideSearchBar ? 'hideSearchBar' : ''}
       ${isMapOpen ? 'stickyFilter' : ''}
       `}>
       <Grid container>
         <Grid item xs={10} container spacing={1}>
           <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
-            <ChooseRoomGuest></ChooseRoomGuest>
+            <ChooseRoomGuest/>
           </Grid>
           <Grid item className="displayWebkit filterRooms__roomType">
-            <RoomType></RoomType>
+            <RoomType/>
           </Grid>
           <Grid item className="displayWebkit filterRooms__priceRange">
-            <PriceRange></PriceRange>
+            <PriceRange/>
           </Grid>
-          <Grid item className="displayWebkit filterRooms__bookByHourt">
-            <BookByHour></BookByHour>
-          </Grid>
+          {showBookByHour && (
+            <Grid item className="displayWebkit filterRooms__bookByHourt">
+              <BookByHour/>
+            </Grid>
+          )}
           <Grid item className="displayWebkit filterRooms__fastBooking">
-            <FastBooking></FastBooking>
+            <FastBooking/>
           </Grid>
           <Grid item className="displayWebkit filterRooms__filterRoom">
-            <FilterRoom></FilterRoom>
+            <FilterRoom/>
           </Grid>
         </Grid>
 
         <Grid item xs={2} container justify="flex-end">
-          <SwitchMap></SwitchMap>
+          <SwitchMap/>
         </Grid>
       </Grid>
     </GridContainer>
   );
+};
+
+FilterActions.defaultProps ={
+  showBookByHour:true
 };
 
 export default FilterActions;

@@ -53,19 +53,19 @@ const LongtermRoom: NextPage = () => {
 
   return (
     <Fragment>
-      {!!ltroom && (
-        <NextHead
-          ogSitename="Westay - Đặt phòng homestay trực tuyến"
-          title={`${ltroom.about_room.name} | Westay - Đặt phòng trực tuyến`}
-          description={`${ltroom.accommodation_type_txt} ${
-            ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'
-            } ngay tại ${ltroom.district.data.name}, ${
-            ltroom.city.data.name
-            }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
-          url={`https://westay.vn/ltroom/${ltroom.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
-        />
-      )}
+      {/*{!!ltroom && (*/}
+      {/*  <NextHead*/}
+      {/*    ogSitename="Westay - Đặt phòng homestay trực tuyến"*/}
+      {/*    title={`${ltroom.about_room.name} | Westay - Đặt phòng trực tuyến`}*/}
+      {/*    description={`${ltroom.accommodation_type_txt} ${*/}
+      {/*      ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'*/}
+      {/*      } ngay tại ${ltroom.district.data.name}, ${*/}
+      {/*      ltroom.city.data.name*/}
+      {/*      }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}*/}
+      {/*    url={`https://westay.vn/ltroom/${ltroom.id}`}*/}
+      {/*    ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}*/}
+      {/*  />*/}
+      {/*)}*/}
 
       <NavHeader />
 

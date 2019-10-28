@@ -113,7 +113,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     name: {
       fontWeight: theme.typography.fontWeightBold,
       color: '#484848',
-      fontSize: 24
+      fontSize: 24,
     }
   })
 );

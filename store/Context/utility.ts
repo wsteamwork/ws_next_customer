@@ -47,7 +47,6 @@ export const updateRouter = (
   }
 
   const query = updateObject(Router.query, obj);
-
   Router.push({
     pathname: pathName,
     query

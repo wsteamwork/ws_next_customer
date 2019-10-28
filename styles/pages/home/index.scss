@@ -35,11 +35,19 @@
     display: flex;
     align-items: center;
     @include xs {
-      display: none;
+      top: 75%;
+      transform: translate(-50%, -75%);
+      min-height: 10vh;
     }
 
     @include sm {
-      display: none;
+      top: 70%;
+      transform: translate(-50%, -70%);
+    }
+
+    @include md {
+      top: 65%;
+      transform: translate(-50%, -65%);
     }
   }
 
@@ -53,7 +61,11 @@
   }
 
   &__content {
-    padding: 15px 0px 8px;
+    padding: 16px 0px 8px;
+
+    @include smDown {
+      padding: 16px 0px;
+    }
   }
 
   &__title {

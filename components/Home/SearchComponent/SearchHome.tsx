@@ -18,10 +18,13 @@ const SearchHome = () => {
   const leaseTypeGlobal = useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
   const [indexTab, setIndexTab] = useState<number>(leaseTypeGlobal);
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-
   const changeLeaseTypeGlobal=(i: 0|1)=>{
     setIndexTab(i);
-    dispatch({ type:'setLeaseTypeGlobal', leaseTypeGlobal: i});
+    dispatch({
+      type:'setLeaseTypeGlobal',
+      leaseTypeGlobal: i,
+      leaseTypePathName: i ? '/long-term-rooms' : '/rooms'
+    });
   };
 
   return useMemo(
@@ -29,7 +32,7 @@ const SearchHome = () => {
       <GridContainer xs = {12} classNameItem = 'searchHome'>
         <NavHeaderHome />
 
-        <GridContainer xs = {12} md = {11} lg={10} classNameItem = 'searchHome__opa' >
+        <GridContainer xs = {11} sm={11} md = {11} lg={10} classNameItem = 'searchHome__opa' >
           <TabChangeHome value = {indexTab}
                          onChange={(e,i)=>changeLeaseTypeGlobal(i)}
                          tab = {[

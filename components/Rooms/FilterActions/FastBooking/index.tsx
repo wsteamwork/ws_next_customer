@@ -10,6 +10,8 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 const FastBooking: FC = () => {
   const { t } = useTranslation();
@@ -17,6 +19,7 @@ const FastBooking: FC = () => {
   const { instant_book } = state;
   const { router } = useContext(GlobalContext);
   const { query } = router;
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
 
   useEffect(() => {
     if (!!query.instant_book) {
@@ -27,13 +30,12 @@ const FastBooking: FC = () => {
   const handleClick = () => {
     if (instant_book === 0) {
       dispatch({ type: 'setInstantBook', payload: 1 });
-      updateRouter('/rooms',true, 'instant_book', 1, 'page', 1);
+      updateRouter(leaseTypePathName,true, 'instant_book', 1, 'page', 1);
     } else {
       dispatch({ type: 'setInstantBook', payload: 0 });
-      updateRouter('/rooms',true, 'instant_book', 0, 'page', 1);
+      updateRouter(leaseTypePathName,true, 'instant_book', 0, 'page', 1);
     }
   };
-
   return useMemo(
     () => (
       <CustomPopper

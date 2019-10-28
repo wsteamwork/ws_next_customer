@@ -11,6 +11,8 @@ import Pagination from 'rc-pagination';
 import NotFound from '@/components/Rooms/Lotte/NotFound';
 import { updateRouter } from '@/store/Context/utility';
 import LazyLoad from 'react-lazyload';
+import RoomCardListing from '@/components/Rooms/RoomCardListing';
+import ListRoom from '@/components/ListRoom';
 
 interface IProps {
   classes?: any,
@@ -38,6 +40,12 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const { t }                               = useTranslation();
   const [currentPage, setCurrentPage]       = useState<number>(1);
 
+  const renderRooms = (room) => (
+    <LazyLoad>
+      <LTRoomCardListing room={room}/>
+    </LazyLoad>
+  );
+
   const changePage  = (current: number) => {
     setCurrentPage(current);
     updateRouter('/long-term-rooms',true, 'page', current);
@@ -54,29 +62,31 @@ const ListingLTRooms: FC<IProps> = (props) => {
   return (
     <GridContainer xs = {11} md = {11} lg = {10}>
       {longtermRooms.length > 0 && !isLoading ? (
-        <Grid container spacing = {2}>
-          <Grid item xs={12}>
-            {meta && (<Typography variant='h5' className={classes.titleList}>
-              {meta.pagination ? `Có ${meta.pagination.total} kết quả tìm kiếm` : ''}
-            </Typography>)}
-          </Grid>
+        <Fragment>
+          {meta && (
+            <Typography variant='h5' className={classes.titleList}>
+            {meta.pagination ? `Tổng số ${meta.pagination.total} kết quả tìm kiếm` : ''}
+          </Typography>)}
 
-          {longtermRooms.map((o,i)=>(
-            <LazyLoad key={i}>
-              <LTRoomCardListing room={o}/>
-            </LazyLoad>
-          ))}
-
-          <Grid item xs={12}>
-            <Pagination
-              className = 'rooms-pagination'
-              total = {meta.pagination.total}
-              pageSize = {meta.pagination.per_page}
-              current = {currentPage}
-              onChange = {changePage}
-            />
-          </Grid>
-        </Grid>
+          <ListRoom
+            customClass=''
+            roomData={longtermRooms}
+            usingSlider={false}
+            title={''}
+            spacing={2}
+            render={renderRooms}
+            usingInMap={usingInMap}
+            hoverAction={hoverAction}
+            xs={12} sm={6} md={4} lg={4} xl={3}
+          />
+          <Pagination
+            className = 'rooms-pagination'
+            total = {meta.pagination.total}
+            pageSize = {meta.pagination.per_page}
+            current = {currentPage}
+            onChange = {changePage}
+          />
+        </Fragment>
       ) : !isEmpty ? (
         <Grid style={{marginTop:32}}>
           <LoadingSkeleton type = {'rooms'} duplicate = {5} />

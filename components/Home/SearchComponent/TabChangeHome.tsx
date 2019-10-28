@@ -16,7 +16,7 @@ interface testTab {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
-      top: '-25%',
+      top: '-7vh',
       position: 'absolute'
     },
     indicator: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         minWidth: 0
       },
-      backgroundColor: 'rgba(225,225,225, 0.2)',
+      backgroundColor: 'rgba(225,225,225, 0.5)',
       borderRadius: 4,
       opacity:0.9,
       padding: '0 24px'
@@ -40,7 +40,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       letterSpacing: 0.5,
       color: '#323232',
       fontWeight: 700,
-      fontSize: 18
+      fontSize: 18,
+      [theme.breakpoints.only('xs')]:{
+        fontSize: 16,
+      }
     }
   })
 );

@@ -13,10 +13,11 @@ import DateRangeOutline from '@material-ui/icons/DateRangeOutlined';
 import { useTranslation } from 'react-i18next';
 import GridContainer from '@/components/Layout/Grid/Container';
 import SearchComponent from '@/components/Home/SearchComponent';
-import { ReducersType } from '@/store/Redux/Reducers';
+import { ReducersType, ReducersList } from '@/store/Redux/Reducers';
 import { compose } from "recompose";
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
 
 
 interface IProps {
@@ -84,6 +85,7 @@ const SearchMobile: FC<IProps> = (props) => {
     roomsCount,
     guestsCount
   } = filter;
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const handleClose = () => {
     setOpen(false);
@@ -141,7 +143,11 @@ const SearchMobile: FC<IProps> = (props) => {
               {t('rooms:search')}
             </Typography>
           </GridContainer>
-          <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={() => setOpen(false)} />
+          {leaseTypeGlobal ? (
+            <SearchHomeLT showPlaces={false} className={classes.modalSearch}/>
+          ) : (
+            <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={() => setOpen(false)} />
+          )}
         </GridContainer>
       </Modal>
     </Grid>
