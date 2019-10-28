@@ -127,8 +127,8 @@ export const calcPercentage = (portion: number, total: number) => {
   const percent = parseInt(((portion / total) * 100).toFixed(2));
 
   if (portion > total) {
-    return `+ ${percent}%`;
+    return `Tăng ${percent - 100}%`;
   } else {
-    return `- ${100 - percent}%`;
+    return `Giảm ${100 - percent}%`;
   }
 };

@@ -126,7 +126,6 @@ const BookingForm: FC = () => {
 
     try {
       const res = await createLTBooking(data);
-      console.log(res);
 
       if (ltroom.instant_book === 0) {
         setOpenDialog(true);

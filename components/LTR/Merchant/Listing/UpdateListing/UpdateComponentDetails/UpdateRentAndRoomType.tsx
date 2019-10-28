@@ -83,7 +83,7 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const [statusLongTerm, setStatusLongTerm] = useState<boolean>(!!status_long_term);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công !");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 

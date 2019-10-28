@@ -13,6 +13,7 @@ export type PriceTermState = {
   readonly priceST: IPriceShortTerm;
   readonly priceLT: IPriceLongTerm;
   readonly serviceFee: IServicesFee;
+  readonly all_fee_included_in_prices;
   error: boolean;
 };
 
@@ -20,12 +21,14 @@ export type PriceTermActions =
   | { type: 'setPriceST'; payload: IPriceShortTerm }
   | { type: 'setPriceLT'; payload: IPriceLongTerm }
   | { type: 'setServiceFee'; payload: IServicesFee }
+  | { type: 'setAllFeeIncluded'; payload: number }
   | { type: 'setError'; payload: boolean };
 
 export const init: PriceTermState = {
   priceST: null,
   priceLT: null,
   serviceFee: { included_fee: [] },
+  all_fee_included_in_prices: 1,
   error: false
 };
 
@@ -40,6 +43,8 @@ export const PriceTermReducer: Reducer<PriceTermState, PriceTermActions> = (
       return updateObject(state, { priceLT: action.payload });
     case 'setServiceFee':
       return updateObject(state, { serviceFee: action.payload });
+    case 'setAllFeeIncluded':
+      return updateObject(state, { all_fee_included_in_prices: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -57,10 +62,10 @@ export const getPrice = async (id: any, dispatch: Dispatch<PriceTermActions>): P
     });
     dispatch({
       type: 'setServiceFee',
-      payload: res.data.data.prices.included_fee
-        ? res.data.data.prices.included_fee
-        : { included_fee: [] }
-    });
+      payload: {[`included_fee`]: res.data.data.prices.included_fee ? res.data.data.prices.included_fee : [] } });
+    dispatch({
+      type: 'setAllFeeIncluded',
+      payload: res.data.data.prices.all_fee_included_in_prices !== undefined ? res.data.data.prices.all_fee_included_in_prices : 1 });
     return 1;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });

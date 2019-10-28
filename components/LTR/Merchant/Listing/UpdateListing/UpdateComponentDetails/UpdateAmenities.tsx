@@ -1,7 +1,6 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
-import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
@@ -27,8 +26,6 @@ const UpdateAmenities: FC<IProps> = (props) => {
   const facilitiesClick = useSelector<ReducersList, number[]>(
     (state) => state.amenities.facilities
   );
-  const dispatch_img = useDispatch<Dispatch<ImageReducerAction>>();
-
   const bathroomsClick = useSelector<ReducersList, number[]>((state) => state.amenities.bathrooms);
   const kitchensClick = useSelector<ReducersList, number[]>((state) => state.amenities.kitchens);
   const entertainmentClick = useSelector<ReducersList, number[]>(
@@ -44,7 +41,7 @@ const UpdateAmenities: FC<IProps> = (props) => {
   const room_id = useSelector<ReducersList, number>((state) => state.amenities.room_id);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>(null);
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
   const getAmenitiesList = async () => {
     const url = `comforts`;
     const res: AxiosRes<any> = await axios_merchant.get(url);
@@ -54,7 +51,6 @@ const UpdateAmenities: FC<IProps> = (props) => {
 
   useEffect(() => {
     getDataAmenities(id, dispatch_amen);
-    getDataImages(id, dispatch_img);
   }, []);
 
   useEffect(() => {

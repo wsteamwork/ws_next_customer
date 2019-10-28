@@ -1,9 +1,10 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import numeral from 'numeral';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CardWrapperItem from '../CardWrapperItem';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -27,11 +28,16 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const PriceLongTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/price-long-term`);
+  };
 
   return (
     <Fragment>
-      {!!listing ? (
-        <CardWrapperItem title="Giá thuê dài hạn">
+      {listing ? (
+        <CardWrapperItem title="Giá thuê dài hạn" onClick={openUpdate}>
           <Grid item xs={12}>
             <Grid item xs={12} className={classes.margin}>
               <Typography variant="subtitle2" className={classes.name}>

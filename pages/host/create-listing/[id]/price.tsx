@@ -29,14 +29,9 @@ const RoomCreateListing = () => {
 
   useEffect(() => {
     getListingPrices(id, dispatchStep)
-      .catch(err => {
-        console.log(err);
-      });
-
-    getPrice(id, dispatchPriceTerm).catch(err => {
-      // console.log('price term: ' + err)
-    })
+    getPrice(id, dispatchPriceTerm)
   }, []);
+  
   useEffect(() => {
     localStorage.setItem('currentStep', '3');
     dispatch_process({ type: 'setActiveStepListing', payload: '3' });
@@ -117,7 +112,6 @@ const RoomCreateListing = () => {
         url='/host/create-listing'
         ogImage='/static/images/Bg_home.4023648f.jpg' />
 
-      {/* <NavHeader></NavHeader> */}
       <Layout
         title='Bước 3: Giá và dịch vụ'
         getSteps={getSteps}

@@ -78,7 +78,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
 
   const FormValidationSchema = useValidatation();
 

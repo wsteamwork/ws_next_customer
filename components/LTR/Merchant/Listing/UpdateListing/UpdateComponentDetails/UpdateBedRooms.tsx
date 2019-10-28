@@ -28,7 +28,7 @@ const UpdateBedRooms: FC<IProps> = (props) => {
   const id = router.query.id;
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
   const { room_id, bedRoomsNumber, bedRooms } = useSelector<ReducersList, UpdateDetailsState>(
     (state) => state.updateDetails
   );
