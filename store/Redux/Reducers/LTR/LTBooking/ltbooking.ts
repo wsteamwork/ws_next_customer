@@ -1,27 +1,28 @@
-import { createContext, Dispatch, Reducer } from 'react';
-
-import moment from 'moment';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import { updateObject } from '@/store/Context/utility';
 import {
-  LTBookingPriceCalculatorRes,
-  LTBookingIndexRes
-} from '@/types/Requests/Booking/BookingResponses';
-import {
-  LTBookingReq,
-  LTBookingPriceCalculatorReq,
-  LTBookingCreateReq
+  LTBookingCreateReq,
+  LTBookingPriceCalculatorReq
 } from '@/types/Requests/Booking/BookingRequests';
+import {
+  LTBookingIndexRes,
+  LTBookingPriceCalculatorRes
+} from '@/types/Requests/Booking/BookingResponses';
+import { PaymentBankListRes } from '@/types/Requests/Payment/PaymentResponse';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import moment from 'moment';
+import qs from 'query-string';
+import { Dispatch, Reducer } from 'react';
 import { ReducresActions } from '../..';
-import { getLTRoom } from '../LTRoom/ltroomReducer';
 
 export type LTBookingReducerState = {
   readonly movein: string | null;
   readonly moveout: string | null;
   readonly numberOfGuests: number;
   readonly LTBookingPriceCalculate: LTBookingPriceCalculatorRes;
+  readonly LTDataInvoice: PaymentBankListRes;
+  readonly LTPaymentError: boolean;
 };
 
 export type LTBookState = {
@@ -32,13 +33,17 @@ export type LTBookingAction =
   | { type: 'setMoveIn'; payload: string }
   | { type: 'setMoveOut'; payload: string }
   | { type: 'setNumberOfGuests'; payload: number }
-  | { type: 'setLTBookingPriceCalculate'; payload: LTBookingPriceCalculatorRes };
+  | { type: 'setLTBookingPriceCalculate'; payload: LTBookingPriceCalculatorRes }
+  | { type: 'setLTDataInvoice'; payload: PaymentBankListRes }
+  | { type: 'setLTPaymentError'; payload: boolean };
 
 export const init: LTBookingReducerState = {
   movein: moment().format(DEFAULT_DATE_FORMAT),
   moveout: '',
   numberOfGuests: 1,
-  LTBookingPriceCalculate: null
+  LTBookingPriceCalculate: null,
+  LTDataInvoice: null,
+  LTPaymentError: false
 };
 
 export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> = (
@@ -54,6 +59,10 @@ export const ltBookingReducer: Reducer<LTBookingReducerState, LTBookingAction> =
       return updateObject(state, { numberOfGuests: action.payload });
     case 'setLTBookingPriceCalculate':
       return updateObject(state, { LTBookingPriceCalculate: action.payload });
+    case 'setLTDataInvoice':
+      return updateObject(state, { LTDataInvoice: action.payload });
+    case 'setLTPaymentError':
+      return updateObject(state, { LTPaymentError: action.payload });
     default:
       return state;
   }
@@ -98,18 +107,58 @@ export const getLTBookingData = async (
     const [LTBookingPriceCalculate] = res;
 
     dispatch({ type: 'setLTBookingPriceCalculate', payload: LTBookingPriceCalculate });
-    dispatch({ type: 'setError', payload: false });
+    dispatch({ type: 'setLTPaymentError', payload: false });
 
     return { LTBookingPriceCalculate };
   } catch (error) {
-    dispatch({ type: 'setError', payload: true });
+    dispatch({ type: 'setLTPaymentError', payload: true });
   }
 
   // const res = Promise.all([])
 };
 
 export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookingIndexRes> => {
-  const res: AxiosRes<LTBookingIndexRes> = await axios.post('long-term-bookings', req);
+  const res: AxiosRes<LTBookingIndexRes> = await axios.post(
+    'long-term-bookings?include=contracts',
+    req
+  );
   console.log(res.data.data);
+  return res.data.data;
+};
+
+export const getLTInvoice = async (
+  query: any,
+  dispatch: Dispatch<ReducresActions>,
+  initLanguage: string = 'vi'
+): Promise<PaymentBankListRes> => {
+  const { uuid } = query;
+
+  const params = {
+    include: 'contracts,longTermRoom,longTermRoom.city,longTermRoom.district'
+  };
+
+  const queryString = qs.stringify(params);
+  const url = `long-term-booking-bank-list/${uuid}?${queryString}`;
+
+  try {
+    const res: AxiosRes<PaymentBankListRes> = await axios.get(url, {
+      headers: { 'Accept-Language': initLanguage }
+    });
+
+    dispatch({ type: 'setLTDataInvoice', payload: res.data.data });
+    dispatch({ type: 'setLTPaymentError', payload: false });
+    return res.data.data;
+  } catch (error) {
+    dispatch({ type: 'setLTPaymentError', payload: true });
+  }
+};
+
+export const LTredirectToBaoKim = async (uuid: string, bank_id: number): Promise<string> => {
+  const request = {
+    payment_method: 4,
+    bank_payment_method_id: bank_id
+  };
+
+  const res: AxiosRes<string> = await axios.post(`long-term-booking-payment/${uuid}`, request);
   return res.data.data;
 };

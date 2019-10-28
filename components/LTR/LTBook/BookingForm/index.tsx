@@ -130,17 +130,28 @@ const BookingForm: FC = () => {
 
       if (ltroom.instant_book === 0) {
         setOpenDialog(true);
-      } else {
+      } else if (res) {
+        console.log(values.paymentMethod);
+        let query = {
+          uuid: res.contracts.data[0].uuid
+        };
         if (values.paymentMethod === 'payment1') {
-          router.push(`/payment/direct/${res.uuid}`);
+          router.push({
+            pathname: '/long-term-booking/payment/direct',
+            query
+          });
         } else {
-          router.push(`/payment/invoice/${res.uuid}`);
+          router.push({
+            pathname: '/long-term-booking/payment/invoice',
+            query
+          });
         }
       }
 
       actions.setSubmitting(false);
     } catch (error) {
-      router.push(`/long-term-room/${data.long_term_room_id}`);
+      console.log(error);
+      // router.push(`/long-term-room/${data.long_term_room_id}`);
       actions.setSubmitting(false);
     }
   };

@@ -1,7 +1,10 @@
-import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
+import { BookingIndexRes, LTBookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
+import { LTRoomIndexRes } from '../LTR/LTRoom/LTRoom';
+import { TransformerInclude } from '../ResponseTemplate';
 
-export interface PaymentBankListRes extends BookingIndexRes {
+export interface PaymentBankListRes extends BookingIndexRes, LTBookingIndexRes {
   bank_list: PaymentMethod[];
+  longTermRoom?: TransformerInclude<LTRoomIndexRes>;
 }
 
 export interface PaymentMethod {

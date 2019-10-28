@@ -1,36 +1,17 @@
-import React, { useContext, useReducer, useEffect, Fragment } from 'react';
-import { NextPage } from 'next';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import { Grid } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  BookingDetailContext,
-  BookingDetailReducer,
-  BookingDetailStateInit,
-  getRoomBookingDetail
-} from '@/store/Context/Booking/BookingDetailContext';
-import { useSelector } from 'react-redux';
-import { ReducersList, NextContextPage } from '@/store/Redux/Reducers';
-import {
-  BookingPriceCalculatorRes,
-  LTBookingPriceCalculatorRes
-} from '@/types/Requests/Booking/BookingResponses';
-import BookingInfoDetail from '@/components/LTR/LTBook/BookingInfoDetail';
-import { getDataBook } from '@/store/Redux/Reducers/Book/book';
-import SettingDetails from '@/components/LTR/LTBook/BookingForm/SettingDetails';
-import RoomHotBook from '@/components/LTR/LTBook/BookingForm/RoomHotBook';
 import BookingForm from '@/components/LTR/LTBook/BookingForm';
-import NextHead from '@/components/NextHead';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { getCookieFromReq } from '@/utils/mixins';
-import {
-  ltBookingReducer,
-  getLTBookingData,
-  LTBookingReducerState
-} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import BookingInfoDetail from '@/components/LTR/LTBook/BookingInfoDetail';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getLTBookingData } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { getCookieFromReq } from '@/utils/mixins';
+import { Grid } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 const LongTermBook: NextPage = (props) => {
   const { width, router } = useContext(GlobalContext);
