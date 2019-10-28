@@ -157,7 +157,7 @@ const PaymentInfo: FC = (props) => {
                 <ExpansionPanelDetails className={'details noPadding'}>
                   {longTermRoom && LTDataInvoice ? (
                     <Grid container spacing={2}>
-                      {infoStatus && (
+                      {
                         <Fragment>
                           <Grid container item xs={12}>
                             <Grid item xs={6} className={'fontLow'}>
@@ -212,7 +212,7 @@ const PaymentInfo: FC = (props) => {
                             </Grid>
                           </Grid> */}
                         </Fragment>
-                      )}
+                      }
                     </Grid>
                   ) : (
                       <SimpleLoader />
