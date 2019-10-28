@@ -54,6 +54,39 @@ export const handleCompareList = (
   }
 };
 
+export const settingSliderRoomCard = {
+  rebuildOnUpdate: true,
+  lazy: true,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
+  renderPrevButton: () => (
+    <FontAwesomeIcon
+      className="swiper-button-prev"
+      icon={faChevronLeft}
+      size="2x"
+      color="#fff"/>
+  ),
+  renderNextButton: () => (
+    <FontAwesomeIcon
+      className="swiper-button-next"
+      icon={faChevronRight}
+      size="2x"
+      color="#fff"/>
+  ),
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    dynamicBullets: true
+  },
+  loop: true,
+  // getSwiper: (swiper: SwiperInstance) => {
+  //   swiper.update();
+  // }
+};
+
 const RoomCardListing: FC<Iprops> = (props) => {
   const { room } = props;
   const { t }: UseTranslationResponse = useTranslation();
@@ -64,38 +97,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
     (state) => state.compareRooms.compareRooms
   );
 
-  const settings = {
-    rebuildOnUpdate: true,
-    lazy: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    renderPrevButton: () => (
-      <FontAwesomeIcon
-        className="swiper-button-prev"
-        icon={faChevronLeft}
-        size="2x"
-        color="#fff"></FontAwesomeIcon>
-    ),
-    renderNextButton: () => (
-      <FontAwesomeIcon
-        className="swiper-button-next"
-        icon={faChevronRight}
-        size="2x"
-        color="#fff"></FontAwesomeIcon>
-    ),
 
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      dynamicBullets: true
-    },
-    loop: true,
-    // getSwiper: (swiper: SwiperInstance) => {
-    //   swiper.update();
-    // }
-  };
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
 
@@ -103,7 +105,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <Swiper {...settings}>
+          <Swiper {...settingSliderRoomCard}>
             {room.media.data.length > 0 ? (
               _.map(room.media.data, (o) => (
                 <div key={o.image}>

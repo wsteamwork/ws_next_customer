@@ -28,6 +28,7 @@
     "service" : "Service",
     "valuable" : "Valuable",
     "rating" : "Rating",
+    "totalArea" : "area",
     "anonymous" : "Anonymous",
     "close" : "Close",
     "change": "Change",

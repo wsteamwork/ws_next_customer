@@ -63,8 +63,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   <RoomDescription description={room.about_room.description} space={room.about_room.space} note={room.about_room.note} />
                 </div>
                 <div className={classes.rowMargin}>
-                  <BoxListImageRoom livingrooms={room.livingrooms} outdoors={room.outdoors} furnitures={room.furnitures} cover_photo={room.cover_photo}
-                    kitchens={room.kitchens} bedrooms={room.bedrooms} bathrooms={room.bathrooms} roomName={room.about_room.name} />
+                  <BoxListImageRoom livingrooms={room.livingrooms} outdoors={room.outdoors} furnitures={room.furnitures} cover_photo={room.cover_photo} kitchens={room.kitchens} bedrooms={room.bedrooms} bathrooms={room.bathrooms} roomName={room.about_room.name} />
                 </div>
                 <div className={classes.rowMargin}>
                   <BoxAmenities facilities={room.comforts.facilities}

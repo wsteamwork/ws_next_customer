@@ -8,6 +8,8 @@ import { Instance } from 'tippy.js';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 
@@ -58,14 +60,19 @@ export const useFilterRoom = (
   const { router } = useContext(GlobalContext);
   const { query } = router;
   const { amenities } = state;
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  const queryAmenities = leaseTypeGlobal ? query.comfort_lists : query.amenities;
+  const paramAmenities = leaseTypeGlobal ? 'comfort_lists' : 'amenities';
 
   useEffect(() => {
     getDataFilter(setData);
   }, []);
 
   useEffect(() => {
-    if (!!query.amenities) {
-      const data = query.amenities as string;
+    if (!!queryAmenities) {
+      const data = queryAmenities as string;
       const res: number[] = data.split(',').map(function(i) {
         return parseInt(i, 10);
       });
@@ -86,7 +93,7 @@ export const useFilterRoom = (
   const handleSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setAmenitiesFilter', amenities: dataClick });
-    updateRouter(false, 'amenities', dataClick, 'page', 1);
+    updateRouter(leaseTypePathName,false, paramAmenities, dataClick, 'page', 1);
   };
 
   const handleClose = () => {

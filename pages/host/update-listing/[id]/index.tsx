@@ -1,37 +1,22 @@
-import React, { FC, Fragment, useEffect, useContext } from 'react';
-import {
-  createStyles,
-  Grid,
-  Theme,
-  AppBar,
-  Tabs,
-  withStyles,
-  Tab,
-  Box,
-  Breadcrumbs
-} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/styles';
 import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/ListingDetails';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  getListingDetails,
-  ListingDetailsReducerAction
-} from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Dispatch } from 'redux';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
+import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
-import {
-  AmenitiesReducerAction,
-  getDataAmenities
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
+import { getListingDetails, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { AppBar, Box, Breadcrumbs, createStyles, Grid, Tab, Tabs, Theme, withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 interface IProps {
   classes?: any;
 }
@@ -91,25 +76,26 @@ const AntTab = withStyles((theme: Theme) =>
   })
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
-const TabPanel = (props: TabPanelProps) => {
+export const TabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
     <Typography
       component="div"
+      style={{ width: '100%' }}
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0} mt={3}>
+      <Box p={0}>
         {children}
       </Box>
     </Typography>
   );
 };
 
-const a11yProps = (index: any) => {
+export const a11yProps = (index: any) => {
   return {
     id: `scrollable-prevent-tab-${index}`,
     'aria-controls': `scrollable-prevent-tabpanel-${index}`
@@ -141,6 +127,7 @@ const UpdateListing: FC<IProps> = (props) => {
   const id = router.query.id;
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
+  const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing
@@ -228,8 +215,8 @@ const UpdateListing: FC<IProps> = (props) => {
           </Grid>
         </Grid>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

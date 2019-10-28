@@ -19,6 +19,7 @@
     "rooms" : "phòng ngủ",
     "bathrooms" : "phòng tắm",
     "beds" : "giường",
+    "totalArea" : "diện tích",
     "readLess" : "Thu gọn",
     "readMore" : "Xem thêm",
     "emptyCalender" : "Lịch trống phòng",

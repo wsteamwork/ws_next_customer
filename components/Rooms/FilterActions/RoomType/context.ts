@@ -13,6 +13,8 @@ import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 export interface RoomTypeData {
   id: number;
@@ -35,7 +37,7 @@ type ReturnUseCheckBox = {
   handleRemove: MouseEventHandler;
   roomTypes: number[];
 };
- 
+
 export const useRoomTypeChecbox = (
   setOpen?: Dispatch<SetStateAction<boolean>>,
   dataClick?: number[],
@@ -46,14 +48,19 @@ export const useRoomTypeChecbox = (
   const { query } = router;
   const { roomTypes } = state;
   const [data, setData] = useState<RoomTypeData[]>([]);
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  const paramsAPI = leaseTypeGlobal ? 'accommodation_type' : 'type_room';
+  const queryTypeRoom = leaseTypeGlobal ? query.accommodation_type : query.type_room;
 
   useEffect(() => {
     getRoomType(setData);
   }, []);
 
   useEffect(() => {
-    if (!!query.type_room) {
-      const data = query.type_room as string;
+    if (!!queryTypeRoom) {
+      const data = queryTypeRoom as string;
       const res: number[] = data.split(',').map(function(i) {
         return parseInt(i, 10);
       });
@@ -76,7 +83,7 @@ export const useRoomTypeChecbox = (
 
   const handleSubmit = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataClick });
-    updateRouter(false, 'type_room', dataClick, 'page', 1);
+    updateRouter(leaseTypePathName,false, paramsAPI, dataClick, 'page', 1);
     setOpen(false);
   };
 
@@ -88,7 +95,7 @@ export const useRoomTypeChecbox = (
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setRoomTypes', roomTypes: [] });
-    updateRouter(false, 'type_room', '', 'page', 1);
+    updateRouter(leaseTypePathName,false, paramsAPI, '', 'page', 1);
     setDataClick([]);
   };
 

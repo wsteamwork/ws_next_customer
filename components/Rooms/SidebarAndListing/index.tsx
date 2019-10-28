@@ -38,7 +38,7 @@ const SidebarAndListing: FC = (props) => {
 
   const changePage = (current: number) => {
     setCurrentPage(current);
-    updateRouter(true, 'page', current);
+    updateRouter('/rooms',true, 'page', current);
   };
 
   useEffect(() => {

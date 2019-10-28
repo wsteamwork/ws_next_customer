@@ -19,6 +19,7 @@ export const updateObject = <T>(oldObject: T, newObject: Partial<T>): T => {
 };
 
 export const updateRouter = (
+  pathName:string,
   notArray: boolean,
   param: string,
   value: any,
@@ -46,9 +47,8 @@ export const updateRouter = (
   }
 
   const query = updateObject(Router.query, obj);
-
   Router.push({
-    pathname: '/rooms',
+    pathname: pathName,
     query
   });
 };

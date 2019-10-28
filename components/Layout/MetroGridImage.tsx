@@ -57,7 +57,7 @@ const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   );
 
   const locationRoom = (nameCity: string) => {
-    updateRouter(true, 'name', nameCity);
+    updateRouter('/rooms',true, 'name', nameCity);
     updateSearchText(nameCity)
   };
 

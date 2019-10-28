@@ -84,7 +84,7 @@ const SearchComponent: FC<IProps> = (props) => {
         )}
 
       <Grid item xs={12} md={2}>
-        <ButtonGlobal padding="0px" width="100%" onClick={applySearch}>
+        <ButtonGlobal padding="0px" width="100%" height={50} onClick={applySearch}>
           {t('home:searchComponent:search')}
         </ButtonGlobal>
       </Grid>

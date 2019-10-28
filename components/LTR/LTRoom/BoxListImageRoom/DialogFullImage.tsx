@@ -25,7 +25,6 @@ interface IProps {
   roomName: string,
   refKit?: Ref<any>
 }
-
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     dialogTitle: {
@@ -35,7 +34,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
     },
     btClose: {
-      marginRight: 16,
+      marginLeft: 16,
       padding: 8,
     },
     iconClose: {
@@ -61,6 +60,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     images: {
       width: '100%',
       borderRadius: 4,
+      height: 320,
+      maxHeight: 320,
+      objectFit: 'cover'
+    },
+    bigImage: {
+      width: '100%',
+      borderRadius: 4,
+      height: 500,
+      maxHeight: 500,
+      objectFit: 'cover'
     },
     listSection: {
       backgroundColor: '#fff',
@@ -125,7 +134,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.images} />
+                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
                       </Grid>
 
                       {livingrooms.images.map((o, i) => {
@@ -149,21 +158,24 @@ const DialogFullImage: FC<IProps> = (props) => {
                       <Typography variant='h5'>Phòng ngủ {i + 1}</Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={9}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.images} />
-                      </Grid>
-
-                      {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                  {
+                    bedrooms[`bedroom_${i+1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
+                      <Grid item xs={12} sm={12} md={9}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
                           </Grid>
-                        )
-                      })}
-                    </Grid>
-                  </Grid>
+
+                          {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
+                            if (i > 0) return (
+                              <Grid item xs={12} sm={6} key={i}>
+                                <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                              </Grid>
+                            )
+                          })}
+                        </Grid>
+                    </Grid>) : ''
+                  }
                 </Grid>
               </li>
             ))}
@@ -176,10 +188,12 @@ const DialogFullImage: FC<IProps> = (props) => {
                       <Typography variant='h5'>Phòng tắm {i + 1}</Typography>
                     </div>
                   </Grid>
+                  {
+                    bathrooms[`bathroom_${i+1}`] && bathrooms[`bathroom_${i+1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.images} />
+                        <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
                       </Grid>
 
                       {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
@@ -190,7 +204,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         )
                       })}
                     </Grid>
-                  </Grid>
+                  </Grid>) :''}
                 </Grid>
               </li>
             ))}
@@ -206,7 +220,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.images} />
+                        <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
                       </Grid>
 
                       {kitchens.images.map((o, i) => {
@@ -233,7 +247,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.images} />
+                        <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
                       </Grid>
 
                       {furnitures.images.map((o, i) => {
@@ -260,7 +274,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.images} />
+                        <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
                       </Grid>
 
                       {outdoors.images.map((o, i) => {

@@ -31,6 +31,8 @@ import { useTranslation } from 'react-i18next';
 import numeral from 'numeral';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps extends WithStyles<typeof styles> {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -88,6 +90,11 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { state, dispatch } = useContext(RoomFilterContext);
   const { price_day_from, price_day_to } = state;
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  const paramMinPrice = leaseTypeGlobal ? 'min_price' : 'price_day_from';
+  const paramMaxPrice = leaseTypeGlobal ? 'max_price' : 'price_day_to';
 
   const [price, setPrice] = useState<Range>({
     min: price_day_from ? price_day_from : MIN_PRICE,
@@ -133,7 +140,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const hanldeSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
-    updateRouter(true, 'price_day_from', price.min, 'price_day_to', price.max, 'page', 1);
+    updateRouter(leaseTypePathName,true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
   };
 
   // usePriceEffect(price, setPrice, state);

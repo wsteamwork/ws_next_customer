@@ -1,9 +1,11 @@
 import Footer from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
+import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
 import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -11,13 +13,11 @@ import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-import { Grid, Dialog } from '@material-ui/core';
+import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useMemo, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import BoxRecommend from '@/components/Room/BoxRecommend';
-import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
@@ -25,15 +25,15 @@ const LongtermRoom: NextPage = () => {
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
   const [] = useVisitedRoom();
   const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
-
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);
   };
 
+  console.log(ltroom);
+
   const handleCloseBookingDialog = () => {
     setOpenBookingDialog(false);
   };
-  useEffect(() => console.log(openBookingDialog));
 
   // useEffect(() => {
   //   if (error || !ltroom.status) router.push('/not-found-resource');
@@ -55,7 +55,7 @@ const LongtermRoom: NextPage = () => {
       {/*{!!ltroom && (*/}
       {/*  <NextHead*/}
       {/*    ogSitename="Westay - Đặt phòng homestay trực tuyến"*/}
-      {/*    title={`${ltroom.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}*/}
+      {/*    title={`${ltroom.about_room.name} | Westay - Đặt phòng trực tuyến`}*/}
       {/*    description={`${ltroom.accommodation_type_txt} ${*/}
       {/*      ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'*/}
       {/*      } ngay tại ${ltroom.district.data.name}, ${*/}
@@ -98,7 +98,6 @@ const LongtermRoom: NextPage = () => {
                       number_room={ltroom.merchant.data.number_room}
                       handleOpenBookingDialog={handleOpenBookingDialog}
                     />
-                    {/* <div onClick={()=>setOpenBookingDialog(true)}>test</div>   */}
                   </Grid>
 
                   <Grid item xs={12}>
@@ -114,8 +113,8 @@ const LongtermRoom: NextPage = () => {
                 </Grid>
               </GridContainer>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </Fragment>
         ),
         [ltroom]
@@ -124,7 +123,7 @@ const LongtermRoom: NextPage = () => {
         fullScreen
         open={openBookingDialog}
         onClose={handleCloseBookingDialog}
-        // TransitionComponent={Transition}
+      // TransitionComponent={Transition}
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>

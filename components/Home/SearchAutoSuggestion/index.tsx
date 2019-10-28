@@ -37,10 +37,12 @@ const styles: any = (theme: Theme) =>
     container: {
       margin: '0 auto',
       height: '100%',
-      border: '1px solid #ddd',
       borderRadius: 4,
-      background: '#fff',
-      position: 'relative'
+      background: '#f5f5f5',
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+      display:'flex'
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -49,7 +51,9 @@ const styles: any = (theme: Theme) =>
       overflowY: 'scroll',
       borderTop: '1px solid #ddd',
       width: '100%',
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
+      boxShadow:'0 3px 35px 0 rgba(132,135,138,.2) !important',
+      top: '100%'
     },
     textFieldRoot: {
       color: '#fff',
@@ -109,7 +113,7 @@ const styles: any = (theme: Theme) =>
       fontSize: 14
     },
     startAdornment: {
-      marginLeft: 8
+      marginLeft: 12
     },
     inputCustom: {
       height: '45px'
