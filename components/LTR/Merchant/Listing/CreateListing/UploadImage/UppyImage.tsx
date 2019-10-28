@@ -49,13 +49,13 @@ const UppyImage: FC<IProps> = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (initImages.length < 1) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    } else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
-  }, [initImages]);
+  // useEffect(() => {
+  //   if (initImages.length < 1) {
+  //     dispatch_detail({ type: 'setDisableNext', payload: true });
+  //   } else {
+  //     dispatch_detail({ type: 'setDisableNext', payload: false });
+  //   }
+  // }, [initImages]);
 
   const initImage = async (arrImg) => {
     for (let i = 0; i < arrImg.length; i++) {

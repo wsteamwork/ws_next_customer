@@ -81,14 +81,14 @@ const Description: FC<IProps> = (props) => {
     dispatch_detail({ type: 'setStep', payload: 'tab1' });
   }, []);
 
-  useMemo(() => {
-    if (name.length < 10 || description.length < 50) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    }
-    else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
-  }, [name, description]);
+  // useMemo(() => {
+  //   if (name.length < 10 || description.length < 50) {
+  //     dispatch_detail({ type: 'setDisableNext', payload: true });
+  //   }
+  //   else {
+  //     dispatch_detail({ type: 'setDisableNext', payload: false });
+  //   }
+  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
