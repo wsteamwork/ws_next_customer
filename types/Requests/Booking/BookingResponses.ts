@@ -77,9 +77,38 @@ export interface LTBookingIndexRes {
   booking_purpose: string;
   status_reviews: number;
   bank_list: any;
+  contracts?: TransformerInclude<LTBookingContracts>;
 }
 
-interface LTPriceAndContract {
+export interface LTBookingContracts {
+  id: number;
+  uuid: string;
+  booking_id: string;
+  price_original: string;
+  price_with_fee: string;
+  range_stay: number;
+  fee_included: any[];
+  fee_not_included: any[];
+  status: number;
+  move_in: string;
+  move_out: string;
+  payment: {
+    payment_term: NumberConstructor;
+    payment_period: LTPaymentPeriod[];
+  };
+  created_at: string;
+  updated_at: string;
+}
+export interface LTPaymentPeriod {
+  id: number;
+  payment_due_date: string;
+  payment_status: number;
+  payment_method: number;
+  payment_amount: number;
+  notify: number;
+}
+
+export interface LTPriceAndContract {
   price_original: number;
   deposit: number;
   price_with_fee: number;

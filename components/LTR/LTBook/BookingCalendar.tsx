@@ -63,7 +63,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
     };
 
     Router.push({
-      pathname: '/long-term-book',
+      pathname: '/long-term-booking',
       query
     });
   };
