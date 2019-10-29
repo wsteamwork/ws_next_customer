@@ -62,12 +62,20 @@ export const getPrice = async (id: any, dispatch: Dispatch<PriceTermActions>): P
     });
     dispatch({
       type: 'setServiceFee',
-      payload: {[`included_fee`]: res.data.data.prices.included_fee ? res.data.data.prices.included_fee : [] } });
+      payload: {
+        [`included_fee`]: res.data.data.prices.included_fee ? res.data.data.prices.included_fee : []
+      }
+    });
     dispatch({
       type: 'setAllFeeIncluded',
-      payload: res.data.data.prices.all_fee_included_in_prices !== undefined ? res.data.data.prices.all_fee_included_in_prices : 1 });
+      payload:
+        res.data.data.prices.all_fee_included_in_prices !== undefined
+          ? res.data.data.prices.all_fee_included_in_prices
+          : 1
+    });
     return 1;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
   }
 };
+

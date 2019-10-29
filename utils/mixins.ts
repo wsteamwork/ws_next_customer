@@ -132,3 +132,62 @@ export const calcPercentage = (portion: number, total: number) => {
     return `Giảm ${100 - percent}%`;
   }
 };
+
+export const weekdayOptions = [
+  {
+    title: 'Thứ 2',
+    weekday: 2,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 3',
+    weekday: 3,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 4',
+    weekday: 4,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 5',
+    weekday: 5,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 6',
+    weekday: 6,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 7',
+    weekday: 7,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Chủ nhật',
+    weekday: 1,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  }
+];
