@@ -5,7 +5,7 @@ import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
-import BoxRecommend from '@/components/Room/BoxRecommend';
+// import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -100,9 +100,9 @@ const LongtermRoom: NextPage = () => {
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <BoxRecommend />
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">
                   <BoxBottomBooking

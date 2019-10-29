@@ -15,9 +15,6 @@ import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
 import DateRangeVertical from './DateRangeVertical';
 
-
-
-
 interface Iprops {
   handleCloseBookingDialog: () => void;
 }

@@ -1,14 +1,12 @@
-import React, { Fragment, FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import ListRoom from '@/components/ListRoom';
+import RoomCard from '@/components/RoomCard';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import ListRoom from '@/components/ListRoom';
-import CardIntro from '@/components/Cards/CardIntro';
-import numeral from "numeral";
-import RoomCard from '@/components/RoomCard';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any

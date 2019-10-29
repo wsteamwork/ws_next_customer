@@ -1,15 +1,15 @@
-import React, { FC, useContext, Fragment, useState, MouseEvent } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Hidden } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Orange from '@material-ui/core/colors/orange';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Hidden, Theme } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Orange from '@material-ui/core/colors/orange';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC, Fragment, MouseEvent, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -89,7 +89,7 @@ const RoomAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { width } = useContext(GlobalContext);
-  const {room} = props;
+  const { room } = props;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
