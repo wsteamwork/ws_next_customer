@@ -53,7 +53,7 @@ const FilterActions: FC<Iprops> = (props) => {
         </Grid>
 
         <Grid item xs={2} container justify="flex-end">
-          <SwitchMap/>
+          {/*<SwitchMap/>*/}
         </Grid>
       </Grid>
     </GridContainer>
