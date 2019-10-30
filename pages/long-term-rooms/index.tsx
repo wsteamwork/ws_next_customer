@@ -26,12 +26,12 @@ const LongtermRooms: NextPage = () => {
     <Fragment>
       <NextHead
         ogSitename="Westay - Thuê phòng trực tuyến"
-        title="Thuê phòng dài hạn, thuê trọ - Westay - Westay.vn - Westay.vn"
-        description="Thuê phòng dài hạn, thuê trọ - Westay - Westay.vn - Westay.vn"
+        title="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
+        description="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/long-term-rooms"/>
+        url="/long-term-rooms" />
 
-      <NavHeader isSticky={isMapOpen}/>
+      <NavHeader isSticky={isMapOpen} />
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
@@ -54,19 +54,19 @@ const LongtermRooms: NextPage = () => {
                             lg={10}
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
-                            <SearchHomeLT showPlaces={false}/>
+                            <SearchHomeLT showPlaces={false} />
                           </GridContainer>
                         </HeadRoom>
 
-                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
+                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
                       </header>
                     )}
                   </Sticky>
                 ) : (
-                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
-                )}
+                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
+                  )}
 
-                <MapAndListing/>
+                <MapAndListing />
               </StickyContainer>
             </Hidden>
             <Hidden mdUp implementation="css">
@@ -77,10 +77,10 @@ const LongtermRooms: NextPage = () => {
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}
-                <SearchHomeLT showPlaces={false}/>
+                <SearchHomeLT showPlaces={false} />
               </GridContainer>
-              <FilterActions showBookByHour={false}/>
-              <MapAndListing/>
+              <FilterActions showBookByHour={false} />
+              <MapAndListing />
               <BottomNav />
             </Hidden>
           </div>
