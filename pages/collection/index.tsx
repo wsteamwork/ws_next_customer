@@ -1,24 +1,24 @@
-import CardIntro from '@/components/Cards/CardIntro';
-import GridContainer from '@/components/Layout/Grid/Container';
-import RoomCard from '@/components/RoomCard';
+// import CardIntro from '@/components/Cards/CardIntro';
+// import GridContainer from '@/components/Layout/Grid/Container';
+// import RoomCard from '@/components/RoomCard';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getCollectionById } from '@/store/Redux/Reducers/Home/roomHomepage';
+// import { getCollectionById } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import Grid from '@material-ui/core/Grid/Grid';
+// import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+// import Grid from '@material-ui/core/Grid/Grid';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
 import { NextPage } from 'next';
-import Pagination from 'rc-pagination';
+// import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
-import localeInfo from 'rc-pagination/lib/locale/vi_VN';
+// import localeInfo from 'rc-pagination/lib/locale/vi_VN';
 import React, { Fragment, useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
-import { Collections } from '../../types/Requests/Rooms/RoomResponses';
+// import { Collections } from '../../types/Requests/Rooms/RoomResponses';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxTitle: {
@@ -69,16 +69,16 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Collection: NextPage = (props) => {
   const classes = useStyles(props);
-  const collection = useSelector<ReducersList, Collections>(
-    (state) => state.roomHomepage.collectionById
-  );
+  // const collection = useSelector<ReducersList, Collections>(
+  //   (state) => state.roomHomepage.collectionById
+  // );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize] = useState<number>(12);
-  const [rooms, setRooms] = useState<any>(collection.rooms.data);
+  // const [rooms, setRooms] = useState<any>(collection.rooms.data);
 
   const indexOfLast = currentPage * pageSize;
   const indexOfFirst = indexOfLast - pageSize;
-  const newData = rooms.slice(indexOfFirst, indexOfLast);
+  // const newData = rooms.slice(indexOfFirst, indexOfLast);
 
   const scrollTop = () => {
     let duration = 500 + window.scrollY * 0.1;
@@ -97,7 +97,7 @@ const Collection: NextPage = (props) => {
   return (
     <Fragment>
       <NavHeader></NavHeader>
-      {collection && (
+      {/* {collection && (
         <Fragment>
           <Grid container>
             <Grid item xs={12}>
@@ -150,7 +150,7 @@ const Collection: NextPage = (props) => {
               )}
           </GridContainer>
         </Fragment>
-      )}
+      )} */}
     </Fragment>
   );
 };
@@ -158,9 +158,9 @@ const Collection: NextPage = (props) => {
 Collection.getInitialProps = async ({ query, store, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
 
-  if (!store.getState().roomHomepage.collectionById) {
-    const data = await getCollectionById(query.id, store.dispatch, initLanguage);
-  }
+  // if (!store.getState().roomHomepage.collectionById) {
+  //   const data = await getCollectionById(query.id, store.dispatch, initLanguage);
+  // }
   return {};
 };
 

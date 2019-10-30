@@ -70,6 +70,8 @@ export interface RoomIndexRes {
   places: TransformerInclude<PlaceIndexResponse[]>;
   reviews: TransformerInclude<RoomReviewIndexResponse[]>;
   prices: TransformerInclude<PriceSpecialDays[]>;
+  room_name: string;
+  avatar_image: string;
 }
 
 export interface RoomDetails {
