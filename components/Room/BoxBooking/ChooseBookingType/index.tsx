@@ -30,7 +30,7 @@ const ChooseBookingType: FC = () => {
   return useMemo(
     () =>
       !!room &&
-      room.price_hour !== 0 && (
+      room.price_hour !== 0 && room.rent_type !== 2 && (
         <Grid className="boxBooking__chooseBooking">
           <FormControlLabel
             control={
