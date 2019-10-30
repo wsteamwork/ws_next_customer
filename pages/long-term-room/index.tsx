@@ -17,6 +17,8 @@ import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import NextHead from '@/components/NextHead';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 
 const LongtermRoom: NextPage = () => {
@@ -28,8 +30,6 @@ const LongtermRoom: NextPage = () => {
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);
   };
-
-  console.log(ltroom);
 
   const handleCloseBookingDialog = () => {
     setOpenBookingDialog(false);
@@ -52,19 +52,19 @@ const LongtermRoom: NextPage = () => {
 
   return (
     <Fragment>
-      {/*{!!ltroom && (*/}
-      {/*  <NextHead*/}
-      {/*    ogSitename="Westay - Đặt phòng homestay trực tuyến"*/}
-      {/*    title={`${ltroom.about_room.name} | Westay - Đặt phòng trực tuyến`}*/}
-      {/*    description={`${ltroom.accommodation_type_txt} ${*/}
-      {/*      ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'*/}
-      {/*      } ngay tại ${ltroom.district.data.name}, ${*/}
-      {/*      ltroom.city.data.name*/}
-      {/*      }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}*/}
-      {/*    url={`https://westay.vn/ltroom/${ltroom.id}`}*/}
-      {/*    ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {!!ltroom && (
+        <NextHead
+          ogSitename="Westay - Đặt phòng dài hạn trực tuyến"
+          title={`${ltroom.about_room.name} | Westay - Đặt phòng dài hạn trực tuyến`}
+          description={`${ltroom.accommodation_type_txt} ${
+            ltroom.accommodation_type == 3 ? 'nghỉ dưỡng' : 'tiện nghi'
+            } ngay tại ${ltroom.district.data.name}, ${
+            ltroom.city.data.name
+            }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
+          url={`https://westay.vn/ltroom/${ltroom.id}`}
+          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+        />
+      )}
 
       <NavHeader />
 

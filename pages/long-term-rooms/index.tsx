@@ -6,7 +6,7 @@ import NextHead from '@/components/NextHead';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { RoomIndexReducer, RoomIndexStateInit, RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { Hidden } from '@material-ui/core';
+import { Hidden, Grid } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
 import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
@@ -15,6 +15,7 @@ import BottomNav from '@/components/Rooms/BottomNav';
 import { StickyContainer, Sticky } from 'react-sticky';
 import HeadRoom from 'react-headroom';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
+import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -54,7 +55,19 @@ const LongtermRooms: NextPage = () => {
                             lg={10}
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
-                            <SearchHomeLT showPlaces={false}/>
+                            {/*<Grid container>*/}
+                            {/*  <Grid item xs={3}>*/}
+                            {/*    */}
+                            {/*  </Grid>*/}
+                            {/*</Grid>*/}
+                            <Grid container spacing={1}>
+                              <Grid item>
+                                <SelectLeaseTypeGlobal/>
+                              </Grid>
+                              <Grid item xs>
+                                <SearchHomeLT showPlaces={false}/>
+                              </Grid>
+                            </Grid>
                           </GridContainer>
                         </HeadRoom>
 

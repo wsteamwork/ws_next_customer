@@ -1,13 +1,9 @@
 import React, {
-  // ComponentType,
   Fragment,
-  // useState,
   useContext,
-  // memo,
-  // useEffect,
   useMemo,
   useState,
-  useEffect
+  useEffect, FC
 } from 'react';
 import _ from 'lodash';
 import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
@@ -15,9 +11,10 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import MapMarker from '../Map/MapMarker';
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface IProps {
-  rooms: RoomIndexRes[];
+  rooms: any;
   hoverAction(id: number): void;
   hoverId: number;
 }
