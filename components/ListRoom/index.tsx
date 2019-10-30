@@ -20,11 +20,11 @@ interface Iprops<T> extends Partial<SwiperOptions> {
   customClass?: string;
   usingInMap?: boolean;
   hoverAction?(id: number): void;
-  xs?:any;
-  sm?:any;
-  md?:any;
-  lg?:any;
-  xl?:any;
+  xs?: any;
+  sm?: any;
+  md?: any;
+  lg?: any;
+  xl?: any;
 }
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
@@ -50,7 +50,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     usingInMap,
     hoverAction,
     customClass = 'listRoomContainer',
-    xs,sm,md,lg,xl,
+    xs, sm, md, lg, xl,
     ...propsSwiper
   } = props;
   const classes = useStyles({});

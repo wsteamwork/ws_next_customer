@@ -1,15 +1,15 @@
-import React, { FC, Fragment } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Grid, Link, Typography, Theme, Tooltip } from '@material-ui/core';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import numeral from 'numeral';
-import StarIcon from '@material-ui/icons/StarRounded';
-import { UseTranslationResponse, useTranslation } from 'react-i18next';
-import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
+import { cleanAccents, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { formatPrice, cleanAccents } from '@/utils/mixins';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid, Link, Theme, Tooltip, Typography } from '@material-ui/core';
+import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
+import StarIcon from '@material-ui/icons/StarRounded';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import numeral from 'numeral';
+import React, { FC, Fragment } from 'react';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
 import Cookies from 'universal-cookie';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -35,7 +35,6 @@ const RoomCard: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
-
   return (
     <Fragment>
       <Grid className="roomCard">

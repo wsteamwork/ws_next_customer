@@ -34,7 +34,7 @@ const PriceDetail: FC = () => {
                     VND/ {t('room:boxBooking:day')}
                   </p>
                 </Grid>
-                {room.price_hour !== 0 && (
+                {room.price_hour !== 0 && room.rent_type !== 2 && (
                   <Grid item xs={6} className="priceDetail__priceHour flex_center">
                     <p>
                       {numeral(
