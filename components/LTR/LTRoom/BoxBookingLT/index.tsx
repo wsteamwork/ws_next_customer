@@ -52,14 +52,14 @@ const BoxBookingLT: FC<IProps> = (props) => {
 
   return (
     <div className={classes.boxContainer}>
-      <Typography variant="h6">{formatMoney(priceBasic)} Vnd</Typography>
+      <Typography variant="h6">{formatMoney(priceBasic)} {t('longtermroom:currency')}</Typography>
       <Typography variant="subtitle2">{term}</Typography>
 
       <div className={classes.rowMargin}>
         <ButtonGlobal padding="0px" width="100%" onClick={handleOpenBookingDialog}>
           <p className="flex_center" style={{ color: '#ffffff' }}>
             <OfflineBoltRounded />
-            &nbsp;&nbsp;{t('room:boxBooking:bookNow')}
+            &nbsp;&nbsp;{t('longtermroom:viewSchedule')}
           </p>
         </ButtonGlobal>
       </div>

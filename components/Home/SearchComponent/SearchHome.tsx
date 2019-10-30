@@ -36,8 +36,8 @@ const SearchHome = () => {
           <TabChangeHome value={indexTab}
             onChange={(e, i) => changeLeaseTypeGlobal(i)}
             tab={[
-              { label: 'Homestay' },
-              { label: 'Thuê dài hạn' }
+              { label: `${t('home:shortTermTab')}` },
+              { label: `${t('home:longTermTab')}` }
             ]} />
           <TabPanel value={indexTab} index={0}>
             <GridContainer xs={11} md={11}>

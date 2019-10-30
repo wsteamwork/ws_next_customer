@@ -1,6 +1,6 @@
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { cleanAccents, formatPrice } from '@/utils/mixins';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Link, Theme, Tooltip, Typography } from '@material-ui/core';
@@ -35,6 +35,7 @@ const RoomCard: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
+  const avatarImg = room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : './static/images/westay-avatar.jpg';
   return (
     <Fragment>
       <Grid className="roomCard">
@@ -45,7 +46,7 @@ const RoomCard: FC<Iprops> = (props) => {
                 <Link href={`/room/${room.id}`} target="_blank">
                   <Grid className="mediaWrapper">
                     <img
-                      src={`${IMAGE_STORAGE_LG + room.media.data[0].image}`}
+                      src={`${avatarImg}`}
                       className="media"
                       alt={``}
                     />

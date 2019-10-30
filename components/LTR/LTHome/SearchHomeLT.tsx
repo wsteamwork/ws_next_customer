@@ -15,6 +15,8 @@ import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Se
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import { Dispatch } from 'redux';
+import Cookies from 'universal-cookie';
+import { cleanAccents } from '@/utils/mixins';
 
 interface IProps {
   classes?: any,
@@ -39,6 +41,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
   const { showPlaces, closeModal, className } = props;
   const { t } = useTranslation();
   const { dispatch: dispatchGlobal, width } = useContext(GlobalContext);
+  const cookies = new Cookies();
   const cities = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
@@ -103,13 +106,13 @@ const SearchHomeLT: FC<IProps> = (props) => {
               <Grid item xs={12} sm={12} md={11} lg={11} xl={9}>
                 <Button variant="contained" className={classes.btnPlace}>
                   <GpsFixed style={{ marginRight: 8, color: 'tomato' }} />
-                  Vị trí của bạn
-            </Button>
+                  {t('home:yourLocation')}
+                </Button>
 
                 {cities.map((o, i) => (
                   i < numRecommend ? (
                     <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
-                      {o.name_city} ({o.total_rooms})
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
                 </Button>
                   ) : null
                 ))}

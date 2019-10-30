@@ -1,20 +1,19 @@
-import React, { Fragment, FC, useReducer, useState } from 'react';
-import { NextPage } from 'next';
-import { NextContextPage } from '@/store/Redux/Reducers';
-import { getCookieFromReq } from '@/utils/mixins';
-import NextHead from '@/components/NextHead';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import { RoomIndexReducer, RoomIndexStateInit, RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { Hidden } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
+import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
+import NextHead from '@/components/NextHead';
+import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
-import SearchMobile from '@/components/Rooms/SearchMobile';
-import BottomNav from '@/components/Rooms/BottomNav';
-import { StickyContainer, Sticky } from 'react-sticky';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import { NextContextPage } from '@/store/Redux/Reducers';
+import { getCookieFromReq } from '@/utils/mixins';
+import { Hidden } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
-import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
+import { Sticky, StickyContainer } from 'react-sticky';
 
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
