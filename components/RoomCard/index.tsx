@@ -35,7 +35,7 @@ const RoomCard: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
-  const avatarImg = room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : './static/images/westay-avatar.jpg';
+  const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? room.avatar_image : './static/images/westay-avatar.jpg';
   return (
     <Fragment>
       <Grid className="roomCard">
@@ -77,7 +77,7 @@ const RoomCard: FC<Iprops> = (props) => {
                       </Tooltip>
                     </div>
                   )}
-                  <span>{room.details.data[0].name}</span>
+                  <span>{room.details ? room.details.data[0].name : room.room_name}</span>
                 </Typography>
                 {!showAddress && (
                   <Typography className="roomCard__address" variant="h1">
