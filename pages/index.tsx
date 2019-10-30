@@ -4,24 +4,24 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
-// import RoomCard from '@/components/RoomCard';
+import RoomCard from '@/components/RoomCard';
 // import HostBecome from '@/components/Shared/HostBecome';
-// import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
+import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-// import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
-// import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
 import React, { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 const Home: NextPage = () => {
-  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-  //   (state) => state.roomHomepage.roomsHot
-  // );
-  // const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
+  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.roomHomepage.roomsHot
+  );
+  const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   console.log(width);
@@ -64,9 +64,9 @@ const Home: NextPage = () => {
 Home.getInitialProps = async ({ store, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
 
-  // if (store.getState().roomHomepage.roomsHot.length === 0) {
-  //   const res = await getRoomsHomepage(store.dispatch, initLanguage);
-  // }
+  if (store.getState().roomHomepage.roomsHot.length === 0) {
+    const res = await getRoomsHomepage(store.dispatch, initLanguage);
+  }
 
   return {};
 };
