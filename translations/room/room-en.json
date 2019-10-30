@@ -53,6 +53,7 @@
     "sunday": "Sunday",
     "serviceFee": "Service fee",
     "surchargeGuests": "Surcharge guests from the",
+    "surchargeLateCheckout" : "Late checkout surcharge (per 1 hour)",
     "surchargeHours" : "Surcharge after 4 hours early (rent by the hour)",
     "feeList": "Fee list",
     "lang": "en"
