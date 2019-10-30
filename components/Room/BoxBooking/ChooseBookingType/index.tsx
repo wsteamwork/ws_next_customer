@@ -1,11 +1,11 @@
-import React, { FC, ChangeEvent, Dispatch, useMemo, useState, useEffect } from 'react';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
-import { Grid, FormControlLabel } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
-import { useTranslation } from 'react-i18next';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { FormControlLabel, Grid } from '@material-ui/core';
+import React, { ChangeEvent, Dispatch, FC, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ChooseBookingType: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();

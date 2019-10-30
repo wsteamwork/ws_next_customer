@@ -8,7 +8,7 @@
             "es2017"
         ],
         "isolatedModules": false,
-        "noEmit": false
+        "noEmit": true
     },
     "include": [
         "server/**/*.ts"

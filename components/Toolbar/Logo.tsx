@@ -1,13 +1,13 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { FunctionComponent, Fragment } from 'react';
-import { compose } from 'recompose';
-import Link from 'next/link';
-// @ts-ignore
-import logo from '@/static/images/Logo-westay.png';
 // @ts-ignore
 import logoOnlyImg from '@/static/images/logo-image-only.png';
+// @ts-ignore
+import logo from '@/static/images/Logo-westay.png';
 import { Theme } from '@material-ui/core';
+import createStyles from '@material-ui/core/styles/createStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Link from 'next/link';
+import React, { Fragment, FunctionComponent } from 'react';
+import { compose } from 'recompose';
 
 interface IProps {
   classes?: any;
@@ -51,7 +51,7 @@ const Logo: FunctionComponent<IProps> = (props) => {
   );
 };
 
-Logo.defaultProps ={
+Logo.defaultProps = {
   href: '/'
 };
 

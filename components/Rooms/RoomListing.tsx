@@ -28,7 +28,7 @@ const RoomListing: FC<IProps> = (props) => {
 
   const changePage = (current: number) => {
     setCurrentPage(current);
-    updateRouter('/rooms',true, 'page', current);
+    updateRouter('/rooms', true, 'page', current);
   };
   const renderRooms = (room) => (
     <LazyLoad>

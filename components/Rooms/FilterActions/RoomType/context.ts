@@ -1,20 +1,19 @@
-import {
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  ChangeEvent,
-  useContext,
-  MouseEventHandler
-} from 'react';
-import { axios } from '@/utils/axiosInstance';
-import { AxiosResponse } from 'axios';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { axios } from '@/utils/axiosInstance';
+import { AxiosResponse } from 'axios';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEventHandler,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
+import { useSelector } from 'react-redux';
 
 export interface RoomTypeData {
   id: number;
@@ -48,8 +47,12 @@ export const useRoomTypeChecbox = (
   const { query } = router;
   const { roomTypes } = state;
   const [data, setData] = useState<RoomTypeData[]>([]);
-  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
-  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypePathName = useSelector<ReducersList, string>(
+    (state) => state.searchFilter.leaseTypePathName
+  );
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
 
   const paramsAPI = leaseTypeGlobal ? 'accommodation_type' : 'type_room';
   const queryTypeRoom = leaseTypeGlobal ? query.accommodation_type : query.type_room;
@@ -83,7 +86,7 @@ export const useRoomTypeChecbox = (
 
   const handleSubmit = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataClick });
-    updateRouter(leaseTypePathName,false, paramsAPI, dataClick, 'page', 1);
+    updateRouter(leaseTypePathName, false, paramsAPI, dataClick, 'page', 1);
     setOpen(false);
   };
 
@@ -95,7 +98,7 @@ export const useRoomTypeChecbox = (
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setRoomTypes', roomTypes: [] });
-    updateRouter(leaseTypePathName,false, paramsAPI, '', 'page', 1);
+    updateRouter(leaseTypePathName, false, paramsAPI, '', 'page', 1);
     setDataClick([]);
   };
 

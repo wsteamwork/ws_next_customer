@@ -5,11 +5,9 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createLTBooking, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { LTBookingCreateReq } from '@/types/Requests/Booking/BookingRequests';
-import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { WEBSITE_SRC } from '@/utils/store/global';
-import { Checkbox, Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
-import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
 import { SlideProps } from '@material-ui/core/Slide';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import Link from 'next/link';
@@ -25,9 +23,9 @@ export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref)
   <Slide direction="up" {...props} ref={ref} />
 ));
 
-const CheckBoxCustom = forwardRef<HTMLElement, CheckboxProps>((props, ref) => (
-  <Checkbox {...props} inputRef={ref} />
-));
+// const CheckBoxCustom = forwardRef<HTMLElement, CheckboxProps>((props, ref) => (
+//   <Checkbox {...props} inputRef={ref} />
+// ));
 
 interface MyFormValues {
   firstName: string;
@@ -86,9 +84,9 @@ const useValidata = () => {
 
 const BookingForm: FC = () => {
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
-  const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
-    (state) => state.ltBooking.LTBookingPriceCalculate
-  );
+  // const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
+  //   (state) => state.ltBooking.LTBookingPriceCalculate
+  // );
   const { movein, moveout, numberOfGuests } = useSelector<ReducersList, LTBookingReducerState>(
     (state) => state.ltBooking
   );
@@ -96,7 +94,7 @@ const BookingForm: FC = () => {
   const { t } = useTranslation();
   const FormValidationSchema = useValidata();
 
-  const [isRequest, setIsRequest] = useState(false);
+  // const [isRequest, setIsRequest] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const { long_term_room_id }: any = router.query;
   // const toggleRequest = () => {
@@ -131,7 +129,7 @@ const BookingForm: FC = () => {
       if (ltroom.instant_book === 0) {
         setOpenDialog(true);
       } else if (res) {
-        console.log(values.paymentMethod);
+        // console.log(values.paymentMethod);
         let query = {
           uuid: res.contracts.data[0].uuid
         };
@@ -150,7 +148,7 @@ const BookingForm: FC = () => {
 
       actions.setSubmitting(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // router.push(`/long-term-room/${data.long_term_room_id}`);
       actions.setSubmitting(false);
     }

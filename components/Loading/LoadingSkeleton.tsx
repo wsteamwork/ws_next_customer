@@ -41,8 +41,8 @@ const Rooms = (props) => {
       {props.imageType === 'circle' ? (
         <circle cx="60" cy="45" r="30" />
       ) : (
-        <rect x="5" y="0" rx="5" ry="5" width="340" height="232" />
-      )}
+          <rect x="5" y="0" rx="5" ry="5" width="340" height="232" />
+        )}
 
       <rect x="370" y="0" rx="5" ry="5" width="670" height="40" />
       <rect x="370" y="55" rx="5" ry="5" width="600" height="30" />
@@ -118,8 +118,8 @@ const LoadingSkeleton: FC<IProps> = (props) => {
             ))}
         </div>
       ) : (
-        <RenderTypeLoading type={props.type} />
-      )}
+          <RenderTypeLoading type={props.type} />
+        )}
     </Fragment>
   );
 };

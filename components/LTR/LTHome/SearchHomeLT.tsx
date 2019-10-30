@@ -1,22 +1,22 @@
-import React, { Fragment, FC, useContext, useReducer } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Button, Hidden } from '@material-ui/core';
-import GpsFixed from '@material-ui/icons/GpsFixedRounded';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
-import { ParsedUrlQueryInput } from "querystring";
-import Router from 'next/router';
+import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
+import { cleanAccents } from '@/utils/mixins';
+import { Button, Grid, Hidden, Theme } from '@material-ui/core';
+import GpsFixed from '@material-ui/icons/GpsFixedRounded';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import Router from 'next/router';
+import { ParsedUrlQueryInput } from "querystring";
+import React, { FC, Fragment, useContext, useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import Cookies from 'universal-cookie';
-import { cleanAccents } from '@/utils/mixins';
 
 interface IProps {
   classes?: any,
@@ -109,13 +109,13 @@ const SearchHomeLT: FC<IProps> = (props) => {
                   {t('home:yourLocation')}
                 </Button>
 
-                {cities.map((o, i) => (
+                {cities ? cities.map((o, i) => (
                   i < numRecommend ? (
                     <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
                       {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
                 </Button>
                   ) : null
-                ))}
+                )) : ''}
               </Grid>
               <Grid item xs />
             </Hidden>

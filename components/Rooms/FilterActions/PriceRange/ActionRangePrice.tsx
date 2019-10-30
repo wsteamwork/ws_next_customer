@@ -1,3 +1,9 @@
+import ButtonGlobal from '@/components/ButtonGlobal';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { MAX_PRICE, MIN_PRICE, STEP_PRICE } from '@/store/Context/Room/RoomListContext';
+import { updateRouter } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Theme } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl/FormControl';
 import Grid from '@material-ui/core/Grid/Grid';
 import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment';
@@ -5,34 +11,12 @@ import InputBase from '@material-ui/core/InputBase/InputBase';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, {
-  useState,
-  useContext,
-  useEffect,
-  Dispatch,
-  Fragment,
-  ChangeEvent,
-  SetStateAction,
-  FC
-} from 'react';
-import InputRange, { Range } from 'react-input-range';
-import _ from 'lodash';
-import { Theme } from '@material-ui/core';
-import {
-  RoomIndexContext,
-  MIN_PRICE,
-  MAX_PRICE,
-  STEP_PRICE,
-  RoomIndexState
-} from '@/store/Context/Room/RoomListContext';
 import { WithStyles } from '@material-ui/styles';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { useTranslation } from 'react-i18next';
 import numeral from 'numeral';
-import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
-import { updateRouter } from '@/store/Context/utility';
+import React, { ChangeEvent, Dispatch, FC, Fragment, SetStateAction, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import InputRange, { Range } from 'react-input-range';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps extends WithStyles<typeof styles> {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -91,7 +75,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const { state, dispatch } = useContext(RoomFilterContext);
   const { price_day_from, price_day_to } = state;
   const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
-  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const paramMinPrice = leaseTypeGlobal ? 'min_price' : 'price_day_from';
   const paramMaxPrice = leaseTypeGlobal ? 'max_price' : 'price_day_to';
@@ -140,7 +124,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
   const hanldeSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
-    updateRouter(leaseTypePathName,true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
+    updateRouter(leaseTypePathName, true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
   };
 
   // usePriceEffect(price, setPrice, state);

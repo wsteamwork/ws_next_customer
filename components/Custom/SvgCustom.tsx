@@ -1,10 +1,10 @@
+import { Theme } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
-import React, { ComponentType, Fragment, useEffect } from 'react';
+import classNames from 'classnames';
+import React, { ComponentType, Fragment } from 'react';
 import { compose } from 'recompose';
 
-import classNames from 'classnames';
-import { Theme } from '@material-ui/core';
 
 interface IProps {
   classes?: any;
@@ -78,8 +78,8 @@ const SvgCustom: ComponentType<IProps> = (props: IProps) => {
             className={classNames(classes.marker)}
           />
         ) : (
-          <Text value={props.text} classes={classes} />
-        )}
+            <Text value={props.text} classes={classes} />
+          )}
       </div>
     </Fragment>
   );

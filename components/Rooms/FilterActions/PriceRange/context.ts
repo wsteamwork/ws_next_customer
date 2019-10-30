@@ -1,18 +1,18 @@
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { MAX_PRICE, MIN_PRICE, RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateRouter } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import numeral from 'numeral';
 import {
-  useState,
-  useContext,
-  useMemo,
+  Dispatch,
   MouseEventHandler,
   SetStateAction,
-  Dispatch,
-  useEffect
+  useContext,
+  useEffect,
+  useMemo,
+  useState
 } from 'react';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { RoomFilterContext, MIN_PRICE, MAX_PRICE } from '@/store/Context/Room/RoomFilterContext';
-import { updateRouter } from '@/store/Context/utility';
-import numeral from 'numeral';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 
 type ReturnUsePriceRange = {
   open: boolean;
@@ -29,8 +29,12 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const { router } = useContext(GlobalContext);
   const { query } = router;
   const { price_day_from, price_day_to } = state;
-  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
-  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypePathName = useSelector<ReducersList, string>(
+    (state) => state.searchFilter.leaseTypePathName
+  );
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
 
   const queryMinPrice = leaseTypeGlobal ? query.min_price : query.price_day_from;
   const queryMaxPrice = leaseTypeGlobal ? query.max_price : query.price_day_to;
@@ -70,7 +74,7 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const handleRemove = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: MIN_PRICE, price_day_to: MAX_PRICE });
-    updateRouter(leaseTypePathName,true, paramMinPrice, MIN_PRICE, paramMaxPrice, MAX_PRICE);
+    updateRouter(leaseTypePathName, true, paramMinPrice, MIN_PRICE, paramMaxPrice, MAX_PRICE);
   };
 
   return {

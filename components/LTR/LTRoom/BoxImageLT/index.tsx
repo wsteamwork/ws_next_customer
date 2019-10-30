@@ -2,17 +2,17 @@ import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useMemo, Fragment, MouseEvent, useState } from 'react';
+import React, { FC, Fragment, MouseEvent, useMemo, useState } from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import '/styles/pages/LTR/room/index.scss';
-import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
+// import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
 
 interface IProps {
   classes?: any,
   livingrooms: ImagesRes,
   cover_photo: ImagesRes,
-  outdoors?: ImagesRes,
+  // outdoors?: ImagesRes,
   furnitures?: ImagesRes,
   kitchens?: ImagesRes,
   roomName: string,
@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
+  const { livingrooms, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();

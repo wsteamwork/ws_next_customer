@@ -8,16 +8,16 @@ import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 import { Divider, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Paper, Typography } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import moment from 'moment';
-import React, { FC, Fragment, useContext, useState } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import InfoHeader from './InfoHeader';
 
-const PaymentInfo: FC = (props) => {
+const PaymentInfo: FC = () => {
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const xsMode = width === 'xs';
-  const [infoStatus, setInfoStatus] = useState<boolean>(!xsMode);
+  // const [infoStatus, setInfoStatus] = useState<boolean>(!xsMode);
   const LTDataInvoice = useSelector<ReducersList, PaymentBankListRes>(
     (state) => state.ltBooking.LTDataInvoice
   );

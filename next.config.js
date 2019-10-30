@@ -6,11 +6,18 @@ const Dotenv = require('dotenv-webpack');
 const withPlugins = require('next-compose-plugins');
 const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = withPlugins([[withSass], [withCss]], {
   xPoweredBy: false,
   // target: 'serverless',
   webpack: (config, {}) => {
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        parallel: true,
+        sourceMap: true
+      })
+    ];
     config.module.rules.push({
       test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
       use: {

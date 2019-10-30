@@ -1,4 +1,3 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
@@ -13,7 +12,7 @@ import { withStyles } from '@material-ui/styles';
 // @ts-ignore
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import React, { ChangeEvent, FC, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -125,7 +124,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   const [searchText, setSearchText] = useState<string>(filter.searchText);
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
-  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
+  // const { dispatch: dispatchGlobal } = useContext(GlobalContext);
 
   const getDataSearch = async (value: string): Promise<any> => {
     const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);

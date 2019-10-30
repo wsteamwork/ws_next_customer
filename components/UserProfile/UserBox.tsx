@@ -1,13 +1,13 @@
-import React, { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import mainColor from '@/styles/constants/colors';
 import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { Grid, Typography, Divider, Hidden } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
-import mainColor from '@/styles/constants/colors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Divider, Grid, Hidden, Typography } from '@material-ui/core';
+import React, { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const UserBox: FC = (props) => {
   const { t } = useTranslation();

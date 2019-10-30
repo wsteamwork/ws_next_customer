@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import Lottie, { Options, LottieProps } from 'react-lottie';
 import animationData from '@/assets/lottie/checkSuccess.json';
 import { Typography } from '@material-ui/core';
+import React, { FC } from 'react';
+import Lottie, { LottieProps, Options } from 'react-lottie';
 
 interface IProps extends Partial<LottieProps> {
   message?: string;

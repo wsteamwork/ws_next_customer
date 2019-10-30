@@ -1,11 +1,11 @@
-import React, { Fragment, FC, memo, Dispatch, useContext, SetStateAction } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, ListItemText, ListItem, Divider, List } from '@material-ui/core';
-import { compose } from 'recompose';
-import { withCookies, Cookies } from 'react-cookie';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Divider, List, ListItem, ListItemText, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { Dispatch, FC, Fragment, memo, SetStateAction, useContext } from 'react';
+import { Cookies, withCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
+import { compose } from 'recompose';
 
 interface IProps {
   classes?: any;

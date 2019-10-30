@@ -1,16 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
-import {
-  Grid,
-  FormGroup,
-  FormControlLabel,
-  FormControl,
-  RadioGroup,
-  Radio,
-  Theme,
-  Typography
-} from '@material-ui/core';
-import { CustomCheckbox } from '@/components/Home/CheckboxList';
+import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import React, { ChangeEvent, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

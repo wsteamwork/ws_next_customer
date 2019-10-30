@@ -1,12 +1,12 @@
-import React, { FC, memo } from 'react';
-import { Grid } from '@material-ui/core';
+import CustomPopper from '@/components/CustomPopper';
 import mainColor from '@/styles/constants/colors';
+import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import numeral from 'numeral';
-import CustomPopper from '@/components/CustomPopper';
+import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
+import numeral from 'numeral';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
@@ -42,15 +42,15 @@ const DetailsPriceDay: FC<IProps> = (props) => {
                 </Grid>
               ))
             ) : (
-              <Grid className="totalPriceRoom__priceDay" container>
-                <Grid item xs={8} className="totalPriceRoom__textLeft">
-                  <p>{t('room:boxBooking:avgDay')}</p>
+                <Grid className="totalPriceRoom__priceDay" container>
+                  <Grid item xs={8} className="totalPriceRoom__textLeft">
+                    <p>{t('room:boxBooking:avgDay')}</p>
+                  </Grid>
+                  <Grid item xs={4} className="totalPriceRoom__textRight">
+                    <p>{numeral(dataCalculate.avg_price).format('0,0')}đ</p>
+                  </Grid>
                 </Grid>
-                <Grid item xs={4} className="totalPriceRoom__textRight">
-                  <p>{numeral(dataCalculate.avg_price).format('0,0')}đ</p>
-                </Grid>
-              </Grid>
-            )}
+              )}
           </Grid>
         }>
         <span>

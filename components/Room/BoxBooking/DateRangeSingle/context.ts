@@ -1,16 +1,16 @@
-import { useState, Dispatch, useEffect, useContext } from 'react';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
-import { useDispatch, useSelector } from 'react-redux';
-import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import moment, { Moment } from 'moment';
-import { FocusedInputShape } from 'react-dates';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { getPriceByDay, RoomReducerAction } from '@/store/Redux/Reducers/Room/roomReducer';
+import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import * as _ from 'lodash';
-import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { getPriceByDay, RoomReducerAction } from '@/store/Redux/Reducers/Room/roomReducer';
+import moment, { Moment } from 'moment';
+import { Dispatch, useContext, useEffect, useState } from 'react';
+import { FocusedInputShape } from 'react-dates';
+import { useDispatch, useSelector } from 'react-redux';
 export interface DataChangePriceByDay {
   [key: string]: PriceByDayRes;
 }
@@ -127,7 +127,7 @@ export const useDateRange = (): ReturnUseDateRange => {
       let dateMax = _.find(schedule, (block) => moment(block).diff(date.startDate) > 0);
       setMaxDate(dateMax);
     }
-    console.log(maxDate)
+    console.log(maxDate);
   }, [date.startDate]);
 
   const onNextMonthClick = async (newCurrentMonth: Moment) => {

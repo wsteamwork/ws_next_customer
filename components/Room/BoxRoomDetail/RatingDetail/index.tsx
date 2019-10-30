@@ -1,17 +1,15 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { withStyles } from '@material-ui/core/styles';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { useSelector } from 'react-redux';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
@@ -132,7 +130,7 @@ const RatingDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const {room} = props;
+  const { room } = props;
   const arrRating = [
     {
       name: t('rooms:cleanliness'),

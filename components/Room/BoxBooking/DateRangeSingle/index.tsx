@@ -1,6 +1,6 @@
+import { ReducersList } from '@/store/Redux/Reducers';
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 import DateRange from './DateRange';
 import DateSingle from './DateSingle';
 

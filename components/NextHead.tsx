@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { NextSeo } from 'next-seo';
+import React, { FC } from 'react';
 interface IProps {
   title: string;
   description: string;

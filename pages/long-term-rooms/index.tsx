@@ -1,6 +1,6 @@
 import GridContainer from '@/components/Layout/Grid/Container';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
-import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+// import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
@@ -60,9 +60,9 @@ const LongtermRooms: NextPage = () => {
                             {/*  </Grid>*/}
                             {/*</Grid>*/}
                             <Grid container spacing={1}>
-                              <Grid item>
+                              {/* <Grid item>
                                 <SelectLeaseTypeGlobal />
-                              </Grid>
+                              </Grid> */}
                               <Grid item xs>
                                 <SearchHomeLT showPlaces={false} />
                               </Grid>

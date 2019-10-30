@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
-  const { filter, updateSearchText } = props;
+  const { updateSearchText } = props;
   const { t } = useTranslation();
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
@@ -57,7 +57,7 @@ const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   );
 
   const locationRoom = (nameCity: string) => {
-    updateRouter('/rooms',true, 'name', nameCity);
+    updateRouter('/rooms', true, 'name', nameCity);
     updateSearchText(nameCity)
   };
 

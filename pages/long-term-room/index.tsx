@@ -5,6 +5,7 @@ import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import NextHead from '@/components/NextHead';
 // import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -13,12 +14,11 @@ import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import NextHead from '@/components/NextHead';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 
 
 const LongtermRoom: NextPage = () => {

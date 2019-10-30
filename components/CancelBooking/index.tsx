@@ -1,29 +1,19 @@
-import React, { Fragment, useState, ChangeEvent, FC, useContext } from 'react';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
-import _ from 'lodash';
-import {
-  Typography,
-  FormControl,
-  Select,
-  OutlinedInput,
-  TextField,
-  Snackbar,
-  MenuItem,
-  Paper,
-  Grid
-} from '@material-ui/core';
-import MySnackbarContentWrapper from '../Profile/EditProfile/MySnackbarContentWrapper';
-import { useSelector } from 'react-redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CancelReasonList } from '@/store/Redux/Reducers/Profile/profile';
-import CardBooking from '../Profile/CardBooking';
-import { useTranslation } from 'react-i18next';
-import GridContainer from '../Layout/Grid/Container';
-import ButtonGlobal from '../ButtonGlobal';
+import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
 import { ReasonCancelReq } from '@/types/Requests/ReviewRoom/ReviewResponse';
 import { axios } from '@/utils/axiosInstance';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import { FormControl, Grid, MenuItem, OutlinedInput, Paper, Select, Snackbar, TextField, Typography } from '@material-ui/core';
+import _ from 'lodash';
+import React, { ChangeEvent, FC, Fragment, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import ButtonGlobal from '../ButtonGlobal';
+import GridContainer from '../Layout/Grid/Container';
+import CardBooking from '../Profile/CardBooking';
+import MySnackbarContentWrapper from '../Profile/EditProfile/MySnackbarContentWrapper';
 
 const CancelBooking: FC = (props) => {
   const { router } = useContext(GlobalContext);
@@ -63,12 +53,13 @@ const CancelBooking: FC = (props) => {
 
     try {
       const res = await axios.post(`bookings/cancel-booking/${id}`, data);
+      console.log(res)
       setOpen(true);
       setTimeout(() => {
         alert(t('shared:cancelBook:returnHome'));
         router.push('/');
       }, 1000);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -153,14 +144,14 @@ const CancelBooking: FC = (props) => {
                         {t('shared:cancelBook:canceled')}
                       </ButtonGlobal>
                     ) : (
-                      <ButtonGlobal
-                        className={'buttonSubmit'}
-                        variant="contained"
-                        disabled={idReason === 0}
-                        type="submit">
-                        {t('shared:cancelBook:conf')}
-                      </ButtonGlobal>
-                    )}
+                        <ButtonGlobal
+                          className={'buttonSubmit'}
+                          variant="contained"
+                          disabled={idReason === 0}
+                          type="submit">
+                          {t('shared:cancelBook:conf')}
+                        </ButtonGlobal>
+                      )}
                   </div>
                 </form>
               </Paper>
@@ -168,8 +159,8 @@ const CancelBooking: FC = (props) => {
           </Grid>
         </GridContainer>
       ) : (
-        <SimpleLoader />
-      )}
+          <SimpleLoader />
+        )}
 
       <Snackbar
         anchorOrigin={{

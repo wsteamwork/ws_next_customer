@@ -1,8 +1,8 @@
-import React, { ComponentType } from 'react';
-import Lottie from 'react-lottie';
 import animationData from '@/assets/lottie/empty_status.json';
 import { Typography } from '@material-ui/core';
-import { useTranslation } from 'react-i18next'
+import React, { ComponentType } from 'react';
+import { useTranslation } from 'react-i18next';
+import Lottie from 'react-lottie';
 interface IProps {
   height?: number;
   width?: number;

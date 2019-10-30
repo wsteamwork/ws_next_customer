@@ -1,15 +1,13 @@
-import React, { FC, useState, useMemo, Dispatch } from 'react';
 import CustomPopper from '@/components/CustomPopper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDoorClosed, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import ActionChoose from '@/components/Home/ChooseGuestRoom/ActionChoose';
-import { Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import classNames from 'classnames';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { updateRouter } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import React, { Dispatch, FC, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 // import QuickBookIcon from "@material-ui/icons/OfflineBoltRounded";
 
 const ChooseRoomGuest: FC = () => {

@@ -1,13 +1,13 @@
+import { ReducersList } from '@/store/Redux/Reducers';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { Grid } from '@material-ui/core';
+import { Moment } from 'moment';
 import React, { FC, memo, useMemo } from 'react';
 import { DateRangePicker } from 'react-dates';
 import 'react-dates/initialize';
-import { Moment } from 'moment';
-import { Grid } from '@material-ui/core';
-import RenderDay from './RenderDay';
-import { useDateRange } from './context';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { useDateRange } from './context';
+import RenderDay from './RenderDay';
 
 const DateRange: FC = (props) => {
   const {
@@ -23,7 +23,7 @@ const DateRange: FC = (props) => {
   const priceByDay = useSelector<ReducersList, PriceByDayRes[]>(
     (state) => state.roomPage.priceByDay
   );
-  const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay}/>;
+  const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay} />;
 
   const _renderMonthText = (day: Moment) => (
     <p className="datePickerBooking__monthText">{day.format('MMMM YYYY')}</p>

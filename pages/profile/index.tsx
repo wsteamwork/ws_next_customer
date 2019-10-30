@@ -1,19 +1,19 @@
-import React, { Fragment, useEffect, useContext, useMemo } from 'react';
-import NextHead from '@/components/NextHead';
-import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
-import { NextPage } from 'next';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getCookieFromReq } from '@/utils/mixins';
-import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
-import { useSelector } from 'react-redux';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
+import NextHead from '@/components/NextHead';
 import MenuProfile from '@/components/Profile/MenuProfile';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
+import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
+import { getCookieFromReq } from '@/utils/mixins';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
 
 const Profile: NextPage = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['_token']);
+  const [cookies] = useCookies(['_token']);
 
   const error = useSelector<ReducersList, boolean>((state) => state.iProfile.error);
   const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);

@@ -1,17 +1,13 @@
-import React, { FC, useContext, memo, useEffect, useMemo } from 'react';
 import CustomPopper from '@/components/CustomPopper';
-import classNames from 'classnames';
-import { Grid } from '@material-ui/core';
-import { OfflineBoltRounded } from '@material-ui/icons';
-import { useTranslation } from 'react-i18next';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import React, { FC, memo, useContext, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const FastBooking: FC = () => {
   const { t } = useTranslation();
@@ -30,10 +26,10 @@ const FastBooking: FC = () => {
   const handleClick = () => {
     if (instant_book === 0) {
       dispatch({ type: 'setInstantBook', payload: 1 });
-      updateRouter(leaseTypePathName,true, 'instant_book', 1, 'page', 1);
+      updateRouter(leaseTypePathName, true, 'instant_book', 1, 'page', 1);
     } else {
       dispatch({ type: 'setInstantBook', payload: 0 });
-      updateRouter(leaseTypePathName,true, 'instant_book', 0, 'page', 1);
+      updateRouter(leaseTypePathName, true, 'instant_book', 0, 'page', 1);
     }
   };
   return useMemo(

@@ -1,14 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { useMemo, Dispatch, useContext, useEffect } from 'react';
-import { axios } from '@/utils/axiosInstance';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { DataChangePriceByDay, changeDataPriceByDay } from '../DateRangeSingle/context';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { axios } from '@/utils/axiosInstance';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import moment from 'moment';
-import { PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { Dispatch, useContext, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeDataPriceByDay, DataChangePriceByDay } from '../DateRangeSingle/context';
 
 export const useCheckBookingTypeHour = (): [boolean] => {
   const startDate = useSelector<ReducersList, string | null>((state) => state.booking.startDate);
