@@ -57,5 +57,11 @@
     "discount": "Giảm giá",
     "compareRooms": "So sánh phòng",
     "emptyItem": "So sánh chỗ ở",
-    "showCompare": "Xem so sánh"
+    "showCompare": "Xem so sánh",
+    "totalResult": "Tổng số",
+    "results": "kết quả tìm kiếm",
+    "contactForPrice": "Giá liên hệ",
+    "currency": "VNĐ",
+    "month": "tháng"
+
 }

@@ -16,13 +16,14 @@ import {
 } from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
 import MapAndListing from '@/components/Rooms/MapAndListing';
-import { Hidden } from '@material-ui/core';
+import { Hidden, Grid } from '@material-ui/core';
 import HeadRoom from 'react-headroom';
 import { StickyContainer, Sticky } from 'react-sticky';
 import BottomNav from '@/components/Rooms/BottomNav';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import SearchMobile from '@/components/Rooms/SearchMobile';
+import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -45,9 +46,9 @@ const Rooms: NextPage = (props) => {
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/rooms"/>
+        url="/rooms" />
 
-      <NavHeader isSticky={isMapOpen}/>
+      <NavHeader isSticky={isMapOpen} />
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
@@ -71,7 +72,14 @@ const Rooms: NextPage = (props) => {
                             lg={10}
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
-                            <SearchComponent />
+                            <Grid container spacing={1}>
+                              <Grid item>
+                                <SelectLeaseTypeGlobal/>
+                              </Grid>
+                              <Grid item xs>
+                                <SearchComponent />
+                              </Grid>
+                            </Grid>
                           </GridContainer>
                         </HeadRoom>
 
@@ -93,7 +101,7 @@ const Rooms: NextPage = (props) => {
                     </Fragment>
                   )}
 
-                <MapAndListing/>
+                <MapAndListing />
               </StickyContainer>
             </Hidden>
             <Hidden mdUp implementation="css">
@@ -107,7 +115,7 @@ const Rooms: NextPage = (props) => {
                 <SearchMobile />
               </GridContainer>
               <FilterActions />
-              <MapAndListing/>
+              <MapAndListing />
               <BottomNav />
             </Hidden>
           </div>

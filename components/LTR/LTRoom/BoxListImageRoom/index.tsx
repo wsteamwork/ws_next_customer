@@ -123,10 +123,10 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Typography variant='h5' className={classes.name}>
-        Khám phá căn hộ
+        {t('longtermroom:discover')}
       </Typography>
       <Typography variant='subtitle2' gutterBottom>
-        Khám phá chi tiết từng ngóc ngách trong căn nhà !
+        {t('longtermroom:discoverSubTitle')}
       </Typography>
 
       <Grid container spacing={2} alignItems='baseline'>
@@ -135,7 +135,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].name} className={classes.images} />
               <Typography variant='subtitle2'>
-                Phòng khách
+                {t('longtermroom:livingrooms')}
               </Typography>
             </div>
           </Grid>
@@ -146,7 +146,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name} alt={bedrooms.bedroom_1.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
-                Phòng ngủ
+                {t('longtermroom:bedrooms')}
               </Typography>
             </div>
           </Grid>
@@ -157,7 +157,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name} alt={bathrooms['bathroom_1'].images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
-                Phòng tắm
+                {t('longtermroom:bathrooms')}
               </Typography>
             </div>
           </Grid>
@@ -168,7 +168,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
-                Phòng bếp
+                {t('longtermroom:kitchens')}
               </Typography>
             </div>
           </Grid>
@@ -179,8 +179,8 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
-                Nội thất
-            </Typography>
+                {t('longtermroom:furnitures')}
+              </Typography>
             </div>
           </Grid>
         ) : <Fragment />}
@@ -190,7 +190,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             <div className={classes.marginImage} onClick={toggle}>
               <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.images} />
               <Typography variant='subtitle2'>
-                Ngoài trời
+                {t('longtermroom:outdoors')}
               </Typography>
             </div>
           </Grid>
@@ -218,8 +218,8 @@ const BoxListImageRoom: FC<IProps> = (props) => {
                   color="inherit"
                   className={classes.imageTitle}
                 >
-                  Xem tất cả ảnh
-              <span className={classes.imageMarked} />
+                  {t('longtermroom:allImages')}
+                  <span className={classes.imageMarked} />
                 </Typography>
               </span>
             </ButtonBase>

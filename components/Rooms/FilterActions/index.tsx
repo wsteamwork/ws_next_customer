@@ -8,7 +8,6 @@ import FastBooking from './FastBooking';
 import FilterRoom from './FilterRoom';
 import PriceRange from './PriceRange';
 import RoomType from './RoomType';
-import SwitchMap from './SwitchMap';
 interface Iprops {
   hideSearchBar?: boolean;
   showBookByHour?: boolean;
@@ -52,7 +51,7 @@ const FilterActions: FC<Iprops> = (props) => {
         </Grid>
 
         <Grid item xs={2} container justify="flex-end">
-          <SwitchMap />
+          {/*<SwitchMap/>*/}
         </Grid>
       </Grid>
     </GridContainer>

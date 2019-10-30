@@ -100,7 +100,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const DialogFullImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName, refKit } = props;
-
+  // console?
   return (
     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
       <DialogTitle className={classes.dialogTitle} disableTypography>
@@ -123,7 +123,7 @@ const DialogFullImage: FC<IProps> = (props) => {
         <GridContainer xs={11} sm={11} md={11} lg={10} xl={9}>
           <List className={classes.root} subheader={<li />}>
 
-            {livingrooms.images.length ? (
+            {livingrooms && livingrooms.images && livingrooms.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi} >
@@ -159,7 +159,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   {
-                    bedrooms[`bedroom_${i+1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
+                    bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
                       <Grid item xs={12} sm={12} md={9}>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
@@ -174,7 +174,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                             )
                           })}
                         </Grid>
-                    </Grid>) : ''
+                      </Grid>) : ''
                   }
                 </Grid>
               </li>
@@ -189,27 +189,27 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   {
-                    bathrooms[`bathroom_${i+1}`] && bathrooms[`bathroom_${i+1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
-                  <Grid item xs={12} sm={12} md={9}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
-                      </Grid>
-
-                      {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                    bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
+                      <Grid item xs={12} sm={12} md={9}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
                           </Grid>
-                        )
-                      })}
-                    </Grid>
-                  </Grid>) :''}
+
+                          {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
+                            if (i > 0) return (
+                              <Grid item xs={12} sm={6} key={i}>
+                                <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                              </Grid>
+                            )
+                          })}
+                        </Grid>
+                      </Grid>) : ''}
                 </Grid>
               </li>
             ))}
 
-            {kitchens.images.length ? (
+            {kitchens && kitchens.images && kitchens.images.length ? (
               <li className={classes.listSection} ref={refKit}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
@@ -236,7 +236,7 @@ const DialogFullImage: FC<IProps> = (props) => {
               </li>
             ) : <Fragment />}
 
-            {furnitures.images.length ? (
+            {furnitures && furnitures.images && furnitures.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
@@ -263,7 +263,7 @@ const DialogFullImage: FC<IProps> = (props) => {
               </li>
             ) : <Fragment />}
 
-            {outdoors.images.length ? (
+            {outdoors && outdoors.images && outdoors.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>

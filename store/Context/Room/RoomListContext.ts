@@ -4,7 +4,13 @@ import qs from 'query-string';
 import { AxiosRes, Pagination, BaseResponse, TypeSelect } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import { RoomIndexGetParams, RoomUrlParams, MapCoords, LTRoomUrlParams, LTRoomIndexGetParams } from '@/types/Requests/Rooms/RoomRequests';
+import {
+  RoomIndexGetParams,
+  RoomUrlParams,
+  MapCoords,
+  LTRoomUrlParams,
+  LTRoomIndexGetParams
+} from '@/types/Requests/Rooms/RoomRequests';
 import { Range } from 'react-input-range';
 import _ from 'lodash';
 import { ComfortIndexGetParams } from '@/types/Requests/Comforts/ComfortRequests';
@@ -83,7 +89,6 @@ export const getRooms = async (
   router: NextRouter,
   coords?: MapCoords
 ): Promise<BaseResponse<RoomIndexRes[]>> => {
-
   let params: RoomUrlParams = router.query;
 
   let query: Partial<RoomIndexGetParams> = {
@@ -148,21 +153,20 @@ export const getLTRooms = async (
   router: NextRouter,
   coords?: MapCoords
 ): Promise<BaseResponse<LTRoomIndexRes[]>> => {
-
   let params: LTRoomUrlParams = router.query;
 
   let query: Partial<LTRoomIndexGetParams> = {
-    include: 'city,district,merchant',
+    // include: 'city,district,merchant',
     name: params.name,
     city_id: params.city_id,
     district_id: params.district_id,
     bedrooms: params.bedrooms,
-    number_guest:params.number_guest,
+    number_guest: params.number_guest,
     min_price: params.min_price,
     max_price: params.max_price,
     accommodation_type: params.accommodation_type,
     comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
-    discount: params.discount === null ? 1 : undefined,   // 0,1
+    discount: params.discount === null ? 1 : undefined, // 0,1
     instant_book: params.instant_book, // 1,2
     page: params.page
   };
@@ -177,4 +181,3 @@ export const getLTRooms = async (
   const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(url);
   return res.data;
 };
-

@@ -2,7 +2,7 @@
   position: relative;
   color: #484848;
   border: 1px solid #ebebeb;
-  border-radius: 4px;
+  border-radius: 16px !important;
   margin-top: 24px;
 
   @include xs {
@@ -64,14 +64,14 @@
     // End Override Swiper
     z-index: 0;
     position: relative;
-    padding: 4px;
+    //padding: 4px;
 
     .imgSize {
       position: relative;
       object-fit: cover;
       height: 280px;
       vertical-align: middle;
-      border-radius: 4px;
+      border-radius: 16px 16px 0 0;
       width: 100%;
       @include xs {
         height: 200px;

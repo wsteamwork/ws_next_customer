@@ -109,7 +109,7 @@ const BoxAmenities: FC<IProps> = (props) => {
         {t('rooms:amenities')}
       </Typography>
       <Typography variant='subtitle2' className={classes.subName} gutterBottom>
-        Các tiện ích và dịch vụ có sẵn trong căn hộ
+        {t('longtermroom:amenitiesOfRoom')}
       </Typography>
 
       <div>

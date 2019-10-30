@@ -55,7 +55,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
       </Typography>
       {included_services && included_services.length ? (
         <Typography variant='subtitle2' className={classes.subName}>
-          Giá đã bao gồm phí : {
+          {t('longtermroom:priceIncludedFee')} : {
             included_services.map((value, index) => (
               <span>{value}{included_services.length !== (index + 1) ? ', ' : ''} </span>
             ))
@@ -67,8 +67,8 @@ const BoxTablePrices: FC<IProps> = (props) => {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <StyledTableCell> Giá thuê theo kì hạn</StyledTableCell>
-              <StyledTableCell align="right"> VND</StyledTableCell>
+              <StyledTableCell> {t('longtermroom:priceByTerm')}</StyledTableCell>
+              <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -86,8 +86,8 @@ const BoxTablePrices: FC<IProps> = (props) => {
             <Fragment>
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Phí dịch vụ</StyledTableCell>
-                  <StyledTableCell align="right"> VND</StyledTableCell>
+                  <StyledTableCell>{t('longtermroom:otherFee')}</StyledTableCell>
+                  <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -98,7 +98,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
                         <StyledTableCell component="th" scope="row">
                           {o.name}
                         </StyledTableCell>
-                        <StyledTableCell align="right">{o.value == 0 ? 'đã bao gồm trong giá thuê nhà' : `${formatMoney(o.value)}`}</StyledTableCell>
+                        <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell>
                       </StyledTableRow>
                     )
                   }
