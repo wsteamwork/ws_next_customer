@@ -42,7 +42,7 @@ const styles: any = (theme: Theme) =>
       position: 'relative',
       alignItems: 'center',
       justifyContent: 'center',
-      display:'flex'
+      display: 'flex'
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -52,7 +52,7 @@ const styles: any = (theme: Theme) =>
       borderTop: '1px solid #ddd',
       width: '100%',
       marginTop: theme.spacing(1),
-      boxShadow:'0 3px 35px 0 rgba(132,135,138,.2) !important',
+      boxShadow: '0 3px 35px 0 rgba(132,135,138,.2) !important',
       top: '100%'
     },
     textFieldRoot: {

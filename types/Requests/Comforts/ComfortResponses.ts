@@ -10,6 +10,7 @@ export interface ComfortIndexRes {
   name_comfort: string;
   type: number;
   type_txt: string;
+  name: string;
 }
 
 export interface ComfortTranslatesRes {

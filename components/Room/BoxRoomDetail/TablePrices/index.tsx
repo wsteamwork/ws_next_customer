@@ -49,7 +49,7 @@ export const StyledTableCell = withStyles((theme: Theme) =>
     },
     body: {
       fontSize: 14,
-      border:'none'
+      border: 'none'
     },
   }),
 )(TableCell);
@@ -81,6 +81,7 @@ const TablePrices: FC<IProps> = (props) => {
     createData(`${t('room:serviceFee')}`, `${formatMoney(room.cleaning_fee)}`),
     createData(` ${t('room:surchargeGuests') + ' ' + (room.max_guest + 1)}`, `${formatMoney(room.price_charge_guest)}`),
     createData(`${t('room:surchargeHours')}`, `${formatMoney(room.price_after_hour)}`),
+    createData(`${t('room:surchargeLateCheckout')}`, `${formatMoney(room.price_after_hour)}`),
   ];
   const formatDayVN = (day: number, local: string) => {
     const dayofWeek = moment().isoWeekday(day).locale(local).format('dddd');

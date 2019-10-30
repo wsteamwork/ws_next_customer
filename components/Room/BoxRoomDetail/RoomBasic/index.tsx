@@ -1,37 +1,26 @@
-import React, { FC, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { faBath, faBed, faDoorOpen, faHeart, faRulerCombined, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHeart,
-  faUserFriends,
-  faBed,
-  faBath,
-  faDoorOpen,
-  faRulerCombined
-} from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface IProps {
   name: string,
   id: number,
-  max_guest:number,
-  max_additional_guest:number,
-  number_bed?:number,
-  number_room:number,
-  bathroom:number,
-  totalComforts:number,
-  avg_rating:number,
-  total_area?:number,
-  avg_rating_txt:string,
-  showBed?:boolean,
+  max_guest: number,
+  max_additional_guest: number,
+  number_bed?: number,
+  number_room: number,
+  bathroom: number,
+  totalComforts: number,
+  avg_rating: number,
+  total_area?: number,
+  avg_rating_txt: string,
+  showBed?: boolean,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -57,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area} = props;
+  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
@@ -72,14 +61,14 @@ const RoomBasic: FC<IProps> = (props) => {
           <FontAwesomeIcon
             key={i}
             className={classes.iconHeartBlue}
-            icon={faHeart}/>
+            icon={faHeart} />
         );
       } else {
         arr.push(
           <FontAwesomeIcon
             key={i}
             className={classes.iconHeartWhite}
-            icon={faHeart}/>
+            icon={faHeart} />
         );
       }
       i++;
@@ -116,7 +105,7 @@ const RoomBasic: FC<IProps> = (props) => {
           <Grid item xs={6} sm={6} md={3} lg xl={3}>
             <Grid container alignItems='center'>
               <Grid item xs={2} sm={2}>
-                <FontAwesomeIcon icon={faUserFriends}/>
+                <FontAwesomeIcon icon={faUserFriends} />
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
                 <Typography variant={'body2'}>
@@ -130,7 +119,7 @@ const RoomBasic: FC<IProps> = (props) => {
             <Grid item xs={6} sm={6} md={3} lg xl={3}>
               <Grid container alignItems='center'>
                 <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faBed}/>
+                  <FontAwesomeIcon icon={faBed} />
                 </Grid>
                 <Grid className={classes.nameIcon} item xs={10} sm={10}>
                   <Typography variant={'body2'}>
@@ -140,24 +129,24 @@ const RoomBasic: FC<IProps> = (props) => {
               </Grid>
             </Grid>
           ) : (
-            <Grid item xs={6} sm={6} md={3} lg xl={3}>
-              <Grid container alignItems='center'>
-                <Grid item xs={2} sm={2}>
-                  <FontAwesomeIcon icon={faRulerCombined}/>
-                </Grid>
-                <Grid className={classes.nameIcon} item xs={10} sm={10}>
-                  <Typography variant={'body2'}>
-                    {total_area} m<sup>2</sup>
-                  </Typography>
+              <Grid item xs={6} sm={6} md={3} lg xl={3}>
+                <Grid container alignItems='center'>
+                  <Grid item xs={2} sm={2}>
+                    <FontAwesomeIcon icon={faRulerCombined} />
+                  </Grid>
+                  <Grid className={classes.nameIcon} item xs={10} sm={10}>
+                    <Typography variant={'body2'}>
+                      {total_area} m<sup>2</sup>
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          )}
+            )}
 
           <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
             <Grid container alignItems='center'>
               <Grid item xs={2} sm={2}>
-                <FontAwesomeIcon icon={faBath}/>
+                <FontAwesomeIcon icon={faBath} />
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
                 <Typography variant={'body2'}>
@@ -171,7 +160,7 @@ const RoomBasic: FC<IProps> = (props) => {
           <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
             <Grid container alignItems='center'>
               <Grid item xs={2} sm={2}>
-                <FontAwesomeIcon icon={faDoorOpen}/>
+                <FontAwesomeIcon icon={faDoorOpen} />
               </Grid>
               <Grid className={classes.nameIcon} item xs={10} sm={10}>
                 <Typography variant={'body2'}>
@@ -186,9 +175,9 @@ const RoomBasic: FC<IProps> = (props) => {
   );
 };
 
-RoomBasic.defaultProps ={
-  showBed:true,
-  number_bed:0
+RoomBasic.defaultProps = {
+  showBed: true,
+  number_bed: 0
 };
 
 export default RoomBasic;

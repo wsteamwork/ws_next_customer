@@ -55,5 +55,10 @@
     "discount": "Discount",
     "compareRooms": "Compare rooms",
     "emptyItem": "Comparison accommodation",
-    "showCompare": "Show compare"
+    "showCompare": "Show compare",
+    "totalResult": "Total",
+    "results": "results",
+    "contactForPrice": "Contact for price",
+    "currency": "VND",
+    "month": "month"
 }

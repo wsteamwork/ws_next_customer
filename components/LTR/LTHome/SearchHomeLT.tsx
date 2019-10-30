@@ -15,6 +15,8 @@ import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Se
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { updateRouter } from '@/store/Context/utility';
 import { Dispatch } from 'redux';
+import Cookies from 'universal-cookie';
+import { cleanAccents } from '@/utils/mixins';
 
 interface IProps {
   classes?: any,
@@ -25,9 +27,9 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    btnPlace:{
-      margin:'8px 16px 8px 0',
-      boxShadow:'0 2px 9px -2px rgba(132,135,138,.2)',
+    btnPlace: {
+      margin: '8px 16px 8px 0',
+      boxShadow: '0 2px 9px -2px rgba(132,135,138,.2)',
       textTransform: 'initial',
       backgroundColor: '#fff'
     }
@@ -36,9 +38,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SearchHomeLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {showPlaces, closeModal, className} = props;
-  const {t} = useTranslation();
+  const { showPlaces, closeModal, className } = props;
+  const { t } = useTranslation();
   const { dispatch: dispatchGlobal, width } = useContext(GlobalContext);
+  const cookies = new Cookies();
   const cities = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
@@ -46,7 +49,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
     (state) => state.searchFilter
   );
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
-  const { searchText, city_id, district_id, guestsCount, roomsCount} = filter;
+  const { searchText, city_id, district_id, guestsCount, roomsCount } = filter;
   const dispatchSearch = useDispatch<Dispatch<SearchFilterAction>>();
 
   const applySearch = () => {
@@ -69,8 +72,8 @@ const SearchHomeLT: FC<IProps> = (props) => {
   };
 
   const locationRoom = (nameCity: string) => {
-    updateRouter('/long-term-rooms',true, 'name', nameCity);
-    dispatchSearch({type:'SET_SEARCH_TEXT', searchText:nameCity})
+    updateRouter('/long-term-rooms', true, 'name', nameCity);
+    dispatchSearch({ type: 'SET_SEARCH_TEXT', searchText: nameCity })
   };
 
   let numRecommend: number;
@@ -89,36 +92,36 @@ const SearchHomeLT: FC<IProps> = (props) => {
   return (
     <RoomFilterContext.Provider value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
       <Grid container spacing={1} className={className}>
-      <Grid item xs={12} md={9}>
-        <SearchAutoSuggestion/>
-      </Grid>
-      <Grid item xs={12} md={3}>
-        <ButtonGlobal padding="0px" width="100%" height={width === 'xs' ? 40 : 50} onClick={applySearch}>
-          {t('home:searchComponent:search')}
-        </ButtonGlobal>
-      </Grid>
-      {showPlaces && (
-        <Fragment>
-          <Hidden xsDown>
-          <Grid item xs={12} sm={12} md={11} lg={11} xl={9}>
-            <Button variant="contained" className={classes.btnPlace}>
-              <GpsFixed style={{marginRight:8, color:'tomato'}}/>
-              Vị trí của bạn
-            </Button>
-
-            {cities.map((o,i)=> (
-              i < numRecommend ? (
-                <Button key={i} variant="contained" className={classes.btnPlace} onClick={()=>locationRoom(o.name_city)}>
-                  {o.name_city} ({o.total_rooms})
+        <Grid item xs={12} md={9}>
+          <SearchAutoSuggestion />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <ButtonGlobal padding="0px" width="100%" height={width === 'xs' ? 40 : 50} onClick={applySearch}>
+            {t('home:searchComponent:search')}
+          </ButtonGlobal>
+        </Grid>
+        {showPlaces && (
+          <Fragment>
+            <Hidden xsDown>
+              <Grid item xs={12} sm={12} md={11} lg={11} xl={9}>
+                <Button variant="contained" className={classes.btnPlace}>
+                  <GpsFixed style={{ marginRight: 8, color: 'tomato' }} />
+                  {t('home:yourLocation')}
                 </Button>
-              ) : null
-            ))}
-          </Grid>
-          <Grid item xs/>
-          </Hidden>
-        </Fragment>
-      )}
-    </Grid>
+
+                {cities.map((o, i) => (
+                  i < numRecommend ? (
+                    <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
+                </Button>
+                  ) : null
+                ))}
+              </Grid>
+              <Grid item xs />
+            </Hidden>
+          </Fragment>
+        )}
+      </Grid>
     </RoomFilterContext.Provider>
   );
 };

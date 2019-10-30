@@ -12,7 +12,7 @@ import BoxSearch from '@/components/Room/BoxSearch';
 import BoxImage from '@/components/Room/BoxImage';
 import BoxRoomDetail from '@/components/Room/BoxRoomDetail';
 import BoxBooking from '@/components/Room/BoxBooking';
-import BoxRecommend from '@/components/Room/BoxRecommend';
+// import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import Footer from '@/components/Layout/FooterComponent';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -57,9 +57,9 @@ const PreviewRoom: NextPage = () => {
               <BoxBooking />
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <BoxRecommend />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid container className="roomPage__disabledBoxBookingMoblie roomPage__boxBookingMoblie">
             <NavBottomBook />

@@ -1,15 +1,14 @@
-import React, { FC, useState, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Paper, Grid, Typography, Button, Collapse } from '@material-ui/core';
+import SearchComponent from '@/components/Home/SearchComponent';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import { Button, Collapse, Grid, Paper, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import moment from 'moment';
+import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import moment from 'moment';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import SearchComponent from '@/components/Home/SearchComponent';
-import { Router } from 'next/router';
 
 interface IProps {
   classes?: any;

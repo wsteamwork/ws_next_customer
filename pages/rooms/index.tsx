@@ -46,9 +46,9 @@ const Rooms: NextPage = (props) => {
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/rooms"/>
+        url="/rooms" />
 
-      <NavHeader isSticky={isMapOpen}/>
+      <NavHeader isSticky={isMapOpen} />
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
@@ -101,7 +101,7 @@ const Rooms: NextPage = (props) => {
                     </Fragment>
                   )}
 
-                <MapAndListing/>
+                <MapAndListing />
               </StickyContainer>
             </Hidden>
             <Hidden mdUp implementation="css">
@@ -115,7 +115,7 @@ const Rooms: NextPage = (props) => {
                 <SearchMobile />
               </GridContainer>
               <FilterActions />
-              <MapAndListing/>
+              <MapAndListing />
               <BottomNav />
             </Hidden>
           </div>

@@ -13,7 +13,8 @@ import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -23,7 +24,8 @@ const Home: NextPage = () => {
   );
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
   const { t } = useTranslation();
-
+  const { width } = useContext<IGlobalContext>(GlobalContext);
+  console.log(width);
   return (
     <Fragment>
       <NextHead
@@ -31,26 +33,27 @@ const Home: NextPage = () => {
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
         url="https://westay.vn"
-        ogImage="/static/images/Bg_home.4023648f.jpg"/>
+        ogImage="/static/images/Bg_home.4023648f.jpg" />
 
       <GridContainer xs={12}>
-        <SearchHome/>
+        <SearchHome />
+        {width === 'lg' || width === 'xl' || width === 'md' ? (
+          <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
+            <SliderTypeApartment />
+            <MetroGridImage />
+            <ListRoom
+              roomData={roomsHot}
+              usingSlider={true}
+              title={t('home:editorChoice')}
+              render={renderRoom} />
 
-        <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-          <SliderTypeApartment />
-          <MetroGridImage />
-          <ListRoom
-            roomData={roomsHot}
-            usingSlider={true}
-            title={t('home:editorChoice')}
-            render={renderRoom}/>
-
-        </GridContainer>
+          </GridContainer>
+        ) : ''}
         {/* <HostBecome /> */}
 
-        <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
+        {/* <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />
-        </GridContainer>
+        </GridContainer> */}
       </GridContainer>
 
       <FooterComponent />

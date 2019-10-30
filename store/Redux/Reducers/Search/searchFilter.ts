@@ -12,9 +12,9 @@ export type DateRange = {
 export type SearchFilterState = {
   readonly city_id: number | undefined;
   readonly district_id: number | undefined;
-  readonly guestsCount: number;
+  readonly guestsCount: number | undefined;
   readonly searchText: string;
-  readonly roomsCount: number;
+  readonly roomsCount: number | undefined;
   readonly bookingType: number;
   readonly roomType: number;
   readonly startDate: string | null;
@@ -28,29 +28,29 @@ export type SearchFilterAction =
   | { type: 'SET_BOOKING_TYPE'; bookingType: number }
   | { type: 'SET_ROOM_TYPE'; roomType: number }
   | { type: 'SET_NAV_BOOKING_TYPE'; bookingType: number }
-  | { type: 'SET_NAV_GUESTS'; guestsCount: number }
-  | { type: 'SET_NUMBER_ROOM'; roomsCount: number }
+  | { type: 'SET_NAV_GUESTS'; guestsCount: number | undefined }
+  | { type: 'SET_NUMBER_ROOM'; roomsCount: number | undefined }
   | { type: 'SET_ROOM_RECENTLY'; roomRecently: number[] }
   | { type: 'SET_SEARCH_TEXT'; searchText: string }
   | { type: 'SET_SEARCH_CITY'; city_id: number | undefined }
   | { type: 'SET_SEARCH_DISTRICT'; district_id: number | undefined }
   | { type: 'SET_START_DATE'; payload: string }
   | { type: 'SET_END_DATE'; payload: string }
-  | { type: 'setLeaseTypeGlobal'; leaseTypeGlobal: 0 | 1 ; leaseTypePathName: string};
+  | { type: 'setLeaseTypeGlobal'; leaseTypeGlobal: 0 | 1; leaseTypePathName: string };
 
 const init: SearchFilterState = {
   city_id: undefined,
   district_id: undefined,
   searchText: '',
-  guestsCount: 0,
-  roomsCount: 0,
+  guestsCount: 1,
+  roomsCount: 1,
   bookingType: 2,
   roomType: 0,
   startDate: moment().format(DEFAULT_DATE_TIME_FORMAT),
   endDate: null,
   roomRecently: [],
   leaseTypeGlobal: 0,
-  leaseTypePathName: '/rooms',
+  leaseTypePathName: '/rooms'
 };
 
 const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
@@ -81,7 +81,10 @@ const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
     case 'SET_END_DATE':
       return updateObject(state, { endDate: action.payload });
     case 'setLeaseTypeGlobal':
-      return updateObject(state, { leaseTypeGlobal: action.leaseTypeGlobal, leaseTypePathName:action.leaseTypePathName });
+      return updateObject(state, {
+        leaseTypeGlobal: action.leaseTypeGlobal,
+        leaseTypePathName: action.leaseTypePathName
+      });
     default:
       return state;
   }

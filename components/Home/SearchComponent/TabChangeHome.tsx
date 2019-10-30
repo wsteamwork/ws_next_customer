@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Tabs, Tab } from '@material-ui/core';
-import { TabsProps } from '@material-ui/core/Tabs';
 import { a11yProps } from '@/pages/host/update-listing/[id]';
+import { Tab, Tabs, Theme } from '@material-ui/core';
+import { TabsProps } from '@material-ui/core/Tabs';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 
 interface IProps extends TabsProps {
   classes?: any,
@@ -33,7 +33,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       backgroundColor: 'rgba(225,225,225, 0.5)',
       borderRadius: 4,
-      opacity:0.9,
+      opacity: 0.9,
       padding: '0 24px'
     },
     wrapper: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: '#323232',
       fontWeight: 700,
       fontSize: 18,
-      [theme.breakpoints.only('xs')]:{
+      [theme.breakpoints.only('xs')]: {
         fontSize: 16,
       }
     }
@@ -55,18 +55,18 @@ const TabChangeHome: FC<IProps> = (props) => {
   return (
     <Tabs
       {...props}
-      classes = {{
+      classes={{
         root: classes.root,
         indicator: classes.indicator
       }}
     >
       {tab.map((proptab, i) =>
-        <Tab key = {i} {...proptab}
-             classes = {{
-               root: classes.rootTab,
-               wrapper: classes.wrapper
-             }}
-             {...a11yProps(i)}
+        <Tab key={i} {...proptab}
+          classes={{
+            root: classes.rootTab,
+            wrapper: classes.wrapper
+          }}
+          {...a11yProps(i)}
         />
       )}
     </Tabs>

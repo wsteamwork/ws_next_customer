@@ -1,21 +1,20 @@
-import React, { Fragment, FC, useReducer, useState } from 'react';
-import { NextPage } from 'next';
-import { NextContextPage } from '@/store/Redux/Reducers';
-import { getCookieFromReq } from '@/utils/mixins';
-import NextHead from '@/components/NextHead';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import { RoomIndexReducer, RoomIndexStateInit, RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { Hidden, Grid } from '@material-ui/core';
 import GridContainer from '@/components/Layout/Grid/Container';
-import FilterActions from '@/components/Rooms/FilterActions';
-import MapAndListing from '@/components/Rooms/MapAndListing';
-import SearchMobile from '@/components/Rooms/SearchMobile';
-import BottomNav from '@/components/Rooms/BottomNav';
-import { StickyContainer, Sticky } from 'react-sticky';
-import HeadRoom from 'react-headroom';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
 import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+import NextHead from '@/components/NextHead';
+import BottomNav from '@/components/Rooms/BottomNav';
+import FilterActions from '@/components/Rooms/FilterActions';
+import MapAndListing from '@/components/Rooms/MapAndListing';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import { NextContextPage } from '@/store/Redux/Reducers';
+import { getCookieFromReq } from '@/utils/mixins';
+import { Grid, Hidden } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useReducer, useState } from 'react';
+import HeadRoom from 'react-headroom';
+import { Sticky, StickyContainer } from 'react-sticky';
 
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
@@ -27,12 +26,12 @@ const LongtermRooms: NextPage = () => {
     <Fragment>
       <NextHead
         ogSitename="Westay - Thuê phòng trực tuyến"
-        title="Thuê phòng dài hạn, thuê trọ - Westay - Westay.vn - Westay.vn"
-        description="Thuê phòng dài hạn, thuê trọ - Westay - Westay.vn - Westay.vn"
+        title="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
+        description="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/long-term-rooms"/>
+        url="/long-term-rooms" />
 
-      <NavHeader isSticky={isMapOpen}/>
+      <NavHeader isSticky={isMapOpen} />
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <div className="roomListing">
@@ -62,24 +61,24 @@ const LongtermRooms: NextPage = () => {
                             {/*</Grid>*/}
                             <Grid container spacing={1}>
                               <Grid item>
-                                <SelectLeaseTypeGlobal/>
+                                <SelectLeaseTypeGlobal />
                               </Grid>
                               <Grid item xs>
-                                <SearchHomeLT showPlaces={false}/>
+                                <SearchHomeLT showPlaces={false} />
                               </Grid>
                             </Grid>
                           </GridContainer>
                         </HeadRoom>
 
-                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
+                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
                       </header>
                     )}
                   </Sticky>
                 ) : (
-                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false}/>
-                )}
+                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
+                  )}
 
-                <MapAndListing/>
+                <MapAndListing />
               </StickyContainer>
             </Hidden>
             <Hidden mdUp implementation="css">
@@ -90,10 +89,10 @@ const LongtermRooms: NextPage = () => {
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}
-                <SearchHomeLT showPlaces={false}/>
+                <SearchHomeLT showPlaces={false} />
               </GridContainer>
-              <FilterActions showBookByHour={false}/>
-              <MapAndListing/>
+              <FilterActions showBookByHour={false} />
+              <MapAndListing />
               <BottomNav />
             </Hidden>
           </div>

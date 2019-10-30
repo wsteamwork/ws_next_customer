@@ -1,22 +1,20 @@
-import React, { FC, useContext } from 'react';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { Grid, Toolbar, AppBar } from '@material-ui/core';
-import ChooseRoomGuest from './ChooseRoomGuest';
-import RoomType from './RoomType';
-import PriceRange from './PriceRange';
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { Grid } from '@material-ui/core';
+import React, { FC, useContext } from 'react';
 import BookByHour from './BookByHour';
+import ChooseRoomGuest from './ChooseRoomGuest';
 import FastBooking from './FastBooking';
 import FilterRoom from './FilterRoom';
-import SwitchMap from './SwitchMap';
-import InfoSearch from './InfoSearch';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import PriceRange from './PriceRange';
+import RoomType from './RoomType';
 interface Iprops {
   hideSearchBar?: boolean;
-  showBookByHour?:boolean;
+  showBookByHour?: boolean;
 }
 
 const FilterActions: FC<Iprops> = (props) => {
-  const {hideSearchBar, showBookByHour} = props;
+  const { hideSearchBar, showBookByHour } = props;
   const { state } = useContext(RoomIndexContext);
   const { isMapOpen } = state;
   return (
@@ -31,24 +29,24 @@ const FilterActions: FC<Iprops> = (props) => {
       <Grid container>
         <Grid item xs={10} container spacing={1}>
           <Grid item className="displayWebkit filterRooms__chooseRoomGuest">
-            <ChooseRoomGuest/>
+            <ChooseRoomGuest />
           </Grid>
           <Grid item className="displayWebkit filterRooms__roomType">
-            <RoomType/>
+            <RoomType />
           </Grid>
           <Grid item className="displayWebkit filterRooms__priceRange">
-            <PriceRange/>
+            <PriceRange />
           </Grid>
           {showBookByHour && (
             <Grid item className="displayWebkit filterRooms__bookByHourt">
-              <BookByHour/>
+              <BookByHour />
             </Grid>
           )}
           <Grid item className="displayWebkit filterRooms__fastBooking">
-            <FastBooking/>
+            <FastBooking />
           </Grid>
           <Grid item className="displayWebkit filterRooms__filterRoom">
-            <FilterRoom/>
+            <FilterRoom />
           </Grid>
         </Grid>
 
@@ -60,8 +58,8 @@ const FilterActions: FC<Iprops> = (props) => {
   );
 };
 
-FilterActions.defaultProps ={
-  showBookByHour:true
+FilterActions.defaultProps = {
+  showBookByHour: true
 };
 
 export default FilterActions;

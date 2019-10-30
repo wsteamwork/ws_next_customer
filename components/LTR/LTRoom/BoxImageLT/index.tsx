@@ -2,10 +2,11 @@ import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, Fragment, MouseEvent, useState } from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import '/styles/pages/LTR/room/index.scss';
+import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
 
 interface IProps {
   classes?: any,
@@ -40,8 +41,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { roomName, livingrooms, cover_photo, outdoors, furnitures, kitchens, bedrooms, bathrooms } = props;
-
+  const { livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
+  const [openFullImage, setOpenFullImage] = useState<boolean>(false);
+  const toggle = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    setOpenFullImage(!openFullImage);
+  };
   let arrImage: IArrayImage[] = [
     // {
     //   imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
@@ -96,23 +101,36 @@ const BoxImageLT: FC<IProps> = (props) => {
   }, []);
 
   return (
-    <Grid container spacing={1} className={classes.boxContainer}>
-      <Slider className="slider-wrapper" autoplay={3000}>
-        {arrImage.map((item, i) => (
-          <div
-            key={i}
-            className="slider-content"
-            style={{ background: `url('${item.imgURL}') no-repeat center center` }}
-          >
-            <div className="inner">
-              <h1 className={classes.txtName}>{item.title}</h1>
-              <p>{item.subTitle}</p>
+    <Fragment>
+      <Grid container spacing={1} className={classes.boxContainer}>
+        <Slider className="slider-wrapper" autoplay={3000}>
+          {arrImage.map((item, i) => (
+            <div
+              onClick={toggle}
+              key={i}
+              className="slider-content"
+              style={{ background: `url('${item.imgURL}') no-repeat center center` }}
+            >
+              {/* <div className="inner"> */}
+              {/* <h1 className={classes.txtName}>{item.title}</h1> */}
+              {/* <p>{item.subTitle}</p> */}
               {/*<button>{item.button}</button>*/}
+              {/* </div> */}
             </div>
-          </div>
-        ))}
-      </Slider>
-    </Grid>
+          ))}
+        </Slider>
+      </Grid>
+      {/* <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}
+        livingrooms={livingrooms}
+        kitchens={kitchens}
+        cover_photo={cover_photo}
+        bathrooms={bathrooms}
+        bedrooms={bedrooms}
+        outdoors={outdoors}
+        furnitures={furnitures}
+        roomName={roomName}
+      /> */}
+    </Fragment>
   );
 };
 

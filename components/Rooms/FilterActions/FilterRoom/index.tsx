@@ -1,13 +1,10 @@
-import React, { useState, FC, useContext, memo, useMemo } from 'react';
 import CustomPopper from '@/components/CustomPopper';
-import classNames from 'classnames';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { Grid } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilter, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
+import React, { FC, memo, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ActionFilter from './ActionFilter';
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 
 const FilterRoom: FC = () => {
   const [open, setOpen] = useState(false);

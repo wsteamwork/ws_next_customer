@@ -1,9 +1,9 @@
-import React, { FC, memo, Dispatch, SetStateAction, useContext } from 'react';
-import { Grid, FormControlLabel } from '@material-ui/core';
-import { useFilterRoom } from './context';
-import { CustomCheckbox } from '@/components/Home/CheckboxList';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import { CustomCheckbox } from '@/components/Home/CheckboxList';
+import { FormControlLabel, Grid } from '@material-ui/core';
+import React, { Dispatch, FC, memo, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useFilterRoom } from './context';
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -39,7 +39,7 @@ const ActionFilter: FC<IProps> = (props) => {
                         color="primary"
                       />
                     }
-                    label={i.details.data[0].name}
+                    label={i.name}
                   />
                 </Grid>
               ))}
