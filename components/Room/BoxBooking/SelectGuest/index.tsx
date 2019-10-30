@@ -1,12 +1,12 @@
-import React, { ChangeEvent, useState, memo, Dispatch, useMemo } from 'react';
 import { BootstrapInput } from '@/components/SelectGlobal';
-import { KeyboardArrowDown } from '@material-ui/icons';
-import { Select, MenuItem, Grid } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { useTranslation } from 'react-i18next';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid, MenuItem, Select } from '@material-ui/core';
+import { KeyboardArrowDown } from '@material-ui/icons';
+import React, { ChangeEvent, Dispatch, memo, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SelectGuest = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();

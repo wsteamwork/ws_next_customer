@@ -1,12 +1,10 @@
-import React, { FC, useState, memo, useMemo, useCallback } from 'react';
 import CustomPopper from '@/components/CustomPopper';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import ActionSelect from './ActionSelect';
+import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRoomTypeChecbox, RoomTypeData } from './context';
+import ActionSelect from './ActionSelect';
+import { useRoomTypeChecbox } from './context';
 
 const RoomType: FC = () => {
   const [open, setOpen] = useState(false);

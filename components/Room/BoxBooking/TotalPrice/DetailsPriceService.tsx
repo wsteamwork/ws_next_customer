@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
 import CustomPopper from '@/components/CustomPopper';
-import { Grid } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import mainColor from '@/styles/constants/colors';
 import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid } from '@material-ui/core';
 import numeral from 'numeral';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {

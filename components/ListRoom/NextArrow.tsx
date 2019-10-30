@@ -1,7 +1,7 @@
-import React, { Fragment, FC } from 'react';
-import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 import Fab from '@material-ui/core/Fab';
+import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 import classNames from 'classnames';
+import React, { FC, Fragment } from 'react';
 import { CustomArrowProps } from 'react-slick';
 
 interface IProps extends CustomArrowProps { }

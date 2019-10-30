@@ -1,20 +1,14 @@
-import React, { FC } from 'react';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import classNames from 'classnames';
-import GridContainer from './Grid/Container';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faPhoneVolume, faEnvelope, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Logo from '../Toolbar/Logo';
+import GridContainer from './Grid/Container';
 
-interface IProps {}
-const facebookUrl = 'https://www.facebook.com/westay.vn/';
-const instagramUrl = 'https://www.instagram.com/westay_stayhappytogether/';
+interface IProps { }
+// const facebookUrl = 'https://www.facebook.com/westay.vn/';
+// const instagramUrl = 'https://www.instagram.com/westay_stayhappytogether/';
 
-const Footer: FC<IProps> = (props) => {
+const Footer: FC<IProps> = () => {
   const { t } = useTranslation();
 
   return (

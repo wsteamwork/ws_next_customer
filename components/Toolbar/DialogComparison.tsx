@@ -127,15 +127,15 @@ const DialogComparison: FC<IProps> = (props) => {
               <Grid container spacing={1} className={classes.wrapperBasic}>
                 <Grid item xs={12} sm={12} md={12} lg={11} xl={10}>
                   <RoomBasic
-                            name={comparisonList[0].details.data[0].name}
-                             id={comparisonList[0].id} bathroom={comparisonList[0].bathroom}
-                             max_additional_guest={comparisonList[0].max_additional_guest}
-                             max_guest={comparisonList[0].max_guest}
-                             number_bed={comparisonList[0].number_bed}
-                             number_room={comparisonList[0].number_room}
-                             totalComforts={comparisonList[0].comforts.data.length}
-                             avg_rating={comparisonList[0].avg_rating}
-                             avg_rating_txt={comparisonList[0].avg_rating_txt}
+                    name={comparisonList[0].details.data[0].name}
+                    id={comparisonList[0].id} bathroom={comparisonList[0].bathroom}
+                    max_additional_guest={comparisonList[0].max_additional_guest}
+                    max_guest={comparisonList[0].max_guest}
+                    number_bed={comparisonList[0].number_bed}
+                    number_room={comparisonList[0].number_room}
+                    totalComforts={comparisonList[0].comforts.data.length}
+                    avg_rating={comparisonList[0].avg_rating}
+                    avg_rating_txt={comparisonList[0].avg_rating_txt}
                   />
                 </Grid>
               </Grid>
@@ -174,9 +174,9 @@ const DialogComparison: FC<IProps> = (props) => {
                   </div>
                   <div className={classes.rowMargin}>
                     <BoxMap longitude={comparisonList[0].longitude}
-                            latitude={comparisonList[0].latitude}
-                            district={comparisonList[0].district.data.name}
-                            city={comparisonList[0].city.data.name}/>
+                      latitude={comparisonList[0].latitude}
+                      district={comparisonList[0].district.data.name}
+                      city={comparisonList[0].city.data.name} />
                   </div>
                 </Grid>
               </Grid>
@@ -209,14 +209,14 @@ const DialogComparison: FC<IProps> = (props) => {
               <Grid container spacing={1} className={classes.wrapperBasic}>
                 <Grid item xs={12}>
                   <RoomBasic name={comparisonList[1].details.data[0].name}
-                             id={comparisonList[1].id} bathroom={comparisonList[0].bathroom}
-                             max_additional_guest={comparisonList[1].max_additional_guest}
-                             max_guest={comparisonList[1].max_guest}
-                             number_bed={comparisonList[1].number_bed}
-                             number_room={comparisonList[1].number_room}
-                             totalComforts={comparisonList[1].comforts.data.length}
-                             avg_rating={comparisonList[1].avg_rating}
-                             avg_rating_txt={comparisonList[1].avg_rating_txt} />
+                    id={comparisonList[1].id} bathroom={comparisonList[0].bathroom}
+                    max_additional_guest={comparisonList[1].max_additional_guest}
+                    max_guest={comparisonList[1].max_guest}
+                    number_bed={comparisonList[1].number_bed}
+                    number_room={comparisonList[1].number_room}
+                    totalComforts={comparisonList[1].comforts.data.length}
+                    avg_rating={comparisonList[1].avg_rating}
+                    avg_rating_txt={comparisonList[1].avg_rating_txt} />
                 </Grid>
               </Grid>
               <Grid container spacing={1} className={classes.wrapper}>
@@ -253,9 +253,9 @@ const DialogComparison: FC<IProps> = (props) => {
                   </div>
                   <div className={classes.rowMargin}>
                     <BoxMap longitude={comparisonList[1].longitude}
-                            latitude={comparisonList[1].latitude}
-                            district={comparisonList[1].district.data.name}
-                            city={comparisonList[1].city.data.name}/>
+                      latitude={comparisonList[1].latitude}
+                      district={comparisonList[1].district.data.name}
+                      city={comparisonList[1].city.data.name} />
                   </div>
                 </Grid>
               </Grid>

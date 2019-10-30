@@ -1,20 +1,20 @@
-import React, { Fragment, useEffect, useContext, useMemo } from 'react';
-import { NextPage } from 'next';
-import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getInvoice } from '@/store/Redux/Reducers/Book/book';
-import { useSelector } from 'react-redux';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { Grid } from '@material-ui/core';
+import NextHead from '@/components/NextHead';
 import BankList from '@/components/Payment/BankList';
 import PaymentInfo from '@/components/Payment/PaymentInfo';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import NextHead from '@/components/NextHead';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getInvoice } from '@/store/Redux/Reducers/Book/book';
 import { PaymentBankListRes } from '@/types/Requests/Payment/PaymentResponse';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { Grid } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const Invoice: NextPage = () => {
   const error = useSelector<ReducersList, boolean>((state) => state.book.error);

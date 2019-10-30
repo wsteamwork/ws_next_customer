@@ -1,11 +1,11 @@
-import React, { ChangeEvent, ReactNode, Dispatch, memo, FC, useMemo } from 'react';
-import { Select, MenuItem } from '@material-ui/core';
-import { MenuProps } from '.';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 import { BootstrapInput } from '@/components/SelectGlobal';
-import { KeyboardArrowDown } from '@material-ui/icons';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { MenuItem, Select } from '@material-ui/core';
+import { KeyboardArrowDown } from '@material-ui/icons';
+import React, { ChangeEvent, Dispatch, FC, memo, ReactNode, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MenuProps } from '.';
 
 const SelectTimeCheckout: FC = () => {
   const dispatch = useDispatch<Dispatch<BookingAction>>();

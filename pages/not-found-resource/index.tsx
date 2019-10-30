@@ -1,13 +1,13 @@
-import React, { Fragment, FC, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Typography } from '@material-ui/core';
-import NavHeader from '@/components/Toolbar/NavHeader';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import SearchComponent from '@/components/Home/SearchComponent';
 import Footer from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { useTranslation } from 'react-i18next';
-import SearchComponent from '@/components/Home/SearchComponent';
-import ButtonGlobal from '@/components/ButtonGlobal';
+import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any
@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: 'auto',
       objectFit: 'cover',
       borderRadius: 4,
-      cursor:'pointer',
+      cursor: 'pointer',
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s',
@@ -31,34 +31,34 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         transform: 'scale(1.005)'
       },
     },
-    boxImage:{
-      textAlign:'center',
+    boxImage: {
+      textAlign: 'center',
     },
-    boxBtn:{
-      margin:'40px 0'
+    boxBtn: {
+      margin: '40px 0'
     }
   })
 );
 
 const NotFoundResource: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
-  const {t} = useTranslation();
-  const {router} = useContext(GlobalContext);
+  const { } = props;
+  const { t } = useTranslation();
+  const { router } = useContext(GlobalContext);
 
-  const goHome=()=>{
+  const goHome = () => {
     router.push('/');
   };
 
   return (
     <Fragment>
-      <NavHeader/>
+      <NavHeader />
       <GridContainer
         xs={11}
         md={10}
         classNameItem="searchRooms__overlay"
         className="searchRooms">
-        <SearchComponent showGuestRoom/>
+        <SearchComponent showGuestRoom />
       </GridContainer>
 
       <GridContainer xs={11} lg={10} xl={9}>
@@ -81,7 +81,7 @@ const NotFoundResource: FC<IProps> = (props) => {
 
         </div>
       </GridContainer>
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };

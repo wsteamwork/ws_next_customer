@@ -1,14 +1,14 @@
-import createStyles from '@material-ui/core/styles/createStyles';
 import Button from '@material-ui/core/Button';
-import React, {FC, Fragment} from 'react';
+import { Theme } from '@material-ui/core/styles';
+import createStyles from '@material-ui/core/styles/createStyles';
 import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
 import { makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
+import React, { FC, Fragment } from 'react';
 import { CustomArrowProps } from 'react-slick';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    x:{
+    x: {
       fontSize: 0,
       lineHeight: 0,
       position: 'absolute',
@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: 0,
       WebkitTransform: 'translate(0, -50%)',
       transform: 'translate(0, -50%)',
-      cursor:'pointer',
+      cursor: 'pointer',
       color: '#273740',
       border: '1px solid #ddd',
       borderRadius: '50%',
@@ -31,12 +31,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme!.breakpoints!.down!('md')]: {
         left: -50,
       },
-      '&:hover':{
+      '&:hover': {
         background: 'transparent',
       }
     },
     icon: {
-      width:15,
+      width: 15,
       height: 15,
       marginLeft: 5
     }
@@ -58,7 +58,7 @@ const PrevArrowSlider: FC<IProps> = (props: CustomArrowProps) => {
         onClick={onClick}
         disableRipple={true}
       >
-        <ArrowBackIos className={classes.icon}/>
+        <ArrowBackIos className={classes.icon} />
       </Button>
     </Fragment>
   );

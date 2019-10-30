@@ -12,7 +12,7 @@ import { useCookies } from 'react-cookie';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import ButtonLoginSocial from '../ButtonLoginSocial';
+// import ButtonLoginSocial from '../ButtonLoginSocial';
 
 interface MyFormValues {
   firstName: string;
@@ -60,7 +60,7 @@ const useValidata = () => {
 };
 
 const FormSignup: FC = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['_token']);
+  const [cookies, setCookie] = useCookies(['_token']);
   const [error, setError] = useState('');
   const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
@@ -126,175 +126,175 @@ const FormSignup: FC = () => {
           handleBlur,
           isSubmitting
         }: FormikProps<MyFormValues>) => (
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant="h6">{t('auth:registerInfo')}</Typography>
-              </Grid>
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Typography variant="h6">{t('auth:registerInfo')}</Typography>
+                </Grid>
 
-              <Grid item xs={12} lg={6}>
-                <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    id="firstName"
-                    name="firstName"
-                    label={t('book:bookingForm:firstName')}
-                    placeholder={t('book:bookingForm:placeFirstName')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.firstName}
-                  />
-                  <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12} lg={6}>
+                  <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      id="firstName"
+                      name="firstName"
+                      label={t('book:bookingForm:firstName')}
+                      placeholder={t('book:bookingForm:placeFirstName')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.firstName}
+                    />
+                    <FormHelperText>{touched.firstName ? errors.firstName : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12} lg={6}>
-                <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    id="lastName"
-                    name="lastName"
-                    label={t('book:bookingForm:lastName')}
-                    placeholder={t('book:bookingForm:placeLastName')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.lastName}
-                  />
-                  <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12} lg={6}>
+                  <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      id="lastName"
+                      name="lastName"
+                      label={t('book:bookingForm:lastName')}
+                      placeholder={t('book:bookingForm:placeLastName')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.lastName}
+                    />
+                    <FormHelperText>{touched.lastName ? errors.lastName : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    id="phone-number"
-                    name="phone"
-                    label={t('book:bookingForm:phoneNumber')}
-                    placeholder={t('book:bookingForm:placePhone')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.phone}
-                  />
-                  <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      id="phone-number"
+                      name="phone"
+                      label={t('book:bookingForm:phoneNumber')}
+                      placeholder={t('book:bookingForm:placePhone')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.phone}
+                    />
+                    <FormHelperText>{touched.phone ? errors.phone : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl error={!!(errors.email && touched.email)} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    id="email-booking"
-                    type="email"
-                    name="email"
-                    label="Email"
-                    placeholder={t('book:bookingForm:placeEmail')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl error={!!(errors.email && touched.email)} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      id="email-booking"
+                      type="email"
+                      name="email"
+                      label="Email"
+                      placeholder={t('book:bookingForm:placeEmail')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                    <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl error={!!(errors.birthday && touched.birthday)} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    type="date"
-                    name="birthday"
-                    label={t('auth:birthday')}
-                    placeholder={t('auth:birthday')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={
-                      values.birthday ||
-                      moment()
-                        .subtract(15, 'years')
-                        .format('yyyy-DD-mm')
-                    }
-                  />
-                  <FormHelperText>{touched.birthday ? errors.birthday : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl error={!!(errors.birthday && touched.birthday)} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      type="date"
+                      name="birthday"
+                      label={t('auth:birthday')}
+                      placeholder={t('auth:birthday')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={
+                        values.birthday ||
+                        moment()
+                          .subtract(15, 'years')
+                          .format('yyyy-DD-mm')
+                      }
+                    />
+                    <FormHelperText>{touched.birthday ? errors.birthday : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl error={!!(errors.password && touched.password)} fullWidth>
-                  <TextField
-                    variant="outlined"
-                    // id="email-booking"
-                    type="password"
-                    name="password"
-                    label={t('auth:password')}
-                    placeholder={t('auth:password')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                  />
-                  <FormHelperText>{touched.password ? errors.password : ''}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl error={!!(errors.password && touched.password)} fullWidth>
+                    <TextField
+                      variant="outlined"
+                      // id="email-booking"
+                      type="password"
+                      name="password"
+                      label={t('auth:password')}
+                      placeholder={t('auth:password')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
+                    />
+                    <FormHelperText>{touched.password ? errors.password : ''}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl
-                  error={!!(errors.password_confirmation && touched.password_confirmation)}
-                  fullWidth>
-                  <TextField
-                    variant="outlined"
-                    // id="email-booking"
-                    type="password"
-                    name="password_confirmation"
-                    label={t('auth:enterConf')}
-                    placeholder={t('auth:enterConf')}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password_confirmation}
-                  />
-                  <FormHelperText>
-                    {touched.password_confirmation ? errors.password_confirmation : ''}
-                  </FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    error={!!(errors.password_confirmation && touched.password_confirmation)}
+                    fullWidth>
+                    <TextField
+                      variant="outlined"
+                      // id="email-booking"
+                      type="password"
+                      name="password_confirmation"
+                      label={t('auth:enterConf')}
+                      placeholder={t('auth:enterConf')}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password_confirmation}
+                    />
+                    <FormHelperText>
+                      {touched.password_confirmation ? errors.password_confirmation : ''}
+                    </FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <FormControl fullWidth error={!!error}>
-                  <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
-                    {!isSubmitting ? (
-                      t('auth:signup')
-                    ) : (
-                      <SimpleLoader height="45px" width="100%"></SimpleLoader>
-                    )}
-                  </ButtonGlobal>
-                  <FormHelperText>{!!error && error}</FormHelperText>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12}>
+                  <FormControl fullWidth error={!!error}>
+                    <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
+                      {!isSubmitting ? (
+                        t('auth:signup')
+                      ) : (
+                          <SimpleLoader height="45px" width="100%"></SimpleLoader>
+                        )}
+                    </ButtonGlobal>
+                    <FormHelperText>{!!error && error}</FormHelperText>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12} container justify="center">
-                <FormControl fullWidth>
-                  <p className="haveAccount">
-                    {t('auth:haveAccount')}{' '}
-                    <Link href="/auth/signin">
-                      <a>{t('auth:singin')}</a>
-                    </Link>
-                  </p>
-                  <p className="agreeRules">
-                    {t('auth:iAgree')}{' '}
-                    <Link href="/terms-and-conditions">
-                      <a>{t('auth:security')}</a>
-                    </Link>{' '}
-                    {t('auth:and')}{' '}
-                    <Link href="/privacy-policy">
-                      <a>{t('auth:privatePoli')}</a>
-                    </Link>{' '}
-                    {t('auth:ofWstay')}
-                  </p>
-                </FormControl>
-              </Grid>
+                <Grid item xs={12} container justify="center">
+                  <FormControl fullWidth>
+                    <p className="haveAccount">
+                      {t('auth:haveAccount')}{' '}
+                      <Link href="/auth/signin">
+                        <a>{t('auth:singin')}</a>
+                      </Link>
+                    </p>
+                    <p className="agreeRules">
+                      {t('auth:iAgree')}{' '}
+                      <Link href="/terms-and-conditions">
+                        <a>{t('auth:security')}</a>
+                      </Link>{' '}
+                      {t('auth:and')}{' '}
+                      <Link href="/privacy-policy">
+                        <a>{t('auth:privatePoli')}</a>
+                      </Link>{' '}
+                      {t('auth:ofWstay')}
+                    </p>
+                  </FormControl>
+                </Grid>
 
-              <ButtonLoginSocial></ButtonLoginSocial>
-            </Grid>
-          </form>
-        )}></Formik>
+                {/* <ButtonLoginSocial></ButtonLoginSocial> */}
+              </Grid>
+            </form>
+          )}></Formik>
     </Grid>
   );
 };

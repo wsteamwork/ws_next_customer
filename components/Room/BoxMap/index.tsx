@@ -9,10 +9,10 @@ import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
-  district:string,
-  city:string,
-  latitude:string,
-  longitude:string
+  district: string,
+  city: string,
+  latitude: string,
+  longitude: string
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>

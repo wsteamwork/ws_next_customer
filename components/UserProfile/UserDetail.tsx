@@ -1,15 +1,15 @@
-import React, { FC, Fragment, useMemo } from 'react';
-import LocationIcon from '@material-ui/icons/LocationOnRounded';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { Grid, Typography, Divider } from '@material-ui/core';
 import { RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexResponse';
+import { Divider, Grid, Typography } from '@material-ui/core';
+import LocationIcon from '@material-ui/icons/LocationOnRounded';
+import React, { FC, Fragment, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import ListRoom from '../ListRoom';
 import RoomCard from '../RoomCard';
 import ReviewUser from './ReviewUser';
-import { useTranslation } from 'react-i18next';
 
 const UserDetail: FC = (props) => {
   const { t } = useTranslation();

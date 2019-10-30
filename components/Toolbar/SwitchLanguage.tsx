@@ -1,26 +1,16 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles from '@material-ui/core/styles/withStyles';
-import React, { Fragment, FunctionComponent, useState, MouseEvent } from 'react';
-import { compose } from 'recompose';
-import { UseTranslationResponse, useTranslation } from 'react-i18next';
-import { useCookies } from 'react-cookie';
-import {
-  Chip,
-  Avatar,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-  Fade,
-  Slide,
-  Button,
-  Theme
-} from '@material-ui/core';
-import Menu, { MenuProps } from '@material-ui/core/Menu';
-
-// @ts-ignore
-import flagVN from '@/static/images/flagVN.svg';
 // @ts-ignore
 import flagEN from '@/static/images/flagEN.svg';
+// @ts-ignore
+import flagVN from '@/static/images/flagVN.svg';
+import { Avatar, Button, Chip, Fade, ListItemIcon, ListItemText, MenuItem, Theme } from '@material-ui/core';
+import Menu, { MenuProps } from '@material-ui/core/Menu';
+import createStyles from '@material-ui/core/styles/createStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
+import React, { Fragment, FunctionComponent, MouseEvent, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { compose } from 'recompose';
+
 
 interface IProps {
   classes?: any;

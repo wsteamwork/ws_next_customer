@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
-import { Grid } from '@material-ui/core';
-import NavHeader from '@/components/Toolbar/NavHeader';
 import Footer from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
-import Link from 'next/link';
-import { NextPage } from 'next';
-import { useTranslation } from 'react-i18next';
 import NextHead from '@/components/NextHead';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { Grid } from '@material-ui/core';
+import { NextPage } from 'next';
+import Link from 'next/link';
+import React, { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Success: NextPage = () => {
   const { t } = useTranslation();

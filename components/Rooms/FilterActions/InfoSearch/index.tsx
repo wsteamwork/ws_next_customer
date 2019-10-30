@@ -1,16 +1,11 @@
-import React, { FC, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Paper, Grid, Typography, Button, Collapse } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import DateRangeSearch from '@/components/Home/DateRangeSearch';
-import ChooseGuestRoom from '@/components/Home/ChooseGuestRoom';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import moment from 'moment';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Button, Collapse, Grid, Paper, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import moment from 'moment';
+import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any;
@@ -30,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const InfoSearch: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
   const [collapseSearch, setCollapseSearch] = useState<boolean>(false);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
@@ -74,7 +69,7 @@ const InfoSearch: FC<IProps> = (props) => {
 
         <Button className={classes.btnChange} onClick={handleCollapse}>
           <Grid>
-            <Typography style={{ display: 'inline-block' }}>{searchText}</Typography>, 
+            <Typography style={{ display: 'inline-block' }}>{searchText}</Typography>,
             {/* {!collapseSearch ? 'Thay đổi' : t('room:cancel')} */}
             {checkIn}
             {checkOut}

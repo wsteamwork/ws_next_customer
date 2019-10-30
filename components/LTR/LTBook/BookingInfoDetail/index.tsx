@@ -1,7 +1,6 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import React, { FC, memo } from 'react';
@@ -10,9 +9,9 @@ import { useSelector } from 'react-redux';
 import InfoRoom from './InfoRoom';
 import SettingRoom from './SettingRoom';
 
-const BookingInfoDetail: FC = (props) => {
+const BookingInfoDetail: FC = () => {
   const { t } = useTranslation();
-  const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
+  // const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
     (state) => state.ltBooking.LTBookingPriceCalculate
   );

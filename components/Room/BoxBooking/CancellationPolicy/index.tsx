@@ -1,9 +1,9 @@
-import React, { FC, memo, useMemo } from 'react';
-import { Grid } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import mainColor from '@/styles/constants/colors';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid } from '@material-ui/core';
 import Link from 'next/link';
+import React, { FC, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const CancellationPolicy: FC = () => {

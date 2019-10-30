@@ -1,15 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useContext, useState, useMemo, useEffect, Dispatch } from 'react';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
-import moment from 'moment';
-import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
-import { AxiosRes, AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingAction } from '@/store/Redux/Reducers/Booking/booking';
+import { BookingPriceCalculatorReq } from '@/types/Requests/Booking/BookingRequests';
+import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
+import { AxiosErrorCustom, AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { axios } from '@/utils/axiosInstance';
 import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import moment from 'moment';
+import { Dispatch, useContext, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 type ReturnCalculate = {
   numberDay: number;

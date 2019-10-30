@@ -22,7 +22,7 @@ interface IProps {
 
 const SearchComponent: FC<IProps> = (props) => {
   const { className, filter, showGuestRoom, closeModal } = props;
-  const { dispatch: dispatchGlobal, router } = useContext(GlobalContext);
+  const { dispatch: dispatchGlobal } = useContext(GlobalContext);
   const {
     searchText,
     city_id,

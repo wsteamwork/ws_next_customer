@@ -1,10 +1,10 @@
-import React, { useContext, FC, memo, useMemo } from 'react';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
-import { Grid } from '@material-ui/core';
-import numeral from 'numeral';
-import { useTranslation } from 'react-i18next';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { Grid } from '@material-ui/core';
+import numeral from 'numeral';
+import React, { FC, memo, useContext, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 const PriceDetail: FC = () => {

@@ -1,18 +1,16 @@
-import React, { Fragment, FC, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, IconButton, Grid, Snackbar, Button } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import VisitedRoom from '@/components/Rooms/VisitedRooms/VisitedRoom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
-import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
+import DialogComparison from '@/components/Toolbar/DialogComparison';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTags } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Grid, IconButton, Snackbar, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import DialogComparison from '@/components/Toolbar/DialogComparison';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any,

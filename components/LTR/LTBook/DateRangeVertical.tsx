@@ -3,7 +3,7 @@ import { getLTCalculatedBookingPrice } from '@/store/Context/Booking/BookingCont
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { DateRange } from '@/store/Redux/Reducers/Booking/booking';
-import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTBookingAction } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { LTRoomAvailableRes } from '@/types/Requests/Rooms/RoomResponses';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import * as _ from 'lodash';
@@ -40,9 +40,9 @@ const DateRangeVertical: FC<IProps> = (props) => {
   const availableDates = useSelector<ReducersList, LTRoomAvailableRes>(
     (state) => state.ltroomPage.availableDates
   );
-  const { movein, moveout } = useSelector<ReducersList, LTBookingReducerState>(
-    (state) => state.ltBooking
-  );
+  // const { movein, moveout } = useSelector<ReducersList, LTBookingReducerState>(
+  //   (state) => state.ltBooking
+  // );
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
 
   useEffect(() => {

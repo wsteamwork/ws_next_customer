@@ -1,18 +1,16 @@
-import React, { FC, useContext, useEffect, useMemo } from 'react';
 import CustomPopper from '@/components/CustomPopper';
-import { Grid } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { SearchFilterState, SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { updateRouter } from '@/store/Context/utility';
 import { ReducersType } from '@/store/Redux/Reducers';
-import { Dispatch } from 'redux';
+import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import { Grid } from '@material-ui/core';
+import classNames from 'classnames';
+import React, { FC, useContext, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { updateRouter } from '@/store/Context/utility';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Dispatch } from 'redux';
 
 interface IProps {
   filter: SearchFilterState;
@@ -36,10 +34,10 @@ const BookByHour: FC<IProps> = (props) => {
   const handleClick = () => {
     if (bookingType === 2) {
       updateBookingType(1);
-      updateRouter('/rooms',true, 'rent_type', 1, 'page', 1);
+      updateRouter('/rooms', true, 'rent_type', 1, 'page', 1);
     } else {
       updateBookingType(2);
-      updateRouter('/rooms',true, 'rent_type', 2, 'page', 1);
+      updateRouter('/rooms', true, 'rent_type', 2, 'page', 1);
     }
   };
 

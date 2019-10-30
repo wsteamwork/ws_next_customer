@@ -1,14 +1,11 @@
-import React, { memo, FC } from 'react';
-import { Grid, Tooltip } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import mainColor from '@/styles/constants/colors';
-import numeral from 'numeral';
-import Lottie from 'react-lottie';
 import animationData from '@/assets/lottie/simple-loading.json';
-import DetailsPriceDay from './DetailsPriceDay';
+import { Grid } from '@material-ui/core';
+import numeral from 'numeral';
+import React, { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import Lottie from 'react-lottie';
 import { useCalculatePrice } from './context';
+import DetailsPriceDay from './DetailsPriceDay';
 import DetailsPriceService from './DetailsPriceService';
 
 const defaultOptions = {
@@ -64,8 +61,8 @@ const TotalPrice: FC = () => {
                 <p className="totalPrice__right">
                   {numeral(
                     dataCalculate.service_fee +
-                      dataCalculate.charge_additional_guest +
-                      dataCalculate.charge_additional_hour
+                    dataCalculate.charge_additional_guest +
+                    dataCalculate.charge_additional_hour
                   ).format('0,0')}{' '}
                   VND
                 </p>
@@ -83,10 +80,10 @@ const TotalPrice: FC = () => {
             </Grid>
           </Grid>
         ) : (
-          <Grid className="totalPrice__error">
-            <p>{error}</p>
-          </Grid>
-        )}
+              <Grid className="totalPrice__error">
+                <p>{error}</p>
+              </Grid>
+            )}
       </Grid>
     )
   );

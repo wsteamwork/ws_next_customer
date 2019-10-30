@@ -1,24 +1,24 @@
-import React, { Fragment, useState } from 'react';
-import { NextPage } from 'next';
-import { getCollectionById } from '@/store/Redux/Reducers/Home/roomHomepage';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { useSelector } from 'react-redux';
-import { Collections } from '../../types/Requests/Rooms/RoomResponses';
-import Grid from '@material-ui/core/Grid/Grid';
 import CardIntro from '@/components/Cards/CardIntro';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
-import RoomCard from '@/components/RoomCard';
-import _ from 'lodash';
 import GridContainer from '@/components/Layout/Grid/Container';
-import Pagination from 'rc-pagination';
-import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import 'rc-pagination/assets/index.css';
+import RoomCard from '@/components/RoomCard';
 import NavHeader from '@/components/Toolbar/NavHeader';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
-import { animateScroll as scroll } from 'react-scroll/modules';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getCollectionById } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import Grid from '@material-ui/core/Grid/Grid';
+import { Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import { NextPage } from 'next';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import localeInfo from 'rc-pagination/lib/locale/vi_VN';
+import React, { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll/modules';
+import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
+import { Collections } from '../../types/Requests/Rooms/RoomResponses';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxTitle: {
@@ -146,8 +146,8 @@ const Collection: NextPage = (props) => {
                 />
               </Grid>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </GridContainer>
         </Fragment>
       )}

@@ -1,15 +1,15 @@
-import React, { Fragment, useEffect, useContext, useMemo } from 'react';
-import { NextPage } from 'next';
-import { getDataViewProfile } from '@/store/Redux/Reducers/Profile/userProfile';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import { useSelector } from 'react-redux';
-import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import Footer from '@/components/Layout/FooterComponent';
-import MainProfile from '@/components/UserProfile/MainProfile';
 import NextHead from '@/components/NextHead';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import MainProfile from '@/components/UserProfile/MainProfile';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getDataViewProfile } from '@/store/Redux/Reducers/Profile/userProfile';
+import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { getCookieFromReq } from '@/utils/mixins';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const UserPage: NextPage = (props) => {
   const { router } = useContext(GlobalContext);

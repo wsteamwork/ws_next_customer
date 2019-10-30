@@ -1,5 +1,3 @@
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { faCheckCircle, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar, Theme } from '@material-ui/core';
@@ -10,7 +8,6 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -98,58 +95,58 @@ interface IProps {
   fontSize?: string | number;
   border?: string;
   borderRadius?: string | number;
-  id:number;
-  avatar:string;
-  avatar_url:string;
-  name:string;
-  number_room:number;
+  id: number;
+  avatar: string;
+  avatar_url: string;
+  name: string;
+  number_room: number;
 }
 
 const HostInfo: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const {id, avatar, avatar_url, name, number_room} = props;
+  const { id, avatar, avatar_url, name, number_room } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   //
   // const merchant = !!room && room.merchant.data;
 
   return (
-      <Paper className={classes.paper}>
-        <Link href={`/user/${id}`}>
-          <a className={classes.link}>
-            <Grid container>
-              <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{ position: 'relative' }}>
-                <Avatar
-                  alt={avatar}
-                  src={avatar_url !== '' ? avatar_url : '/static/images/avatar_default.png'}
-                  className={classes.avatar}
-                />
-              </Grid>
-              <Grid item xs={9} sm={8} md={8} lg={8} xl={9}>
-                <Grid item xs className={classes.content}>
-                  <Typography className={classes.userName}>{name}</Typography>
-                  <Grid container className={classes.price}>
-                    <Grid item sm={2} md={3} lg={3}>
-                      <Typography variant='subtitle1' className={classes.icon}>
-                        <FontAwesomeIcon className={classes.icon} icon={faHome}/>
-                        {number_room}
-                      </Typography>
-                    </Grid>
-                    <Grid item sm={10} md={9} lg={9}>
-                      <Typography variant='subtitle1' className={classes.certificate}>
-                        <FontAwesomeIcon
-                          className={classes.icon}
-                          icon={faCheckCircle}/>
-                        {t('rooms:verified')}
-                      </Typography>
-                    </Grid>
+    <Paper className={classes.paper}>
+      <Link href={`/user/${id}`}>
+        <a className={classes.link}>
+          <Grid container>
+            <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{ position: 'relative' }}>
+              <Avatar
+                alt={avatar}
+                src={avatar_url !== '' ? avatar_url : '/static/images/avatar_default.png'}
+                className={classes.avatar}
+              />
+            </Grid>
+            <Grid item xs={9} sm={8} md={8} lg={8} xl={9}>
+              <Grid item xs className={classes.content}>
+                <Typography className={classes.userName}>{name}</Typography>
+                <Grid container className={classes.price}>
+                  <Grid item sm={2} md={3} lg={3}>
+                    <Typography variant='subtitle1' className={classes.icon}>
+                      <FontAwesomeIcon className={classes.icon} icon={faHome} />
+                      {number_room}
+                    </Typography>
+                  </Grid>
+                  <Grid item sm={10} md={9} lg={9}>
+                    <Typography variant='subtitle1' className={classes.certificate}>
+                      <FontAwesomeIcon
+                        className={classes.icon}
+                        icon={faCheckCircle} />
+                      {t('rooms:verified')}
+                    </Typography>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </a>
-        </Link>
-      </Paper>
+          </Grid>
+        </a>
+      </Link>
+    </Paper>
   );
 };
 

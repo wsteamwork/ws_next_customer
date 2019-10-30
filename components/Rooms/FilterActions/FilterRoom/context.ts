@@ -21,7 +21,7 @@ export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 export const getDataFilter = async (
   setData: Dispatch<SetStateAction<ResDataFilter>>
 ): Promise<ResDataFilter> => {
-  const res: AxiosRes<ComfortIndexRes[]> = await axios.get('comforts?include=details&limit=-1');
+  const res: AxiosRes<ComfortIndexRes[]> = await axios.get('comforts?limit=-1');
   const resChangeWithReducer = changeDataWithReduce(res.data.data);
   const resChangeWithEntries = changeDataWithEntries(resChangeWithReducer);
   setData(resChangeWithEntries);

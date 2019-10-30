@@ -1,9 +1,8 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { AppBar, Theme, Typography } from '@material-ui/core';
+import { AppBar, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
-import { createStyles, makeStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,10 +14,10 @@ interface IProps {
   handleOpenBookingDialog: any;
 }
 
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) => createStyles({}));
+// const useStyles = makeStyles<Theme, IProps>((theme: Theme) => createStyles({}));
 
 const BoxBottomBooking: FC<IProps> = (props) => {
-  const classes = useStyles(props);
+  // const classes = useStyles(props);
   const { priceBasic, term, handleOpenBookingDialog } = props;
   const { t } = useTranslation();
 

@@ -1,9 +1,9 @@
-import React, { FC, useMemo, memo } from 'react';
 import CustomPopper from '@/components/CustomPopper';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
-import ActionRangePrice from './ActionRangePrice';
+import React, { FC, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import ActionRangePrice from './ActionRangePrice';
 import { usePriceRange } from './context';
 
 const PriceRange: FC = () => {

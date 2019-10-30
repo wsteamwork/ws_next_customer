@@ -2,11 +2,12 @@ import React from 'react';
 import { Grid, FormControl } from '@material-ui/core';
 import ButtonGoogle from './ButtonGoogle';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { ReactFacebookLoginInfo } from 'react-facebook-login';
+// import { ReactFacebookLoginInfo } from 'react-facebook-login';
 import ButtonFacebook from './ButtonFacebook';
 
 const ButtonLoginSocial = () => {
-  const responseFacebook = (userInfo: ReactFacebookLoginInfo) => {};
+  // const responseFacebook = (userInfo: ReactFacebookLoginInfo) => {};
+  const responseFacebook = () => { };
 
   return (
     <Grid item xs={12} container spacing={2}>

@@ -1,7 +1,7 @@
+import { Collapse, Grid } from '@material-ui/core';
 import React, { FC, memo, useMemo } from 'react';
-import { Grid, Collapse } from '@material-ui/core';
-import SelectTimeCheckin from './SelectTimeCheckin';
 import { useCheckBookingTypeHour } from './context';
+import SelectTimeCheckin from './SelectTimeCheckin';
 import SelectTimeCheckout from './SelectTimeCheckout';
 
 export const MenuProps = {

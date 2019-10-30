@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import { Grid, Typography, Divider, Hidden } from '@material-ui/core';
+import { Divider, Grid, Hidden, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const CustomerInfoBox: FC = (props) => {
   const { t } = useTranslation();

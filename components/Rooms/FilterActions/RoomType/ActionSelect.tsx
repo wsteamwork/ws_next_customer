@@ -1,9 +1,9 @@
-import React, { FC, Dispatch, SetStateAction, memo } from 'react';
-import { Grid, FormGroup, FormControlLabel } from '@material-ui/core';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { useTranslation } from 'react-i18next';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
-import { useRoomTypeChecbox, RoomTypeData } from './context';
+import { FormControlLabel, FormGroup, Grid } from '@material-ui/core';
+import React, { Dispatch, FC, memo, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useRoomTypeChecbox } from './context';
 
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;

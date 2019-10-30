@@ -7,7 +7,7 @@ import BoxBooking from '@/components/Room/BoxBooking';
 import BoxImage from '@/components/Room/BoxImage';
 // import BoxRecommend from '@/components/Room/BoxRecommend';
 import BoxRoomDetail from '@/components/Room/BoxRoomDetail/index';
-import BoxSearch from '@/components/Room/BoxSearch';
+// import BoxSearch from '@/components/Room/BoxSearch';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -18,7 +18,7 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
 import { useSelector } from 'react-redux';
@@ -71,9 +71,9 @@ const Room: NextPage = () => {
                 {/*   <SearchMobile /> */}
                 {/*</Hidden>*/}
 
-                <Hidden mdDown implementation="css">
+                {/* <Hidden mdDown implementation="css">
                   <BoxSearch />
-                </Hidden>
+                </Hidden> */}
 
                 <BoxImage />
                 <Grid container>

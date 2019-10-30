@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import Lottie, { Options, LottieProps } from 'react-lottie';
 import animationData from '@/assets/lottie/simple_loader.json';
+import React, { FC } from 'react';
+import Lottie, { LottieProps, Options } from 'react-lottie';
 
-interface IProps extends Partial<LottieProps> {}
+interface IProps extends Partial<LottieProps> { }
 
 const defaultOptions: Options = {
   loop: true,

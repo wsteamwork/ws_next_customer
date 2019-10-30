@@ -1,10 +1,8 @@
-import simpleLoading from '@/assets/lottie/simple-loading.json';
 import { SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { Grid, List, Paper } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Options } from 'react-lottie';
 
 const ItemSeach = dynamic(() => import('./ItemSeach'));
 
@@ -13,11 +11,11 @@ interface IProps {
   suggestionSelected(value: string): void;
 }
 
-const defaultOptions: Options = {
-  loop: true,
-  autoplay: true,
-  animationData: simpleLoading
-};
+// const defaultOptions: Options = {
+//   loop: true,
+//   autoplay: true,
+//   animationData: simpleLoading
+// };
 
 const ListResSearch: FC<IProps> = (props) => {
   const { data, suggestionSelected } = props;

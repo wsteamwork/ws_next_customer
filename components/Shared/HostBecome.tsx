@@ -1,8 +1,8 @@
-import React, { FC, useContext, useMemo, memo } from 'react';
-import { Grid, Hidden } from '@material-ui/core';
-import ButtonGlobal from '../ButtonGlobal';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Grid, Hidden } from '@material-ui/core';
+import React, { FC, memo, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import ButtonGlobal from '../ButtonGlobal';
 
 const HostBecome: FC = () => {
   const { width } = useContext(GlobalContext);

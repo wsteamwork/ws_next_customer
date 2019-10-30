@@ -1,29 +1,21 @@
-import React, { useReducer, Fragment, useState } from 'react';
-import { NextPage } from 'next';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import NextHead from '@/components/NextHead';
-import GridContainer from '@/components/Layout/Grid/Container';
-import FilterActions from '@/components/Rooms/FilterActions';
-import {
-  RoomFilterContext,
-  RoomFilterStateInit,
-  RoomFilterReducer
-} from '@/store/Context/Room/RoomFilterContext';
-import {
-  RoomIndexReducer,
-  RoomIndexContext,
-  RoomIndexStateInit
-} from '@/store/Context/Room/RoomListContext';
 import SearchComponent from '@/components/Home/SearchComponent';
-import MapAndListing from '@/components/Rooms/MapAndListing';
-import { Hidden, Grid } from '@material-ui/core';
-import HeadRoom from 'react-headroom';
-import { StickyContainer, Sticky } from 'react-sticky';
+import GridContainer from '@/components/Layout/Grid/Container';
+// import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
+import FilterActions from '@/components/Rooms/FilterActions';
+import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchMobile from '@/components/Rooms/SearchMobile';
-import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import { Grid, Hidden } from '@material-ui/core';
+import { Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { NextPage } from 'next';
+import React, { Fragment, useReducer, useState } from 'react';
+import HeadRoom from 'react-headroom';
+import { Sticky, StickyContainer } from 'react-sticky';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -73,9 +65,9 @@ const Rooms: NextPage = (props) => {
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
                             <Grid container spacing={1}>
-                              <Grid item>
-                                <SelectLeaseTypeGlobal/>
-                              </Grid>
+                              {/* <Grid item>
+                                <SelectLeaseTypeGlobal />
+                              </Grid> */}
                               <Grid item xs>
                                 <SearchComponent />
                               </Grid>

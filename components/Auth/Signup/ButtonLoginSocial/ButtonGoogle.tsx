@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Grid } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-interface IProps {}
+interface IProps { }
 
-const ButtonGoogle: FC<IProps> = (props) => {
+const ButtonGoogle: FC<IProps> = () => {
   const { t } = useTranslation();
 
   return (

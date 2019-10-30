@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { Grid, Paper } from '@material-ui/core';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
+import { Grid, Paper } from '@material-ui/core';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import GridContainer from '../Layout/Grid/Container';
 import UserBox from './UserBox';
 import UserDetail from './UserDetail';
