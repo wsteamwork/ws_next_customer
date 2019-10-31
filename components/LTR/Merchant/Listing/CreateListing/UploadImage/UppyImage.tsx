@@ -59,7 +59,6 @@ const UppyImage: FC<IProps> = (props) => {
   // }, [initImages]);
 
   const initImage = async (arrImg) => {
-    console.log(123456)
     for (let i = 0; i < arrImg.length; i++) {
       let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
       await fetch(img)

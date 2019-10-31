@@ -2,11 +2,21 @@ import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Ste
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CardActions, createStyles, Grid, makeStyles, TextField, Theme, Tooltip, Typography } from '@material-ui/core';
+import {
+  CardActions,
+  createStyles,
+  Grid,
+  makeStyles,
+  TextField,
+  Theme,
+  Tooltip,
+  Typography,
+  Button
+} from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import React, { ChangeEvent, FC, Fragment, useState } from 'react';
+import React, { ChangeEvent, FC, Fragment, useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -44,7 +54,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 5
     },
     marginLabel: {
-      marginBottom: theme.spacing(2)
+      marginBottom: theme.spacing(3)
     },
     cardAction: {
       color: '#ffffff',
@@ -87,24 +97,32 @@ const CardImageCaption: FC<IProps> = (props) => {
     setValues(values);
     handleBlur();
   };
+  useEffect(() => {
+    setValues(arrImage)
+  }, [arrImage]);
 
   return (
     <Fragment>
       <Grid className={classes.wrapper}>
         <Grid container className={classes.marginLabel}>
-          <section>
+          <Grid container item xs={12}>
             <Typography variant="h1" className="label main_label">
               {label}
             </Typography>
-            <Grid item className="normal_text">
-              <span>{subLabel}</span>
-            </Grid>
-          </section>
+          </Grid>
+          <Grid item className="normal_text">
+            <span>{subLabel}</span>
+          </Grid>
         </Grid>
         <Grid container spacing={3}>
           {values.map((img, index) => (
-            <Grid className={classes.card} item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
-              {(values.length > 1 || allowRemove) ? (
+            <Grid
+              className={classes.card}
+              item
+              xs={12}
+              sm={typeImage === 1 || typeImage === 4 ? 12 : 6}
+              key={index}>
+              {values.length > 1 || allowRemove ? (
                 <Tooltip title="Xóa ảnh" placement="right" classes={{ tooltip: 'tooltip' }}>
                   <CardActions
                     onClick={() => handleRemoveImage(index)}
@@ -114,9 +132,9 @@ const CardImageCaption: FC<IProps> = (props) => {
                   </CardActions>
                 </Tooltip>
               ) : (
-                  ''
-                )}
-              <Card >
+                ''
+              )}
+              <Card>
                 <CardMedia
                   className={classes.media}
                   image={IMAGE_STORAGE_LG + img.name}
@@ -153,7 +171,7 @@ const CardImageCaption: FC<IProps> = (props) => {
 };
 
 CardImageCaption.defaultProps = {
-  allowRemove: false,
+  allowRemove: false
 };
 
 export default CardImageCaption;

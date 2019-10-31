@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%',
       borderTop: '1px solid lightgrey',
       padding: '24px 0',
-      zIndex: 1000,
+      zIndex: 100,
       backgroundColor: '#ffffff'
     },
     boxShadow: {
