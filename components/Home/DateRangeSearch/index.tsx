@@ -15,6 +15,7 @@ import DatePicker from 'rc-calendar/lib/Picker';
 import React, { Dispatch, FC, memo, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
 
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
@@ -39,6 +40,7 @@ const DateRangeSearch: FC = () => {
   const [startValue, setStartValue] = useState(startDate ? moment(startDate) : null);
   const [endValue, setEndValue] = useState(endDate ? moment(endDate) : null);
   const refEndDate = useRef(null);
+  const { t } = useTranslation();
 
   const numberDay: number = useMemo(() => {
     if (startValue && endValue) {
@@ -156,7 +158,7 @@ const DateRangeSearch: FC = () => {
                   <Grid item xs={9}>
                     <InputBase
                       ref={refEndDate}
-                      placeholder="Ngày đi"
+                      placeholder={t('home:checkout')}
                       fullWidth
                       className="input"
                       inputProps={{ style: { padding: 0 } }}

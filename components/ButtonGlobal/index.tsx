@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import Button, { ButtonProps } from '@material-ui/core/Button';
 import { Theme } from '@material-ui/core';
+import Button, { ButtonProps } from '@material-ui/core/Button';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
+import React, { FC } from 'react';
 
 const checkTypeBackground = (value: string[] | string): string => {
   if (typeof value !== 'string') {
@@ -20,8 +20,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
           ? checkTypeBackground(props.background)
           : `radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );`,
       borderRadius: (props) => props.borderRadius || 4,
-      fontWeight: 700,
-      fontSize: (props) => props.fontSize || '17px',
+      fontWeight: 600,
+      fontSize: (props) => props.fontSize || '16px',
       color: (props) => (props.textColor ? props.textColor : 'white'),
       height: (props) => props.height || '45px',
       width: (props) => props.width || 'auto',

@@ -57,6 +57,8 @@
     "night": "đêm",
     "longTermTab": "Thuê dài hạn",
     "shortTermTab": "Thuê ngắn hạn",
-    "yourLocation": "Vị trí lân cận"
+    "yourLocation": "Vị trí lân cận",
+    "checkout": "Ngày trả phòng",
+    "checkin": "Ngày nhận phòng"
 
 }

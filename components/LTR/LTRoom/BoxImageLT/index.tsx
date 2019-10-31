@@ -106,7 +106,6 @@ const BoxImageLT: FC<IProps> = (props) => {
         <Slider className="slider-wrapper" autoplay={3000}>
           {arrImage.map((item, i) => (
             <div
-              onClick={toggle}
               key={i}
               className="slider-content"
               style={{ background: `url('${item.imgURL}') no-repeat center center` }}

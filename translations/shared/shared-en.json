@@ -10,5 +10,14 @@
         "success": "Cancel the room successfully!"
     },
     "dayPrice": "VND/night",
-    "hourPrice": "VND/4 hours"
+    "hourPrice": "VND/4 hours",
+    "facilities": "Facilities",
+    "bedrooms": "Bedroom",
+    "kitchens": "Kitchen",
+    "bathrooms": "Bathroom",
+    "livingrooms": "Livingroom",
+    "common": "Common amenities",
+    "entertainment": "Entertainment",
+    "others": "Others",
+    "outdoors": "Outdoor"
 }

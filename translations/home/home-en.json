@@ -56,5 +56,8 @@
     "night": "night",
     "longTermTab": "Long term",
     "shortTermTab": "Short term",
-    "yourLocation": "Near by"
+    "yourLocation": "Near by",
+    "checkout": "Check-out",
+    "checkin": "Check-in"
+
 }

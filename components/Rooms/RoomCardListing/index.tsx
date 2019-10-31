@@ -2,14 +2,14 @@ import SvgCustom from '@/components/Custom/SvgCustom';
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.jsx';
 // import { windowExist } from '@/store/Redux';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
+// import { ReducersList } from '@/store/Redux/Reducers';
+// import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { cleanAccents } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { faBalanceScaleRight, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid, IconButton, Tooltip, Typography } from '@material-ui/core';
+import { Grid, Tooltip, Typography } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden/Hidden';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper/Paper';
@@ -20,10 +20,7 @@ import _ from 'lodash';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
-import Swiper from 'react-id-swiper';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
 import Cookies from 'universal-cookie';
 
 
@@ -32,27 +29,27 @@ interface Iprops {
   room?: RoomIndexRes;
 }
 
-export const handleCompareList = (
-  comparisonList: RoomIndexRes[],
-  room: RoomIndexRes,
-  dispatch: Dispatch<CompareRoomsActions>
-) => {
-  const comparisonListId = comparisonList.map((item) => item.id);
-  if (!comparisonListId.includes(room.id)) {
-    if (comparisonList.length === 2) {
-      const data = comparisonList.slice(1);
-      dispatch({
-        type: 'SET_COMPARISON_LIST',
-        comparisonList: [...data, room]
-      });
-    } else {
-      dispatch({
-        type: 'SET_COMPARISON_LIST',
-        comparisonList: [...comparisonList, room]
-      });
-    }
-  }
-};
+// export const handleCompareList = (
+//   comparisonList: RoomIndexRes[],
+//   room: RoomIndexRes,
+//   dispatch: Dispatch<CompareRoomsActions>
+// ) => {
+//   const comparisonListId = comparisonList.map((item) => item.id);
+//   if (!comparisonListId.includes(room.id)) {
+//     if (comparisonList.length === 2) {
+//       const data = comparisonList.slice(1);
+//       dispatch({
+//         type: 'SET_COMPARISON_LIST',
+//         comparisonList: [...data, room]
+//       });
+//     } else {
+//       dispatch({
+//         type: 'SET_COMPARISON_LIST',
+//         comparisonList: [...comparisonList, room]
+//       });
+//     }
+//   }
+// };
 
 export const settingSliderRoomCard = {
   rebuildOnUpdate: true,
@@ -66,14 +63,14 @@ export const settingSliderRoomCard = {
       className="swiper-button-prev"
       icon={faChevronLeft}
       size="2x"
-      color="#fff"/>
+      color="#fff" />
   ),
   renderNextButton: () => (
     <FontAwesomeIcon
       className="swiper-button-next"
       icon={faChevronRight}
       size="2x"
-      color="#fff"/>
+      color="#fff" />
   ),
 
   pagination: {
@@ -92,20 +89,26 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const cookies = new Cookies();
-  const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
-  const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
-    (state) => state.compareRooms.compareRooms
-  );
+  // const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
+  // const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
+  //   (state) => state.compareRooms.compareRooms
+  // );
 
 
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
-
+  console.log(room)
+  const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
   return (
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <Swiper {...settingSliderRoomCard}>
+          <img
+            src={`${avatarImg}`}
+            className="imgSize swiper-lazy"
+            alt={``}
+          />
+          {/* <Swiper {...settingSliderRoomCard}>
             {room.media.data.length > 0 ? (
               _.map(room.media.data, (o) => (
                 <div key={o.image}>
@@ -115,13 +118,12 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     alt={`Westay - Homestay cho người việt`}
                   />
 
-                  {/* <div className="swiper-lazy-preloader" /> */}
                 </div>
               ))
             ) : (
                 <img src="./static/images/background.svg" className="imgSize" />
               )}
-          </Swiper>
+          </Swiper> */}
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={8} className="boxCard">
           <Grid className="cardWrapper">
@@ -138,7 +140,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                           <QuickBookIcon color="primary" style={{ marginRight: 5 }} />
                         </Tooltip>
                       )}
-                      {room.details.data[0].name}
+                      {room.details ? room.details.data[0].name : room.room_name}
                     </Typography>
                   </Grid>
                   <Grid className="roomSubtitle">
@@ -148,13 +150,9 @@ const RoomCardListing: FC<Iprops> = (props) => {
                     </Hidden>
 
                     <span className="address">
-                      {cookies.get('initLanguage') == 'en'
-                        ? cleanAccents(room.district.data.name)
-                        : room.district.data.name}
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(room.district.data.name) : room.district.data.name}
                       ,{' '}
-                      {cookies.get('initLanguage') == 'en'
-                        ? cleanAccents(room.city.data.name)
-                        : room.city.data.name}
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}
                     </span>
                   </Grid>
                   <Grid className="collectionAmenities">
@@ -288,7 +286,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
               </Link>
               <Grid className="boxSave">
                 <FavoriteAnimation />
-                <Hidden smDown>
+                {/* <Hidden smDown>
                   <Tooltip title={t('rooms:compareRooms')} placement="right-start">
                     <IconButton
                       aria-label="compare"
@@ -297,7 +295,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <FontAwesomeIcon size="1x" icon={faBalanceScaleRight} />
                     </IconButton>
                   </Tooltip>
-                </Hidden>
+                </Hidden> */}
               </Grid>
             </Grid>
           </Grid>

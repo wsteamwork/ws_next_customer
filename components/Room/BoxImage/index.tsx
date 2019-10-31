@@ -1,16 +1,14 @@
 import GridContainer from '@/components/Layout/Grid/Container';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation';
-import { handleCompareList } from '@/components/Rooms/RoomCardListing';
-import SnackBarCompareRoom from '@/components/Toolbar/SnackBarCompareRoom';
+// import { handleCompareList } from '@/components/Rooms/RoomCardListing';
+// import SnackBarCompareRoom from '@/components/Toolbar/SnackBarCompareRoom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
+// import { CompareRoomsActions } from '@/store/Redux/Reducers/Room/CompareRooms';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { faBalanceScaleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Grid, Hidden, Theme, Typography } from '@material-ui/core';
+import { Button, Grid, Theme, Typography } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -23,8 +21,7 @@ import React, { FC, forwardRef, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useSelector } from 'react-redux';
 import '../../../styles/pages/room/boxImage/index.scss';
 
 interface IProps {
@@ -159,11 +156,11 @@ const BoxImage: FC<IProps> = (props) => {
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { width } = useContext(GlobalContext);
   const { t } = useTranslation();
-  const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
-  const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
-    (state) => state.compareRooms.compareRooms
-  );
-  const [openCompare, setOpenCompare] = useState<boolean>(false);
+  // const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
+  // const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
+  //   (state) => state.compareRooms.compareRooms
+  // );
+  // const [openCompare, setOpenCompare] = useState<boolean>(false);
 
   const handleClick = () => {
     if (isPreview && room.media.data.length === 0) {
@@ -173,14 +170,14 @@ const BoxImage: FC<IProps> = (props) => {
     }
   };
 
-  const handldeSnackBar = () => {
-    setOpenCompare(!openCompare);
-  };
+  // const handldeSnackBar = () => {
+  //   setOpenCompare(!openCompare);
+  // };
 
-  const handleCompare = () => {
-    handleCompareList(comparisonList, room, dispatch);
-    handldeSnackBar();
-  };
+  // const handleCompare = () => {
+  //   handleCompareList(comparisonList, room, dispatch);
+  //   handldeSnackBar();
+  // };
 
   const images = room
     ? _.map(room.media.data, (o) => {
@@ -237,11 +234,11 @@ const BoxImage: FC<IProps> = (props) => {
           </Button>
         </div>
         <div className={classes.boxHeart}>
-          <Hidden smDown>
+          {/* <Hidden smDown>
             <IconButton aria-label="compare" className={classes.iconCompare} onClick={handleCompare}>
               <FontAwesomeIcon size='1x' icon={faBalanceScaleRight} />
             </IconButton>
-          </Hidden>
+          </Hidden> */}
           <FavoriteAnimation />
         </div>
       </div>
@@ -281,7 +278,7 @@ const BoxImage: FC<IProps> = (props) => {
         </Grid>
       </Dialog>
 
-      <SnackBarCompareRoom open={openCompare} onClose={() => handldeSnackBar()} />
+      {/* <SnackBarCompareRoom open={openCompare} onClose={() => handldeSnackBar()} /> */}
 
     </GridContainer>
   );

@@ -63,7 +63,7 @@ const RoomCard: FC<Iprops> = (props) => {
                     <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
                   )}
                   {room.room_type_txt}
-                  {showAddress && <span> &#8226; {room.city.data.name}</span>}
+                  {showAddress && <span> &#8226; {cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}</span>}
                   {showBedRoom && <span> &#8226; {room.number_room} {t('room:rooms')}</span>}
                 </Typography>
                 <Typography className="roomCard__name" variant="h1">
