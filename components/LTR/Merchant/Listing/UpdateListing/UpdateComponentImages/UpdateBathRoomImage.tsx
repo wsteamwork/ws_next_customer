@@ -8,7 +8,6 @@ import React, {
   useEffect,
   useState,
   SyntheticEvent,
-  useMemo,
   MouseEvent
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
