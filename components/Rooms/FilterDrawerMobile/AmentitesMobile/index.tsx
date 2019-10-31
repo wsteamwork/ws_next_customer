@@ -87,7 +87,7 @@ const AmentitesMobile: FC<IProps> = (props) => {
                           }}
                         />
                       }
-                      label={o.details.data[0].name}
+                      label={o.name}
                     />
                   </li>
                 ))}

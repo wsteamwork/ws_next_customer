@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
-  console.log(width);
+  // console.log(width);
   return (
     <Fragment>
       <NextHead

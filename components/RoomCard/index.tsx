@@ -35,7 +35,7 @@ const RoomCard: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
-  const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? room.avatar_image : './static/images/westay-avatar.jpg';
+  const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
   return (
     <Fragment>
       <Grid className="roomCard">
