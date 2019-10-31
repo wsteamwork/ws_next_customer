@@ -1,31 +1,21 @@
-import { useEffect, useContext, useState, Fragment, FC } from 'react';
-
+import ButtonGlobal from '@/components/ButtonGlobal';
+import GridContainer from '@/components/Layout/Grid/Container';
+import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 // import { Grid, Hidden, Paper } from '@material-ui/core';
-
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { updateRouter } from '@/store/Context/utility';
+import { Grid, Hidden, Paper } from '@material-ui/core';
 // import Pagination from 'rc-pagination';
 // import localeInfo from 'rc-pagination/lib/locale/vi_VN';
 import 'rc-pagination/assets/index.css';
-import _ from 'lodash';
-import { updateRouter } from '@/store/Context/utility';
-
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-// import GridContainer from '@/components/Layout/Grid/Container';
-// import ButtonGlobal from '@/components/ButtonGlobal';
-// import VisitedRooms from '../VisitedRooms';
-// import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
-import RoomCardListing from '../RoomCardListing';
 import RoomListing from '../RoomListing';
-import GridContainer from '@/components/Layout/Grid/Container';
-import { Grid, Hidden, Paper } from '@material-ui/core';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import ListRoom from '@/components/ListRoom';
-import { Pagination } from 'swiper/dist/js/swiper.esm';
-import NotFound from '../Lotte/NotFound';
-import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
-import CompareRooms from '../CompareRooms';
+// import CompareRooms from '../CompareRooms';
 import VisitedRooms from '../VisitedRooms';
+
+
 // import CompareRooms from '../CompareRooms';
 // @ts-ignore
 const SidebarAndListing: FC = (props) => {
@@ -38,7 +28,7 @@ const SidebarAndListing: FC = (props) => {
 
   const changePage = (current: number) => {
     setCurrentPage(current);
-    updateRouter('/rooms',true, 'page', current);
+    updateRouter('/rooms', true, 'page', current);
   };
 
   useEffect(() => {
@@ -77,16 +67,16 @@ const SidebarAndListing: FC = (props) => {
               </Paper>
 
               <VisitedRooms />
-              <CompareRooms />
+              {/* <CompareRooms /> */}
             </Grid>
           </Hidden>
         ) : (
-          <Hidden smDown>
-            <Grid item sm={4} lg={3}>
-              <LoadingSkeleton type={'sideBar'} />
-            </Grid>
-          </Hidden>
-        )}
+            <Hidden smDown>
+              <Grid item sm={4} lg={3}>
+                <LoadingSkeleton type={'sideBar'} />
+              </Grid>
+            </Hidden>
+          )}
 
         <Grid item lg={9} md={8} sm={12} xs={12}>
           <RoomListing usingInMap={false} rooms={rooms} />

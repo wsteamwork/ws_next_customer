@@ -63,7 +63,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
       {longtermRooms.length > 0 && !isLoading ? (
         <Fragment>
           {meta && (
-            <Typography variant='h5' className={classes.titleList}>
+            <Typography variant='h6' className={classes.titleList}>
               {meta.pagination ? `${t('rooms:totalResult')} ${meta.pagination.total} ${t('rooms:results')}` : ''}
             </Typography>)}
 

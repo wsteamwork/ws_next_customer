@@ -1,24 +1,23 @@
-import { createContext, Dispatch, Reducer } from 'react';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import qs from 'query-string';
-import { AxiosRes, Pagination, BaseResponse, TypeSelect } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
-import {
-  RoomIndexGetParams,
-  RoomUrlParams,
-  MapCoords,
-  LTRoomUrlParams,
-  LTRoomIndexGetParams
-} from '@/types/Requests/Rooms/RoomRequests';
-import { Range } from 'react-input-range';
-import _ from 'lodash';
 import { ComfortIndexGetParams } from '@/types/Requests/Comforts/ComfortRequests';
 import { ComfortIndexRes } from '@/types/Requests/Comforts/ComfortResponses';
-import { AxiosResponse } from 'axios';
-import { NextRouter } from 'next/router';
-import { BaseRouter } from 'next-server/dist/lib/router/router';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { AxiosRes, BaseResponse, Pagination, TypeSelect } from '@/types/Requests/ResponseTemplate';
+import {
+  LTRoomIndexGetParams,
+  LTRoomUrlParams,
+  MapCoords,
+  RoomIndexGetParams,
+  RoomUrlParams
+} from '@/types/Requests/Rooms/RoomRequests';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { axios } from '@/utils/axiosInstance';
+import { AxiosResponse } from 'axios';
+import _ from 'lodash';
+import { BaseRouter } from 'next-server/dist/lib/router/router';
+import { NextRouter } from 'next/router';
+import qs from 'query-string';
+import { createContext, Dispatch, Reducer } from 'react';
 
 export const MIN_PRICE = 0;
 export const MAX_PRICE = 50000000;
@@ -92,7 +91,7 @@ export const getRooms = async (
   let params: RoomUrlParams = router.query;
 
   let query: Partial<RoomIndexGetParams> = {
-    include: 'details,media,city,district,comforts.details,reviews.user',
+    include: 'comforts.details,city,district',
     name: params.name,
     city_id: params.city_id,
     district_id: params.district_id,

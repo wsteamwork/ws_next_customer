@@ -60,7 +60,7 @@ const CompareRooms: FC<IProps> = (props) => {
 
   return (
     <div className={classes.boxCompare}>
-      <Typography variant="h5" className={classes.label}>
+      <Typography variant="h6" className={classes.label}>
         {t('rooms:compareRooms')}
       </Typography>
       {

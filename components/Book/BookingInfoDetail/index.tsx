@@ -1,15 +1,15 @@
+import { ReducersList } from '@/store/Redux/Reducers';
+import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { formatMoney } from '@/utils/mixins';
+import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 import { Grid, Paper, Typography } from '@material-ui/core';
 import moment from 'moment';
 import React, { FC, memo } from 'react';
-import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import SettingRoom from './SettingRoom';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import InfoRoom from './InfoRoom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import InfoRoom from './InfoRoom';
+import SettingRoom from './SettingRoom';
 
 const BookingInfoDetail: FC = (props) => {
   const { t } = useTranslation();
@@ -71,8 +71,8 @@ const BookingInfoDetail: FC = (props) => {
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
                           {`${formatMoney(
                             dataCalculate.service_fee +
-                              dataCalculate.charge_additional_guest +
-                              dataCalculate.charge_additional_hour
+                            dataCalculate.charge_additional_guest +
+                            dataCalculate.charge_additional_hour
                           )}đ`}
                         </Grid>
                       </Grid>

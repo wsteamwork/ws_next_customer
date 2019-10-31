@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
-import { Grid } from '@material-ui/core';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { useSelector } from 'react-redux';
-import Link from 'next/link';
 import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid } from '@material-ui/core';
+import Link from 'next/link';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 const InfoRoom: FC = () => {
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.book.room);
