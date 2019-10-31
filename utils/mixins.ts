@@ -127,8 +127,118 @@ export const calcPercentage = (portion: number, total: number) => {
   const percent = parseInt(((portion / total) * 100).toFixed(2));
 
   if (portion > total) {
-    return `+ ${percent}%`;
+    return `Tăng ${percent - 100}%`;
   } else {
-    return `- ${100 - percent}%`;
+    return `Giảm ${100 - percent}%`;
   }
 };
+
+export const weekdayOptions = [
+  {
+    title: 'Thứ 2',
+    weekday: 2,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 3',
+    weekday: 3,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 4',
+    weekday: 4,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 5',
+    weekday: 5,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 6',
+    weekday: 6,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Thứ 7',
+    weekday: 7,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  },
+  {
+    title: 'Chủ nhật',
+    weekday: 1,
+    price_day: 0,
+    price_hour: 0,
+    price_after_hour: 0,
+    status: 0
+  }
+];
+
+export const hoursList = [
+  '00:00:00',
+  '00:30:00',
+  '01:00:00',
+  '01:30:00',
+  '02:00:00',
+  '02:30:00',
+  '03:00:00',
+  '03:30:00',
+  '04:00:00',
+  '04:30:00',
+  '05:00:00',
+  '05:30:00',
+  '06:00:00',
+  '06:30:00',
+  '07:00:00',
+  '07:30:00',
+  '08:00:00',
+  '08:30:00',
+  '09:00:00',
+  '09:30:00',
+  '10:00:00',
+  '10:30:00',
+  '11:00:00',
+  '11:30:00',
+  '12:00:00',
+  '12:30:00',
+  '13:00:00',
+  '13:30:00',
+  '14:00:00',
+  '14:30:00',
+  '15:00:00',
+  '15:30:00',
+  '16:00:00',
+  '16:30:00',
+  '17:00:00',
+  '17:30:00',
+  '18:00:00',
+  '18:30:00',
+  '19:00:00',
+  '19:30:00',
+  '20:00:00',
+  '20:30:00',
+  '21:00:00',
+  '21:30:00',
+  '22:00:00',
+  '22:30:00',
+  '23:00:00',
+  '23:30:00'
+];

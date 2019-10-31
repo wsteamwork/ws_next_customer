@@ -65,7 +65,7 @@ const BedRooms: FC<IProps> = (props) => {
                     Số giường: <span className={classes.name}>{listing.bedrooms[`bedroom_${i + 1}`].number_bed}</span>
                   </Grid>
                   <Grid item xs={4} className={classes.image}>
-                    Số ảnh: <span className={classes.name}>{listing.bedrooms[`bedroom_${i + 1}`].images.length}</span>
+                    Số ảnh: <span className={classes.name}>{listing.bedrooms.total_image}</span>
                   </Grid>
                 </Grid>
               </Grid>

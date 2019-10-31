@@ -1,9 +1,10 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import numeral from 'numeral';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CardWrapperItem from '../CardWrapperItem';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -27,11 +28,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 const PriceShortTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
-
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+  const openUpdate = () => {
+    router.push(`/host/update-listing/${id}/price-short-term`);
+  };
   return (
     <Fragment>
       {!!listing ? (
-        <CardWrapperItem title="Giá thuê ngắn hạn">
+        <CardWrapperItem title="Giá thuê ngắn hạn" onClick={openUpdate}>
           <Grid item xs={12}>
             <Grid container className={classes.margin}>
               {listing.short_term_room.rent_type !== 1 ? (

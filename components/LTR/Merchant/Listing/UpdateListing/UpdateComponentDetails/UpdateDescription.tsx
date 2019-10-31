@@ -82,7 +82,7 @@ const UpdateDescription: FC<IProps> = (props) => {
   const dispatch_detail = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
   const id = router.query.id;
   useEffect(() => {
     getDetailDescription(id, dispatch_des);

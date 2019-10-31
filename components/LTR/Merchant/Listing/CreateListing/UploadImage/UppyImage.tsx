@@ -1,3 +1,4 @@
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
@@ -11,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import 'uppy/dist/uppy.min.css';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   classes?: any;
   label?: string;
@@ -78,6 +78,7 @@ const UppyImage: FC<IProps> = (props) => {
     }
   };
   initImage(initImages);
+
   const uppy = Uppy({
     id: 'uppy',
     autoProceed: false,
@@ -141,7 +142,6 @@ const UppyImage: FC<IProps> = (props) => {
         let modifiedFile = Object.assign({}, currentFile, {
           name: newName
         });
-        // console.log(modifiedFile);
         return modifiedFile;
       }
       return currentFile;
@@ -157,7 +157,12 @@ const UppyImage: FC<IProps> = (props) => {
       let imgs = initImages;
       result.successful.map((res) => {
         let img = { name: res.meta.name.split('.')[0] + '.jpg', caption: '', type: typeImage };
-        imgs = [...imgs, img];
+        if (typeUpload.type === "setAvatarImage" || typeUpload.type === "setCoverImage") {
+          imgs = [img];
+        }
+        else {
+          imgs = [...imgs, img];
+        }
       });
 
       uppy.getFiles().forEach((file) => {
@@ -165,7 +170,6 @@ const UppyImage: FC<IProps> = (props) => {
           progress: { uploadComplete: true, uploadStarted: true }
         });
       });
-
       if (type_txt) {
         dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
       } else {
@@ -213,7 +217,7 @@ const UppyImage: FC<IProps> = (props) => {
         </Grid>
       </Fragment>
     ),
-    []
+    [initImages]
   );
 };
 

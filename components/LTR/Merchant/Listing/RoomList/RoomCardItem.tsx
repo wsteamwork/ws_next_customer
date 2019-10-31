@@ -68,7 +68,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       [theme.breakpoints.up('sm')]: {
         maxHeight: 117
-      },
+      }
     },
     wrapperImage: {
       display: 'flex',
@@ -248,12 +248,24 @@ const RoomCardItem: FC<IProps> = (props) => {
       backgroundColor: '#43cab8'
     }
   })(LinearProgress);
+  const openUpdateRoom = (room_id: number, percent_longterm: number, lease_type: number, percent_shortterm: number) => {
+    if (lease_type !== 1) {
 
-  const openUpdateRoom = (room_id: number) => {
-    router.push(`/host/create-listing/${room_id}/process`);
+      if (percent_longterm == 100) {
+        window.open(`/host/update-listing/${room_id}`, `_blank`);
+      } else {
+        window.open(`/host/create-listing/${room_id}/process`, `_blank`);
+      }
+    } else if (lease_type == 1) {
+      if (percent_shortterm == 100) {
+        window.open(`/host/update-listing/${room_id}`, `_blank`);
+      } else {
+        window.open(`/host/create-listing/${room_id}/process`, `_blank`);
+      }
+    }
   };
   const openPreviewRoom = (room_id: number) => {
-    router.push(`/host/preview-room/${room_id}`);
+    window.open(`/preview-room/${room_id}`, `_blank`);
   };
 
   return (
@@ -294,7 +306,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             color="primary"
                             className={classes.IconButton}
                             aria-label="Edit"
-                            onClick={() => openUpdateRoom(room.id)}>
+                            onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
                             <EditIcon className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
@@ -318,7 +330,10 @@ const RoomCardItem: FC<IProps> = (props) => {
                       <Grid container>
                         <Grid item xs={12} sm={10} className={classes.infoRoomName}>
                           <span>
-                            <Link href="/terms-and-conditions" className={classes.roomName}>
+                            <Link
+                              href={`/room/${room.room_id}`}
+                              className={classes.roomName}
+                              target="_blank">
                               {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
                                 <img
@@ -343,7 +358,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   color="primary"
                                   className={classes.IconButton}
                                   aria-label="Edit"
-                                  onClick={() => openUpdateRoom(room.id)}>
+                                  onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
                                   <EditIcon className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
@@ -428,26 +443,34 @@ const RoomCardItem: FC<IProps> = (props) => {
                         </Grid>
                       </Grid>
                       <Grid container>
-                        <Grid item xs={12} lg={6} className={classes.infoRoomName}>
+                        <Grid item xs={12} lg={8} className={classes.infoRoomName}>
                           {room.short_term_room.rent_type === 3 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
-                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
                                   ''
                                 )}
-                              <span>
-                                &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
-                                &nbsp; &#8226;
-                              </span>
-                              <span>
-                                &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
-                              </span>
+                              {room.short_term_room.rent_type !== 1 ? (
+                                <span>
+                                  &nbsp;
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ{' '}
+                                  {t('roomlist:onePerDay')}
+                                  &nbsp; &#8226;
+                                </span>
+                              ) : ''}
+                              {room.short_term_room.rent_type !== 2 ? (
+
+                                <span>
+                                  &nbsp;
+                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
+                                  {t('roomlist:onePerHour')}
+                                </span>
+                              ) : ''}
+
                             </Typography>
                           ) : (
                               ''
@@ -464,7 +487,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerDay')}
                               </span>
                             </Typography>
                           ) : (
@@ -482,15 +506,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
                               ''
                             )}
                         </Grid>
-                        {room.percent < 100 ? (
-                          <Grid container item xs={12} lg={6}>
+                        {room.lease_type !== 1 ? (room.percent < 100 ? (
+                          <Grid container item xs={12} lg={4}>
                             <Grid item xs={12} className={classes.process}>
                               <BorderLinearProgress
                                 className={classes.marginProcess}
@@ -503,7 +528,19 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </Grid>
                         ) : (
                             ''
-                          )}
+                          )) : room.lease_type !== 2 && room.lease_type !== 3 ? (room.short_term_room.percent < 100 ? (
+                            <Grid container item xs={12} lg={4}>
+                              <Grid item xs={12} className={classes.process}>
+                                <BorderLinearProgress
+                                  className={classes.marginProcess}
+                                  variant="determinate"
+                                  color="secondary"
+                                  value={room.short_term_room.percent}
+                                />
+                                <span className={classes.percent}> {room.short_term_room.percent}%</span>
+                              </Grid>
+                            </Grid>
+                          ) : '') : ''}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -601,8 +638,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                 <Grid item xs={6} sm={4} md lg xl={3}>
                   <HtmlTooltip
                     placement="bottom-end"
-                    title={room.short_term_room.settings.booking_cancel_text}
-                  >
+                    title={room.short_term_room.settings.booking_cancel_text}>
                     <Grid container>
                       <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
                         <img
@@ -627,7 +663,7 @@ const RoomCardItem: FC<IProps> = (props) => {
           </Paper>
         </Grid>
       </Grid>
-    </Fragment >
+    </Fragment>
   );
 };
 export default RoomCardItem;

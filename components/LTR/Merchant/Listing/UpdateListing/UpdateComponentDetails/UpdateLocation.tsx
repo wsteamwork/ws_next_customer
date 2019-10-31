@@ -1,29 +1,24 @@
 /* global google */
-import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { ReducersList } from '@/store/Redux/Reducers';
-import Grid from '@material-ui/core/Grid/Grid';
-import React, { FC, useEffect, useState, Fragment, useContext, useMemo, SyntheticEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  UpdateDetailsState,
-  getDataUpdateListing,
-  UpdateDetailsActions
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Dispatch } from 'redux';
-import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { FormControl, OutlinedInput } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikActions, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import * as Yup from 'yup';
-interface IProps {}
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 interface Coordinate {
   lat: number;
   lng: number;
@@ -78,7 +73,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
 
   const FormValidationSchema = useValidatation();
 
@@ -124,7 +119,7 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
   };
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
-    <GoogleMap defaultZoom={16} defaultCenter={props.defaultCenter} onClick={props.onClickMap}>
+    <GoogleMap defaultZoom={16} defaultCenter={props.coordinate ? props.coordinate : props.defaultCenter} onClick={props.onClickMap}>
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -132,7 +127,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const handleChange = (event) => {
     setBuilding(event.target.value);
   };
-  
+
   const onSuggestSelect = (place: Suggest) => {
     if (place) {
       let { lat, lng } = place.location;
@@ -190,7 +185,7 @@ const UpdateLocation: FC<IProps> = (props) => {
         longitude: coordi.lng
       }
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật địa chỉ căn hộ thành công !")
     }
@@ -246,10 +241,12 @@ const UpdateLocation: FC<IProps> = (props) => {
                     placeholder="Nhập địa chỉ"
                     onSuggestSelect={onSuggestSelect}
                     radius={20}
+                    location={new google.maps.LatLng(53.558572, 9.9278215)}
                     onChange={handleChangeAddress(setFieldValue)}
                     onBlur={() => {
                       setFieldTouched('address', true);
                     }}
+                    value={values.address}
                     initialValue={addressInput}
                     name="address"
                   />

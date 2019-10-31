@@ -127,21 +127,21 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                         <StyledMenuItem onClick={() => openLink('/host/room-list')}>
                           <ListItemText primary='Danh sách phòng' />
                         </StyledMenuItem>
-                        <StyledMenuItem onClick={() => alert('Chuyển link')}>
+                        <StyledMenuItem onClick={() => openLink('/host/create-listing/basic')}>
                           <ListItemText primary='Đăng phòng' />
                         </StyledMenuItem>
                       </StyledMenu>
                     </Grid>
-                    <Grid item>
+                    {/* <Grid item>
                       <Button href={'#'} className={classes.btnPolicy}>
                         Khuyến mãi
                       </Button>
-                    </Grid>
-                    <Grid item>
+                    </Grid> */}
+                    {/* <Grid item>
                       <Button href={'#'} className={classes.btnPolicy}>
                         Tin nhắn
                       </Button>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Grid>
                 <Grid item>

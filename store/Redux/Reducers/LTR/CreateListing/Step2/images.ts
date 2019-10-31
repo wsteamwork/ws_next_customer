@@ -7,6 +7,8 @@ import _ from 'lodash';
 
 export type ImageReducerState = {
   room_id: number;
+  number_bedroom: number;
+  number_bathroom: number;
   avatar_image: ImagesRes;
   cover_photo: ImagesRes;
   livingrooms: ImagesRes;
@@ -20,6 +22,8 @@ export type ImageReducerState = {
 
 export const init: ImageReducerState = {
   room_id: null,
+  number_bedroom: 0,
+  number_bathroom: 0,
   avatar_image: { images: [] },
   cover_photo: { images: [] },
   livingrooms: { images: [] },
@@ -33,6 +37,8 @@ export const init: ImageReducerState = {
 
 export type ImageReducerAction =
   | { type: 'setRoomId'; payload: number }
+  | { type: 'setNumberBedroom'; payload: number }
+  | { type: 'setNumberBathroom'; payload: number }
   | { type: 'setAvatarImage'; payload: ImagesRes }
   | { type: 'setCoverImage'; payload: ImagesRes }
   | { type: 'setLivingRoomImage'; payload: ImagesRes }
@@ -50,6 +56,10 @@ export const imageReducer: Reducer<ImageReducerState, ImageReducerAction> = (
   switch (action.type) {
     case 'setRoomId':
       return updateObject<ImageReducerState>(state, { room_id: action.payload });
+    case 'setNumberBedroom':
+      return updateObject<ImageReducerState>(state, { number_bedroom: action.payload });
+    case 'setNumberBathroom':
+      return updateObject<ImageReducerState>(state, { number_bathroom: action.payload });
     case 'setAvatarImage':
       return updateObject<ImageReducerState>(state, { avatar_image: action.payload });
     case 'setCoverImage':
@@ -86,8 +96,10 @@ export const getDataImages = async (
     const data = res.data.data;
     const room_id = data.room_id;
     const number_bedroom = res.data.data.bedrooms.number_bedroom;
-    const number_bathroom = res.data.data.bedrooms.number_bathroom;
+    const number_bathroom = res.data.data.bathrooms.number_bathroom;
     dispatch({ type: 'setRoomId', payload: room_id });
+    dispatch({ type: 'setNumberBedroom', payload: number_bedroom });
+    dispatch({ type: 'setNumberBathroom', payload: number_bathroom });
     dispatch({ type: 'setAvatarImage', payload: data.avatar ? data.avatar : { images: [] } });
     dispatch({
       type: 'setCoverImage',

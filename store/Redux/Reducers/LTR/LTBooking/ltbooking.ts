@@ -113,8 +113,6 @@ export const getLTBookingData = async (
   } catch (error) {
     dispatch({ type: 'setLTPaymentError', payload: true });
   }
-
-  // const res = Promise.all([])
 };
 
 export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookingIndexRes> => {
@@ -122,7 +120,7 @@ export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookin
     'long-term-bookings?include=contracts',
     req
   );
-  console.log(res.data.data);
+  // console.log(res.data.data);
   return res.data.data;
 };
 

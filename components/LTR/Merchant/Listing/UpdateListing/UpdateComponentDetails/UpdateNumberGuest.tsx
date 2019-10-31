@@ -21,7 +21,7 @@ const UpdateNumberGuest: FC<IProps> = (props) => {
   const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>(null);
+  const [statusSnack, setStatusSnack] = useState<string>("success");
 
   useEffect(() => {
     getDataUpdateListing(id, dispatch);

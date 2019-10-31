@@ -7,6 +7,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { getListingDetails, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AppBar, Box, Breadcrumbs, createStyles, Grid, Tab, Tabs, Theme, withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
@@ -16,7 +17,6 @@ import { makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 interface IProps {
   classes?: any;
 }

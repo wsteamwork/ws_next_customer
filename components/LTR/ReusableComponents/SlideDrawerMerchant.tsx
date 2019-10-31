@@ -134,16 +134,16 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
 
           <Collapse in={openItem} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
+              <ListItem button className={classes.nested} href="/host/room-list">
                 <ListItemText primary="Danh sách phòng" />
               </ListItem>
-              <ListItem button className={classes.nested}>
+              <ListItem button className={classes.nested} href="/host/create-listing/basic">
                 <ListItemText primary="Đăng phòng" />
               </ListItem>
             </List>
           </Collapse>
 
-          <ListItem
+          {/* <ListItem
             classes={{
               gutters: classes.listItemGutters
             }}
@@ -156,8 +156,8 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
                 primary: classes.text
               }}
             />
-          </ListItem>
-          <ListItem
+          </ListItem> */}
+          {/* <ListItem
             classes={{
               gutters: classes.listItemGutters
             }}
@@ -170,7 +170,7 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
                 primary: classes.text
               }}
             />
-          </ListItem>
+          </ListItem> */}
         </div>
         <div className="bottom">
           <ListItem

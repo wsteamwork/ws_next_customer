@@ -9,6 +9,7 @@ export type StepPricesState = {
   step: string;
   disable_next: boolean;
   listing: any;
+  weekday: any;
   error: boolean;
 };
 
@@ -17,6 +18,7 @@ export const init: StepPricesState = {
   step: null,
   disable_next: false,
   listing: null,
+  weekday: [],
   error: false
 };
 
@@ -25,6 +27,7 @@ export type StepPricesActions =
   | { type: 'setStep'; payload: string }
   | { type: 'setDisableNext'; payload: boolean }
   | { type: 'setListing'; payload: any }
+  | { type: 'setWeekday'; payload: any }
   | { type: 'setError'; payload: boolean };
 
 export const stepPricesReducer: Reducer<StepPricesState, StepPricesActions> = (
@@ -40,6 +43,8 @@ export const stepPricesReducer: Reducer<StepPricesState, StepPricesActions> = (
       return updateObject(state, { disable_next: action.payload });
     case 'setListing':
       return updateObject(state, { listing: action.payload });
+    case 'setWeekday':
+      return updateObject(state, { weekday: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -65,6 +70,20 @@ export const getListingPrices = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
+
+export const getWeekdayPrice = async (
+  id: any,
+  dispatch: Dispatch<StepPricesActions>
+): Promise<any> => {
+  try {
+    const url = `get-room-optional-prices/${id}`;
+    const res: AxiosRes<any> = await axios_merchant.get(url);
+    dispatch({ type: 'setWeekday', payload: res.data.data });
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+
 
 export const handlePricesListing = async (room_id: number, tab: string, data: any) => {
   const cookies = new Cookies();

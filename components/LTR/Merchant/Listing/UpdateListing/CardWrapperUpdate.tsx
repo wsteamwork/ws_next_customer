@@ -16,6 +16,8 @@ interface IProps {
   handleCloseSnack?: any;
   messageSnack?: string;
   statusSnack?: any;
+  widthMd?: any;
+  widthLg?: any;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -33,7 +35,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%',
       borderTop: '1px solid lightgrey',
       padding: '24px 0',
-      zIndex: 1000,
+      zIndex: 100,
       backgroundColor: '#ffffff'
     },
     boxShadow: {
@@ -67,7 +69,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const CardWrapperUpdate: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { handleSave, disabledSave, children, openSnack, handleCloseSnack, messageSnack, statusSnack  } = props;
+  const { handleSave, disabledSave, children, openSnack, handleCloseSnack, messageSnack, statusSnack , widthMd, widthLg } = props;
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const [isBottom, setIsBottom] = useState<boolean>(true);
@@ -86,15 +88,15 @@ const CardWrapperUpdate: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Grid container justify="center" alignContent="center">
-        <Grid item xs={11} sm={9} md={7} lg={5} className={classes.root}>
+        <Grid item xs={11} sm={9} md={widthMd} lg={widthLg} className={classes.root}>
           {children}
         </Grid>
         <Grid
           item
           xs={11}
           sm={9}
-          md={7}
-          lg={5}
+          md={widthMd}
+          lg={widthLg}
           className={classNames(classes.wrapper, isBottom ? classes.boxShadow : '')}>
           <Grid>
             <Button onClick={handleBack} size="large" className={classes.buttonBack}>
@@ -135,6 +137,8 @@ const CardWrapperUpdate: FC<IProps> = (props) => {
 };
 CardWrapperUpdate.defaultProps = {
   disabledSave: false,
-  statusSnack: "success"
+  statusSnack: "success",
+  widthLg: 5,
+  widthMd: 7
 };
 export default CardWrapperUpdate;

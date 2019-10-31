@@ -1,35 +1,13 @@
+import ButtonGlobal from '@/components/ButtonGlobal';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
-import React, { Fragment, useState, useEffect } from 'react';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { DayPickerRangeController } from 'react-dates';
+import React, { Fragment } from 'react';
 import 'react-dates/initialize';
-import {
-  Dialog,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-  List,
-  ListItemText,
-  ListItem,
-  Divider,
-  Typography,
-  Slide,
-  Grid
-} from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import RenderDay from '@/components/Room/BoxBooking/DateRangeSingle/RenderDay';
-import moment, { Moment } from 'moment';
 
 const Host: NextPage = () => {
-  
-
-
-  
 
   // const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay} />;
   return (
@@ -46,11 +24,11 @@ const Host: NextPage = () => {
         name="confirm-information"
         size="large"
         color="primary"
-        >
+      >
         Book Now
       </ButtonGlobal>
 
-      
+
     </Fragment>
   );
 };
