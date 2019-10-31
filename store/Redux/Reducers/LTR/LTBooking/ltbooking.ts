@@ -104,12 +104,9 @@ export const getLTBookingData = async (
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
   }
-
-  // const res = Promise.all([])
 };
 
 export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookingIndexRes> => {
   const res: AxiosRes<LTBookingIndexRes> = await axios.post('long-term-bookings', req);
-  console.log(res.data.data);
   return res.data.data;
 };

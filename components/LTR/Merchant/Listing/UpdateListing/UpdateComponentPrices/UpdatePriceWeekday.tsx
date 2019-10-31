@@ -1,23 +1,10 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import {
-  PriceTermActions,
-  getPrice,
-  PriceTermState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
-import {
   StepPricesActions,
   getListingPrices,
   getWeekdayPrice
 } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
-import React, {
-  FC,
-  useEffect,
-  Fragment,
-  useContext,
-  SyntheticEvent,
-  useState,
-  useMemo
-} from 'react';
+import React, { FC, useEffect, Fragment, useContext, SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -26,7 +13,6 @@ import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/li
 import {
   Grid,
   FormGroup,
-  FormControlLabel,
   InputAdornment,
   FormControl,
   Select,
@@ -42,8 +28,6 @@ import { weekdayOptions } from '@/utils/mixins';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { axios_merchant } from '@/utils/axiosInstance';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 interface IProps {
   classes?: any;
 }
@@ -188,7 +172,6 @@ const UpdatePriceWeekday: FC<IProps> = (props) => {
     weedayPrice.splice(i, 1);
     setWeekdayPrice(weedayPrice);
     dispatchStep({ type: 'setWeekday', payload: weedayPrice });
-    UpdateWeekday();
   };
 
   return (

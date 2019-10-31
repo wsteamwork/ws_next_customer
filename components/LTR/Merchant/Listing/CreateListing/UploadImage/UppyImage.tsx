@@ -49,6 +49,7 @@ const UppyImage: FC<IProps> = (props) => {
     }
   }, []);
 
+
   // useEffect(() => {
   //   if (initImages.length < 1) {
   //     dispatch_detail({ type: 'setDisableNext', payload: true });
@@ -58,6 +59,7 @@ const UppyImage: FC<IProps> = (props) => {
   // }, [initImages]);
 
   const initImage = async (arrImg) => {
+    console.log(123456)
     for (let i = 0; i < arrImg.length; i++) {
       let img = `${IMAGE_STORAGE_LG}` + arrImg[i].name;
       await fetch(img)
@@ -78,6 +80,7 @@ const UppyImage: FC<IProps> = (props) => {
     }
   };
   initImage(initImages);
+
   const uppy = Uppy({
     id: 'uppy',
     autoProceed: false,
@@ -141,7 +144,6 @@ const UppyImage: FC<IProps> = (props) => {
         let modifiedFile = Object.assign({}, currentFile, {
           name: newName
         });
-        // console.log(modifiedFile);
         return modifiedFile;
       }
       return currentFile;
@@ -157,7 +159,12 @@ const UppyImage: FC<IProps> = (props) => {
       let imgs = initImages;
       result.successful.map((res) => {
         let img = { name: res.meta.name.split('.')[0] + '.jpg', caption: '', type: typeImage };
-        imgs = [...imgs, img];
+        if(typeUpload.type === "setAvatarImage" || typeUpload.type === "setCoverImage") {
+          imgs = [img];
+        }
+        else {
+          imgs = [...imgs, img];
+        }
       });
 
       uppy.getFiles().forEach((file) => {
@@ -165,7 +172,6 @@ const UppyImage: FC<IProps> = (props) => {
           progress: { uploadComplete: true, uploadStarted: true }
         });
       });
-
       if (type_txt) {
         dispatch({ type: typeUpload.type, payload: { [`${type_txt}`]: { images: imgs } } });
       } else {
@@ -213,7 +219,7 @@ const UppyImage: FC<IProps> = (props) => {
         </Grid>
       </Fragment>
     ),
-    []
+    [initImages]
   );
 };
 

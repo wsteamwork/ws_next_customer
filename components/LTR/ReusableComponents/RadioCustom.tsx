@@ -1,20 +1,21 @@
-import { Radio, Theme, Typography } from '@material-ui/core';
+import { Radio, Theme, Typography, Grid } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC } from 'react';
-
+import React, { FC, ReactNode } from 'react';
+import classNames from 'classnames';
 interface IProps {
   classes?: any,
   label: string,
-  descr: string,
+  descr?: ReactNode,
   value: string,
+  className?: string;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     checkboxItemWrapper: {
       padding: '5px 15px 10px',
-      border: '1px solid #767676',
+      border: '1px solid lightgray',
       borderRadius: 4,
       minHeight: 120,
     },
@@ -29,10 +30,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const RadioCustom: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { label, descr, value } = props;
+  const { label, descr, value, className } = props;
 
   return (
-    <div className={classes.checkboxItemWrapper}>
+    <div className={classNames(classes.checkboxItemWrapper, className)}>
       <FormControlLabel
         value={value}
         label={label}
@@ -40,7 +41,7 @@ const RadioCustom: FC<IProps> = (props) => {
         labelPlacement="end"
         classes={{ label: classes.title }}
       />
-      <Typography style={{ marginTop: 10 }}> {descr} </Typography>
+      <Grid style={{ marginTop: 10 }}> {descr} </Grid>
     </div>
   );
 };

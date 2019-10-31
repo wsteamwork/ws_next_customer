@@ -24,12 +24,12 @@ import { useTranslation } from 'react-i18next';
 import CardImageCaption from '../../CreateListing/UploadImage/CardImageCaption';
 interface IProps {}
 
-const UpdateAvatarImage: FC<IProps> = (props) => {
+const UpdateCoverPhoto: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const { t } = useTranslation();
   const dispatch_img = useDispatch<Dispatch<ImageReducerAction>>();
-  const { room_id, avatar_image } = useSelector<ReducersList, ImageReducerState>(
+  const { room_id, cover_photo } = useSelector<ReducersList, ImageReducerState>(
     (state) => state.images
   );
   const [openSnack, setOpenSnack] = useState<boolean>(false);
@@ -40,17 +40,17 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
     getDataImages(id, dispatch_img);
   }, []);
 
-  const UpdateAvatar: any = () => {
+  const UpdateCover: any = () => {
     const res = handleUpdateListing(room_id, {
-      avatar_image: avatar_image
+      cover_photo: cover_photo
     });
     if (res) {
       setOpenSnack(true);
-      setMessageSnack('Cập nhật ảnh đại diện thành công !');
+      setMessageSnack('Cập nhật ảnh bìa thành công !');
     } else {
       setOpenSnack(true);
       setStatusSnack('error');
-      setMessageSnack('Cập nhật ảnh đại diện thất bại !');
+      setMessageSnack('Cập nhật ảnh bìa thất bại !');
     }
   };
 
@@ -64,33 +64,33 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
   return (
     <Fragment>
       <CardWrapperUpdate
-        handleSave={UpdateAvatar}
+        handleSave={UpdateCover}
         openSnack={openSnack}
         messageSnack={messageSnack}
         statusSnack={statusSnack}
         handleCloseSnack={handleCloseSnack}>
-        {avatar_image.images.length ? (
+        {cover_photo.images.length ? (
           <Fragment>
             <Grid container justify="center" alignContent="center">
               <Grid item xs={12}>
-                <UppyImage
-                  label={t('details:images:labelAvatar')}
-                  subLabel={t('details:images:subLabelAvatar')}
-                  height={350}
-                  maxImage={2}
-                  typeImage={1}
-                  typeUpload={{ type: 'setAvatarImage' }}
-                  initImages={avatar_image.images.length ? avatar_image.images : []}
-                />
+              <UppyImage
+                label={t('details:images:labelCover')}
+                subLabel={t('details:images:subLabelCover')}
+                height={350}
+                maxImage={2}
+                typeImage={4}
+                typeUpload={{ type: 'setCoverImage' }}
+                initImages={cover_photo.images.length ? cover_photo.images : []}
+              />
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6}>
               <CardImageCaption
-                subLabel="Thêm chú thích cho ảnh đại diện"
+                subLabel="Thêm chú thích cho ảnh bìa"
                 allowRemove={false}
-                typeUpload={{ type: 'setAvatarImage' }}
+                typeUpload={{ type: 'setCoverImage' }}
                 typeImage={1}
-                arrImage={avatar_image.images}
+                arrImage={cover_photo.images}
               />
             </Grid>
           </Fragment>
@@ -102,4 +102,4 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
   );
 };
 
-export default UpdateAvatarImage;
+export default UpdateCoverPhoto;

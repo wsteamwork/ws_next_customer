@@ -24,12 +24,12 @@ import { useTranslation } from 'react-i18next';
 import CardImageCaption from '../../CreateListing/UploadImage/CardImageCaption';
 interface IProps {}
 
-const UpdateAvatarImage: FC<IProps> = (props) => {
+const UpdateKitchenImage: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const { t } = useTranslation();
   const dispatch_img = useDispatch<Dispatch<ImageReducerAction>>();
-  const { room_id, avatar_image } = useSelector<ReducersList, ImageReducerState>(
+  const { room_id, kitchens } = useSelector<ReducersList, ImageReducerState>(
     (state) => state.images
   );
   const [openSnack, setOpenSnack] = useState<boolean>(false);
@@ -40,17 +40,17 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
     getDataImages(id, dispatch_img);
   }, []);
 
-  const UpdateAvatar: any = () => {
+  const UpdateKitchenImage: any = () => {
     const res = handleUpdateListing(room_id, {
-      avatar_image: avatar_image
+      kitchens: kitchens
     });
     if (res) {
       setOpenSnack(true);
-      setMessageSnack('Cập nhật ảnh đại diện thành công !');
+      setMessageSnack('Cập nhật ảnh phòng bếp thành công !');
     } else {
       setOpenSnack(true);
       setStatusSnack('error');
-      setMessageSnack('Cập nhật ảnh đại diện thất bại !');
+      setMessageSnack('Cập nhật ảnh phòng bếp thất bại !');
     }
   };
 
@@ -64,33 +64,30 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
   return (
     <Fragment>
       <CardWrapperUpdate
-        handleSave={UpdateAvatar}
+        handleSave={UpdateKitchenImage}
         openSnack={openSnack}
         messageSnack={messageSnack}
         statusSnack={statusSnack}
         handleCloseSnack={handleCloseSnack}>
-        {avatar_image.images.length ? (
+        {kitchens.images.length ? (
           <Fragment>
             <Grid container justify="center" alignContent="center">
               <Grid item xs={12}>
                 <UppyImage
-                  label={t('details:images:labelAvatar')}
-                  subLabel={t('details:images:subLabelAvatar')}
-                  height={350}
-                  maxImage={2}
-                  typeImage={1}
-                  typeUpload={{ type: 'setAvatarImage' }}
-                  initImages={avatar_image.images.length ? avatar_image.images : []}
+                  label={t('details:images:labelKitchens')}
+                  subLabel={t('details:images:subLabelKitchens')}
+                  typeImage={8}
+                  typeUpload={{ type: 'setKitchensImage' }}
+                  initImages={kitchens.images.length ? kitchens.images : []}
                 />
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
               <CardImageCaption
-                subLabel="Thêm chú thích cho ảnh đại diện"
-                allowRemove={false}
-                typeUpload={{ type: 'setAvatarImage' }}
-                typeImage={1}
-                arrImage={avatar_image.images}
+                subLabel="Thêm chú thích cho ảnh phòng bếp căn hộ"
+                typeUpload={{ type: 'setKitchensImage' }}
+                typeImage={8}
+                arrImage={kitchens.images}
               />
             </Grid>
           </Fragment>
@@ -102,4 +99,4 @@ const UpdateAvatarImage: FC<IProps> = (props) => {
   );
 };
 
-export default UpdateAvatarImage;
+export default UpdateKitchenImage;

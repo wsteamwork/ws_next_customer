@@ -1,12 +1,11 @@
 import { ReducersList } from '@/store/Redux/Reducers';
-import { PriceTermActions, getPrice, PriceTermState } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { PriceTermActions, getPrice } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { StepPricesActions, getListingPrices } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import React, { FC, useEffect, Fragment, useContext, SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import ServiceFee from '../../CreateListing/Step3/ServiceFee';
 import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';

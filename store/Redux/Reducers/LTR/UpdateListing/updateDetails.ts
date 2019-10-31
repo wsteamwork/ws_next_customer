@@ -25,8 +25,13 @@ export type UpdateDetailsState = {
   readonly building: string;
   readonly city_id: number;
   readonly district_id: number;
+  readonly instant_book: number;
+  readonly no_booking_cancel: number;
   readonly coordinate: Coordinate;
   readonly disableSubmit: boolean;
+  readonly rent_type: number;
+  readonly checkin: string;
+  readonly checkout: string;
   readonly error: boolean;
 };
 
@@ -47,6 +52,11 @@ export type UpdateDetailsActions =
   | { type: 'SET_DISTRICT_ID'; payload: number }
   | { type: 'SET_COORDINATE'; payload: Coordinate }
   | { type: 'SET_DISABLE_SUBMIT'; payload: boolean }
+  | { type: 'SET_INSTANT_BOOK'; payload: number }
+  | { type: 'SET_BOOKING_CANCEL'; payload: number }
+  | { type: 'SET_RENT_TYPE'; payload: number }
+  | { type: 'SET_CHECKIN'; payload: string }
+  | { type: 'SET_CHECKOUT'; payload: string }
   | { type: 'SET_ERROR'; payload: boolean };
 
 const init: UpdateDetailsState = {
@@ -66,6 +76,11 @@ const init: UpdateDetailsState = {
   district_id: null,
   coordinate: null,
   disableSubmit: false,
+  instant_book: 0,
+  no_booking_cancel: 0,
+  rent_type: 1,
+  checkin: "14:00:00",
+  checkout: "12:00:00",
   error: false
 };
 
@@ -106,6 +121,16 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { coordinate: action.payload });
     case 'SET_DISABLE_SUBMIT':
       return updateObject<UpdateDetailsState>(state, { disableSubmit: action.payload });
+    case 'SET_INSTANT_BOOK':
+      return updateObject<UpdateDetailsState>(state, { instant_book: action.payload });
+    case 'SET_BOOKING_CANCEL':
+      return updateObject<UpdateDetailsState>(state, { no_booking_cancel: action.payload });
+    case 'SET_RENT_TYPE':
+      return updateObject<UpdateDetailsState>(state, { rent_type: action.payload });
+    case 'SET_CHECKIN':
+      return updateObject<UpdateDetailsState>(state, { checkin: action.payload });
+    case 'SET_CHECKOUT':
+      return updateObject<UpdateDetailsState>(state, { checkout: action.payload });
     case 'SET_ERROR':
       return updateObject(state, { error: action.payload });
     default:
@@ -136,6 +161,14 @@ export const getDataUpdateListing = async (
     dispatch({ type: 'SET_BUILDING', payload: listing.building });
     dispatch({ type: 'SET_CITY_ID', payload: listing.city_id });
     dispatch({ type: 'SET_DISTRICT_ID', payload: listing.district_id });
+    dispatch({ type: 'SET_INSTANT_BOOK', payload: listing.short_term_room.instant_book });
+    dispatch({
+      type: 'SET_BOOKING_CANCEL',
+      payload: listing.short_term_room.settings.no_booking_cancel
+    });
+    dispatch({ type: 'SET_RENT_TYPE', payload: listing.short_term_room.rent_type });
+    dispatch({ type: 'SET_CHECKIN', payload: listing.short_term_room.checkin ?  listing.short_term_room.checkin : "14:00:00"});
+    dispatch({ type: 'SET_CHECKOUT', payload: listing.short_term_room.checkout ?  listing.short_term_room.checkout : "12:00:00" });
     dispatch({
       type: 'SET_COORDINATE',
       payload: {

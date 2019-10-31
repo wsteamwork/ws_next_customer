@@ -19,6 +19,7 @@ interface IProps {
   typeImage?: number;
   typeUpload: { type: any };
   type_txt?: string;
+  allowRemove?: boolean;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -67,7 +68,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const CardImageCaption: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
-  const { label, subLabel, arrImage, typeImage, typeUpload, type_txt } = props;
+  const { label, subLabel, arrImage, typeImage, typeUpload, type_txt, allowRemove } = props;
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
   const [values, setValues] = useState(arrImage);
   const handleBlur = () => {
@@ -82,8 +83,8 @@ const CardImageCaption: FC<IProps> = (props) => {
     setValues(values);
   };
   const handleRemoveImage = (index: number) => {
-    let newValues = values.splice(index, 1);
-    setValues(newValues);
+    values.splice(index, 1);
+    setValues(values);
     handleBlur();
   };
 
@@ -103,7 +104,7 @@ const CardImageCaption: FC<IProps> = (props) => {
         <Grid container spacing={3}>
           {values.map((img, index) => (
             <Grid className={classes.card} item xs={12} sm={typeImage === 1 || typeImage === 4 ? 12 : 6} key={index}>
-              {values.length > 1 ? (
+              {(values.length > 1 || allowRemove) ? (
                 <Tooltip title="Xóa ảnh" placement="right" classes={{ tooltip: 'tooltip' }}>
                   <CardActions
                     onClick={() => handleRemoveImage(index)}
@@ -149,6 +150,10 @@ const CardImageCaption: FC<IProps> = (props) => {
       </Grid>
     </Fragment>
   );
+};
+
+CardImageCaption.defaultProps = {
+  allowRemove: false,
 };
 
 export default CardImageCaption;

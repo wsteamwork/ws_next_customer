@@ -14,7 +14,6 @@ const RoomCreateListing = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [idListing, setIdListing] = useState<number>(null);
   const { router } = useContext(GlobalContext);
-  console.log(router);
   const disableSubmit = useSelector<ReducersList, boolean>(
     (state) => state.createListing.disableSubmit
   );
@@ -48,7 +47,6 @@ const RoomCreateListing = () => {
   };
 
   const uid = router.query.uid;
-  // console.log(uid);
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -71,7 +69,6 @@ const RoomCreateListing = () => {
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
-      {/* <CreateListingContext.Provider value={{ state, dispatch }}> */}
       <Layout
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
@@ -80,9 +77,7 @@ const RoomCreateListing = () => {
         handleAPI={() => handleCreateRoom(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}
-
       />
-      {/* </CreateListingContext.Provider> */}
     </Fragment>
   );
 };
