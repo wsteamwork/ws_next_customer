@@ -10,5 +10,14 @@
         "success": "Hủy phòng thành công!"
     },
     "dayPrice": "₫/ngày",
-    "hourPrice": "₫/4 giờ"
+    "hourPrice": "₫/4 giờ",
+    "facilities": "Tiện ích",
+    "bedrooms": "Phòng ngủ",
+    "kitchens": "Phòng bếp",
+    "bathrooms": "Phòng tắm",
+    "livingrooms": "Phòng khách",
+    "common": "Tiện nghi chung",
+    "entertainment": "Giải trí",
+    "others": "Tiện nghi khác",
+    "outdoors": "Ngoài trời"
 }

@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Theme, Typography
 import CloseIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
@@ -66,6 +67,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, facilities, bedrooms, kitchens, bathrooms, livingrooms, common, entertainment, others, outdoors } = props;
   const { width } = useContext(GlobalContext);
+  const { t } = useTranslation();
 
   return (
     <Dialog scroll='body' fullWidth fullScreen={width === 'xs'}
@@ -91,7 +93,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Tiện nghi chung
+                {t('shared:facilities')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -120,7 +122,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Phòng khách
+                {t('shared:livingrooms')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -149,7 +151,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Phòng ngủ
+                {t('shared:bedrooms')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -178,7 +180,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Phòng tắm
+                {t('shared:bathrooms')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -207,7 +209,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Phòng bếp
+                {t('shared:kitchens')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -236,7 +238,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Giải trí
+                {t('shared:entertainment')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -265,7 +267,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Tiện nghi ngoài trời
+                {t('shared:outdoors')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -294,7 +296,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Tiện nghi chung
+                {t('shared:common')}
               </Typography>
 
               <Grid container spacing={2}>
@@ -323,7 +325,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         ) : (
             <div>
               <Typography variant='subtitle1' className={classes.roomName}>
-                Tiện nghi khác
+                {t('shared:others')}
               </Typography>
 
               <Grid container spacing={2}>
