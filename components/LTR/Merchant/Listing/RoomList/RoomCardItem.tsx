@@ -2,7 +2,16 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Theme } from '@material-ui/core';
+import {
+  createStyles,
+  Divider,
+  Grid,
+  Hidden,
+  IconButton,
+  Link,
+  Paper,
+  Theme
+} from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -68,7 +77,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
       [theme.breakpoints.up('sm')]: {
         maxHeight: 117
-      },
+      }
     },
     wrapperImage: {
       display: 'flex',
@@ -249,11 +258,15 @@ const RoomCardItem: FC<IProps> = (props) => {
     }
   })(LinearProgress);
 
-  const openUpdateRoom = (room_id: number) => {
-    router.push(`/host/create-listing/${room_id}/process`);
+  const openUpdateRoom = (room_id: number, status: number) => {
+    if (status === 1) {
+      window.open(`/host/update-listing/${room_id}`, `_blank`);
+    } else {
+      window.open(`/host/create-listing/${room_id}/process`, `_blank`);
+    }
   };
   const openPreviewRoom = (room_id: number) => {
-    router.push(`/host/preview-room/${room_id}`);
+    window.open(`/preview-room/${room_id}`, `_blank`);
   };
 
   return (
@@ -273,16 +286,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                      <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
-                        <Grid className={classes.wrapperImage}>
-                          <img
-                            src={'/static/images/camera.svg'}
-                            alt="Camera"
-                            className={classes.imgDefault}
-                          />
-                        </Grid>
+                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <Grid className={classes.wrapperImage}>
+                        <img
+                          src={'/static/images/camera.svg'}
+                          alt="Camera"
+                          className={classes.imgDefault}
+                        />
                       </Grid>
-                    )}
+                    </Grid>
+                  )}
                   <Hidden smUp>
                     <Grid item xs={5} className={classes.btnShowSmUp}>
                       <Grid item>
@@ -294,7 +307,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             color="primary"
                             className={classes.IconButton}
                             aria-label="Edit"
-                            onClick={() => openUpdateRoom(room.id)}>
+                            onClick={() => openUpdateRoom(room.id, room.status)}>
                             <EditIcon className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
@@ -318,7 +331,10 @@ const RoomCardItem: FC<IProps> = (props) => {
                       <Grid container>
                         <Grid item xs={12} sm={10} className={classes.infoRoomName}>
                           <span>
-                            <Link href="/terms-and-conditions" className={classes.roomName}>
+                            <Link
+                              href={`/room/${room.room_id}`}
+                              className={classes.roomName}
+                              target="_blank">
                               {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
                                 <img
@@ -327,8 +343,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   className={classes.iconVerified}
                                 />
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                             </Link>
                           </span>
                         </Grid>
@@ -343,7 +359,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   color="primary"
                                   className={classes.IconButton}
                                   aria-label="Edit"
-                                  onClick={() => openUpdateRoom(room.id)}>
+                                  onClick={() => openUpdateRoom(room.id, room.status)}>
                                   <EditIcon className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
@@ -437,21 +453,23 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerDay')}
                                 &nbsp; &#8226;
                               </span>
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
-                              ''
-                            )}
+                            ''
+                          )}
                           {room.short_term_room.rent_type === 2 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -460,16 +478,17 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/ {t('roomlist:onePerDay')}
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerDay')}
                               </span>
                             </Typography>
                           ) : (
-                              ''
-                            )}
+                            ''
+                          )}
                           {room.short_term_room.rent_type === 1 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -478,16 +497,17 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/ {t('roomlist:onePerHour')}
+                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                {t('roomlist:onePerHour')}
                               </span>
                             </Typography>
                           ) : (
-                              ''
-                            )}
+                            ''
+                          )}
                         </Grid>
                         {room.percent < 100 ? (
                           <Grid container item xs={12} lg={6}>
@@ -502,8 +522,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </Grid>
                           </Grid>
                         ) : (
-                            ''
-                          )}
+                          ''
+                        )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -601,8 +621,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                 <Grid item xs={6} sm={4} md lg xl={3}>
                   <HtmlTooltip
                     placement="bottom-end"
-                    title={room.short_term_room.settings.booking_cancel_text}
-                  >
+                    title={room.short_term_room.settings.booking_cancel_text}>
                     <Grid container>
                       <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
                         <img
@@ -627,7 +646,7 @@ const RoomCardItem: FC<IProps> = (props) => {
           </Paper>
         </Grid>
       </Grid>
-    </Fragment >
+    </Fragment>
   );
 };
 export default RoomCardItem;
