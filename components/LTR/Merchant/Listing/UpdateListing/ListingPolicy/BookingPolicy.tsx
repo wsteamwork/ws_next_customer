@@ -34,10 +34,10 @@ const BookingPolicy: FC<IProps> = (props) => {
       {listing ? (
         <CardWrapperItem title="Hình thức đặt phòng" onClick={openUpdate}>
           <Typography variant="subtitle1" className={classes.name}>
-            {listing.instant_book_txt}
+            {listing.short_term_room.instant_book_txt}
           </Typography>
           <Grid container>
-            <span>{listing.instant_book === 1 ? instant_book_txt : normal_book_txt}</span>
+            <span>{listing.short_term_room.instant_book === 1 ? instant_book_txt : normal_book_txt}</span>
           </Grid>
         </CardWrapperItem>
       ) : (

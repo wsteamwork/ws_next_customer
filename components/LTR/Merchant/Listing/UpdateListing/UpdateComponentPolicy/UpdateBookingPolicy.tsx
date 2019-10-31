@@ -73,7 +73,7 @@ const UpdateBookingPolicy: FC<IProps> = (props) => {
 
   const updateBookPolicy: any = () => {
     const res = handleUpdateListing(room_id, {
-      instant_book: instant_book
+      instant_book: instantBook
     });
     if (res) {
       setOpenSnack(true);
