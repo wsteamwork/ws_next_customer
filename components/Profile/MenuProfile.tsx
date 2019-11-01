@@ -23,6 +23,7 @@ import EditProfile from './EditProfile';
 import BookingProfile from './BookingProfile';
 import { useTranslation } from 'react-i18next';
 import NotificationPanel from '../Notifications/NotificationPanel';
+import Account from './Account';
 
 const MenuProfile: FC = (props) => {
   const { t } = useTranslation();
@@ -54,7 +55,10 @@ const MenuProfile: FC = (props) => {
               label={t('profile:userProfile')}
               className="sideNavItemText"
               icon={<PersonOutlineRounded />}></Tab>
-
+            <Tab
+              label={t('profile:account:title')}
+              className="sideNavItemText"
+              icon={<PersonOutlineRounded />}></Tab>
             <Tab
               label={t('profile:myBooking')}
               className={'sideNavItemText'}
@@ -94,7 +98,8 @@ const MenuProfile: FC = (props) => {
         <Grid item xs={12} md={9}>
           {value === 0 && <NotificationPanel />}
           {value === 1 && <EditProfile />}
-          {value === 2 && <BookingProfile />}
+          {value === 2 && <Account />}
+          {value === 3 && <BookingProfile />}
         </Grid>
       </Grid>
     </GridContainer>
