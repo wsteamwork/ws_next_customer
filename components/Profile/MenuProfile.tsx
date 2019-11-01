@@ -1,29 +1,17 @@
-import React, { ChangeEvent, useState, useContext, FC } from 'react';
-import {
-  Hidden,
-  Tabs,
-  Tab,
-  Grid,
-  BottomNavigation,
-  BottomNavigationAction
-} from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import {
-  PersonOutlineRounded,
-  NotificationsNoneRounded,
-  BookmarksOutlined,
-  PersonOutlined
-} from '@material-ui/icons';
-import GridContainer from '../Layout/Grid/Container';
-import Link from 'next/link';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import EditProfile from './EditProfile';
-import BookingProfile from './BookingProfile';
+import { BottomNavigation, BottomNavigationAction, Grid, Hidden, Tab, Tabs } from '@material-ui/core';
+import { BookmarksOutlined, NotificationsNoneRounded, PersonOutlined, PersonOutlineRounded } from '@material-ui/icons';
+import Link from 'next/link';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import GridContainer from '../Layout/Grid/Container';
 import NotificationPanel from '../Notifications/NotificationPanel';
 import Account from './Account';
+import BookingProfile from './BookingProfile';
+import EditProfile from './EditProfile';
 
 const MenuProfile: FC = (props) => {
   const { t } = useTranslation();

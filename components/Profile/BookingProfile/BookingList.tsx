@@ -1,28 +1,28 @@
-import React, { Fragment, useContext, useState, FC, Dispatch, useEffect } from 'react';
-import _ from 'lodash';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import GridContainer from '@/components/Layout/Grid/Container';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList, ReducresActions } from '@/store/Redux/Reducers';
+import { getUserBookingList } from '@/store/Redux/Reducers/Profile/profile';
+import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
+import { Pagination } from '@/types/Requests/ResponseTemplate';
+import { formatMoney } from '@/utils/mixins';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { Button, Grid, Hidden, Paper, Typography } from '@material-ui/core';
+import InsertDriveFileOutlined from '@material-ui/icons/InsertDriveFileOutlined';
+import Rating from '@material-ui/lab/Rating';
+import _ from 'lodash';
 import moment from 'moment';
 import 'moment/locale/vi';
-import { formatMoney } from '@/utils/mixins';
-import InsertDriveFileOutlined from '@material-ui/icons/InsertDriveFileOutlined';
-import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import 'rc-pagination/assets/index.css';
-import { Pagination } from '@/types/Requests/ResponseTemplate';
-import { Paper, Grid, Typography, Hidden, Button } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { ReducersList, ReducresActions } from '@/store/Redux/Reducers';
-import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import GridContainer from '@/components/Layout/Grid/Container';
-import Rating from '@material-ui/lab/Rating';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import PaginationS from 'rc-pagination';
-import { getUserBookingList } from '@/store/Redux/Reducers/Profile/profile';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import Link from 'next/link';
+import PaginationS from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import localeInfo from 'rc-pagination/lib/locale/vi_VN';
+import React, { Dispatch, FC, Fragment, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import DialogBookingDetails from './DialogBookingDetails';
 import DialogReviewDetails from './DialogReviewDetails';
-import { useTranslation } from 'react-i18next';
 
 interface IBookingList {
   status: number;
@@ -145,14 +145,14 @@ const BookingList: FC<IBookingList> = (props) => {
                         {t('profile:bookingProfile:seeReview')}
                       </Button>
                     ) : (
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        onClick={() => toReview(i.id)}>
-                        {t('profile:bookingProfile:review')}
-                      </Button>
-                    )}
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          size="small"
+                          onClick={() => toReview(i.id)}>
+                          {t('profile:bookingProfile:review')}
+                        </Button>
+                      )}
                   </Grid>
                 </Hidden>
               </Grid>

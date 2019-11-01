@@ -1,23 +1,16 @@
-import React, { FC, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  Modal
-} from '@material-ui/core';
-import moment from 'moment';
-import DateRangeOutline from '@material-ui/icons/DateRangeOutlined';
-import { useTranslation } from 'react-i18next';
-import GridContainer from '@/components/Layout/Grid/Container';
 import SearchComponent from '@/components/Home/SearchComponent';
-import { ReducersType, ReducersList } from '@/store/Redux/Reducers';
-import { compose } from "recompose";
-import { connect, useSelector } from 'react-redux';
-import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import GridContainer from '@/components/Layout/Grid/Container';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
+import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
+import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
+import { Button, Grid, Modal, Paper, Theme, Typography } from '@material-ui/core';
+import DateRangeOutline from '@material-ui/icons/DateRangeOutlined';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import moment from 'moment';
+import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect, useSelector } from 'react-redux';
+import { compose } from "recompose";
 
 
 interface IProps {
@@ -85,7 +78,7 @@ const SearchMobile: FC<IProps> = (props) => {
     roomsCount,
     guestsCount
   } = filter;
-  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const handleClose = () => {
     setOpen(false);
@@ -144,10 +137,10 @@ const SearchMobile: FC<IProps> = (props) => {
             </Typography>
           </GridContainer>
           {leaseTypeGlobal ? (
-            <SearchHomeLT showPlaces={false} className={classes.modalSearch}/>
+            <SearchHomeLT showPlaces={false} className={classes.modalSearch} />
           ) : (
-            <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={() => setOpen(false)} />
-          )}
+              <SearchComponent showGuestRoom={true} className={classes.modalSearch} closeModal={() => setOpen(false)} />
+            )}
         </GridContainer>
       </Modal>
     </Grid>

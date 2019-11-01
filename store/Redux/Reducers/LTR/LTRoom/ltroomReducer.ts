@@ -1,14 +1,13 @@
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { axios } from '@/utils/axiosInstance';
-import moment from 'moment';
-import qs from 'query-string';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
-import { ParsedUrlQuery } from 'querystring';
 import { ReducresActions } from '@/store/Redux/Reducers';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { LTRoomAvailableRes, LTAvailableDate } from '@/types/Requests/Rooms/RoomResponses';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { LTRoomAvailableRes } from '@/types/Requests/Rooms/RoomResponses';
+import { axios } from '@/utils/axiosInstance';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import moment from 'moment';
+import { ParsedUrlQuery } from 'querystring';
+import { Dispatch, Reducer } from 'redux';
 
 export type LTRoomReducerState = {
   readonly room: LTRoomIndexRes | null;
@@ -60,12 +59,15 @@ export const getRoomAvailableDate = async (
   initLanguage: string = 'vi',
   date_start: string = moment().format(DEFAULT_DATE_FORMAT)
 ): Promise<LTRoomAvailableRes> => {
-  const res: AxiosRes<LTRoomAvailableRes> = await axios.get(`long-term-rooms/available-dates/${idRoom}`, {
-    data: {
-      move_in: date_start
-    },
-    headers: { 'Accept-Language': initLanguage }
-  });
+  const res: AxiosRes<LTRoomAvailableRes> = await axios.get(
+    `long-term-rooms/available-dates/${idRoom}`,
+    {
+      data: {
+        move_in: date_start
+      },
+      headers: { 'Accept-Language': initLanguage }
+    }
+  );
   return res.data.data;
 };
 //
@@ -110,6 +112,6 @@ export const getDataLTRoom = async (
   } catch (error) {
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
     // console.log(error.response);
-    console.log(error);
+    // console.log(error);
   }
 };

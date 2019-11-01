@@ -1,22 +1,13 @@
-import React, { Fragment, FC, useContext, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  Typography,
-  Hidden,
-  DialogTitle,
-  Dialog,
-  IconButton,
-  DialogContent,
-  Grid
-} from '@material-ui/core';
-import { TransitionCustom, FILTER, TAB_LIST } from '@/components/Rooms/BottomNav';
+import { FILTER, TAB_LIST, TransitionCustom } from '@/components/Rooms/BottomNav';
+import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
+import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { Dialog, DialogContent, DialogTitle, Grid, Hidden, IconButton, Theme, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import FilterIcon from '@material-ui/icons/FilterListRounded';
-import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
 interface IProps {
   classes?: any
   openMap?: boolean

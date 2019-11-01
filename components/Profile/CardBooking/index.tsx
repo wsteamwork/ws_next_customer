@@ -1,12 +1,12 @@
-import React, { FC, useMemo } from 'react';
-import { Grid, Typography, Button, Hidden, Divider } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import { LocationOnOutlined } from '@material-ui/icons';
-import moment from 'moment';
-import { useTranslation } from 'react-i18next';
-import { formatMoney } from '@/utils/mixins';
 import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { formatMoney } from '@/utils/mixins';
+import { Button, Divider, Grid, Hidden, Typography } from '@material-ui/core';
+import { LocationOnOutlined } from '@material-ui/icons';
+import Rating from '@material-ui/lab/Rating';
+import moment from 'moment';
+import React, { FC, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   dataBooking: BookingIndexRes;
@@ -62,17 +62,17 @@ const CardBooking: FC<IProps> = (props) => {
                 {dataBooking.status_txt === '' ? (
                   ''
                 ) : (
-                  <Button variant="outlined" size="small" className={'btStatus'}>
-                    {dataBooking.status_txt}
-                  </Button>
-                )}
+                    <Button variant="outlined" size="small" className={'btStatus'}>
+                      {dataBooking.status_txt}
+                    </Button>
+                  )}
                 {dataBooking.coupon_txt === '' ? (
                   ''
                 ) : (
-                  <Button variant="outlined" size="small" className={'btStatus'}>
-                    {dataBooking.coupon_txt}
-                  </Button>
-                )}
+                    <Button variant="outlined" size="small" className={'btStatus'}>
+                      {dataBooking.coupon_txt}
+                    </Button>
+                  )}
               </Grid>
             </Grid>
           </Grid>

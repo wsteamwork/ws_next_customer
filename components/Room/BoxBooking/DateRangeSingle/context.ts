@@ -28,7 +28,7 @@ const useCheckDate = (date: DateRange, dateSingle: Moment) => {
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
   const dispatch = useDispatch<Dispatch<BookingAction>>();
 
-  console.log('useCheckDate');
+  // console.log('useCheckDate');
 
   useEffect(() => {
     if (bookingType === 1 && !!dateSingle) {

@@ -1,9 +1,9 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { axios } from '@/utils/axiosInstance';
+import { Grid, Typography } from '@material-ui/core';
 import { FC, Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Typography, Grid } from '@material-ui/core';
 
 const VerifyEmail: FC = (props) => {
   const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);
@@ -14,7 +14,7 @@ const VerifyEmail: FC = (props) => {
     axios
       .get(`verify-email`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => console.log(err));
   };
@@ -27,14 +27,14 @@ const VerifyEmail: FC = (props) => {
           <Typography>{profile.email}</Typography>
         </Grid>
       ) : (
-        <Fragment>
-          <button onClick={verifyEmail} className="section-edit">
-            Verify Your Email
+          <Fragment>
+            <button onClick={verifyEmail} className="section-edit">
+              Verify Your Email
           </button>
-          <br></br>
-          Email của bạn chưa được xác thực
+            <br></br>
+            Email của bạn chưa được xác thực
         </Fragment>
-      )}
+        )}
     </Fragment>
   );
 };

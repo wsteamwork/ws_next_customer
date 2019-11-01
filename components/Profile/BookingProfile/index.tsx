@@ -1,8 +1,8 @@
-import React, { ChangeEvent, Fragment, useContext, useState, FC } from 'react';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Typography, Paper, Tabs, Tab } from '@material-ui/core';
-import BookingList from './BookingList';
+import { Paper, Tab, Tabs, Typography } from '@material-ui/core';
+import React, { ChangeEvent, FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import BookingList from './BookingList';
 
 function TabContainer(props: any) {
   return (

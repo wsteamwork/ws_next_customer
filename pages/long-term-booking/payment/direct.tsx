@@ -25,7 +25,7 @@ const Direct: NextPage = () => {
   const { router } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log(error);
+    // console.log(error);
     !!error && router.push('/error');
   }, [error]);
 

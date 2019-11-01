@@ -1,10 +1,9 @@
-import { Fragment, FC, useState } from 'react';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import { useSelector } from 'react-redux';
-import { axios } from '@/utils/axiosInstance';
-import UppyImageID from './UppyImageID';
 import { Typography } from '@material-ui/core';
+import { FC, Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import UppyImageID from './UppyImageID';
 
 const VerifyID: FC = (props) => {
   //   const { t } = useTranslation();
@@ -29,8 +28,8 @@ const VerifyID: FC = (props) => {
           <Typography>Đã cung cấp</Typography>
         </Fragment>
       ) : (
-        <UppyImageID />
-      )}
+          <UppyImageID />
+        )}
     </Fragment>
   );
 };

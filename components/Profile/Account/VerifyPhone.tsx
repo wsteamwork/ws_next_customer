@@ -30,7 +30,7 @@ const VerifyPhone: FC = (props) => {
     };
     const res: any = await axios.post(`send-sms`, req);
     try {
-      if (res) console.log(res);
+      if (res) console.log('success send sms');
     } catch (error) {
       console.log(error);
     }
@@ -87,13 +87,13 @@ const VerifyPhone: FC = (props) => {
             }
             // onBlur={handleBlur}
             value={verification.code}
-            // InputProps={{
-            //   startAdornment: (
-            //     <InputAdornment position="start">
-            //       <b>+84</b>
-            //     </InputAdornment>
-            //   )
-            // }}
+          // InputProps={{
+          //   startAdornment: (
+          //     <InputAdornment position="start">
+          //       <b>+84</b>
+          //     </InputAdornment>
+          //   )
+          // }}
           />
           <br></br>
           <button onClick={() => setIsSentSms(false)} className="section-edit">
@@ -108,32 +108,32 @@ const VerifyPhone: FC = (props) => {
           Đã xác thực
         </Fragment>
       ) : (
-        <Fragment>
-          <PhoneInput
-            country="VN"
-            placeholder="Enter phone number"
-            value={verification.phoneNumber}
-            onChange={(value) =>
-              setVerification({
-                ...verification,
-                phoneNumber: formatPhoneNumberIntl(value)
-              })
-            }
-            error={
-              verification.phoneNumber
-                ? isValidPhoneNumber(verification.phoneNumber)
-                  ? undefined
-                  : 'Invalid phone number'
-                : 'Phone number required'
-            }
-          />
-          <ButtonGlobal
-            disabled={!verification.phoneNumber || !isValidPhoneNumber(verification.phoneNumber)}
-            onClick={confirmPhoneNumber}>
-            Confirm Phone Number
+            <Fragment>
+              <PhoneInput
+                country="VN"
+                placeholder="Enter phone number"
+                value={verification.phoneNumber}
+                onChange={(value) =>
+                  setVerification({
+                    ...verification,
+                    phoneNumber: formatPhoneNumberIntl(value)
+                  })
+                }
+                error={
+                  verification.phoneNumber
+                    ? isValidPhoneNumber(verification.phoneNumber)
+                      ? undefined
+                      : 'Invalid phone number'
+                    : 'Phone number required'
+                }
+              />
+              <ButtonGlobal
+                disabled={!verification.phoneNumber || !isValidPhoneNumber(verification.phoneNumber)}
+                onClick={confirmPhoneNumber}>
+                Confirm Phone Number
           </ButtonGlobal>
-        </Fragment>
-      )}
+            </Fragment>
+          )}
     </Fragment>
   );
 };

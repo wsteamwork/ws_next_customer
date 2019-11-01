@@ -1,23 +1,9 @@
-import React, { FC, Dispatch, Fragment, SetStateAction, useContext } from 'react';
-import Location from '@material-ui/icons/LocationOnOutlined';
-import CloseIcon from '@material-ui/icons/Close';
-import moment from 'moment';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { TransitionCustom } from '@/components/Book/BookingForm';
-import {
-  Dialog,
-  DialogTitle,
-  IconButton,
-  DialogContent,
-  Grid,
-  Typography,
-  Button,
-  Hidden,
-  Divider
-} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
-import { formatMoney } from '@/utils/mixins';
+import { Dialog, DialogContent, DialogTitle, Grid, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import React, { Dispatch, FC, SetStateAction, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import CardBooking from '../CardBooking';
 

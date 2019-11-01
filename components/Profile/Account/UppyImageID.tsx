@@ -1,21 +1,19 @@
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import Uppy from '@uppy/core';
-import Cookies from 'universal-cookie';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
-import '@uppy/webcam/dist/style.css';
-import { Dashboard, DashboardModal } from '@uppy/react';
+import { Dashboard } from '@uppy/react';
 import Webcam from '@uppy/webcam';
+import '@uppy/webcam/dist/style.css';
 import XHRUpload from '@uppy/xhr-upload';
-import fetch from 'isomorphic-fetch';
-import React, { FC, Fragment, useEffect, useMemo } from 'react';
+import React, { FC, Fragment, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import Cookies from 'universal-cookie';
 import 'uppy/dist/uppy.min.css';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 interface IProps {
   //   classes?: any;
   //   label?: string;
@@ -80,7 +78,7 @@ const UppyImageID: FC<IProps> = (props) => {
   });
 
   uppy.use(XHRUpload, {
-    endpoint: 'http://ws-api.lc/customer-api/upload-identity',
+    endpoint: 'https://dev.westay.vn/customer-api/upload-identity',
     headers: {
       authorization: `Bearer ${new Cookies().get('_token')}`
     },
@@ -104,8 +102,8 @@ const UppyImageID: FC<IProps> = (props) => {
         progress: { uploadComplete: true, uploadStarted: true }
       });
     });
-    console.log('successful files:', result.successful);
-    console.log('failed files:', result.failed);
+    // console.log('successful files:', result.successful);
+    // console.log('failed files:', result.failed);
   });
 
   return useMemo(
