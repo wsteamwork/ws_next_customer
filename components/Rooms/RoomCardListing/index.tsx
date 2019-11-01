@@ -97,7 +97,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
 
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
   const totalComfort = room.comforts.data.length - 4;
-  console.log(room)
+  // console.log(room)
   const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
   return (
     <Paper elevation={0} className="roomCardListing">

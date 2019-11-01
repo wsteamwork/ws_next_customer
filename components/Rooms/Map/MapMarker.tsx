@@ -1,13 +1,13 @@
 import CustomPopper from '@/components/CustomPopper';
 import RoomCard from '@/components/RoomCard';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import { ChildComponentProps, Coords } from 'google-map-react';
 import numeral from 'numeral';
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps extends Coords, ChildComponentProps {
   room: any;
@@ -19,41 +19,41 @@ interface IProps extends Coords, ChildComponentProps {
 const MapMarker: FC<IProps> = (props) => {
   const { room, $hover, isHover, focus } = props;
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  const avatarImg = room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image ? room.avatar_image : './static/images/westay-avatar.jpg';
+  const priceOnMap = leaseTypeGlobal ? room.price_display : room.price_day;
 
-  const priceOnMap = leaseTypeGlobal ? room.price_display :  room.price_day;
-
-  const cardRoom = useMemo(()=>{
-    if (leaseTypeGlobal){
-      return(
+  const cardRoom = useMemo(() => {
+    if (leaseTypeGlobal) {
+      return (
         <RoomCard city={room.city.name}
-                  district={room.district.name}
-                  instantbook={room.instant_book}
-                  roomID={room.id}
-                  roomName={room.about_room.name}
-                  roomNumber={room.bedrooms.number_room}
-                  roomType={room.accommodation_type_txt}
-                  roomImage={room.avatar.images[0].name}
-                  price_day={room.price_display}
-                  isHomepage={true} />
+          district={room.district.name}
+          instantbook={room.instant_book}
+          roomID={room.id}
+          roomName={room.about_room.name}
+          roomNumber={room.bedrooms.number_room}
+          roomType={room.accommodation_type_txt}
+          roomImage={room.avatar.images[0].name}
+          price_day={room.price_display}
+          isHomepage={true} />
       )
     } else {
-      return(
+      return (
         <RoomCard city={room.city.data.name}
-                  district={room.district.data.name}
-                  instantbook={room.instant_book}
-                  roomID={room.id}
-                  roomName={room.details.data[0].name}
-                  roomNumber={room.number_room}
-                  roomType={room.room_type_txt}
-                  roomImage={room.media.data[0].image}
-                  price_day={room.price_day}
-                  price_hour={room.price_hour}
-                  total_review={room.total_review}
-                  avg_rating={room.avg_rating}
-                  isHomepage={true} />
+          district={room.district.data.name}
+          instantbook={room.instant_book}
+          roomID={room.id}
+          roomName={room.details ? room.details.data[0].name : room.room_name}
+          roomNumber={room.number_room}
+          roomType={room.room_type_txt}
+          roomImage={room.media ? room.media.data[0].image : avatarImg}
+          price_day={room.price_day}
+          price_hour={room.price_hour}
+          total_review={room.total_review}
+          avg_rating={room.avg_rating}
+          isHomepage={true} />
       )
     }
-  },[leaseTypeGlobal]);
+  }, [leaseTypeGlobal]);
 
   // useEffect(() => {
   // }, [leaseTypeGlobal]);
