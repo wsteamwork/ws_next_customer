@@ -87,6 +87,28 @@
       -webkit-animation: fadein 0.5s ease-in-out;
       animation: 500ms ease-in-out 0ms 1 normal none running fadein;
     }
+    .imgSizeInMap{
+      position: relative;
+      object-fit: cover;
+      height: 180px;
+      vertical-align: middle;
+      border-radius: 16px 16px 0 0;
+      width: 100%;
+      @include xs {
+        height: 200px;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      -webkit-animation: fadein 0.5s ease-in-out;
+      animation: 500ms ease-in-out 0ms 1 normal none running fadein;
+    }
+
   }
 
   .boxSave {
