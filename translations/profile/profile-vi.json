@@ -1,5 +1,11 @@
 {
     "userProfile": "Thông tin người dùng",
+    "account": {
+        "title": "Xác thực tài khoản",
+        "email": "Địa chỉ Email",
+        "phoneNumber": "Số điện thoại",
+        "identity": "ID"
+    },
     "listRooms": "Danh sách phòng",
     "notifications": "Thông báo",
     "waitConf": "Chờ xác nhận",
