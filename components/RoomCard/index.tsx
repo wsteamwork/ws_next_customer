@@ -1,4 +1,4 @@
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { cleanAccents, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
@@ -10,32 +10,58 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC, Fragment } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     icon: {
       fontSize: '1.2rem !important',
-      paddingRight: 5
+      paddingRight: 5,
     }
   })
 );
 
 interface Iprops {
-  room: RoomIndexRes;
   isHomepage: boolean;
   showIcon?: boolean;
   showBedRoom?: boolean;
   showAddress?: boolean;
   isFormatPrice?: boolean;
+  roomID: number;
+  roomName: string;
+  city: string;
+  district: string;
+  roomImage: string;
+  roomType: string;
+  instantbook: number;
+  roomNumber: number;
+  price_day: number;
+  total_review?: number;
+  price_hour?: number;
+  avg_rating?: number;
 }
 
 const RoomCard: FC<Iprops> = (props) => {
-  const { room, isHomepage, showIcon, showBedRoom, showAddress, isFormatPrice } = props;
+  const { isHomepage, showIcon, showBedRoom, showAddress, isFormatPrice,
+    roomID,
+    roomName,
+    city,
+    district,
+    roomImage,
+    roomType,
+    instantbook,
+    roomNumber,
+    price_day,
+    total_review,
+    price_hour,
+    avg_rating, } = props;
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
-  const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  const avatarImg = !!roomImage ? IMAGE_STORAGE_SM + roomImage : './static/images/westay-avatar.jpg';
+  const linkRoom = leaseTypeGlobal ? `/long-term-room/${roomID}` : `/room/${roomID}`;
   return (
     <Fragment>
       <Grid className="roomCard">
@@ -43,7 +69,7 @@ const RoomCard: FC<Iprops> = (props) => {
           <Grid className="mediaContainer">
             <Grid className="backContainer">
               <Grid className="frontContainer">
-                <Link href={`/room/${room.id}`} target="_blank">
+                <Link href={linkRoom} target="_blank">
                   <Grid className="mediaWrapper">
                     <img
                       src={`${avatarImg}`}
@@ -56,18 +82,18 @@ const RoomCard: FC<Iprops> = (props) => {
             </Grid>
           </Grid>
           <Grid className="infoContainer">
-            <Link href={`/room/${room.id}`} target="_blank" className="infoLink">
+            <Link href={linkRoom} target="_blank" className="infoLink">
               <Grid className="info">
                 <Typography variant="subtitle1" className="roomCard__type">
                   {showIcon && (
-                    <FontAwesomeIcon className={classes.icon} icon={faHome}></FontAwesomeIcon>
+                    <FontAwesomeIcon className={classes.icon} icon={faHome} />
                   )}
-                  {room.room_type_txt}
-                  {showAddress && <span> &#8226; {cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}</span>}
-                  {showBedRoom && <span> &#8226; {room.number_room} {t('room:rooms')}</span>}
+                  {roomType}
+                  {showAddress && <span> &#8226; {city}</span>}
+                  {showBedRoom && <span> &#8226; {roomNumber} {t('room:rooms')}</span>}
                 </Typography>
                 <Typography className="roomCard__name" variant="h1">
-                  {room.instant_book === 1 && (
+                  {instantbook === 1 && (
                     <div className="iconWrapper">
                       <Tooltip
                         classes={{ tooltip: 'tooltip' }}
@@ -77,23 +103,23 @@ const RoomCard: FC<Iprops> = (props) => {
                       </Tooltip>
                     </div>
                   )}
-                  <span>{room.details ? room.details.data[0].name : room.room_name}</span>
+                  <span>{roomName}</span>
                 </Typography>
                 {!showAddress && (
                   <Typography className="roomCard__address" variant="h1">
-                    <span>{cookies.get('initLanguage') == 'en' ? cleanAccents(room.district.data.name) : room.district.data.name}</span>
-                    <span>&#44;{cookies.get('initLanguage') == 'en' ? cleanAccents(room.city.data.name) : room.city.data.name}</span>
+                    <span>{cookies.get('initLanguage') == 'en' ? cleanAccents(district) : district}</span>
+                    <span>&#44;{cookies.get('initLanguage') == 'en' ? cleanAccents(city) : city}</span>
                   </Typography>
                 )}
 
                 <Grid className="price">
-                  {isFormatPrice ? formatPrice(room.price_day) : numeral(room.price_day).format('0,0')}đ/{t('room:night')}
-                  {!isHomepage && room.price_hour > 0 ? (
+                  {isFormatPrice ? formatPrice(price_day) : numeral(price_day).format('0,0')}đ/{t('room:night')}
+                  {!isHomepage && price_hour > 0 ? (
                     <Typography className="hourPrice">
                       &#10072;{' '}
-                      {room.price_hour && (
+                      {price_hour && (
                         <span>
-                          {isFormatPrice ? formatPrice(room.price_hour) : numeral(room.price_hour).format('0,0')}{t('shared:hourPrice')}
+                          {isFormatPrice ? formatPrice(price_hour) : numeral(price_hour).format('0,0')}{t('shared:hourPrice')}
                         </span>
                       )}
                     </Typography>
@@ -102,12 +128,12 @@ const RoomCard: FC<Iprops> = (props) => {
                     )}
                 </Grid>
 
-                {room.total_review > 3 ? (
+                {total_review > 3 ? (
                   <Grid className="review">
                     <StarIcon className="starIcon" />
-                    <Typography className="rating text">{`${room.avg_rating}`}</Typography>
+                    <Typography className="rating text">{`${avg_rating}`}</Typography>
                     <Typography variant="subtitle1" className="totalReview text">{` (${
-                      room.total_review
+                      total_review
                       } ${t('home:review')})`}</Typography>
                   </Grid>
                 ) : (

@@ -25,6 +25,11 @@ interface Iprops<T> extends Partial<SwiperOptions> {
   md?: any;
   lg?: any;
   xl?: any;
+  xsMap?: any;
+  smMap?: any;
+  mdMap?: any;
+  lgMap?: any;
+  xlMap?: any;
 }
 
 const useStyles = makeStyles<Theme, any>((theme: Theme) =>
@@ -50,7 +55,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     usingInMap,
     hoverAction,
     customClass = 'listRoomContainer',
-    xs, sm, md, lg, xl,
+    xs, sm, md, lg, xl,xsMap, smMap, mdMap, lgMap, xlMap,
     ...propsSwiper
   } = props;
   const classes = useStyles({});
@@ -94,6 +99,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     () =>
       _.map(roomData, (room, index) => (
         <Grid
+          xs={xsMap} sm={smMap} md={mdMap} lg={lgMap} xl={xlMap}
           item
           id={`room-${room.id}`}
           key={room.id}

@@ -41,7 +41,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
 
   const renderRooms = (room) => (
     <LazyLoad>
-      <LTRoomCardListing room={room} />
+      <LTRoomCardListing room={room} usingInMap={usingInMap}/>
     </LazyLoad>
   );
 
@@ -77,6 +77,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
             usingInMap={usingInMap}
             hoverAction={hoverAction}
             xs={12} sm={6} md={4} lg={3} xl={3}
+            xsMap={12} smMap={6}
           />
           <Pagination
             className='rooms-pagination'

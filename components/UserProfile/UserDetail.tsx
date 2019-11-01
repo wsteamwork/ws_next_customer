@@ -41,7 +41,19 @@ const UserDetail: FC = (props) => {
     return array;
   }, [userRooms]);
 
-  const renderRoom = (room) => <RoomCard room={room} isHomepage={true} />;
+  const renderRoom = (room) => <RoomCard city={room.city.data.name}
+                                         district={room.district.data.name}
+                                         instantbook={room.instant_book}
+                                         roomID={room.id}
+                                         roomName={room.room.details.data[0].name}
+                                         roomNumber={room.number_room}
+                                         roomType={room.room_type_txt}
+                                         roomImage={room.media.data[0].image}
+                                         price_day={room.price_day}
+                                         price_hour={room.price_hour}
+                                         total_review={room.total_review}
+                                         avg_rating={room.avg_rating}
+                                         isHomepage={true} />;
 
   return (
     <Grid container className={'userDetail'}>
@@ -76,7 +88,7 @@ const UserDetail: FC = (props) => {
         slidesPerView={userRooms.length < 2 ? 1 : 2}
         usingSlider={true}
         title={t('user:accommodationUpper')}
-        render={renderRoom}></ListRoom>
+        render={renderRoom}/>
 
       {totalReview !== 0 && (
         <Fragment>
