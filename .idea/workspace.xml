@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ListRoom/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ListRoom/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRecommend/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRecommend/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RoomCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RoomCard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/Map/MapMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/Map/MapMarker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/UserProfile/UserDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/UserProfile/UserDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss" afterDir="false" />
-    </list>
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -31,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+            <state relative-caret-position="368">
+              <caret line="87" column="45" lean-forward="true" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -406,7 +391,7 @@
       <workItem from="1572423725350" duration="8472000" />
       <workItem from="1572448627485" duration="450000" />
       <workItem from="1572510964519" duration="6991000" />
-      <workItem from="1572572914246" duration="10515000" />
+      <workItem from="1572572914246" duration="10802000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -541,17 +526,24 @@
       <option name="project" value="LOCAL" />
       <updated>1572448720010</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="map long term final">
+      <created>1572585067660</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1572585067660</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1300120000" />
+    <option name="totallyTimeSpent" value="1300407000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22441365" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22441365" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -566,7 +558,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3277592" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50479746" side_tool="true" weight="0.12263099" />
-      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49520257" visible="true" weight="0.17168339" />
+      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49520257" visible="true" weight="0.17168339" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32884398" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -636,7 +628,8 @@
     <MESSAGE value="Buoc 3 - Gia dich vu" />
     <MESSAGE value="giao dien tab trang chu" />
     <MESSAGE value="map long term demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="map long term demo" />
+    <MESSAGE value="map long term final" />
+    <option name="LAST_COMMIT_MESSAGE" value="map long term final" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/components/Rooms/SearchMobile/index.tsx">
@@ -1031,8 +1024,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+        <state relative-caret-position="368">
+          <caret line="87" column="45" lean-forward="true" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
         </state>
       </provider>
     </entry>
