@@ -91,7 +91,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
         query: pushQueryST
       });
     }
-  }, [leaseTypeGlobal]);
+  }, [leaseType]);
 
 
   return (
