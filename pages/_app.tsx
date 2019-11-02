@@ -3,6 +3,7 @@ import App, { Container, AppProps, AppContext } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import '@/styles/index.scss';
+import '@/styles/font.css';
 import 'tippy.js/themes/light-border.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProviderGlobal from '@/utils/ProviderGlobal';
@@ -12,6 +13,7 @@ import withRedux, { NextJSContext } from 'next-redux-wrapper';
 import { makeStore, windowExist } from '@/store/Redux';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
+// import ''
 config.autoAddCss = false;
 
 interface NextContextApp extends NextJSContext, AppContext { }

@@ -22,24 +22,25 @@ const Home: NextPage = () => {
     (state) => state.roomHomepage.roomsHot
   );
   const renderRoom = (room) => <RoomCard city={room.city.data.name}
-                                         district={room.district.data.name}
-                                         instantbook={room.instant_book}
-                                         roomID={room.id}
-                                         roomName={room.room_name}
-                                         roomNumber={room.number_room}
-                                         roomType={room.room_type_txt}
-                                         roomImage={room.avatar_image}
-                                         price_day={room.price_day}
-                                         price_hour={room.price_hour}
-                                         total_review={room.total_review}
-                                         avg_rating={room.avg_rating}
-                                         isHomepage={true} />;
+    district={room.district.data.name}
+    instantbook={room.instant_book}
+    roomID={room.id}
+    roomName={room.room_name}
+    roomNumber={room.number_room}
+    roomType={room.room_type_txt}
+    roomImage={room.avatar_image}
+    price_day={room.price_day}
+    price_hour={room.price_hour}
+    total_review={room.total_review}
+    avg_rating={room.avg_rating}
+    isHomepage={true} />;
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   // console.log(width);
   return (
     <Fragment>
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"

@@ -43,6 +43,7 @@ const Book: NextPage = (props) => {
     <Fragment>
       {!!room && !!dataCalculate && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`Đặt phòng - ${room.details.data[0].name} ngay`}
           description={`Đặt phòng - ${room.details.data[0].name} ngay. Westay - Kênh đặt phòng Homestay trực tuyến`}

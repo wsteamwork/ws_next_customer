@@ -17,6 +17,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
   return (
     <Grid className="termsAndConditions">
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"

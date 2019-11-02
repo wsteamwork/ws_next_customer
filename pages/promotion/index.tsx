@@ -17,6 +17,7 @@ const Promotion: NextPage = () => {
     <Fragment>
       {!!promotion && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`${promotion.name} | Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay`}
           description={`${promotion.name} | Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay`}

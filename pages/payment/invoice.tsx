@@ -31,6 +31,7 @@ const Invoice: NextPage = () => {
     <Fragment>
       {!!room && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`Thanh toán booking của phòng ${room.details.data[0].name}`}
           description={`Thanh toán booking của phòng ${room.details.data[0].name}`}

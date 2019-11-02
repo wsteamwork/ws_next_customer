@@ -54,6 +54,7 @@ const LongtermRoom: NextPage = () => {
     <Fragment>
       {!!ltroom && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng dài hạn trực tuyến"
           title={`${ltroom.about_room.name} | Westay - Đặt phòng dài hạn trực tuyến`}
           description={`${ltroom.accommodation_type_txt} ${

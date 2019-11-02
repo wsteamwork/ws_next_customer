@@ -28,6 +28,7 @@ const Reviews: NextPage = () => {
     <Fragment>
       {!!review && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename={`Westay - Đặt phòng homestay trực tuyến`}
           title={`Review phòng ${review.name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`Review phòng ${review.name} | Westay - Đặt phòng homestay trực tuyến`}

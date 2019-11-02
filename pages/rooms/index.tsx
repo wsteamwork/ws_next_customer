@@ -34,6 +34,7 @@ const Rooms: NextPage = (props) => {
   return (
     <Fragment>
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"

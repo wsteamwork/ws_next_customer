@@ -25,6 +25,7 @@ const LongtermRooms: NextPage = () => {
   return (
     <Fragment>
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Thuê phòng trực tuyến"
         title="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         description="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"

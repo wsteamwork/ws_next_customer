@@ -29,6 +29,7 @@ const BookingCancel: NextPage = () => {
     <Fragment>
       {!!bookingById && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename={`Westay - Đặt phòng homestay trực tuyến`}
           title={`Hủy phòng ${bookingById.room.data.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`Hủy phòng ${bookingById.room.data.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}

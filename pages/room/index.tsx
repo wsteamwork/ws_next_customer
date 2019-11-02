@@ -49,6 +49,7 @@ const Room: NextPage = () => {
     <Fragment>
       {!!room && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`${room.details.data[0].name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`${room.room_type_txt} ${

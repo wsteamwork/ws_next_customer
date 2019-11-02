@@ -22,7 +22,7 @@ import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import Cookies from 'universal-cookie';
-
+import LazyLoad from 'react-lazyload'
 
 interface Iprops {
   classes?: any;
@@ -103,11 +103,13 @@ const RoomCardListing: FC<Iprops> = (props) => {
     <Paper elevation={0} className="roomCardListing">
       <Grid container className="roomCardListing__wrapper" spacing={0}>
         <Grid item xs={12} sm={4} md={4} lg={4} className="boxImg">
-          <img
-            src={`${avatarImg}`}
-            className="imgSize swiper-lazy"
-            alt={``}
-          />
+          <LazyLoad>
+            <img
+              src={`${avatarImg}`}
+              className="imgSize swiper-lazy"
+              alt={``}
+            />
+          </LazyLoad>
           {/* <Swiper {...settingSliderRoomCard}>
             {room.media.data.length > 0 ? (
               _.map(room.media.data, (o) => (
