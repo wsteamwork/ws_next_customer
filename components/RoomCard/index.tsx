@@ -10,9 +10,9 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC, Fragment } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
-
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     icon: {
@@ -55,7 +55,8 @@ const RoomCard: FC<Iprops> = (props) => {
     price_day,
     total_review,
     price_hour,
-    avg_rating, } = props;
+    avg_rating
+  } = props;
   const { t }: UseTranslationResponse = useTranslation();
   const classes = useStyles(props);
   const cookies = new Cookies();
@@ -71,11 +72,13 @@ const RoomCard: FC<Iprops> = (props) => {
               <Grid className="frontContainer">
                 <Link href={linkRoom} target="_blank">
                   <Grid className="mediaWrapper">
-                    <img
-                      src={`${avatarImg}`}
-                      className="media"
-                      alt={``}
-                    />
+                    <LazyLoad>
+                      <img
+                        src={`${avatarImg}`}
+                        className="media"
+                        alt={``}
+                      />
+                    </LazyLoad>
                   </Grid>
                 </Link>
               </Grid>

@@ -1,16 +1,13 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-// import { GlobalContext } from '@/store/Context/GlobalContext';
 import { Grid, Typography } from '@material-ui/core';
 import React, { FC, Fragment } from 'react';
-// import BookingList from './BookingList';
 import { useTranslation } from 'react-i18next';
 import 'react-phone-number-input/style.css';
 import { useSelector } from 'react-redux';
 import VerifyEmail from './VerifyEmail';
 import VerifyID from './VerifyID';
 import VerifyPhone from './VerifyPhone';
-
 
 interface VerifySection {
   render?: any;

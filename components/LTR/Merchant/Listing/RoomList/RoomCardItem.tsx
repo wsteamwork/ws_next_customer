@@ -380,7 +380,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                       </Grid>
                       <Grid className={classes.price}>
                         <Grid container item xs={12} sm={12} lg={10} spacing={1}>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -394,7 +394,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           </Grid>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -412,7 +412,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </Grid>
                           </Grid>
 
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -426,7 +426,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           </Grid>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
