@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import PriceRangeMobile from './PriceRangeMobile/index';
 import RoomTypeMobile from './RoomTypeMobile/index';
 import AmentitesMobile from './AmentitesMobile/index';
+import DistrictsMobile from './DistrictsMobile/index';
 import BookingTypeMobile from './BookingTypeMobile/index';
 import InstantBookMobile from './InstantBookMobile/index';
 import DialogActions from '@material-ui/core/DialogActions/DialogActions';
@@ -71,11 +72,12 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const [open, setOpen] = useState(false);
-  const leaseTypeGlobal= useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
-  const leaseTypePathName= useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
 
   const queryTypeRoom = leaseTypeGlobal ? Router.query.accommodation_type : Router.query.type_room;
   const queryAmenities = leaseTypeGlobal ? Router.query.comfort_lists : Router.query.amenities;
+  const queryDistricts = leaseTypeGlobal ? Router.query.district_id : Router.query.districts;
 
   const convertParams = (params: string) => {
     if (params) {
@@ -86,18 +88,24 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   };
   const roomTypeInit = convertParams(queryTypeRoom as string);
   const amenitiesInit = convertParams(queryAmenities as string);
+  const districtInit = convertParams(queryDistricts as string);
   const [dataRoomType, setDataRoomType] = useState<number[]>(roomTypeInit);
   const [dataAmentites, setDataAmentites] = useState<number[]>(amenitiesInit);
+  const [dataDistricts, setDataDistricts] = useState<number[]>(districtInit);
   const filterRoomType = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataRoomType });
   };
   const filterAmentites = () => {
     dispatch({ type: 'setAmenitiesFilter', amenities: dataAmentites });
   };
+  const filterDistricts = () => {
+    dispatch({ type: 'setDistrictsFilter', districts: dataDistricts });
+  };
 
   const query = {
     type_room: dataRoomType.join(','),
     amenities: dataAmentites.join(','),
+    districts: dataDistricts,
     rent_type: booking_type,
     instant_book: instant_book,
     price_day_from: price_day_from,
@@ -107,6 +115,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const queryLT = {
     accommodation_type: dataRoomType.join(','),
     comfort_lists: dataAmentites.join(','),
+    district_id: dataDistricts,
     instant_book: instant_book,
     min_price: price_day_from,
     max_price: price_day_to
@@ -116,6 +125,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     setIndex(TAB_LIST);
     filterRoomType();
     filterAmentites();
+    filterDistricts();
 
     Router.push({
       pathname: leaseTypePathName,
@@ -171,6 +181,16 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
             <RoomTypeMobile
               dataClick={dataRoomType}
               setDataClick={setDataRoomType}
+              setOpen={setOpen}
+            />
+          </Grid>
+          <Grid item xs={12} className={classes.sortMargin}>
+            <Typography variant="subtitle2" className={classes.title}>
+              {t('rooms:filterRooms:districtsFilter')}
+            </Typography>
+            <DistrictsMobile
+              dataClick={dataDistricts}
+              setDataClick={setDataDistricts}
               setOpen={setOpen}
             />
           </Grid>

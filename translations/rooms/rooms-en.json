@@ -5,6 +5,7 @@
         "fastBooking": "Instant Book",
         "fastPayment": "Direct payment is possible",
         "filterRooms": "Filter",
+        "districtsFilter": "Districts",
         "bookByHour": "Book by hour",
         "descBookByHour": "You can book by hour, at least 4 hours"
     },
@@ -47,6 +48,7 @@
         "instantBook": "Instant book",
         "priceRange": "Price range",
         "roomsType": "Type of accommodation",
+        "districtsFilter": "Districts",
         "apply": "Apply"
     },
     "notFoundTitle": "Sorry, there are no available properties on this date.",
