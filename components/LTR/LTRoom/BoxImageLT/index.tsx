@@ -2,12 +2,12 @@ import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, MouseEvent, useMemo, useState } from 'react';
+import React, { FC, Fragment, MouseEvent, useMemo, useState, useContext } from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import '/styles/pages/LTR/room/index.scss';
 // import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
-
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any,
   livingrooms: ImagesRes,
@@ -31,11 +31,23 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     boxContainer: {
       height: '55vh',
       margin: '64px 0 48px',
-      [theme.breakpoints.down('xs')]: {
-        height: '40vh',
+      [theme.breakpoints.down('sm')]: {
+        height: '35vh',
         margin: '20px 0 48px',
       }
     },
+    txtName: {
+      fontSize: '1.5rem'
+    },
+    txtDes: {
+      overflow: 'hidden',
+      display: '-webkit-box',
+      maxHeight: '52px',
+      height: '52px',
+      WebkitLineClamp: 2,
+      textOverflow: 'ellipsis',
+      WebkitBoxOrient: 'vertical'
+    }
   })
 );
 
@@ -43,16 +55,17 @@ const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { livingrooms, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
+  const { width } = useContext(GlobalContext);
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpenFullImage(!openFullImage);
   };
   let arrImage: IArrayImage[] = [
-    // {
-    //   imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
-    //   title: '',
-    //   subTitle: cover_photo.images[0].caption
-    // }
+    {
+      imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
+      title: '',
+      subTitle: cover_photo.images[0].caption
+    }
   ];
 
   const funcPushImage = useMemo(() => {
@@ -103,21 +116,31 @@ const BoxImageLT: FC<IProps> = (props) => {
   return (
     <Fragment>
       <Grid container spacing={1} className={classes.boxContainer}>
-        <Slider className="slider-wrapper" autoplay={3000}>
-          {arrImage.map((item, i) => (
+        {
+          width === 'sm' || width === 'xs' ? (
             <div
-              key={i}
               className="slider-content"
-              style={{ background: `url('${item.imgURL}') no-repeat center center` }}
+              style={{ width: '100%', background: `url('${IMAGE_STORAGE_LG + cover_photo.images[0].name}') no-repeat center center` }}
             >
-              {/* <div className="inner"> */}
-              {/* <h1 className={classes.txtName}>{item.title}</h1> */}
-              {/* <p>{item.subTitle}</p> */}
-              {/*<button>{item.button}</button>*/}
-              {/* </div> */}
             </div>
-          ))}
-        </Slider>
+          ) : (
+              <Slider className="slider-wrapper" autoplay={3000}>
+                {arrImage.map((item, i) => (
+                  <div
+                    key={item.title}
+                    className="slider-content"
+                    style={{ background: `url('${item.imgURL}') no-repeat center center` }}
+                  >
+                    <div className="inner">
+                      <h1 className={classes.txtName}>{item.title}</h1>
+                      <p className={classes.txtDes}>{item.subTitle}</p>
+                      {/* <button>{item.button}</button> */}
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+            )
+        }
       </Grid>
       {/* <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}
         livingrooms={livingrooms}

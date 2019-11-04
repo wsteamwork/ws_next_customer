@@ -1,5 +1,5 @@
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { IMAGE_STORAGE_LG, IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { ButtonBase, Grid, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
@@ -132,7 +132,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         {t('longtermroom:discoverSubTitle')}
       </Typography>
 
-      <Grid container spacing={2} alignItems='baseline'>
+      <Grid container spacing={2} alignItems='center'>
         {livingrooms && livingrooms.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>

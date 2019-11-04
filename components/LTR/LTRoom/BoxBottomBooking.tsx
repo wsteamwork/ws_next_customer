@@ -32,7 +32,7 @@ const BoxBottomBooking: FC<IProps> = (props) => {
                   <Grid item xs>
                     <div>
                       <Typography className={'price'}>
-                        {numeral(priceBasic).format('0,0')} Vnd
+                        {numeral(priceBasic).format('0,0')} {t('longtermroom:currency')}
                       </Typography>
                       <Typography variant="subtitle2">{term}</Typography>
                     </div>

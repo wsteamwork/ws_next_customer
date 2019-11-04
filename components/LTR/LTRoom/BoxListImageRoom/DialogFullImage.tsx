@@ -60,16 +60,21 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     images: {
       width: '100%',
       borderRadius: 4,
-      height: 320,
+      [theme.breakpoints.up('md')]: {
+        height: 320,
+      },
       maxHeight: 320,
       objectFit: 'cover'
     },
     bigImage: {
       width: '100%',
       borderRadius: 4,
-      height: 500,
       maxHeight: 500,
-      objectFit: 'cover'
+      height: 'auto',
+      objectFit: 'cover',
+      [theme.breakpoints.up('md')]: {
+        height: 500,
+      },
     },
     listSection: {
       backgroundColor: '#fff',
