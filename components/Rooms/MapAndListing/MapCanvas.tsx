@@ -10,6 +10,7 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import MapMarker from '../Map/MapMarker';
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { min } from 'moment';
 
 interface IProps {
   rooms: any;
@@ -72,6 +73,13 @@ const MapCanvas: FC<IProps> = (props) => {
       <GoogleMap
         bootstrapURLKeys={{
           key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
+        }}
+        options={() => {
+          return {
+            minZoom: 3,
+            clickableIcons: false,
+            zoomControl: false
+          }
         }}
         defaultZoom={14}
         onChange={onChangeMap}
