@@ -1,7 +1,6 @@
 import React, {
   Fragment,
   useContext,
-  useMemo,
   useState,
   useEffect, FC
 } from 'react';
@@ -11,7 +10,6 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import MapMarker from '../Map/MapMarker';
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface IProps {
   rooms: any;
@@ -29,9 +27,6 @@ const MapCanvas: FC<IProps> = (props) => {
     lat: 0,
     lng: 0
   });
-
-  const room = useMemo(() => rooms.length && rooms[0], [rooms]);
-  // console.log(room)
 
   const onChangeMap = ({ bounds }: ChangeEventValue) => {
     if (readyToLoad) {
