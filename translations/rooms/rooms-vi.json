@@ -5,6 +5,7 @@
         "fastBooking": "Đặt phòng nhanh",
         "fastPayment": "Có thể thanh toán trực tiếp",
         "filterRooms": "Bộ lọc",
+        "districtsFilter": "Quận, Huyện",
         "bookByHour": "Theo giờ",
         "descBookByHour": "Bạn có thể đặt phòng theo giờ, tối thiểu là 4h"
     },
@@ -47,6 +48,7 @@
         "instantBook": "Đặt phòng nhanh",
         "priceRange": "Khoảng giá",
         "roomsType": "Loại phòng",
+        "districtsFilter": "Quận/Huyện",
         "apply": "Lọc kết quả",
         "readMore": "Mở rộng",
         "readLess" : "Thu gọn"
