@@ -58,7 +58,7 @@ const Room: NextPage = () => {
             room.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+          ogImage={`${IMAGE_STORAGE_LG}${room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image}`}
         />
       )}
 

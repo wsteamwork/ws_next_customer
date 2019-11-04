@@ -1,4 +1,3 @@
-import SvgCustom from '@/components/Custom/SvgCustom';
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation.jsx';
 // import { windowExist } from '@/store/Redux';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
@@ -16,13 +15,12 @@ import Paper from '@material-ui/core/Paper/Paper';
 import { ThemeStyle } from '@material-ui/core/styles/createTypography';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import StarIcon from '@material-ui/icons/StarRounded';
-import _ from 'lodash';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import LazyLoad from 'react-lazyload';
 import Cookies from 'universal-cookie';
-import LazyLoad from 'react-lazyload'
 
 interface Iprops {
   classes?: any;
@@ -96,7 +94,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
 
 
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
-  const totalComfort = room.comforts.data.length - 4;
+  // const totalComfort = room.comforts.data.length - 4;
   // console.log(room)
   const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
   return (
@@ -172,43 +170,43 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         ''
                       )}
                   </Grid>
-                  <Grid>
-                    <ul className="ul">
-                      {_.filter(room.comforts.data, (o, i) => {
-                        return (
-                          o.id === 20 || // air conditioner
-                          o.id === 9 || //wifi
-                          o.id === 27 || //swimming
-                          o.id === 10 //television
-                        );
-                      })
-                        .sort((a, b) => a.id - b.id)
-                        .map((o, i) => (
-                          <Tooltip
-                            key={i}
-                            title={o.details.data[0].name}
-                            placement="bottom"
-                            classes={{ tooltip: 'tooltip' }}>
-                            <li key={o.id} className="list">
-                              <SvgCustom icon={o.icon} />
-                            </li>
-                          </Tooltip>
-                        ))}
-                      {totalComfort > 0 ? (
-                        <Tooltip
-                          enterTouchDelay={300}
-                          classes={{ tooltip: 'tooltip' }}
-                          title={`${totalComfort} tiện nghi phòng khác`}
-                          placement="bottom">
-                          <li>
-                            <SvgCustom borderClass="borderBlue" text={`+${totalComfort}`} />
-                          </li>
-                        </Tooltip>
-                      ) : (
-                          ''
-                        )}
-                    </ul>
-                  </Grid>
+                  {/*<Grid>*/}
+                  {/*  <ul className="ul">*/}
+                  {/*    {_.filter(room.comforts.data, (o, i) => {*/}
+                  {/*      return (*/}
+                  {/*        o.id === 20 || // air conditioner*/}
+                  {/*        o.id === 9 || //wifi*/}
+                  {/*        o.id === 27 || //swimming*/}
+                  {/*        o.id === 10 //television*/}
+                  {/*      );*/}
+                  {/*    })*/}
+                  {/*      .sort((a, b) => a.id - b.id)*/}
+                  {/*      .map((o, i) => (*/}
+                  {/*        <Tooltip*/}
+                  {/*          key={i}*/}
+                  {/*          title={o.details.data[0].name}*/}
+                  {/*          placement="bottom"*/}
+                  {/*          classes={{ tooltip: 'tooltip' }}>*/}
+                  {/*          <li key={o.id} className="list">*/}
+                  {/*            <SvgCustom icon={o.icon} />*/}
+                  {/*          </li>*/}
+                  {/*        </Tooltip>*/}
+                  {/*      ))}*/}
+                  {/*    {totalComfort > 0 ? (*/}
+                  {/*      <Tooltip*/}
+                  {/*        enterTouchDelay={300}*/}
+                  {/*        classes={{ tooltip: 'tooltip' }}*/}
+                  {/*        title={`${totalComfort} tiện nghi phòng khác`}*/}
+                  {/*        placement="bottom">*/}
+                  {/*        <li>*/}
+                  {/*          <SvgCustom borderClass="borderBlue" text={`+${totalComfort}`} />*/}
+                  {/*        </li>*/}
+                  {/*      </Tooltip>*/}
+                  {/*    ) : (*/}
+                  {/*        ''*/}
+                  {/*      )}*/}
+                  {/*  </ul>*/}
+                  {/*</Grid>*/}
                 </Grid>
                 {room!.total_review > 3 ? (
                   <Grid className="boxRating">

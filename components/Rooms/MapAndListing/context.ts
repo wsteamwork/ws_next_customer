@@ -11,7 +11,7 @@ interface ReturnUseRefresh {
 export const useRefreshListing = (): ReturnUseRefresh => {
   const { router } = useContext(GlobalContext);
   const { state: stateRoomIndex, dispatch: dispatchIndexRoom } = useContext(RoomIndexContext);
-  const { isMapOpen, coords, meta } = stateRoomIndex;
+  const { isMapOpen, coords } = stateRoomIndex;
   const leaseTypeGlobal = useSelector<ReducersList, 0|1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const getData = async () => {
@@ -19,9 +19,9 @@ export const useRefreshListing = (): ReturnUseRefresh => {
 
     try {
       if (leaseTypeGlobal){
-        const res = await getLTRooms(router, coords);
+        const res = await getLTRooms(router,coords);
         dispatchIndexRoom({ type: 'setlongtermRooms', longtermRooms: res.data, meta: res.meta });
-        dispatchIndexRoom({ type: 'setMeta', meta: res.meta });
+        // dispatchIndexRoom({ type: 'setMeta', meta: res.meta });
       } else {
         const res = await getRooms(router, coords);
         dispatchIndexRoom({ type: 'setRooms', rooms: res.data, meta: res.meta });
