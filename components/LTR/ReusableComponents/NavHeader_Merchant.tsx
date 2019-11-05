@@ -11,7 +11,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, MouseEvent, useContext, useState } from 'react';
 import { withCookies } from 'react-cookie';
 import { compose } from "recompose";
-
+import Cookies from 'universal-cookie';
 interface IProps {
   classes?: any,
 }
@@ -76,6 +76,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const NavHeader_Merchant: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const cookies = new Cookies();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
@@ -89,6 +90,13 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
   const openLink = (url: string) => {
     router.push(url);
     setAnchorEl(null);
+  };
+
+  const logoutTrigger = () => {
+    window.location.reload();
+    cookies.remove('_token', {
+      path: '/'
+    });
   };
 
   return (
@@ -108,7 +116,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                 <Grid item>
                   <Grid container spacing={2} alignItems='center' justify='space-around'>
                     <Grid item>
-                      <Button href={'#'} className={classes.btnPolicy}>
+                      <Button onClick={() => openLink('/host/booking-list')} className={classes.btnPolicy}>
                         Danh sách booking
                       </Button>
                     </Grid>
@@ -151,14 +159,14 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                     </Grid>
                     <Grid item>
                       <Tooltip TransitionComponent={Zoom} title='Chính sách và điều khoản'>
-                        <IconButton color='primary' className={classes.IconPolicy} aria-label='Policy'>
+                        <IconButton onClick={() => openLink('/terms-and-conditions')} color='primary' className={classes.IconPolicy} aria-label='Policy'>
                           <PolicyIcon />
                         </IconButton>
                       </Tooltip>
                     </Grid>
                     <Grid item>
                       <Tooltip TransitionComponent={Zoom} title='Đăng xuất'>
-                        <IconButton color='primary' className={classes.IconExit} aria-label='Logout'>
+                        <IconButton onClick={logoutTrigger} color='primary' className={classes.IconExit} aria-label='Logout'>
                           <ExitToAppIcon />
                         </IconButton>
                       </Tooltip>
@@ -166,7 +174,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                     <Grid item>
                       <Tooltip TransitionComponent={Zoom} title='Thông tin cá nhân'>
                         <Avatar alt='Profile' src={'@/../../../static/images/room_demo.jpg'}
-                          className={classes.avatar} onClick={() => alert('Chuyển link')} />
+                          className={classes.avatar} onClick={() => openLink('/profile')} />
                       </Tooltip>
                     </Grid>
                   </Grid>

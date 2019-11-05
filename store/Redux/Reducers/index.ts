@@ -88,6 +88,7 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import { BookingListReducerState, BookingListReducerAction, bookingListReducer } from './LTR/BookingList/bookinglist';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -114,6 +115,7 @@ export type ReducersType = {
   roomlist: Reducer<RoomListReducerState, RoomListReducerAction>;
   listingdetails: Reducer<ListingDetailsReducerState, ListingDetailsReducerAction>;
   updateDetails: Reducer<UpdateDetailsState, UpdateDetailsActions>;
+  bookinglist: Reducer<BookingListReducerState, BookingListReducerAction>;
 };
 
 export type ReducersList = {
@@ -141,6 +143,7 @@ export type ReducersList = {
   roomlist: RoomListReducerState;
   listingdetails: ListingDetailsReducerState;
   updateDetails: UpdateDetailsState;
+  bookinglist: BookingListReducerState;
 };
 
 export type ReducresActions =
@@ -168,7 +171,8 @@ export type ReducresActions =
   | RoomListReducerAction
   | ListingDetailsReducerAction
   | ProcessReducerAction
-  | UpdateDetailsActions;
+  | UpdateDetailsActions
+  | BookingListReducerAction;
 
 const reducers: ReducersType = {
   searchFilter: reducerSearch,
@@ -194,7 +198,8 @@ const reducers: ReducersType = {
   process: processReducer,
   roomlist: roomListReducer,
   listingdetails: listingDetailsReducer,
-  updateDetails: updateDetailsReducer
+  updateDetails: updateDetailsReducer,
+  bookinglist: bookingListReducer
 };
 
 export interface NextContextPage extends NextPageContext {
