@@ -1,61 +1,31 @@
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { updateObject } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  createStyles,
-  Grid,
-  makeStyles,
-  Theme,
-  Typography,
-  Button,
-  Hidden,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  DialogActions,
-  Divider,
-  Snackbar,
-  FormControl,
-  Select,
-  MenuItem,
-  OutlinedInput
-} from '@material-ui/core';
-import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.css';
-import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, {
-  FC,
-  Fragment,
-  useEffect,
-  useState,
-  SyntheticEvent,
-  useMemo,
-  useContext
-} from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { animateScroll as scroll } from 'react-scroll/modules';
-import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
-import { Dispatch } from 'redux';
+import { BookingListReducerAction, getBookingListST } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { Button, createStyles, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, Grid, Hidden, makeStyles, MenuItem, OutlinedInput, Select, Snackbar, Theme, Typography } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {
-  getBookingListST,
-  BookingListReducerAction
-} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 import moment from 'moment';
-import numeral from 'numeral';
-import { axios_merchant } from '@/utils/axiosInstance';
-import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
-import CardTextarea from '../CreateListing/Description/CardTextarea';
 import Router from 'next/router';
-import { updateObject } from '@/store/Context/utility';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import numeral from 'numeral';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.css';
+import localeInfo from 'rc-pagination/lib/locale/vi_VN';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { animateScroll as scroll } from 'react-scroll/modules';
+import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
+import { Dispatch } from 'redux';
+import CardTextarea from '../CreateListing/Description/CardTextarea';
 interface IProps {
   classes?: any;
 }
@@ -346,7 +316,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                     <TableCell className={classes.tableCell}>Phòng</TableCell>
                   </Hidden>
                   <Hidden xsDown>
-                    <TableCell className={classes.tableCell}>Hóa đơn</TableCell>
+                    <TableCell className={classes.tableCell}>Thanh toán</TableCell>
                     <TableCell className={classes.tableCell}>Trạng thái</TableCell>
                   </Hidden>
                 </TableRow>
@@ -356,7 +326,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                   {bookinglist.map((booking, i) => (
                     <TableRow key={i} className={classes.tableRow}>
                       <Hidden smDown>
-                        <TableCell className={classes.tableValue}>#{booking.code}</TableCell>
+                        <TableCell className={classes.tableValue}>#{booking.uuid}</TableCell>
                       </Hidden>
                       <TableCell className={classes.tableValue}>
                         <Grid item xs={12} className={classes.wrapperPaymentXs}>
@@ -401,10 +371,10 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                             {booking.phone}
                           </Typography>
                         ) : (
-                          <Typography variant="subtitle2" className={classes.notPayment}>
-                            Thông tin sẽ được cung cấp sau khi khách hàng thanh toán
+                            <Typography variant="subtitle2" className={classes.notPayment}>
+                              Thông tin sẽ được cung cấp sau khi khách hàng thanh toán
                           </Typography>
-                        )}
+                          )}
                         <Hidden xsDown>
                           {booking.payment_status == 3 && (
                             <Typography variant="subtitle2" className={classes.valueNormal}>
@@ -412,7 +382,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                             </Typography>
                           )}
                           <Typography variant="subtitle2" className={classes.valueNormal}>
-                            Booked: {booking.created_at.substring(11, 16)} -{' '}
+                            Ngày tạo: {booking.created_at.substring(11, 16)} -{' '}
                             {moment(booking.created_at).format('DD/MM/YYYY')}
                           </Typography>
                         </Hidden>
@@ -480,10 +450,10 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                               {booking.checkout.substring(11, 16)}
                             </Typography>
                           ) : (
-                            <Typography variant="subtitle2">
-                              {moment(booking.checkin).format('DD/MM/YYYY')}
-                            </Typography>
-                          )}
+                              <Typography variant="subtitle2">
+                                {moment(booking.checkin).format('DD/MM/YYYY')}
+                              </Typography>
+                            )}
                           <Typography variant="subtitle2" className={classes.valueNormal}>
                             {booking.booking_type === 1 ? '' : <span>&#8594;</span>}
                           </Typography>
@@ -494,7 +464,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                       </Hidden>
                       <Hidden xsDown>
                         <TableCell className={classes.tableValue}>
-                          {booking.room.data.details.data[0].name}
+                          <a href={`https://westay.vn/room/${booking.room_id}`} target="_blank">{booking.room_id} - {booking.room.data.details.data[0].name}</a>
                         </TableCell>
                         <TableCell className={classes.tableValue}>
                           <Grid item xs={12} className={classes.wrapperPayment}>
@@ -576,7 +546,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                         aria-describedby="alert-dialog-description">
                         <DialogTitle id="alert-dialog-title">
                           <span className={classes.customerName}>
-                            #{booking.code} - Chi tiết giá đặt phòng
+                            #{booking.uuid} - Chi tiết giá đặt phòng
                           </span>
                         </DialogTitle>
                         <DialogContent>
@@ -641,7 +611,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                         aria-describedby="alert-dialog-description">
                         <DialogTitle id="alert-dialog-title">
                           <span className={classes.customerName}>
-                            #{booking.code} - Thông tin chi tiết hủy đặt phòng
+                            #{booking.uuid} - Thông tin chi tiết hủy đặt phòng
                           </span>
                         </DialogTitle>
                         <DialogContent>
@@ -710,8 +680,8 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                   ))}
                 </TableBody>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Table>
             <Snackbar
               anchorOrigin={{
@@ -739,12 +709,12 @@ const ShortTermBookingList: FC<IProps> = (props) => {
           )}
         </Fragment>
       ) : (
-        <NotFoundGlobal
-          height={300}
-          width={250}
-          content="Danh sách booking hiện tại chưa hiển thị, vui lòng đợi trong giây lát"
-        />
-      ),
+          <NotFoundGlobal
+            height={300}
+            width={250}
+            content="Danh sách booking hiện tại chưa hiển thị, vui lòng đợi trong giây lát"
+          />
+        ),
     [open, openCancel, bookinglist, openSnack, reason, reasonDescription]
   );
 };

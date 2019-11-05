@@ -86,8 +86,24 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
             onClick={() => setOpen(false)}
             href="/profile">
             <Avatar alt='Profile' src={'@/../../../static/images/room_demo.jpg'}
-              className={classes.bigAvatar} onClick={() => alert('Chuyển link')} />
+              className={classes.bigAvatar} />
           </ListItem>
+
+          <ListItem
+            classes={{
+              gutters: classes.listItemGutters
+            }}
+            button
+            onClick={() => setOpen(false)}
+            href="/">
+            <ListItemText
+              primary={t('home:home')}
+              classes={{
+                primary: classes.text
+              }}
+            />
+          </ListItem>
+
           <ListItem
             classes={{
               gutters: classes.listItemGutters
@@ -108,7 +124,7 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
             }}
             button
             onClick={() => setOpen(false)}
-            href="/profile">
+            href="/host/booking-list">
             <ListItemText
               primary={'Danh sách booking'}
               classes={{
@@ -122,7 +138,7 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
             }}
             button
             onClick={() => setOpenItem(!openItem)}
-            href="/profile">
+          >
             <ListItemText
               primary={'Quản lý phòng'}
               classes={{

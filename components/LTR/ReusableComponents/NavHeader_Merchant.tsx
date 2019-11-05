@@ -111,7 +111,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
             <Hidden smDown>
               <Grid container justify='space-between' alignItems='center'>
                 <Grid item>
-                  <Logo href='/host' />
+                  <Logo href="https://westay.vn" />
                 </Grid>
                 <Grid item>
                   <Grid container spacing={2} alignItems='center' justify='space-around'>

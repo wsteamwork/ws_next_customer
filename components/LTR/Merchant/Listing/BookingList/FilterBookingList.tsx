@@ -1,6 +1,4 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Grid, Paper, Typography, makeStyles, Theme, createStyles } from '@material-ui/core';
-import Router from 'next/router';
+import { createStyles, Grid, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
 
 interface IProps {
@@ -14,18 +12,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 const FilterBookingList: FC<IProps> = (props) => {
- const classes = useStyles(props);
-  
+  const classes = useStyles(props);
+
   return (
     <Grid container>
       <Paper className={classes.root}>
-      <Typography variant="h5" component="h3">
-        This is a sheet of paper.
+        <Typography variant="h5" component="h3">
+          This is a sheet of paper.
       </Typography>
-      <Typography component="p">
-        Paper can be used to build surface or other elements for your application.
+        <Typography component="p">
+          Paper can be used to build surface or other elements for your application.
       </Typography>
-    </Paper>
+      </Paper>
     </Grid>
   );
 };
