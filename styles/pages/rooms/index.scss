@@ -39,6 +39,7 @@
 
 .filterBar {
   z-index: 1 !important;
+
   .toolbar {
     padding: 0;
     min-height: 50px;
@@ -102,7 +103,8 @@
 
 .mapRoomListing {
   margin-top: 164px;
-  @include mdDown{
+
+  @include mdDown {
     margin-top: 0px;
   }
 }
@@ -148,15 +150,17 @@
     right: 0 !important;
     height: calc(100vh - 139px);
     width: calc(100% - 840px) !important;
-    @include mdDown{
-       flex: 1;
+
+    @include mdDown {
+      flex: 1;
       width: 100% !important;
       top: 0;
       height: 100vh;
     }
+
     * {
       border-radius: 4px !important;
-      font-family: "Montserrat Alternates", "Quicksand", sans-serif;
+      font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
     }
 
     .arrow_box {
@@ -207,6 +211,7 @@
       border-width: 5px;
       margin-left: -5px;
     }
+
     .arrow_box:before {
       border-color: rgba(221, 221, 221, 0);
       border-top-color: #ddd;

@@ -16,7 +16,7 @@ import React, { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-
+import LazyLoad, { forceCheck } from 'react-lazyload'
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
@@ -37,6 +37,7 @@ const Home: NextPage = () => {
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   // console.log(width);
+  forceCheck();
   return (
     <Fragment>
       <NextHead
@@ -48,18 +49,26 @@ const Home: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
       <GridContainer xs={12}>
-        <SearchHome />
+        <LazyLoad>
+          <SearchHome />
+        </LazyLoad>
         {width === 'lg' || width === 'xl' || width === 'md' ? (
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            <SliderTypeApartment />
-            <MetroGridImage />
-            <ListRoom
-              roomData={roomsHot}
-              usingSlider={true}
-              title={t('home:editorChoice')}
-              render={renderRoom}
-            />
+            <LazyLoad>
+              <SliderTypeApartment />
+            </LazyLoad>
+            <LazyLoad>
+              <MetroGridImage />
+            </LazyLoad>
+            <LazyLoad>
+              <ListRoom
+                roomData={roomsHot}
+                usingSlider={true}
+                title={t('home:editorChoice')}
+                render={renderRoom}
+              />
 
+            </LazyLoad>
           </GridContainer>
         ) : ''}
         {/* <HostBecome /> */}

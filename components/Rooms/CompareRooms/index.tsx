@@ -24,7 +24,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     label: {
       textAlign: 'left',
-      fontWeight: 900,
+      fontWeight: 700,
       marginBottom: theme.spacing(2),
       marginTop: theme.spacing(4)
     },
