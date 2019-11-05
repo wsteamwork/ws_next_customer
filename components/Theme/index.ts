@@ -21,7 +21,8 @@ const options: ThemeOptions = {
     },
     fontWeightRegular: fontWeight.medium,
 
-    fontFamily: 'Montserrat Alternates, Quicksand, sans-serif'
+    fontFamily:
+      '"Circular", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif !important;'
   },
   palette: {
     text: {

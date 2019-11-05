@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, any>((theme: Theme) =>
     },
     title: {
       marginBottom: theme.spacing(3),
-      fontWeight: 900,
+      fontWeight: 700,
       marginTop: theme.spacing(8)
     }
   })
@@ -55,7 +55,7 @@ const ListRoom = <T extends any>(props: Iprops<T>) => {
     usingInMap,
     hoverAction,
     customClass = 'listRoomContainer',
-    xs, sm, md, lg, xl,xsMap, smMap, mdMap, lgMap, xlMap,
+    xs, sm, md, lg, xl, xsMap, smMap, mdMap, lgMap, xlMap,
     ...propsSwiper
   } = props;
   const classes = useStyles({});

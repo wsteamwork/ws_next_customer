@@ -70,7 +70,7 @@ const styles = (theme: Theme) =>
       textTransform: 'capitalize',
       color: 'white',
       borderRadius: 8,
-      fontFamily: 'Montserrat Alternates, Quicksand, sans-serif',
+      fontFamily: '"Circular", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif !important;',
       fontWeight: 600,
       // boxShadow: '0 1px 5px rgba(0, 0, 0, 0.15)',
       marginRight: 16,

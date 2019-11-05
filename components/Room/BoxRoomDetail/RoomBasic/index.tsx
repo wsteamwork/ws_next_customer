@@ -26,7 +26,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     roomName: {
-      fontWeight: 900
+      fontWeight: 700
     },
     roomId: {
       marginTop: '-10px',

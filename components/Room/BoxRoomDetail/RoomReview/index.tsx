@@ -14,7 +14,7 @@ import ReviewItem from '../ReviewItem/index';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900
+      fontWeight: 700
     },
     boxPagination: {
       display: 'flex',

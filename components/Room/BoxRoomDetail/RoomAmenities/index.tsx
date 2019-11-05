@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       margin: '1rem 0 1rem 0'
     },
     icon: {

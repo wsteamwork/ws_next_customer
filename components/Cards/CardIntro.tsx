@@ -105,7 +105,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     title: {
       color: '#fff',
-      fontWeight: 900,
+      fontWeight: 700,
       // fontSize:'1.075rem',
       textShadow: '1px 1px 4px #000000'
     },
