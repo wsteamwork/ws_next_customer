@@ -167,7 +167,7 @@ const UpdateLivingRoomImage: FC<IProps> = (props) => {
               </Button>
               <CardImageCaption
                 label={t('details:images:labelLivingRooms')}
-                subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
+                subLabel="Thêm chú thích cho ảnh"
                 typeUpload={{ type: 'setLivingRoomImage' }}
                 typeImage={7}
                 arrImage={livingrooms.images}

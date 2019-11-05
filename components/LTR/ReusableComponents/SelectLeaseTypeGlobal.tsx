@@ -1,6 +1,6 @@
 import React, { Fragment, FC, useState, ChangeEvent, useEffect } from 'react';
 import { makeStyles, createStyles, withStyles } from '@material-ui/styles';
-import { Theme, FormControl, InputLabel, Select, MenuItem, InputBase } from '@material-ui/core';
+import { Theme, FormControl, Select, MenuItem, InputBase } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { Dispatch } from 'redux';
@@ -21,14 +21,14 @@ const CustomInput = withStyles((theme: Theme) =>
       height:'100%'
     },
     input: {
-      borderRadius: 4,
+      borderRadius: 4 ,
       position: 'relative',
-      fontSize: 16,
-      padding: '10px 26px 10px 12px',
-      backgroundColor: '#f5f5f5',
-      height: 'calc(100% - 20px)',
+      fontSize: '16px !important',
+      padding: '10px 26px 10px 12px !important',
+      backgroundColor: '#f5f5f5 !important',
+      height: 'calc(100% - 20px) !important',
       alignItems: 'center',
-      display: 'flex',
+      display: 'flex !important',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
     },
   }),
@@ -91,7 +91,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
         query: pushQueryST
       });
     }
-  }, [leaseTypeGlobal]);
+  }, [leaseType]);
 
 
   return (

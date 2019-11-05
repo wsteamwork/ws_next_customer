@@ -43,7 +43,10 @@ const styles = (theme: Theme) =>
     },
     stickyContainer: {
       position: 'fixed',
-      zIndex: 99999
+      zIndex: 99999,
+      [theme.breakpoints.down('sm')]: {
+        zIndex: 1200
+      }
     },
     grow: {
       flexGrow: 1,

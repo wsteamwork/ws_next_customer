@@ -28,6 +28,7 @@ const Profile: NextPage = () => {
     <Fragment>
       {!!profile && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename={`Westay - Đặt phòng homestay trực tuyến`}
           title={`Thông tin cá nhân ${profile.name} | Westay - Đặt phòng homestay trực tuyến`}
           description={`Thông tin cá nhân ${profile.name} | Westay - Đặt phòng homestay trực tuyến`}

@@ -1,33 +1,20 @@
-import React, { useState, ChangeEvent, FC, useMemo, useContext } from 'react';
-import { SentimentVeryDissatisfied, SentimentVerySatisfied } from '@material-ui/icons';
-import { axios } from '@/utils/axiosInstance';
-import { RoomReviewInfoRes } from '@/types/Requests/ReviewRoom/ReviewResponse';
-import { RoomReviewInfoReq } from '@/types/Requests/ReviewRoom/ReviewRequest';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { formatMoney } from '@/utils/mixins';
-import { useSelector } from 'react-redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  Grid,
-  Typography,
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  TextField,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Snackbar
-} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
 import mainColor from '@/styles/constants/colors';
+import { RoomReviewInfoReq } from '@/types/Requests/ReviewRoom/ReviewRequest';
+import { RoomReviewInfoRes } from '@/types/Requests/ReviewRoom/ReviewResponse';
+import { axios } from '@/utils/axiosInstance';
+import { formatMoney } from '@/utils/mixins';
+import { Card, CardActionArea, CardContent, CardMedia, FormControl, FormControlLabel, Grid, Radio, RadioGroup, Snackbar, TextField, Typography } from '@material-ui/core';
+import { SentimentVeryDissatisfied, SentimentVerySatisfied } from '@material-ui/icons';
+import Rating from '@material-ui/lab/Rating';
+import React, { ChangeEvent, FC, useContext, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import StarRatings from 'react-star-ratings';
 import ButtonGlobal from '../ButtonGlobal';
 import MySnackbarContentWrapper from '../Profile/EditProfile/MySnackbarContentWrapper';
-import StarRatings from 'react-star-ratings';
-import { useTranslation } from 'react-i18next';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 
 // @ts-ignore
 const ReviewRoom: FC<IProps> = (props) => {
@@ -299,8 +286,8 @@ const ReviewRoom: FC<IProps> = (props) => {
           </Snackbar>
         </Grid>
       ) : (
-        <SimpleLoader />
-      )}
+          <SimpleLoader />
+        )}
     </form>
   );
 };

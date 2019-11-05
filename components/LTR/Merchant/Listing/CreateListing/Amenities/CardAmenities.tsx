@@ -6,7 +6,7 @@ import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesRespo
 import { Checkbox, createStyles, FormControlLabel, Grid, Theme, Typography, withStyles } from '@material-ui/core';
 import { CheckboxProps } from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/styles';
-import React, { ChangeEvent, FC, useMemo, useState, useEffect } from 'react';
+import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -59,13 +59,13 @@ const CardAmenities: FC<IProps> = (props) => {
       dispatch({ type: 'setCountAmenities', payload: countAmenities - 1 });
     }
   };
-  // useEffect(() => {
-  //   if (countAmenities < 10) {
-  //     dispatch_detail({ type: 'setDisableNext', payload: true });
-  //   } else {
-  //     dispatch_detail({ type: 'setDisableNext', payload: false });
-  //   }
-  // }, [countAmenities]);
+  useEffect(() => {
+    if (countAmenities < 10) {
+      dispatch_detail({ type: 'setDisableNext', payload: true });
+    } else {
+      dispatch_detail({ type: 'setDisableNext', payload: false });
+    }
+  }, [countAmenities]);
   return useMemo(
     () => (
       <OutlinedDiv label={label}>

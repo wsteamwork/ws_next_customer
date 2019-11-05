@@ -1,7 +1,6 @@
 import React, {
   Fragment,
   useContext,
-  useMemo,
   useState,
   useEffect, FC
 } from 'react';
@@ -11,7 +10,7 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import MapMarker from '../Map/MapMarker';
 import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { min } from 'moment';
 
 interface IProps {
   rooms: any;
@@ -29,9 +28,6 @@ const MapCanvas: FC<IProps> = (props) => {
     lat: 0,
     lng: 0
   });
-
-  const room = useMemo(() => rooms.length && rooms[0], [rooms]);
-  // console.log(room)
 
   const onChangeMap = ({ bounds }: ChangeEventValue) => {
     if (readyToLoad) {
@@ -77,6 +73,13 @@ const MapCanvas: FC<IProps> = (props) => {
       <GoogleMap
         bootstrapURLKeys={{
           key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
+        }}
+        options={() => {
+          return {
+            minZoom: 3,
+            clickableIcons: false,
+            zoomControl: false
+          }
         }}
         defaultZoom={14}
         onChange={onChangeMap}

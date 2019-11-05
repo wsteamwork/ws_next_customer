@@ -68,10 +68,6 @@ class MyDocument extends Document {
             name="google-site-verification"
             content="Xn4ULuU-MncP7CZoQxH1r7F2DzzID_IolgwbUbQMxtM"
           />
-          <link
-            href="https://fonts.googleapis.com/css?family=Montserrat+Alternates:400,500,700|Quicksand:300,400,500,600,700&display=swap&subset=vietnamese"
-            rel="stylesheet"
-          />
           <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png" />
           <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png" />
@@ -92,8 +88,6 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png" />
-          <script
-            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}&libraries=places,drawing,geometry`}></script>
         </Head>
         <body>
           <Main />

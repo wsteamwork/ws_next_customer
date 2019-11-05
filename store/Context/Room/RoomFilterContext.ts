@@ -1,6 +1,6 @@
 import { createContext, Dispatch, Reducer } from 'react';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { AxiosRes, Pagination} from '@/types/Requests/ResponseTemplate';
+import { AxiosRes, Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
 import { updateObject } from '@/store/Context/utility';
 import _ from 'lodash';
@@ -29,6 +29,7 @@ export type RoomFilterAction =
   | { type: 'setComforts'; comforts: ComfortIndexRes[] }
   | { type: 'setRoomTypes'; roomTypes: number[] }
   | { type: 'setAmenitiesFilter'; amenities: number[] }
+  | { type: 'setDistrictsFilter'; districts: number[] }
   | { type: 'setInstantBook'; payload: number };
 
 export type RoomFilterState = {
@@ -38,6 +39,7 @@ export type RoomFilterState = {
   readonly price_day_to: number;
   readonly ratingLists: number[];
   readonly amenities: number[];
+  readonly districts: number[];
   readonly roomTypesFilter: number[];
   readonly instant_book: number;
 };
@@ -48,9 +50,10 @@ export const RoomFilterStateInit: RoomFilterState = {
   roomTypes: [],
   comforts: [],
   amenities: [],
+  districts: [],
   ratingLists: [],
   roomTypesFilter: [],
-  instant_book: 0,
+  instant_book: 0
 };
 
 export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
@@ -69,6 +72,8 @@ export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
       return updateObject<RoomFilterState>(state, { comforts: action.comforts });
     case 'setAmenitiesFilter':
       return updateObject<RoomFilterState>(state, { amenities: action.amenities });
+    case 'setDistrictsFilter':
+      return updateObject<RoomFilterState>(state, { districts: action.districts });
     case 'setRoomTypes':
       return updateObject<RoomFilterState>(state, { roomTypes: action.roomTypes });
     case 'setInstantBook':
@@ -81,7 +86,7 @@ export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
 export const fetchComforts = async () => {
   const params: ComfortIndexGetParams = {
     include: '',
-    limit: -1,
+    limit: -1
   };
 
   const url = 'rooms/count-room-by-comfort-lists';
@@ -93,4 +98,3 @@ export const fetchRoomType = async () => {
   const res: AxiosResponse<number[]> = await axios.get('rooms/type');
   return res.data;
 };
-

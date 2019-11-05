@@ -25,7 +25,7 @@ const Direct: NextPage = () => {
   const { router } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log(error);
+    // console.log(error);
     !!error && router.push('/error');
   }, [error]);
 
@@ -33,6 +33,7 @@ const Direct: NextPage = () => {
     <Fragment>
       {/* {!!room && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`Thanh toán booking của phòng ${longTermRoom.about_room.name}`}
           description={`Thanh toán booking của phòng ${longTermRoom.about_room.name}`}

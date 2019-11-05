@@ -1,22 +1,13 @@
-import React, { Fragment, FC, useContext, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  Typography,
-  Hidden,
-  DialogTitle,
-  Dialog,
-  IconButton,
-  DialogContent,
-  Grid
-} from '@material-ui/core';
-import { TransitionCustom, FILTER, TAB_LIST } from '@/components/Rooms/BottomNav';
+import { FILTER, TAB_LIST, TransitionCustom } from '@/components/Rooms/BottomNav';
+import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
+import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { Dialog, DialogContent, DialogTitle, Grid, Hidden, IconButton, Theme, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import FilterIcon from '@material-ui/icons/FilterListRounded';
-import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
 interface IProps {
   classes?: any
   openMap?: boolean
@@ -25,18 +16,18 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     closeButton: {
-      [theme!.breakpoints!.only!('xs')]: {},
+      [theme!.breakpoints!.down!('sm')]: {},
       position: 'absolute',
       top: '1%',
       right: '1%'
     },
     closeButtonRoot: {
-      [theme!.breakpoints!.only!('xs')]: {
+      [theme!.breakpoints!.down!('sm')]: {
         position: 'absolute'
       }
     },
     label: {
-      [theme!.breakpoints!.only!("xs")]: {
+      [theme!.breakpoints!.down!("sm")]: {
         textAlign: "center",
         backgroundColor: "#fff",
         width: "1.6em",
@@ -48,7 +39,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     filterButton: {
       position: "absolute",
       top: "3.8%",
-      [theme!.breakpoints!.only!("xs")]: {
+      [theme!.breakpoints!.down!("sm")]: {
         bottom: '5%',
         top: 'unset',
       },
@@ -65,7 +56,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         order: 1,
         marginTop: 10
       },
-      [theme!.breakpoints!.only!('xs')]: {
+      [theme!.breakpoints!.down!('sm')]: {
         maxHeight: '47vh',
         order: 1,
         position: 'absolute',
@@ -81,19 +72,19 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme!.breakpoints!.between!('sm', 'md')]: {
         minHeight: '46vh'
       },
-      [theme!.breakpoints!.only!('xs')]: {
+      [theme!.breakpoints!.down!('sm')]: {
         minHeight: '100vh'
       }
     },
     dialogContent: {
-      [theme!.breakpoints!.only!('xs')]: {
+      [theme!.breakpoints!.down!('sm')]: {
         padding: 0
       }
     },
     dialogTitle: {
       display: 'flex',
       justifyContent: 'space-between',
-      [theme!.breakpoints!.only!('xs')]: {
+      [theme!.breakpoints!.down!('sm')]: {
         textAlign: 'center',
         position: 'absolute',
         zIndex: 9999,
@@ -108,7 +99,7 @@ const MapMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { openMap } = props;
   const [index, setIndex] = useState<number>(TAB_LIST);
-  const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
+  const { dispatch: mapDispatch } = useContext(RoomIndexContext);
   const { t } = useTranslation();
 
   const handleOpenFilter = () => {
@@ -126,7 +117,7 @@ const MapMobile: FC<IProps> = (props) => {
     <Fragment>
       <Dialog fullScreen open={openMap} onClose={mapClose} TransitionComponent={TransitionCustom}>
         <DialogTitle disableTypography className={classes.dialogTitle}>
-          <Hidden xsDown>
+          <Hidden smDown>
             <Typography variant="h6">
               {t('rooms:map')}
             </Typography>

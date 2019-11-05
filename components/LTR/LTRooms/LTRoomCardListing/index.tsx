@@ -11,7 +11,8 @@ import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 interface IProps {
   classes?: any,
-  room?: LTRoomIndexRes
+  room?: LTRoomIndexRes,
+  usingInMap?:boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -20,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const LTRoomCardListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { room } = props;
+  const { room, usingInMap } = props;
   const { t } = useTranslation();
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
@@ -31,7 +32,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
       <Grid container className='roomCardListing__wrapper'>
         <Grid item xs={12} className='boxImg'>
           <LazyLoad>
-            <img src={imgRoom} className='imgSize' alt={room.about_room.name} />
+            <img src={imgRoom} className={usingInMap ? 'imgSizeInMap' : 'imgSize'} alt={room.about_room.name} />
           </LazyLoad>
         </Grid>
         <Grid item xs={12} className='boxCard'>

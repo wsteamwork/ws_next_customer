@@ -28,7 +28,7 @@ const useCheckDate = (date: DateRange, dateSingle: Moment) => {
   const bookingType = useSelector<ReducersList, number>((state) => state.booking.bookingType);
   const dispatch = useDispatch<Dispatch<BookingAction>>();
 
-  console.log('useCheckDate');
+  // console.log('useCheckDate');
 
   useEffect(() => {
     if (bookingType === 1 && !!dateSingle) {
@@ -127,7 +127,7 @@ export const useDateRange = (): ReturnUseDateRange => {
       let dateMax = _.find(schedule, (block) => moment(block).diff(date.startDate) > 0);
       setMaxDate(dateMax);
     }
-    console.log(maxDate);
+    // console.log(maxDate);
   }, [date.startDate]);
 
   const onNextMonthClick = async (newCurrentMonth: Moment) => {

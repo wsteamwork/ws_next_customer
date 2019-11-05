@@ -1,31 +1,15 @@
-import React, { FC, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
-import CloseIcon from '@material-ui/icons/Close';
-import { SentimentVerySatisfied, SentimentVeryDissatisfied } from '@material-ui/icons';
-import { axios } from '@/utils/axiosInstance';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { RoomShowReviewRes, RoomReviewInfoRes } from '@/types/Requests/ReviewRoom/ReviewResponse';
-import { formatMoney } from '@/utils/mixins';
+import { TransitionCustom } from '@/components/Book/BookingForm';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  Dialog,
-  Grid,
-  DialogTitle,
-  IconButton,
-  DialogContent,
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  Typography,
-  TextField,
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio
-} from '@material-ui/core';
-import { TransitionCustom } from '@/components/Book/BookingForm';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { RoomReviewInfoRes, RoomShowReviewRes } from '@/types/Requests/ReviewRoom/ReviewResponse';
+import { axios } from '@/utils/axiosInstance';
+import { formatMoney } from '@/utils/mixins';
+import { Card, CardActionArea, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, FormControl, FormControlLabel, Grid, IconButton, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
+import { SentimentVeryDissatisfied, SentimentVerySatisfied } from '@material-ui/icons';
+import CloseIcon from '@material-ui/icons/Close';
 import Rating from '@material-ui/lab/Rating';
+import React, { Dispatch, FC, SetStateAction, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IDialogReviewDetails {
@@ -53,14 +37,14 @@ const DialogReviewDetails: FC<IDialogReviewDetails> = (props) => {
         .then((res: AxiosRes<RoomShowReviewRes>) => {
           setRoomReview(res.data.data);
         })
-        .catch((err) => {});
+        .catch((err) => { });
 
       axios
         .get(`get-room-for-review/${props.room_id}`)
         .then((res2: AxiosRes<RoomReviewInfoRes>) => {
           setRoom(res2.data.data);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [stateOpen]);
 
@@ -195,8 +179,8 @@ const DialogReviewDetails: FC<IDialogReviewDetails> = (props) => {
                 </Grid>
               </Grid>
             ) : (
-              <SimpleLoader />
-            )}
+                <SimpleLoader />
+              )}
           </DialogContent>
         </Grid>
       </Dialog>

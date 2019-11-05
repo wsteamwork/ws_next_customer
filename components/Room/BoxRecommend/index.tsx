@@ -26,7 +26,20 @@ const BoxRecommend: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const roomRecommend = useSelector<ReducersList, RoomIndexRes[]>((state) => state.roomPage.roomRecommend);
 
-  const renderRoom = (room) => <RoomCard room={room} isHomepage={false} isFormatPrice={true} />;
+  const renderRoom = (room) => <RoomCard isHomepage={false} isFormatPrice={true}
+                                        city={room.city.data.name}
+                                        district={room.district.data.name}
+                                        instantbook={room.instant_book}
+                                        roomID={room.id}
+                                        roomName={room.room.details.data[0].name}
+                                        roomNumber={room.number_room}
+                                        roomType={room.room_type_txt}
+                                        roomImage={room.media.data[0].image}
+                                        price_day={room.price_day}
+                                        price_hour={room.price_hour}
+                                        total_review={room.total_review}
+                                        avg_rating={room.avg_rating}
+  />;
 
   return (
     <Fragment>

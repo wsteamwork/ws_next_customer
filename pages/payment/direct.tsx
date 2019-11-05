@@ -28,14 +28,14 @@ const Direct: NextPage = () => {
 
   return (
     <Fragment>
-      {!!room && (
+      {/* {!!room && (
         <NextHead
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`Thanh toán booking của phòng ${room.details.data[0].name}`}
           description={`Thanh toán booking của phòng ${room.details.data[0].name}`}
           url={`/payment/invoice/${lists.uuid}`}
           ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}></NextHead>
-      )}
+      )} */}
 
       {useMemo(
         () => (

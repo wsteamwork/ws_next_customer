@@ -4,7 +4,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Dialog from "@material-ui/core/Dialog/Dialog";
 import Slide, { SlideProps } from "@material-ui/core/Slide/Slide";
 import { Theme } from '@material-ui/core/styles';
-import { Adjust, List, PinDrop } from "@material-ui/icons";
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, forwardRef, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -63,9 +62,15 @@ const BottomNav: FC<IProps> = (props) => {
         }}
         showLabels
         className={classes.root}>
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:searchRooms:filterRooms')} icon={<Adjust />} />
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:list')} icon={<List />} />
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:location')} icon={<PinDrop />} />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:searchRooms:filterRooms')} icon={
+          <img width="16" height="16" src="/static/filter-results-button.svg" />
+        } />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:list')} icon={
+          <img width="16" height="16" src="/static/list.svg" />
+        } />
+        <BottomNavigationAction className={classes.customColor} label={t('rooms:location')} icon={
+          <img width="16" height="16" src="/static/address.svg" />
+        } />
       </BottomNavigation>
       <Dialog
         fullScreen

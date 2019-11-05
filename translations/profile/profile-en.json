@@ -1,5 +1,11 @@
 {
     "userProfile": "User information",
+    "account": {
+        "title": "Account verification",
+        "email": "Email address",
+        "phoneNumber": "Phone number",
+        "identity": "ID"
+    },
     "listRooms": "List of rooms",
     "notifications": "Notifications",
     "waitConf": "Wait for confirmation",
@@ -87,5 +93,6 @@
         "unsatisfied": "Unsatisfied",
         "feedback": "Look forward to your feedback"
     },
-    "myBooking": "My Bookings"
+    "myBooking": "My Bookings",
+    "confirmPhoneNumber": "Send OTP"
 }

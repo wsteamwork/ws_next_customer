@@ -3,23 +3,20 @@ import BookingForm from '@/components/LTR/LTBook/BookingForm';
 import BookingInfoDetail from '@/components/LTR/LTBook/BookingInfoDetail';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { NextContextPage } from '@/store/Redux/Reducers';
 import { getLTBookingData } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
-import { LTBookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext } from 'react';
-import { useSelector } from 'react-redux';
 
 const LongTermBook: NextPage = (props) => {
   const { width, router } = useContext(GlobalContext);
   //   const error = useSelector<ReducersList, boolean>((state) => state.book.error);
-  const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
-  const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
-    (state) => state.ltBooking.LTBookingPriceCalculate
-  );
+  // const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
+  // const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
+  //   (state) => state.ltBooking.LTBookingPriceCalculate
+  // );
 
   //   useEffect(() => {
   //     !!error && router.push('/error');
@@ -32,6 +29,7 @@ const LongTermBook: NextPage = (props) => {
     <Fragment>
       {/* {!!ltroom && !!dataCalculate && (
         <NextHead
+          googleMapApiRequire={false}
           ogSitename="Westay - Đặt phòng homestay trực tuyến"
           title={`Đặt phòng - ${ltroom.details.data[0].name} ngay`}
           description={`Đặt phòng - ${ltroom.details.data[0].name} ngay. Westay - Kênh đặt phòng Homestay trực tuyến`}

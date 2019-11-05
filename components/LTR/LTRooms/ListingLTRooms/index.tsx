@@ -3,7 +3,6 @@ import ListRoom from '@/components/ListRoom';
 import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
 import LTRoomCardListing from '@/components/LTR/LTRooms/LTRoomCardListing';
 import NotFound from '@/components/Rooms/Lotte/NotFound';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { updateRouter } from '@/store/Context/utility';
 import { Grid, Theme, Typography } from '@material-ui/core';
@@ -35,13 +34,13 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const { state: stateIndexRoom } = useContext(RoomIndexContext);
   const { longtermRooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const { width } = useContext(GlobalContext);
+  // const { width } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const renderRooms = (room) => (
     <LazyLoad>
-      <LTRoomCardListing room={room} />
+      <LTRoomCardListing room={room} usingInMap={usingInMap} />
     </LazyLoad>
   );
 
@@ -77,6 +76,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
             usingInMap={usingInMap}
             hoverAction={hoverAction}
             xs={12} sm={6} md={4} lg={3} xl={3}
+            xsMap={12} smMap={6}
           />
           <Pagination
             className='rooms-pagination'

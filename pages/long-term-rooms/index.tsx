@@ -1,6 +1,6 @@
 import GridContainer from '@/components/Layout/Grid/Container';
 import SearchHomeLT from '@/components/LTR/LTHome/SearchHomeLT';
-// import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
@@ -25,6 +25,7 @@ const LongtermRooms: NextPage = () => {
   return (
     <Fragment>
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Thuê phòng trực tuyến"
         title="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         description="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
@@ -54,15 +55,10 @@ const LongtermRooms: NextPage = () => {
                             lg={10}
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
-                            {/*<Grid container>*/}
-                            {/*  <Grid item xs={3}>*/}
-                            {/*    */}
-                            {/*  </Grid>*/}
-                            {/*</Grid>*/}
                             <Grid container spacing={1}>
-                              {/* <Grid item>
+                              <Grid item>
                                 <SelectLeaseTypeGlobal />
-                              </Grid> */}
+                              </Grid>
                               <Grid item xs>
                                 <SearchHomeLT showPlaces={false} />
                               </Grid>
@@ -88,8 +84,14 @@ const LongtermRooms: NextPage = () => {
                 lg={10}
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
-                {/*<SearchComponent />*/}
-                <SearchHomeLT showPlaces={false} />
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={3}>
+                    <SelectLeaseTypeGlobal />
+                  </Grid>
+                  <Grid item xs sm={9}>
+                    <SearchHomeLT showPlaces={false} />
+                  </Grid>
+                </Grid>
               </GridContainer>
               <FilterActions showBookByHour={false} />
               <MapAndListing />

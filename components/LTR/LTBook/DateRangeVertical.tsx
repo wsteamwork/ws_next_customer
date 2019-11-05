@@ -112,9 +112,9 @@ const DateRangeVertical: FC<IProps> = (props) => {
     return {};
   };
   const { } = useCheckDate(date);
-  useEffect(() => {
-    console.log(focusedInput);
-  }, [focusedInput]);
+  // useEffect(() => {
+  //   console.log(focusedInput);
+  // }, [focusedInput]);
 
   // useEffect(() => {
   //   if (date.startDate) {

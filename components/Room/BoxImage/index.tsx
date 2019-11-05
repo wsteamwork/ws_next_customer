@@ -214,7 +214,7 @@ const BoxImage: FC<IProps> = (props) => {
 
       <div className={classes.contentParallax}>
         <img
-          src={isPreview && room.media.data.length === 0 ? '/static/images/image-room-default.png' : `${IMAGE_STORAGE_LG + room.media.data[0].image}`}
+          src={isPreview && room.media.data.length === 0 ? '/static/images/image-room-default.png' : `${IMAGE_STORAGE_LG}${room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image}`}
           alt={isPreview && !room.details.data[0].name ? t('room:updateRoomName') : room.details.data[0].name}
           className={classes.imgRoom}
           onClick={handleClick}

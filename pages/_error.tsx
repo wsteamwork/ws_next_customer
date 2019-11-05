@@ -18,6 +18,7 @@ const Error500: NextPage = (props) => {
   return (
     <GridContainer xs={12} classNameItem="pageError">
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"

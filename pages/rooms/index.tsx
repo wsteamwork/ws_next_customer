@@ -1,6 +1,6 @@
 import SearchComponent from '@/components/Home/SearchComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
-// import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
+import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
@@ -34,6 +34,7 @@ const Rooms: NextPage = (props) => {
   return (
     <Fragment>
       <NextHead
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
         description="Đặt phòng homestay - Westay - Westay.vn - Westay.vn"
@@ -65,9 +66,9 @@ const Rooms: NextPage = (props) => {
                             classNameItem="searchRooms__overlay"
                             className="searchRooms">
                             <Grid container spacing={1}>
-                              {/* <Grid item>
+                              <Grid item>
                                 <SelectLeaseTypeGlobal />
-                              </Grid> */}
+                              </Grid>
                               <Grid item xs>
                                 <SearchComponent />
                               </Grid>
@@ -104,7 +105,14 @@ const Rooms: NextPage = (props) => {
                 classNameItem="searchRooms__overlay"
                 className="searchRooms">
                 {/*<SearchComponent />*/}
-                <SearchMobile />
+                <Grid container spacing={1}>
+                  <Grid item xs={12}>
+                    <SelectLeaseTypeGlobal />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <SearchMobile />
+                  </Grid>
+                </Grid>
               </GridContainer>
               <FilterActions />
               <MapAndListing />
