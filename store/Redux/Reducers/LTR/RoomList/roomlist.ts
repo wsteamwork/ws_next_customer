@@ -1,8 +1,8 @@
+import { updateObject } from '@/store/Context/utility';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AxiosRes, Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { Dispatch, Reducer } from 'redux';
 
 export type RoomListReducerState = {
   readonly roomlist: LTRoomIndexRes[];
@@ -15,7 +15,7 @@ export const init: RoomListReducerState = {
 };
 
 export type RoomListReducerAction =
-  | { type: 'setRoomList'; payload: LTRoomIndexRes[]; meta?: Pagination | null  }
+  | { type: 'setRoomList'; payload: LTRoomIndexRes[]; meta?: Pagination | null }
   | { type: 'setError'; payload: boolean };
 
 export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerAction> = (
@@ -33,10 +33,17 @@ export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerActio
 };
 
 export const getRoomList = async (
-  dispatch: Dispatch<RoomListReducerAction>
+  dispatch: Dispatch<RoomListReducerAction>,
+  initLanguage: string = 'vi',
+  token?: string
 ): Promise<any> => {
+  const headers = token && {
+    headers: {
+      'Accept-Language': initLanguage
+    }
+  };
   try {
-    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms`);
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms`, headers);
     const roomlist = res.data.data;
     if (roomlist) {
       dispatch({ type: 'setRoomList', payload: roomlist });

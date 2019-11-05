@@ -93,7 +93,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
   };
 
   const logoutTrigger = () => {
-    window.location.reload();
+    router.push('/');
     cookies.remove('_token', {
       path: '/'
     });
@@ -182,7 +182,7 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
               </Grid>
             </Hidden>
             <Hidden mdUp>
-              <Logo href='/host' />
+              <Logo />
               <div className={classes.grow} />
               <IconMenu onClick={() => setOpenDrawer(true)} />
 

@@ -1,11 +1,13 @@
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
-import { ReducersList } from '@/store/Redux/Reducers';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomList, RoomListReducerAction } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { NextPage } from 'next';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { FC, Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
@@ -22,7 +24,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
   })
 );
-const RoomListHost: FC<IProps> = (props) => {
+const RoomListHost: NextPage = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
@@ -54,7 +56,7 @@ const RoomListHost: FC<IProps> = (props) => {
     if (!roomlist.length) {
       getRoomList(dispatch);
     }
-  }, []);
+  }, [roomlist]);
 
   return (
     <Fragment>
@@ -80,5 +82,13 @@ const RoomListHost: FC<IProps> = (props) => {
         )}
     </Fragment>
   );
+
+};
+RoomListHost.getInitialProps = async ({ req, store }: NextContextPage) => {
+  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const token = getCookieFromReq(req, '_token');
+  const res = await getRoomList(store.dispatch, initLanguage, token);
+
+  return {};
 };
 export default RoomListHost;
