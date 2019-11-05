@@ -41,7 +41,8 @@ export const makeStore: MakeStore = (initialState, { isServer }) => {
         'process',
         'roomlist',
         'listingdetails',
-        'updateDetails'
+        'updateDetails',
+        'bookinglist'
       ]
     };
 

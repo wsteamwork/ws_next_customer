@@ -64,7 +64,7 @@ const UserDetail: FC = (props) => {
         </Typography>
         {profile!.description && (
           <Fragment>
-            <Divider className={'dividerDescription'} />
+            <Divider className={'4Description'} />
             <Typography className={'description'}>{profile.description}</Typography>
           </Fragment>
         )}

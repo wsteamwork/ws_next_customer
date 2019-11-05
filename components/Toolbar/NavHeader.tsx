@@ -215,7 +215,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               <Logo />
               <div className={classes.grow} />
               <ButtonGlobal
-                href="https://merchant.westay.vn"
+                href="https://westay.vn/host/room-list"
                 // color = 'inherit'
                 padding="0px 20px"
                 className={classes.buttonMerchantSite}

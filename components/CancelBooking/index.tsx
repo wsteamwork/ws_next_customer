@@ -53,7 +53,6 @@ const CancelBooking: FC = (props) => {
 
     try {
       const res = await axios.post(`bookings/cancel-booking/${id}`, data);
-      console.log(res)
       setOpen(true);
       setTimeout(() => {
         alert(t('shared:cancelBook:returnHome'));

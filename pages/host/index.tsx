@@ -1,23 +1,30 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
-import { NextContextPage } from '@/store/Redux/Reducers';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
+import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import 'react-dates/initialize';
+import { useSelector } from 'react-redux';
 
 const Host: NextPage = () => {
+  const [cookies] = useCookies(['_token']);
 
+  const error = useSelector<ReducersList, boolean>((state) => state.iProfile.error);
+  const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);
+  const { router } = useContext(GlobalContext);
+
+  useEffect(() => {
+    !!error && router.push('/auth/signin');
+    !cookies._token && router.push('/auth/signin');
+  }, [error]);
   // const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay} />;
   return (
     <Fragment>
-      {/*<NextHead*/}
-      {/*  ogSitename={`Westay - Đặt phòng homestay trực tuyến`}*/}
-      {/*  title={`Westay - Đặt phòng homestay trực tuyến`}*/}
-      {/*  description={`Westay - Đặt phòng homestay trực tuyến`}*/}
-      {/*  url={`/host`}*/}
-      {/*  ogImage={profile.avatar_url}/>*/}
       <NavHeader_Merchant />
       <ButtonGlobal
         variant="contained"
@@ -25,7 +32,6 @@ const Host: NextPage = () => {
         size="large"
         color="primary"
       >
-        Book Now
       </ButtonGlobal>
 
 
