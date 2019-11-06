@@ -16,7 +16,7 @@ import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
-import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+// import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
@@ -28,7 +28,7 @@ const Room: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
-  const [] = useVisitedRoom();
+  // const [] = useVisitedRoom();
 
   useEffect(() => {
     if (error || !room.status) router.push('/not-found-resource');
