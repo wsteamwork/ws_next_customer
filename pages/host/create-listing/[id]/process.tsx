@@ -1,10 +1,7 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  DetailsReducerAction,
-  getListingDetails
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
+import { DetailsReducerAction, getListingDetails } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createStyles, Divider, Grid, Link, Theme } from '@material-ui/core';
@@ -105,15 +102,15 @@ const ProcessListing: FC<IProps> = (props) => {
                     Cập nhật
                   </Link>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
                 {listing && listing.percent >= 40 && listing.percent < 70 ? (
                   <Link href={`/host/create-listing/${id}/detail`} className={classes.sizeBtn}>
                     Tiếp tục
                   </Link>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </Grid>
               {listing && listing.percent >= 70 ? (
                 <Grid container item xs={2} justify="flex-end">
@@ -123,8 +120,8 @@ const ProcessListing: FC<IProps> = (props) => {
                     size="3x"></FontAwesomeIcon>
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
           </Grid>
           <Divider className={classes.marginLabel} />
@@ -142,15 +139,15 @@ const ProcessListing: FC<IProps> = (props) => {
                     Cập nhật
                   </Link>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
                 {listing && listing.percent >= 70 && listing.percent < 100 ? (
                   <Link href={`/host/create-listing/${id}/price`} className={classes.sizeBtn}>
                     Tiếp tục
                   </Link>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </Grid>
               {listing && listing.percent === 100 ? (
                 <Grid container item xs={2} justify="flex-end">
@@ -160,8 +157,8 @@ const ProcessListing: FC<IProps> = (props) => {
                     size="3x"></FontAwesomeIcon>
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
           </Grid>
           <Divider className={classes.marginLabel} />

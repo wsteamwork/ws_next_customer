@@ -22,6 +22,7 @@ routes
   .add('room', '/room/:id')
   .add('long-term-room', '/long-term-room/:id')
   .add('preview-room', '/preview-room/:id')
+  .add('preview-long-term-room', '/preview-long-term-room/:id')
   .add('user', '/user/:id')
   .add('booking-cancel', '/booking-cancel/:id')
   .add('reviews', '/reviews/:id')

@@ -10,15 +10,14 @@ import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
   priceBasic: number;
-  term: string;
-  handleOpenBookingDialog: any;
+  handleOpenBookingDialog?: any;
 }
 
 // const useStyles = makeStyles<Theme, IProps>((theme: Theme) => createStyles({}));
 
 const BoxBottomBooking: FC<IProps> = (props) => {
   // const classes = useStyles(props);
-  const { priceBasic, term, handleOpenBookingDialog } = props;
+  const { priceBasic, handleOpenBookingDialog } = props;
   const { t } = useTranslation();
 
   return (
@@ -34,7 +33,7 @@ const BoxBottomBooking: FC<IProps> = (props) => {
                       <Typography className={'price'}>
                         {numeral(priceBasic).format('0,0')} {t('longtermroom:currency')}
                       </Typography>
-                      <Typography variant="subtitle2">{term}</Typography>
+                      <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
                     </div>
                   </Grid>
                 </Grid>
