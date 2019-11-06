@@ -30,6 +30,7 @@ interface FormValues {
   address: string;
   city: string;
   building: string;
+  district: string;
 }
 
 const useValidatation = () => {
@@ -138,7 +139,8 @@ const Location: FC<IProps> = (props) => {
   const initFormValue: FormValues = {
     address: address,
     city: '',
-    building: building
+    building: building,
+    district: ''
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
@@ -250,12 +252,15 @@ const Location: FC<IProps> = (props) => {
                 </Grid>
                 <Grid className="box-district" item xs={10} md={5}>
                   <SelectCustom
+                    onChange={(e) => {
+                      handleChange(e);
+                      callBackOnChange(e.target.value);
+                    }}
                     name="district"
-                    // onChange={handleChangeSelect}
-                    value={district}
+                    value={values.district}
                     options={districtList}
                     title="Quận huyện"
-                    callBackOnChange={callBackOnChange}
+                    onBlurTouched={setFieldTouched}
                     disabled={disabledDistrictField}
                   />
                 </Grid>

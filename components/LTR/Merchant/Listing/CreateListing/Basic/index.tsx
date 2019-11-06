@@ -82,7 +82,8 @@ const Basic: FC<IProps> = (props) => {
     const data: any = {
       lease_type: values.lease_type,
       accommodation_type: values.accommodation_type,
-      stay_with_host: values.stay_with_host
+      stay_with_host: values.stay_with_host,
+      total_area: values.total_area
     };
   };
 
@@ -159,8 +160,8 @@ const Basic: FC<IProps> = (props) => {
                   required
                   fullWidth>
                   <OutlinedInput
+                    name="total_area"
                     placeholder="Nhập diện tích"
-                    // id="component-outlined"
                     value={values.total_area}
                     onChange={(e) => {
                       setFieldValue('total_area', parseInt(e.target.value));
@@ -169,10 +170,10 @@ const Basic: FC<IProps> = (props) => {
                       handleBlur(e);
                       dispatch({
                         type: 'SET_TOTAL_AREA',
-                        payload: parseInt(e.currentTarget.value)
+                        payload: parseInt(e.target.value)
                       });
                     }}
-                    inputComponent={NumberFormatCustom as any}
+                    // inputComponent={NumberFormatCustom as any}
                     endAdornment={
                       <InputAdornment position="start">
                         m<sup>2</sup>

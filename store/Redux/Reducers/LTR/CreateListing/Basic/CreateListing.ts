@@ -136,13 +136,14 @@ export const handleCreateRoom = async (
       'Accept-Language': initLanguage
     }
   };
-
+  // console.log(data);
   const body = {
     step1: {
       tab1: {
         lease_type: data.lease_type,
         accommodation_type: data.accommodation_type,
-        stay_with_host: data.stay_with_host
+        stay_with_host: data.stay_with_host,
+        total_area: data.total_area
       },
       tab2: {
         guest: {
