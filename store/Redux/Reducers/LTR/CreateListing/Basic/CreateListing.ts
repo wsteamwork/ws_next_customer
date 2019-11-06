@@ -11,10 +11,12 @@ interface Coordinate {
 export type CreateListingState = {
   readonly leaseType: number;
   readonly accommodationType: number;
+  readonly totalArea: number;
   readonly stayWithHost: number;
   readonly guestRecommendation: number;
   readonly maxGuest: number;
   readonly bedRoomsNumber: number;
+  readonly bedsNumber: number;
   readonly bathroomNumber: number;
   readonly bedRooms: BedRoomReq;
   readonly address: string;
@@ -30,10 +32,12 @@ export type CreateListingState = {
 export type CreateListingActions =
   | { type: 'SET_LEASE_TYPE'; payload: number }
   | { type: 'SET_ACCOMMODATION_TYPE'; payload: number }
+  | { type: 'SET_TOTAL_AREA'; payload: number }
   | { type: 'SET_STAY_WITH_HOST'; payload: number }
   | { type: 'SET_GUEST_RECOMMENDATION'; payload: number }
   | { type: 'SET_MAX_GUEST'; payload: number }
   | { type: 'SET_BEDROOMS_NUMBER'; payload: number }
+  | { type: 'SET_BEDS_NUMBER'; payload: number }
   | { type: 'SET_BEDROOMS'; payload: BedRoomReq }
   | { type: 'SET_BATHROOM_NUMBER'; payload: number }
   | { type: 'SET_ADDRESS'; payload: string }
@@ -48,8 +52,10 @@ export type CreateListingActions =
 const init: CreateListingState = {
   leaseType: 3,
   accommodationType: 2,
+  totalArea: null,
   stayWithHost: 0,
   bedRooms: null,
+  bedsNumber: 1,
   guestRecommendation: 0,
   maxGuest: 0,
   bedRoomsNumber: 1,
@@ -73,6 +79,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { leaseType: action.payload });
     case 'SET_ACCOMMODATION_TYPE':
       return updateObject<CreateListingState>(state, { accommodationType: action.payload });
+    case 'SET_TOTAL_AREA':
+      return updateObject<CreateListingState>(state, { totalArea: action.payload });
     case 'SET_STAY_WITH_HOST':
       return updateObject<CreateListingState>(state, { stayWithHost: action.payload });
     case 'SET_GUEST_RECOMMENDATION':
@@ -81,6 +89,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { maxGuest: action.payload });
     case 'SET_BEDROOMS_NUMBER':
       return updateObject<CreateListingState>(state, { bedRoomsNumber: action.payload });
+    case 'SET_BEDS_NUMBER':
+      return updateObject<CreateListingState>(state, { bedsNumber: action.payload });
     case 'SET_BEDROOMS':
       return updateObject<CreateListingState>(state, { bedRooms: action.payload });
     case 'SET_BATHROOM_NUMBER':

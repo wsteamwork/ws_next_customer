@@ -1,5 +1,5 @@
 export interface BedRoomReq {
-  number_bed: number;
+  number_bedroom: number;
   beds: Bed[];
   area: number;
 }

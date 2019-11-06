@@ -1,21 +1,20 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
-import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 import { Button, Collapse } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 interface IProps {
   roomNumber?: number;
   bedRoomsList?: any;
-  setBedroomsList?: Dispatch<SetStateAction<any>>;
+  setBedroomsList?: Dispatch<SetStateAction<BedRoomReq>>;
+  // setTotalBedsNumber?: Dispatch<SetStateAction<any>>;
+  setErrorsBedsNumber?: Dispatch<SetStateAction<boolean>>;
 }
 
 const BedRoom: FC<IProps> = (props) => {
-  const { roomNumber, bedRoomsList } = props;
+  const { roomNumber, bedRoomsList, setErrorsBedsNumber, setBedroomsList } = props;
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [single, setSingle] = useState<number>(0);
   const [double, setDouble] = useState<number>(0);
@@ -24,11 +23,37 @@ const BedRoom: FC<IProps> = (props) => {
   const totalBeds = [single, double, king, queen].reduce((a, b) => a + b, 0);
 
   const [isAddBedRoom, setIsAddBedRoom] = useState<boolean>(false);
+
+  // useEffect(() => {}, [totalBeds]);
+  useEffect(() => {
+    if (bedRoomsList && bedRoomsList[`bedroom_${roomNumber}`]) {
+      bedRoomsList[`bedroom_${roomNumber}`]['beds'].map((item) => {
+        switch (item.size) {
+          case 1:
+            setSingle(item.number_bed);
+            break;
+          case 2:
+            setDouble(item.number_bed);
+            break;
+          case 3:
+            setKing(item.number_bed);
+            break;
+          case 4:
+            setQueen(item.number_bed);
+            break;
+          default:
+            setSingle(0);
+        }
+      });
+    }
+  }, [bedRoomsList]);
+
   const handleToggleAddBedRoom = () => {
     if (isAddBedRoom) {
       if (bedRoomsList.hasOwnProperty(`bedroom_${roomNumber}`)) {
         let bedsList = [];
-        let bedRoomsListTemp = bedRoomsList;
+        let bedRoomsListTemp: BedRoomReq = JSON.parse(JSON.stringify(bedRoomsList));
+        console.log('bedRoomsListTemp', bedRoomsListTemp);
         if (single > 0) bedsList.push({ number_bed: single, size: 1 });
         if (double > 0) bedsList.push({ number_bed: double, size: 2 });
         if (king > 0) bedsList.push({ number_bed: king, size: 3 });
@@ -40,6 +65,8 @@ const BedRoom: FC<IProps> = (props) => {
           type: 'SET_BEDROOMS',
           payload: bedRoomsListTemp
         });
+        setBedroomsList(bedRoomsListTemp);
+        setErrorsBedsNumber(true);
       }
     }
     setIsAddBedRoom(!isAddBedRoom);
@@ -59,14 +86,15 @@ const BedRoom: FC<IProps> = (props) => {
         <Grid item xs={6} className="add-room-container__title">
           <h3>Phòng ngủ {roomNumber}</h3>
         </Grid>
-        <Grid item xs={6} className="add-bedroom-container__counting">
-          <p>{totalBeds} giường</p>
-          {!isAddBedRoom ? <Grid>{renderBedroomInfo()}</Grid> : ' '}
+        <Grid item xs={6} className="add-bedroom-container__add-room">
+          <Button className="add-room-button" onClick={handleToggleAddBedRoom}>
+            {isAddBedRoom ? 'Xong' : 'Thêm giường'}
+          </Button>
         </Grid>
 
         <Grid item xs={12} className="counting-open">
           <Collapse in={isAddBedRoom}>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <QuantityButtons
                 number={single}
                 setNumber={setSingle}
@@ -83,10 +111,9 @@ const BedRoom: FC<IProps> = (props) => {
             </Grid>
           </Collapse>
         </Grid>
-        <Grid item xs={12}>
-          <Button className="add-room-button" onClick={handleToggleAddBedRoom}>
-            {isAddBedRoom ? 'Xong' : 'Thêm giường'}
-          </Button>
+        <Grid item xs={12} className="add-bedroom-container__counting">
+          <p>{totalBeds} giường</p>
+          {!isAddBedRoom ? <Grid>{renderBedroomInfo()}</Grid> : ' '}
         </Grid>
       </Grid>
     </Grid>

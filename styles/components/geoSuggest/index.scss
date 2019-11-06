@@ -2,7 +2,10 @@
   font-size: 18px;
   font-size: 1rem;
   position: relative;
-  width: calc(80% - 8px);
+  @include xsUp {
+    width: calc(80% - 8px);
+  }
+
   text-align: left;
 }
 .geosuggest__input {

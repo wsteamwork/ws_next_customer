@@ -27,6 +27,7 @@ const RoomCreateListing = () => {
     accommodation_type: useSelector<ReducersList, number>(
       (state) => state.createListing.accommodationType
     ),
+    total_area: useSelector<ReducersList, number>((state) => state.createListing.totalArea),
     stay_with_host: useSelector<ReducersList, number>((state) => state.createListing.stayWithHost),
     guest_recommendation: useSelector<ReducersList, number>(
       (state) => state.createListing.guestRecommendation
@@ -78,6 +79,7 @@ const RoomCreateListing = () => {
         handleAPI={() => handleCreateRoom(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}
+        disableNext={disableSubmit}
       />
     </Fragment>
   );

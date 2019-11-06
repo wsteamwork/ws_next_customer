@@ -1,9 +1,6 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,22 +18,23 @@ const Bathroom: FC<IProps> = (props) => {
       type: 'SET_BATHROOM_NUMBER',
       payload: bathroom
     });
+    dispatch({
+      type: 'SET_DISABLE_SUBMIT',
+      payload: false
+    });
   }, [bathroom]);
   return (
     <div className="step1-tab3-bathroom">
       <Grid className="createListing-title">
         <Grid className="createListing-heading-1">Số phòng tắm</Grid>
-        <Grid className="createListing-subTitle">
-          Phòng không có bồn hoặc vòi tắm sẽ được tính là nửa phòng
-        </Grid>
+        <Grid className="createListing-subTitle">Nhập số phòng tắm trong căn hộ của bạn</Grid>
       </Grid>
 
       <Grid item sm={8}>
         <QuantityButtons
           number={bathroom}
           setNumber={setBathroom}
-          title={'Phòng tắm'}
-          step={0.5}></QuantityButtons>
+          title={'Phòng tắm'}></QuantityButtons>
       </Grid>
     </div>
   );
