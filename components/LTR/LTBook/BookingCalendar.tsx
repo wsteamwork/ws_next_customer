@@ -245,7 +245,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                   ''
                 )}
                 <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                  {isLogin ? 'Book' : 'Đăng nhập để book phòng'}
+                  {isLogin ? 'Book' : 'Đăng nhập để tiếp tục'}
                 </ButtonGlobal>
               </Hidden>
             </Grid>
