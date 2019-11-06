@@ -1,21 +1,20 @@
-import { NextPage } from 'next';
-import React, { Fragment, useMemo, useContext, useState } from 'react';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import GridContainer from '@/components/Layout/Grid/Container';
-import { Grid, Dialog } from '@material-ui/core';
 import Footer from '@/components/Layout/FooterComponent';
-import { getCookieFromReq } from '@/utils/mixins';
-import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
-import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
-import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import GridContainer from '@/components/Layout/Grid/Container';
 import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
-import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
+import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
+import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useSelector } from 'react-redux';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { getCookieFromReq } from '@/utils/mixins';
+import { Grid } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const PreviewLongTermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
