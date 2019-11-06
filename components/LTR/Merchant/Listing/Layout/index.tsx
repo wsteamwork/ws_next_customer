@@ -37,7 +37,7 @@ const Layout: FC<IProps> = (props) => {
       <HeaderNav title={title} />
       <GridContainer
         xs={12}
-        md={10}
+        md={8}
         className="listing-content"
         classNameItem="listing-content-wrapper">
         <StepperProgress

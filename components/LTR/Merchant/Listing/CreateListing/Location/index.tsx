@@ -43,16 +43,24 @@ const useValidatation = () => {
   return FormValidationSchema;
 };
 
+export const InputFeedback = ({ error }) =>
+  error ? <div className={classNames('input-feedback')}>{error}</div> : null;
+
 const Location: FC<IProps> = (props) => {
-  const { address, building, disableSubmit } = useSelector<ReducersList, CreateListingState>(
-    (state) => state.createListing
-  );
+  const {
+    address,
+    building,
+    disableSubmit,
+    coordinate: coordinateState,
+    district_id,
+    city_id
+  } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
-  const [coordinate, setCoordinate] = useState<Coordinate>(null);
+  const [coordinate, setCoordinate] = useState<Coordinate>(coordinateState);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
-  const [district, setDistrict] = useState<number>(null);
+  const [district, setDistrict] = useState<number>(district_id);
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
@@ -128,9 +136,9 @@ const Location: FC<IProps> = (props) => {
   };
 
   const initFormValue: FormValues = {
-    address: '',
+    address: address,
     city: '',
-    building: ''
+    building: building
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
@@ -140,9 +148,6 @@ const Location: FC<IProps> = (props) => {
   const handleChangeAddress = (setFieldValue: any) => (value: any) => {
     setFieldValue('address', value);
   };
-
-  const InputFeedback = ({ error }) =>
-    error ? <div className={classNames('input-feedback')}>{error}</div> : null;
 
   return (
     <div className="step1-tab3-location">
@@ -176,23 +181,26 @@ const Location: FC<IProps> = (props) => {
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
           return (
             <form onSubmit={handleSubmit}>
-              <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
-              <Geosuggest
-                country="vn"
-                placeholder="Nhập địa chỉ"
-                onSuggestSelect={onSuggestSelect}
-                location={new google.maps.LatLng(53.558572, 9.9278215)}
-                radius={20}
-                onChange={handleChangeAddress(setFieldValue)}
-                onBlur={() => {
-                  setFieldTouched('address', true);
-                }}
-                value={values.address}
-                name="address"
-              />
+              <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+
+                <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
+                <Geosuggest
+                  country="vn"
+                  placeholder="Nhập địa chỉ"
+                  onSuggestSelect={onSuggestSelect}
+                  location={new google.maps.LatLng(53.558572, 9.9278215)}
+                  radius={20}
+                  onChange={handleChangeAddress(setFieldValue)}
+                  // onBlur={() => {
+                  //   setFieldTouched('address', true);
+                  // }}
+                  value={values.address}
+                  name="address"
+                />
+              </Grid>
 
               {touched.address && <InputFeedback error={errors.address} />}
-              <Grid style={{ width: 'calc(80% - 8px)', margin: '20px 0' }}>
+              <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
                 <h3 style={{ color: '#767676' }}>Toà nhà (Tuỳ chọn)</h3>
 
                 <FormControl fullWidth variant="outlined">
@@ -215,8 +223,8 @@ const Location: FC<IProps> = (props) => {
                 </FormControl>
               </Grid>
               <Grid container style={{ display: 'flex' }}>
-                <Grid item xs={7} style={{ paddingRight: 20 }}>
-                  <Grid style={{ margin: '32px 0' }}>
+                <Grid item xs={10} md={7}>
+                  <Grid style={{ marginBottom: 32 }}>
                     <h3
                       style={{
                         color: '#767676',
@@ -240,7 +248,7 @@ const Location: FC<IProps> = (props) => {
                     {touched.city && <InputFeedback error={errors.city} />}
                   </Grid>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid className="box-district" item xs={10} md={5}>
                   <SelectCustom
                     name="district"
                     // onChange={handleChangeSelect}

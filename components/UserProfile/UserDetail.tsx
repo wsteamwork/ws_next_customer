@@ -45,7 +45,7 @@ const UserDetail: FC = (props) => {
                                          district={room.district.data.name}
                                          instantbook={room.instant_book}
                                          roomID={room.id}
-                                         roomName={room.room.details.data[0].name}
+                                         roomName={room.details.data[0].name}
                                          roomNumber={room.number_room}
                                          roomType={room.room_type_txt}
                                          roomImage={room.media.data[0].image}

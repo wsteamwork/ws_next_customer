@@ -1,8 +1,8 @@
-import React, { FC, Dispatch, SetStateAction, Fragment } from 'react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Grid, IconButton, Typography } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { RemoveCircleOutline, AddCircleOutline } from '@material-ui/icons';
+import { Grid, IconButton } from '@material-ui/core';
+import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
+import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
 
 interface Iprops {
   icon?: IconDefinition;
@@ -10,13 +10,14 @@ interface Iprops {
   number: number;
   setNumber: Dispatch<SetStateAction<number>>;
   step?: number;
+  minimumValue?: number;
 }
 
 const QuantityButtons: FC<Iprops> = (props) => {
-  const { icon, title, number, setNumber, step } = props;
+  const { icon, title, number, setNumber, step, minimumValue } = props;
 
   const handleDecrement = () => {
-    if (number === 0) {
+    if (number === minimumValue) {
       return;
     }
     if (step) {
@@ -35,9 +36,7 @@ const QuantityButtons: FC<Iprops> = (props) => {
   };
 
   return (
-    <Grid
-      container
-      className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}>
+    <Grid container className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}>
       <Grid item xs={8} className="flex_columCenter">
         <p>
           {icon ? (
@@ -72,6 +71,10 @@ const QuantityButtons: FC<Iprops> = (props) => {
       </Grid>
     </Grid>
   );
+};
+
+QuantityButtons.defaultProps = {
+  minimumValue: 0
 };
 
 export default QuantityButtons;
