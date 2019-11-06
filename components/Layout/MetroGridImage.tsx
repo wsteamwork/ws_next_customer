@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     title: {
       marginBottom: theme.spacing(3),
-      fontWeight: 900
+      fontWeight: 700
     },
     paddingGrid: {
       padding: 4

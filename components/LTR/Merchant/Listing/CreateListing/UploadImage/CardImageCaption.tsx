@@ -2,21 +2,11 @@ import { ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Ste
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  CardActions,
-  createStyles,
-  Grid,
-  makeStyles,
-  TextField,
-  Theme,
-  Tooltip,
-  Typography,
-  Button
-} from '@material-ui/core';
+import { CardActions, createStyles, Grid, makeStyles, TextField, Theme, Tooltip, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import React, { ChangeEvent, FC, Fragment, useState, useMemo, useEffect } from 'react';
+import React, { ChangeEvent, FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -132,8 +122,8 @@ const CardImageCaption: FC<IProps> = (props) => {
                   </CardActions>
                 </Tooltip>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <Card>
                 <CardMedia
                   className={classes.media}

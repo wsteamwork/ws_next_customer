@@ -1,10 +1,7 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
@@ -16,7 +13,7 @@ import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-interface IProps {}
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -184,20 +181,23 @@ const Location: FC<IProps> = (props) => {
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
           return (
             <form onSubmit={handleSubmit}>
-              <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
-              <Geosuggest
-                country="vn"
-                placeholder="Nhập địa chỉ"
-                onSuggestSelect={onSuggestSelect}
-                location={new google.maps.LatLng(53.558572, 9.9278215)}
-                radius={20}
-                onChange={handleChangeAddress(setFieldValue)}
-                onBlur={() => {
-                  setFieldTouched('address', true);
-                }}
-                value={values.address}
-                name="address"
-              />
+              <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+
+                <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
+                <Geosuggest
+                  country="vn"
+                  placeholder="Nhập địa chỉ"
+                  onSuggestSelect={onSuggestSelect}
+                  location={new google.maps.LatLng(53.558572, 9.9278215)}
+                  radius={20}
+                  onChange={handleChangeAddress(setFieldValue)}
+                  // onBlur={() => {
+                  //   setFieldTouched('address', true);
+                  // }}
+                  value={values.address}
+                  name="address"
+                />
+              </Grid>
 
               {touched.address && <InputFeedback error={errors.address} />}
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
@@ -223,7 +223,7 @@ const Location: FC<IProps> = (props) => {
                 </FormControl>
               </Grid>
               <Grid container style={{ display: 'flex' }}>
-                <Grid item xs={10} md={7} style={{ paddingRight: 20 }}>
+                <Grid item xs={10} md={7}>
                   <Grid style={{ marginBottom: 32 }}>
                     <h3
                       style={{
@@ -248,7 +248,7 @@ const Location: FC<IProps> = (props) => {
                     {touched.city && <InputFeedback error={errors.city} />}
                   </Grid>
                 </Grid>
-                <Grid className="box-district"item xs={10} md={5}>
+                <Grid className="box-district" item xs={10} md={5}>
                   <SelectCustom
                     name="district"
                     // onChange={handleChangeSelect}

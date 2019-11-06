@@ -25,7 +25,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       margin: '1rem 0 0.35rem 0'
     },
     rowMargin: {
@@ -114,10 +114,10 @@ const BoxAmenities: FC<IProps> = (props) => {
 
       <div>
         <Typography variant='subtitle1' className={classes.roomName}>
-          Tiện nghi chung
+          {t('longtermroom:amenitiesCommon')}
         </Typography>
         {facilities === undefined || facilities.length === 0 ? (
-          <Typography>Không có dữ liệu</Typography>
+          <Typography>{t('longtermroom:notFoundData')}</Typography>
         ) : (
             <Grid container spacing={2}>
               {facilities.map((o, i) => {
@@ -144,40 +144,10 @@ const BoxAmenities: FC<IProps> = (props) => {
 
       <div>
         <Typography variant='subtitle1' className={classes.roomName}>
-          Phòng ngủ
-        </Typography>
-        {bedrooms === undefined || bedrooms.length === 0 ? (
-          <Typography>Không có dữ liệu</Typography>
-        ) : (
-            <Grid container spacing={2}>
-              {bedrooms.map((o, i) => {
-                if (i < 6) return (
-                  <Fragment key={i}>
-                    <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
-                        <img
-                          src={o.icon}
-                          alt={o.type_txt}
-                          className={classes.roomAmenitiesIcon}
-                        />
-                      </Grid>
-                      <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                      </Grid>
-                    </Grid>
-                  </Fragment>
-                )
-              })}
-            </Grid>
-          )}
-      </div>
-
-      <div>
-        <Typography variant='subtitle1' className={classes.roomName}>
-          Phòng tắm
+          {t('longtermroom:bathrooms')}
         </Typography>
         {bathrooms === undefined || bathrooms.length === 0 ? (
-          <Typography>Không có dữ liệu</Typography>
+          <Typography>{t('longtermroom:notFoundData')}</Typography>
         ) : (
             <Grid container spacing={2}>
               {bathrooms.map((o, i) => {

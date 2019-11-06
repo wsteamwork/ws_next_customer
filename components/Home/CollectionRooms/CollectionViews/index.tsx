@@ -24,7 +24,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     title: {
       marginBottom: theme.spacing(3),
-      fontWeight: 900,
+      fontWeight: 700,
     },
     paddingItem: {
       padding: theme.spacing(1 / 2)

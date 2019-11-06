@@ -7,7 +7,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
-import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
@@ -264,8 +263,12 @@ const RoomCardItem: FC<IProps> = (props) => {
       }
     }
   };
-  const openPreviewRoom = (room_id: number) => {
-    window.open(`/preview-room/${room_id}`, `_blank`);
+  const openPreviewRoomShortTerm = (room_id: number, status: number) => {
+    status != 1 ? window.open(`/preview-room/${room_id}`, `_blank`) : window.open(`/room/${room_id}`, `_blank`)
+  };
+  const openPreviewRoomLongTerm = (room_id: number, status: number) => {
+    // window.open(`/preview-long-term-room/${room_id}`, `_blank`);
+    status != 1 ? window.open(`/preview-long-term-room/${room_id}`, `_blank`) : window.open(`/long-term-room/${room_id}`, `_blank`);
   };
 
   return (
@@ -310,18 +313,6 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <EditIcon className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip
-                          title={t('roomlist:tooltipPreviewRoom')}
-                          placement="bottom"
-                          classes={{ tooltip: 'tooltip' }}>
-                          <IconButton
-                            color="primary"
-                            className={classes.IconButton}
-                            aria-label="Search"
-                            onClick={() => openPreviewRoom(room.id)}>
-                            <SearchIcon className={classes.sizeButton} />
-                          </IconButton>
-                        </Tooltip>
                       </Grid>
                     </Grid>
                   </Hidden>
@@ -336,11 +327,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                               target="_blank">
                               {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
-                                <img
-                                  src={'/static/images/verified.svg'}
-                                  alt="Verified"
-                                  className={classes.iconVerified}
-                                />
+                                <Tooltip
+                                  title={`Verified`}
+                                  placement="bottom"
+                                  classes={{ tooltip: 'tooltip' }}>
+                                  <img
+                                    src={'/static/images/verified.svg'}
+                                    alt="Verified"
+                                    className={classes.iconVerified}
+                                  />
+                                </Tooltip>
                               ) : (
                                   ''
                                 )}
@@ -362,25 +358,13 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   <EditIcon className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
-                              <Tooltip
-                                title={t('roomlist:tooltipPreviewRoom')}
-                                placement="bottom"
-                                classes={{ tooltip: 'tooltip' }}>
-                                <IconButton
-                                  color="primary"
-                                  className={classes.IconButton}
-                                  aria-label="Search"
-                                  onClick={() => openPreviewRoom(room.id)}>
-                                  <SearchIcon className={classes.sizeButton} />
-                                </IconButton>
-                              </Tooltip>
                             </Grid>
                           </Grid>
                         </Hidden>
                       </Grid>
                       <Grid className={classes.price}>
                         <Grid container item xs={12} sm={12} lg={10} spacing={1}>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -394,7 +378,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           </Grid>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -412,7 +396,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </Grid>
                           </Grid>
 
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -426,7 +410,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           </Grid>
-                          <Grid item xs={6} sm={3} lg={6} xl={3} className={classes.wrapperIcon}>
+                          <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
@@ -580,9 +564,25 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
-                      <Typography variant="subtitle1" className={classes.priceDay}>
-                        {t('roomlist:shortTerm')}
-                      </Typography>
+                      <HtmlTooltip
+                        placement="bottom-end"
+                        title={`Xem phòng ngắn`}
+                        style={{ cursor: 'pointer' }}>
+                        <Typography
+                          variant="subtitle1"
+                          className={classes.priceDay}
+                          onClick={() => openPreviewRoomShortTerm(room.room_id, room.short_term_room.status)}>
+
+                          {t('roomlist:shortTerm')}
+                          <img
+                            src={'/static/preview.svg'}
+                            width={16}
+                            height={16}
+                            style={{ marginLeft: 4 }}
+                          />
+                        </Typography>
+                      </HtmlTooltip>
+
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.short_term_rent_type.rent_type === 3
                           ? t('roomlist:dayAndHour')
@@ -602,9 +602,23 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
-                      <Typography variant="subtitle1" className={classes.priceDay}>
-                        {t('roomlist:longTerm')}
-                      </Typography>
+                      <HtmlTooltip
+                        placement="bottom-end"
+                        title={`Xem phòng dài hạn`}
+                        style={{ cursor: 'pointer' }}>
+                        <Typography
+                          variant="subtitle1"
+                          className={classes.priceDay}
+                          onClick={() => openPreviewRoomLongTerm(room.id, room.status)}>
+                          {t('roomlist:longTerm')}
+                          <img
+                            src={'/static/preview.svg'}
+                            width={16}
+                            height={16}
+                            style={{ marginLeft: 4 }}
+                          />
+                        </Typography>
+                      </HtmlTooltip>
                       <Typography variant={'body1'} className={classes.subLabel}>
                         {room.status === 0 ? t('roomlist:locked') : t('roomlist:byMonth')}
                       </Typography>

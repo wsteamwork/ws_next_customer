@@ -1,7 +1,7 @@
 import { updateObject } from '@/store/Context/utility';
-import { Dispatch, Reducer } from 'redux';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 import { axios_merchant } from '@/utils/axiosInstance';
+import { Reducer } from 'redux';
 
 interface Coordinate {
   lat: number;

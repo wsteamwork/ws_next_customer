@@ -8,6 +8,7 @@ import { FC, Fragment, useEffect, useState } from 'react';
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const VerifyPhone: FC = (props) => {
   const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);
@@ -16,6 +17,7 @@ const VerifyPhone: FC = (props) => {
     phoneNumber: profile.phone
   });
   const [isSentSms, setIsSentSms] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (verification.code && verification.code.length == 6) {
@@ -48,7 +50,9 @@ const VerifyPhone: FC = (props) => {
     };
     const res: any = await axios.post(`verify-phone`, req);
     try {
-      if (res) console.log(res);
+      if (res) {
+        // console.log(res);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -130,8 +134,8 @@ const VerifyPhone: FC = (props) => {
               <ButtonGlobal
                 disabled={!verification.phoneNumber || !isValidPhoneNumber(verification.phoneNumber)}
                 onClick={confirmPhoneNumber}>
-                Confirm Phone Number
-          </ButtonGlobal>
+                {t('profile:confirmPhoneNumber')}
+              </ButtonGlobal>
             </Fragment>
           )}
     </Fragment>

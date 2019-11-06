@@ -9,11 +9,11 @@ import DialogFullImage from './DialogFullImage';
 
 interface IProps {
   classes?: any,
-  livingrooms: ImagesRes,
-  outdoors: ImagesRes,
-  furnitures: ImagesRes,
-  kitchens: ImagesRes,
-  cover_photo: ImagesRes,
+  livingrooms: ImagesRes | any,
+  outdoors: ImagesRes | any,
+  furnitures: ImagesRes | any,
+  kitchens: ImagesRes | any,
+  cover_photo: ImagesRes | any,
   bedrooms: any,
   bathrooms: any,
   roomName: string
@@ -22,7 +22,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       margin: '1rem 0 0.35rem 0'
     },
     marginImage: {
@@ -34,7 +34,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       cursor: 'pointer',
       maxHeight: 150,
       height: 150,
-      objectFit: 'cover'
+      objectFit: 'cover',
+      backgroundSize: 'cover !important',
+      backgroundPosition: '50% 50% !important',
+      backgroundRepeat: 'no-repeat !important',
     },
     btnImage: {
       position: 'relative',
@@ -119,7 +122,6 @@ const BoxListImageRoom: FC<IProps> = (props) => {
     e.preventDefault();
     setOpenFullImage(!openFullImage);
   };
-
   return (
     <Fragment>
       <Typography variant='h5' className={classes.name}>
@@ -129,11 +131,13 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         {t('longtermroom:discoverSubTitle')}
       </Typography>
 
-      <Grid container spacing={2} alignItems='baseline'>
-        {livingrooms && livingrooms.images.length ? (
+      <Grid container spacing={2} alignItems='center'>
+        {livingrooms.images && livingrooms.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].name} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + livingrooms.images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:livingrooms')}
               </Typography>
@@ -141,10 +145,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
 
-        {bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images.length ? (
+        {bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name} alt={bedrooms.bedroom_1.images[0].caption} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:bedrooms')}
               </Typography>
@@ -152,10 +158,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
 
-        {bathrooms['bathroom_1'] && bathrooms['bathroom_1'].images.length ? (
+        {bathrooms['bathroom_1'] && bathrooms[`bathroom_1`].images && bathrooms['bathroom_1'].images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name} alt={bathrooms['bathroom_1'].images[0].caption} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:bathrooms')}
               </Typography>
@@ -163,10 +171,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
 
-        {kitchens.images.length && kitchens.images ? (
+        {kitchens.images && kitchens.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + kitchens.images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:kitchens')}
               </Typography>
@@ -174,10 +184,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
 
-        {furnitures.images.length && furnitures.images ? (
+        {furnitures.images && furnitures.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + furnitures.images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:furnitures')}
               </Typography>
@@ -185,10 +197,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
 
-        {outdoors.images.length && outdoors.images ? (
+        {outdoors.images && outdoors.images.length ? (
           <Grid item xs={6} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
-              <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + outdoors.images[0].name}')` }}
+                className={classes.images}/>
               <Typography variant='subtitle2'>
                 {t('longtermroom:outdoors')}
               </Typography>
@@ -206,7 +220,9 @@ const BoxListImageRoom: FC<IProps> = (props) => {
                 width: '100%',
               }}
             >
-              <img src={IMAGE_STORAGE_LG + cover_photo.images[0].name} alt='cover' className={classes.images} />
+              <div
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + cover_photo.images[0].name}')` }} className={classes.images}/>
+
               <span
                 className={classes.imageSrc}
               />
@@ -224,7 +240,13 @@ const BoxListImageRoom: FC<IProps> = (props) => {
               </span>
             </ButtonBase>
           </Grid>
-        ) : <Fragment />}
+        ) : (
+          <Grid item xs={12}>
+            <Typography variant='subtitle2' gutterBottom>
+              {t('room:notFoundContent')}
+            </Typography>
+          </Grid>
+        )}
       </Grid>
 
       <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}

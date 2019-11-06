@@ -11,12 +11,30 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: 'Helvetica Neue';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/Helvetica/helvetica-neue-regular.ttf');
+  /* IE9 Compat Modes */
+  src: local('Helvetica Neue'), local('HelveticaNeue'),
+
+    url('/static/Helvetica/helvetica-neue-regular.ttf') format('ttf'),
+    /* Modern Browsers */
+    url('/static/Helvetica/helvetica-neue-regular.ttf') format('ttf'),
+    /* Safari, Android, iOS */
+
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: "Montserrat Alternates", "Quicksand", sans-serif;
+  // font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
   -webkit-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
   -moz-box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   color: $secondaryText;
   background-color: $backgroundWhite;
@@ -25,17 +43,22 @@ body {
   line-height: 1.5;
 }
 
-html{
-  min-height:100%;/* make sure it is at least as tall as the viewport */
-  position:relative;
+html {
+  min-height: 100%;
+  /* make sure it is at least as tall as the viewport */
+  position: relative;
 }
-body{
-  height:100%; /* force the BODY element to match the height of the HTML element */
+
+body {
+  height: 100%;
+  /* force the BODY element to match the height of the HTML element */
 }
+
 a {
   // display: block;
   // color: $secondaryText !important;
   text-decoration: none;
+
   &:hover {
     text-decoration: none !important;
   }

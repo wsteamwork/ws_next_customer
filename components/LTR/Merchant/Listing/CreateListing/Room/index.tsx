@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
 import AddBedRoom from './AddBedRoom';
 
-interface IProps {}
+interface IProps { }
 
 interface FormValues {
   bedsNumber: number;
@@ -91,7 +91,7 @@ const Room: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (bedRoomsList) {
-      console.log('bedRoomsList', bedRoomsList);
+      // console.log('bedRoomsList', bedRoomsList);
       let totalBedsNumberInList = 0;
 
       _.times(bedRoomsList.number_bedroom, (i) => {
@@ -278,6 +278,7 @@ const Room: FC<IProps> = (props) => {
               </h3>
               {bedRoomsNumberArray(bedRoomsNumber).map((number) => (
                 <AddBedRoom
+                  key={number}
                   setErrorsBedsNumber={setErrorsBedsNumber}
                   // setTotalBedsNumber={setTotalBedsNumber}
                   roomNumber={number}

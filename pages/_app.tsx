@@ -1,18 +1,18 @@
-import React from 'react';
-import App, { Container, AppProps, AppContext } from 'next/app';
+import { makeStore, windowExist } from '@/store/Redux';
+import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
+import '@/styles/font.css';
+import '@/styles/index.scss';
+import ProviderGlobal from '@/utils/ProviderGlobal';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import withRedux, { NextJSContext } from 'next-redux-wrapper';
+import App, { AppContext, AppProps, Container } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import '@/styles/index.scss';
-import '@/styles/font.css';
-import 'tippy.js/themes/light-border.css';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import ProviderGlobal from '@/utils/ProviderGlobal';
-import { PersistGate } from 'redux-persist/integration/react';
+import React from 'react';
 import { Provider } from 'react-redux';
-import withRedux, { NextJSContext } from 'next-redux-wrapper';
-import { makeStore, windowExist } from '@/store/Redux';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
+import { PersistGate } from 'redux-persist/integration/react';
+import 'tippy.js/themes/light-border.css';
 // import ''
 config.autoAddCss = false;
 

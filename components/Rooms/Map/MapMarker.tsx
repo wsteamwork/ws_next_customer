@@ -21,7 +21,7 @@ const MapMarker: FC<IProps> = (props) => {
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
   const avatarImg = room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image ? room.avatar_image : './static/images/westay-avatar.jpg';
   const priceOnMap = leaseTypeGlobal ? room.price_display : room.price_day;
-
+  // console.log(room);
   const cardRoom = useMemo(() => {
     if (leaseTypeGlobal) {
       return (
@@ -42,7 +42,7 @@ const MapMarker: FC<IProps> = (props) => {
           district={room.district.data.name}
           instantbook={room.instant_book}
           roomID={room.id}
-          roomName={room.details ? room.details.data[0].name : room.room_name}
+          roomName={room.room_name}
           roomNumber={room.number_room}
           roomType={room.room_type_txt}
           roomImage={room.media ? room.media.data[0].image : avatarImg}

@@ -1,10 +1,14 @@
 import RoomListHost from '@/components/LTR/Merchant/Listing/RoomList';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
-import { NextPage } from 'next';
-import React, { Fragment } from 'react';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { Breadcrumbs, Grid, Link, Theme, Typography } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { Grid, Breadcrumbs, Link, Typography, Theme } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -18,6 +22,16 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const RoomList: NextPage = (props) => {
   const classes = useStyles(props);
+
+  const [cookies] = useCookies(['_token']);
+
+  const error = useSelector<ReducersList, boolean>((state) => state.iProfile.error);
+  const { router } = useContext(GlobalContext);
+
+  useEffect(() => {
+    !!error && router.push('/auth/signin');
+    !cookies._token && router.push('/auth/signin');
+  }, [error]);
   return (
     <Fragment>
       <NavHeader_Merchant />
@@ -33,7 +47,10 @@ const RoomList: NextPage = (props) => {
           </Breadcrumbs>
         </Grid>
       </Grid>
-      <RoomListHost />
+      {!!cookies._token ? (
+        <RoomListHost />
+      ) : ''}
+
     </Fragment>
   );
 };

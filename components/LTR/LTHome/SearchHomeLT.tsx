@@ -71,9 +71,9 @@ const SearchHomeLT: FC<IProps> = (props) => {
     });
   };
 
-  const locationRoom = (nameCity: string) => {
-    updateRouter('/long-term-rooms', true, 'name', nameCity);
-    dispatchSearch({ type: 'SET_SEARCH_TEXT', searchText: nameCity })
+  const locationRoom = (cityId: number) => {
+    updateRouter('/long-term-rooms', true, 'name', cityId);
+    dispatchSearch({ type: 'SET_SEARCH_CITY', city_id: cityId })
   };
 
   let numRecommend: number;
@@ -111,9 +111,12 @@ const SearchHomeLT: FC<IProps> = (props) => {
 
                 {cities ? cities.map((o, i) => (
                   i < numRecommend ? (
-                    <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
-                      {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
-                </Button>
+                    // <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
+                    //   {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
+                    // </Button>
+                    <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.city_id)}>
+                      {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city}
+                    </Button>
                   ) : null
                 )) : ''}
               </Grid>

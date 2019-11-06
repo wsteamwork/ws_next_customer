@@ -27,13 +27,15 @@
     }
   }
 
-  &__disabledBoxBooking, &__disabledBoxBookingMoblie, &__disabledBoxSearch{
+  &__disabledBoxBooking,
+  &__disabledBoxBookingMoblie,
+  &__disabledBoxSearch {
     pointer-events: none;
-    opacity: 0.5;
+    // opacity: 0.5;
   }
 
-  .Lottie_iconHeart{
-    width:60px;
+  .Lottie_iconHeart {
+    width: 60px;
     height: 60px;
     cursor: pointer;
   }

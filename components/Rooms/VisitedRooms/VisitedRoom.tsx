@@ -1,16 +1,16 @@
-import React, { FC, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { formatPrice } from '@/utils/mixins';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { formatPrice } from '@/utils/mixins';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import Hidden from '@material-ui/core/Hidden';
-import { useTranslation } from 'react-i18next';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import React, { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {

@@ -21,12 +21,13 @@ interface IProps {
   total_area?: number,
   avg_rating_txt: string,
   showBed?: boolean,
+  isPreviewPage?: boolean,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     roomName: {
-      fontWeight: 900
+      fontWeight: 700
     },
     roomId: {
       marginTop: '-10px',
@@ -46,10 +47,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area } = props;
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const { router } = useContext(GlobalContext);
-  const isPreviewPage = router.pathname.includes('preview-room');
+  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area, isPreviewPage } = props;
 
   const arrMenuItem = (x: number): any[] => {
     let i = 1;

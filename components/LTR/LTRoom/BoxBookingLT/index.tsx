@@ -8,14 +8,13 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
-  priceBasic: number;
+  priceBasic: number | string;
   id: number;
   avatar: string;
   avatar_url: string;
   name: string;
-  term: string;
   number_room: number;
-  handleOpenBookingDialog: any;
+  handleOpenBookingDialog?: any;
 
 }
 
@@ -42,18 +41,14 @@ const BoxBookingLT: FC<IProps> = (props) => {
     name,
     number_room,
     priceBasic,
-    term,
     handleOpenBookingDialog,
   } = props;
-
   const { t } = useTranslation();
-
-
 
   return (
     <div className={classes.boxContainer}>
       <Typography variant="h6">{formatMoney(priceBasic)} {t('longtermroom:currency')}</Typography>
-      <Typography variant="subtitle2">{term}</Typography>
+      <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
 
       <div className={classes.rowMargin}>
         <ButtonGlobal padding="0px" width="100%" onClick={handleOpenBookingDialog}>
@@ -63,8 +58,6 @@ const BoxBookingLT: FC<IProps> = (props) => {
           </p>
         </ButtonGlobal>
       </div>
-
-
 
       <Divider className={classes.rowMargin} />
 

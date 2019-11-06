@@ -127,7 +127,6 @@ const UpdateListing: FC<IProps> = (props) => {
   const id = router.query.id;
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
-  const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing

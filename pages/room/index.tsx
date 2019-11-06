@@ -17,7 +17,7 @@ import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
@@ -58,7 +58,7 @@ const Room: NextPage = () => {
             room.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media.data[0].image}`}
+          ogImage={`${IMAGE_STORAGE_SM}${room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image}`}
         />
       )}
 

@@ -53,7 +53,7 @@ const BedRoom: FC<IProps> = (props) => {
       if (bedRoomsList.hasOwnProperty(`bedroom_${roomNumber}`)) {
         let bedsList = [];
         let bedRoomsListTemp: BedRoomReq = JSON.parse(JSON.stringify(bedRoomsList));
-        console.log('bedRoomsListTemp', bedRoomsListTemp);
+        // console.log('bedRoomsListTemp', bedRoomsListTemp);
         if (single > 0) bedsList.push({ number_bed: single, size: 1 });
         if (double > 0) bedsList.push({ number_bed: double, size: 2 });
         if (king > 0) bedsList.push({ number_bed: king, size: 3 });

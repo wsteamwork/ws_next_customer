@@ -2,10 +2,12 @@
   &:focus {
     outline: none;
   }
+
   &__wrapper {
     width: 100% !important;
     height: 100% !important;
     padding: 8px;
+
     &:focus {
       outline: none;
     }
@@ -57,6 +59,7 @@
         display: block;
         color: rgb(72, 72, 72);
         text-decoration: none;
+
         .iconWrapper {
           display: inline-block !important;
           vertical-align: bottom;
@@ -64,26 +67,31 @@
           height: 25px;
           margin-right: 5px;
         }
+
         .instantBookIcon {
           color: #fa991c;
         }
+
         .info {
           .price {
             margin-top: 5px;
             display: flex;
+
             .hourPrice {
               margin-left: 6px;
             }
           }
+
           .roomCard__type {
             color: #fa991c !important;
 
             text-transform: uppercase !important;
-            font-family: "Montserrat Alternates", "Quicksand", sans-serif !important;
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
 
             font-size: 12px !important;
             font-weight: 700 !important;
           }
+
           .roomCard__name {
             font-size: 0.85rem !important;
             font-weight: 600 !important;
@@ -95,6 +103,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
           }
+
           .roomCard__address {
             font-size: 0.8rem !important;
             font-weight: 500 !important;
@@ -112,23 +121,27 @@
             margin-top: 2px;
             margin-left: -4px;
             align-items: center;
+
             .starIcon {
               width: 20px;
               height: 20px;
               color: #ffc212;
             }
+
             .text {
               display: inline-block;
             }
+
             .rating {
               font-weight: 700;
               margin-right: 2px;
             }
+
             .totalReview {
               font-size: 14px;
               font-weight: 500;
             }
-            
+
           }
         }
       }

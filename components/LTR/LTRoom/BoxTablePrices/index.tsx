@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       overflow: 'hidden',
     },
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       margin: '1rem 0 1rem 0'
     },
     heading: {
@@ -72,14 +72,23 @@ const BoxTablePrices: FC<IProps> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {prices.map((o, i) => (
-              <StyledTableRow key={i}>
+            {prices && prices.length ? (
+              prices.map((o, i) => (
+                  <StyledTableRow key={i}>
+                    <StyledTableCell component="th" scope="row">
+                      {o.term}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
+                  </StyledTableRow>
+                ))
+            ) : (
+              <StyledTableRow>
                 <StyledTableCell component="th" scope="row">
-                  {o.term}
+                  {t('longtermroom:notFoundData')}
                 </StyledTableCell>
-                <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
+                <StyledTableCell align="right">0</StyledTableCell>
               </StyledTableRow>
-            ))}
+            )}
           </TableBody>
 
           {included_services && included_services.length ? (

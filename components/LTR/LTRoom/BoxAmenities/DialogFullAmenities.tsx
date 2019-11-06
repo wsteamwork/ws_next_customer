@@ -83,7 +83,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
         </IconButton>
 
         <Typography variant="h6" className={classes.title}>
-          Amenities
+          {t('longtermroom:amenitiesOfRoom')}
         </Typography>
       </DialogTitle>
 

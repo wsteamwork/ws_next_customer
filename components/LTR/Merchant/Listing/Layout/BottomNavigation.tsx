@@ -1,11 +1,13 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { FC, Fragment, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import BottomMdNavigation from './BottomMdNavigation';
 
 interface IProps {
@@ -33,6 +35,8 @@ const BottomNavigation: FC<IProps> = (props) => {
   const currentActiveStep = useSelector<ReducersList, string>(
     (state) => state.process.currentActiveStep
   );
+  const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
+
   useEffect(() => {
     let step = localStorage.getItem('currentStep');
     if (window.performance) {
@@ -68,10 +72,11 @@ const BottomNavigation: FC<IProps> = (props) => {
       } else {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleBack = () => {
+    dispatch_detail({ type: 'setDisableNext', payload: false });
     if (activeStep === 0) {
       Router.back();
     } else {
@@ -110,10 +115,10 @@ const BottomNavigation: FC<IProps> = (props) => {
                 Finish
               </ButtonGlobal>
             ) : (
-              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-                Next
+                <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                  Next
               </ButtonGlobal>
-            )
+              )
           }
           backButton={
             <Button className="prev-link" disabled={activeStep === 0} onClick={handleBack}>

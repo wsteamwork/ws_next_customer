@@ -5,11 +5,12 @@ import TablePrices from '@/components/Room/BoxRoomDetail/TablePrices';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import EmptyRoomCalendar from './EmptyRoomCalendar';
 import RoomAmenities from './RoomAmenities/index';
 import RoomBasic from './RoomBasic/index';
 import RoomDescription from './RoomDescription/index';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -39,6 +40,8 @@ interface IProps {
 const BoxRoomDetail: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { room } = props;
+  const { router } = useContext(GlobalContext);
+  const isPreviewPage = router.pathname.includes('preview-room');
 
   return (
     <Fragment>
@@ -47,7 +50,9 @@ const BoxRoomDetail: FC<IProps> = (props) => {
           <Grid item md={12} lg={12}>
             <Grid container spacing={1} justify='center'>
               <Grid item xs={11} sm={8} md={9} lg={8} xl={9}>
-                <RoomBasic name={room.details.data[0].name}
+                <RoomBasic
+                  isPreviewPage={isPreviewPage}
+                  name={room.details.data[0].name}
                   id={room.id} bathroom={room.bathroom}
                   max_additional_guest={room.max_additional_guest}
                   max_guest={room.max_guest}
@@ -68,7 +73,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={12} lg={10} xl={9}>
                 <div className={classes.rowMargin}>
-                  <RoomDescription description={room.details.data[0].description} note={room.details.data[0].note} space={room.details.data[0].space} />
+                  <RoomDescription description={room.details.data[0].description} note={room.details.data[0].note} space={room.details.data[0].space} isPreviewPage={isPreviewPage}/>
                 </div>
                 <div className={classes.rowMargin}>
                   <RoomAmenities room={room} />

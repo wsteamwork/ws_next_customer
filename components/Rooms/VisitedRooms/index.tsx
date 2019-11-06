@@ -1,19 +1,19 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import VisitedRoom from './VisitedRoom';
+import { Grid, Theme } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
+import VisitedRoom from './VisitedRoom';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     label: {
       textAlign: 'left',
-      fontWeight: 900,
+      fontWeight: 700,
       marginBottom: theme.spacing(2),
       marginTop: theme.spacing(4)
     }
