@@ -566,7 +566,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <HtmlTooltip
                         placement="bottom-end"
-                        title={`Xem phòng ngắn`}
+                        title={`Xem phòng ngắn hạn`}
                         style={{ cursor: 'pointer' }}>
                         <Typography
                           variant="subtitle1"
