@@ -1,6 +1,5 @@
 import { makeStore, windowExist } from '@/store/Redux';
 import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
-import '@/styles/font.css';
 import '@/styles/index.scss';
 import ProviderGlobal from '@/utils/ProviderGlobal';
 import { config } from '@fortawesome/fontawesome-svg-core';
