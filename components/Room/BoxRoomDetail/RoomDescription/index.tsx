@@ -46,16 +46,15 @@ interface IProps {
   description: string,
   space: string,
   note: string,
+  isPreviewPage?:boolean,
 }
 
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const { description, note, space } = props;
+  const { description, note, space, isPreviewPage } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { router } = useContext(GlobalContext);
-  const isPreviewPage = router.pathname.includes('preview-room');
 
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();

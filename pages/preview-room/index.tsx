@@ -3,8 +3,6 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import BoxBooking from '@/components/Room/BoxBooking';
 import BoxImage from '@/components/Room/BoxImage';
 import BoxRoomDetail from '@/components/Room/BoxRoomDetail';
-// import BoxSearch from '@/components/Room/BoxSearch';
-// import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavBottomBook from '@/components/Room/NavBottomBook';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -13,11 +11,10 @@ import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useReducer } from 'react';
 import { useSelector } from 'react-redux';
-// import Cookies from 'universal-cookie';
 const PreviewRoom: NextPage = () => {
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
@@ -30,12 +27,6 @@ const PreviewRoom: NextPage = () => {
 
       <RoomDetailsContext.Provider value={{ state, dispatch }}>
         <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-          {/* <Hidden mdDown implementation="css">
-            <div className="roomPage__disabledBoxSearch">
-              <BoxSearch isPreview={isPreviewPage} />
-            </div>
-          </Hidden> */}
-
           <BoxImage isPreview={isPreviewPage} />
 
           <Grid container>
@@ -52,10 +43,6 @@ const PreviewRoom: NextPage = () => {
               className="roomPage__disabledBoxBooking roomPage__boxBooking">
               <BoxBooking />
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <BoxRecommend />
-            </Grid> */}
           </Grid>
           <Grid container className="roomPage__disabledBoxBookingMoblie roomPage__boxBookingMoblie">
             <NavBottomBook />

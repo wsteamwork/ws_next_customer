@@ -6,7 +6,6 @@ import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
 import NextHead from '@/components/NextHead';
-// import BoxRecommend from '@/components/Room/BoxRecommend';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -17,8 +16,9 @@ import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useMemo, useState } from 'react';
+import React, { Fragment, useContext, useMemo, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 
 
 const LongtermRoom: NextPage = () => {
@@ -35,20 +35,20 @@ const LongtermRoom: NextPage = () => {
     setOpenBookingDialog(false);
   };
 
-  // useEffect(() => {
-  //   if (error || !ltroom.status) router.push('/not-found-resource');
-  //
-  // }, [error]);
-  //
-  // if (error || !ltroom.status) {
-  //   return (
-  //     <div>
-  //       <NavHeader />
-  //       <ContentPlaceHolder />
-  //       <Footer />
-  //     </div>
-  //   )
-  // }
+  useEffect(() => {
+    if (error || !ltroom.status) router.push('/not-found-resource');
+
+  }, [error]);
+
+  if (error || !ltroom.status) {
+    return (
+      <div>
+        <NavHeader />
+        <ContentPlaceHolder />
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <Fragment>
@@ -75,7 +75,6 @@ const LongtermRoom: NextPage = () => {
             {ltroom ? (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
                 <BoxImageLT
-                  roomName={ltroom.about_room.name}
                   livingrooms={ltroom.livingrooms}
                   kitchens={ltroom.kitchens}
                   bathrooms={ltroom.bathrooms}
@@ -90,8 +89,7 @@ const LongtermRoom: NextPage = () => {
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
                     <BoxBookingLT
-                      priceBasic={ltroom.prices.prices[0].price}
-                      term={ltroom.prices.prices[0].term}
+                      priceBasic={ltroom.price_display}
                       id={ltroom.merchant.data.id}
                       avatar={ltroom.merchant.data.avatar}
                       avatar_url={ltroom.merchant.data.avatar_url}
@@ -100,22 +98,15 @@ const LongtermRoom: NextPage = () => {
                       handleOpenBookingDialog={handleOpenBookingDialog}
                     />
                   </Grid>
-
-                  {/* <Grid item xs={12}>
-                    <BoxRecommend />
-                  </Grid> */}
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">
                   <BoxBottomBooking
-                    priceBasic={ltroom.prices.prices[0].price}
-                    term={ltroom.prices.prices[0].term}
+                    priceBasic={ltroom.price_display}
                     handleOpenBookingDialog={handleOpenBookingDialog}
                   />
                 </Grid>
               </GridContainer>
-            ) : (
-                ''
-              )}
+            ) : ''}
           </Fragment>
         ),
         [ltroom]
@@ -124,7 +115,6 @@ const LongtermRoom: NextPage = () => {
         fullScreen
         open={openBookingDialog}
         onClose={handleCloseBookingDialog}
-      // TransitionComponent={Transition}
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>

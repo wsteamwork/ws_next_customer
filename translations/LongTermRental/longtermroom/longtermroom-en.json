@@ -6,6 +6,7 @@
     "priceIncludedFee": "Following fee is included in rent prices",
     "viewSchedule": "Rent this room",
     "amenitiesOfRoom": "All amenities included in this accommodation",
+    "amenitiesCommon": "Amenities common",
     "discover": "Take a tour",
     "discoverSubTitle": "All information about the apartment is presented to help you have the most intuitive and accurate look",
     "livingrooms": "Livingroom",
@@ -14,6 +15,7 @@
     "kitchens": "Kitchen",
     "furnitures": "Furnitures",
     "outdoors": "Outdoor",
-    "allImages": "All Photos"
-
+    "allImages": "All Photos",
+    "priceBasic": "Basic price in term of 1-2 months",
+    "notFoundData": "Not found data!"
 }
