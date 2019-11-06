@@ -39,6 +39,11 @@ import { combineReducers, Reducer, Store } from 'redux';
 import { BookActions, bookReducer, BookState } from './Book/book';
 import { RoomHomepageAction, roomHomepageReducer, RoomHomepageState } from './Home/roomHomepage';
 import {
+  bookingListReducer,
+  BookingListReducerAction,
+  BookingListReducerState
+} from './LTR/BookingList/bookinglist';
+import {
   processReducer,
   ProcessReducerAction,
   ProcessReducerState
@@ -88,7 +93,6 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
-import { BookingListReducerState, BookingListReducerAction, bookingListReducer } from './LTR/BookingList/bookinglist';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;

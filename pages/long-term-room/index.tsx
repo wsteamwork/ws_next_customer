@@ -6,26 +6,26 @@ import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
 import NextHead from '@/components/NextHead';
+import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
-import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+// import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useMemo, useState, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
-  const [] = useVisitedRoom();
+  // const [] = useVisitedRoom();
   const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);

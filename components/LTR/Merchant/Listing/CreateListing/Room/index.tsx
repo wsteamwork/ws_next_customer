@@ -85,6 +85,9 @@ const Room: FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
+    // console.log('bedsNumber', bedsNumber)
+    // console.log('bedsNumber', totalBedsNumber)
+
     setDisableSubmit(!(bedsNumber == totalBedsNumber));
     if (!(bedsNumber == totalBedsNumber)) scrollToError();
   }, [bedsNumber, totalBedsNumber]);
@@ -93,6 +96,7 @@ const Room: FC<IProps> = (props) => {
     if (bedRoomsList) {
       // console.log('bedRoomsList', bedRoomsList);
       let totalBedsNumberInList = 0;
+      // console.log('bedRoomListInTotal', bedRoomsList)
 
       _.times(bedRoomsList.number_bedroom, (i) => {
         totalBedsNumberInList += bedRoomsList[`bedroom_${i + 1}`].number_bed;
@@ -144,6 +148,8 @@ const Room: FC<IProps> = (props) => {
       type: 'SET_BEDROOMS_NUMBER',
       payload: value
     });
+    bedRoomsList['number_bedroom'] = parseInt(value);
+
     let bedRoomsTemp: any = {};
     if (bedRoomsNumber < parseInt(value)) {
       for (let i = bedRoomsNumber + 1; i <= parseInt(value); i++) {
