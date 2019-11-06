@@ -80,7 +80,7 @@ const styles = (theme: Theme) =>
       textTransform: 'capitalize',
       color: 'white',
       borderRadius: 8,
-      fontFamily: 'Montserrat Alternates, Quicksand, sans-serif',
+      fontFamily: '"Circular", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif !important;',
       fontWeight: 600,
       marginRight: 16,
       MozTransition: 'all 0.5s',
@@ -215,7 +215,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               <Logo />
               <div className={classes.grow} />
               <ButtonGlobal
-                href="https://merchant.westay.vn"
+                href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
                 // color = 'inherit'
                 padding="0px 20px"
                 className={classes.buttonMerchantSite}

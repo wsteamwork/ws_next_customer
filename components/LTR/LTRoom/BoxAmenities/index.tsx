@@ -25,7 +25,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       margin: '1rem 0 0.35rem 0'
     },
     rowMargin: {

@@ -159,7 +159,7 @@ const UpdateCoverPhoto: FC<IProps> = (props) => {
                 </Dialog>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} className={classes.wrapperBtn}>
+            <Grid item xs={12} sm={12} className={classes.wrapperBtn}>
               <Button
                 onClick={handleClick}
                 size="small"

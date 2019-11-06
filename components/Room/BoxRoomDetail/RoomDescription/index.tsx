@@ -14,7 +14,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       lineHeight: '1.8rem'
     },
     name: {
-      fontWeight: 900,
+      fontWeight: 700,
       [theme.breakpoints.down('xs')]: {
         margin: '1.5rem 0 0.4rem 0'
       }

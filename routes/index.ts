@@ -30,7 +30,8 @@ routes
   // .add('collection', '/collection/:id')
   .add('/payment/invoice/:uuid', 'payment/invoice')
   .add('/payment/direct/:uuid', 'payment/direct')
-  .add('host', '/host')
+  // .add('host', '/host')
   .add('create-listing', 'host/create-listing/:id')
   .add('update-listing', 'host/update-listing/:id')
-  .add('room-list', 'host/room-list');
+  .add('room-list', 'host/room-list')
+  .add('booking-list', 'host/booking-list');

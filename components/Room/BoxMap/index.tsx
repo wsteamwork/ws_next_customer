@@ -18,7 +18,7 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
-      fontWeight: 900,
+      fontWeight: 700,
       marginTop: theme.spacing(4),
       marginBottom: theme.spacing(2)
     },

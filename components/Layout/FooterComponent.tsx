@@ -10,7 +10,7 @@ import { faPhoneVolume, faEnvelope, faMapMarkedAlt } from '@fortawesome/free-sol
 import { useTranslation } from 'react-i18next';
 import Logo from '../Toolbar/Logo';
 
-interface IProps {}
+interface IProps { }
 const facebookUrl = 'https://www.facebook.com/westay.vn/';
 const instagramUrl = 'https://www.instagram.com/westay_stayhappytogether/';
 
@@ -200,17 +200,17 @@ const Footer: FC<IProps> = (props) => {
         </div>
       </Hidden>
       <Hidden mdUp>
-      <div className={'itemMobile'}>
-        <GridContainer xs={11} className="textCenter">
-          <Grid style={{ marginBottom: 12 }}>
-            <Logo isFooter={true} />
-          </Grid>
+        <div className={'itemMobile'}>
+          <GridContainer xs={11} className="textCenter">
+            <Grid style={{ marginBottom: 12 }}>
+              <Logo isFooter={true} />
+            </Grid>
 
-          <Grid style={{ fontSize: 16 }}>
-            © {new Date().getFullYear()} {t('layout:footer:rights')}
-          </Grid>
-        </GridContainer>
-      </div>
+            <Grid style={{ fontSize: 16 }}>
+              © {new Date().getFullYear()} {t('layout:footer:rights')}
+            </Grid>
+          </GridContainer>
+        </div>
       </Hidden>
     </div>
   );
