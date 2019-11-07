@@ -12,16 +12,29 @@ import { NextContextPage } from '@/store/Redux/Reducers';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid, Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useReducer, useState, useEffect, useContext } from 'react';
 import HeadRoom from 'react-headroom';
 import { Sticky, StickyContainer } from 'react-sticky';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { isMapOpen } = state;
   const [hideSearchBar, setHideSearchBar] = useState<boolean>(false);
+  const { router } = useContext(GlobalContext);
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
+  if (router.pathname.includes('/long-term-rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 1,
+      leaseTypePathName: !router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
+    });
+  }
   return (
     <Fragment>
       <NextHead
