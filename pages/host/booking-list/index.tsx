@@ -63,7 +63,7 @@ const AntTab = withStyles((theme: Theme) =>
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
 export const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -89,7 +89,7 @@ export const a11yProps = (index: any) => {
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
-        marginTop: 16
+      marginTop: 16
     },
     custom_link_bread: {
       color: '#1d8df7'

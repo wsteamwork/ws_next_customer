@@ -3,14 +3,18 @@ import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AxiosRes, Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Dispatch, Reducer } from 'redux';
+import Router from 'next/router';
+import qs from 'query-string';
 
 export type RoomListReducerState = {
   readonly roomlist: LTRoomIndexRes[];
+  readonly meta: Pagination | null;
   error: boolean;
 };
 
 export const init: RoomListReducerState = {
   roomlist: [],
+  meta: null,
   error: false
 };
 
@@ -24,7 +28,7 @@ export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerActio
 ): RoomListReducerState => {
   switch (action.type) {
     case 'setRoomList':
-      return updateObject(state, { roomlist: action.payload });
+      return updateObject(state, { roomlist: action.payload, meta: action.meta });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -43,10 +47,16 @@ export const getRoomList = async (
     }
   };
   try {
-    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms`, headers);
+    let params = Router.query;
+    let query = {
+      size: 10,
+      page: params.page
+    };
+    const url = `long-term-rooms?${qs.stringify(query)}`;
+    const res: AxiosRes<any> = await axios_merchant.get(url, headers);
     const roomlist = res.data.data;
     if (roomlist) {
-      dispatch({ type: 'setRoomList', payload: roomlist });
+      dispatch({ type: 'setRoomList', payload: roomlist, meta: res.data.meta });
     }
     return roomlist;
   } catch (error) {
