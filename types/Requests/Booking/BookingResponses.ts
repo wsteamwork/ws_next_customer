@@ -92,6 +92,10 @@ export interface LTBookingContracts {
   status: number;
   move_in: string;
   move_out: string;
+  next_payment_due: {
+    payment_due_date: string;
+    payment_amount: number;
+  };
   payment: {
     payment_term: NumberConstructor;
     payment_period: LTPaymentPeriod[];
