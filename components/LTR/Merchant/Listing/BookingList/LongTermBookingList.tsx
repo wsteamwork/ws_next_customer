@@ -1,41 +1,41 @@
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getRoomList, RoomListReducerAction } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { getRoomList, } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import BookingCardItem from './BookingCardItem';
+import Router from 'next/router';
+import { updateObject } from '@/store/Context/utility';
+import { getBookingListLT, BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
-      margin: theme.spacing(3, 0),
-    },
+      margin: theme.spacing(3, 0)
+    }
   })
 );
 const LongTermBookingList: NextPage = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
-
+  const { router } = useContext(GlobalContext);
+  const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);
+  const meta = useSelector<ReducersList, any>((state) => state.bookinglist.metaLT);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize] = useState<number>(10);
-
-  const indexOfLast = currentPage * pageSize;
-  const indexOfFirst = indexOfLast - pageSize;
-  const collectRoom = roomlist.slice(indexOfFirst, indexOfLast);
-
+  console.log(meta)
   const scrollTop = () => {
     let duration = 500 + window.scrollY * 0.1;
     let effect: Partial<ReactScrollLinkProps> = {
@@ -46,46 +46,48 @@ const LongTermBookingList: NextPage = (props) => {
     scroll.scrollToTop(effect);
   };
 
-  const ChangePage = (current: number) => {
+  const changePage = (current: number) => {
     setCurrentPage(current);
+    const query = {
+      page: current
+    };
+    Router.push({
+      pathname: '/host/booking-list',
+      query: updateObject<any>(Router.query, query)
+    });
     scrollTop();
   };
+  const dispatch = useDispatch<Dispatch<BookingListReducerAction>>();
 
-  const dispatch = useDispatch<Dispatch<RoomListReducerAction>>();
   useEffect(() => {
-    if (!roomlist.length) {
-      getRoomList(dispatch);
+    if (!bookinglist.length) {
+      getBookingListLT(dispatch);
     }
-  }, [roomlist]);
+  }, []);
+
+  useEffect(() => {
+    getBookingListLT(dispatch);
+  }, [router.query]);
 
   return (
     <Fragment>
-      {roomlist.length ? (
-        collectRoom.map((o) => <BookingCardItem key={o.id} room={o} />)
+      {bookinglist.length ? (
+        bookinglist.map((o) => <BookingCardItem key={o.id} booking={o} />)
       ) : (
-          <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
-        )}
-      {roomlist.length > 10 ? (
+        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
+      )}
+      {meta && (
         <Pagination
           className="rooms-pagination"
-          total={roomlist.length}
+          total={meta.pagination.total}
           locale={localeInfo}
-          pageSize={pageSize}
+          pageSize={meta.pagination.per_page}
           current={currentPage}
-          onChange={ChangePage}
+          onChange={changePage}
         />
-      ) : (
-          ''
-        )}
+      )}
     </Fragment>
   );
-
 };
-LongTermBookingList.getInitialProps = async ({ req, store }: NextContextPage) => {
-  const initLanguage = getCookieFromReq(req, 'initLanguage');
-  const token = getCookieFromReq(req, '_token');
-  const res = await getRoomList(store.dispatch, initLanguage, token);
 
-  return {};
-};
 export default LongTermBookingList;

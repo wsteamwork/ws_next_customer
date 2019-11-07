@@ -7,34 +7,34 @@ import { NextPage } from 'next';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import RoomCardItem from './RoomCardItem';
+import Router from 'next/router';
+import { updateObject } from '@/store/Context/utility';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
-      margin: theme.spacing(3, 0),
-    },
+      margin: theme.spacing(3, 0)
+    }
   })
 );
 const RoomListHost: NextPage = (props) => {
   const { t } = useTranslation();
+  const { router } = useContext(GlobalContext);
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
+  const meta = useSelector<ReducersList, any>((state) => state.roomlist.meta);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageSize] = useState<number>(10);
-
-  const indexOfLast = currentPage * pageSize;
-  const indexOfFirst = indexOfLast - pageSize;
-  const collectRoom = roomlist.slice(indexOfFirst, indexOfLast);
 
   const scrollTop = () => {
     let duration = 500 + window.scrollY * 0.1;
@@ -46,17 +46,29 @@ const RoomListHost: NextPage = (props) => {
     scroll.scrollToTop(effect);
   };
 
-  const ChangePage = (current: number) => {
+  const changePage = (current: number) => {
     setCurrentPage(current);
+    const query = {
+      page: current
+    };
+    Router.push({
+      pathname: '/host/room-list',
+      query: updateObject<any>(Router.query, query)
+    });
     scrollTop();
   };
 
   const dispatch = useDispatch<Dispatch<RoomListReducerAction>>();
+
   useEffect(() => {
     if (!roomlist.length) {
       getRoomList(dispatch);
     }
   }, [roomlist]);
+
+  useEffect(() => {
+    getRoomList(dispatch);
+  }, [router.query]);
 
   return (
     <Fragment>
@@ -64,25 +76,22 @@ const RoomListHost: NextPage = (props) => {
         <h2>{t('roomlist:titleName')}</h2>
       </Grid>
       {roomlist.length ? (
-        collectRoom.map((o) => <RoomCardItem key={o.id} room={o} />)
+        roomlist.map((o) => <RoomCardItem key={o.id} room={o} />)
       ) : (
-          <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
-        )}
-      {roomlist.length > 10 ? (
+        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
+      )}
+      {meta && (
         <Pagination
           className="rooms-pagination"
-          total={roomlist.length}
+          total={meta.pagination.total}
           locale={localeInfo}
-          pageSize={pageSize}
+          pageSize={meta.pagination.per_page}
           current={currentPage}
-          onChange={ChangePage}
+          onChange={changePage}
         />
-      ) : (
-          ''
-        )}
+      )}
     </Fragment>
   );
-
 };
 RoomListHost.getInitialProps = async ({ req, store }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');

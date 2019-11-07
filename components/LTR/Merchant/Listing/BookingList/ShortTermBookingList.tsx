@@ -138,7 +138,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const ShortTermBookingList: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { router } = useContext(GlobalContext);
+  const { router, width } = useContext(GlobalContext);
   const [open, setOpen] = useState<number>(0);
   const [openCancel, setOpenCancel] = useState<number>(0);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
@@ -540,6 +540,8 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                         </TableCell>
                       </Hidden>
                       <Dialog
+                        fullScreen={width === 'xs'}
+                        maxWidth="sm"
                         open={open === booking.id}
                         onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
@@ -605,6 +607,8 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                       </Dialog>
 
                       <Dialog
+                        fullScreen={width === 'xs'}
+                        maxWidth="sm"
                         open={openCancel === booking.id}
                         onClose={handleCloseCancel}
                         aria-labelledby="alert-dialog-title"
