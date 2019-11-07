@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import moment from 'moment';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
+import { Cookies, withCookies } from 'react-cookie';
 import { FocusedInputShape } from 'react-dates';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,14 +18,16 @@ import DateRangeVertical from './DateRangeVertical';
 
 interface Iprops {
   handleCloseBookingDialog: () => void;
+  cookies: Cookies;
 }
 
 const BookingCalendar: FC<Iprops> = (props) => {
-  const { handleCloseBookingDialog } = props;
+  const { handleCloseBookingDialog, cookies } = props;
   const { movein, moveout, numberOfGuests, LTBookingPriceCalculate } = useSelector<
     ReducersList,
     LTBookingReducerState
   >((state) => state.ltBooking);
+  const isLogin = !!cookies.get('_token');
 
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [date, setDate] = useState<DateRange>({
@@ -43,6 +46,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
     });
   }, [guest]);
 
+
+
   const handleOpenMobilePriceDetail = () => {
     setOpenMobilePriceDetail(true);
   };
@@ -52,17 +57,23 @@ const BookingCalendar: FC<Iprops> = (props) => {
   };
 
   const handleSubmit = () => {
-    const query = {
-      move_in: movein,
-      move_out: moveout,
-      number_of_guests: numberOfGuests,
-      long_term_room_id: Router.query.id
-    };
+    if (isLogin) {
+      const query = {
+        move_in: movein,
+        move_out: moveout,
+        number_of_guests: numberOfGuests,
+        long_term_room_id: Router.query.id
+      };
 
-    Router.push({
-      pathname: '/long-term-booking',
-      query
-    });
+      Router.push({
+        pathname: '/long-term-booking',
+        query
+      });
+    } else {
+      Router.push({
+        pathname: '/auth/signin'
+      });
+    }
   };
 
   const onClearDates = () => {
@@ -200,7 +211,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                     )}
                   </Grid>
                   <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                    Book
+                    {isLogin ? 'Book' : 'Đăng nhập để book phòng'}
                   </ButtonGlobal>
                 </Grid>
               </Hidden>
@@ -234,7 +245,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                   ''
                 )}
                 <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                  Book
+                  {isLogin ? 'Book' : 'Đăng nhập để tiếp tục'}
                 </ButtonGlobal>
               </Hidden>
             </Grid>
@@ -245,4 +256,4 @@ const BookingCalendar: FC<Iprops> = (props) => {
   );
 };
 
-export default BookingCalendar;
+export default withCookies(BookingCalendar);

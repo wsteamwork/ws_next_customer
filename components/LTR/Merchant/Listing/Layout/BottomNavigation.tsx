@@ -1,14 +1,14 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Hidden, MobileStepper } from '@material-ui/core';
 import Router from 'next/router';
 import React, { FC, Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { useSelector, useDispatch } from 'react-redux';
 import BottomMdNavigation from './BottomMdNavigation';
-import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 
 interface IProps {
   steps?: string[];

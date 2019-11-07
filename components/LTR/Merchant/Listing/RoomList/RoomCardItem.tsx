@@ -269,8 +269,8 @@ const RoomCardItem: FC<IProps> = (props) => {
   const openPreviewRoomShortTerm = (room_id: number, status: number) => {
     status != 1 ? window.open(`/preview-room/${room_id}`, `_blank`) : window.open(`/room/${room_id}`, `_blank`)
   };
-  const openPreviewRoomLongTerm = (room_id: number) => {
-    window.open(`/long-term-room/${room_id}`, `_blank`);
+  const openPreviewRoomLongTerm = (room_id: number, status: number) => {
+    status != 1 ? window.open(`/preview-long-term-room/${room_id}`, `_blank`) : window.open(`/long-term-room/${room_id}`, `_blank`);
   };
 
   return (
@@ -568,7 +568,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
                       <HtmlTooltip
                         placement="bottom-end"
-                        title={`Xem phòng ngắn`}
+                        title={`Xem phòng ngắn hạn`}
                         style={{ cursor: 'pointer' }}>
                         <Typography
                           variant="subtitle1"
@@ -611,7 +611,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                         <Typography
                           variant="subtitle1"
                           className={classes.priceDay}
-                          onClick={() => openPreviewRoomLongTerm(room.id)}>
+                          onClick={() => openPreviewRoomLongTerm(room.id, room.status)}>
                           {t('roomlist:longTerm')}
                           <img
                             src={'/static/preview.svg'}

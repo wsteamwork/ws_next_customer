@@ -1,5 +1,5 @@
 .step1-tab2-room {
-  .createListing-title{
+  .createListing-title {
     padding: 20px 0;
   }
 }
@@ -15,11 +15,16 @@
       color: #484848;
       padding: 9px 27px;
       text-transform: initial;
-      margin-top: 10px;
+      // margin-top: 10px;
     }
 
     .add-bedroom-container__counting {
-      text-align: right;
+      text-align: left;
+    }
+
+    .add-bedroom-container__add-room {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }

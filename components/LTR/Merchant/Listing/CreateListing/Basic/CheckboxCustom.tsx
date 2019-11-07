@@ -124,7 +124,7 @@ const CheckboxCustom: FC<IProps> = (props) => {
                   }
                   label="Dài hạn"
                 />
-                <div style={{ marginTop: 5 }}>Thời gian thuê tối thiểu 1 tháng</div>
+                <div style={{ marginTop: 10 }}>Đặt phòng tối thiểu 1 tháng</div>
               </div>
             </Grid>
           </Grid>

@@ -33,6 +33,7 @@ interface GoogleMapProps {
 interface FormValues {
   address: string;
   city: string;
+  district: string;
   building: string;
 }
 
@@ -155,9 +156,10 @@ const UpdateLocation: FC<IProps> = (props) => {
     return {
       address: address,
       city: '',
-      building: building
+      building: building,
+      district: ''
     };
-  }, [address, city_id, building]);
+  }, [address, city_id, building, district]);
 
   const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
     return {};
@@ -301,11 +303,15 @@ const UpdateLocation: FC<IProps> = (props) => {
                     </Grid>
                     <Grid item xs={5}>
                       <SelectCustom
+                        onChange={(e) => {
+                          handleChange(e);
+                          callBackOnChange(e.target.value);
+                        }}
                         name="district"
-                        value={district_id}
+                        value={values.district}
                         options={districtList}
                         title="Quận huyện"
-                        callBackOnChange={callBackOnChange}
+                        onBlurTouched={setFieldTouched}
                         disabled={disabledDistrictField}
                       />
                     </Grid>

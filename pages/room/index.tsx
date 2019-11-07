@@ -16,8 +16,8 @@ import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
-import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+// import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
@@ -28,7 +28,7 @@ const Room: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
-  const [] = useVisitedRoom();
+  // const [] = useVisitedRoom();
 
   useEffect(() => {
     if (error || !room.status) router.push('/not-found-resource');
@@ -58,7 +58,7 @@ const Room: NextPage = () => {
             room.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/room/${room.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image}`}
+          ogImage={`${IMAGE_STORAGE_SM}${room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image}`}
         />
       )}
 

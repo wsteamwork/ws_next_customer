@@ -12,8 +12,6 @@ import 'rc-pagination/assets/index.css';
 import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import RoomListing from '../RoomListing';
-// import CompareRooms from '../CompareRooms';
-import VisitedRooms from '../VisitedRooms';
 
 
 // import CompareRooms from '../CompareRooms';
@@ -66,7 +64,7 @@ const SidebarAndListing: FC = (props) => {
                 </ButtonGlobal>
               </Paper>
 
-              <VisitedRooms />
+              {/* <VisitedRooms /> */}
               {/* <CompareRooms /> */}
             </Grid>
           </Hidden>

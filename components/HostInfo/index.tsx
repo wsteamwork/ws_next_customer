@@ -106,8 +106,6 @@ const HostInfo: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { id, avatar, avatar_url, name, number_room } = props;
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  //
   // const merchant = !!room && room.merchant.data;
 
   return (

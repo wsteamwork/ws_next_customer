@@ -32,9 +32,10 @@ const BottomMdNavigation: FC<IProps> = (props) => {
   return (
     <GridContainer
       xs={10}
+      md={8}
       className="bottom-navigation"
       classNameItem="bottom-navigation-container">
-      <Grid container item xs={7} className="bottom-navigation-inner-container">
+      <Grid container item xs={8} className="bottom-navigation-inner-container">
         <Grid item className="bottom-navigation-inner-wrapper">
           <Grid className="prev-button">
             <Button className="prev-link" onClick={handleBack}>
@@ -50,10 +51,10 @@ const BottomMdNavigation: FC<IProps> = (props) => {
                 Finish
               </ButtonGlobal>
             ) : (
-              <ButtonGlobal onClick={handleNext} disabled={disableNext}>
-                Next
+                <ButtonGlobal onClick={handleNext} disabled={disableNext}>
+                  Next
               </ButtonGlobal>
-            )}
+              )}
           </Grid>
         </Grid>
       </Grid>
