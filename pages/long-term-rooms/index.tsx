@@ -6,19 +6,19 @@ import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
 import { NextContextPage } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid, Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useReducer, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useContext, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
-import { Sticky, StickyContainer } from 'react-sticky';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useDispatch } from 'react-redux';
+import { Sticky, StickyContainer } from 'react-sticky';
 import { Dispatch } from 'redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
