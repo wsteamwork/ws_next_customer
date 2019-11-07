@@ -2,9 +2,21 @@ import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Me
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { Grid, Breadcrumbs, Link, Typography, Theme, AppBar, Box, withStyles, Tabs, Tab } from '@material-ui/core';
+import {
+  Grid,
+  Breadcrumbs,
+  Link,
+  Typography,
+  Theme,
+  AppBar,
+  Box,
+  withStyles,
+  Tabs,
+  Tab
+} from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import ShortTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList';
+import LongTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/LongTermBookingList';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -63,7 +75,7 @@ const AntTab = withStyles((theme: Theme) =>
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
 export const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -74,7 +86,9 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0} mt={3}>{children}</Box>
+      <Box p={0} mt={3}>
+        {children}
+      </Box>
     </Typography>
   );
 };
@@ -89,7 +103,7 @@ export const a11yProps = (index: any) => {
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
-        marginTop: 16
+      marginTop: 16
     },
     custom_link_bread: {
       color: '#1d8df7'
@@ -134,16 +148,16 @@ const BookingList: NextPage = (props) => {
                 aria-label="ant example"
                 variant="scrollable"
                 scrollButtons="off">
-                <AntTab label="Đặt phòng ngắn hạn" {...a11yProps(0)} />
-                <AntTab label="Đặt phòng dài hạn" {...a11yProps(1)} />
+                <AntTab label="Đặt phòng dài hạn" {...a11yProps(0)} />
+                <AntTab label="Đặt phòng ngắn hạn" {...a11yProps(1)} />
               </AntTabs>
               <Typography className={classes.padding} />
             </AppBar>
             <TabPanel value={value} index={0}>
-              <ShortTermBookingList />
+              <LongTermBookingList />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Dài hạn
+              <ShortTermBookingList />
             </TabPanel>
           </Grid>
         </Grid>
