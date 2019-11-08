@@ -1,22 +1,22 @@
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { updateObject } from '@/store/Context/utility';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomList, RoomListReducerAction } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
+import Router from 'next/router';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { Fragment, useEffect, useState, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import RoomCardItem from './RoomCardItem';
-import Router from 'next/router';
-import { updateObject } from '@/store/Context/utility';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -33,7 +33,6 @@ const RoomListHost: NextPage = (props) => {
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
   const meta = useSelector<ReducersList, any>((state) => state.roomlist.meta);
-
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const scrollTop = () => {
@@ -65,6 +64,9 @@ const RoomListHost: NextPage = (props) => {
       getRoomList(dispatch);
     }
   }, [roomlist]);
+  useEffect(() => {
+    getRoomList(dispatch);
+  }, [router.query]);
 
   useEffect(() => {
     getRoomList(dispatch);
@@ -78,8 +80,8 @@ const RoomListHost: NextPage = (props) => {
       {roomlist.length ? (
         roomlist.map((o) => <RoomCardItem key={o.id} room={o} />)
       ) : (
-        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
-      )}
+          <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
+        )}
       {meta && (
         <Pagination
           className="rooms-pagination"

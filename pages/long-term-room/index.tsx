@@ -11,6 +11,7 @@ import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 // import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
@@ -18,14 +19,23 @@ import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
-  // const [] = useVisitedRoom();
+  // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+
+  if (router.pathname.includes('/long-term-rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 1,
+      leaseTypePathName: !router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
+    });
+  }
   const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);
