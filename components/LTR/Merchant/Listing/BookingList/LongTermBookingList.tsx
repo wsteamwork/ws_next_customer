@@ -1,6 +1,6 @@
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getRoomList, } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
@@ -16,8 +16,12 @@ import { Dispatch } from 'redux';
 import BookingCardItem from './BookingCardItem';
 import Router from 'next/router';
 import { updateObject } from '@/store/Context/utility';
-import { getBookingListLT, BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import {
+  getBookingListLT,
+  BookingListReducerAction
+} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import FilterBookingList from './FilterBookingList';
 interface IProps {
   classes?: any;
 }
@@ -33,9 +37,12 @@ const LongTermBookingList: NextPage = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);
+  const { startDate, endDate, searchName, room_id, codeBooking, statusBooking } = useSelector<
+    ReducersList,
+    any
+  >((state) => state.bookinglist);
   const meta = useSelector<ReducersList, any>((state) => state.bookinglist.metaLT);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  console.log(meta)
   const scrollTop = () => {
     let duration = 500 + window.scrollY * 0.1;
     let effect: Partial<ReactScrollLinkProps> = {
@@ -69,8 +76,20 @@ const LongTermBookingList: NextPage = (props) => {
     getBookingListLT(dispatch);
   }, [router.query]);
 
+  const handleSearchLT = () => {
+    getBookingListLT(dispatch, {
+      nameSearch : searchName,
+      date_start: startDate,
+      date_end: endDate,
+      status: statusBooking,
+      room_id: room_id,
+      booking_code: codeBooking
+    });
+  };
+
   return (
     <Fragment>
+      <FilterBookingList handleSearch={handleSearchLT} />
       {bookinglist.length ? (
         bookinglist.map((o) => <BookingCardItem key={o.id} booking={o} />)
       ) : (

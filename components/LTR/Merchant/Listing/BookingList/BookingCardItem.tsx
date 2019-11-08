@@ -20,19 +20,24 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  Snackbar
 } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import moment from 'moment';
-import React, { FC, Fragment, useContext, useState } from 'react';
+import React, { FC, Fragment, useContext, useState, SyntheticEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { getBookingListLT, BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import {
+  getBookingListLT,
+  BookingListReducerAction
+} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 interface IProps {
   classes?: any;
   booking: any;
@@ -57,8 +62,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     paper: {
       padding: '16px',
       border: '1px solid #eeeeee',
+      boxShadow: 'none',
       borderRadius: 16,
-      boxShadow: '0 2px 9px -2px rgba(132,135,138,.2)'
+      '&:hover': {
+        boxShadow: '0 2px 9px -2px rgba(132,135,138,.2)'
+      }
     },
     title: {
       fontWeight: 600
@@ -348,11 +356,20 @@ const BookingCardItem: FC<IProps> = (props) => {
   const handleCloseTermPaymentContract = () => {
     setOpenTermPayment(false);
   };
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
   const submitApprovedBooking = async () => {
     try {
-      const res = await axios_merchant.put(`long-term-contracts/minor-update/${booking.id}?option=status`, {
-        status: 2
-      });
+      const res = await axios_merchant.put(
+        `long-term-contracts/minor-update/${booking.contracts.data[0].id}?option=status`,
+        {
+          status: 2
+        }
+      );
       setMessageSnack('Đơn đặt phòng được xác nhận thành công !');
       setOpenSnack(true);
       getBookingListLT(dispatch);
@@ -367,9 +384,12 @@ const BookingCardItem: FC<IProps> = (props) => {
 
   const confirmCancelBooking = async () => {
     try {
-      const res = await axios_merchant.put(`long-term-contracts/minor-update/${booking.id}?option=status`, {
-        status: 5
-      });
+      const res = await axios_merchant.put(
+        `long-term-contracts/minor-update/${booking.contracts.data[0].id}?option=status`,
+        {
+          status: 5
+        }
+      );
       if (res) {
         setMessageSnack('Đơn đặt phòng được hủy thành công !');
         setOpenSnack(true);
@@ -453,7 +473,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                     <Grid className={classes.content}>
                       <Grid container>
                         <Grid item>
-                          <Grid item sm={4} xs={12} className={classes.infoRoomName}>
+                          <Grid item sm={6} xs={12} className={classes.infoRoomName}>
                             <span>
                               #{booking.uuid}
                               <Tooltip
@@ -558,7 +578,12 @@ const BookingCardItem: FC<IProps> = (props) => {
                       </Grid>
                       <Grid item xs={12} lg={8} className={classes.infoContract}>
                         <Typography variant="body1">
-                          Căn hộ: <a href={`https://westay.vn/room/${booking.longTermRoom.data.id}`} target="_blank">{booking.longTermRoom.data.id} - {booking.longTermRoom.data.room_name}</a>
+                          Căn hộ:{' '}
+                          <a
+                            href={`https://westay.vn/long-term-room/${booking.longTermRoom.data.id}`}
+                            target="_blank">
+                            {booking.longTermRoom.data.id} - {booking.longTermRoom.data.room_name}
+                          </a>
                         </Typography>
                       </Grid>
                       <Hidden only={['xs', 'lg']}>
@@ -618,7 +643,10 @@ const BookingCardItem: FC<IProps> = (props) => {
                                 ).format('DD/MM/YYYY')}
                               </Typography>
                               <Typography variant="subtitle1" className={classes.priceDay}>
-                                Giá trị: {booking.contracts.data[0].next_payment_due.payment_amount}{' '}
+                                Giá trị:{' '}
+                                {numeral(
+                                  booking.contracts.data[0].next_payment_due.payment_amount
+                                ).format('0,0')}{' '}
                                 vnđ
                               </Typography>
                               {booking.contracts.data[0].status === 1 && (
@@ -892,15 +920,14 @@ const BookingCardItem: FC<IProps> = (props) => {
                         )}
                     </Grid>
                     <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
-                     
-                        <Grid>
-                          <Typography variant="subtitle1" className={classes.priceDay}>
-                            Trạng thái hợp đồng
-                          </Typography>
-                          <Typography variant={'body1'} className={classes.subLabel}>
-                            {booking.contracts.data[0].status_txt}
-                          </Typography>
-                        </Grid>
+                      <Grid>
+                        <Typography variant="subtitle1" className={classes.priceDay}>
+                          Trạng thái hợp đồng
+                        </Typography>
+                        <Typography variant={'body1'} className={classes.subLabel}>
+                          {booking.contracts.data[0].status_txt}
+                        </Typography>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -1003,6 +1030,19 @@ const BookingCardItem: FC<IProps> = (props) => {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        open={openSnack}
+        autoHideDuration={3000}
+        onClose={handleCloseSnack}>
+        <MySnackbarContentWrapper
+          variant={statusSnack}
+          message={messageSnack}
+          onClose={handleCloseSnack}></MySnackbarContentWrapper>
+      </Snackbar>
     </Fragment>
   );
 };

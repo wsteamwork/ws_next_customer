@@ -1,8 +1,6 @@
 /* eslint react/no-multi-comp:0, no-console:0 */
 
-import { ReducersList } from '@/store/Redux/Reducers';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { Grid, InputBase, Paper } from '@material-ui/core';
 import { CalendarToday } from '@material-ui/icons';
 import moment, { Moment } from 'moment';
@@ -13,13 +11,11 @@ import enGB from 'rc-calendar/lib/locale/en_GB';
 import viVN from 'rc-calendar/lib/locale/vi_VN';
 import DatePicker from 'rc-calendar/lib/Picker';
 import React, { Dispatch, FC, memo, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import Cookies from 'universal-cookie';
 import { useTranslation } from 'react-i18next';
+import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 
-interface IProps {
-  isDisablePastDay?: boolean;
-}
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
 type Language = 'vi' | 'en';
@@ -34,15 +30,11 @@ if (vi === 'vi') {
 
 type Field = 'startValue' | 'endValue';
 
-const DateRangeSearch: FC<IProps> = (props) => {
-  const { isDisablePastDay } = props;
-  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-  const startDate = useSelector<ReducersList, string | null>(
-    (state) => state.searchFilter.startDate
-  );
-  const endDate = useSelector<ReducersList, string | null>((state) => state.searchFilter.endDate);
-  const [startValue, setStartValue] = useState(startDate ? moment(startDate) : null);
-  const [endValue, setEndValue] = useState(endDate ? moment(endDate) : null);
+const DateSearchBooking: FC = () => {
+  const dispatch = useDispatch<Dispatch<BookingListReducerAction>>();
+  const currentDate = moment().format(DEFAULT_DATE_FORMAT);
+  const [startValue, setStartValue] = useState(moment(currentDate));
+  const [endValue, setEndValue] = useState(null);
   const refEndDate = useRef(null);
   const { t } = useTranslation();
 
@@ -63,8 +55,8 @@ const DateRangeSearch: FC<IProps> = (props) => {
       refEndDate.current.click();
     } else {
       setEndValue(value);
-      dispatch({ type: 'SET_START_DATE', payload: startValue.format(DEFAULT_DATE_TIME_FORMAT) });
-      dispatch({ type: 'SET_END_DATE', payload: value.format(DEFAULT_DATE_TIME_FORMAT) });
+      dispatch({ type: 'SET_START_DATE', payload: startValue.format(DEFAULT_DATE_FORMAT) });
+      dispatch({ type: 'SET_END_DATE', payload: value.format(DEFAULT_DATE_FORMAT) });
     }
   };
 
@@ -78,25 +70,11 @@ const DateRangeSearch: FC<IProps> = (props) => {
     return endValue.diff(startValue, 'days') <= 0;
   };
 
-  const disabledStartDate = (startValue: Moment) => {
-    // if (!startValue) {
-    //   return startValue.diff(moment(), 'days') <= -1;
-    // }
-    // if (!endValue) {
-    //   return startValue.diff(moment(), 'days') <= -1;
-    // }
-    // return endValue.diff(startValue, 'days') <= 0;
-    if(isDisablePastDay) {
-      return startValue.diff(moment(), 'days') <= -1;
-    }
-  };
-
   const calendarStart = (
     <Calendar
       locale={vi === 'en' ? enGB : viVN}
       showDateInput={false}
       defaultValue={now}
-      disabledDate={disabledStartDate}
       showToday={false}
     />
   );
@@ -112,7 +90,7 @@ const DateRangeSearch: FC<IProps> = (props) => {
   );
 
   return (
-    <Paper elevation={0} className="dateRangeSearch">
+    <Paper elevation={0} className="dateRangeSearchBooking">
       <Grid container>
         <Grid item xs={5} className="calendar">
           <DatePicker
@@ -182,5 +160,4 @@ const DateRangeSearch: FC<IProps> = (props) => {
     </Paper>
   );
 };
-
-export default memo(DateRangeSearch);
+export default memo(DateSearchBooking);
