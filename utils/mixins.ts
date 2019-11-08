@@ -242,3 +242,26 @@ export const hoursList = [
   '23:00:00',
   '23:30:00'
 ];
+
+export const statusBookingList = [
+    {
+      id: 0,
+      name: 'Tất cả',
+    },
+    {
+      id: 1,
+      name: 'Đơn mới',
+    },
+    {
+      id: 2,
+      name: 'Xác nhận',
+    },
+    {
+      id: 4,
+      name: 'Hoàn thành',
+    },
+    {
+      id: 5,
+      name: 'Đã hủy',
+    },
+];

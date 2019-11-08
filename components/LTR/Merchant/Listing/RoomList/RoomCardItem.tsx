@@ -32,7 +32,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginBottom: theme.spacing(3)
     },
     paper: {
-      padding: '16px'
+      padding: '16px',
+      border: '1px solid #eeeeee',
+      borderRadius: 16,
+      boxShadow: '0 2px 9px -2px rgba(132,135,138,.2)'
     },
     title: {
       fontWeight: 600
@@ -267,7 +270,6 @@ const RoomCardItem: FC<IProps> = (props) => {
     status != 1 ? window.open(`/preview-room/${room_id}`, `_blank`) : window.open(`/room/${room_id}`, `_blank`)
   };
   const openPreviewRoomLongTerm = (room_id: number, status: number) => {
-    // window.open(`/preview-long-term-room/${room_id}`, `_blank`);
     status != 1 ? window.open(`/preview-long-term-room/${room_id}`, `_blank`) : window.open(`/long-term-room/${room_id}`, `_blank`);
   };
 
@@ -432,7 +434,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
-                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
                                   {t('roomlist:onePerMonth')} &nbsp; &#8226;
                                 </span>
                               ) : (
@@ -441,7 +443,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ{' '}
+                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
                                   {t('roomlist:onePerDay')}
                                   &nbsp; &#8226;
                                 </span>
@@ -450,7 +452,7 @@ const RoomCardItem: FC<IProps> = (props) => {
 
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
+                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
                                   {t('roomlist:onePerHour')}
                                 </span>
                               ) : ''}

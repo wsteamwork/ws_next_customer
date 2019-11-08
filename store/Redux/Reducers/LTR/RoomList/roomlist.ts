@@ -2,10 +2,9 @@ import { updateObject } from '@/store/Context/utility';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AxiosRes, Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { Dispatch, Reducer } from 'redux';
 import Router from 'next/router';
 import qs from 'query-string';
-
+import { Dispatch, Reducer } from 'redux';
 export type RoomListReducerState = {
   readonly roomlist: LTRoomIndexRes[];
   readonly meta: Pagination | null;
