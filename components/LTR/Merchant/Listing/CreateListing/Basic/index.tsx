@@ -177,6 +177,7 @@ const Basic: FC<IProps> = (props) => {
                   <OutlinedInput
                     name="total_area"
                     placeholder="Nhập diện tích"
+                    type="number"
                     value={values.total_area}
                     onChange={(e) => {
                       setFieldValue('total_area', parseInt(e.target.value));

@@ -173,7 +173,7 @@ const UpdateAddBedRoom: FC<IProps> = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Button className="add-room-button" onClick={handleToggleAddBedRoom}>
-                {isAddBedRoom ? 'Xong' : 'Cập nhật'}
+                {isAddBedRoom ? 'Xác nhận' : 'Cập nhật'}
               </Button>
             </Grid>
           </Grid>

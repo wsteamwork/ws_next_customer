@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import mainColor from '@/styles/constants/colors';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -26,6 +28,21 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
         border: '6px solid #fff'
       }
     },
+    switchBaseLT: {
+      padding: 1,
+      '&$checked': {
+        color: theme.palette.common.white,
+        '& + $track': {
+          backgroundColor: mainColor.primaryLT,
+          opacity: 1,
+          border: 'none'
+        }
+      },
+      '&$focusVisible $thumb': {
+        color: mainColor.primaryLT,
+        border: '6px solid #fff'
+      }
+    },
     thumb: {
       width: 24,
       height: 24
@@ -43,10 +60,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-interface IProps extends SwitchProps {}
+interface IProps extends SwitchProps { }
 
 const IOSSwitch: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   return (
     <Switch
@@ -54,7 +72,7 @@ const IOSSwitch: FC<IProps> = (props) => {
       disableRipple
       classes={{
         root: classes.root,
-        switchBase: classes.switchBase,
+        switchBase: leaseTypeGlobal ? classes.switchBaseLT : classes.switchBase,
         thumb: classes.thumb,
         track: classes.track,
         checked: classes.checked

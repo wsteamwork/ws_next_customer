@@ -176,7 +176,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: '1.5rem'
     },
     customIcon: {
-      color: '#767676'
+      color: '#484848'
     },
     maxWidthIcon: {
       maxWidth: 60

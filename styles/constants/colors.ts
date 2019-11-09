@@ -25,6 +25,8 @@ const mainColor = {
 
   linearGradientBackground:
     'radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );',
+  linearGradientBackgroundLongTerm: 'linear-gradient(to right, #667eea, #764ba2);',
+  primaryLT: '#673ab7',
   linearGradientSecond: 'linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516) !important;'
 };
 

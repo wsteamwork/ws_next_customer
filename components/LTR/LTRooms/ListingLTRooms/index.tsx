@@ -79,7 +79,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
             xsMap={12} smMap={6}
           />
           <Pagination
-            className='rooms-pagination'
+            className='rooms-pagination-lt'
             total={meta.pagination.total}
             pageSize={meta.pagination.per_page}
             current={currentPage}

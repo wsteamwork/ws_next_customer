@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, IconButton } from '@material-ui/core';
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface Iprops {
   icon?: IconDefinition;
@@ -15,6 +17,7 @@ interface Iprops {
 
 const QuantityButtons: FC<Iprops> = (props) => {
   const { icon, title, number, setNumber, step, minimumValue } = props;
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const handleDecrement = () => {
     if (number === minimumValue) {
@@ -44,31 +47,53 @@ const QuantityButtons: FC<Iprops> = (props) => {
               <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp;
             </Fragment>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {title}
         </p>
       </Grid>
+      {
+        leaseTypeGlobal ? (
+          <Grid item xs={4}>
+            <Grid container>
+              <Grid item xs={4} className="centerCustom">
+                <IconButton onClick={handleDecrement} className="iconLT" aria-label="Add">
+                  <RemoveCircleOutline></RemoveCircleOutline>
+                </IconButton>
+              </Grid>
 
-      <Grid item xs={4}>
-        <Grid container>
-          <Grid item xs={4} className="centerCustom">
-            <IconButton onClick={handleDecrement} className="icon" color="primary" aria-label="Add">
-              <RemoveCircleOutline></RemoveCircleOutline>
-            </IconButton>
-          </Grid>
+              <Grid item xs={4} className="centerCustom">
+                <p>{number}</p>
+              </Grid>
 
-          <Grid item xs={4} className="centerCustom">
-            <p>{number}</p>
+              <Grid item xs={4} className="centerCustom">
+                <IconButton onClick={handleIncrement} className="iconLT" aria-label="Add">
+                  <AddCircleOutline></AddCircleOutline>
+                </IconButton>
+              </Grid>
+            </Grid>
           </Grid>
+        ) : (
+            <Grid item xs={4}>
+              <Grid container>
+                <Grid item xs={4} className="centerCustom">
+                  <IconButton onClick={handleDecrement} className="icon" color="primary" aria-label="Add">
+                    <RemoveCircleOutline></RemoveCircleOutline>
+                  </IconButton>
+                </Grid>
 
-          <Grid item xs={4} className="centerCustom">
-            <IconButton onClick={handleIncrement} className="icon" color="primary" aria-label="Add">
-              <AddCircleOutline></AddCircleOutline>
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Grid>
+                <Grid item xs={4} className="centerCustom">
+                  <p>{number}</p>
+                </Grid>
+
+                <Grid item xs={4} className="centerCustom">
+                  <IconButton onClick={handleIncrement} className="icon" color="primary" aria-label="Add">
+                    <AddCircleOutline></AddCircleOutline>
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>)
+      }
     </Grid>
   );
 };

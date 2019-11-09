@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import React, { FC, memo, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ActionFilter from './ActionFilter';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 const FilterRoom: FC = () => {
     const [open, setOpen] = useState(false);
@@ -12,6 +14,7 @@ const FilterRoom: FC = () => {
     const { dispatch, state } = useContext(RoomFilterContext);
     const { districts } = state;
     const { t } = useTranslation();
+    const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
     const checkDistricts = useMemo<boolean>(() => {
         return districts.length > 0;
@@ -50,9 +53,11 @@ const FilterRoom: FC = () => {
                         setOpen={setOpen}></ActionFilter>
                 }>
                 <Grid
-                    className={classNames('chooseRoomGuest', 'flex_columCenter', {
-                        haveResult: checkDistricts
-                    })}>
+                    className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+                        haveResultLT: checkDistricts
+                    } : {
+                            haveResult: checkDistricts
+                        })}>
                     <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
                         {/* <FontAwesomeIcon icon={faFilter} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
                         <p>{t('rooms:searchRooms:districtsFilter')}</p>

@@ -16,6 +16,7 @@ const FastBooking: FC = () => {
   const { router } = useContext(GlobalContext);
   const { query } = router;
   const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   useEffect(() => {
     if (!!query.instant_book) {
@@ -45,9 +46,11 @@ const FastBooking: FC = () => {
         }>
         <Grid
           onClick={handleClick}
-          className={classNames('chooseRoomGuest', 'flex_columCenter', {
-            haveResult: instant_book === 1
-          })}>
+          className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+            haveResultLT: instant_book === 1
+          } : {
+              haveResult: instant_book === 1
+            })}>
           <span className="flex_columCenter chooseRoomGuest__actions">
             {/* <OfflineBoltRounded fontSize="small"></OfflineBoltRounded>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:fastBooking')}</p>

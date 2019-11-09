@@ -2,7 +2,6 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import HostInfo from '@/components/HostInfo';
 import { formatMoney } from '@/utils/mixins';
 import { Divider, Theme, Typography } from '@material-ui/core';
-import { OfflineBoltRounded } from '@material-ui/icons';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -51,9 +50,9 @@ const BoxBookingLT: FC<IProps> = (props) => {
       <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
 
       <div className={classes.rowMargin}>
-        <ButtonGlobal padding="0px" width="100%" onClick={handleOpenBookingDialog}>
+        <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" onClick={handleOpenBookingDialog}>
           <p className="flex_center" style={{ color: '#ffffff' }}>
-            <OfflineBoltRounded />
+            {/* <OfflineBoltRounded /> */}
             &nbsp;&nbsp;{t('longtermroom:viewSchedule')}
           </p>
         </ButtonGlobal>

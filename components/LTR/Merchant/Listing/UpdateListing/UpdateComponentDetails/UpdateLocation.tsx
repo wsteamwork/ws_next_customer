@@ -237,7 +237,7 @@ const UpdateLocation: FC<IProps> = (props) => {
               setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
               return (
                 <form onSubmit={handleSubmit}>
-                  <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
+                  <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
                   <Geosuggest
                     country="vn"
                     placeholder="Nhập địa chỉ"
@@ -255,7 +255,7 @@ const UpdateLocation: FC<IProps> = (props) => {
 
                   {touched.address && <InputFeedback error={errors.address} />}
                   <Grid style={{ width: 'calc(80% - 8px)', margin: '20px 0' }}>
-                    <h3 style={{ color: '#767676' }}>Toà nhà (Tuỳ chọn)</h3>
+                    <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
 
                     <FormControl fullWidth variant="outlined">
                       <OutlinedInput
@@ -281,7 +281,7 @@ const UpdateLocation: FC<IProps> = (props) => {
                       <Grid style={{ margin: '32px 0' }}>
                         <h3
                           style={{
-                            color: '#767676',
+                            color: '#484848',
                             paddingBottom: 8,
                             fontSize: 16,
                             fontWeight: 600,

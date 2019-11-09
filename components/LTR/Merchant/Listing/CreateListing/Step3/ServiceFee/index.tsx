@@ -52,7 +52,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     checkboxItemWrapper: {
       padding: '5px 15px 10px',
-      border: '1px solid #767676',
+      border: '1px solid #484848',
       borderRadius: 4,
       minHeight: 120
     },
@@ -70,7 +70,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const ServiceFee: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const priceService = useSelector<ReducersList, IServicesFee>(
     (state) => state.priceTerm.serviceFee
   );
@@ -225,125 +225,125 @@ const ServiceFee: FC<IProps> = (props) => {
   };
 
   return (
-      <div>
-        <ValidatorForm
-          onSubmit={() => {
-            return null;
-          }}>
+    <div>
+      <ValidatorForm
+        onSubmit={() => {
+          return null;
+        }}>
+        <div>
+          <h1 className={classes.bigTitle}>Lựa chọn gói dịch vụ</h1>
+          <Grid container className={classes.container} justify="center">
+            <Grid item xs={12}>
+              <FormControl component="fieldset" fullWidth>
+                <RadioGroup value={String(selectedValue)} onChange={handleChange} row>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      <RadioCustom
+                        label={'Trọn gói dịch vụ'}
+                        descr={
+                          'Giá cho thuê phòng đã bao gồm các dịch vụ: wifi, điện, nước, phí môi trường,...'
+                        }
+                        value={String(1)}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <RadioCustom
+                        label={'Bán lẻ dịch vụ'}
+                        descr={
+                          'Hình thức thanh toán dịch vụ riêng lẻ theo từng loại phí: wifi, điện, nước, phí môi trường...'
+                        }
+                        value={String(0)}
+                      />
+                    </Grid>
+                  </Grid>
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </div>
+        <Collapse in={!selectedValue}>
           <div>
-            <h1 className={classes.bigTitle}>Lựa chọn gói dịch vụ</h1>
-            <Grid container className={classes.container} justify="center">
+            <h1 className={classes.bigTitle}>Giá dịch vụ bán lẻ</h1>
+            <Grid container justify="center">
               <Grid item xs={12}>
-                <FormControl component="fieldset" fullWidth>
-                  <RadioGroup value={String(selectedValue)} onChange={handleChange} row>
-                    <Grid container spacing={2}>
-                      <Grid item xs={6}>
-                        <RadioCustom
-                          label={'Trọn gói dịch vụ'}
-                          descr={
-                            'Giá cho thuê phòng đã bao gồm các dịch vụ: wifi, điện, nước, phí môi trường,...'
+                <FormGroup row>
+                  {services.map((o, i) => (
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      className={classes.rowCheckPrice}
+                      key={o.id}>
+                      <Grid item xs={5}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={serviceOpt.some((x) => x === o.id)}
+                              classes={{ checked: classes.checked }}
+                              onChange={handleChangeServices(o.id)}
+                              value={o.id}
+                            />
                           }
-                          value={String(1)}
+                          label={o.type_txt}
                         />
                       </Grid>
-                      <Grid item xs={6}>
-                        <RadioCustom
-                          label={'Bán lẻ dịch vụ'}
-                          descr={
-                            'Hình thức thanh toán dịch vụ riêng lẻ theo từng loại phí: wifi, điện, nước, phí môi trường...'
-                          }
-                          value={String(0)}
-                        />
+                      <Grid item xs={7}>
+                        <Zoom in={serviceOpt.some((x) => x === o.id)}>
+                          <Grid container spacing={2}>
+                            <Grid item xs={8}>
+                              <TextValidator
+                                validators={['required', 'isNumber']}
+                                errorMessages={[
+                                  'Bạn cần nhập giá cho trường này',
+                                  'Bạn cần nhập giá cho trường này'
+                                ]}
+                                id={o.id.toString()}
+                                variant="outlined"
+                                onChange={handlePrice(o.id, serviceOpt.some((x) => x === o.id))}
+                                onBlur={blurPrice}
+                                value={included_fee.length ? included_fee[i].value : null}
+                                InputProps={{
+                                  id: o.id.toString(),
+                                  inputComponent: NumberFormatCustom as any,
+                                  endAdornment: (
+                                    <InputAdornment position="start"> đ </InputAdornment>
+                                  )
+                                }}
+                              />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <FormControl variant="outlined" fullWidth>
+                                <Select
+                                  native
+                                  onChange={changeSelect(o.id)}
+                                  value={
+                                    included_fee.length ? included_fee[i].calculate_function : 3
+                                  }
+                                  onClose={closeSelect}
+                                  inputProps={{
+                                    className: 'outlineInput'
+                                  }}
+                                  input={<OutlinedInput name={o.type_txt} labelWidth={0} />}>
+                                  {serviceFeeType.map((o, i) => (
+                                    <option key={i} value={o.id}>
+                                      {o.value}
+                                    </option>
+                                  ))}
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                          </Grid>
+                        </Zoom>
                       </Grid>
                     </Grid>
-                  </RadioGroup>
-                </FormControl>
+                  ))}
+                </FormGroup>
               </Grid>
             </Grid>
           </div>
-          <Collapse in={!selectedValue}>
-            <div>
-              <h1 className={classes.bigTitle}>Giá dịch vụ bán lẻ</h1>
-              <Grid container justify="center">
-                <Grid item xs={12}>
-                  <FormGroup row>
-                    {services.map((o, i) => (
-                      <Grid
-                        container
-                        spacing={2}
-                        alignItems="center"
-                        className={classes.rowCheckPrice}
-                        key={o.id}>
-                        <Grid item xs={5}>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                checked={serviceOpt.some((x) => x === o.id)}
-                                classes={{ checked: classes.checked }}
-                                onChange={handleChangeServices(o.id)}
-                                value={o.id}
-                              />
-                            }
-                            label={o.type_txt}
-                          />
-                        </Grid>
-                        <Grid item xs={7}>
-                          <Zoom in={serviceOpt.some((x) => x === o.id)}>
-                            <Grid container spacing={2}>
-                              <Grid item xs={8}>
-                                <TextValidator
-                                  validators={['required', 'isNumber']}
-                                  errorMessages={[
-                                    'Bạn cần nhập giá cho trường này',
-                                    'Bạn cần nhập giá cho trường này'
-                                  ]}
-                                  id={o.id.toString()}
-                                  variant="outlined"
-                                  onChange={handlePrice(o.id, serviceOpt.some((x) => x === o.id))}
-                                  onBlur={blurPrice}
-                                  value={included_fee.length ? included_fee[i].value : null}
-                                  InputProps={{
-                                    id: o.id.toString(),
-                                    inputComponent: NumberFormatCustom as any,
-                                    endAdornment: (
-                                      <InputAdornment position="start"> đ </InputAdornment>
-                                    )
-                                  }}
-                                />
-                              </Grid>
-                              <Grid item xs={4}>
-                                <FormControl variant="outlined" fullWidth>
-                                  <Select
-                                    native
-                                    onChange={changeSelect(o.id)}
-                                    value={
-                                      included_fee.length ? included_fee[i].calculate_function : 3
-                                    }
-                                    onClose={closeSelect}
-                                    inputProps={{
-                                      className: 'outlineInput'
-                                    }}
-                                    input={<OutlinedInput name={o.type_txt} labelWidth={0} />}>
-                                    {serviceFeeType.map((o, i) => (
-                                      <option key={i} value={o.id}>
-                                        {o.value}
-                                      </option>
-                                    ))}
-                                  </Select>
-                                </FormControl>
-                              </Grid>
-                            </Grid>
-                          </Zoom>
-                        </Grid>
-                      </Grid>
-                    ))}
-                  </FormGroup>
-                </Grid>
-              </Grid>
-            </div>
-          </Collapse>
-        </ValidatorForm>
-      </div>
+        </Collapse>
+      </ValidatorForm>
+    </div>
   );
 };
 

@@ -82,8 +82,8 @@ const init: UpdateDetailsState = {
   instant_book: 0,
   no_booking_cancel: 0,
   rent_type: 1,
-  checkin: "14:00:00",
-  checkout: "12:00:00",
+  checkin: '14:00:00',
+  checkout: '12:00:00',
   error: false
 };
 
@@ -173,8 +173,14 @@ export const getDataUpdateListing = async (
       payload: listing.short_term_room.settings.no_booking_cancel
     });
     dispatch({ type: 'SET_RENT_TYPE', payload: listing.short_term_room.rent_type });
-    dispatch({ type: 'SET_CHECKIN', payload: listing.short_term_room.checkin ?  listing.short_term_room.checkin : "14:00:00"});
-    dispatch({ type: 'SET_CHECKOUT', payload: listing.short_term_room.checkout ?  listing.short_term_room.checkout : "12:00:00" });
+    dispatch({
+      type: 'SET_CHECKIN',
+      payload: listing.short_term_room.checkin ? listing.short_term_room.checkin : '14:00:00'
+    });
+    dispatch({
+      type: 'SET_CHECKOUT',
+      payload: listing.short_term_room.checkout ? listing.short_term_room.checkout : '12:00:00'
+    });
     dispatch({
       type: 'SET_COORDINATE',
       payload: {

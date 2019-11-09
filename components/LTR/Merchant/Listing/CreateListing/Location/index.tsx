@@ -16,7 +16,7 @@ import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-interface IProps {}
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -192,7 +192,7 @@ const Location: FC<IProps> = (props) => {
           return (
             <form onSubmit={handleSubmit}>
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
+                <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
                 <Geosuggest
                   country="vn"
                   placeholder="Nhập địa chỉ"
@@ -210,7 +210,7 @@ const Location: FC<IProps> = (props) => {
 
               {touched.address && <InputFeedback error={errors.address} />}
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                <h3 style={{ color: '#767676' }}>Toà nhà (Tuỳ chọn)</h3>
+                <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
 
                 <FormControl fullWidth variant="outlined">
                   <OutlinedInput
@@ -236,7 +236,7 @@ const Location: FC<IProps> = (props) => {
                   <Grid style={{ marginBottom: 32 }}>
                     <h3
                       style={{
-                        color: '#767676',
+                        color: '#484848',
                         paddingBottom: 8,
                         fontSize: 16,
                         fontWeight: 600,

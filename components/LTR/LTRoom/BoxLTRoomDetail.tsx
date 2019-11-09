@@ -4,11 +4,11 @@ import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
 import BoxMap from '@/components/Room/BoxMap';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
 import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -41,7 +41,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const { room } = props;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const checkAboutRoom = isPreviewPage && !room.about_room;
   const checkComfort = isPreviewPage && !room.comforts;
@@ -56,7 +56,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 <RoomBasic
                   isPreviewPage={isPreviewPage}
                   showBed={false}
-                  name={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name }
+                  name={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
                   id={room.id}
                   bathroom={room.bathrooms.number_bathroom}
                   max_additional_guest={room.guests.max_additional_guest}

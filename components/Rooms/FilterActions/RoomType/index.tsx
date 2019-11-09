@@ -1,8 +1,10 @@
 import CustomPopper from '@/components/CustomPopper';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import ActionSelect from './ActionSelect';
 import { useRoomTypeChecbox } from './context';
 
@@ -11,6 +13,7 @@ const RoomType: FC = () => {
   const [dataClick, setDataClick] = useState<number[]>([]);
   const { handleRemove, roomTypes } = useRoomTypeChecbox(setOpen, dataClick, setDataClick);
   const { t } = useTranslation();
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const checkRoomTypes = useMemo<boolean>(() => {
     return roomTypes.length > 0;
@@ -52,9 +55,11 @@ const RoomType: FC = () => {
             setOpen={setOpen}></ActionSelect>
         }>
         <Grid
-          className={classNames('chooseRoomGuest', 'flex_columCenter', {
-            haveResult: checkRoomTypes
-          })}>
+          className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+            haveResultLT: checkRoomTypes
+          } : {
+              haveResult: checkRoomTypes
+            })}>
           <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
             {/* <FontAwesomeIcon icon={faBuilding} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:roomsType')}</p>

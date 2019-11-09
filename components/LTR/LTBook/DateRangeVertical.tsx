@@ -12,7 +12,7 @@ import React, { Dispatch, FC, memo, useContext, useEffect, useMemo } from 'react
 import { DayPickerRangeController, FocusedInputShape } from 'react-dates';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
-
+import '@/styles/pages/book/bookingCalendar/LTDatePicker.scss'
 interface IProps {
   setDisableBooking?: any;
   date?: DateRange;

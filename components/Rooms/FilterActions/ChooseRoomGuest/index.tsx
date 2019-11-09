@@ -63,9 +63,11 @@ const ChooseRoomGuest: FC = () => {
         <ActionChoose checkRemove={checkRemove} setOpen={setOpen} open={open}></ActionChoose>
       }>
       <Grid
-        className={classNames('chooseRoomGuest', 'flex_columCenter', {
-          haveResult: valueInput !== ''
-        })}>
+        className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+          haveResultLT: valueInput !== ''
+        } : {
+            haveResult: valueInput !== ''
+          })}>
         <span onClick={() => setOpen(true)} className="flex_columCenter chooseRoomGuest__actions">
           {/* <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
           <p>

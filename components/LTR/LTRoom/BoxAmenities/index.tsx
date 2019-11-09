@@ -2,7 +2,7 @@ import DialogFullAmenities from '@/components/LTR/LTRoom/BoxAmenities/DialogFull
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Orange from '@material-ui/core/colors/orange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
@@ -45,7 +45,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 700,
     },
     button: {
-      color: Orange[500],
+      color: deepPurple[500],
       margin: '30px 0 16px',
       '&:hover': {
         backgroundColor: '#fff'
@@ -63,7 +63,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     readLess: {
-      color: Orange[500],
+      color: deepPurple[500],
       '&:hover': {
         backgroundColor: '#fff'
       },

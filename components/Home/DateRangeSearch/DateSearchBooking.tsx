@@ -11,7 +11,7 @@ import enGB from 'rc-calendar/lib/locale/en_GB';
 import viVN from 'rc-calendar/lib/locale/vi_VN';
 import DatePicker from 'rc-calendar/lib/Picker';
 import React, { Dispatch, FC, memo, useMemo, useRef, useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { useTranslation } from 'react-i18next';
 import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';

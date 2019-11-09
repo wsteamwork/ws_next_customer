@@ -3,6 +3,7 @@ import Logo from '@/components/Toolbar/Logo';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { AppBar, Avatar, Button, ClickAwayListener, Divider, Grow, Hidden, ListItemIcon, MenuItem, MenuList, Paper, Popover, Popper, SwipeableDrawer, Theme, Toolbar } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
@@ -17,6 +18,7 @@ import PowerSettingsNewRounded from '@material-ui/icons/PowerSettingsNewRounded'
 import React, { Fragment, FunctionComponent, useContext, useRef, useState } from 'react';
 import { withCookies } from 'react-cookie';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { compose } from 'recompose';
 import Cookies from 'universal-cookie';
 import GridContainer from '../Layout/Grid/Container';
@@ -137,6 +139,7 @@ const styles = (theme: Theme) =>
 
 const NavHeader: FunctionComponent<IProps> = (props) => {
   const { classes, cookies, hiddenListCitySearch } = props;
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
@@ -192,6 +195,8 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               <Logo />
               <div className={classes.grow} />
               <ButtonGlobal
+                background={leaseTypeGlobal ? 'linear-gradient(to right, #667eea, #764ba2);' : ''}
+
                 href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
                 // color = 'inherit'
                 padding="0px 20px"

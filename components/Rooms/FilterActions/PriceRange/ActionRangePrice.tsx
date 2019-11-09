@@ -121,7 +121,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
     setPrice({ max: price_day_to, min: price_day_from });
   };
 
-  const hanldeSubmit = () => {
+  const handleSubmit = () => {
     setOpen(false);
     dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
     updateRouter(leaseTypePathName, true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
@@ -203,9 +203,13 @@ const ActionRangePrice: FC<IProps> = (props) => {
           </ButtonGlobal>
         </Grid>
         <Grid item xs={6}>
-          <ButtonGlobal onClick={hanldeSubmit} height="35px" fontSize="14px" color="primary">
-            {t('home:chooseGuestRoom:apply')}
-          </ButtonGlobal>
+          {leaseTypeGlobal ?
+            <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal> :
+            <ButtonGlobal height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal>}
         </Grid>
       </Grid>
     </Fragment>

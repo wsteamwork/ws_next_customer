@@ -22,7 +22,9 @@ const TooltipPayment: FC = () => {
         <FontAwesomeIcon
           icon={faQuestionCircle}
           size="1x"
-          color={mainColor.primary}></FontAwesomeIcon>
+          // color={mainColor.primary}
+          style={{ color: '#673ab7' }}
+        ></FontAwesomeIcon>
       </span>
     </CustomPopper>
   );
