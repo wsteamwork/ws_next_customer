@@ -32,7 +32,7 @@ const LongtermRooms: NextPage = () => {
     dispatchLeaseType({
       type: 'setLeaseTypeGlobal',
       leaseTypeGlobal: 1,
-      leaseTypePathName: !router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
+      leaseTypePathName: router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
     });
   }
   return (

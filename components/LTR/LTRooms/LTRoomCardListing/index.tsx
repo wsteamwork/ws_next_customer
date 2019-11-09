@@ -12,7 +12,7 @@ import LazyLoad from 'react-lazyload';
 interface IProps {
   classes?: any,
   room?: LTRoomIndexRes,
-  usingInMap?:boolean;
+  usingInMap?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
