@@ -100,7 +100,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     statusBookCancel: {
       fontWeight: theme.typography.fontWeightBold
     },
-
     button: {
       width: 79.58,
       boxShadow: 'none',
@@ -235,12 +234,19 @@ const ShortTermBookingList: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (!bookinglist.length) {
-      getBookingListST(dispatch);
+      getBookingListST(dispatch, {});
     }
   }, []);
 
   useEffect(() => {
-    getBookingListST(dispatch);
+    getBookingListST(dispatch, {
+      nameSearch: searchName,
+      date_start: startDate,
+      date_end: endDate,
+      status: statusBooking,
+      room_id: room_id,
+      booking_code: codeBooking
+    });
   }, [router.query]);
 
   useEffect(() => {
@@ -279,7 +285,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
       });
       setMessageSnack('Đơn đặt phòng được xác nhận thành công !');
       setOpenSnack(true);
-      getBookingListST(dispatch);
+      getBookingListST(dispatch, {});
     } catch (error) {
       if (error) {
         setMessageSnack('Đơn đặt phòng chưa được xác nhận !');
@@ -299,7 +305,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
         setOpenCancel(0);
         setMessageSnack('Đơn đặt phòng được hủy thành công !');
         setOpenSnack(true);
-        getBookingListST(dispatch);
+        getBookingListST(dispatch, {});
       }
     } catch (error) {
       if (error) {
@@ -310,8 +316,9 @@ const ShortTermBookingList: FC<IProps> = (props) => {
     }
   };
   const handleSearchST = () => {
+    changePage(1);
     getBookingListST(dispatch, {
-      nameSearch : searchName,
+      nameSearch: searchName,
       date_start: startDate,
       date_end: endDate,
       status: statusBooking,
@@ -319,10 +326,9 @@ const ShortTermBookingList: FC<IProps> = (props) => {
       booking_code: codeBooking
     });
   };
-
   return (
     <Fragment>
-      <FilterBookingList handleSearch={handleSearchST}/>
+      <FilterBookingList handleSearch={handleSearchST} />
       {useMemo(
         () =>
           !isEmpty ? (

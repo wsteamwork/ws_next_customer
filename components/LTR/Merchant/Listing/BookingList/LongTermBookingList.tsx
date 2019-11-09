@@ -7,7 +7,7 @@ import { NextPage } from 'next';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { Fragment, useEffect, useState, useContext } from 'react';
+import React, { Fragment, useEffect, useState, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
@@ -37,10 +37,15 @@ const LongTermBookingList: NextPage = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);
-  const { startDate, endDate, searchName, room_id, codeBooking, statusBooking } = useSelector<
-    ReducersList,
-    any
-  >((state) => state.bookinglist);
+  const {
+    startDate,
+    endDate,
+    searchName,
+    room_id,
+    codeBooking,
+    statusBooking,
+    currentTab
+  } = useSelector<ReducersList, any>((state) => state.bookinglist);
   const meta = useSelector<ReducersList, any>((state) => state.bookinglist.metaLT);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const scrollTop = () => {
@@ -68,17 +73,25 @@ const LongTermBookingList: NextPage = (props) => {
 
   useEffect(() => {
     if (!bookinglist.length) {
-      getBookingListLT(dispatch);
+      getBookingListLT(dispatch, {});
     }
   }, []);
 
   useEffect(() => {
-    getBookingListLT(dispatch);
+    getBookingListLT(dispatch, {
+      nameSearch: searchName,
+      date_start: startDate,
+      date_end: endDate,
+      status: statusBooking,
+      room_id: room_id,
+      booking_code: codeBooking
+    });
   }, [router.query]);
 
   const handleSearchLT = () => {
+    changePage(1);
     getBookingListLT(dispatch, {
-      nameSearch : searchName,
+      nameSearch: searchName,
       date_start: startDate,
       date_end: endDate,
       status: statusBooking,
@@ -89,7 +102,12 @@ const LongTermBookingList: NextPage = (props) => {
 
   return (
     <Fragment>
-      <FilterBookingList handleSearch={handleSearchLT} />
+      {useMemo(
+        () => (
+          currentTab === 0 ? (<FilterBookingList handleSearch={handleSearchLT} />):('')
+        ),
+        [currentTab]
+      )}
       {bookinglist.length ? (
         bookinglist.map((o) => <BookingCardItem key={o.id} booking={o} />)
       ) : (

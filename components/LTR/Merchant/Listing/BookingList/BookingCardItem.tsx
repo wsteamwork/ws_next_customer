@@ -128,17 +128,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       border: '1px solid #ffffff',
       borderRadius: '10px'
     },
-    roomName: {
-      fontSize: '1.2rem',
-      display: 'inline-block',
-      color: '#48465b',
-      fontWeight: 600,
-      alignItems: 'center',
-      marginRight: '0.5rem',
-      [theme.breakpoints.down('md')]: {
-        fontSize: '1rem'
-      }
-    },
     price: {
       display: 'flex',
       justifyContent: 'flex-start',
@@ -153,21 +142,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 600,
       fontSize: 14
     },
-    link: {
-      color: '#484848'
-    },
     infoRoomName: {
       display: 'flex'
     },
     infoCustomer: {
       maxWidth: 180
-    },
-    vertifiredMdDown: {
-      display: 'flex',
-      alignItems: 'center',
-      [theme.breakpoints.down('md')]: {
-        alignItems: 'flex-start'
-      }
     },
     iconVerified: {
       width: '14px',
@@ -194,42 +173,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         color: '#fff'
       }
     },
-    IconImage: {
-      backgroundColor: '#E1E8F7',
-      color: '#3E93F8',
-      padding: 8,
-      marginLeft: 8,
-      '&:hover': {
-        background: '#3E93F8',
-        color: '#fff'
-      }
-    },
-    sizeImage: {
-      width: '1.5rem',
-      height: '1.5rem'
-    },
     customIcon: {
       color: '#767676'
     },
     maxWidthIcon: {
       maxWidth: 60
     },
-    sizeButton: {
-      [theme.breakpoints.down('md')]: {
-        width: '0.9rem',
-        height: '0.9rem'
-      }
-    },
     infoContract: {
       margin: '6px 0'
-    },
-    process: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      [theme.breakpoints.down('md')]: {
-        justifyContent: 'flex-start'
-      }
     },
     imgDetail: {
       height: 45,
@@ -243,12 +194,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         height: 30
       }
     },
-    marginProcess: {
-      marginRight: '10px'
-    },
-    IconDetail: {
-      color: 'lightgray'
-    },
     subLabel: {
       display: 'flex',
       fontWeight: 600,
@@ -259,14 +204,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         fontSize: 12
       }
-    },
-    btnShowSmUp: {
-      display: 'flex',
-      alignItems: 'start',
-      justifyContent: 'flex-end'
-    },
-    percent: {
-      fontWeight: 600
     },
     wrapperPaymentXs: {
       display: 'flex',

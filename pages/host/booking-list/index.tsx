@@ -17,6 +17,10 @@ import {
 import { makeStyles, createStyles } from '@material-ui/styles';
 import ShortTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList';
 import LongTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/LongTermBookingList';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -43,18 +47,6 @@ const AntTab = withStyles((theme: Theme) =>
       padding: 0,
       fontWeight: theme.typography.fontWeightBold,
       marginRight: theme.spacing(6),
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
       fontSize: 20,
       '&:hover': {
         color: '#40a9ff',
@@ -123,9 +115,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const BookingList: NextPage = (props) => {
   const classes = useStyles(props);
+  const dispatch = useDispatch<Dispatch<BookingListReducerAction>>();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    dispatch({ type: 'SET_CURRENT_TAB', payload: newValue });
   };
   return (
     <Fragment>

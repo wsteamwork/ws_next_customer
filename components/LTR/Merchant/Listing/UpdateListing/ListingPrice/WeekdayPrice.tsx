@@ -30,7 +30,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       alignItems: 'flex-end'
     },
     mdDown: {
-        marginBottom: 8
+      marginBottom: 8
     }
   })
 );
@@ -52,53 +52,56 @@ const WeekdayPrice: FC<IProps> = (props) => {
   }, []);
   return (
     <Fragment>
-      {!!listing && weekday.length ? (
-        <CardWrapperItem title="Giá cuối tuần" onClick={openUpdate}>
-          {weekday.map((w, i) => (
-            <Fragment key={i}>
-              <Grid item xs={12} className={weekday.length !== i + 1 ? classes.wrapperContent : ''}>
-                <Grid item xs={12} className={classes.margin}>
-                  <Typography variant="subtitle2" className={classes.name}>
-                    {w.weekday === 1 ? 'Chủ nhật' : `Thứ ${w.weekday}`}
-                  </Typography>
+      <CardWrapperItem title="Giá cuối tuần" onClick={openUpdate}>
+        {!!listing && weekday.length
+          ? weekday.map((w, i) => (
+              <Fragment key={i}>
+                <Grid
+                  item
+                  xs={12}
+                  className={weekday.length !== i + 1 ? classes.wrapperContent : ''}>
+                  <Grid item xs={12} className={classes.margin}>
+                    <Typography variant="subtitle2" className={classes.name}>
+                      {w.weekday === 1 ? 'Chủ nhật' : `Thứ ${w.weekday}`}
+                    </Typography>
+                  </Grid>
+                  <Grid container className={classes.wrapperValue}>
+                    {listing.short_term_room.rent_type !== 1 ? (
+                      <Grid item lg={6} sm={6} xs={12} className={classes.mdDown}>
+                        Theo ngày:{' '}
+                        <span className={classes.name}>
+                          {numeral(w.price_day).format('0,0')} vnđ
+                        </span>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
+                    {listing.short_term_room.rent_type !== 2 ? (
+                      <Grid item lg={6} sm={6} xs={12} className={classes.mdDown}>
+                        Theo giờ:{' '}
+                        <span className={classes.name}>
+                          {numeral(w.price_hour).format('0,0')} vnđ
+                        </span>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
+                    {listing.short_term_room.rent_type !== 2 ? (
+                      <Grid item lg={6} sm={6} xs={12}>
+                        Phụ thu thêm giờ:{' '}
+                        <span className={classes.name}>
+                          {numeral(w.price_after_hour).format('0,0')} vnđ
+                        </span>
+                      </Grid>
+                    ) : (
+                      ''
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid container className={classes.wrapperValue}>
-                  {listing.short_term_room.rent_type !== 1 ? (
-                    <Grid item lg={6} sm={6} xs={12} className={classes.mdDown}>
-                      Theo ngày:{' '}
-                      <span className={classes.name}>{numeral(w.price_day).format('0,0')} vnđ</span>
-                    </Grid>
-                  ) : (
-                    ''
-                  )}
-                  {listing.short_term_room.rent_type !== 2 ? (
-                    <Grid item lg={6} sm={6} xs={12} className={classes.mdDown}>
-                      Theo giờ:{' '}
-                      <span className={classes.name}>
-                        {numeral(w.price_hour).format('0,0')} vnđ
-                      </span>
-                    </Grid>
-                  ) : (
-                    ''
-                  )}
-                  {listing.short_term_room.rent_type !== 2 ? (
-                    <Grid item lg={6} sm={6} xs={12}>
-                      Phụ thu thêm giờ:{' '}
-                      <span className={classes.name}>
-                        {numeral(w.price_after_hour).format('0,0')} vnđ
-                      </span>
-                    </Grid>
-                  ) : (
-                    ''
-                  )}
-                </Grid>
-              </Grid>
-            </Fragment>
-          ))}
-        </CardWrapperItem>
-      ) : (
-        ''
-      )}
+              </Fragment>
+            ))
+          : ''}
+      </CardWrapperItem>
     </Fragment>
   );
 };
