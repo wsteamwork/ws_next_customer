@@ -1,16 +1,16 @@
-import React, { Fragment, useContext, useEffect, useMemo } from 'react';
-import { NextPage } from 'next';
-import NavHeader from '@/components/Toolbar/NavHeader';
-import Footer from '@/components/Layout/FooterComponent';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getCookieFromReq } from '@/utils/mixins';
-import { getPageBookingCancel } from '@/store/Redux/Reducers/Profile/profile';
-import { useSelector } from 'react-redux';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import NextHead from '@/components/NextHead';
-import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import CancelBooking from '@/components/CancelBooking';
+import Footer from '@/components/Layout/FooterComponent';
+import NextHead from '@/components/NextHead';
+import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { getPageBookingCancel } from '@/store/Redux/Reducers/Profile/profile';
+import { BookingIndexRes } from '@/types/Requests/Booking/BookingResponses';
+import { getCookieFromReq } from '@/utils/mixins';
+import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { NextPage } from 'next';
+import React, { Fragment, useContext, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 const BookingCancel: NextPage = () => {
   const { router } = useContext(GlobalContext);

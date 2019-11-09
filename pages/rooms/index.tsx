@@ -13,9 +13,13 @@ import { Grid, Hidden } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useReducer, useState, useContext, useEffect } from 'react';
 import HeadRoom from 'react-headroom';
 import { Sticky, StickyContainer } from 'react-sticky';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -27,10 +31,23 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Rooms: NextPage = (props) => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
+
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { isMapOpen } = state;
   const [hideSearchBar, setHideSearchBar] = useState<boolean>(false);
   const classes = useStyles(props);
+  const { router } = useContext(GlobalContext);
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+  // const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  if (router.pathname.includes('/rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 0,
+      leaseTypePathName: !router.pathname.includes('/rooms') ? '/long-term-rooms' : '/rooms'
+    });
+  }
+
   return (
     <Fragment>
       <NextHead
