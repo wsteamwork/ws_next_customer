@@ -9,7 +9,7 @@ import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { WEBSITE_SRC } from '@/utils/store/global';
 import { Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
 import { SlideProps } from '@material-ui/core/Slide';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
 import React, { FC, forwardRef, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -101,7 +101,7 @@ const BookingForm: FC = () => {
   //   setIsRequest(!isRequest);
   // };
 
-  const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+  const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const data: LTBookingCreateReq = {
       name: `${values.lastName} ${values.firstName}`,
       email: values.email,

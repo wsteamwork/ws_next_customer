@@ -1,5 +1,5 @@
 import React, { FC, forwardRef, useState, useContext } from 'react';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import {
   Paper,
   Grid,
@@ -125,7 +125,7 @@ const BookingForm: FC = () => {
     setIsRequest(!isRequest);
   };
 
-  const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+  const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const data: BookingCreateReq = {
       name: `${values.lastName} ${values.firstName}`,
       email: values.email,

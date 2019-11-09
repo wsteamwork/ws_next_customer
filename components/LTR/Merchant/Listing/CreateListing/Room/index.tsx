@@ -1,19 +1,24 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState,
+  countBedsNumberFromBedRoomList
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
 import Grid from '@material-ui/core/Grid/Grid';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import _ from 'lodash';
-import React, { Dispatch, FC, useEffect, useState } from 'react';
+import React, { Dispatch, FC, useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
 import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
 import AddBedRoom from './AddBedRoom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
-interface IProps { }
+interface IProps {}
 
 interface FormValues {
   bedsNumber: number;
@@ -27,9 +32,14 @@ const Room: FC<IProps> = (props) => {
     bedRoomsNumber,
     bedRooms,
     disableSubmit,
-    bedsNumber: bedsNumberRedux
+    bedsNumber: bedsNumberRedux,
+    listing
   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
+
   const [guest, setGuest] = useState<number>(guestRecommendation);
   const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
 
@@ -70,6 +80,7 @@ const Room: FC<IProps> = (props) => {
   }, [bedRooms]);
 
   useEffect(() => {
+    // console.log(guestRecommendation, maxGuest);
     if (bedRooms == null) {
       let bedRoomsTemp: any = {};
       for (let i = 1; i <= bedRoomsNumber; i++) {
@@ -85,39 +96,16 @@ const Room: FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log('bedsNumber', bedsNumber)
-    // console.log('bedsNumber', totalBedsNumber)
-
     setDisableSubmit(!(bedsNumber == totalBedsNumber));
     if (!(bedsNumber == totalBedsNumber)) scrollToError();
   }, [bedsNumber, totalBedsNumber]);
 
+
   useEffect(() => {
     if (bedRoomsList) {
-      // console.log('bedRoomsList', bedRoomsList);
-      let totalBedsNumberInList = 0;
-      // console.log('bedRoomListInTotal', bedRoomsList)
-
-      _.times(bedRoomsList.number_bedroom, (i) => {
-        totalBedsNumberInList += bedRoomsList[`bedroom_${i + 1}`].number_bed;
-      });
-      setTotalBedsNumber(totalBedsNumberInList);
+      setTotalBedsNumber(countBedsNumberFromBedRoomList(bedRoomsList));
     }
   }, [bedRoomsList]);
-
-  // useEffect(() => {
-  //   if (bedRoomsNumber) {
-  //     let bedRoomsTemp = bedRoomsList;
-  //     bedRoomsTemp['number_bedroom'] = bedRoomsNumber;
-  //     setBedRoomsList(bedRoomsTemp);
-  //   }
-  // }, [bedRoomsNumber]);
-
-  // useEffect(() => {
-  //   console.log('bedsNumber', bedsNumber);
-  //   console.log('totalBedsNumber', totalBedsNumber);
-  //   console.log(bedsNumber == totalBedsNumber);
-  // }, [bedsNumber, totalBedsNumber]);
 
   useEffect(() => {
     dispatch({
@@ -173,15 +161,6 @@ const Room: FC<IProps> = (props) => {
         payload: bedRoomsTemp
       });
     }
-    // for (let i = 1; i <= value; i++) {
-    //   bedRoomsTemp[`bedroom_${i}`] = {
-    //     number_bed: 0,
-    //     beds: [],
-    //     area: 0
-    //   };
-    // }
-    // bedRoomsTemp['number_bedroom'] = value;
-    // setBedRoomsList(bedRoomsTemp);
   };
 
   const initFormValue: FormValues = {
@@ -194,7 +173,7 @@ const Room: FC<IProps> = (props) => {
       .required('At least one checkbox is required')
       .test('checkNotChoose', 'Please select an option', (value) => value != 0)
   });
-  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+  const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     // const data: any = {
     //   lease_type: values.lease_type,
     //   accommodation_type: values.accommodation_type,

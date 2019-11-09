@@ -8,7 +8,7 @@ import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
 import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
@@ -161,7 +161,7 @@ const UpdateLocation: FC<IProps> = (props) => {
     };
   }, [address, city_id, building, district]);
 
-  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+  const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     return {};
   };
 

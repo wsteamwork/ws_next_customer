@@ -1,6 +1,6 @@
 import Lock from '@material-ui/icons/LockOutlined';
 import React, { useMemo, useState, FC, Dispatch } from 'react';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 import { ProfileInfoReq } from '@/types/Requests/Profile/ProfileReq';
@@ -106,7 +106,7 @@ const EditProfile: FC = (props) => {
 
   const onSubmit = async (
     values: FormikProfileValues,
-    actions: FormikActions<FormikProfileValues>
+    actions: FormikHelpers<FormikProfileValues>
   ) => {
     let day = values.day ? values.day : '';
     let month = values.month ? values.month : '';
