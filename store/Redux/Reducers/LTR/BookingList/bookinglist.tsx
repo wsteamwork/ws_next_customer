@@ -81,7 +81,7 @@ export const getBookingListST = async (dispatch: Dispatch<BookingListReducerActi
       q: dataFilter ? dataFilter.nameSearch : '',
       date_start: dataFilter ? dataFilter.date_start : '',
       date_end: dataFilter ? dataFilter.date_end : '',
-      status: dataFilter ? dataFilter.tatus : '',
+      status: dataFilter ? dataFilter.status : '',
       room_id: dataFilter ? dataFilter.room_id: '',
       page: params.page
     };
