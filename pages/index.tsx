@@ -5,7 +5,6 @@ import MetroGridImage from '@/components/Layout/MetroGridImage';
 import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
 import RoomCard from '@/components/RoomCard';
-// import HostBecome from '@/components/Shared/HostBecome';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -15,8 +14,9 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
 import React, { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import LazyLoad, { forceCheck } from 'react-lazyload';
+// // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
+
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
     isHomepage={true} />;
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
-  forceCheck();
+  // forceCheck();
   return (
     <Fragment>
       <NextHead
@@ -48,26 +48,26 @@ const Home: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
       <GridContainer xs={12}>
-        <LazyLoad>
-          <SearchHome />
-        </LazyLoad>
+        {/* <LazyLoad> */}
+        <SearchHome />
+        {/* </LazyLoad> */}
         {width === 'lg' || width === 'xl' || width === 'md' ? (
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            <LazyLoad>
-              <SliderTypeApartment />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <MetroGridImage />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <ListRoom
-                roomData={roomsHot}
-                usingSlider={true}
-                title={t('home:editorChoice')}
-                render={renderRoom}
-              />
+            {/* <LazyLoad> */}
+            <SliderTypeApartment />
+            {/* </LazyLoad> */}
+            {/* <LazyLoad offset="150"> */}
+            <MetroGridImage />
+            {/* </LazyLoad> */}
+            {/* <LazyLoad offset="150"> */}
+            <ListRoom
+              roomData={roomsHot}
+              usingSlider={true}
+              title={t('home:editorChoice')}
+              render={renderRoom}
+            />
 
-            </LazyLoad>
+            {/* </LazyLoad> */}
           </GridContainer>
         ) : ''}
         {/* <HostBecome /> */}
@@ -76,9 +76,9 @@ const Home: NextPage = () => {
           <BlogContainer />
         </GridContainer> */}
       </GridContainer>
-      <LazyLoad offset="150">
-        <FooterComponent />
-      </LazyLoad>
+      {/* <LazyLoad offset="150"> */}
+      <FooterComponent />
+      {/* </LazyLoad> */}
     </Fragment>
   );
 };

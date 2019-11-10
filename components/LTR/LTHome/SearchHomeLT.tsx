@@ -111,7 +111,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
             {/* <Hidden xsDown> */}
             <Grid item xs={12} sm={12} md={11} lg={11} xl={9} className={classes.overFlowChip}>
               <Button variant="contained" className={classes.btnPlace}>
-                <GpsFixed style={{ marginRight: 8, color: 'tomato' }} />
+                <GpsFixed style={{ marginRight: 8, color: '#673ab7' }} />
                 {t('home:yourLocation')}
               </Button>
 

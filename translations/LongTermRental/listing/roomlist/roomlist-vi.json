@@ -17,6 +17,8 @@
     "locked": "Đang khóa",
     "byMonth": "Theo tháng",
     "rentType": "Loại đặt phòng",
-    "policy": "Chính sách hủy"
+    "policy": "Chính sách hủy",
+    "leaseTypeLongTerm": "Thuê dài hạn",
+    "leaseTypeShortTerm": "Homestay"
 
 }

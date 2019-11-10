@@ -59,6 +59,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     images: {
       width: '100%',
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
       borderRadius: 4,
       [theme.breakpoints.up('md')]: {
         height: 320,
@@ -67,6 +69,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       objectFit: 'cover'
     },
     bigImage: {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
       width: '100%',
       borderRadius: 4,
       maxHeight: 500,
@@ -139,13 +143,15 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
+                        {/* <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} /> */}
+                        <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + livingrooms.images[0].name}")` }}></div>
                       </Grid>
 
                       {livingrooms.images.map((o, i) => {
                         if (i > 0) return (
                           <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                            {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                            <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
                           </Grid>
                         )
                       })}
@@ -168,13 +174,16 @@ const DialogFullImage: FC<IProps> = (props) => {
                       <Grid item xs={12} sm={12} md={9}>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
-                            <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            {/* <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} /> */}
+                            <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name}")` }}></div>
+
                           </Grid>
 
                           {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
                             if (i > 0) return (
                               <Grid item xs={12} sm={6} key={i}>
-                                <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                                {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                                <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
                               </Grid>
                             )
                           })}
@@ -198,13 +207,16 @@ const DialogFullImage: FC<IProps> = (props) => {
                       <Grid item xs={12} sm={12} md={9}>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
-                            <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            {/* <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} /> */}
+                            <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + bedrooms[`bathroom_${i + 1}`].images[0].name}")` }}></div>
+
                           </Grid>
 
                           {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
                             if (i > 0) return (
                               <Grid item xs={12} sm={6} key={i}>
-                                <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                                {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                                <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
                               </Grid>
                             )
                           })}
@@ -225,13 +237,16 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
+                        {/* <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} /> */}
+                        <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + kitchens.images[0].name}")` }}></div>
+
                       </Grid>
 
                       {kitchens.images.map((o, i) => {
                         if (i > 0) return (
                           <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                            {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                            <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
                           </Grid>
                         )
                       })}
@@ -252,13 +267,18 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
+                        {/* <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} /> */}
+                        <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + furnitures.images[0].name}")` }}></div>
+
+
                       </Grid>
 
                       {furnitures.images.map((o, i) => {
                         if (i > 0) return (
                           <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                            {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                            <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
+
                           </Grid>
                         )
                       })}
@@ -279,13 +299,17 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={12} md={9}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
+                        {/* <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} /> */}
+                        <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + outdoors.images[0].name}")` }}></div>
+
                       </Grid>
 
                       {outdoors.images.map((o, i) => {
                         if (i > 0) return (
                           <Grid item xs={12} sm={6} key={i}>
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                            {/* <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} /> */}
+                            <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div>
+
                           </Grid>
                         )
                       })}

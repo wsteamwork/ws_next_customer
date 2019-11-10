@@ -16,7 +16,7 @@ import { Grid, Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 import { useDispatch } from 'react-redux';
 import { Sticky, StickyContainer } from 'react-sticky';
 import { Dispatch } from 'redux';
@@ -107,9 +107,9 @@ const LongtermRooms: NextPage = () => {
                 </Grid>
               </GridContainer>
               <FilterActions showBookByHour={false} />
-              <LazyLoad>
-                <MapAndListing />
-              </LazyLoad>
+              {/* <LazyLoad offset={100}> */}
+              <MapAndListing />
+              {/* </LazyLoad> */}
               <BottomNav />
             </Hidden>
           </div>

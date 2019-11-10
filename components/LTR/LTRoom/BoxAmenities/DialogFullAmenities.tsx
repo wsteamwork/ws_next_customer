@@ -6,7 +6,6 @@ import CloseIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-
 interface IProps {
   classes?: any,
   open: boolean,

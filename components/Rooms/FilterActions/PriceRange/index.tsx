@@ -6,8 +6,8 @@ import React, { FC, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { usePriceRange } from './context';
-const ActionRangePriceLT = React.lazy(() => import('./ActionRangePriceLT'));
-const ActionRangePrice = React.lazy(() => import('./ActionRangePrice'));
+import ActionRangePriceLT from './ActionRangePriceLT'
+import ActionRangePrice from './ActionRangePrice'
 const PriceRange: FC = () => {
   const { t } = useTranslation();
   const { open, onHide, checkPrice, setOpen, hanldeOpen, handleRemove } = usePriceRange();

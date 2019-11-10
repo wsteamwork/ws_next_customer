@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+// import Grow from '@material-ui/core/Grow';
 
 interface IProps {
   classes?: any,
@@ -174,11 +175,12 @@ const BoxAmenities: FC<IProps> = (props) => {
       <Button onClick={toggle} className={classes.button} size='small'>
         &#8230; {t('rooms:readMore')}
       </Button>
-
+      {/* <Grow in={openFullAmen}> */}
       <DialogFullAmenities open={openFullAmen} handleClose={() => setOpenFullAmen(false)}
         facilities={facilities} kitchens={kitchens} bedrooms={bedrooms}
         bathrooms={bathrooms} common={common} livingrooms={livingrooms}
         entertainment={entertainment} others={others} outdoors={outdoors} />
+      {/* </Grow> */}
     </Fragment>
   );
 };

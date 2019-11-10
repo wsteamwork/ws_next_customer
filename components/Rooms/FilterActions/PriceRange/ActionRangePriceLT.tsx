@@ -147,7 +147,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
                 </Grid>
                 <Grid container item lg={6} sm={6}>
                     <FormControl>
-                        <InputLabel classname={classes.labelLT} shrink htmlFor="min-price-filter">
+                        <InputLabel className={classes.labelLT} shrink htmlFor="min-price-filter">
                             Tối thiểu
             </InputLabel>
                         <InputBase
@@ -161,7 +161,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
                                 input: classes.bootstrapInput
                             }}
                             startAdornment={
-                                <InputAdornment classname={classes.labelLT} position="start">
+                                <InputAdornment className={classes.labelLT} position="start">
                                     đ
                 </InputAdornment>
                             }
@@ -170,7 +170,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
                 </Grid>
                 <Grid container item lg={6} sm={6}>
                     <FormControl>
-                        <InputLabel classname={classes.labelLT} shrink htmlFor="max-price-filter">
+                        <InputLabel className={classes.labelLT} shrink htmlFor="max-price-filter">
                             Tối đa
             </InputLabel>
                         <InputBase
@@ -184,7 +184,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
                                 input: classes.bootstrapInput
                             }}
                             startAdornment={
-                                <InputAdornment classname={classes.labelLT} position="start">
+                                <InputAdornment className={classes.labelLT} position="start">
                                     đ
                 </InputAdornment>
                             }

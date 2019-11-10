@@ -30,7 +30,7 @@ export const MAP = 2;
 export const NAV = 3;
 
 export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
-  <Slide direction="up" ref={ref} {...props} />
+  <Slide timeout={300} direction="up" ref={ref} {...props} />
 ));
 
 interface IProps { }
