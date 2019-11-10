@@ -101,7 +101,7 @@ const BoxAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const [openFullAmen, setOpenFullAmen] = useState<boolean>(false);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-
+  console.log(leaseTypeGlobal)
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpenFullAmen(!openFullAmen);
@@ -175,7 +175,7 @@ const BoxAmenities: FC<IProps> = (props) => {
             </Grid>
           )}
       </div>
-      <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7' : '#ff9800'}` }} size='small'>
+      <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7 !important' : '#ff9800'}` }} size='small'>
         &#8230; {t('rooms:readMore')}
       </Button>
       {/* <Grow in={openFullAmen}> */}
