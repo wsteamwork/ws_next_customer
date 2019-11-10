@@ -87,23 +87,6 @@ const SideDrawer: FC<IProps> = (props) => {
     <Fragment>
       <List className={classes.list}>
         <div className="top">
-          <ListItem
-            classes={{
-              gutters: classes.listItemGutters
-            }}
-            component="a"
-            href="https://merchant.westay.vn"
-            button
-            onClick={() => setOpen(false)}>
-            <ListItemText
-              primary={t('home:becomeAHost')}
-              classes={{
-                primary: classes.becomeHost,
-                root: classes.listItem
-              }}
-            />
-          </ListItem>
-
           {/* <ListItem button {...to("/")} onClick={() => setOpen(false)}>
           <ListItemIcon>
             <Home />
@@ -126,6 +109,9 @@ const SideDrawer: FC<IProps> = (props) => {
                 href="/"
                 button
                 onClick={() => setOpen(false)}>
+                {/* <ListItemIcon>
+                  <Home />
+                </ListItemIcon> */}
                 <ListItemText
                   primary={t('home:home')}
                   classes={{
@@ -147,6 +133,23 @@ const SideDrawer: FC<IProps> = (props) => {
                   primary={t('home:profile')}
                   classes={{
                     primary: classes.text
+                  }}
+                />
+              </ListItem>
+
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}
+                component="a"
+                href="https://merchant.westay.vn"
+                button
+                onClick={() => setOpen(false)}>
+                <ListItemText
+                  primary={t('home:becomeAHost')}
+                  classes={{
+                    primary: classes.becomeHost,
+                    root: classes.listItem
                   }}
                 />
               </ListItem>
@@ -202,7 +205,7 @@ const SideDrawer: FC<IProps> = (props) => {
             button>
             <SwitchLanguage />
           </ListItem>
-          <ListItem
+          {/* <ListItem
             button
             onClick={() => setOpen(false)}
             component="a"
@@ -216,7 +219,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 primary: classes.text
               }}
             />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem
             button

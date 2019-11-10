@@ -210,10 +210,10 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       ''
                     )}
                   </Grid>
-                  <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                    {isLogin ? 'Book' : 'Đăng nhập để book phòng'}
+                  <ButtonGlobal style={{color: '#fff'}} background="linear-gradient(to right, #667eea, #764ba2);" onClick={handleSubmit} disabled={!disableBooking}>
+                    {isLogin ? 'Đặt phòng' : 'Đăng nhập để book phòng'}
                   </ButtonGlobal>
-                </Grid>
+                </Grid> 
               </Hidden>
               <Hidden mdDown>
                 {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
@@ -244,8 +244,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                 ) : (
                   ''
                 )}
-                <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                  {isLogin ? 'Book' : 'Đăng nhập để tiếp tục'}
+                <ButtonGlobal style={{ color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit} disabled={!disableBooking}>
+                  {isLogin ? 'Đặt phòng' : 'Đăng nhập để tiếp tục'}
                 </ButtonGlobal>
               </Hidden>
             </Grid>

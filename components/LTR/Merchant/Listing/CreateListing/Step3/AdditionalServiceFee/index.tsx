@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     checkboxItem: {},
     checkboxItemWrapper: {
       padding: '5px 15px 10px',
-      border: '1px solid #767676',
+      border: '1px solid #484848',
       borderRadius: 4,
       minHeight: 120,
     },

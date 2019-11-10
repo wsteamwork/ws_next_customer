@@ -33,7 +33,7 @@
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "express-useragent": "^1.0.13",
-    "formik": "^1.5.8",
+    "formik": "^2.0.3",
     "google-map-react": "^1.1.4",
     "helmet": "^3.15.1",
     "i18next": "^17.0.6",

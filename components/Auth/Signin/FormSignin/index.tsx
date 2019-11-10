@@ -4,7 +4,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { LoginRequest } from '@/types/Requests/Account/AccountRequests';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
 import Router from 'next/router';
 import React, { useContext, useEffect, useState } from 'react';
@@ -41,7 +41,7 @@ const FormSignin = () => {
       .max(50, t('auth:max50Characters'))
   });
 
-  const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+  const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const body: LoginRequest = {
       username: values.email,
       password: values.password

@@ -174,7 +174,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     customIcon: {
-      color: '#767676'
+      color: '#484848'
     },
     maxWidthIcon: {
       maxWidth: 60
@@ -350,25 +350,25 @@ const BookingCardItem: FC<IProps> = (props) => {
               <Grid item xs={12}>
                 <Grid container>
                   {booking.longTermRoom.data.avatar &&
-                  booking.longTermRoom.data.avatar.images.length ? (
-                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
-                      <img
-                        className={classes.img}
-                        src={IMAGE_STORAGE_LG + booking.longTermRoom.data.avatar.images[0].name}
-                        alt="Westay - Homestay cho người việt"
-                      />
-                    </Grid>
-                  ) : (
-                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
-                      <Grid className={classes.wrapperImage}>
+                    booking.longTermRoom.data.avatar.images.length ? (
+                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                         <img
-                          src={'/static/images/camera.svg'}
-                          alt="Camera"
-                          className={classes.imgDefault}
+                          className={classes.img}
+                          src={IMAGE_STORAGE_LG + booking.longTermRoom.data.avatar.images[0].name}
+                          alt="Westay - Homestay cho người việt"
                         />
                       </Grid>
-                    </Grid>
-                  )}
+                    ) : (
+                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                        <Grid className={classes.wrapperImage}>
+                          <img
+                            src={'/static/images/camera.svg'}
+                            alt="Camera"
+                            className={classes.imgDefault}
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
                   <Hidden smUp>
                     <Grid item xs={6}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
@@ -427,74 +427,74 @@ const BookingCardItem: FC<IProps> = (props) => {
                           </Grid>
 
                           {booking.contracts.data[0].status !== 1 &&
-                          booking.contracts.data[0].status !== 5 ? (
-                            <Grid className={classes.price}>
-                              <Grid container item xs={12} sm={12} lg={12} spacing={1}>
-                                <Grid item xs={6} lg={6} className={classes.infoCustomer}>
-                                  <Grid container>
-                                    <Grid item xs={2} className={classes.spanIcon}>
-                                      <FontAwesomeIcon
-                                        className={classes.customIcon}
-                                        icon={faUserFriends}></FontAwesomeIcon>
-                                    </Grid>
-                                    <Grid className={classes.nameIcon} item xs={10}>
-                                      <Typography variant="subtitle1" className={classes.priceAll}>
-                                        {booking.name}
-                                      </Typography>
+                            booking.contracts.data[0].status !== 5 ? (
+                              <Grid className={classes.price}>
+                                <Grid container item xs={12} sm={12} lg={12} spacing={1}>
+                                  <Grid item xs={6} lg={6} className={classes.infoCustomer}>
+                                    <Grid container>
+                                      <Grid item xs={2} className={classes.spanIcon}>
+                                        <FontAwesomeIcon
+                                          className={classes.customIcon}
+                                          icon={faUserFriends}></FontAwesomeIcon>
+                                      </Grid>
+                                      <Grid className={classes.nameIcon} item xs={10}>
+                                        <Typography variant="subtitle1" className={classes.priceAll}>
+                                          {booking.name}
+                                        </Typography>
+                                      </Grid>
                                     </Grid>
                                   </Grid>
-                                </Grid>
 
-                                <Grid item xs={6} lg={6} className={classes.infoCustomer}>
-                                  <Grid container>
-                                    <Grid item xs={2} className={classes.spanIcon}>
-                                      <FontAwesomeIcon
-                                        className={classes.customIcon}
-                                        icon={faUserFriends}></FontAwesomeIcon>
-                                    </Grid>
-                                    <Grid className={classes.nameIcon} item xs={10}>
-                                      <Typography variant="subtitle1" className={classes.priceAll}>
-                                        {booking.guests.total_guests} khách
+                                  <Grid item xs={6} lg={6} className={classes.infoCustomer}>
+                                    <Grid container>
+                                      <Grid item xs={2} className={classes.spanIcon}>
+                                        <FontAwesomeIcon
+                                          className={classes.customIcon}
+                                          icon={faUserFriends}></FontAwesomeIcon>
+                                      </Grid>
+                                      <Grid className={classes.nameIcon} item xs={10}>
+                                        <Typography variant="subtitle1" className={classes.priceAll}>
+                                          {booking.guests.total_guests} khách
                                       </Typography>
+                                      </Grid>
                                     </Grid>
                                   </Grid>
-                                </Grid>
 
-                                <Grid item xs={6} lg={6} className={classes.infoCustomer}>
-                                  <Grid container>
-                                    <Grid item xs={2} className={classes.spanIcon}>
-                                      <FontAwesomeIcon
-                                        className={classes.customIcon}
-                                        icon={faPhoneAlt}></FontAwesomeIcon>
-                                    </Grid>
-                                    <Grid className={classes.nameIcon} item xs={10}>
-                                      <Typography variant="subtitle1" className={classes.priceAll}>
-                                        {booking.phone}
-                                      </Typography>
+                                  <Grid item xs={6} lg={6} className={classes.infoCustomer}>
+                                    <Grid container>
+                                      <Grid item xs={2} className={classes.spanIcon}>
+                                        <FontAwesomeIcon
+                                          className={classes.customIcon}
+                                          icon={faPhoneAlt}></FontAwesomeIcon>
+                                      </Grid>
+                                      <Grid className={classes.nameIcon} item xs={10}>
+                                        <Typography variant="subtitle1" className={classes.priceAll}>
+                                          {booking.phone}
+                                        </Typography>
+                                      </Grid>
                                     </Grid>
                                   </Grid>
-                                </Grid>
-                                <Grid item xs={6} lg={6} className={classes.infoCustomer}>
-                                  <Grid container>
-                                    <Grid item xs={2} className={classes.spanIcon}>
-                                      <FontAwesomeIcon
-                                        className={classes.customIcon}
-                                        icon={faEnvelope}></FontAwesomeIcon>
-                                    </Grid>
-                                    <Grid className={classes.nameIcon} item xs={10}>
-                                      <Typography variant="subtitle1" className={classes.priceAll}>
-                                        {booking.email}
-                                      </Typography>
+                                  <Grid item xs={6} lg={6} className={classes.infoCustomer}>
+                                    <Grid container>
+                                      <Grid item xs={2} className={classes.spanIcon}>
+                                        <FontAwesomeIcon
+                                          className={classes.customIcon}
+                                          icon={faEnvelope}></FontAwesomeIcon>
+                                      </Grid>
+                                      <Grid className={classes.nameIcon} item xs={10}>
+                                        <Typography variant="subtitle1" className={classes.priceAll}>
+                                          {booking.email}
+                                        </Typography>
+                                      </Grid>
                                     </Grid>
                                   </Grid>
                                 </Grid>
                               </Grid>
-                            </Grid>
-                          ) : (
-                            <Typography variant="subtitle1" className={classes.priceAll}>
-                              Vui lòng xác nhận để xem thông tin khách
+                            ) : (
+                              <Typography variant="subtitle1" className={classes.priceAll}>
+                                Vui lòng xác nhận để xem thông tin khách
                             </Typography>
-                          )}
+                            )}
                         </Grid>
                       </Grid>
                       <Grid item xs={12} lg={8} className={classes.infoContract}>

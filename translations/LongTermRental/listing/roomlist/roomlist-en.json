@@ -17,5 +17,7 @@
     "locked": "Locked",
     "byMonth": "Monthly",
     "rentType": "Instant book",
-    "policy": "Cancellation policy"
+    "policy": "Cancellation policy",
+    "leaseTypeLongTerm": "Long-term",
+    "leaseTypeShortTerm": "Homestay"
 }

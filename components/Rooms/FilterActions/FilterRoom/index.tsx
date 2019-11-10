@@ -1,9 +1,11 @@
 import CustomPopper from '@/components/CustomPopper';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import React, { FC, memo, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import ActionFilter from './ActionFilter';
 
 const FilterRoom: FC = () => {
@@ -12,6 +14,7 @@ const FilterRoom: FC = () => {
   const { dispatch, state } = useContext(RoomFilterContext);
   const { amenities } = state;
   const { t } = useTranslation();
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const checkAmentites = useMemo<boolean>(() => {
     return amenities.length > 0;
@@ -50,9 +53,11 @@ const FilterRoom: FC = () => {
             setOpen={setOpen}></ActionFilter>
         }>
         <Grid
-          className={classNames('chooseRoomGuest', 'flex_columCenter', {
-            haveResult: checkAmentites
-          })}>
+          className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+            haveResultLT: checkAmentites
+          } : {
+              haveResult: checkAmentites
+            })}>
           <span onClick={hanldeOpen} className="flex_columCenter chooseRoomGuest__actions">
             {/* <FontAwesomeIcon icon={faFilter} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:filterRooms')}</p>

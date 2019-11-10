@@ -196,11 +196,12 @@
               }
 
               .svgQuick {
+                color: #673ab7;
                 position: relative;
                 top: 7px;
                 margin-right: 8px;
-                -webkit-filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
-                filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
+                // -webkit-filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
+                // filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
               }
             }
 
@@ -208,7 +209,7 @@
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 600;
-              color: #fa991c;
+              color: #673ab7;
               display: inline-block;
               margin-right: 3px;
             }
@@ -271,7 +272,7 @@
 
             .totalReviewText {
               margin-left: 10px;
-              color: #fa991c;
+              color: #673ab7;
               font-weight: 500;
             }
 
@@ -284,7 +285,8 @@
             margin-top: 12px;
 
             .priceBasic {
-              font-weight: 700;
+              font-weight: 500;
+              color: #484848;
             }
 
             .priceContainer {
@@ -312,7 +314,7 @@
             .priceText {
               font-size: 15px;
               margin-left: 20px;
-              color: #fa991c;
+              color: #673ab7;
               font-weight: 700;
             }
 

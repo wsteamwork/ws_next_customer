@@ -24,6 +24,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 4,
       zIndex: -1,
     },
+    selectedLT: {
+      color: '#fff !important',
+      background: 'linear-gradient(to right, #667eea, #764ba2);'
+    },
+    selectedST: {
+      color: '#fff !important',
+      background: 'radial-gradient( circle farthest-corner at 10% 20%,  rgba(253,193,104,1) 0%, rgba(251,128,128,1) 90% );'
+    },
     rootTab: {
       textTransform: 'initial',
       margin: '0 8px 0 0',
@@ -38,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     wrapper: {
       letterSpacing: 0.5,
-      color: '#323232',
+      // color: '#323232',
       fontWeight: 700,
       fontSize: 18,
       [theme.breakpoints.only('xs')]: {
@@ -64,7 +72,8 @@ const TabChangeHome: FC<IProps> = (props) => {
         <Tab key={i} {...proptab}
           classes={{
             root: classes.rootTab,
-            wrapper: classes.wrapper
+            wrapper: classes.wrapper,
+            selected: i == 1 ? classes.selectedLT : classes.selectedST
           }}
           {...a11yProps(i)}
         />

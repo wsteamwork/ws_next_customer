@@ -1,3 +1,4 @@
+import { ReducersList } from '@/store/Redux/Reducers';
 import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from '@material-ui/core';
@@ -6,6 +7,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import GoogleMap from 'google-map-react';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any,
@@ -43,6 +45,8 @@ const BoxMap: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { district, city, latitude, longitude } = props;
   // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
   return (
     <div>
       <Typography variant="h5" className={classes.title}>
@@ -68,10 +72,10 @@ const BoxMap: FC<IProps> = (props) => {
           onGoogleApiLoaded={({ map, maps }) => {
             latitude ?
               new maps.Circle({
-                strokeColor: '#FCAB70',
+                strokeColor: `${leaseTypeGlobal ? '#673ab7' : '#FCAB70'}`,
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#FDBF68',
+                fillColor: `${leaseTypeGlobal ? '#673ab7' : '#FDBF68'}`,
                 fillOpacity: 0.3,
                 map,
                 center: {

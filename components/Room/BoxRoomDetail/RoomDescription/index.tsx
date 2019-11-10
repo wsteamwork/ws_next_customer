@@ -1,11 +1,10 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Orange from '@material-ui/core/colors/orange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, MouseEvent, useContext, useState } from 'react';
+import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -23,7 +22,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginBottom: 10
     },
     button: {
-      color: Orange[500],
+      color: deepPurple[500],
       padding: 0,
       '&:hover': {
         backgroundColor: '#fff'
@@ -46,7 +45,7 @@ interface IProps {
   description: string,
   space: string,
   note: string,
-  isPreviewPage?:boolean,
+  isPreviewPage?: boolean,
 }
 
 const RoomDescription: FC<IProps> = (props) => {

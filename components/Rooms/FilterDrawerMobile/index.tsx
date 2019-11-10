@@ -57,6 +57,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     apply: {
       width: '100%'
+    },
+    applyLT: {
+      width: '100%',
+      backgroundColor: '#673ab7'
     }
   })
 );
@@ -204,15 +208,26 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={applyFilter}
-          classes={{
-            root: classes.apply
-          }}>
-          {t('rooms:filterRooms:apply')}
-        </Button>
+        {leaseTypeGlobal ?
+          <Button
+
+            variant="contained"
+            onClick={applyFilter}
+            classes={{
+              root: classes.applyLT
+            }}>
+            {t('rooms:filterRooms:apply')}
+          </Button> :
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={applyFilter}
+            classes={{
+              root: classes.apply
+            }}>
+            {t('rooms:filterRooms:apply')}
+          </Button>}
+
       </DialogActions>
     </Fragment>
   );

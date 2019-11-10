@@ -10,7 +10,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import Pagination from 'rc-pagination';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 
 interface IProps {
   classes?: any,
@@ -39,9 +39,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const renderRooms = (room) => (
-    <LazyLoad>
-      <LTRoomCardListing room={room} usingInMap={usingInMap} />
-    </LazyLoad>
+    <LTRoomCardListing room={room} usingInMap={usingInMap} />
   );
 
   const changePage = (current: number) => {
@@ -65,7 +63,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
             <Typography variant='h6' className={classes.titleList}>
               {meta.pagination ? `${t('rooms:totalResult')} ${meta.pagination.total} ${t('rooms:results')}` : ''}
             </Typography>)}
-
+          {/* <LazyLoad> */}
           <ListRoom
             customClass=''
             roomData={longtermRooms}
@@ -78,8 +76,9 @@ const ListingLTRooms: FC<IProps> = (props) => {
             xs={12} sm={6} md={4} lg={4} xl={3}
             xsMap={12} smMap={6}
           />
+          {/* </LazyLoad> */}
           <Pagination
-            className='rooms-pagination'
+            className='rooms-pagination-lt'
             total={meta.pagination.total}
             pageSize={meta.pagination.per_page}
             current={currentPage}

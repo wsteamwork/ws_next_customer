@@ -1,11 +1,14 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
@@ -60,13 +63,18 @@ const Location: FC<IProps> = (props) => {
   const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [coordinate, setCoordinate] = useState<Coordinate>(coordinateState);
-  const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(null);
+  const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(coordinateState);
   const [district, setDistrict] = useState<number>(district_id);
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
 
   const FormValidationSchema = useValidatation();
+
+  // useEffect(() => {
+  //   console.log(address);
+  //   console.log(building);
+  // }, []);
 
   useEffect(() => {
     dispatch({
@@ -143,7 +151,7 @@ const Location: FC<IProps> = (props) => {
     district: ''
   };
 
-  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+  const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     return {};
   };
 
@@ -184,13 +192,12 @@ const Location: FC<IProps> = (props) => {
           return (
             <form onSubmit={handleSubmit}>
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-
-                <h3 style={{ color: '#767676' }}>Địa chỉ</h3>
+                <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
                 <Geosuggest
                   country="vn"
                   placeholder="Nhập địa chỉ"
                   onSuggestSelect={onSuggestSelect}
-                  location={new google.maps.LatLng(53.558572, 9.9278215)}
+                  location={new google.maps.LatLng(coordinate.lat, coordinate.lng)}
                   radius={20}
                   onChange={handleChangeAddress(setFieldValue)}
                   // onBlur={() => {
@@ -203,7 +210,7 @@ const Location: FC<IProps> = (props) => {
 
               {touched.address && <InputFeedback error={errors.address} />}
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                <h3 style={{ color: '#767676' }}>Toà nhà (Tuỳ chọn)</h3>
+                <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
 
                 <FormControl fullWidth variant="outlined">
                   <OutlinedInput
@@ -229,7 +236,7 @@ const Location: FC<IProps> = (props) => {
                   <Grid style={{ marginBottom: 32 }}>
                     <h3
                       style={{
-                        color: '#767676',
+                        color: '#484848',
                         paddingBottom: 8,
                         fontSize: 16,
                         fontWeight: 600,
