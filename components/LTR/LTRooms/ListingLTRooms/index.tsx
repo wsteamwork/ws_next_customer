@@ -65,19 +65,20 @@ const ListingLTRooms: FC<IProps> = (props) => {
             <Typography variant='h6' className={classes.titleList}>
               {meta.pagination ? `${t('rooms:totalResult')} ${meta.pagination.total} ${t('rooms:results')}` : ''}
             </Typography>)}
-
-          <ListRoom
-            customClass=''
-            roomData={longtermRooms}
-            usingSlider={false}
-            title={''}
-            spacing={2}
-            render={renderRooms}
-            usingInMap={usingInMap}
-            hoverAction={hoverAction}
-            xs={12} sm={6} md={4} lg={4} xl={3}
-            xsMap={12} smMap={6}
-          />
+          <LazyLoad>
+            <ListRoom
+              customClass=''
+              roomData={longtermRooms}
+              usingSlider={false}
+              title={''}
+              spacing={2}
+              render={renderRooms}
+              usingInMap={usingInMap}
+              hoverAction={hoverAction}
+              xs={12} sm={6} md={4} lg={4} xl={3}
+              xsMap={12} smMap={6}
+            />
+          </LazyLoad>
           <Pagination
             className='rooms-pagination-lt'
             total={meta.pagination.total}

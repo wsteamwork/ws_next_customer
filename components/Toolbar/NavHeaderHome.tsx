@@ -144,7 +144,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
-  const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
+  // const [openSearchMobile, setOpenSearchMobile] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
   const { router } = useContext(GlobalContext);
@@ -194,17 +194,28 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
             <Hidden smDown>
               <Logo />
               <div className={classes.grow} />
-              <ButtonGlobal
-                background={leaseTypeGlobal ? 'linear-gradient(to right, #667eea, #764ba2);' : ''}
-
-                href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
-                // color = 'inherit'
-                padding="0px 20px"
-                className={classes.buttonMerchantSite}
-                name="merchant-site"
-                size="large">
-                {t('home:merchantChannel')}
-              </ButtonGlobal>
+              {
+                leaseTypeGlobal ? (
+                  <ButtonGlobal
+                    background={'linear-gradient(to right, #667eea, #764ba2);'}
+                    href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
+                    padding="0px 20px"
+                    className={classes.buttonMerchantSite}
+                    name="merchant-site"
+                    size="large">
+                    {t('home:merchantChannel')}
+                  </ButtonGlobal>
+                ) : (
+                    <ButtonGlobal
+                      href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
+                      padding="0px 20px"
+                      className={classes.buttonMerchantSite}
+                      name="merchant-site"
+                      size="large">
+                      {t('home:merchantChannel')}
+                    </ButtonGlobal>
+                  )
+              }
 
               <Button
                 onClick={() => setOpen(!open)}

@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import React, { FC, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import ActionRangePrice from './ActionRangePrice';
 import { usePriceRange } from './context';
-
+const ActionRangePriceLT = React.lazy(() => import('./ActionRangePriceLT'));
+const ActionRangePrice = React.lazy(() => import('./ActionRangePrice'));
 const PriceRange: FC = () => {
   const { t } = useTranslation();
   const { open, onHide, checkPrice, setOpen, hanldeOpen, handleRemove } = usePriceRange();
@@ -24,7 +24,8 @@ const PriceRange: FC = () => {
         theme="light-border"
         onHide={onHide}
         interactive
-        content={<ActionRangePrice setOpen={setOpen}></ActionRangePrice>}>
+        content={leaseTypeGlobal ?
+          <ActionRangePriceLT setOpen={setOpen}></ActionRangePriceLT> : <ActionRangePrice setOpen={setOpen}></ActionRangePrice>}>
         <Grid
           className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
             haveResultLT: checkPrice !== ''

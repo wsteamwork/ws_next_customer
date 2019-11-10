@@ -14,11 +14,11 @@ import { getDataLTRoom } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
-// import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -28,7 +28,7 @@ const LongtermRoom: NextPage = () => {
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
   // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
-
+  forceCheck();
   if (router.pathname.includes('/long-term-rooms')) {
     dispatchLeaseType({
       type: 'setLeaseTypeGlobal',
@@ -36,6 +36,7 @@ const LongtermRoom: NextPage = () => {
       leaseTypePathName: router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
     });
   }
+
   const [openBookingDialog, setOpenBookingDialog] = useState<boolean>(false);
   const handleOpenBookingDialog = () => {
     setOpenBookingDialog(true);
@@ -84,29 +85,33 @@ const LongtermRoom: NextPage = () => {
           <Fragment>
             {ltroom ? (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <BoxImageLT
-                  livingrooms={ltroom.livingrooms}
-                  kitchens={ltroom.kitchens}
-                  bathrooms={ltroom.bathrooms}
-                  furnitures={ltroom.furnitures}
-                  bedrooms={ltroom.bedrooms}
-                  cover_photo={ltroom.cover_photo}
-                />
+                <LazyLoad>
+                  <BoxImageLT
+                    livingrooms={ltroom.livingrooms}
+                    kitchens={ltroom.kitchens}
+                    bathrooms={ltroom.bathrooms}
+                    furnitures={ltroom.furnitures}
+                    bedrooms={ltroom.bedrooms}
+                    cover_photo={ltroom.cover_photo}
+                  />
+                </LazyLoad>
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
                     <BoxLTRoomDetail room={ltroom} />
                   </Grid>
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                    <BoxBookingLT
-                      priceBasic={ltroom.price_display}
-                      id={ltroom.merchant.data.id}
-                      avatar={ltroom.merchant.data.avatar}
-                      avatar_url={ltroom.merchant.data.avatar_url}
-                      name={ltroom.merchant.data.name}
-                      number_room={ltroom.merchant.data.number_room}
-                      handleOpenBookingDialog={handleOpenBookingDialog}
-                    />
+                    <LazyLoad>
+                      <BoxBookingLT
+                        priceBasic={ltroom.price_display}
+                        id={ltroom.merchant.data.id}
+                        avatar={ltroom.merchant.data.avatar}
+                        avatar_url={ltroom.merchant.data.avatar_url}
+                        name={ltroom.merchant.data.name}
+                        number_room={ltroom.merchant.data.number_room}
+                        handleOpenBookingDialog={handleOpenBookingDialog}
+                      />
+                    </LazyLoad>
                   </Grid>
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">
@@ -128,7 +133,9 @@ const LongtermRoom: NextPage = () => {
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>
-      <Footer />
+      <LazyLoad offset={100}>
+        <Footer />
+      </LazyLoad>
     </Fragment>
   );
 };

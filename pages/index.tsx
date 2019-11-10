@@ -10,13 +10,13 @@ import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartmen
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
 import React, { Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import LazyLoad, { forceCheck } from 'react-lazyload'
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
@@ -36,7 +36,6 @@ const Home: NextPage = () => {
     isHomepage={true} />;
   const { t } = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
-  // console.log(width);
   forceCheck();
   return (
     <Fragment>
@@ -57,10 +56,10 @@ const Home: NextPage = () => {
             <LazyLoad>
               <SliderTypeApartment />
             </LazyLoad>
-            <LazyLoad>
+            <LazyLoad offset="150">
               <MetroGridImage />
             </LazyLoad>
-            <LazyLoad>
+            <LazyLoad offset="150">
               <ListRoom
                 roomData={roomsHot}
                 usingSlider={true}
@@ -77,8 +76,9 @@ const Home: NextPage = () => {
           <BlogContainer />
         </GridContainer> */}
       </GridContainer>
-
-      <FooterComponent />
+      <LazyLoad offset="150">
+        <FooterComponent />
+      </LazyLoad>
     </Fragment>
   );
 };

@@ -24,8 +24,10 @@ import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 
 const Room: NextPage = () => {
+  forceCheck();
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
@@ -87,11 +89,15 @@ const Room: NextPage = () => {
                 {/* <Hidden mdDown implementation="css">
                   <BoxSearch />
                 </Hidden> */}
-
-                <BoxImage />
+                <LazyLoad>
+                  <BoxImage />
+                </LazyLoad>
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
-                    <BoxRoomDetail room={room} />
+                    <LazyLoad>
+                      <BoxRoomDetail room={room} />
+                    </LazyLoad>
+
                   </Grid>
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">

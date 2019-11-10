@@ -64,6 +64,11 @@ class MyDocument extends Document {
           <meta name="theme-color" content={theme.palette.primary.main} />
           <meta name="twitter:card" content="summary_large_image" />
           <meta property="fb:app_id" content="331750437466885" />
+
+          {/* <meta http-equiv="pragma" content="no-cache" />
+          <meta http-equiv="cache-control" content="no-cache" />
+          <meta http-equiv="cache-control" content="max-age=0" /> */}
+
           <meta
             name="google-site-verification"
             content="Xn4ULuU-MncP7CZoQxH1r7F2DzzID_IolgwbUbQMxtM"
