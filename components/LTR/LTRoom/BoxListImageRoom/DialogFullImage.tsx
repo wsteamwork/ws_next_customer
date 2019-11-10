@@ -162,7 +162,7 @@ const DialogFullImage: FC<IProps> = (props) => {
             ) : <Fragment />}
 
             {_.times(bedrooms.number_bedroom, (i) => (
-              <li className={classes.listSection}>
+              <li className={classes.listSection} key={i}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
@@ -195,7 +195,7 @@ const DialogFullImage: FC<IProps> = (props) => {
             ))}
 
             {_.times(bathrooms.number_bathroom, (i) => (
-              <li className={classes.listSection}>
+              <li className={classes.listSection} key={i}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>

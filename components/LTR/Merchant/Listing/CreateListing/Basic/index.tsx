@@ -1,26 +1,17 @@
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputAdornment,
-  OutlinedInput
-} from '@material-ui/core';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { Checkbox, FormControl, FormControlLabel, InputAdornment, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import React, { ChangeEvent, Dispatch, FC, useEffect, useState, useContext } from 'react';
+import { Formik, FormikProps } from 'formik';
+import React, { ChangeEvent, Dispatch, FC, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -60,7 +51,7 @@ const Basic: FC<IProps> = (props) => {
 
   useEffect(() => {
     getRoomType(setRoomTypesData);
-    console.log(listing);
+    // console.log(listing);
   }, []);
 
   const checkLeaseType = (listing: any) => {
