@@ -5,11 +5,35 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import { getDataUpdateListing, handleUpdateRentAndRoomType, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { Checkbox, FormControl, FormControlLabel, Grid, InputAdornment, Typography } from '@material-ui/core';
+import {
+  getDataUpdateListing,
+  handleUpdateRentAndRoomType,
+  UpdateDetailsActions,
+  UpdateDetailsState
+} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputAdornment,
+  Typography,
+  OutlinedInput,
+  Select,
+  MenuItem
+} from '@material-ui/core';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import React, { ChangeEvent, FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  Fragment,
+  SyntheticEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -41,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: '#1e8df7 !important'
     },
     margin: {
-      margin: '-16px 0'
+      margin: '16px 0'
     },
     label: {
       marginTop: theme.spacing(2),
@@ -129,10 +153,10 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
     });
   }, [roomType]);
 
-  const callBackOnChange = (value: string) => {
+  const callBackOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: 'SET_ACCOMMODATION_TYPE',
-      payload: parseInt(value)
+      payload: parseInt(event.target.value)
     });
   };
 
@@ -194,12 +218,21 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Grid item xs={12} sm={8} md={8} lg={7} className={classes.margin}>
-              <SelectCustom
-                name="accommodation_type"
-                value={roomType}
-                options={roomTypesData}
-                callBackOnChange={callBackOnChange}
-              />
+              <FormControl variant="outlined" fullWidth>
+                <Select
+                  fullWidth
+                  onChange={callBackOnChange}
+                  value={roomType}
+                  inputProps={{ style: { padding: 12 } }}
+                  input={<OutlinedInput labelWidth={0} />}>
+                  {roomTypesData &&
+                    roomTypesData.map((o, idx) => (
+                      <MenuItem key={idx} value={o.id}>
+                        {o.value}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
           <Grid item xs={12}>

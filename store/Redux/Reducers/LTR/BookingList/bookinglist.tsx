@@ -16,6 +16,7 @@ export type BookingListReducerState = {
   readonly room_id: number;
   readonly codeBooking: string;
   readonly statusBooking: number;
+  readonly currentTab: number;
   readonly error: boolean;
 };
 
@@ -30,6 +31,7 @@ export const init: BookingListReducerState = {
   room_id: null,
   codeBooking: null,
   statusBooking: 0,
+  currentTab: 0,
   error: false
 };
 
@@ -42,6 +44,7 @@ export type BookingListReducerAction =
   | { type: 'SET_ID_ROOM'; payload: number }
   | { type: 'SET_CODE_BOOKING'; payload: string }
   | { type: 'SET_STATUS_BOOKING'; payload: number }
+  | { type: 'SET_CURRENT_TAB'; payload: number }
   | { type: 'setError'; payload: boolean };
 
 export const bookingListReducer: Reducer<BookingListReducerState, BookingListReducerAction> = (
@@ -65,6 +68,8 @@ export const bookingListReducer: Reducer<BookingListReducerState, BookingListRed
       return updateObject(state, { codeBooking: action.payload });
     case 'SET_STATUS_BOOKING':
       return updateObject(state, { statusBooking: action.payload });
+    case 'SET_CURRENT_TAB':
+      return updateObject(state, { currentTab: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -81,7 +86,7 @@ export const getBookingListST = async (dispatch: Dispatch<BookingListReducerActi
       q: dataFilter ? dataFilter.nameSearch : '',
       date_start: dataFilter ? dataFilter.date_start : '',
       date_end: dataFilter ? dataFilter.date_end : '',
-      status: dataFilter ? dataFilter.tatus : '',
+      status: dataFilter ? dataFilter.status : '',
       room_id: dataFilter ? dataFilter.room_id: '',
       page: params.page
     };
