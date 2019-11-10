@@ -14,7 +14,7 @@ import { Cookies, withCookies } from 'react-cookie';
 import { FocusedInputShape } from 'react-dates';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
-import DateRangeVertical from './DateRangeVertical';
+import DateRangeVerticalLT from './DateRangeVerticalLT';
 
 interface Iprops {
   handleCloseBookingDialog: () => void;
@@ -124,7 +124,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
         <Grid className="booking-calendar__box-main">
           <Grid container className="box-main__wrapper">
             <Grid item xs={12} lg={7} className="calendar-picker">
-              <DateRangeVertical
+              <DateRangeVerticalLT
                 focusedInput={focusedInput}
                 setFocusedInput={setFocusedInput}
                 date={date}
