@@ -1,6 +1,6 @@
+import { updateObject } from '@/store/Context/utility';
 import { Pagination } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
 import Router from 'next/router';
 import qs from 'query-string';
 import { Dispatch, Reducer } from 'redux';
@@ -106,7 +106,7 @@ export const getBookingListLT = async (dispatch: Dispatch<BookingListReducerActi
   try {
     let params = Router.query;
     let query = {
-      size: 5,
+      size: 10,
       include: 'contracts,longTermRoom',
       q: dataFilter ? dataFilter.nameSearch : '',
       date_start: dataFilter ? dataFilter.date_start : '',

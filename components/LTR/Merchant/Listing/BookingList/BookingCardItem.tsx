@@ -1,43 +1,20 @@
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { BookingListReducerAction, getBookingListLT } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { faPhoneAlt, faEnvelope, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhoneAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  createStyles,
-  Divider,
-  Grid,
-  Hidden,
-  IconButton,
-  Link,
-  Paper,
-  Theme,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Snackbar
-} from '@material-ui/core';
+import { Button, createStyles, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, Hidden, Paper, Snackbar, Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, withStyles } from '@material-ui/styles';
-import numeral from 'numeral';
 import moment from 'moment';
-import React, { FC, Fragment, useContext, useState, SyntheticEvent } from 'react';
+import numeral from 'numeral';
+import React, { FC, Fragment, SyntheticEvent, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { axios_merchant } from '@/utils/axiosInstance';
-import {
-  getBookingListLT,
-  BookingListReducerAction
-} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 interface IProps {
   classes?: any;
   booking: any;
@@ -271,6 +248,7 @@ const BookingCardItem: FC<IProps> = (props) => {
   const [openCurrent, setOpenCurrent] = useState<boolean>(false);
   const [openTermPayment, setOpenTermPayment] = useState<boolean>(false);
   const currentContract = booking.contracts.data[booking.contracts.data.length - 1];
+  const nextPaymentDue = booking.contracts.data[0].next_payment_due;
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<any>(null);
   const [statusSnack, setStatusSnack] = useState<any>('success');
@@ -349,7 +327,7 @@ const BookingCardItem: FC<IProps> = (props) => {
             <Grid container item xs={12}>
               <Grid item xs={12}>
                 <Grid container>
-                  {booking.longTermRoom.data.avatar &&
+                  {booking.longTermRoom && booking.longTermRoom.data && booking.longTermRoom.data.avatar &&
                     booking.longTermRoom.data.avatar.images.length ? (
                       <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                         <img
@@ -373,13 +351,13 @@ const BookingCardItem: FC<IProps> = (props) => {
                     <Grid item xs={6}>
                       <Typography variant="subtitle1" className={classes.priceDay}>
                         Kỳ thanh toán tiếp theo:{' '}
-                        {moment(booking.contracts.data[0].next_payment_due.payment_due_date).format(
+                        {moment(nextPaymentDue.payment_due_date).format(
                           'DD/MM/YYYY'
                         )}
                       </Typography>
                       <Typography variant="subtitle1" className={classes.priceDay}>
                         Giá trị:{' '}
-                        {numeral(booking.contracts.data[0].next_payment_due.payment_amount).format(
+                        {numeral(nextPaymentDue.payment_amount).format(
                           '0,0'
                         )}{' '}
                         vnđ
@@ -529,7 +507,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                           <Typography variant="body1">
                             Kỳ thanh toán tiếp theo:{' '}
                             {moment(
-                              booking.contracts.data[0].next_payment_due.payment_due_date
+                              nextPaymentDue.payment_due_date
                             ).format('DD/MM/YYYY')}
                           </Typography>
                         </Grid>
@@ -537,7 +515,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                           <Typography variant="body1">
                             Giá trị:{' '}
                             {numeral(
-                              booking.contracts.data[0].next_payment_due.payment_amount
+                              nextPaymentDue.payment_amount
                             ).format('0,0')}{' '}
                             vnđ
                           </Typography>
@@ -576,13 +554,13 @@ const BookingCardItem: FC<IProps> = (props) => {
                               <Typography variant="subtitle1" className={classes.priceDay}>
                                 Kỳ thanh toán tiếp theo:{' '}
                                 {moment(
-                                  booking.contracts.data[0].next_payment_due.payment_due_date
+                                  nextPaymentDue.payment_due_date
                                 ).format('DD/MM/YYYY')}
                               </Typography>
                               <Typography variant="subtitle1" className={classes.priceDay}>
                                 Giá trị:{' '}
                                 {numeral(
-                                  booking.contracts.data[0].next_payment_due.payment_amount
+                                  nextPaymentDue.payment_amount
                                 ).format('0,0')}{' '}
                                 vnđ
                               </Typography>
