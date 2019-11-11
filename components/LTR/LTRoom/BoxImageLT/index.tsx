@@ -29,7 +29,7 @@ interface IArrayImage {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
-      height: '70vh',
+      height: '55vh',
       margin: '64px 0 48px',
       [theme.breakpoints.down('sm')]: {
         height: '35vh',

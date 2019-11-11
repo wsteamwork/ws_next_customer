@@ -84,7 +84,10 @@ const LongtermRoom: NextPage = () => {
         () => (
           <Fragment>
             {ltroom ? (
-              <Fragment>
+              // <Fragment>
+
+              <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
+                {/* <LazyLoad> */}
                 <BoxImageLT
                   livingrooms={ltroom.livingrooms}
                   kitchens={ltroom.kitchens}
@@ -93,38 +96,35 @@ const LongtermRoom: NextPage = () => {
                   bedrooms={ltroom.bedrooms}
                   cover_photo={ltroom.cover_photo}
                 />
-                <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                  {/* <LazyLoad> */}
-
-                  {/* </LazyLoad> */}
-                  <Grid container>
-                    <Grid item xs={12} lg={8} xl={9}>
-                      <BoxLTRoomDetail room={ltroom} />
-                    </Grid>
-
-                    <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                      {/* <LazyLoad> */}
-                      <BoxBookingLT
-                        priceBasic={ltroom.price_display}
-                        id={ltroom.merchant.data.id}
-                        avatar={ltroom.merchant.data.avatar}
-                        avatar_url={ltroom.merchant.data.avatar_url}
-                        name={ltroom.merchant.data.name}
-                        number_room={ltroom.merchant.data.number_room}
-                        handleOpenBookingDialog={handleOpenBookingDialog}
-                      />
-                      {/* </LazyLoad> */}
-                    </Grid>
+                {/* </LazyLoad> */}
+                <Grid container>
+                  <Grid item xs={12} lg={8} xl={9}>
+                    <BoxLTRoomDetail room={ltroom} />
                   </Grid>
-                  <Grid container className="roomPage__boxBookingMoblie">
-                    <BoxBottomBooking
+
+                  <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
+                    {/* <LazyLoad> */}
+                    <BoxBookingLT
                       priceBasic={ltroom.price_display}
+                      id={ltroom.merchant.data.id}
+                      avatar={ltroom.merchant.data.avatar}
+                      avatar_url={ltroom.merchant.data.avatar_url}
+                      name={ltroom.merchant.data.name}
+                      number_room={ltroom.merchant.data.number_room}
                       handleOpenBookingDialog={handleOpenBookingDialog}
                     />
+                    {/* </LazyLoad> */}
                   </Grid>
-                </GridContainer>
+                </Grid>
+                <Grid container className="roomPage__boxBookingMoblie">
+                  <BoxBottomBooking
+                    priceBasic={ltroom.price_display}
+                    handleOpenBookingDialog={handleOpenBookingDialog}
+                  />
+                </Grid>
+              </GridContainer>
 
-              </Fragment>
+              {/* </Fragment> */}
             ) : ''}
           </Fragment>
         ),
