@@ -1,14 +1,14 @@
+// import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, MouseEvent, useMemo, useState, useContext } from 'react';
+import React, { FC, Fragment, MouseEvent, useContext, useMemo, useState } from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
-import '/styles/pages/LTR/room/index.scss';
-// import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { useTranslation } from 'react-i18next';
+import '/styles/pages/LTR/room/index.scss';
 interface IProps {
   classes?: any,
   livingrooms: ImagesRes | any,
@@ -29,7 +29,7 @@ interface IArrayImage {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
-      height: '55vh',
+      height: '70vh',
       margin: '64px 0 48px',
       [theme.breakpoints.down('sm')]: {
         height: '35vh',
@@ -53,17 +53,17 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { livingrooms, furnitures, kitchens, bedrooms, bathrooms, cover_photo, isPreviewPage} = props;
+  const { livingrooms, furnitures, kitchens, bedrooms, bathrooms, cover_photo, isPreviewPage } = props;
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
   const { width } = useContext(GlobalContext);
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpenFullImage(!openFullImage);
   };
   let arrImage: IArrayImage[] = [];
   const funcPushImage = useMemo(() => {
-    if (isPreviewPage && !cover_photo.images && !livingrooms.images && !bedrooms[`bedroom_1`].images){
+    if (isPreviewPage && !cover_photo.images && !livingrooms.images && !bedrooms[`bedroom_1`].images) {
       arrImage.push({
         imgURL: '/static/images/image-room-default.png',
         title: '',
@@ -73,7 +73,7 @@ const BoxImageLT: FC<IProps> = (props) => {
     if (cover_photo.images && cover_photo.images.length) {
       arrImage.push({
         imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
-        title:'',
+        title: '',
         subTitle: cover_photo.images[0].caption
       })
     }

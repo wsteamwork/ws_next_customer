@@ -294,11 +294,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                         {t('home:supportHost')}: 0917 041 849
                       </MenuItem>
                       <Divider />
-                      <MenuItem onClick={() => Hotline('mailto:info@westay.org')}>
+                      <MenuItem onClick={() => Hotline('mailto:info@westay.vn')}>
                         <ListItemIcon>
                           <EmailIcon />
                         </ListItemIcon>
-                        Email: info@westay.org
+                        Email: info@westay.vn
                       </MenuItem>
                     </MenuList>
                   </Paper>

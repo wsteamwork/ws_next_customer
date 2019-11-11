@@ -6,15 +6,15 @@ import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
 import RoomCard from '@/components/RoomCard';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
-import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
+import { Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-// // import LazyLoad, { forceCheck } from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
@@ -35,8 +35,8 @@ const Home: NextPage = () => {
     avg_rating={room.avg_rating}
     isHomepage={true} />;
   const { t } = useTranslation();
-  const { width } = useContext<IGlobalContext>(GlobalContext);
-  // forceCheck();
+  // const { width } = useContext<IGlobalContext>(GlobalContext);
+  forceCheck();
   return (
     <Fragment>
       <NextHead
@@ -48,37 +48,39 @@ const Home: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
       <GridContainer xs={12}>
-        {/* <LazyLoad> */}
-        <SearchHome />
-        {/* </LazyLoad> */}
-        {width === 'lg' || width === 'xl' || width === 'md' ? (
+        <LazyLoad>
+          <SearchHome />
+        </LazyLoad>
+        {/* {width === 'lg' || width === 'xl' || width === 'md' ? ( */}
+        <Hidden smDown implementation="css">
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            {/* <LazyLoad> */}
-            <SliderTypeApartment />
-            {/* </LazyLoad> */}
-            {/* <LazyLoad offset="150"> */}
-            <MetroGridImage />
-            {/* </LazyLoad> */}
-            {/* <LazyLoad offset="150"> */}
-            <ListRoom
-              roomData={roomsHot}
-              usingSlider={true}
-              title={t('home:editorChoice')}
-              render={renderRoom}
-            />
+            <LazyLoad offset="150">
+              <SliderTypeApartment />
+            </LazyLoad>
+            <LazyLoad offset="150">
+              <MetroGridImage />
+            </LazyLoad>
+            <LazyLoad offset="150">
+              <ListRoom
+                roomData={roomsHot}
+                usingSlider={true}
+                title={t('home:editorChoice')}
+                render={renderRoom}
+              />
 
-            {/* </LazyLoad> */}
+            </LazyLoad>
           </GridContainer>
-        ) : ''}
+        </Hidden>
+        {/* ) : ''} */}
         {/* <HostBecome /> */}
 
         {/* <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />
         </GridContainer> */}
       </GridContainer>
-      {/* <LazyLoad offset="150"> */}
-      <FooterComponent />
-      {/* </LazyLoad> */}
+      <LazyLoad offset="150">
+        <FooterComponent />
+      </LazyLoad>
     </Fragment>
   );
 };
