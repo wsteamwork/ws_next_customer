@@ -84,10 +84,8 @@ const LongtermRoom: NextPage = () => {
         () => (
           <Fragment>
             {ltroom ? (
-              // <Fragment>
 
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                {/* <LazyLoad> */}
                 <BoxImageLT
                   livingrooms={ltroom.livingrooms}
                   kitchens={ltroom.kitchens}
@@ -96,7 +94,6 @@ const LongtermRoom: NextPage = () => {
                   bedrooms={ltroom.bedrooms}
                   cover_photo={ltroom.cover_photo}
                 />
-                {/* </LazyLoad> */}
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
                     <BoxLTRoomDetail room={ltroom} />
@@ -124,7 +121,6 @@ const LongtermRoom: NextPage = () => {
                 </Grid>
               </GridContainer>
 
-              {/* </Fragment> */}
             ) : ''}
           </Fragment>
         ),

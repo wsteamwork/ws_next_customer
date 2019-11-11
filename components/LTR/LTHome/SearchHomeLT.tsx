@@ -2,7 +2,6 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { updateRouter } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
@@ -60,7 +59,6 @@ const SearchHomeLT: FC<IProps> = (props) => {
 
   const applySearch = () => {
     closeModal && closeModal();
-
     dispatchGlobal({ type: 'setOverlay', payload: false });
     const pushQuery: ParsedUrlQueryInput = {
       name: city_id === undefined && district_id === undefined ? searchText : '',
@@ -78,8 +76,8 @@ const SearchHomeLT: FC<IProps> = (props) => {
   };
 
   const locationRoom = (cityId: number) => {
-    updateRouter('/long-term-rooms', true, 'name', cityId);
     dispatchSearch({ type: 'SET_SEARCH_CITY', city_id: cityId })
+    applySearch();
   };
 
   let numRecommend: number;

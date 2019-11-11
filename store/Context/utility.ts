@@ -21,8 +21,8 @@ export const updateObject = <T>(oldObject: T, newObject: Partial<T>): T => {
 export const updateRouter = (
   pathName:string,
   notArray: boolean,
-  param: string,
-  value: any,
+  param?: string,
+  value?: any,
   param2?: string,
   value2?: any,
   param3?: string,
