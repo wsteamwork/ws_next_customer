@@ -197,7 +197,7 @@ const Location: FC<IProps> = (props) => {
                   country="vn"
                   placeholder="Nhập địa chỉ"
                   onSuggestSelect={onSuggestSelect}
-                  location={new google.maps.LatLng(coordinate.lat, coordinate.lng)}
+                  location={new google.maps.LatLng(53.558572, 9.9278215)}
                   radius={20}
                   onChange={handleChangeAddress(setFieldValue)}
                   // onBlur={() => {
