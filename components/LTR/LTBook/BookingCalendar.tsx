@@ -6,6 +6,7 @@ import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
 import { Dialog, Divider, Grid, Hidden, IconButton, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import moment from 'moment';
 import Router from 'next/router';
@@ -116,9 +117,9 @@ const BookingCalendar: FC<Iprops> = (props) => {
               : 'Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay'}
 
             <Grid className="box-button-clear-dates">
-              <button onClick={onClearDates} className="button-clear-dates">
+              <Button onClick={onClearDates} variant="outlined" className="button-clear-dates">
                 Chọn lại ngày
-              </button>
+              </Button>
             </Grid>
           </Grid>
         </Grid>
