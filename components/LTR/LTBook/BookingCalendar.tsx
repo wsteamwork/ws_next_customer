@@ -220,7 +220,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       ''
                     )}
                   </Grid>
-                  <Grid item xs={4} sm={3}>
+                  <Grid item xs={isLogin ? 4 : 5} sm={3}>
                     <ButtonGlobal
                       background="linear-gradient(to right, #667eea, #764ba2);"
                       padding="0px"

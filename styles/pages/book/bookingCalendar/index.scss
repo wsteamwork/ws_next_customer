@@ -84,7 +84,8 @@
 
     .calendar-picker {
       @include lgDown {
-        padding-bottom: 140px;
+        // padding-bottom: 140px;
+        padding-bottom: 100px;
       }
 
       padding-left: 8px;
