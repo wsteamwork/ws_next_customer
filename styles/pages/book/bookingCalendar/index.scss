@@ -114,7 +114,8 @@
   }
 
   .box-price {
-    position: absolute;
+    // position: absolute;
+    position: fixed;
     padding-bottom: 15px;
     align-items: center;
 
@@ -129,7 +130,8 @@
       z-index: 99;
       width: 100%;
       background: white;
-      padding: 0 24px;
+      // padding: 0 24px;
+      padding: 0 8px;
       // position: fixed;
     }
 
@@ -172,7 +174,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 16px;
+      padding-bottom: 8px;
     }
   }
 }
@@ -185,4 +187,9 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+.price {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
 }

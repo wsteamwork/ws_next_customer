@@ -1,20 +1,10 @@
-import {
-  createStyles,
-  Grid,
-  makeStyles,
-  Paper,
-  Theme,
-  TextField,
-  MenuItem,
-  Button,
-  Hidden
-} from '@material-ui/core';
-import React, { FC, useState, ChangeEvent } from 'react';
-import { statusBookingList } from '@/utils/mixins';
 import DateSearchBooking from '@/components/Home/DateRangeSearch/DateSearchBooking';
+import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { statusBookingList } from '@/utils/mixins';
+import { Button, createStyles, Grid, Hidden, makeStyles, MenuItem, Paper, TextField, Theme } from '@material-ui/core';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 
 interface IProps {
   className?: string;
@@ -26,6 +16,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginTop: theme.spacing(3)
     },
     paper: {
+      margin: 0,
       padding: '16px',
       marginBottom: '32px',
       border: '1px solid #eeeeee',
@@ -70,7 +61,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 const FilterBookingList: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {handleSearch} = props;
+  const { handleSearch } = props;
   const [searchName, setSearchName] = useState<string>('');
   const [idRoom, setIdRoom] = useState<number>(null);
   const [codeBooking, setCodeBooking] = useState<string>('');
@@ -172,35 +163,35 @@ const FilterBookingList: FC<IProps> = (props) => {
             </Hidden>
           </Grid>
           <Grid item xs={12} container spacing={3}>
-          <Hidden smDown>
-            <Grid item xs={12} sm={6} md={4}>
-              <TextField
-                fullWidth={true}
-                id="outlined-select-currency"
-                select
-                label="Trạng thái booking"
-                className={classes.textField}
-                value={statusBooking}
-                onChange={handleChangeStatusBooking}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                InputLabelProps={{
-                  className: classes.multilineColor
-                }}
-                margin="normal"
-                variant="outlined">
-                {statusBookingList.map((option) => (
-                  <MenuItem key={option.id} value={option.id}>
-                    {option.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
+            <Hidden smDown>
+              <Grid item xs={12} sm={6} md={4}>
+                <TextField
+                  fullWidth={true}
+                  id="outlined-select-currency"
+                  select
+                  label="Trạng thái booking"
+                  className={classes.textField}
+                  value={statusBooking}
+                  onChange={handleChangeStatusBooking}
+                  SelectProps={{
+                    MenuProps: {
+                      className: classes.menu
+                    }
+                  }}
+                  InputLabelProps={{
+                    className: classes.multilineColor
+                  }}
+                  margin="normal"
+                  variant="outlined">
+                  {statusBookingList.map((option) => (
+                    <MenuItem key={option.id} value={option.id}>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
 
-          </Hidden>
+            </Hidden>
             <Grid item xs={12} sm={9} md={6} className={classes.dateSearch}>
               <DateSearchBooking />
             </Grid>
