@@ -17,13 +17,13 @@
     font-size: 0.9rem;
     font-weight: 700;
 
-    @include sm {
-      font-size: 0.8rem;
-    }
+    // @include sm {
+    //   font-size: 0.8rem;
+    // }
 
-    @include xs {
-      font-size: 0.7rem;
-    }
+    // @include xs {
+    //   font-size: 0.7rem;
+    // }
   }
 
   .perTime {

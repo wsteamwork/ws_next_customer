@@ -31,7 +31,7 @@ const CustomInput = withStyles((theme: Theme) =>
       alignItems: 'center',
       display: 'flex !important',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
-    },
+    }
   }),
 )(InputBase);
 
@@ -41,6 +41,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     select: {
       width: '100%',
       height: '100%'
+    },
+    customMenuItem: {
+      width: '100%'
     }
   })
 );
@@ -105,7 +108,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
           value={leaseType}
           onChange={handleChange}
           input={<CustomInput />}
-          autoWidth
+          fullWidth
         >
           <MenuItem value={0}>{t('roomlist:leaseTypeShortTerm')}</MenuItem>
           <MenuItem value={1}>{t('roomlist:leaseTypeLongTerm')}</MenuItem>

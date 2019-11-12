@@ -2,30 +2,21 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
-import React, { Dispatch, FC, useEffect, useState, useMemo, Fragment } from 'react';
+import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'react';
 // import Geosuggest, { Suggest } from 'react-geosuggest';
-import {
-  GoogleMap,
-  Marker,
-  withGoogleMap,
-  withScriptjs,
-  WithGoogleMapProps
-} from 'react-google-maps';
+import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
 import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
-
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-interface IProps {}
+
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -78,6 +69,23 @@ const Location: FC<IProps> = (props) => {
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
+
+
+  // useEffect(() => {
+
+  //   // This interval is to check when the map is completely loaded
+  //   const interval = window.setInterval(() => {
+  //     if (this.map) {
+  //       let input = document.getElementById("standalone-search-box");
+  //       let autocomplete = new google.maps.places.Autocomplete(input);
+  //       this.autocomplete.setComponentRestrictions({ country: 'au' });
+  //       this.autocomplete.addListener('place_changed', this.handleSearchBoxPlacesChanged)
+
+  //       window.clearInterval(interval);
+  //     }
+  //   }, 500)
+
+  // }, [])
 
   let refStandaloneBox: any = null;
   const onSearchBoxMounted = (ref) => {
@@ -152,6 +160,9 @@ const Location: FC<IProps> = (props) => {
       payload: parseInt(value)
     });
   };
+  const handleChangeAddress = (e: any) => {
+    setAddress(e.target.value);
+  }
 
   const initFormValue: FormValues = {
     address: address,
@@ -205,9 +216,10 @@ const Location: FC<IProps> = (props) => {
                     onPlacesChanged={onPlacesChanged}>
                     <OutlinedInput
                       placeholder="Nhập địa chỉ"
-                      id="component-outlined"
+                      // id="tandalone-search-box"
+                      inputProps={{ id: 'standalone-search-box' }}
                       value={addressInput}
-                      // onChange={handleChangeAddress}
+                      onChange={(e) => setAddress(e.target.value)}
                       labelWidth={0}
                       fullWidth
                     />
@@ -295,7 +307,7 @@ const Location: FC<IProps> = (props) => {
           defaultCenter={defaultCenter}
           coordinate={coordinateMarker}
           handleDragEnd={handleDragEnd}
-          // onClickMap={onClickMap}
+        // onClickMap={onClickMap}
         />
       )}
       {/* {useMemo(() => {

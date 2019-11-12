@@ -4,35 +4,22 @@ import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import {
-  getDataUpdateListing,
-  UpdateDetailsActions,
-  UpdateDetailsState
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
-import React, {
-  FC,
-  Fragment,
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
-import Geosuggest, { Suggest } from 'react-geosuggest';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
+import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as Yup from 'yup';
 import CardWrapperUpdate from '../CardWrapperUpdate';
-import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 
-interface IProps {}
+interface IProps { }
 interface Coordinate {
   lat: number;
   lng: number;
@@ -78,6 +65,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
   const [coordi, setCoordinate] = useState<Coordinate>(coordinate);
+  // console.log(coordi);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate>({
     lat: 21.027895,
     lng: 105.833896
@@ -136,13 +124,13 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
   }, [addressInput]);
 
-  useEffect(() => {
-    if (!address.length) {
-      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
-    } else {
-      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
-    }
-  }, [address]);
+  // useEffect(() => {
+  //   if (!address.length) {
+  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
+  //   } else {
+  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
+  //   }
+  // }, [address]);
 
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
@@ -154,6 +142,7 @@ const UpdateLocation: FC<IProps> = (props) => {
   };
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
     <GoogleMap defaultZoom={14} defaultCenter={props.defaultCenter}>
+      {/* cordi */}
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -282,6 +271,7 @@ const UpdateLocation: FC<IProps> = (props) => {
                         placeholder="Nhập địa chỉ"
                         id="component-outlined"
                         value={addressInput}
+                        onChange={(e) => setAddress(e.target.value)}
                         labelWidth={0}
                         fullWidth
                       />
@@ -296,7 +286,7 @@ const UpdateLocation: FC<IProps> = (props) => {
                       <OutlinedInput
                         placeholder="Nhập số căn hộ"
                         id="component-outlined"
-                        value={buildingInput}
+                        value={values.building}
                         onChange={(e) => {
                           setFieldValue('building', e.target.value);
                         }}

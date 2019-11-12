@@ -5,16 +5,11 @@ import Room from '@/components/LTR/Merchant/Listing/CreateListing/Room';
 import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { ReducersList, NextContextPage } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  handleCreateRoom,
-  getDataLTCreateListingID,
-  handleUpdateStep1
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { CreateListingActions, getDataLTCreateListingID, handleUpdateStep1 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { getCookieFromReq } from '@/utils/mixins';
 import React, { Dispatch, Fragment, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCookieFromReq } from '@/utils/mixins';
 
 const RoomCreateListingID = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
