@@ -239,6 +239,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                 {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                   <Fragment>
                     <h3 className="price-title">Chi tiết giá</h3>
+                    <Grid item xs={11}>
                     <Grid className="box-price-sub">
                       <Grid className="price-subtitle">Giá gốc</Grid>
                       <Grid className="sub-price">
@@ -249,7 +250,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <Grid className="price-subtitle">Giá đặt cọc</Grid>
                       <Grid className="sub-price">{`${formatMoney(
                         LTBookingPriceCalculate.deposit
-                      )}đ`}</Grid>
+                        )}đ`}
+                      </Grid>
                     </Grid>
 
                     <Divider style={{ margin: ' 16px 0 28px' }} />
@@ -257,9 +259,11 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <h3 className="price-title">Tổng cộng</h3>
                       <Grid className="price-title">{`${formatMoney(
                         LTBookingPriceCalculate.price_with_fee
-                      )}đ`}</Grid>
+                        )}đ`}
+                      </Grid>
                     </Grid>
-                    <Divider style={{ margin: ' 0px 0 16px' }} />
+                      <Divider style={{ margin: ' 0px 0 16px' }} />
+                    </Grid>
                   </Fragment>
                 ) : (
                   ''
