@@ -4,27 +4,41 @@ import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import {
+  getDataUpdateListing,
+  UpdateDetailsActions,
+  UpdateDetailsState
+} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
-import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  FC,
+  Fragment,
+  SyntheticEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import Geosuggest, { Suggest } from 'react-geosuggest';
-import { GoogleMap, Marker, withGoogleMap } from 'react-google-maps';
+import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as Yup from 'yup';
 import CardWrapperUpdate from '../CardWrapperUpdate';
-interface IProps { }
+import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+
+interface IProps {}
 interface Coordinate {
   lat: number;
   lng: number;
 }
 
-interface GoogleMapProps {
+interface GoogleMapProps extends WithGoogleMapProps {
   defaultCenter: Coordinate | null;
   coordinate: Coordinate;
   onClickMap: (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => void;
@@ -73,10 +87,29 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
-  const [messageSnack, setMessageSnack] = useState<string>("Cập nhật thành công");
-  const [statusSnack, setStatusSnack] = useState<string>("success");
+  const [messageSnack, setMessageSnack] = useState<string>('Cập nhật thành công');
+  const [statusSnack, setStatusSnack] = useState<string>('success');
 
   const FormValidationSchema = useValidatation();
+
+  let refStandaloneBox: any = null;
+  const onSearchBoxMounted = (ref) => {
+    refStandaloneBox = ref;
+  };
+
+  const onPlacesChanged = () => {
+    const placeInfo = refStandaloneBox.getPlaces();
+    const location = placeInfo[0].geometry.location;
+    setAddress(placeInfo.formatted_address);
+    setCoordinate({
+      lat: location.lat(),
+      lng: location.lng()
+    });
+    setDefaultCenter({
+      lat: location.lat(),
+      lng: location.lng()
+    });
+  };
 
   useEffect(() => {
     getDataUpdateListing(id, dispatch);
@@ -120,7 +153,7 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
   };
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
-    <GoogleMap defaultZoom={16} defaultCenter={props.coordinate ? props.coordinate : props.defaultCenter} onClick={props.onClickMap}>
+    <GoogleMap defaultZoom={14} defaultCenter={props.defaultCenter}>
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -129,20 +162,20 @@ const UpdateLocation: FC<IProps> = (props) => {
     setBuilding(event.target.value);
   };
 
-  const onSuggestSelect = (place: Suggest) => {
-    if (place) {
-      let { lat, lng } = place.location;
-      setCoordinate({
-        lat,
-        lng
-      });
-      setDefaultCenter({
-        lat,
-        lng
-      });
-      setAddress(place.label);
-    }
-  };
+  // const onSuggestSelect = (place: Suggest) => {
+  //   if (place) {
+  //     let { lat, lng } = place.location;
+  //     setCoordinate({
+  //       lat,
+  //       lng
+  //     });
+  //     setDefaultCenter({
+  //       lat,
+  //       lng
+  //     });
+  //     setAddress(place.label);
+  //   }
+  // };
 
   const callBackOnChange = (value) => {
     setDistrict(value);
@@ -189,12 +222,11 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
     if (res) {
       setOpenSnack(true);
-      setMessageSnack("Cập nhật địa chỉ căn hộ thành công !")
-    }
-    else {
+      setMessageSnack('Cập nhật địa chỉ căn hộ thành công !');
+    } else {
       setOpenSnack(true);
-      setStatusSnack("error");
-      setMessageSnack("Cập nhật địa chỉ căn hộ thất bại !")
+      setStatusSnack('error');
+      setMessageSnack('Cập nhật địa chỉ căn hộ thất bại !');
     }
   };
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
@@ -206,7 +238,13 @@ const UpdateLocation: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <CardWrapperUpdate disabledSave={disableSubmit} handleSave={updateLocation} openSnack={openSnack} statusSnack={statusSnack} messageSnack={messageSnack} handleCloseSnack={handleCloseSnack}>
+      <CardWrapperUpdate
+        disabledSave={disableSubmit}
+        handleSave={updateLocation}
+        openSnack={openSnack}
+        statusSnack={statusSnack}
+        messageSnack={messageSnack}
+        handleCloseSnack={handleCloseSnack}>
         <div className="step1-tab3-location">
           <Grid className="createListing-location">
             <Grid className="createListing-heading-1">Địa chỉ căn hộ của bạn</Grid>
@@ -238,20 +276,17 @@ const UpdateLocation: FC<IProps> = (props) => {
               return (
                 <form onSubmit={handleSubmit}>
                   <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
-                  <Geosuggest
-                    country="vn"
-                    placeholder="Nhập địa chỉ"
-                    onSuggestSelect={onSuggestSelect}
-                    radius={20}
-                    location={new google.maps.LatLng(53.558572, 9.9278215)}
-                    onChange={handleChangeAddress(setFieldValue)}
-                    onBlur={() => {
-                      setFieldTouched('address', true);
-                    }}
-                    value={values.address}
-                    initialValue={addressInput}
-                    name="address"
-                  />
+                  <div data-standalone-searchbox="">
+                    <StandaloneSearchBox ref={onSearchBoxMounted} onPlacesChanged={onPlacesChanged}>
+                      <OutlinedInput
+                        placeholder="Nhập địa chỉ"
+                        id="component-outlined"
+                        value={addressInput}
+                        labelWidth={0}
+                        fullWidth
+                      />
+                    </StandaloneSearchBox>
+                  </div>
 
                   {touched.address && <InputFeedback error={errors.address} />}
                   <Grid style={{ width: 'calc(80% - 8px)', margin: '20px 0' }}>
