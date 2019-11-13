@@ -2,10 +2,7 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
@@ -19,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-interface IProps {}
+interface IProps { }
 
 interface Coordinate {
   lat: number;
@@ -34,7 +31,7 @@ interface GoogleMapProps extends WithGoogleMapProps {
 }
 
 interface FormValues {
-  address: string;
+  // address: string;
   city: string;
   building: string;
   district: string;
@@ -44,7 +41,7 @@ const useValidatation = () => {
   const { t } = useTranslation();
 
   const FormValidationSchema = Yup.object().shape({
-    address: Yup.string().required(t('basic:addressRequired')),
+    // address: Yup.string().required(t('basic:addressRequired')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
 
@@ -63,7 +60,7 @@ const Location: FC<IProps> = (props) => {
     district_id,
     city_id
   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
-  // const [addressInput, setAddress] = useState<string>(address);
+  const [addressInput, setAddress] = useState<string>(address);
   // const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [coordinateMarker, setCoordinateMarker] = useState<Coordinate>(coordinateState);
@@ -81,7 +78,7 @@ const Location: FC<IProps> = (props) => {
   const onPlacesChanged = () => {
     const placeInfo = refStandaloneBox.getPlaces();
     const location = placeInfo[0].geometry.location;
-    // setAddress(placeInfo.formatted_address);
+    setAddress(placeInfo[0].formatted_address);
     setCoordinateMarker({
       lat: location.lat(),
       lng: location.lng()
@@ -107,16 +104,17 @@ const Location: FC<IProps> = (props) => {
       payload: coordinateMarker
     });
   }, [coordinateMarker]);
-  // useEffect(() => {
-  //   dispatch({
-  //     type: 'SET_ADDRESS',
-  //     payload: addressInput
-  //   });
-  // }, [addressInput]);
-
   useEffect(() => {
-    console.log(defaultCenter);
-  }, [defaultCenter]);
+    // console.log(addressInput);
+    dispatch({
+      type: 'SET_ADDRESS',
+      payload: addressInput
+    });
+  }, [addressInput]);
+
+  // useEffect(() => {
+  //   console.log(defaultCenter);
+  // }, [defaultCenter]);
 
   const handleDragEnd = (e: google.maps.MouseEvent) => {
     const lat = e.latLng.lat();
@@ -147,7 +145,7 @@ const Location: FC<IProps> = (props) => {
     });
   };
   const initFormValue: FormValues = {
-    address: address,
+    // address: address,
     city: '',
     building: building,
     district: ''
@@ -186,6 +184,7 @@ const Location: FC<IProps> = (props) => {
           const hasChanged = !deepEqual(values, initialValues);
           const hasErrors = Object.keys(errors).length > 0;
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
+          // console.log('value city', values.city)
           return (
             <form onSubmit={handleSubmit}>
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
@@ -200,17 +199,18 @@ const Location: FC<IProps> = (props) => {
                       placeholder="Nhập địa chỉ"
                       // id="tandalone-search-box"
                       inputProps={{ id: 'standalone-search-box' }}
-                      value={values.address}
+                      value={addressInput}
                       onChange={(e) => {
-                        setFieldValue('address', e.target.value);
+                        console.log('currentValue' + e.target.value);
+                        setAddress(e.target.value)
                       }}
-                      onBlur={(e: any) => {
-                        handleBlur(e);
-                        dispatch({
-                          type: 'SET_TOTAL_AREA',
-                          payload: parseInt(e.target.value)
-                        });
-                      }}
+                      // onBlur={(e: any) => {
+                      //   handleBlur(e);
+                      //   dispatch({
+                      //     type: 'SET_ADDRESS',
+                      //     payload: e.target.value
+                      //   });
+                      // }}
                       labelWidth={0}
                       fullWidth
                     />
@@ -218,7 +218,7 @@ const Location: FC<IProps> = (props) => {
                 </div>
               </Grid>
 
-              {touched.address && <InputFeedback error={errors.address} />}
+              {/* {touched.address && <InputFeedback error={errors.address} />} */}
               <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
                 <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
 
@@ -229,13 +229,14 @@ const Location: FC<IProps> = (props) => {
                     value={values.building}
                     onChange={(e) => {
                       setFieldValue('building', e.target.value);
+                      // dispatch({
+                      //   type: 'SET_BUILDING',
+                      //   payload: e.currentTarget.value
+                      // });
                     }}
                     onBlur={(e: any) => {
                       handleBlur(e);
-                      dispatch({
-                        type: 'SET_ADDRESS',
-                        payload: e.currentTarget.value
-                      });
+
                     }}
                     labelWidth={0}
                   />
@@ -298,7 +299,7 @@ const Location: FC<IProps> = (props) => {
           defaultCenter={defaultCenter}
           coordinate={coordinateMarker}
           handleDragEnd={handleDragEnd}
-          // onClickMap={onClickMap}
+        // onClickMap={onClickMap}
         />
       )}
       {/* {useMemo(() => {

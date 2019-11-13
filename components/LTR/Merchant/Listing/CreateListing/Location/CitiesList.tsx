@@ -87,7 +87,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   useEffect(() => {
     getDistricts()
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         return setDistrictList(
           res.data.data.map((district) => {
             let obj = {};
@@ -225,6 +225,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
       inputProps={{
         classes,
         id: 'react-autosuggest-sksimple',
+        name: 'city',
         placeholder: 'Chọn thành phố',
         value: valueCity,
         onChange: handleChange('city'),
