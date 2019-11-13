@@ -87,6 +87,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   useEffect(() => {
     getDistricts()
       .then((res) => {
+        console.log(res.data)
         return setDistrictList(
           res.data.data.map((district) => {
             let obj = {};
