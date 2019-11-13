@@ -29,7 +29,7 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(15, t('details:name15Character'))
+      .min(10, t('details:name15Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))
@@ -131,24 +131,24 @@ const Description: FC<IProps> = (props) => {
                     sub_label={t('details:subName')}
                     value={values.name.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(values.name.length < 15 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name && errors.name)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
-                    show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
+                    show_error={!!(values.name.length < 10 && touched!.name && errors.name)}
                     error_message={errors.name ? errors.name : t('details:defaultError')}
                     rows={1}
                     rowsMax={1}
                     max_char={100}
                     multiline={true}
                     classMaxChar={
-                      !!(values.name.length < 15 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name && errors.name)
                         ? 'error_char'
                         : 'remain_char'
                     }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
+                        notchedOutline: !!(values.name.length < 10 && touched!.name && errors.name)
                           ? classes.notchedOutline
                           : ''
                       }
