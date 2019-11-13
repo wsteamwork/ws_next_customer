@@ -1,5 +1,6 @@
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { axios } from '@/utils/axiosInstance';
+import { cleanAccents } from '@/utils/mixins';
 import { MenuItem, OutlinedInput, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // @ts-ignore
@@ -9,7 +10,6 @@ import deburr from 'lodash/deburr';
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { useDispatch } from 'react-redux';
-import { cleanAccents } from '@/utils/mixins';
 interface Iprops {
   //   classes?: any;
   setDistrictList: Dispatch<SetStateAction<any[]>>;

@@ -217,7 +217,7 @@ const UppyImage: FC<IProps> = (props) => {
         </Grid>
       </Fragment>
     ),
-    [initImages]
+    []
   );
 };
 

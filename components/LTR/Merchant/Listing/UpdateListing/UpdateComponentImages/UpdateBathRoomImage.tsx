@@ -1,40 +1,20 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { getDataImages, ImageReducerAction, ImageReducerState } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { Button, createStyles, Dialog, Theme, useMediaQuery, useTheme, withStyles } from '@material-ui/core';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, {
-  FC,
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-  SyntheticEvent,
-  MouseEvent
-} from 'react';
+import { makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC, Fragment, MouseEvent, SyntheticEvent, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  ImageReducerAction,
-  getDataImages,
-  ImageReducerState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { ReducersList } from '@/store/Redux/Reducers';
-import UppyImage from '../../CreateListing/UploadImage/UppyImage';
-import { useTranslation } from 'react-i18next';
 import CardImageCaption from '../../CreateListing/UploadImage/CardImageCaption';
-import _ from 'lodash';
-import {
-  Button,
-  Dialog,
-  useTheme,
-  useMediaQuery,
-  createStyles,
-  Theme,
-  withStyles
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-interface IProps {}
+import UppyImage from '../../CreateListing/UploadImage/UppyImage';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -178,6 +158,7 @@ const UpdateBathRoomImage: FC<IProps> = (props) => {
                         Thêm ảnh
                       </Button>
                       <CardImageCaption
+                        onUpdateImage={true}
                         key={i}
                         type_txt={`bathroom_${i + 1}`}
                         typeUpload={{ type: 'setBathRoomImage' }}
@@ -189,14 +170,14 @@ const UpdateBathRoomImage: FC<IProps> = (props) => {
                     </Grid>
                   </Grid>
                 ) : (
-                  ''
-                )
+                    ''
+                  )
               )}
             </Grid>
           </Fragment>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </CardWrapperUpdate>
     </Fragment>
   );

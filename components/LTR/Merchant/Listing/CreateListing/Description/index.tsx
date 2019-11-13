@@ -170,7 +170,8 @@ const Description: FC<IProps> = (props) => {
                     name="description"
                     label={t('details:listingDes')}
                     sub_label={t('details:subDes')}
-                    value={values.description.replace(/\s+/g, ' ')}
+                    // value={values.description.replace(/\s+/g, ' ')}
+                    value={values.description}
                     classTextField={
                       !!(values.description.length < 50 && touched!.description && errors.description)
                         ? 'textarea error_textarea'
