@@ -2,7 +2,10 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
@@ -16,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-interface IProps { }
+interface IProps {}
 
 interface Coordinate {
   lat: number;
@@ -60,7 +63,7 @@ const Location: FC<IProps> = (props) => {
     district_id,
     city_id
   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
-  const [addressInput, setAddress] = useState<string>(address);
+  // const [addressInput, setAddress] = useState<string>(address);
   // const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [coordinateMarker, setCoordinateMarker] = useState<Coordinate>(coordinateState);
@@ -70,23 +73,6 @@ const Location: FC<IProps> = (props) => {
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
 
-
-  // useEffect(() => {
-
-  //   // This interval is to check when the map is completely loaded
-  //   const interval = window.setInterval(() => {
-  //     if (this.map) {
-  //       let input = document.getElementById("standalone-search-box");
-  //       let autocomplete = new google.maps.places.Autocomplete(input);
-  //       this.autocomplete.setComponentRestrictions({ country: 'au' });
-  //       this.autocomplete.addListener('place_changed', this.handleSearchBoxPlacesChanged)
-
-  //       window.clearInterval(interval);
-  //     }
-  //   }, 500)
-
-  // }, [])
-
   let refStandaloneBox: any = null;
   const onSearchBoxMounted = (ref) => {
     refStandaloneBox = ref;
@@ -95,7 +81,7 @@ const Location: FC<IProps> = (props) => {
   const onPlacesChanged = () => {
     const placeInfo = refStandaloneBox.getPlaces();
     const location = placeInfo[0].geometry.location;
-    setAddress(placeInfo.formatted_address);
+    // setAddress(placeInfo.formatted_address);
     setCoordinateMarker({
       lat: location.lat(),
       lng: location.lng()
@@ -121,12 +107,12 @@ const Location: FC<IProps> = (props) => {
       payload: coordinateMarker
     });
   }, [coordinateMarker]);
-  useEffect(() => {
-    dispatch({
-      type: 'SET_ADDRESS',
-      payload: addressInput
-    });
-  }, [addressInput]);
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'SET_ADDRESS',
+  //     payload: addressInput
+  //   });
+  // }, [addressInput]);
 
   useEffect(() => {
     console.log(defaultCenter);
@@ -160,10 +146,6 @@ const Location: FC<IProps> = (props) => {
       payload: parseInt(value)
     });
   };
-  const handleChangeAddress = (e: any) => {
-    setAddress(e.target.value);
-  }
-
   const initFormValue: FormValues = {
     address: address,
     city: '',
@@ -218,8 +200,17 @@ const Location: FC<IProps> = (props) => {
                       placeholder="Nhập địa chỉ"
                       // id="tandalone-search-box"
                       inputProps={{ id: 'standalone-search-box' }}
-                      value={addressInput}
-                      onChange={(e) => setAddress(e.target.value)}
+                      value={values.address}
+                      onChange={(e) => {
+                        setFieldValue('address', e.target.value);
+                      }}
+                      onBlur={(e: any) => {
+                        handleBlur(e);
+                        dispatch({
+                          type: 'SET_TOTAL_AREA',
+                          payload: parseInt(e.target.value)
+                        });
+                      }}
                       labelWidth={0}
                       fullWidth
                     />
@@ -242,7 +233,7 @@ const Location: FC<IProps> = (props) => {
                     onBlur={(e: any) => {
                       handleBlur(e);
                       dispatch({
-                        type: 'SET_BUILDING',
+                        type: 'SET_ADDRESS',
                         payload: e.currentTarget.value
                       });
                     }}
@@ -307,7 +298,7 @@ const Location: FC<IProps> = (props) => {
           defaultCenter={defaultCenter}
           coordinate={coordinateMarker}
           handleDragEnd={handleDragEnd}
-        // onClickMap={onClickMap}
+          // onClickMap={onClickMap}
         />
       )}
       {/* {useMemo(() => {
