@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Stepper from '@material-ui/core/Stepper';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface IProps {
   classes?: any;
@@ -92,12 +92,12 @@ const StepperProgress: FC<IProps> = (props) => {
 
   const [activeStep, setActiveStep] = useState<number>(0);
 
-  useEffect(() => {
-    if (localStorage.getItem('currentTab')) {
-      let tab = Number(localStorage.getItem('currentTab'));
-      setActiveStep(tab);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem('currentTab')) {
+  //     let tab = Number(localStorage.getItem('currentTab'));
+  //     setActiveStep(tab);
+  //   }
+  // }, []);
 
   const steps = getSteps();
 

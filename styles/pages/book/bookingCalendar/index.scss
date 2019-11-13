@@ -73,8 +73,12 @@
 
     .box-main__wrapper {
       @include lgDown {
-        position: relative;
-        height: 100vh;
+        // position: relative;
+        height: 95%;
+      }
+      @include lgUp {
+        // position: relative;
+        height: 95%;
       }
 
       padding-top: 126px;
@@ -85,7 +89,7 @@
     .calendar-picker {
       @include lgDown {
         // padding-bottom: 140px;
-        padding-bottom: 100px;
+        // padding-bottom: 100px;
       }
 
       padding-left: 8px;
@@ -96,9 +100,9 @@
       float: left;
 
       // CUSTOMIZE AIRBNB CALENDAR
-      .CalendarMonthGrid__vertical_scrollable {
-        overflow-y: auto;
-      }
+      // .CalendarMonthGrid__vertical_scrollable {
+      //   overflow-y: auto;
+      // }
 
       .CalendarDay__default {
         border: none;
@@ -115,8 +119,8 @@
   }
 
   .box-price {
-    // position: absolute;
-    position: fixed;
+    position: absolute;
+    // position: fixed;
     padding-bottom: 15px;
     align-items: center;
 

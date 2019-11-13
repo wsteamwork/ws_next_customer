@@ -82,7 +82,7 @@ const RoomCreateListing = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('currentStep', '2');
+    // localStorage.setItem('currentStep', '2');
     dispatch_process({ type: 'setActiveStepListing', payload: '2' });
   }, []);
 

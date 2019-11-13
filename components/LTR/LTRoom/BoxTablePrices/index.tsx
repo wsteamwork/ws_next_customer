@@ -110,6 +110,15 @@ const BoxTablePrices: FC<IProps> = (props) => {
                         <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell>
                       </StyledTableRow>
                     )
+                  } else {
+                    return (
+                      <StyledTableRow key={i}>
+                        <StyledTableCell component="th" scope="row">
+                          {o.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">{o.value == 0 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</StyledTableCell>
+                      </StyledTableRow>
+                    )
                   }
                 })}
               </TableBody>

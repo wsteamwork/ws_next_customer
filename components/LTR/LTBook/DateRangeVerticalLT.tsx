@@ -166,7 +166,7 @@ const DateRangeVerticalLT: FC<IProps> = (props) => {
             <DayPickerRangeController
                 // isRTL={false}
                 daySize={width == 'lg' ? 60 : 40}
-                orientation="verticalScrollable"
+                orientation="vertical"
                 minimumNights={30}
                 startDate={date.startDate}
                 endDate={date.endDate}
@@ -178,12 +178,12 @@ const DateRangeVerticalLT: FC<IProps> = (props) => {
                 navNext={null}
                 navPrev={null}
                 monthFormat="MMMM YYYY"
-                verticalHeight={300}
+                verticalHeight={width === 'lg' ? 600 : width === 'xl' ? 800 : 325}
                 // withPortal={false}
                 isDayBlocked={isDayBlocked}
                 isOutsideRange={isOutsideRange}
                 renderDayContents={_renderDayContents}
-                numberOfMonths={3}
+                numberOfMonths={width == 'lg' ? 2 : width == 'xl' ? 3 : 2}
             />
         ),
         [date]

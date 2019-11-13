@@ -201,7 +201,7 @@ const Location: FC<IProps> = (props) => {
                       inputProps={{ id: 'standalone-search-box' }}
                       value={addressInput}
                       onChange={(e) => {
-                        console.log('currentValue' + e.target.value);
+                        // console.log('currentValue' + e.target.value);
                         setAddress(e.target.value)
                       }}
                       // onBlur={(e: any) => {

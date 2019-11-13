@@ -66,6 +66,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   number_room={room.bedrooms.number_bedroom}
                   totalComforts={room.total_comforts}
                   avg_rating={room.rating.avg_avg_rating}
+                  total_area={room.total_area}
                   avg_rating_txt={room.rating.avg_avg_rating_txt} />
                 {/* </LazyLoad> */}
               </Grid>

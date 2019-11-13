@@ -86,7 +86,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
       <Grid
         style={{
           zIndex: 102,
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           width: 100,
           padding: '0 40px'
@@ -125,7 +125,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
         </Grid>
         <Grid className="booking-calendar__box-main">
           <Grid container className="box-main__wrapper">
-            <Grid item xs={12} lg={7} className="calendar-picker">
+            <Grid item xs={12} lg={7} xl={6} className="calendar-picker">
               <DateRangeVerticalLT
                 focusedInput={focusedInput}
                 setFocusedInput={setFocusedInput}
@@ -135,7 +135,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
               />
             </Grid>
 
-            <Grid item xs={12} lg={5} className="box-price">
+            <Grid item xs={12} lg={5} xl={6} className="box-price">
               <QuantityButtons
                 number={guest}
                 setNumber={setGuest}
@@ -213,9 +213,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                           <Typography className="price">
                             {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
                           </Typography>
-                          <Typography variant="subtitle2">{ltroom.prices.prices[0].term}</Typography>
-
-                        
+                          <Typography variant="body2" style={{fontSize: '0.75rem'}}>{ltroom.prices.prices[0].term}</Typography>
                       </Fragment>
                     ) : (
                       ''
@@ -230,7 +228,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       disabled={!disableBooking}
                       style={{color: '#fff'}}
                       className="btBook">
-                      {isLogin ? 'Đặt phòng' : 'Đăng nhập để tiếp tục'}
+                      {isLogin ? 'Đặt phòng' : 'Đăng nhập'}
                     </ButtonGlobal>
                 </Grid> 
                 </Grid> 
