@@ -68,8 +68,10 @@ class MyDocument extends Document {
           {/* <meta http-equiv="pragma" content="no-cache" />
           <meta http-equiv="cache-control" content="no-cache" />
           <meta http-equiv="cache-control" content="max-age=0" /> */}
-
+          <script type="text/javascript"
+            src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyC4472yT9a-EPWIv_lbR0f-ToLjaqeYOXM&libraries=geometry,places`}></script>
           <meta
+            
             name="google-site-verification"
             content="Xn4ULuU-MncP7CZoQxH1r7F2DzzID_IolgwbUbQMxtM"
           />

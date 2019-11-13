@@ -1,8 +1,8 @@
-import Cookies from 'universal-cookie';
+import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
+import { Dispatch, Reducer } from 'redux';
+import Cookies from 'universal-cookie';
 
 export type DetailsReducerState = {
   room_id: number;
@@ -35,7 +35,7 @@ export const detailsReducer: Reducer<DetailsReducerState, DetailsReducerAction> 
     case 'setRoomId':
       return updateObject(state, { room_id: action.payload });
     case 'setStep':
-      return updateObject(state, { step: action.payload }); 
+      return updateObject(state, { step: action.payload });
     case 'setDisableNext':
       return updateObject(state, { disable_next: action.payload });
     case 'setListing':
@@ -70,7 +70,7 @@ export const handleDetailsListing = async (room_id: number, tab: string, data: a
   const token = cookies.get('_token');
   const headers = token && {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   };
   const response = await axios_merchant.post(

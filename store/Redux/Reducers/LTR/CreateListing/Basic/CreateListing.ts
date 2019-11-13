@@ -1,12 +1,13 @@
 import { updateObject } from '@/store/Context/utility';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
-import { axios_merchant } from '@/utils/axiosInstance';
-import { Reducer, Dispatch } from 'redux';
-import { ReducresActions } from '../../..';
-import { ParsedUrlQuery } from 'querystring';
-import { getLTRoom } from '../../LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { axios_merchant } from '@/utils/axiosInstance';
 import _ from 'lodash';
+import { ParsedUrlQuery } from 'querystring';
+import { Dispatch, Reducer } from 'redux';
+import { getLTRoom } from '../../LTRoom/ltroomReducer';
+import Cookies from 'universal-cookie';
+
 interface Coordinate {
   lat: number;
   lng: number;
@@ -136,9 +137,10 @@ export const handleCreateRoom = async (
   data: any,
   dispatch: any,
   uid: any,
-  token?: string,
   initLanguage: string = 'vi'
 ) => {
+  const cookies = new Cookies();
+  const token = cookies.get('_token');
   const headers = token && {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -177,7 +179,7 @@ export const handleCreateRoom = async (
     }
   };
 
-  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body);
+  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body, headers);
 
   dispatch({
     type: 'SET_LISTING',
@@ -191,9 +193,10 @@ export const handleUpdateStep1 = async (
   data: any,
   dispatch: any,
   uid: any,
-  token?: string,
   initLanguage: string = 'vi'
 ) => {
+  const cookies = new Cookies();
+  const token = cookies.get('_token');
   const headers = token && {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -232,7 +235,7 @@ export const handleUpdateStep1 = async (
     }
   };
 
-  const response = await axios_merchant.post(`long-term/room/step1/${uid}`, body);
+  const response = await axios_merchant.post(`long-term/room/step1/${uid}`, body, headers);
 
   dispatch({
     type: 'SET_LISTING',
@@ -241,9 +244,6 @@ export const handleUpdateStep1 = async (
 
   return response;
 };
-
-
-
 
 export const countBedsNumberFromBedRoomList = (bedRoomsList: BedRoomReq) => {
   let totalBedsNumberInList = 0;
