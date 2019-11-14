@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import '@/styles/FullCalendar/index.scss';
+
 let CalendarComponent;
 export default function FullCalendarNoSSR(props) {
   const [calendarLoaded, setCalendarLoaded] = useState(false);
@@ -10,7 +11,9 @@ export default function FullCalendarNoSSR(props) {
       modules: () => ({
         calendar: import('@fullcalendar/react'),
         dayGridPlugin: import('@fullcalendar/daygrid'),
-        timeGridPlugin: import('@fullcalendar/timegrid')
+        timeGridPlugin: import('@fullcalendar/timegrid'),
+        interactionPlugin: import('@fullcalendar/interaction'),
+        momentPlugin : import('@fullcalendar/moment'),
       }),
       render: (props:any, { calendar: Calendar, ...plugins }) => (
         <Calendar {...props} plugins={Object.values(plugins)} ref={props.myRef} />

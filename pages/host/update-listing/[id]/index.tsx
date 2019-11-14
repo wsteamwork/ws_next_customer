@@ -209,7 +209,7 @@ const UpdateListing: FC<IProps> = (props) => {
                 <ListingPolicy />
               </TabPanel>
               <TabPanel value={value} index={4}>
-                <CalendarManagement/>
+                <CalendarManagement idRoom={listing.room_id} />
               </TabPanel>
             </Grid>
           </Grid>
