@@ -65,7 +65,7 @@ const RoomCreateListing = () => {
   return (
     <Fragment>
       <NextHead
-        googleMapApiRequire={true}
+        googleMapApiRequire={false}
         ogSitename="Westay - Đặt phòng homestay trực tuyến"
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"

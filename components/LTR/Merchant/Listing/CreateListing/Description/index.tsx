@@ -80,15 +80,17 @@ const Description: FC<IProps> = (props) => {
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab1' });
   }, []);
-
   useMemo(() => {
-    if (name.length < 10 || description.length < 50) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    }
-    else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
-  }, [name, description]);
+    dispatch_detail({ type: 'setDisableNext', payload: (name.length < 10) });
+  }, [name]);
+  // useMemo(() => {
+  //   if (name.length < 10 || description.length < 50) {
+  //     dispatch_detail({ type: 'setDisableNext', payload: true });
+  //   }
+  //   elseif {
+  //     dispatch_detail({ type: 'setDisableNext', payload: false });
+  //   }
+  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -158,7 +160,7 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 14) {
+                      if (e.currentTarget.value.length > 9) {
                         dispatchDescription({ type: 'setName' }, e.currentTarget.value);
                       }
                     }}
@@ -215,7 +217,7 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 49) {
+                      if (e.currentTarget.value.length > 30) {
                         dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
                       }
                     }}
