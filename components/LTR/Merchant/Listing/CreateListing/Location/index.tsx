@@ -13,6 +13,7 @@ import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'rea
 import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
 import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { useTranslation } from 'react-i18next';
+import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -187,61 +188,6 @@ const Location: FC<IProps> = (props) => {
           // console.log('value city', values.city)
           return (
             <form onSubmit={handleSubmit}>
-              <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
-
-                <div data-standalone-searchbox="">
-                  <StandaloneSearchBox
-                    ref={onSearchBoxMounted}
-                    // bounds={}
-                    onPlacesChanged={onPlacesChanged}>
-                    <OutlinedInput
-                      placeholder="Nhập địa chỉ"
-                      // id="tandalone-search-box"
-                      inputProps={{ id: 'standalone-search-box' }}
-                      value={addressInput}
-                      onChange={(e) => {
-                        // console.log('currentValue' + e.target.value);
-                        setAddress(e.target.value)
-                      }}
-                      // onBlur={(e: any) => {
-                      //   handleBlur(e);
-                      //   dispatch({
-                      //     type: 'SET_ADDRESS',
-                      //     payload: e.target.value
-                      //   });
-                      // }}
-                      labelWidth={0}
-                      fullWidth
-                    />
-                  </StandaloneSearchBox>
-                </div>
-              </Grid>
-
-              {/* {touched.address && <InputFeedback error={errors.address} />} */}
-              <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
-
-                <FormControl fullWidth variant="outlined">
-                  <OutlinedInput
-                    placeholder="Nhập số căn hộ"
-                    id="component-outlined"
-                    value={values.building}
-                    onChange={(e) => {
-                      setFieldValue('building', e.target.value);
-                      // dispatch({
-                      //   type: 'SET_BUILDING',
-                      //   payload: e.currentTarget.value
-                      // });
-                    }}
-                    onBlur={(e: any) => {
-                      handleBlur(e);
-
-                    }}
-                    labelWidth={0}
-                  />
-                </FormControl>
-              </Grid>
               <Grid container style={{ display: 'flex' }}>
                 <Grid item xs={10} md={7}>
                   <Grid style={{ marginBottom: 32 }}>
@@ -283,28 +229,87 @@ const Location: FC<IProps> = (props) => {
                   />
                 </Grid>
               </Grid>
+              {values.city ? (
+                <Grid container>
+                  <LazyLoad>
+                    <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+                      <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
+                      <div data-standalone-searchbox="">
+                        <StandaloneSearchBox
+                          ref={onSearchBoxMounted}
+                          // bounds={}
+                          onPlacesChanged={onPlacesChanged}>
+                          <OutlinedInput
+                            placeholder="Nhập địa chỉ"
+                            // id="tandalone-search-box"
+                            inputProps={{ id: 'standalone-search-box' }}
+                            value={addressInput}
+                            onChange={(e) => {
+                              // console.log('currentValue' + e.target.value);
+                              setAddress(e.target.value)
+                            }}
+                            // onBlur={(e: any) => {
+                            //   handleBlur(e);
+                            //   dispatch({
+                            //     type: 'SET_ADDRESS',
+                            //     payload: e.target.value
+                            //   });
+                            // }}
+                            labelWidth={0}
+                            fullWidth
+                          />
+                        </StandaloneSearchBox>
+                      </div>
+                    </Grid>
+                    {/* {touched.address && <InputFeedback error={errors.address} />} */}
+                    <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+                      <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
+                      <FormControl fullWidth variant="outlined">
+                        <OutlinedInput
+                          placeholder="Thông tin thêm về toà nhà, khu nhà..."
+                          id="component-outlined"
+                          value={values.building}
+                          onChange={(e) => {
+                            setFieldValue('building', e.target.value);
+                            // dispatch({
+                            //   type: 'SET_BUILDING',
+                            //   payload: e.currentTarget.value
+                            // });
+                          }}
+                          onBlur={(e: any) => {
+                            handleBlur(e);
+
+                          }}
+                          labelWidth={0}
+                        />
+                      </FormControl>
+                    </Grid>
+                  </LazyLoad>
+                </Grid>
+              ) : ''}
             </form>
           );
         }}
       />
-      <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>
-      <h3 className="createListing-subTitle">
-        Nếu cần thiết, bạn có thể thay đổi vị trí cho chính xác. Chỉ những khách hàng xác nhận đặt
-        phòng mới có thể thấy được
+      {addressInput ? (
+        <Fragment>
+          <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>
+          <h3 className="createListing-subTitle">
+            Nếu cần thiết, bạn có thể thay đổi vị trí cho chính xác. Chỉ những khách hàng xác nhận đặt
+            phòng mới có thể thấy được
       </h3>
-      {defaultCenter && (
-        <MapWithAMarker
-          containerElement={<div style={{ height: `350px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          defaultCenter={defaultCenter}
-          coordinate={coordinateMarker}
-          handleDragEnd={handleDragEnd}
-        // onClickMap={onClickMap}
-        />
-      )}
-      {/* {useMemo(() => {
-        
-      }, [defaultCenter])} */}
+          {defaultCenter && (
+            <MapWithAMarker
+              containerElement={<div style={{ height: `350px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              defaultCenter={defaultCenter}
+              coordinate={coordinateMarker}
+              handleDragEnd={handleDragEnd}
+            // onClickMap={onClickMap}
+            />
+          )}
+        </Fragment>
+      ) : ''}
     </div>
   );
 };

@@ -1,14 +1,14 @@
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { PriceTermActions, getPrice } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
-import { StepPricesActions, getListingPrices } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
-import React, { FC, useEffect, Fragment, useContext, SyntheticEvent, useState } from 'react';
+import { getPrice, PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
+import { getListingPrices, StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
+import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import ServiceFee from '../../CreateListing/Step3/ServiceFee';
-import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
+import CardWrapperUpdate from '../CardWrapperUpdate';
 
 interface IProps {
   classes?: any;
@@ -34,7 +34,7 @@ const UpdateIncludedFee: FC<IProps> = (props) => {
     const res = handleUpdateListing(listing.room_id, {
       long_term_fee: priceService.included_fee
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật phí dịch vụ dài hạn thành công !")
     }

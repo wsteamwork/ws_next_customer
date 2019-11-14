@@ -31,6 +31,13 @@ const Outdoors: FC<IProps> = (props) => {
         <CardWrapperItem title="Ảnh xung quanh căn hộ" onClick={openUpdate}>
           <Grid item xs={12} className={classes.nameIcon}>
             Số ảnh: <span className={classes.name}>{listing.outdoors.images.length}</span>
+            {listing.outdoors.images.length == 0 ?
+              <div>
+                <br />
+                <span className={classes.name}>Vui lòng cập nhật thêm ảnh</span>
+              </div>
+              : ''
+            }
           </Grid>
         </CardWrapperItem>
       ) : (

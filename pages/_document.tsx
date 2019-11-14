@@ -1,7 +1,7 @@
-import React from 'react';
-import Document, { Head, Main, NextScript, DocumentContext } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/styles';
 import theme from '@/components/Theme';
+import { ServerStyleSheets } from '@material-ui/styles';
+import Document, { DocumentContext, Head, Main, NextScript } from 'next/document';
+import React from 'react';
 import flush from 'styled-jsx/server';
 
 class MyDocument extends Document {
@@ -69,9 +69,8 @@ class MyDocument extends Document {
           <meta http-equiv="cache-control" content="no-cache" />
           <meta http-equiv="cache-control" content="max-age=0" /> */}
           <script type="text/javascript"
-            src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyC4472yT9a-EPWIv_lbR0f-ToLjaqeYOXM&libraries=geometry,places`}></script>
+            src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}&libraries=geometry,places&language=vi`}></script>
           <meta
-            
             name="google-site-verification"
             content="Xn4ULuU-MncP7CZoQxH1r7F2DzzID_IolgwbUbQMxtM"
           />

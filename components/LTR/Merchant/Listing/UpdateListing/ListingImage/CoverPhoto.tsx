@@ -31,6 +31,13 @@ const CoverPhoto: FC<IProps> = (props) => {
         <CardWrapperItem title="Ảnh bìa" onClick={openUpdate}>
           <Grid item xs={12} className={classes.nameIcon}>
             Số ảnh: <span className={classes.name}>{listing.cover_photo.images.length}</span>
+            {listing.cover_photo.images.length == 0 ?
+              <div>
+                <br />
+                <span className={classes.name}>Vui lòng cập nhật thêm ảnh</span>
+              </div>
+              : ''
+            }
           </Grid>
         </CardWrapperItem>
       ) : (

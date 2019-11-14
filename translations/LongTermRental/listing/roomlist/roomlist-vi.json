@@ -2,6 +2,7 @@
     "titleName": "Danh sách phòng",
     "contentNotFound": "Danh sách phòng hiện tại chưa hiển thị, vui lòng đợi trong giây lát",
     "tooltipUpdateRoom": "Cập nhật phòng",
+    "tooltipUpdateRoomLongTerm": "Bổ sung thông tin dài hạn",
     "tooltipPreviewRoom": "Xem trước phòng",
     "noNameRoom": "Chưa có tên căn hộ",
     "numberGuest": "khách",

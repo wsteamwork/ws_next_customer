@@ -35,18 +35,19 @@ const IncludedFee: FC<IProps> = (props) => {
     <Fragment>
       {!!listing ? (
         <CardWrapperItem title="Phí dịch vụ dài hạn" onClick={openUpdate}>
-          <Grid container>
-            {_.map(listing.prices.included_fee, (o, i) =>
-              o.included === 1 ? (
-                <Grid item xs={12} sm={6} key={i} className={classes.value}>
-                  {o.name}:&nbsp;
+          {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b>Chưa cập nhật</b> : (
+            <Grid container>
+              {_.map(listing.prices.included_fee, (o, i) =>
+                o.included === 1 ? (
+                  <Grid item xs={12} sm={6} key={i} className={classes.value}>
+                    {o.name}:&nbsp;
                   <span className={classes.name}>{numeral(o.value).format('0,0')} vnđ</span>
-                </Grid>
-              ) : (
-                  ''
-                )
-            )}
-          </Grid>
+                  </Grid>
+                ) : (
+                    ''
+                  )
+              )}
+            </Grid>)}
         </CardWrapperItem>
       ) : (
           ''

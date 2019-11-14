@@ -7,6 +7,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
@@ -266,6 +267,9 @@ const RoomCardItem: FC<IProps> = (props) => {
       }
     }
   };
+  const openLongTermRoomUpdateFirstTime = (room_id: number) => {
+    window.open(`/host/create-listing/${room_id}/process`, `_blank`);
+  };
   const openPreviewRoomShortTerm = (room_id: number, status: number) => {
     status != 1 ? window.open(`/preview-room/${room_id}`, `_blank`) : window.open(`/room/${room_id}`, `_blank`)
   };
@@ -316,6 +320,22 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </IconButton>
                         </Tooltip>
                       </Grid>
+                      {room.percent < 100 ? (
+                        <Grid item>
+                          <Tooltip
+                            title={t('roomlist:tooltipUpdateRoomLongTerm')}
+                            placement="bottom"
+                            classes={{ tooltip: 'tooltip' }}>
+                            <IconButton
+                              color="primary"
+                              className={classes.IconButton}
+                              aria-label="Edit"
+                              onClick={() => openLongTermRoomUpdateFirstTime(room.id)}>
+                              <AddIcon className={classes.sizeButton} />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                      ) : ''}
                     </Grid>
                   </Hidden>
                   <Grid item xs={12} sm={9} md={9} lg={10}>
@@ -361,6 +381,22 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 </IconButton>
                               </Tooltip>
                             </Grid>
+                            {room.percent < 100 ? (
+                              <Grid item>
+                                <Tooltip
+                                  title={t('roomlist:tooltipUpdateRoomLongTerm')}
+                                  placement="bottom"
+                                  classes={{ tooltip: 'tooltip' }}>
+                                  <IconButton
+                                    color="primary"
+                                    className={classes.IconButton}
+                                    aria-label="Edit"
+                                    onClick={() => openLongTermRoomUpdateFirstTime(room.id)}>
+                                    <AddIcon className={classes.sizeButton} />
+                                  </IconButton>
+                                </Tooltip>
+                              </Grid>
+                            ) : ''}
                           </Grid>
                         </Hidden>
                       </Grid>
