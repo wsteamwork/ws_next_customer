@@ -3,31 +3,17 @@ import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
-import {
-  IServicesFee,
-  serviceFeeType,
-  typeService
-} from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
+import { IServicesFee, serviceFeeType, typeService } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
 import { ServicesIndexRes } from '@/types/Requests/LTR/Services/ServicesResponses';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import {
-  Checkbox,
-  Collapse,
-  FormGroup,
-  InputAdornment,
-  OutlinedInput,
-  RadioGroup,
-  Select,
-  Theme,
-  Zoom
-} from '@material-ui/core';
+import { Checkbox, Collapse, FormGroup, InputAdornment, OutlinedInput, RadioGroup, Select, Theme, Zoom } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -74,6 +60,7 @@ const ServiceFee: FC<IProps> = (props) => {
   const priceService = useSelector<ReducersList, IServicesFee>(
     (state) => state.priceTerm.serviceFee
   );
+  // console.log()
   const all_fee_included = useSelector<ReducersList, number>(
     (state) => state.priceTerm.all_fee_included_in_prices
   );
@@ -108,6 +95,7 @@ const ServiceFee: FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
+    // console.log(priceService);
     if (priceService.included_fee.length) {
       setIncludedFee(priceService.included_fee);
       let ids = priceService.included_fee.reduce((ids, i) => {
@@ -121,23 +109,25 @@ const ServiceFee: FC<IProps> = (props) => {
       let defaultService: typeService[] = [];
       if (services.length) {
         _.map(services, (o, i) => {
-          if (selectedValue === 0) {
-            defaultService = [
-              ...defaultService,
-              { id: o.id, value: 0, included: 0, calculate_function: 3 }
-            ];
-          } else {
-            defaultService = [
-              ...defaultService,
-              { id: o.id, value: 0, included: 0, calculate_function: 3 }
-            ];
-          }
+          // if (selectedValue === 0) {
+          //   defaultService = [
+          //     ...defaultService,
+          //     { id: o.id, value: 0, included: 1, calculate_function: 3 }
+          //   ];
+          // } else {
+          defaultService = [
+            ...defaultService,
+            { id: o.id, value: 0, included: 1, calculate_function: 3 }
+          ];
+          // }
         });
       }
       setIncludedFee(defaultService);
       dispatch({ type: 'setServiceFee', payload: { included_fee: included_fee } });
     }
   }, [priceService, services, selectedValue]);
+
+
 
   const handlePrice = (id: number, include: boolean) => (
     event: React.ChangeEvent<HTMLInputElement>
@@ -153,25 +143,10 @@ const ServiceFee: FC<IProps> = (props) => {
     newArrayPrice.sort((a, b) => a.id - b.id);
     setIncludedFee(newArrayPrice);
   };
-
   const handleChangeServices = (id: number) => (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       included_fee.sort((a, b) => a.id - b.id);
       setServiceOtp([...serviceOpt, id]);
-      let newObj = {
-        id: id,
-        value: included_fee[id - 1].value,
-        included: 1,
-        calculate_function: included_fee[id - 1].calculate_function
-      };
-      let dataCheck = included_fee.filter((item) => item.id !== id);
-      let newDataChecked = [...dataCheck, newObj];
-      setIncludedFee(newDataChecked);
-      dispatch({ type: 'setServiceFee', payload: { included_fee: newDataChecked } });
-    } else {
-      included_fee.sort((a, b) => a.id - b.id);
-      let dataCheckboxUnCheck = serviceOpt.filter((i) => i !== id);
-      setServiceOtp(dataCheckboxUnCheck);
       let newObj = {
         id: id,
         value: included_fee[id - 1].value,
@@ -181,6 +156,22 @@ const ServiceFee: FC<IProps> = (props) => {
       let dataCheck = included_fee.filter((item) => item.id !== id);
       let newDataChecked = [...dataCheck, newObj];
       setIncludedFee(newDataChecked);
+      newDataChecked.sort((a, b) => a.id - b.id);
+      dispatch({ type: 'setServiceFee', payload: { included_fee: newDataChecked } });
+    } else {
+      included_fee.sort((a, b) => a.id - b.id);
+      let dataCheckboxUnCheck = serviceOpt.filter((i) => i !== id);
+      setServiceOtp(dataCheckboxUnCheck);
+      let newObj = {
+        id: id,
+        value: included_fee[id - 1].value,
+        included: 1,
+        calculate_function: included_fee[id - 1].calculate_function
+      };
+      let dataCheck = included_fee.filter((item) => item.id !== id);
+      let newDataChecked = [...dataCheck, newObj];
+      setIncludedFee(newDataChecked);
+      newDataChecked.sort((a, b) => a.id - b.id);
       dispatch({ type: 'setServiceFee', payload: { included_fee: newDataChecked } });
     }
   };
@@ -189,12 +180,16 @@ const ServiceFee: FC<IProps> = (props) => {
     setSelectedValue(parseInt((event.target as HTMLInputElement).value));
     if (parseInt((event.target as HTMLInputElement).value) === 1) {
       for (let i in included_fee) {
+        // if (included_fee[i].included == 1) {
         included_fee[i].included = 1;
+        // }
       }
     } else {
       for (let i in included_fee) {
-        if (included_fee[i].value === 0) {
+        if (included_fee[i].included == 0) {
           included_fee[i].included = 0;
+        } else {
+          included_fee[i].included = 1;
         }
       }
     }
@@ -264,6 +259,7 @@ const ServiceFee: FC<IProps> = (props) => {
         <Collapse in={!selectedValue}>
           <div>
             <h1 className={classes.bigTitle}>Giá dịch vụ bán lẻ</h1>
+            <p>Vui lòng chọn những dịch vụ không bao gồm trong gía thuê hàng tháng</p>
             <Grid container justify="center">
               <Grid item xs={12}>
                 <FormGroup row>
@@ -278,7 +274,7 @@ const ServiceFee: FC<IProps> = (props) => {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={serviceOpt.some((x) => x === o.id)}
+                              checked={!serviceOpt.some((x) => x === o.id)}
                               classes={{ checked: classes.checked }}
                               onChange={handleChangeServices(o.id)}
                               value={o.id}
@@ -288,7 +284,7 @@ const ServiceFee: FC<IProps> = (props) => {
                         />
                       </Grid>
                       <Grid item xs={7}>
-                        <Zoom in={serviceOpt.some((x) => x === o.id)}>
+                        <Zoom in={!serviceOpt.some((x) => x === o.id)}>
                           <Grid container spacing={2}>
                             <Grid item xs={8}>
                               <TextValidator
