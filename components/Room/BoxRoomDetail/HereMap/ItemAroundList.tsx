@@ -46,7 +46,7 @@ const ItemAroundList: FC<IProps> = (props) => {
           <Typography variant="subtitle2" className={classes.name}>{item.title}</Typography>
           <Typography variant="subtitle2" className={classes.distance}>{(item.distance / 1000).toFixed(1)} km</Typography>
         </Grid>
-        <Divider className={classes.divider} />
+        {/* <Divider className={classes.divider} /> */}
       </Grid>
     );
   });
