@@ -1,18 +1,21 @@
 import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
 import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
+import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
+import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesAroundList';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
 import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { LTRoomReducerAction } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesAroundList';
-import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -47,7 +50,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
-
+  const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const checkAboutRoom = isPreviewPage && !room.about_room;
   const checkComfort = isPreviewPage && !room.comforts;
   const checkPrice = isPreviewPage && !room.prices;
@@ -138,7 +141,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     district={room.district.data.name}
                   />
                   <HereMap
-                    isLongTerm={true}
+                    dp={dispatch}
                     latitude={room.latitude}
                     longitude={room.longitude}
                   />

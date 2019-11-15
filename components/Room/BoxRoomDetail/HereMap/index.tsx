@@ -1,27 +1,21 @@
 /* global google */
-import { Theme, Grid } from '@material-ui/core';
-import { createStyles, makeStyles, withStyles } from '@material-ui/styles';
-import React, { FC, useState, useEffect, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import HPlatform, { HMap, HMapCircle } from 'react-here-map';
-import axios from 'axios';
 import { placeNearTypeList } from '@/utils/mixins';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
-import { Dispatch } from 'redux';
-import { LTRoomReducerAction } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import React, { FC, useEffect } from 'react';
+import HPlatform, { HMap, HMapCircle } from 'react-here-map';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
   latitude?: string;
   longitude?: string;
-  isLongTerm?: boolean;
+  dp?: any;
 }
 
 const HereMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { latitude, longitude, isLongTerm } = props;
-  const { dispatch } = useContext(RoomDetailsContext);
-  const dispatch_LT = useDispatch<Dispatch<LTRoomReducerAction>>();
+  const { latitude, longitude, dp } = props;
+  // const { dispatch } = useContext(RoomDetailsContext);
+  // const dispatch_LT = useDispatch<Dispatch<LTRoomReducerAction>>();
   const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
   const your_app_code = '54vN9paKcbDlrQ_E4R4jqw';
   const center = {
@@ -58,9 +52,8 @@ const HereMap: FC<IProps> = (props) => {
         })
         .catch((err) => console.error(err));
     }
-    isLongTerm
-      ? dispatch_LT({ type: 'setDataPlaces', payload: newData })
-      : dispatch({ type: 'setDataPlaces', payload: newData });
+    dp({ type: 'setDataPlaces', payload: newData })
+    // : dispatch({ type: 'setDataPlaces', payload: newData });
   };
   useEffect(() => {
     fetchData();
@@ -84,9 +77,6 @@ const HereMap: FC<IProps> = (props) => {
       </HMap>
     </HPlatform>
   );
-};
-HereMap.defaultProps = {
-  isLongTerm: false
 };
 
 export default HereMap;

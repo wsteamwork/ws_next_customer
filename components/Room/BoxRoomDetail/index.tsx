@@ -1,20 +1,19 @@
 import HostInfo from '@/components/HostInfo';
-import BoxMap from '@/components/Room/BoxMap';
 import RoomReview from '@/components/Room/BoxRoomDetail/RoomReview';
 import TablePrices from '@/components/Room/BoxRoomDetail/TablePrices';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import EmptyRoomCalendar from './EmptyRoomCalendar';
+import HereMap from './HereMap';
+import PlacesAroundList from './HereMap/PlacesAroundList';
 import RoomAmenities from './RoomAmenities/index';
 import RoomBasic from './RoomBasic/index';
 import RoomDescription from './RoomDescription/index';
-import HereMap from './HereMap';
-import PlacesAroundList from './HereMap/PlacesAroundList';
-import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -45,7 +44,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
   // forceCheck();
   const classes = useStyles(props);
   const { room } = props;
-  const { state } = useContext(RoomDetailsContext);
+  const { state, dispatch } = useContext(RoomDetailsContext);
   const { places } = state;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
@@ -129,6 +128,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                     district={room ? room.district.data.name : ''}
                   />
                   <HereMap
+                    dp={dispatch}
                     latitude={room ? room.latitude : '0'}
                     longitude={room ? room.longitude : '0'}
                   />
