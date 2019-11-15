@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import CalendarManagement from '@/components/LTR/Merchant/Listing/CalendarManagement';
 interface IProps {
   classes?: any;
 }
@@ -200,7 +201,7 @@ const UpdateListing: FC<IProps> = (props) => {
                 <ListingPolicy />
               </TabPanel>
               <TabPanel value={value} index={4}>
-                Đang cập nhật...
+                <CalendarManagement idRoom={listing.room_id} />
               </TabPanel>
             </Grid>
           </Grid>
