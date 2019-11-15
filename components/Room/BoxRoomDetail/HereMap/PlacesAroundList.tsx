@@ -10,10 +10,13 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ItemAroundList from './ItemAroundList';
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 interface IProps {
   classes?: any;
   district?: string;
   city?: string;
+  places: any;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -122,10 +125,8 @@ function a11yProps(index: any) {
 
 const PlacesAroundList: FC<IProps> = (props) => {
   const { t } = useTranslation();
-  const { state } = useContext(RoomDetailsContext);
-  const { places } = state;
+  const { district, city, places } = props;
   const classes = useStyles(props);
-  const { district, city } = props;
   const [value, setValue] = useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);

@@ -13,17 +13,20 @@ export type LTRoomReducerState = {
   readonly room: LTRoomIndexRes | null;
   readonly error: boolean;
   readonly availableDates: LTRoomAvailableRes;
+  readonly places?: any;
 };
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
   | { type: 'setErrorSSRLTRoompage'; payload: boolean }
-  | { type: 'setAvailableDates'; payload: LTRoomAvailableRes };
+  | { type: 'setAvailableDates'; payload: LTRoomAvailableRes }
+  | { type: 'setDataPlaces'; payload: any };
 
 export const init: LTRoomReducerState = {
   room: null,
   error: false,
-  availableDates: null
+  availableDates: null,
+  places: null
 };
 
 export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
@@ -37,6 +40,8 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
       return updateObject(state, { error: action.payload });
     case 'setAvailableDates':
       return updateObject(state, { availableDates: action.payload });
+    case 'setDataPlaces':
+      return updateObject<any>(state, { places: action.payload });
     default:
       return state;
   }

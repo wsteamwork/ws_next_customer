@@ -11,6 +11,8 @@ import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesAroundList';
 import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -41,6 +43,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   // forceCheck();
   const classes = useStyles(props);
   const { room } = props;
+  const { places } = useSelector<ReducersList, any>((state) => state.ltroomPage);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
@@ -130,10 +133,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
                   <PlacesAroundList
+                    places={places}
                     city={room.city.data.name}
                     district={room.district.data.name}
                   />
                   <HereMap
+                    isLongTerm={true}
                     latitude={room.latitude}
                     longitude={room.longitude}
                   />

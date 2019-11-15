@@ -14,6 +14,7 @@ import RoomBasic from './RoomBasic/index';
 import RoomDescription from './RoomDescription/index';
 import HereMap from './HereMap';
 import PlacesAroundList from './HereMap/PlacesAroundList';
+import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -44,6 +45,8 @@ const BoxRoomDetail: FC<IProps> = (props) => {
   // forceCheck();
   const classes = useStyles(props);
   const { room } = props;
+  const { state } = useContext(RoomDetailsContext);
+  const { places } = state;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
@@ -121,6 +124,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={150}> */}
                   <PlacesAroundList
+                    places={places}
                     city={room ? room.city.data.name : ''}
                     district={room ? room.district.data.name : ''}
                   />
