@@ -1,7 +1,6 @@
 import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
 import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
-import BoxMap from '@/components/Room/BoxMap';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
 import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -10,6 +9,8 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesAroundList';
+import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -128,7 +129,14 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
-                  <BoxMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+                  <PlacesAroundList
+                    city={room.city.data.name}
+                    district={room.district.data.name}
+                  />
+                  <HereMap
+                    latitude={room.latitude}
+                    longitude={room.longitude}
+                  />
                   {/* </LazyLoad> */}
 
                 </div>
