@@ -1,12 +1,12 @@
-import React, { Fragment, FC, useRef, useEffect, useMemo, useState } from 'react';
+import React, { FC, useRef, useEffect, useMemo, useState } from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Snackbar, Grid } from '@material-ui/core';
+import { Theme, Snackbar, Grid, Typography } from '@material-ui/core';
 import FullCalendarNoSSR from '@/components/FullCalendarNoSSR';
 import moment from 'moment';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { BlockCalendarReq, UnlockCalendarReq } from '@/types/Requests/Calendar/CalendarReq';
-import { UpdateBlockRes, ScheduleRes, BookingCalendarRes, BookingEvents } from '@/types/Requests/Calendar/CalendarRes';
+import { ScheduleRes, BookingEvents } from '@/types/Requests/Calendar/CalendarRes';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import DialogActionCalendar from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
@@ -17,7 +17,7 @@ interface IProps {
   idRoom: number
 }
 
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
+const useStyles = makeStyles<Theme, IProps>(() =>
   createStyles({
     blockDay: {
       // background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 1px,#f2f2f2 1px,#f2f2f2 50px)',
@@ -70,7 +70,7 @@ const CalendarManagement: FC<IProps> = (props) => {
         setTimeout(() => {
           window.location.reload();
         }, 2000);
-      })
+      });
     setOpenDialog(false);
   };
 
@@ -87,7 +87,7 @@ const CalendarManagement: FC<IProps> = (props) => {
         setTimeout(() => {
           window.location.reload();
         }, 2000);
-      })
+      });
     setOpenDialog(false);
   };
 
@@ -124,6 +124,9 @@ const CalendarManagement: FC<IProps> = (props) => {
   return (
     <div>
       <Grid container className = {classes.boxCalendar}>
+        <Grid item xs={12} className={classes.boxItem}>
+          <Typography variant='subtitle1'>* Chọn 1 ngày hoặc khoảng ngày bằng cách chọn hoặc kéo giữ trên lịch.</Typography>
+        </Grid>
         <Grid item xs={6} sm={4} className={classes.boxItem}>
           <div className={classes.boxSugguest} style={{backgroundColor:'#fb8c00'}}/>
           <span>Booking dài hạn</span>
@@ -152,7 +155,7 @@ const CalendarManagement: FC<IProps> = (props) => {
                                    let endDayBooking = moment(day.end).format(DEFAULT_DATE_FORMAT);
                                    if(info.startStr >= startDayBooking && info.startStr < endDayBooking) {
                                      temp++;
-                                   };
+                                   }
                                  })
                                });
                              }
