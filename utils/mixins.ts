@@ -265,3 +265,36 @@ export const statusBookingList = [
       name: 'Đã hủy',
     },
 ];
+
+export const placeNearTypeList = [
+    {
+      id: 1,
+      name: 'natural-geographical',
+      size: 6,
+    },
+    {
+      id: 2,
+      name: 'restaurant',
+      size: 5,
+    },
+    {
+      id: 3,
+      name: 'shopping',
+      size: 5,
+    },
+    {
+      id: 4,
+      name: 'sights-museums',
+      size: 6,
+    },
+    {
+      id: 5,
+      name: 'hospital-health-care-facility',
+      size: 3,
+    },
+    {
+      id: 6,
+      name: 'administrative-areas-buildings',
+      size: 4,
+    },
+];

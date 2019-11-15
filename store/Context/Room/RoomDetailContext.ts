@@ -16,19 +16,22 @@ export type RoomDetailsState = {
   readonly dataCalculate: BookingPriceCalculatorRes | null;
   readonly error: string | null;
   readonly currentDate: string;
+  readonly places: any;
 };
 
 export type RoomDetailsAction =
   | { type: 'setDataCalculdate'; payload: BookingPriceCalculatorRes }
   | { type: 'setError'; payload: string }
-  | { type: 'setCurrentDate'; payload: string };
+  | { type: 'setCurrentDate'; payload: string }
+  | { type: 'setDataPlaces'; payload: any };
 
 export const RoomDetailsStateInit: RoomDetailsState = {
   dataCalculate: null,
   error: null,
   currentDate: moment()
     .add(5, 'month')
-    .format(DEFAULT_DATE_FORMAT)
+    .format(DEFAULT_DATE_FORMAT),
+  places: null
 };
 
 export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = (
@@ -42,6 +45,8 @@ export const RoomDetailsReducer: Reducer<RoomDetailsState, RoomDetailsAction> = 
       return updateObject<RoomDetailsState>(state, { error: action.payload });
     case 'setCurrentDate':
       return updateObject<RoomDetailsState>(state, { currentDate: action.payload });
+    case 'setDataPlaces':
+      return updateObject<any>(state, { places: action.payload });
     default:
       return state;
   }

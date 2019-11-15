@@ -1,22 +1,22 @@
+/* global google */
 import { ReducersList } from '@/store/Redux/Reducers';
 import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Theme } from '@material-ui/core';
+import { Theme, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import GoogleMap from 'google-map-react';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import HPlatform, { HMap, HMapCircle } from 'react-here-map';
 
 interface IProps {
-  classes?: any,
-  district: string,
-  city: string,
-  latitude: string,
-  longitude: string
+  classes?: any;
+  district?: string;
+  city?: string;
+  latitude?: string;
+  longitude?: string;
 }
-
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
@@ -25,7 +25,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginBottom: theme.spacing(2)
     },
     root: {
-      height: 400,
       margin: '10px 0',
       borderRadius: 5,
       overflow: 'hidden',
@@ -44,11 +43,27 @@ const BoxMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { district, city, latitude, longitude } = props;
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
+  const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
+  const your_app_code = '54vN9paKcbDlrQ_E4R4jqw';
+  const center = {
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude)
+  };
+  const circleOptions = {
+    style: {
+      strokeColor: '#1275E8',
+      fillColor: 'rgba(212, 92, 91, 0.2)',
+      lineWidth: 1,
+      strokeWeight: 2,
+      strokeOpacity: 0.8,
+      fillOpacity: 0.3
+    }
+  };
   return (
-    <div>
+    <Grid>
       <Typography variant="h5" className={classes.title}>
         {t('room:map')}
       </Typography>
@@ -57,37 +72,24 @@ const BoxMap: FC<IProps> = (props) => {
         <FontAwesomeIcon className={classes.icon} icon={faMapSigns} />
         {district}, {city}
       </Typography>
-
-      <div className={classes.root}>
-        <GoogleMap
-          bootstrapURLKeys={{
-            key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
+      <HPlatform
+        app_id={your_app_id}
+        app_code={your_app_code}
+        useCIT
+        useHTTPS
+        includeUI
+        interactive
+        includePlaces>
+        <HMap
+          style={{
+            height: '400px',
+            width: '100%'
           }}
-          defaultZoom={15}
-          defaultCenter={{
-            lat: latitude ? parseFloat(latitude) : 0,
-            lng: longitude ? parseFloat(longitude) : 0
-          }}
-          yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => {
-            latitude ?
-              new maps.Circle({
-                strokeColor: `${leaseTypeGlobal ? '#673ab7' : '#FCAB70'}`,
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: `${leaseTypeGlobal ? '#673ab7' : '#FDBF68'}`,
-                fillOpacity: 0.3,
-                map,
-                center: {
-                  lat: parseFloat(latitude),
-                  lng: parseFloat(longitude)
-                },
-                radius: 400
-              }) : null
-          }}
-        />
-      </div>
-    </div>
+          mapOptions={{ center: center, zoom: 15 }}>
+          <HMapCircle coords={center} radius={400} options={circleOptions} />
+        </HMap>
+      </HPlatform>
+    </Grid>
   );
 };
 
