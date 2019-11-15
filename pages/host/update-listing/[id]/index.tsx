@@ -76,7 +76,7 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0}>
+      <Box p={3}>
         {children}
       </Box>
     </Typography>

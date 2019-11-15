@@ -12,6 +12,8 @@ import EmptyRoomCalendar from './EmptyRoomCalendar';
 import RoomAmenities from './RoomAmenities/index';
 import RoomBasic from './RoomBasic/index';
 import RoomDescription from './RoomDescription/index';
+import HereMap from './HereMap';
+import PlacesAroundList from './HereMap/PlacesAroundList';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -35,7 +37,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 
 interface IProps {
-  room: RoomIndexRes,
+  room: RoomIndexRes;
 }
 
 const BoxRoomDetail: FC<IProps> = (props) => {
@@ -50,30 +52,33 @@ const BoxRoomDetail: FC<IProps> = (props) => {
       <Paper className={classes.paper}>
         <Grid container>
           <Grid item md={12} lg={12}>
-            <Grid container spacing={1} justify='center'>
+            <Grid container spacing={1} justify="center">
               <Grid item xs={11} sm={8} md={9} lg={8} xl={9}>
                 {/* <LazyLoad> */}
                 <RoomBasic
                   isPreviewPage={isPreviewPage}
                   name={room.details.data[0].name}
-                  id={room.id} bathroom={room.bathroom}
+                  id={room.id}
+                  bathroom={room.bathroom}
                   max_additional_guest={room.max_additional_guest}
                   max_guest={room.max_guest}
                   number_bed={room.number_bed}
                   number_room={room.number_room}
                   totalComforts={room.comforts.data.length}
                   avg_rating={room.avg_rating}
-                  avg_rating_txt={room.avg_rating_txt} />
+                  avg_rating_txt={room.avg_rating_txt}
+                />
                 {/* </LazyLoad> */}
-
               </Grid>
               <Grid className={classes.hostInfo} item xs={12} sm={4} md={3} lg={4} xl={3}>
                 {/* <LazyLoad> */}
-                <HostInfo number_room={room.merchant.data.number_room}
+                <HostInfo
+                  number_room={room.merchant.data.number_room}
                   id={room.merchant.data.id}
                   name={room.merchant.data.name}
                   avatar={room.merchant.data.avatar}
-                  avatar_url={room.merchant.data.avatar_url} />
+                  avatar_url={room.merchant.data.avatar_url}
+                />
                 {/* </LazyLoad> */}
               </Grid>
             </Grid>
@@ -81,7 +86,12 @@ const BoxRoomDetail: FC<IProps> = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={10} xl={9}>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad> */}
-                  <RoomDescription description={room.details.data[0].description} note={room.details.data[0].note} space={room.details.data[0].space} isPreviewPage={isPreviewPage} />
+                  <RoomDescription
+                    description={room.details.data[0].description}
+                    note={room.details.data[0].note}
+                    space={room.details.data[0].space}
+                    isPreviewPage={isPreviewPage}
+                  />
                   {/* </LazyLoad> */}
                 </div>
                 <div className={classes.rowMargin}>
@@ -101,7 +111,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 </div>
               </Grid>
             </Grid>
-            <Grid container spacing={1} justify='center'>
+            <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={150}> */}
@@ -110,7 +120,14 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 </div>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={150}> */}
-                  <BoxMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+                  <PlacesAroundList
+                    city={room ? room.city.data.name : ''}
+                    district={room ? room.district.data.name : ''}
+                  />
+                  <HereMap
+                    latitude={room ? room.latitude : '0'}
+                    longitude={room ? room.longitude : '0'}
+                  />
                   {/* </LazyLoad> */}
                 </div>
               </Grid>
