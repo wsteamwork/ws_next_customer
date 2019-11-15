@@ -71,9 +71,6 @@ const CalendarManagement: FC<IProps> = (props) => {
           window.location.reload();
         }, 2000);
       })
-      .catch((error) => {
-        console.log(error);
-      });
     setOpenDialog(false);
   };
 
@@ -91,9 +88,6 @@ const CalendarManagement: FC<IProps> = (props) => {
           window.location.reload();
         }, 2000);
       })
-      .catch((error) => {
-        console.log(error);
-      });
     setOpenDialog(false);
   };
 
@@ -103,7 +97,6 @@ const CalendarManagement: FC<IProps> = (props) => {
       const res: AxiosRes<ScheduleRes> = await axios_merchant.get(url);
       setDataBlock(res.data.data.blocks);
     } catch (e) {
-      console.log(e);
       return null;
     }
   };
@@ -115,12 +108,9 @@ const CalendarManagement: FC<IProps> = (props) => {
       const res: AxiosRes<any> = await axios_merchant.get(url);
       setDataBooking(res.data.data);
     } catch (e) {
-      console.log(e);
       return null;
     }
   };
-
-  // useMemo(() => getDataBlock(), [dataBlock]);
 
   useEffect(() => {
     getDataBlock();
@@ -129,45 +119,8 @@ const CalendarManagement: FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
-  }, [dataBooking, dataBlock]);
+  }, [reload,dataBooking, dataBlock]);
 
-
-  const dataTest = [
-    {
-      events: [
-        {
-          id: 16,
-          booking_id: 19,
-          uuid: 'CT0KLV6LZE',
-          title: 'Mã hợp đồng: CT0KLV6LZE - Giá trị: 137133300 đ',
-          start: '2019-11-25 00:00:00',
-          end: '2020-04-25 23:59:59'
-        }
-      ],
-      color: '#fb8c00',
-      textColor: '#fff',
-    },
-    {
-      events: [
-        {
-          id: 11229,
-          uuid: 'OwGVrQxA',
-          title: 'Mã đặt phòng: OwGVrQxA - Giá trị: 13213412 đ',
-          start: '2019-12-14 10:30:00',
-          end: '2019-12-17 14:30:00'
-        },
-        {
-          id: 11230,
-          uuid: 'AxeB3Kwr',
-          title: 'Mã đặt phòng: AxeB3Kwr - Giá trị: 110000 đ',
-          start: '2019-11-18 10:30:00',
-          end: '2019-11-20 14:30:00'
-        }
-      ],
-      color: '#00897b',
-      textColor: '#fff',
-    }
-  ];
   return (
     <div>
       <Grid container className = {classes.boxCalendar}>
@@ -208,11 +161,7 @@ const CalendarManagement: FC<IProps> = (props) => {
                              // if (info.startStr === '2019-11-20') return true;
                              // return false;
                            }}
-                           selectOverlap={(x)=>
-                           {
-                             console.log(x);
-                             return x.startEditable === '2019-11-20';
-                           }}
+                           selectOverlap={false}
                            eventSources = {
                              dataBooking
                            }
@@ -237,7 +186,6 @@ const CalendarManagement: FC<IProps> = (props) => {
                              ]);
                              setOpenDialog(true);
                            }}
-          // eventRender={(event, el)=>{console.log(event)}}
         />
       ), [dataBooking, dataBlock])}
       <DialogActionCalendar open = {openDialog}
