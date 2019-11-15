@@ -14,8 +14,6 @@ interface IProps {
 const HereMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { latitude, longitude, dp } = props;
-  // const { dispatch } = useContext(RoomDetailsContext);
-  // const dispatch_LT = useDispatch<Dispatch<LTRoomReducerAction>>();
   const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
   const your_app_code = '54vN9paKcbDlrQ_E4R4jqw';
   const center = {
@@ -52,21 +50,13 @@ const HereMap: FC<IProps> = (props) => {
         })
         .catch((err) => console.error(err));
     }
-    dp({ type: 'setDataPlaces', payload: newData })
-    // : dispatch({ type: 'setDataPlaces', payload: newData });
+    dp({ type: 'setDataPlaces', payload: newData });
   };
   useEffect(() => {
     fetchData();
   }, []);
   return (
-    <HPlatform
-      app_id={your_app_id}
-      app_code={your_app_code}
-      useCIT
-      useHTTPS
-      includeUI
-      interactive
-      includePlaces>
+    <HPlatform app_id={your_app_id} app_code={your_app_code} useCIT useHTTPS includeUI interactive>
       <HMap
         style={{
           height: '400px',
