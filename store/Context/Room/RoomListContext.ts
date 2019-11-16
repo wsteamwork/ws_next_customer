@@ -45,6 +45,7 @@ export type RoomIndexState = {
   readonly isLoading: boolean;
   readonly isMapOpen: boolean;
   readonly coords: MapCoords | null;
+
 };
 
 export const RoomIndexStateInit: RoomIndexState = {
@@ -53,7 +54,7 @@ export const RoomIndexStateInit: RoomIndexState = {
   meta: null,
   isLoading: false,
   isMapOpen: false,
-  coords: null
+  coords: null,
 };
 
 export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (

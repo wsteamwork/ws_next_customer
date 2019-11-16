@@ -15,8 +15,8 @@ const NextHead: FC<IProps> = (props) => (
       <script
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAP_KEY}&libraries=geometry,places`}></script>
     ) : (
-      ''
-    )}
+        ''
+      )}
 
     <NextSeo
       title={props.title}

@@ -266,7 +266,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                 ) : (
                   ''
                 )}
-                <ButtonGlobal style={{ color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit} disabled={!disableBooking}>
+                <ButtonGlobal style={{cursor: 'pointer', color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit}>
                   {isLogin ? 'Đặt phòng' : 'Đăng nhập để tiếp tục'}
                 </ButtonGlobal>
               </Hidden>

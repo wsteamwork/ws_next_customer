@@ -19,5 +19,7 @@
     "common": "Common amenities",
     "entertainment": "Entertainment",
     "others": "Others",
-    "outdoors": "Outdoor"
+    "outdoors": "Outdoor",
+    "success": "Successfully",
+    "lang": "en"
 }

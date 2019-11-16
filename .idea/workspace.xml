@@ -2,28 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/preview-long-term-room/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/HostInfo/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HostInfo/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/preview-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/preview-room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/home/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/home/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/shared/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/shared/global.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,87 +16,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/preview-room/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1035">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/preview-long-term-room/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="45" column="31" lean-forward="true" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="149" column="67" lean-forward="true" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1437">
-              <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
+            <state relative-caret-position="399">
+              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
               <folding>
-                <element signature="e#0#71#0" expanded="true" />
-                <element signature="e#541#603#0" expanded="true" />
+                <element signature="e#0#82#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="19" column="17" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="17" />
+            <state relative-caret-position="1564">
+              <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json">
+        <entry file="file://$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+            <state relative-caret-position="414">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/FullCalendar/index.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/mixins.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2438">
+              <caret line="106" column="23" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/index.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1748">
+              <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="874">
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -133,36 +109,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>room.</find>
-      <find>ltroomindexres</find>
-      <find>window</find>
-      <find>RoomIndexRes</find>
-      <find>LTRoomIndexRes</find>
-      <find>.avatar.images</find>
-      <find>.mapListing</find>
-      <find>only</find>
-      <find>xs</find>
-      <find>NavHeader</find>
-      <find>getLTrooms</find>
-      <find>useRefreshListing</find>
-      <find>roomImage</find>
-      <find>roomListingInMap</find>
-      <find>getRooms</find>
-      <find>getLTRooms</find>
-      <find>com</find>
-      <find>comfor</find>
-      <find>comfort</find>
-      <find>LazyLoad</find>
-      <find>boxlistimage</find>
-      <find>txtName</find>
-      <find>c</find>
-      <find>PreviewRoom</find>
-      <find>__opa</find>
-      <find>color.</find>
-      <find>colors.scss</find>
-      <find>disabledBoxBooking</find>
-      <find>amenitiesOfRoom</find>
-      <find>static/images/</find>
+      <find>&quot;</find>
+      <find>axios.get</find>
+      <find>dataBlock</find>
+      <find>price</find>
+      <find>eventClicked</find>
+      <find>&lt;Dialog</find>
+      <find>filterbooking</find>
+      <find>event-bloc</find>
+      <find>test</find>
+      <find>isLoading</find>
+      <find>next</find>
+      <find>isLoaded</find>
+      <find>setIsLoaded</find>
+      <find>reloaded</find>
+      <find>setReloaded</find>
+      <find>MySnackbarContentWrapper</find>
+      <find>vi</find>
+      <find>“</find>
+      <find>”</find>
+      <find>disabledBoxBookingMoblie</find>
+      <find>selectAllow</find>
+      <find>TransformerInclude</find>
+      <find>selectOverlap</find>
+      <find>useConte</find>
+      <find>view</find>
+      <find>defaultView</find>
+      <find>serviceFe</find>
+      <find>@include</find>
+      <find>@include xs</find>
+      <find>Booking dài hạn</find>
     </findStrings>
     <dirStrings>
       <dir>D:\VNP\ws_next_customer\node_modules</dir>
@@ -179,26 +155,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/components/Rooms/FilterDrawerMobile/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Home/SearchComponent/SearchHome.tsx" />
-        <option value="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" />
-        <option value="$PROJECT_DIR$/components/Home/SearchComponent/TabChangeHome.tsx" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/components/LTR/LTHome/SearchHomeLT.tsx" />
-        <option value="$PROJECT_DIR$/styles/pages/rooms/chooseRoomGuest.scss" />
-        <option value="$PROJECT_DIR$/components/Rooms/MapAndListing/MapRoomListing.tsx" />
-        <option value="$PROJECT_DIR$/components/Rooms/FilterActions/index.tsx" />
-        <option value="$PROJECT_DIR$/components/UserProfile/UserDetail.tsx" />
-        <option value="$PROJECT_DIR$/components/Room/BoxRecommend/index.tsx" />
-        <option value="$PROJECT_DIR$/pages/index.tsx" />
-        <option value="$PROJECT_DIR$/components/ListRoom/index.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx" />
-        <option value="$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss" />
         <option value="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" />
         <option value="$PROJECT_DIR$/components/RoomCard/index.tsx" />
         <option value="$PROJECT_DIR$/pages/rooms/index.tsx" />
         <option value="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" />
-        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" />
         <option value="$PROJECT_DIR$/styles/pages/rooms/index.scss" />
         <option value="$PROJECT_DIR$/components/Rooms/MapMobile/index.tsx" />
         <option value="$PROJECT_DIR$/components/Toolbar/NavHeader.tsx" />
@@ -230,20 +190,37 @@
         <option value="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" />
         <option value="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManager/index.tsx" />
+        <option value="$PROJECT_DIR$/components/FullCalendar/index.tsx" />
+        <option value="$PROJECT_DIR$/types/Requests/Calendar/CalendarReq.ts" />
+        <option value="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionManagement.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" />
+        <option value="$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx" />
+        <option value="$PROJECT_DIR$/translations/shared/shared-vi.json" />
+        <option value="$PROJECT_DIR$/translations/shared/shared-en.json" />
+        <option value="$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts" />
+        <option value="$USER_HOME$/Downloads/RoomCalendar.vue" />
+        <option value="$PROJECT_DIR$/styles/components/index.scss" />
+        <option value="$PROJECT_DIR$/styles/index.scss" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx" />
+        <option value="$PROJECT_DIR$/styles/FullCalendar/index.scss" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="976" />
-    <option name="height" value="1056" />
+    <option name="x" value="-10" />
+    <option name="width" value="1710" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <showMembers ProjectPane="false" />
+      <autoscrollToSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -278,42 +255,95 @@
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CalendarManagement" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
+              <item name="ServiceFee" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="long-term-room" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="preview-room" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
-              <item name="LongTermRental" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
-              <item name="LongTermRental" type="462c0819:PsiDirectoryNode" />
-              <item name="longtermroom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
-              <item name="room" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="FullCalendar" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -337,17 +367,17 @@
     <property name="ts.external.directory.path" value="D:\VNP\ws_next_customer\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
-      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
-      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\VNP\ws_next_customer\styles\components\LTRoomCardListing" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchAutoSuggestion" />
       <recent name="D:\VNP\ws_next_customer\components\LTR" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchComponent" />
       <recent name="D:\VNP\ws_next_customer\components\LTR\LTRoom\BoxListImageRoom" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
+      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
+      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -459,6 +489,16 @@
       <workItem from="1572572914246" duration="10802000" />
       <workItem from="1572831187173" duration="18909000" />
       <workItem from="1573004853305" duration="10588000" />
+      <workItem from="1573094807935" duration="18423000" />
+      <workItem from="1573179114654" duration="17297000" />
+      <workItem from="1573223753604" duration="7694000" />
+      <workItem from="1573261559889" duration="6131000" />
+      <workItem from="1573441768708" duration="16291000" />
+      <workItem from="1573523156270" duration="24010000" />
+      <workItem from="1573609828686" duration="21918000" />
+      <workItem from="1573654213566" duration="8086000" />
+      <workItem from="1573696145234" duration="21689000" />
+      <workItem from="1573783111834" duration="314000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -600,18 +640,32 @@
       <option name="project" value="LOCAL" />
       <updated>1572585067660</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="test fullcalendar">
+      <created>1573115002367</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1573115002367</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fullcalendar final #1">
+      <created>1573728735255</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1573728735255</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1372123000" />
+    <option name="totallyTimeSpent" value="1514410000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49932706" visible="true" weight="0.23134328" />
-      <window_info id="Structure" order="1" sideWeight="0.50067294" side_tool="true" weight="0.22867803" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.25799572" />
+      <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -623,10 +677,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
-      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.3277592" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50479746" side_tool="true" weight="0.12263099" />
-      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49520257" visible="true" weight="0.12374582" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32884398" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.15830547" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50586355" side_tool="true" weight="0.14046822" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49413645" weight="0.19843924" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3277592" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -696,417 +750,366 @@
     <MESSAGE value="giao dien tab trang chu" />
     <MESSAGE value="map long term demo" />
     <MESSAGE value="map long term final" />
-    <option name="LAST_COMMIT_MESSAGE" value="map long term final" />
+    <MESSAGE value="test fullcalendar" />
+    <MESSAGE value="fullcalendar final #1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fullcalendar final #1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/components/Rooms/MapMobile/index.tsx">
+    <entry file="file://$PROJECT_DIR$/types/Requests/Cities/CityResponse.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="122" column="25" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="25" />
+        <state>
+          <caret selection-end-line="3" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/long-term-rooms/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1840">
-          <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
+        <state relative-caret-position="313">
+          <caret line="114" column="23" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/MapAndListing/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state relative-caret-position="842">
+          <caret line="135" column="13" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/BottomNav/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1541">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Toolbar/NavHeader.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/rooms/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="105" column="41" selection-start-line="105" selection-start-column="41" selection-end-line="105" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/RoomListing.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/MapAndListing/MapRoomListing.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ws_react_ts/src/views/ProfilePage/EditProfile.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="447" column="36" lean-forward="true" selection-start-line="447" selection-start-column="36" selection-end-line="447" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <element signature="e#2396#6192#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ws_react_ts/src/views/ProfilePage/ProfileEdit.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="66" column="64" selection-start-line="66" selection-start-column="64" selection-end-line="66" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ws_react_ts/src/views/ProfilePage/Profile.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-897">
-          <folding>
-            <element signature="e#0#84#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomRequests.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="44" column="19" lean-forward="true" selection-start-line="41" selection-start-column="2" selection-end-line="44" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomResponses.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/Map/MapMarker.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="21" column="103" selection-start-line="21" selection-start-column="91" selection-end-line="21" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/VisitedRooms/VisitedRoom.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="80" column="49" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/MapAndListing/MapCanvas.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-575">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#75#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/RoomCard/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="90" column="28" selection-start-line="90" selection-start-column="28" selection-end-line="90" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-            <element signature="e#403#471#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rooms/MapAndListing/context.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/Context/Room/RoomListContext.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="115" column="3" lean-forward="true" selection-start-line="115" selection-start-column="3" selection-end-line="115" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/shared/useVisitedRoom.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/HostInfo/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="107" column="62" selection-start-line="107" selection-start-column="62" selection-end-line="107" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="157" column="54" lean-forward="true" selection-start-line="157" selection-start-column="54" selection-end-line="157" selection-end-column="54" />
+        <state relative-caret-position="-739">
           <folding>
             <element signature="e#0#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTBook/BookingCalendar.tsx">
+    <entry file="file://$PROJECT_DIR$/pages/host/booking-list/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1518">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles/shared/global.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles/index.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="84" column="84" selection-start-line="84" selection-start-column="84" selection-end-line="84" selection-end-column="84" />
+        <state relative-caret-position="-2829">
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
-            <element signature="e#231#308#0" expanded="true" />
-            <element signature="e#600#660#0" expanded="true" />
+            <element signature="e#0#88#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/pages/room/index.scss">
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="29" column="66" selection-start-line="29" selection-start-column="66" selection-end-line="29" selection-end-column="66" />
+        <state relative-caret-position="411">
+          <caret line="66" column="39" lean-forward="true" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx">
+    <entry file="file://$PROJECT_DIR$/pages/host/room-list/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-529">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        <state relative-caret-position="391">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#70#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx">
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/UpdateListing/listingdetails.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1699">
-          <caret line="49" column="161" selection-start-line="49" selection-start-column="161" selection-end-line="49" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="70" column="58" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5305">
-          <caret line="84" column="59" lean-forward="true" selection-start-line="84" selection-start-column="59" selection-end-line="84" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="86" column="50" lean-forward="true" selection-start-line="86" selection-start-column="50" selection-end-line="86" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/Images/ImageResponses.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-35">
-          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/preview-room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Room/BoxImage/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="216" column="59" selection-start-line="216" selection-start-column="59" selection-end-line="216" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-987">
-          <caret line="134" column="60" selection-start-line="134" selection-start-column="60" selection-end-line="134" selection-end-column="60" />
-          <folding>
-            <marker date="1573011667975" expanded="true" signature="3598:4163" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/LTRoom/ltroomReducer.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="108" column="36" lean-forward="true" selection-start-line="108" selection-start-column="36" selection-end-line="108" selection-end-column="36" />
+        <state relative-caret-position="244">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="54" column="2" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
+        <state relative-caret-position="46">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/room/room-vi.json">
+    <entry file="file://$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4439">
+          <caret line="212" column="25" selection-start-line="212" selection-start-column="25" selection-end-line="212" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Payment/PaymentResponse.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/ResponseTemplate.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/colors/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1288">
+          <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Button/Button.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/MenuItem/MenuItem.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
-          <caret line="45" column="88" selection-start-line="45" selection-start-column="88" selection-end-line="45" selection-end-column="88" />
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json">
+    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/preview-long-term-room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="45" column="31" lean-forward="true" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
+        <state relative-caret-position="365">
+          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#78#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/FilterBookingList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1035">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="1219">
+          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Profile/BookingProfile/BookingList.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+        <state relative-caret-position="5727">
+          <caret line="273" column="16" selection-start-line="273" selection-start-column="7" selection-end-line="273" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json">
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/LTBooking/ltbooking.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="17" />
+        <state relative-caret-position="2852">
+          <caret line="140" column="7" selection-start-line="140" selection-start-column="7" selection-end-line="140" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/MySnackbarContentWrapper.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1437">
-          <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
+        <state relative-caret-position="782">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
           <folding>
-            <element signature="e#0#71#0" expanded="true" />
-            <element signature="e#541#603#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx">
+    <entry file="file://$PROJECT_DIR$/translations/home/home-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/layout/layout-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/profile/profile-en.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="149" column="67" lean-forward="true" selection-start-line="149" selection-start-column="67" selection-end-line="149" selection-end-column="67" />
+        <state relative-caret-position="-1615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/promotion/promotion-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/reviews/reviews-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/room/room-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="58" column="4" lean-forward="true" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/room/room-vi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-764" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/user/user-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/shared/shared-vi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/shared/shared-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/preview-room/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="48" column="17" lean-forward="true" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/CancelBooking/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="174" column="32" selection-start-line="171" selection-start-column="8" selection-end-line="174" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/RoomCardItem.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="244" column="10" selection-start-line="244" selection-start-column="10" selection-end-line="244" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarReq.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomResponses.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="112" column="37" lean-forward="true" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomRequests.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/PriceByDay.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="128" column="25" selection-start-line="128" selection-start-column="25" selection-end-line="128" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/components/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2438">
+          <caret line="106" column="23" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1748">
+          <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/FullCalendar/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
