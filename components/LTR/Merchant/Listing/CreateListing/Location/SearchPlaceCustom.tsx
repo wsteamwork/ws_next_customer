@@ -31,27 +31,18 @@ let autocomplete = null;
 
 const SearchPlaceCustom: FC<IProps> = (props) => {
   const { setCoordinateMarker, setDefaultCenter, setAddress, addressInput } = props;
-  //   const {
-  //     address,
-  //     building,
-  //     disableSubmit,
-  //     coordinate: coordinateState,
-  //     district_id,
-  //     city_id
-  //   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
-  //   const [addressInput, setAddress] = useState<string>(address);
-  //   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const loaded = useRef(false);
+
   const handleScriptLoad = () => {
     const inputEl = document.getElementById('standalone-search-box');
-
-    if ((window as any).google) {
-      autocomplete = new (window as any).google.maps.places.Autocomplete(inputEl);
+    if (typeof google === 'object' && typeof google.maps === 'object') {
+      autocomplete = new (window as any).google.maps.places.Autocomplete(
+        inputEl as HTMLInputElement
+      );
       autocomplete.setComponentRestrictions({ country: 'vn' });
       autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
       autocomplete.addListener('place_changed', () => {
         const placeInfo = autocomplete.getPlace();
-        console.log('placeInfo', placeInfo);
         const location = placeInfo.geometry.location;
         setAddress(placeInfo.name);
         setCoordinateMarker({
@@ -91,21 +82,18 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      {loaded && (window as any).google ? (
-        <OutlinedInput
-          placeholder="Nhập địa chỉ"
-          // id="standalone-search-box"
-          inputProps={{ id: 'standalone-search-box' }}
-          value={addressInput}
-          onChange={(e) => {
-            setAddress(e.target.value);
-          }}
-          labelWidth={0}
-          fullWidth
-        />
-      ) : (
-        ''
-      )}
+      <OutlinedInput
+        type="text"
+        placeholder="Nhập địa chỉ"
+        // id="standalone-search-box"
+        inputProps={{ id: 'standalone-search-box' }}
+        value={addressInput}
+        onChange={(e) => {
+          setAddress(e.target.value);
+        }}
+        labelWidth={0}
+        fullWidth
+      />
     </Fragment>
   );
 };

@@ -105,7 +105,10 @@ const Location: FC<IProps> = (props) => {
   };
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
     <Fragment>
-      <GoogleMap defaultZoom={14} defaultCenter={props.defaultCenter} streetView={null}>
+      <GoogleMap
+        defaultZoom={14}
+        defaultCenter={props.defaultCenter}
+        options={{ streetViewControl: false, mapTypeControl: false }}>
         <Marker position={props.coordinate} defaultDraggable onDragEnd={props.handleDragEnd} />
       </GoogleMap>
     </Fragment>
@@ -183,6 +186,10 @@ const Location: FC<IProps> = (props) => {
                       }}
                       onBlur={(e: any) => {
                         handleBlur(e);
+                        dispatch({
+                          type: 'SET_BUILDING',
+                          payload: e.target.value
+                        });
                       }}
                       labelWidth={0}
                     />
