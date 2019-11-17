@@ -1,25 +1,24 @@
-import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { placeNearTypeList } from '@/utils/mixins';
 import { Grid, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, withStyles } from '@material-ui/styles';
-import React, { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import React, { FC, useEffect, useState } from 'react';
 import ItemAroundList from './ItemAroundList';
+
 interface IProps {
   classes?: any;
-  district?: string;
-  city?: string;
-  places: any;
+  latitude?: string;
+  longitude?: string;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     title: {
       fontWeight: 700,
-      marginTop: theme.spacing(4),
+      marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2)
     },
     root: {
@@ -75,7 +74,7 @@ const AntTab = withStyles((theme: Theme) =>
       padding: 0,
       fontWeight: theme.typography.fontWeightBold,
       margin: theme.spacing(0, 6),
-      fontSize: 16,
+      fontSize: 14,
       '&:hover': {
         color: '#45C29A',
         opacity: 1
@@ -97,7 +96,7 @@ const AntTab = withStyles((theme: Theme) =>
   })
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel: FC<TabPanelProps> = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -121,24 +120,49 @@ function a11yProps(index: any) {
 }
 
 const PlacesAroundList: FC<IProps> = (props) => {
-  const { t } = useTranslation();
-  const { district, city, places } = props;
+  const { latitude, longitude } = props;
   const classes = useStyles(props);
   const [value, setValue] = useState(0);
+  const [nearby, setNearby] = useState([]);
+  const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
+  const your_app_code = '54vN9paKcbDlrQ_E4R4jqw';
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+
+  const fetchData = async () => {
+    let newData = [];
+    for (let i = 0; i < placeNearTypeList.length; i++) {
+      let item = placeNearTypeList[i];
+      await axios
+        .get(`https://places.cit.api.here.com/places/v1/discover/around`, {
+          params: {
+            app_id: your_app_id,
+            app_code: your_app_code,
+            at: `${parseFloat(latitude)},${parseFloat(longitude)}`,
+            cat: item.name,
+            pretty: true,
+            size: item.size
+          }
+        })
+        .then((res) => {
+          newData = [...newData, res.data.results.items];
+          setNearby(newData)
+        })
+        .catch((err) => console.error(err));
+    }
+    // dispatch({ type: 'setDataPlaces', payload: newData });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Grid>
       <Typography variant="h5" className={classes.title}>
         Xung quanh căn hộ
       </Typography>
-
-      <Typography variant="subtitle1" className={classes.txtAddress}>
-        <FontAwesomeIcon className={classes.icon} icon={faMapSigns} />
-        {district}, {city}
-      </Typography>
-      {places ? (
+      {latitude && longitude ? (
         <Grid className={classes.rootTab}>
           <AntTabs
             orientation="vertical"
@@ -155,22 +179,22 @@ const PlacesAroundList: FC<IProps> = (props) => {
             <AntTab label="Tòa nhà xung quanh" {...a11yProps(5)} />
           </AntTabs>
           <TabPanel value={value} index={0}>
-            <ItemAroundList itemList={places[0]} />
+            <ItemAroundList itemList={nearby[0]} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <ItemAroundList itemList={places[1]} />
+            <ItemAroundList itemList={nearby[1]} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <ItemAroundList itemList={places[2]} />
+            <ItemAroundList itemList={nearby[2]} />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <ItemAroundList itemList={places[3]} />
+            <ItemAroundList itemList={nearby[3]} />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <ItemAroundList itemList={places[4]} />
+            <ItemAroundList itemList={nearby[4]} />
           </TabPanel>
           <TabPanel value={value} index={5}>
-            <ItemAroundList itemList={places[5]} />
+            <ItemAroundList itemList={nearby[5]} />
           </TabPanel>
         </Grid>
       ) : (

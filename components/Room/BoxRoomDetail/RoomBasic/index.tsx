@@ -21,6 +21,8 @@ interface IProps {
   avg_rating_txt: string,
   showBed?: boolean,
   isPreviewPage?: boolean,
+  district?: string,
+  city?: string,
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -46,7 +48,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area, isPreviewPage } = props;
+  const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area, isPreviewPage, district, city } = props;
 
   const arrMenuItem = (x: number): any[] => {
     let i = 1;
@@ -84,7 +86,7 @@ const RoomBasic: FC<IProps> = (props) => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h5" className={classes.roomId}>
-              Room No. {id}
+              Room No. {id} | {district}, {city}
             </Typography>
           </Grid>
         </Grid>

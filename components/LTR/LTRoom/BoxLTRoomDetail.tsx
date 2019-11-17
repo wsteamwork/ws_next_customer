@@ -6,16 +6,12 @@ import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesArou
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
 import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { LTRoomReducerAction } from '@/store/Redux/Reducers/LTR/LTRoom/ltroomReducer';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
 
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -47,11 +43,9 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   forceCheck();
   const classes = useStyles(props);
   const { room } = props;
-  const { places } = useSelector<ReducersList, any>((state) => state.ltroomPage);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
-  const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
   const checkAboutRoom = isPreviewPage && !room.about_room;
   const checkComfort = isPreviewPage && !room.comforts;
   const checkPrice = isPreviewPage && !room.prices;
@@ -75,7 +69,10 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   totalComforts={room.total_comforts}
                   avg_rating={room.rating.avg_avg_rating}
                   total_area={room.total_area}
-                  avg_rating_txt={room.rating.avg_avg_rating_txt} />
+                  avg_rating_txt={room.rating.avg_avg_rating_txt}
+                  city={room.city.data.name}
+                  district={room.district.data.name}
+                />
                 {/* </LazyLoad> */}
               </Grid>
             </Grid>
@@ -137,15 +134,11 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   <LazyLoad offset={100}>
                     <PlacesAroundList
-                      places={places}
-                      city={room.city.data.name}
-                      district={room.district.data.name}
+                      latitude={room ? room.latitude : '0'}
+                      longitude={room ? room.longitude : '0'}
                     />
-                    <HereMap
-                      dp={dispatch}
-                      latitude={room.latitude}
-                      longitude={room.longitude}
-                    />
+                    <HereMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+
                   </LazyLoad>
 
                 </div>

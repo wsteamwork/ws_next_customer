@@ -7,7 +7,7 @@ import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
-// import LazyLoad, { forceCheck } from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import EmptyRoomCalendar from './EmptyRoomCalendar';
 import HereMap from './HereMap';
 import PlacesAroundList from './HereMap/PlacesAroundList';
@@ -41,11 +41,10 @@ interface IProps {
 }
 
 const BoxRoomDetail: FC<IProps> = (props) => {
-  // forceCheck();
+  forceCheck();
   const classes = useStyles(props);
   const { room } = props;
-  const { state, dispatch } = useContext(RoomDetailsContext);
-  const { places } = state;
+  const { state } = useContext(RoomDetailsContext);
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-room');
 
@@ -69,6 +68,8 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                   totalComforts={room.comforts.data.length}
                   avg_rating={room.avg_rating}
                   avg_rating_txt={room.avg_rating_txt}
+                  city={room.city.data.name}
+                  district={room.district.data.name}
                 />
                 {/* </LazyLoad> */}
               </Grid>
@@ -116,23 +117,22 @@ const BoxRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
-                  {/* <LazyLoad offset={150}> */}
-                  <RoomReview room={room} showComment />
-                  {/* </LazyLoad> */}
+                  <LazyLoad offset={150}>
+                    <RoomReview room={room} showComment />
+                  </LazyLoad>
                 </div>
                 <div className={classes.rowMargin}>
-                  {/* <LazyLoad offset={150}> */}
-                  <PlacesAroundList
-                    places={places}
-                    city={room ? room.city.data.name : ''}
-                    district={room ? room.district.data.name : ''}
-                  />
-                  <HereMap
-                    dp={dispatch}
-                    latitude={room ? room.latitude : '0'}
-                    longitude={room ? room.longitude : '0'}
-                  />
-                  {/* </LazyLoad> */}
+                  <LazyLoad offset={150}>
+                    <PlacesAroundList
+                      latitude={room ? room.latitude : '0'}
+                      longitude={room ? room.longitude : '0'}
+                    />
+                  </LazyLoad>
+                </div>
+                <div className={classes.rowMargin}>
+                  <LazyLoad offset={150}>
+                    <HereMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+                  </LazyLoad>
                 </div>
               </Grid>
             </Grid>
