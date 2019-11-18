@@ -179,6 +179,10 @@ const PlacesAroundList: FC<IProps> = (props) => {
             <AntTab label={t('room:entertainment')} {...a11yProps(3)} />
             <AntTab label={t('room:medical')} {...a11yProps(4)} />
             <AntTab label={t('room:building')} {...a11yProps(5)} />
+            <AntTab label={t('room:coffeeTea')} {...a11yProps(6)} />
+            <AntTab label={t('room:transport')} {...a11yProps(7)} />
+            <AntTab label={t('room:petrolStation')} {...a11yProps(8)} />
+            <AntTab label={t('room:atmBankExchange')} {...a11yProps(9)} />
           </AntTabs>
           <TabPanel value={value} index={0}>
             <ItemAroundList itemList={nearby[0]} />

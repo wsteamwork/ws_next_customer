@@ -62,7 +62,11 @@
     "restaurant": "Restaurant",
     "shopping": "Shopping",
     "entertainment": "Entertainment",
-    "medical": "Medical center",
-    "building": "Office building"
+    "medical": "Medical Center",
+    "building": "Office Building",
+    "coffeeTea": "Coffee Shop",
+    "transport": "Transportation",
+    "petrolStation": "Petrol Station",
+    "atmBankExchange": "Bank and ATM"
 
 }

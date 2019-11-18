@@ -244,57 +244,77 @@ export const hoursList = [
 ];
 
 export const statusBookingList = [
-    {
-      id: 0,
-      name: 'Tất cả',
-    },
-    {
-      id: 1,
-      name: 'Đơn mới',
-    },
-    {
-      id: 2,
-      name: 'Xác nhận',
-    },
-    {
-      id: 4,
-      name: 'Hoàn thành',
-    },
-    {
-      id: 5,
-      name: 'Đã hủy',
-    },
+  {
+    id: 0,
+    name: 'Tất cả'
+  },
+  {
+    id: 1,
+    name: 'Đơn mới'
+  },
+  {
+    id: 2,
+    name: 'Xác nhận'
+  },
+  {
+    id: 4,
+    name: 'Hoàn thành'
+  },
+  {
+    id: 5,
+    name: 'Đã hủy'
+  }
 ];
 
 export const placeNearTypeList = [
-    {
-      id: 1,
-      name: 'natural-geographical',
-      size: 6,
-    },
-    {
-      id: 2,
-      name: 'restaurant',
-      size: 5,
-    },
-    {
-      id: 3,
-      name: 'shopping',
-      size: 5,
-    },
-    {
-      id: 4,
-      name: 'sights-museums',
-      size: 6,
-    },
-    {
-      id: 5,
-      name: 'hospital-health-care-facility',
-      size: 3,
-    },
-    {
-      id: 6,
-      name: 'administrative-areas-buildings',
-      size: 4,
-    },
+  {
+    id: 1,
+    name: 'natural-geographical',
+    size: 7
+  },
+  {
+    id: 2,
+    name: 'restaurant',
+    size: 8
+  },
+  {
+    id: 3,
+    name: 'shopping',
+    size: 10
+  },
+  {
+    id: 4,
+    name: 'sights-museums',
+    size: 6
+  },
+  {
+    id: 5,
+    name: 'hospital-health-care-facility',
+    size: 10
+  },
+  {
+    id: 6,
+    name: 'administrative-areas-buildings',
+    size: 7
+  },
+  {
+    id: 7,
+    name: 'coffee-tea',
+    size: 8
+  },
+  {
+    id: 8,
+    name: 'transport',
+    size: 8
+  },
+  {
+    id: 9,
+    name: 'petrol-station',
+    size: 3
+  },
+  {
+    id: 10,
+    name: 'atm-bank-exchange',
+    size: 3
+  }
 ];

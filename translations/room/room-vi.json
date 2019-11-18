@@ -63,5 +63,9 @@
     "shopping": "Mua sắm",
     "entertainment": "Giải trí",
     "medical": "Y tế",
-    "building": "Toà nhà văn phòng"
+    "building": "Toà nhà văn phòng",
+    "coffeeTea": "Tiệm cafe",
+    "transport": "Phương tiện công cộng",
+    "petrolStation": "Trạm xăng",
+    "atmBankExchange": "ATM & Ngân hàng"
 }
