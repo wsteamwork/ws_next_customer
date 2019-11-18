@@ -3,18 +3,14 @@
 @import '~@fullcalendar/timegrid/main.css';
 
 .fc-view-container{
-  margin: auto;
   overflow: hidden;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background: #fff;
+  margin: 24px 0 32px;
 
   .fc-head-container{
     border:none;
-  }
-
-  @media (max-width: 959px) {
-    margin: 24px 0 32px;
   }
 }
 
@@ -47,4 +43,8 @@
   @media (max-width: 599px) {
     font-size: 12px;
   }
+}
+
+.fc-content-skeleton td{
+  cursor: pointer;
 }
