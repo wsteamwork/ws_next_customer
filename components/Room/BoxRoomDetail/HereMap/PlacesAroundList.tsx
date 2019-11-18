@@ -173,7 +173,7 @@ const PlacesAroundList: FC<IProps> = (props) => {
             onChange={handleChange}
             aria-label="Vertical tabs example"
             className={classes.tabs}>
-            <AntTab label={t('room:neutralGeographic')} {...a11yProps(0)} />
+            <AntTab label={t('room:naturalTraction')} {...a11yProps(0)} />
             <AntTab label={t('room:restaurant')} {...a11yProps(1)} />
             <AntTab label={t('room:shopping')} {...a11yProps(2)} />
             <AntTab label={t('room:entertainment')} {...a11yProps(3)} />
