@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontSize: 16,
       lineHeight: '22px',
       letterSpacing: 'normal',
-      fontWeight: 600,
+      fontWeight: 500,
       display: 'block',
       position: 'relative',
       textDecoration: 'none'
@@ -50,13 +50,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontSize: 16,
       lineHeight: '22px',
       letterSpacing: 'normal',
-      fontWeight: 600,
+      fontWeight: 500,
       display: 'block',
       position: 'relative',
       textDecoration: 'none'
     },
     hotline: {
-      fontWeight: 800
+      fontWeight: 500
     },
     becomeHost: {
       textAlign: 'center',
@@ -64,7 +64,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: ' #FFFFFF',
       background: 'linear-gradient(to right, #FFC54D, #FFA712)',
       boxShadow: 'none',
-      fontWeight: 800,
+      fontWeight: 500,
       borderRadius: '100px !important'
     }
   })
@@ -91,19 +91,9 @@ const SideDrawer: FC<IProps> = (props) => {
             classes={{
               gutters: classes.listItemGutters
             }}
-            component="a"
-            href="https://merchant.westay.vn"
-            button
-            onClick={() => setOpen(false)}>
-            <ListItemText
-              primary={t('home:becomeAHost')}
-              classes={{
-                primary: classes.becomeHost,
-                root: classes.listItem
-              }}
-            />
+            button>
+            <SwitchLanguage />
           </ListItem>
-
           {/* <ListItem button {...to("/")} onClick={() => setOpen(false)}>
           <ListItemIcon>
             <Home />
@@ -126,6 +116,9 @@ const SideDrawer: FC<IProps> = (props) => {
                 href="/"
                 button
                 onClick={() => setOpen(false)}>
+                {/* <ListItemIcon>
+                  <Home />
+                </ListItemIcon> */}
                 <ListItemText
                   primary={t('home:home')}
                   classes={{
@@ -150,6 +143,34 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                 />
               </ListItem>
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}
+                button
+                onClick={() => {
+                  router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth/signin'}`);
+                }}>
+                <ListItemText
+                  primary={t('home:becomeAHost')}
+                  classes={{
+                    primary: classes.text,
+                    // root: classes.listItem
+                  }}
+                />
+              </ListItem>
+              <ListItem
+                classes={{
+                  gutters: classes.listItemGutters
+                }}>
+                <ListItemText
+                  primary={t('home:logout')}
+                  onClick={logoutTrigger}
+                  classes={{
+                    primary: classes.signOut
+                  }}
+                />
+              </ListItem>
             </Fragment>
           ) : (
               <Fragment>
@@ -161,9 +182,6 @@ const SideDrawer: FC<IProps> = (props) => {
                   onClick={() => {
                     router.push('/auth/signin');
                   }}>
-                  {/* <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon> */}
                   <ListItemText
                     primary={t('home:signIn')}
                     classes={{
@@ -179,13 +197,26 @@ const SideDrawer: FC<IProps> = (props) => {
                   onClick={() => {
                     router.push('/auth/signup');
                   }}>
-                  {/* <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon> */}
                   <ListItemText
                     primary={t('home:signUp')}
                     classes={{
                       primary: classes.text
+                    }}
+                  />
+                </ListItem>
+                <ListItem
+                  classes={{
+                    gutters: classes.listItemGutters
+                  }}
+                  button
+                  onClick={() => {
+                    router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth/signin'}`);
+                  }}>
+                  <ListItemText
+                    primary={t('home:becomeAHost')}
+                    classes={{
+                      primary: classes.text,
+                      // root: classes.listItem
                     }}
                   />
                 </ListItem>
@@ -195,14 +226,8 @@ const SideDrawer: FC<IProps> = (props) => {
         </div>
 
         <div className="bottom">
-          <ListItem
-            classes={{
-              gutters: classes.listItemGutters
-            }}
-            button>
-            <SwitchLanguage />
-          </ListItem>
-          <ListItem
+
+          {/* <ListItem
             button
             onClick={() => setOpen(false)}
             component="a"
@@ -216,7 +241,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 primary: classes.text
               }}
             />
-          </ListItem>
+          </ListItem> */}
 
           <ListItem
             button
@@ -244,7 +269,9 @@ const SideDrawer: FC<IProps> = (props) => {
               primary={
                 <span>
                   Hotline <br />
-                  <span className={classes.hotline}>0916 374 057 - 0946 746 417</span>
+                  <span className={classes.hotline}>0916 374 057</span>
+                  <br />
+                  <span className={classes.hotline}>0946 746 417</span>
                 </span>
               }
               classes={{
@@ -268,23 +295,6 @@ const SideDrawer: FC<IProps> = (props) => {
               }}
             />
           </ListItem>
-
-          {isLogin ? (
-            <ListItem
-              classes={{
-                gutters: classes.listItemGutters
-              }}>
-              <ListItemText
-                primary={t('home:logout')}
-                onClick={logoutTrigger}
-                classes={{
-                  primary: classes.signOut
-                }}
-              />
-            </ListItem>
-          ) : (
-              ''
-            )}
         </div>
       </List>
     </Fragment>

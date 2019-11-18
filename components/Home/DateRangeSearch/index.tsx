@@ -17,6 +17,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { useTranslation } from 'react-i18next';
 
+interface IProps {
+  isDisablePastDay?: boolean;
+}
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
 type Language = 'vi' | 'en';
@@ -31,7 +34,8 @@ if (vi === 'vi') {
 
 type Field = 'startValue' | 'endValue';
 
-const DateRangeSearch: FC = () => {
+const DateRangeSearch: FC<IProps> = (props) => {
+  const { isDisablePastDay } = props;
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const startDate = useSelector<ReducersList, string | null>(
     (state) => state.searchFilter.startDate
@@ -82,7 +86,9 @@ const DateRangeSearch: FC = () => {
     //   return startValue.diff(moment(), 'days') <= -1;
     // }
     // return endValue.diff(startValue, 'days') <= 0;
-    return startValue.diff(moment(), 'days') <= -1;
+    if(isDisablePastDay) {
+      return startValue.diff(moment(), 'days') <= -1;
+    }
   };
 
   const calendarStart = (

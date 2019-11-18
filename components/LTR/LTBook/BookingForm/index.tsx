@@ -9,7 +9,8 @@ import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { WEBSITE_SRC } from '@/utils/store/global';
 import { Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
 import { SlideProps } from '@material-ui/core/Slide';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { withStyles } from '@material-ui/styles';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
 import React, { FC, forwardRef, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -82,7 +83,33 @@ const useValidata = () => {
   return FormValidationSchema;
 };
 
+const LTTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: '#673ab7',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#975cff',
+    },
+    '& label.MuiFormLabel-root': {
+      color: '#673ab7'
+    },
+    '& .MuiOutlinedInput-root': {
+      // '& fieldset': {
+      //   borderColor: 'red',
+      // },
+      '&:hover fieldset': {
+        borderColor: '#673ab7',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#673ab7',
+      },
+    },
+  },
+})(TextField);
+
 const BookingForm: FC = () => {
+
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   // const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
   //   (state) => state.ltBooking.LTBookingPriceCalculate
@@ -101,7 +128,7 @@ const BookingForm: FC = () => {
   //   setIsRequest(!isRequest);
   // };
 
-  const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+  const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const data: LTBookingCreateReq = {
       name: `${values.lastName} ${values.firstName}`,
       email: values.email,
@@ -125,7 +152,7 @@ const BookingForm: FC = () => {
     try {
       const res = await createLTBooking(data);
 
-      if (ltroom.instant_book === 0) {
+      if (ltroom && ltroom.instant_book === 0) {
         setOpenDialog(true);
       } else if (res) {
         // console.log(values.paymentMethod);
@@ -189,8 +216,10 @@ const BookingForm: FC = () => {
 
                   <Grid item xs={12} lg={6}>
                     <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
-                      <TextField
+                      <LTTextField
+                        margin="normal"
                         variant="outlined"
+                        autoFocus
                         id="firstName"
                         name="firstName"
                         label={t('book:bookingForm:firstName')}
@@ -205,7 +234,8 @@ const BookingForm: FC = () => {
 
                   <Grid item xs={12} lg={6}>
                     <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
-                      <TextField
+                      <LTTextField
+                        margin="normal"
                         variant="outlined"
                         id="lastName"
                         name="lastName"
@@ -221,7 +251,8 @@ const BookingForm: FC = () => {
 
                   <Grid item xs={12}>
                     <FormControl error={!!(errors.email && touched.email)} fullWidth>
-                      <TextField
+                      <LTTextField
+                        margin="normal"
                         variant="outlined"
                         id="email-booking"
                         name="email"
@@ -237,7 +268,8 @@ const BookingForm: FC = () => {
 
                   <Grid item xs={12} sm={6} md={6}>
                     <FormControl error={!!(errors.phone && touched!.phone)} fullWidth>
-                      <TextField
+                      <LTTextField
+                        margin="normal"
                         variant="outlined"
                         id="phone-number"
                         name="phone"
@@ -298,7 +330,8 @@ const BookingForm: FC = () => {
                         </Grid>
                         <Grid item xs={12}>
                           <FormControl error={!!(errors.guestName && touched.guestName)} fullWidth>
-                            <TextField
+                            <LTTextField
+                            style={{color: '#673ab7 !important'}}
                               variant="outlined"
                               id="guest-name"
                               name="guestName"
@@ -335,7 +368,9 @@ const BookingForm: FC = () => {
                     <Grid container spacing={3}>
                       <Grid item xs={12}>
                         <FormControl fullWidth>
-                          <TextField
+                          <LTTextField
+                            margin="normal"
+
                             variant="outlined"
                             id="additional-note"
                             name="additionalNote"
@@ -353,7 +388,7 @@ const BookingForm: FC = () => {
                     {/* </Collapse> */}
                   </Grid>
 
-                  {ltroom.instant_book === 1 && (
+                  {ltroom.instant_book && ltroom.instant_book === 1 ? (
                     <Grid item xs={12}>
                       <Grid container>
                         <Grid item>
@@ -370,7 +405,7 @@ const BookingForm: FC = () => {
                               onChange={handleChange}>
                               <FormControlLabel
                                 value="payment1"
-                                control={<Radio color="primary" />}
+                                control={<Radio style={{ color: '#673ab7' }} />}
                                 label={
                                   <p>
                                     {t('book:bookingForm:directTransfer')}{' '}
@@ -380,7 +415,7 @@ const BookingForm: FC = () => {
                               />
                               <FormControlLabel
                                 value="payment2"
-                                control={<Radio color="primary" />}
+                                control={<Radio style={{ color: '#673ab7' }} />}
                                 label={
                                   <p>
                                     {t('book:bookingForm:transferMoney')}{' '}
@@ -398,12 +433,13 @@ const BookingForm: FC = () => {
                         </Grid>
                       </Grid>
                     </Grid>
-                  )}
+                  ) : ''}
 
                   <Grid item xs={12}>
                     <Grid container justify="flex-end">
                       <Grid item>
                         <ButtonGlobal
+                          background="linear-gradient(to right, #667eea, #764ba2);"
                           variant="contained"
                           name="confirm-information"
                           size="large"

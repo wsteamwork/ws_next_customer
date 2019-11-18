@@ -44,7 +44,7 @@ const ImageCaption: FC<IProps> = (props) => {
     <Fragment>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
-          {avatar_image.images.length && (
+          {avatar_image.images && avatar_image.images.length && (
             <CardImageCaption
               label={t('details:images:labelAvatar')}
               // subLabel="Thêm chú thích cho ảnh đại diện"
@@ -55,7 +55,7 @@ const ImageCaption: FC<IProps> = (props) => {
           )}
         </Grid>
         <Grid item xs={12} sm={6}>
-          {cover_photo.images.length && (
+          {cover_photo.images && cover_photo.images.length && (
             <CardImageCaption
               label={t('details:images:labelCover')}
               // subLabel="Thêm chú thích cho ảnh bìa"
@@ -66,7 +66,7 @@ const ImageCaption: FC<IProps> = (props) => {
           )}
         </Grid>
       </Grid>
-      {livingrooms.images.length && (
+      {livingrooms.images && livingrooms.images.length && (
         <CardImageCaption
           label={t('details:images:labelLivingRooms')}
           // subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
@@ -77,7 +77,7 @@ const ImageCaption: FC<IProps> = (props) => {
       )}
       {countBedRoom &&
         _.times(countBedRoom, (i) =>
-          bedrooms[`bedroom_${i + 1}`].images.length ? (
+          bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
             <CardImageCaption
               key={i}
               label={`${t('details:images:labelBedRooms')} ${i + 1}`}
@@ -93,7 +93,7 @@ const ImageCaption: FC<IProps> = (props) => {
         )}
       {countBathRoom &&
         _.times(countBathRoom, (i) =>
-          bathrooms[`bathroom_${i + 1}`].images.length ? (
+          bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
             <CardImageCaption
               key={i}
               label={`${t('details:images:labelBathRooms')} ${i + 1}`}
@@ -107,7 +107,7 @@ const ImageCaption: FC<IProps> = (props) => {
               ''
             )
         )}
-      {kitchens.images.length && (
+      {kitchens.images && kitchens.images.length && (
         <CardImageCaption
           label={t('details:images:labelKitchens')}
           // subLabel="Thêm chú thích cho ảnh phòng bếp căn hộ"
@@ -116,7 +116,7 @@ const ImageCaption: FC<IProps> = (props) => {
           arrImage={kitchens.images}
         />
       )}
-      {furnitures.images.length && (
+      {furnitures.images && furnitures.images.length && (
         <CardImageCaption
           label={t('details:images:labelFurnitures')}
           // subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"
@@ -125,7 +125,7 @@ const ImageCaption: FC<IProps> = (props) => {
           arrImage={furnitures.images}
         />
       )}
-      {outdoors.images.length && (
+      {outdoors.images && outdoors.images.length && (
         <CardImageCaption
           label={t('details:images:labelOutdoors')}
           // subLabel="Thêm chú thích cho ảnh phòng khách căn hộ"

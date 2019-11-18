@@ -1,8 +1,10 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import { CustomCheckbox } from '@/components/Home/CheckboxList';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { FormControlLabel, FormGroup, Grid } from '@material-ui/core';
 import React, { Dispatch, FC, memo, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { useRoomTypeChecbox } from './context';
 
 interface IProps {
@@ -19,6 +21,7 @@ const ActionSelect: FC<IProps> = (props) => {
     dataClick,
     setDataClick
   );
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   return (
     <Grid className="roomType__actions">
@@ -49,9 +52,13 @@ const ActionSelect: FC<IProps> = (props) => {
           </ButtonGlobal>
         </Grid>
         <Grid item xs={6}>
-          <ButtonGlobal onClick={handleSubmit} height="35px" fontSize="14px" color="primary">
-            {t('home:chooseGuestRoom:apply')}
-          </ButtonGlobal>
+          {leaseTypeGlobal ?
+            <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal> :
+            <ButtonGlobal height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal>}
         </Grid>
       </Grid>
     </Grid>

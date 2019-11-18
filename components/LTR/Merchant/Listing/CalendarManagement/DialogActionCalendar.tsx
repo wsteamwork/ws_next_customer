@@ -76,7 +76,7 @@ const DialogActionCalendar: FC<IProps> = (props) => {
           <Typography>
             Bạn đang chọn ngày <b> {startDate} </b>
             {diffDay ? (
-              <span>đến ngay <b>{endDate}</b></span>
+              <span>đến ngày <b>{endDate}</b></span>
             ) : ''}
           </Typography>
         </DialogContent>

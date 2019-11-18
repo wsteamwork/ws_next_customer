@@ -1,8 +1,8 @@
-import Cookies from 'universal-cookie';
+import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { updateObject } from '@/store/Context/utility';
-import { Reducer, Dispatch } from 'redux';
+import { Dispatch, Reducer } from 'redux';
+import Cookies from 'universal-cookie';
 
 export type StepPricesState = {
   room_id: number;
@@ -83,7 +83,6 @@ export const getWeekdayPrice = async (
     dispatch({ type: 'setError', payload: true });
   }
 };
-
 
 export const handlePricesListing = async (room_id: number, tab: string, data: any) => {
   const cookies = new Cookies();

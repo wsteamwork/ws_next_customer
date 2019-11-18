@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Tippy, { TippyProps } from '@tippy.js/react';
 
-interface IProps extends TippyProps {}
+interface IProps extends TippyProps { }
 
 const CustomPopper: FC<IProps> = (props) => {
   return (

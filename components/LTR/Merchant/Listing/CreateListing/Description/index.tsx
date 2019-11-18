@@ -29,7 +29,7 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(15, t('details:name15Character'))
+      .min(10, t('details:name15Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))
@@ -80,15 +80,17 @@ const Description: FC<IProps> = (props) => {
   useEffect(() => {
     dispatch_detail({ type: 'setStep', payload: 'tab1' });
   }, []);
-
   useMemo(() => {
-    if (name.length < 10 || description.length < 50) {
-      dispatch_detail({ type: 'setDisableNext', payload: true });
-    }
-    else {
-      dispatch_detail({ type: 'setDisableNext', payload: false });
-    }
-  }, [name, description]);
+    dispatch_detail({ type: 'setDisableNext', payload: (name.length < 10) });
+  }, [name]);
+  // useMemo(() => {
+  //   if (name.length < 10 || description.length < 50) {
+  //     dispatch_detail({ type: 'setDisableNext', payload: true });
+  //   }
+  //   elseif {
+  //     dispatch_detail({ type: 'setDisableNext', payload: false });
+  //   }
+  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -131,24 +133,24 @@ const Description: FC<IProps> = (props) => {
                     sub_label={t('details:subName')}
                     value={values.name.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(values.name.length < 15 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name && errors.name)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
-                    show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
+                    show_error={!!(values.name.length < 10 && touched!.name && errors.name)}
                     error_message={errors.name ? errors.name : t('details:defaultError')}
                     rows={1}
                     rowsMax={1}
                     max_char={100}
                     multiline={true}
                     classMaxChar={
-                      !!(values.name.length < 15 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name && errors.name)
                         ? 'error_char'
                         : 'remain_char'
                     }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
+                        notchedOutline: !!(values.name.length < 10 && touched!.name && errors.name)
                           ? classes.notchedOutline
                           : ''
                       }
@@ -158,7 +160,7 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 14) {
+                      if (e.currentTarget.value.length > 9) {
                         dispatchDescription({ type: 'setName' }, e.currentTarget.value);
                       }
                     }}
@@ -170,7 +172,8 @@ const Description: FC<IProps> = (props) => {
                     name="description"
                     label={t('details:listingDes')}
                     sub_label={t('details:subDes')}
-                    value={values.description.replace(/\s+/g, ' ')}
+                    // value={values.description.replace(/\s+/g, ' ')}
+                    value={values.description}
                     classTextField={
                       !!(values.description.length < 50 && touched!.description && errors.description)
                         ? 'textarea error_textarea'
@@ -214,7 +217,7 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 49) {
+                      if (e.currentTarget.value.length > 30) {
                         dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
                       }
                     }}

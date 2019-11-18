@@ -9,10 +9,11 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
+
 interface IProps {
   classes?: any,
   room?: LTRoomIndexRes,
-  usingInMap?:boolean;
+  usingInMap?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -26,6 +27,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
   const price = room.price_display ? `${formatMoney(room.price_display)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
+  // const price = room.price_display ? `${(room.price_display / 1000000)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
 
   return (
     <Paper elevation={0} className='ltRoomCardListing'>
@@ -47,7 +49,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                           classes={{ tooltip: 'tooltip' }}
                           title={room.instant_book_txt}
                           placement='top'>
-                          <QuickBookIcon color='primary' className='svgQuick' />
+                          <QuickBookIcon className='svgQuick' />
                         </Tooltip>
                       ) : ''}
                       {room.about_room.name}

@@ -1,3 +1,3 @@
-import { FormikHandlers, FormikState, FormikActions } from 'formik';
+import { FormikHandlers, FormikState, FormikHelpers } from 'formik';
 
-export interface FormikProps<V> extends FormikHandlers, FormikState<V>, FormikActions<V> {}
+export interface FormikProps<V> extends FormikHandlers, FormikState<V>, FormikHelpers<V> {}

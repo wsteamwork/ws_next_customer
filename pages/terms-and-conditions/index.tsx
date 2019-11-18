@@ -600,10 +600,10 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
             <p className="ql-align-justify">
               <span style={{ backgroundColor: 'transparent', color: 'rgb(0, 0, 0)' }}>Email: </span>
               <a
-                href="mailto:info@westay.org"
+                href="mailto:info@westay.vn"
                 target="_blank"
                 style={{ backgroundColor: 'transparent', color: 'rgb(17, 85, 204)' }}>
-                info@westay.org
+                info@westay.vn
               </a>
             </p>
             <p className="ql-align-justify">
@@ -737,7 +737,7 @@ const TermsOfConditions: NextPage<IProps> = (props: IProps) => {
             </p>
             <p className="ql-align-justify">
               <span style={{ backgroundColor: 'transparent', color: 'rgb(0, 0, 0)' }}>
-                Email: info@westay.org
+                Email: info@westay.vn
               </span>
             </p>
             <p className="ql-align-justify">

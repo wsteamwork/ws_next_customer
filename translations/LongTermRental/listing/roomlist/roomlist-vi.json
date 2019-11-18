@@ -2,6 +2,7 @@
     "titleName": "Danh sách phòng",
     "contentNotFound": "Danh sách phòng hiện tại chưa hiển thị, vui lòng đợi trong giây lát",
     "tooltipUpdateRoom": "Cập nhật phòng",
+    "tooltipUpdateRoomLongTerm": "Bổ sung thông tin dài hạn",
     "tooltipPreviewRoom": "Xem trước phòng",
     "noNameRoom": "Chưa có tên căn hộ",
     "numberGuest": "khách",
@@ -17,6 +18,8 @@
     "locked": "Đang khóa",
     "byMonth": "Theo tháng",
     "rentType": "Loại đặt phòng",
-    "policy": "Chính sách hủy"
+    "policy": "Chính sách hủy",
+    "leaseTypeLongTerm": "Thuê dài hạn",
+    "leaseTypeShortTerm": "Homestay"
 
 }

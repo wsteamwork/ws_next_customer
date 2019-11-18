@@ -5,7 +5,8 @@ import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/L
 import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
-import { Button, Dialog, Divider, Grid, Hidden, IconButton, Typography } from '@material-ui/core';
+import { Dialog, Divider, Grid, Hidden, IconButton, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import moment from 'moment';
 import Router from 'next/router';
@@ -13,8 +14,9 @@ import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
 import { Cookies, withCookies } from 'react-cookie';
 import { FocusedInputShape } from 'react-dates';
 import 'react-dates/initialize';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import DateRangeVertical from './DateRangeVertical';
+import DateRangeVerticalLT from './DateRangeVerticalLT';
 
 interface Iprops {
   handleCloseBookingDialog: () => void;
@@ -28,7 +30,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
     LTBookingReducerState
   >((state) => state.ltBooking);
   const isLogin = !!cookies.get('_token');
-
+  const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<LTBookingAction>>();
   const [date, setDate] = useState<DateRange>({
     startDate: moment(),
@@ -84,7 +86,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
       <Grid
         style={{
           zIndex: 102,
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           width: 100,
           padding: '0 40px'
@@ -115,16 +117,16 @@ const BookingCalendar: FC<Iprops> = (props) => {
               : 'Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay'}
 
             <Grid className="box-button-clear-dates">
-              <button onClick={onClearDates} className="button-clear-dates">
+              <Button onClick={onClearDates} variant="outlined" className="button-clear-dates">
                 Chọn lại ngày
-              </button>
+              </Button>
             </Grid>
           </Grid>
         </Grid>
         <Grid className="booking-calendar__box-main">
           <Grid container className="box-main__wrapper">
-            <Grid item xs={12} lg={7} className="calendar-picker">
-              <DateRangeVertical
+            <Grid item xs={12} lg={7} xl={6} className="calendar-picker">
+              <DateRangeVerticalLT
                 focusedInput={focusedInput}
                 setFocusedInput={setFocusedInput}
                 date={date}
@@ -133,22 +135,21 @@ const BookingCalendar: FC<Iprops> = (props) => {
               />
             </Grid>
 
-            <Grid item xs={12} lg={5} className="box-price">
+            <Grid item xs={12} lg={5} xl={6} className="box-price">
               <QuantityButtons
                 number={guest}
                 setNumber={setGuest}
                 title={'Khách'}></QuantityButtons>
               <Hidden lgUp>
-                <Grid className="mobile-box-price">
-                  <Grid className="mobile-price-show">
+                <Grid container spacing={2} className="mobile-box-price">
+                  <Grid item xs className="mobile-price-show">
                     {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                       <Fragment>
-                        <Typography>
-                          <b>${formatMoney(LTBookingPriceCalculate.price_with_fee)}đ</b> cho{' '}
+                        <Typography className="price">
+                          {formatMoney(LTBookingPriceCalculate.price_with_fee)}đ/
                           {LTBookingPriceCalculate.range_stay} ngày
                         </Typography>
-                        <Button onClick={handleOpenMobilePriceDetail}>Giá chi tiết</Button>
-
+                        <a onClick={handleOpenMobilePriceDetail}>Giá chi tiết</a>
                         <Dialog
                           fullScreen
                           open={openMobilePriceDetail}
@@ -202,23 +203,41 @@ const BookingCalendar: FC<Iprops> = (props) => {
                         </Dialog>
                       </Fragment>
                     ) : ltroom ? (
-                      <Fragment>
-                        <b>{formatMoney(ltroom.prices.prices[0].price)}đ</b>{' '}
-                        {ltroom.prices.prices[0].term}
+                        <Fragment>
+                          {/* <div>
+                            <Typography className={'price'}>
+                              {numeral(priceBasic).format('0,0')} {t('longtermroom:currency')}
+                            </Typography>
+                            <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
+                          </div> */}
+                          <Typography className="price">
+                            {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
+                          </Typography>
+                          <Typography variant="body2" style={{fontSize: '0.75rem'}}>{ltroom.prices.prices[0].term}</Typography>
                       </Fragment>
                     ) : (
                       ''
                     )}
                   </Grid>
-                  <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                    {isLogin ? 'Book' : 'Đăng nhập để book phòng'}
-                  </ButtonGlobal>
-                </Grid>
+                  <Grid item xs={isLogin ? 4 : 5} sm={3}>
+                    <ButtonGlobal
+                      background="linear-gradient(to right, #667eea, #764ba2);"
+                      padding="0px"
+                      width="100%"
+                      onClick={handleSubmit}
+                      disabled={!disableBooking}
+                      style={{color: '#fff'}}
+                      className="btBook">
+                      {isLogin ? 'Đặt phòng' : 'Đăng nhập'}
+                    </ButtonGlobal>
+                </Grid> 
+                </Grid> 
               </Hidden>
               <Hidden mdDown>
                 {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                   <Fragment>
                     <h3 className="price-title">Chi tiết giá</h3>
+                    <Grid item xs={11}>
                     <Grid className="box-price-sub">
                       <Grid className="price-subtitle">Giá gốc</Grid>
                       <Grid className="sub-price">
@@ -229,7 +248,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <Grid className="price-subtitle">Giá đặt cọc</Grid>
                       <Grid className="sub-price">{`${formatMoney(
                         LTBookingPriceCalculate.deposit
-                      )}đ`}</Grid>
+                        )}đ`}
+                      </Grid>
                     </Grid>
 
                     <Divider style={{ margin: ' 16px 0 28px' }} />
@@ -237,15 +257,17 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <h3 className="price-title">Tổng cộng</h3>
                       <Grid className="price-title">{`${formatMoney(
                         LTBookingPriceCalculate.price_with_fee
-                      )}đ`}</Grid>
+                        )}đ`}
+                      </Grid>
                     </Grid>
-                    <Divider style={{ margin: ' 0px 0 16px' }} />
+                      <Divider style={{ margin: ' 0px 0 16px' }} />
+                    </Grid>
                   </Fragment>
                 ) : (
                   ''
                 )}
-                <ButtonGlobal onClick={handleSubmit} disabled={!disableBooking}>
-                  {isLogin ? 'Book' : 'Đăng nhập để tiếp tục'}
+                <ButtonGlobal style={{ color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit} disabled={!disableBooking}>
+                  {isLogin ? 'Đặt phòng' : 'Đăng nhập để tiếp tục'}
                 </ButtonGlobal>
               </Hidden>
             </Grid>

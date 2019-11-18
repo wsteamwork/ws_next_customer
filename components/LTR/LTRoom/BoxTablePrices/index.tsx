@@ -57,7 +57,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
         <Typography variant='subtitle2' className={classes.subName}>
           {t('longtermroom:priceIncludedFee')} : {
             included_services.map((value, index) => (
-              <span>{value}{included_services.length !== (index + 1) ? ', ' : ''} </span>
+              <span key={index}>{value}{included_services.length !== (index + 1) ? ', ' : ''} </span>
             ))
           }
         </Typography>
@@ -74,21 +74,21 @@ const BoxTablePrices: FC<IProps> = (props) => {
           <TableBody>
             {prices && prices.length ? (
               prices.map((o, i) => (
-                  <StyledTableRow key={i}>
-                    <StyledTableCell component="th" scope="row">
-                      {o.term}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
-                  </StyledTableRow>
-                ))
+                <StyledTableRow key={i}>
+                  <StyledTableCell component="th" scope="row">
+                    {o.term}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
+                </StyledTableRow>
+              ))
             ) : (
-              <StyledTableRow>
-                <StyledTableCell component="th" scope="row">
-                  {t('longtermroom:notFoundData')}
-                </StyledTableCell>
-                <StyledTableCell align="right">0</StyledTableCell>
-              </StyledTableRow>
-            )}
+                <StyledTableRow>
+                  <StyledTableCell component="th" scope="row">
+                    {t('longtermroom:notFoundData')}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">0</StyledTableCell>
+                </StyledTableRow>
+              )}
           </TableBody>
 
           {included_services && included_services.length ? (
@@ -107,7 +107,17 @@ const BoxTablePrices: FC<IProps> = (props) => {
                         <StyledTableCell component="th" scope="row">
                           {o.name}
                         </StyledTableCell>
-                        <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell>
+                        <StyledTableCell align="right">{`${t('longtermroom:feeIncluded')}`}</StyledTableCell>
+                        {/* <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell> */}
+                      </StyledTableRow>
+                    )
+                  } else {
+                    return (
+                      <StyledTableRow key={i}>
+                        <StyledTableCell component="th" scope="row">
+                          {o.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">{o.calculate_function == 3 || o.calculate_function == 6 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</StyledTableCell>
                       </StyledTableRow>
                     )
                   }

@@ -84,7 +84,7 @@ export const useFilterRoom = (
 
   useEffect(() => {
     getDataFilter(setData, city_id);
-  }, []);
+  }, [city_id]);
 
   useEffect(() => {
     if (!!queryDistricts) {

@@ -1,33 +1,20 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { getDataImages, ImageReducerAction, ImageReducerState } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { Button, Dialog, Theme, useMediaQuery, useTheme, withStyles } from '@material-ui/core';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, {
-  FC,
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-  SyntheticEvent,
-  useMemo,
-  MouseEvent
-} from 'react';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import _ from 'lodash';
+import React, { FC, Fragment, MouseEvent, SyntheticEvent, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  ImageReducerAction,
-  getDataImages,
-  ImageReducerState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { ReducersList } from '@/store/Redux/Reducers';
-import UppyImage from '../../CreateListing/UploadImage/UppyImage';
-import { useTranslation } from 'react-i18next';
 import CardImageCaption from '../../CreateListing/UploadImage/CardImageCaption';
-import _ from 'lodash';
-import { Button, Theme, Dialog, useMediaQuery, useTheme, withStyles } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-interface IProps {}
+import UppyImage from '../../CreateListing/UploadImage/UppyImage';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -99,7 +86,7 @@ const UpdateBedRoomImage: FC<IProps> = (props) => {
   const UpdateBedImage: any = () => {
     const res = handleUpdateListing(room_id, {
       images: {
-        bedrooms: bedrooms 
+        bedrooms: bedrooms
       }
     });
     if (res) {
@@ -120,81 +107,82 @@ const UpdateBedRoomImage: FC<IProps> = (props) => {
   };
 
   return (
-      <Fragment>
-        <CardWrapperUpdate
-          handleSave={UpdateBedImage}
-          openSnack={openSnack}
-          messageSnack={messageSnack}
-          statusSnack={statusSnack}
-          handleCloseSnack={handleCloseSnack}>
-          {number_bedroom ? (
-            <Fragment>
-              <Grid container justify="center" alignContent="center">
-                {_.times(number_bedroom, (i) =>
-                  bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images.length ? (
-                    <Grid item key={i} xs={12}>
-                      <Dialog
-                        open={openDialog === i + 1}
-                        onClose={handleClose}
-                        className={classes.dialog}
-                        fullScreen={fullScreen}
-                        aria-labelledby="responsive-dialog-title">
-                        <DialogContent dividers>
-                          <UppyImage
-                            label={`${t('details:images:labelBedRooms')} ${i + 1}`}
-                            subLabel={t('details:images:subLabelBedRooms')}
-                            type_txt={`bedroom_${i + 1}`}
-                            typeUpload={{ type: 'setBedRoomImage' }}
-                            typeImage={5}
-                            initImages={
-                              bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images
-                                ? bedrooms[`bedroom_${i + 1}`].images
-                                : []
-                            }
-                          />
-                          <Grid item xs={12} className={classes.wrapperBtn}>
-                            <Button
-                              onClick={handleClose}
-                              variant="contained"
-                              size="small"
-                              color="primary"
-                              className={classes.buttonClose}>
-                              Đóng
-                            </Button>
-                          </Grid>
-                        </DialogContent>
-                      </Dialog>
-                      <Grid item xs={12} sm={12} className={classes.wrapperBtn}>
-                        <Button
-                          onClick={() => handleClick(i + 1)}
-                          size="small"
-                          variant="outlined"
-                          color="primary"
-                          className={classes.button}>
-                          Thêm ảnh
-                        </Button>
-                        <CardImageCaption
-                          key={i}
+    <Fragment>
+      <CardWrapperUpdate
+        handleSave={UpdateBedImage}
+        openSnack={openSnack}
+        messageSnack={messageSnack}
+        statusSnack={statusSnack}
+        handleCloseSnack={handleCloseSnack}>
+        {number_bedroom ? (
+          <Fragment>
+            <Grid container justify="center" alignContent="center">
+              {_.times(number_bedroom, (i) =>
+                bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images.length ? (
+                  <Grid item key={i} xs={12}>
+                    <Dialog
+                      open={openDialog === i + 1}
+                      onClose={handleClose}
+                      className={classes.dialog}
+                      fullScreen={fullScreen}
+                      aria-labelledby="responsive-dialog-title">
+                      <DialogContent dividers>
+                        <UppyImage
+                          label={`${t('details:images:labelBedRooms')} ${i + 1}`}
+                          subLabel={t('details:images:subLabelBedRooms')}
                           type_txt={`bedroom_${i + 1}`}
                           typeUpload={{ type: 'setBedRoomImage' }}
                           typeImage={5}
-                          label={`${t('details:images:labelBedRooms')} ${i + 1}`}
-                          subLabel={`Thêm chú thích cho ảnh`}
-                          arrImage={bedrooms[`bedroom_${i + 1}`].images}
+                          initImages={
+                            bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images
+                              ? bedrooms[`bedroom_${i + 1}`].images
+                              : []
+                          }
                         />
-                      </Grid>
+                        <Grid item xs={12} className={classes.wrapperBtn}>
+                          <Button
+                            onClick={handleClose}
+                            variant="contained"
+                            size="small"
+                            color="primary"
+                            className={classes.buttonClose}>
+                            Đóng
+                            </Button>
+                        </Grid>
+                      </DialogContent>
+                    </Dialog>
+                    <Grid item xs={12} sm={12} className={classes.wrapperBtn}>
+                      <Button
+                        onClick={() => handleClick(i + 1)}
+                        size="small"
+                        variant="outlined"
+                        color="primary"
+                        className={classes.button}>
+                        Thêm ảnh
+                      </Button>
+                      <CardImageCaption
+                        onUpdateImage={true}
+                        key={i}
+                        type_txt={`bedroom_${i + 1}`}
+                        typeUpload={{ type: 'setBedRoomImage' }}
+                        typeImage={5}
+                        label={`${t('details:images:labelBedRooms')} ${i + 1}`}
+                        subLabel={`Thêm chú thích cho ảnh`}
+                        arrImage={bedrooms[`bedroom_${i + 1}`].images}
+                      />
                     </Grid>
-                  ) : (
+                  </Grid>
+                ) : (
                     ''
                   )
-                )}
-              </Grid>
-            </Fragment>
-          ) : (
+              )}
+            </Grid>
+          </Fragment>
+        ) : (
             ''
           )}
-        </CardWrapperUpdate>
-      </Fragment>
+      </CardWrapperUpdate>
+    </Fragment>
   );
 };
 

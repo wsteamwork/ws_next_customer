@@ -50,7 +50,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
       overflow: 'hidden',
-      color: '#767676'
+      color: '#484848'
     },
     status: {
       fontWeight: 700,

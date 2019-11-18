@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useContext, useState, useEffect } from 'react';
 import { Grid, FormControl, TextField, FormHelperText, Typography } from '@material-ui/core';
-import { Formik, FormikActions, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import ButtonGlobal from '@/components/ButtonGlobal';
@@ -72,7 +72,7 @@ const FormSignup: FC = () => {
     }
   }, [cookies]);
 
-  const handleSubmitForm = async (values: MyFormValues, actions: FormikActions<MyFormValues>) => {
+  const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const body: RegisterReq = {
       name: `${values.firstName} ${values.lastName}`,
       gender: 1,

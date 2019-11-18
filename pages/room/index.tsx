@@ -14,6 +14,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomDetailsContext, RoomDetailsReducer, RoomDetailsStateInit } from '@/store/Context/Room/RoomDetailContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getDataRoom } from '@/store/Redux/Reducers/Room/roomReducer';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 // import { useVisitedRoom } from '@/utils/shared/useVisitedRoom';
@@ -21,14 +22,27 @@ import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useReducer } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+// // import LazyLoad, { forceCheck } from 'react-lazyload';
 
 const Room: NextPage = () => {
+  // forceCheck();
   const [state, dispatch] = useReducer(RoomDetailsReducer, RoomDetailsStateInit);
   const { router } = useContext(GlobalContext);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.roomPage.error);
   // const [] = useVisitedRoom();
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+  // const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  if (router.pathname.includes('/room')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 0,
+      leaseTypePathName: !router.pathname.includes('/room') ? '/long-term-room' : '/room'
+    });
+  }
 
   useEffect(() => {
     if (error || !room.status) router.push('/not-found-resource');
@@ -75,11 +89,15 @@ const Room: NextPage = () => {
                 {/* <Hidden mdDown implementation="css">
                   <BoxSearch />
                 </Hidden> */}
-
+                {/* <LazyLoad> */}
                 <BoxImage />
+                {/* </LazyLoad> */}
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
+                    {/* <LazyLoad> */}
                     <BoxRoomDetail room={room} />
+                    {/* </LazyLoad> */}
+
                   </Grid>
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">

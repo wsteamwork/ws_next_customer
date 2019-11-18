@@ -1,7 +1,12 @@
 import { updateObject } from '@/store/Context/utility';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { Reducer } from 'redux';
+import _ from 'lodash';
+import { ParsedUrlQuery } from 'querystring';
+import { Dispatch, Reducer } from 'redux';
+import { getLTRoom } from '../../LTRoom/ltroomReducer';
+import Cookies from 'universal-cookie';
 
 interface Coordinate {
   lat: number;
@@ -24,9 +29,10 @@ export type CreateListingState = {
   readonly city_id: number;
   readonly district_id: number;
   readonly coordinate: Coordinate;
-  readonly listing: any;
+  readonly listing: LTRoomIndexRes;
   readonly id_listing: number;
   readonly disableSubmit: boolean;
+  readonly errorBasic: boolean;
 };
 
 export type CreateListingActions =
@@ -47,7 +53,8 @@ export type CreateListingActions =
   | { type: 'SET_COORDINATE'; payload: Coordinate }
   | { type: 'SET_LISTING'; payload: any }
   | { type: 'SET_ID_LISTING'; payload: number }
-  | { type: 'SET_DISABLE_SUBMIT'; payload: boolean };
+  | { type: 'SET_DISABLE_SUBMIT'; payload: boolean }
+  | { type: 'SET_ERROR_BASIC'; payload: boolean };
 
 const init: CreateListingState = {
   leaseType: 3,
@@ -67,7 +74,8 @@ const init: CreateListingState = {
   coordinate: null,
   listing: null,
   id_listing: 0,
-  disableSubmit: false
+  disableSubmit: false,
+  errorBasic: false
 };
 
 export const createListingReducer: Reducer<CreateListingState, CreateListingActions> = (
@@ -111,6 +119,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { id_listing: action.payload });
     case 'SET_DISABLE_SUBMIT':
       return updateObject<CreateListingState>(state, { disableSubmit: action.payload });
+    case 'SET_ERROR_BASIC':
+      return updateObject<CreateListingState>(state, { errorBasic: action.payload });
 
     default:
       return state;
@@ -127,9 +137,10 @@ export const handleCreateRoom = async (
   data: any,
   dispatch: any,
   uid: any,
-  token?: string,
   initLanguage: string = 'vi'
 ) => {
+  const cookies = new Cookies();
+  const token = cookies.get('_token');
   const headers = token && {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -168,7 +179,7 @@ export const handleCreateRoom = async (
     }
   };
 
-  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body);
+  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body, headers);
 
   dispatch({
     type: 'SET_LISTING',
@@ -176,4 +187,105 @@ export const handleCreateRoom = async (
   });
 
   return response;
+};
+
+export const handleUpdateStep1 = async (
+  data: any,
+  dispatch: any,
+  uid: any,
+  initLanguage: string = 'vi'
+) => {
+  const cookies = new Cookies();
+  const token = cookies.get('_token');
+  const headers = token && {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Accept-Language': initLanguage
+    }
+  };
+  // console.log(data);
+  const body = {
+    step1: {
+      tab1: {
+        lease_type: data.lease_type,
+        accommodation_type: data.accommodation_type,
+        stay_with_host: data.stay_with_host,
+        total_area: data.total_area
+      },
+      tab2: {
+        guest: {
+          recommendation: data.guest_recommendation,
+          max_additional_guest: data.max_guest
+        },
+        bedrooms: data.bedRooms
+      },
+      tab3: {
+        bathrooms: {
+          number_bathroom: data.number_bathroom
+        }
+      },
+      tab4: {
+        address: data.address,
+        building: data.building,
+        city_id: data.city_id,
+        district_id: data.district_id,
+        latitude: parseFloat(data.coordinate.lat),
+        longitude: parseFloat(data.coordinate.lng)
+      }
+    }
+  };
+
+  const response = await axios_merchant.post(`long-term/room/step1/${uid}`, body, headers);
+
+  dispatch({
+    type: 'SET_LISTING',
+    payload: response.data.data
+  });
+
+  return response;
+};
+
+export const countBedsNumberFromBedRoomList = (bedRoomsList: BedRoomReq) => {
+  let totalBedsNumberInList = 0;
+
+  _.times(bedRoomsList.number_bedroom, (i) => {
+    totalBedsNumberInList += bedRoomsList[`bedroom_${i + 1}`].number_bed;
+  });
+  return totalBedsNumberInList;
+};
+
+export const getDataLTCreateListingID = async (
+  dispatch: Dispatch<CreateListingActions>,
+  query: ParsedUrlQuery,
+  initLanguage: string = 'vi'
+): Promise<any> => {
+  const { id } = query;
+  try {
+    const res = await getLTRoom(id, initLanguage);
+    console.log(res);
+    dispatch({ type: 'SET_LISTING', payload: res });
+    dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: res.accommodation_type });
+    dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });
+    dispatch({ type: 'SET_STAY_WITH_HOST', payload: res.stay_with_host });
+    dispatch({ type: 'SET_GUEST_RECOMMENDATION', payload: res.guests.recommendation });
+    dispatch({ type: 'SET_MAX_GUEST', payload: res.guests.max_additional_guest });
+    dispatch({ type: 'SET_BEDROOMS_NUMBER', payload: res.bedrooms.number_bedroom });
+    dispatch({ type: 'SET_BEDS_NUMBER', payload: countBedsNumberFromBedRoomList(res.bedrooms) });
+    dispatch({ type: 'SET_BEDROOMS', payload: res.bedrooms });
+    dispatch({ type: 'SET_BATHROOM_NUMBER', payload: res.bathrooms.number_bathroom });
+    dispatch({ type: 'SET_ADDRESS', payload: res.address });
+
+    dispatch({ type: 'SET_BUILDING', payload: res.building });
+    dispatch({ type: 'SET_CITY_ID', payload: res.city_id });
+    dispatch({ type: 'SET_DISTRICT_ID', payload: res.district_id });
+    dispatch({
+      type: 'SET_COORDINATE',
+      payload: { lat: parseFloat(res.latitude), lng: parseFloat(res.longitude) }
+    });
+
+    dispatch({ type: 'SET_ERROR_BASIC', payload: false });
+    return res;
+  } catch (error) {
+    dispatch({ type: 'SET_ERROR_BASIC', payload: true });
+  }
 };

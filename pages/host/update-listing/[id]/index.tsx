@@ -46,18 +46,6 @@ const AntTab = withStyles((theme: Theme) =>
       padding: 0,
       fontWeight: theme.typography.fontWeightBold,
       marginRight: theme.spacing(6),
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
       fontSize: 16,
       '&:hover': {
         color: '#40a9ff',
@@ -149,6 +137,10 @@ const UpdateListing: FC<IProps> = (props) => {
         localStorage.setItem('currentRoom', String(id));
         setValue(0);
       }
+    }
+    else {
+      localStorage.setItem('currentRoom', String(id));
+      setValue(0);
     }
   }, []);
 

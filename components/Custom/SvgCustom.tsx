@@ -44,7 +44,7 @@ const styles: any = (theme: Theme) =>
     textSize: {
       fontSize: '0.6rem',
       fontWeight: 500,
-      color: '#767676'
+      color: '#484848'
     }
   });
 

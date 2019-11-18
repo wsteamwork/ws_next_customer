@@ -24,6 +24,7 @@ const ActionChoose: FC<IProps> = (props) => {
   const numberRoom = useSelector<ReducersList, number>((state) => state.searchFilter.roomsCount);
   const [guest, setGuest] = useState(numberGuest);
   const [room, setRoom] = useState(numberRoom);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   useEffect(() => {
     !open && handleClose();
@@ -35,7 +36,7 @@ const ActionChoose: FC<IProps> = (props) => {
     setRoom(numberRoom);
   };
 
-  const hanleSubmit = () => {
+  const handleSubmit = () => {
     setOpen(false);
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: room });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: guest });
@@ -66,9 +67,13 @@ const ActionChoose: FC<IProps> = (props) => {
           </ButtonGlobal>
         </Grid>
         <Grid item xs={6}>
-          <ButtonGlobal height="35px" fontSize="14px" color="primary" onClick={hanleSubmit}>
-            {t('home:chooseGuestRoom:apply')}
-          </ButtonGlobal>
+          {leaseTypeGlobal ?
+            <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal> :
+            <ButtonGlobal height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+              {t('home:chooseGuestRoom:apply')}
+            </ButtonGlobal>}
         </Grid>
       </Grid>
     </Grid>

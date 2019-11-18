@@ -5,18 +5,18 @@ import MetroGridImage from '@/components/Layout/MetroGridImage';
 import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
 import RoomCard from '@/components/RoomCard';
-// import HostBecome from '@/components/Shared/HostBecome';
 import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
-import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
-import { getCookieFromReq } from '@/utils/mixins';
-import { NextPage } from 'next';
-import React, { Fragment, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import LazyLoad, { forceCheck } from 'react-lazyload'
+import { getCookieFromReq } from '@/utils/mixins';
+import { Hidden } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment } from 'react';
+import { useTranslation } from 'react-i18next';
+import LazyLoad, { forceCheck } from 'react-lazyload';
+import { useSelector } from 'react-redux';
+
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
@@ -35,8 +35,7 @@ const Home: NextPage = () => {
     avg_rating={room.avg_rating}
     isHomepage={true} />;
   const { t } = useTranslation();
-  const { width } = useContext<IGlobalContext>(GlobalContext);
-  // console.log(width);
+  // const { width } = useContext<IGlobalContext>(GlobalContext);
   forceCheck();
   return (
     <Fragment>
@@ -52,15 +51,16 @@ const Home: NextPage = () => {
         <LazyLoad>
           <SearchHome />
         </LazyLoad>
-        {width === 'lg' || width === 'xl' || width === 'md' ? (
+        {/* {width === 'lg' || width === 'xl' || width === 'md' ? ( */}
+        <Hidden smDown implementation="css">
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            <LazyLoad>
+            <LazyLoad offset="150">
               <SliderTypeApartment />
             </LazyLoad>
-            <LazyLoad>
+            <LazyLoad offset="150">
               <MetroGridImage />
             </LazyLoad>
-            <LazyLoad>
+            <LazyLoad offset="150">
               <ListRoom
                 roomData={roomsHot}
                 usingSlider={true}
@@ -70,15 +70,17 @@ const Home: NextPage = () => {
 
             </LazyLoad>
           </GridContainer>
-        ) : ''}
+        </Hidden>
+        {/* ) : ''} */}
         {/* <HostBecome /> */}
 
         {/* <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
           <BlogContainer />
         </GridContainer> */}
       </GridContainer>
-
-      <FooterComponent />
+      <LazyLoad offset="150">
+        <FooterComponent />
+      </LazyLoad>
     </Fragment>
   );
 };

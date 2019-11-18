@@ -68,6 +68,7 @@ export interface LTBookingIndexRes {
   latest_move_in: string;
   latest_move_out: string;
   long_term_room_id: number;
+  deposit:number;
   note: string;
   coupon: string;
   price_and_contract: LTPriceAndContract[];
@@ -92,6 +93,11 @@ export interface LTBookingContracts {
   status: number;
   move_in: string;
   move_out: string;
+  status_txt: string;
+  next_payment_due: {
+    payment_due_date: string;
+    payment_amount: number;
+  };
   payment: {
     payment_term: NumberConstructor;
     payment_period: LTPaymentPeriod[];

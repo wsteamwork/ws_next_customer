@@ -4,7 +4,7 @@
   border-radius: 3px;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 3px 15px -2px rgba(132,135,138,0.2);
+  box-shadow: 0 3px 15px -2px rgba(132, 135, 138, 0.2);
 
   &:hover {
     background-color: $primary;
@@ -22,5 +22,10 @@
 
 .haveResult {
   background-color: $primary;
+  color: white;
+}
+
+.haveResultLT {
+  background-color: $primaryLT;
   color: white;
 }

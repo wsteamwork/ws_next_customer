@@ -38,41 +38,43 @@ const PriceLongTerm: FC<IProps> = (props) => {
     <Fragment>
       {listing ? (
         <CardWrapperItem title="Giá thuê dài hạn" onClick={openUpdate}>
-          <Grid item xs={12}>
-            <Grid item xs={12} className={classes.margin}>
-              <Typography variant="subtitle2" className={classes.name}>
-                Giá cơ bản: {numeral(listing.prices.prices.term_1_month).format('0,0')} vnđ/ tháng
+          {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b>Chưa cập nhật</b> : (
+            <Grid item xs={12}>
+              <Grid item xs={12} className={classes.margin}>
+                <Typography variant="subtitle2" className={classes.name}>
+                  Giá cơ bản: {numeral(listing.prices.prices.term_1_month).format('0,0')} vnđ/ tháng
               </Typography>
+              </Grid>
+              <Grid container className={classes.margin}>
+                <Grid item xs={12} sm={6} className={classes.marginXs}>
+                  Kì hạn 2 - 3 tháng:{' '}
+                  <span className={classes.name}>
+                    {numeral(listing.prices.prices.term_2_month).format('0,0')} vnđ
+                </span>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  Kì hạn 3 - 6 tháng:{' '}
+                  <span className={classes.name}>
+                    {numeral(listing.prices.prices.term_3_month).format('0,0')} vnđ
+                </span>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item xs={12} sm={6} className={classes.margin}>
+                  Kì hạn 6 - 12 tháng:{' '}
+                  <span className={classes.name}>
+                    {numeral(listing.prices.prices.term_6_month).format('0,0')} vnđ
+                </span>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  Kì hạn 1 năm trở lên:{' '}
+                  <span className={classes.name}>
+                    {numeral(listing.prices.prices.term_12_month).format('0,0')} vnđ
+                </span>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid container className={classes.margin}>
-              <Grid item xs={12} sm={6} className={classes.marginXs}>
-                Kì hạn 2 - 3 tháng:{' '}
-                <span className={classes.name}>
-                  {numeral(listing.prices.prices.term_2_month).format('0,0')} vnđ
-                </span>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                Kì hạn 3 - 6 tháng:{' '}
-                <span className={classes.name}>
-                  {numeral(listing.prices.prices.term_3_month).format('0,0')} vnđ
-                </span>
-              </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={12} sm={6} className={classes.margin}>
-                Kì hạn 6 - 12 tháng:{' '}
-                <span className={classes.name}>
-                  {numeral(listing.prices.prices.term_6_month).format('0,0')} vnđ
-                </span>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                Kì hạn 1 năm trở lên:{' '}
-                <span className={classes.name}>
-                  {numeral(listing.prices.prices.term_12_month).format('0,0')} vnđ
-                </span>
-              </Grid>
-            </Grid>
-          </Grid>
+          )}
         </CardWrapperItem>
       ) : (
           ''

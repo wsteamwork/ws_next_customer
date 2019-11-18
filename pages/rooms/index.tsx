@@ -7,15 +7,19 @@ import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchMobile from '@/components/Rooms/SearchMobile';
 import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Grid, Hidden } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useContext, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
+import { useDispatch } from 'react-redux';
 import { Sticky, StickyContainer } from 'react-sticky';
+import { Dispatch } from 'redux';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -27,10 +31,23 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Rooms: NextPage = (props) => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
+
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { isMapOpen } = state;
   const [hideSearchBar, setHideSearchBar] = useState<boolean>(false);
   const classes = useStyles(props);
+  const { router } = useContext(GlobalContext);
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+  // const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  if (router.pathname.includes('/rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 0,
+      leaseTypePathName: router.pathname.includes('/rooms') ? '/rooms' : '/long-term-rooms'
+    });
+  }
+
   return (
     <Fragment>
       <NextHead

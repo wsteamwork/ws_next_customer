@@ -36,7 +36,7 @@ const SliderTypeApartment: FC<Iprops> = (props: Iprops) => {
   );
 
   const SearchType = (idType: number) => {
-    updateRouter('/rooms',true, 'type_room', idType);
+    updateRouter('/rooms', true, 'type_room', idType);
   };
 
   const settings = {

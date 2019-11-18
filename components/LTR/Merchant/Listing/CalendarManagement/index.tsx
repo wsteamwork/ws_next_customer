@@ -1,23 +1,27 @@
-import React, { FC, useRef, useEffect, useMemo, useState } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Snackbar, Grid, Typography } from '@material-ui/core';
 import FullCalendarNoSSR from '@/components/FullCalendarNoSSR';
-import moment from 'moment';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
-import { axios_merchant } from '@/utils/axiosInstance';
-import { BlockCalendarReq, UnlockCalendarReq } from '@/types/Requests/Calendar/CalendarReq';
-import { ScheduleRes, BookingEvents } from '@/types/Requests/Calendar/CalendarRes';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import DialogActionCalendar from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import { BlockCalendarReq, UnlockCalendarReq } from '@/types/Requests/Calendar/CalendarReq';
+import { BookingEvents, ScheduleRes } from '@/types/Requests/Calendar/CalendarRes';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
+import { Grid, Snackbar, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import moment from 'moment';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import DialogBookingDetails from '@/components/Profile/BookingProfile/DialogBookingDetails';
+import DialogDetailBooking from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking';
+import LazyLoad from 'react-lazyload';
+import DialogDetailLTBooking from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking';
 
 interface IProps {
   classes?: any,
   idRoom: number
 }
 
-const useStyles = makeStyles<Theme, IProps>(() =>
+const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     blockDay: {
       // background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 1px,#f2f2f2 1px,#f2f2f2 50px)',
@@ -30,16 +34,16 @@ const useStyles = makeStyles<Theme, IProps>(() =>
     boxCalendar: {
       margin: '32px 0'
     },
-    boxSugguest:{
-      width:25,
-      height:25,
+    boxSugguest: {
+      width: 25,
+      height: 25,
       borderRadius: 4,
       display: 'inline-flex',
-      margin: 8,
+      margin: 8
     },
-    boxItem:{
-      display:'flex',
-      alignItems:'center'
+    boxItem: {
+      display: 'flex',
+      alignItems: 'center'
     }
   })
 );
@@ -53,42 +57,43 @@ const CalendarManagement: FC<IProps> = (props) => {
   const [period, setPeriod]             = useState<string[]>([]);
   const [openDialog, setOpenDialog]     = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [reload, setReload]             = useState(false);
+  const [openDialogDetail, setOpenDialogDetail] = useState(false);
+  const [openDialogLTDetail, setOpenDialogLTDetail] = useState(false);
+  const [idbooking, setIdbooking]       = useState<number>(null);
+  const [isLongterm, setIsLongterm]     = useState<boolean>(null);
+  const [isNewBooking, setIsNewBooking]     = useState<boolean>(null);
   const { t }                           = useTranslation();
   const today                           = moment().format(DEFAULT_DATE_FORMAT);
   const oneYearLater                    = moment(today).add(1.2, 'years').format(DEFAULT_DATE_FORMAT);
 
-  const putApiLock = (period: string[]) => {
+  const putApiLock = async (period: string[]) => {
     const data: BlockCalendarReq = {
       room_id: idRoom,
       room_time_blocks: [period]
     };
-    axios_merchant
+    await axios_merchant
       .put('rooms/update-block?option=room_time_blocks', data)
       .then(() => {
         setOpenSnackbar(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
       });
     setOpenDialog(false);
+    getDataBlock();
   };
 
-  const putApiUnlock = (period: string[]) => {
+  const putApiUnlock = async (period: string[]) => {
     const data: UnlockCalendarReq = {
       room_id: idRoom,
       unlock_days: [period]
     };
 
-    axios_merchant
+    await axios_merchant
       .put('rooms/update-block?option=unlock_days', data)
       .then(() => {
         setOpenSnackbar(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
       });
+    getDataBlock();
     setOpenDialog(false);
+
   };
 
   const getDataBlock = async (): Promise<ScheduleRes> => {
@@ -115,28 +120,25 @@ const CalendarManagement: FC<IProps> = (props) => {
   useEffect(() => {
     getDataBlock();
     getDataBooking();
-    setReload(true);
   }, []);
 
   useEffect(() => {
-  }, [reload,dataBooking, dataBlock]);
+  }, [dataBooking, dataBlock]);
 
   return (
     <div>
       <Grid container className = {classes.boxCalendar}>
-        <Grid item xs={12} className={classes.boxItem}>
-          <Typography variant='subtitle1'>* Chọn 1 ngày hoặc khoảng ngày bằng cách chọn hoặc kéo giữ trên lịch.</Typography>
-        </Grid>
-        <Grid item xs={6} sm={4} className={classes.boxItem}>
-          <div className={classes.boxSugguest} style={{backgroundColor:'#fb8c00'}}/>
+        <Grid item xs = {6} sm = {4} className = {classes.boxItem}>
+          <div className = {classes.boxSugguest} style = {{ backgroundColor: '#673ab7' }} />
           <span>Booking dài hạn</span>
         </Grid>
-        <Grid item xs={6} sm={4} className={classes.boxItem}>
-          <div className={classes.boxSugguest} style={{backgroundColor:'#00897b'}}/>
+        <Grid item xs = {6} sm = {4} className = {classes.boxItem}>
+          <div className = {classes.boxSugguest} style = {{ backgroundColor: '#FA991C' }} />
           <span>Booking ngắn hạn</span>
         </Grid>
-        <Grid item xs={6} sm={4} className={classes.boxItem}>
-          <div className={classes.boxSugguest} style={{background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 5px,#f2f2f2 5px,#f2f2f2 10px)'}}/>
+        <Grid item xs = {6} sm = {4} className = {classes.boxItem}>
+          <div className = {classes.boxSugguest}
+               style = {{ background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 5px,#f2f2f2 5px,#f2f2f2 10px)' }} />
           <span>Ngày đã khóa</span>
         </Grid>
       </Grid>
@@ -148,26 +150,24 @@ const CalendarManagement: FC<IProps> = (props) => {
                            selectable = {true}
                            selectAllow = {(info) => {
                              let temp = 0;
-                             if(dataBooking.length !== 0){
-                               dataBooking.map((dates:any)=>{
-                                 dates.events.map((day:BookingEvents)=>{
+                             if (dataBooking.length !== 0) {
+                               dataBooking.map((dates: any) => {
+                                 dates.events.map((day: BookingEvents) => {
                                    let startDayBooking = moment(day.start).format(DEFAULT_DATE_FORMAT);
-                                   let endDayBooking = moment(day.end).format(DEFAULT_DATE_FORMAT);
-                                   if(info.startStr >= startDayBooking && info.startStr < endDayBooking) {
+                                   let endDayBooking   = moment(day.end).format(DEFAULT_DATE_FORMAT);
+                                   if (info.startStr >= startDayBooking && info.startStr < endDayBooking) {
                                      temp++;
                                    }
-                                 })
+                                 });
                                });
                              }
                              return temp <= 0;
-                             //
-                             // if (info.startStr === '2019-11-20') return true;
-                             // return false;
                            }}
-                           selectOverlap={false}
+                           selectOverlap = {false}
                            eventSources = {
                              dataBooking
                            }
+                           eventRender={(x)=>{console.log(x)}}
                            validRange = {() => {
                              return {
                                start: today,
@@ -189,8 +189,21 @@ const CalendarManagement: FC<IProps> = (props) => {
                              ]);
                              setOpenDialog(true);
                            }}
+                           eventClick = {(x) => {
+                             if (x.event.extendedProps.long_term) {
+                               setIdbooking(x.event.extendedProps.booking_id);
+                               setIsLongterm(true);
+                               setOpenDialogLTDetail(true);
+                             }else {
+                               setIdbooking(x.event.id);
+                               setIsLongterm(false);
+                               setOpenDialogDetail(true);
+                             }
+                             setIsNewBooking(x.event.extendedProps.is_new_booking);
+                           }}
         />
       ), [dataBooking, dataBlock])}
+
       <DialogActionCalendar open = {openDialog}
                             handleClose = {() => {
                               setOpenDialog(false);
@@ -204,6 +217,24 @@ const CalendarManagement: FC<IProps> = (props) => {
                             startDate = {period[0]}
                             endDate = {period[1]}
       />
+      <LazyLoad>
+        <DialogDetailBooking open={openDialogDetail}
+                             handleClose={()=>setOpenDialogDetail(false)}
+                             idBooking={idbooking}
+                             isLongterm={isLongterm}
+                             isNewBooking={isNewBooking}
+        />
+      </LazyLoad>
+
+      <LazyLoad>
+        <DialogDetailLTBooking open={openDialogLTDetail}
+                             handleClose={()=>setOpenDialogLTDetail(false)}
+                             idBooking={idbooking}
+                             isLongterm={isLongterm}
+                             isNewBooking={isNewBooking}
+        />
+      </LazyLoad>
+
       <Snackbar
         anchorOrigin = {{
           vertical: 'bottom',

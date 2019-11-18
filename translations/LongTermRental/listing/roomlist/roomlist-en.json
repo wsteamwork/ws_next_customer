@@ -2,6 +2,7 @@
     "titleName": "Room List", 
     "contentNotFound": "The current room list is not displayed, please wait a moment", 
     "tooltipUpdateRoom": "Edit",
+    "tooltipUpdateRoomLongTerm": "Long Term Room Edit",
     "tooltipPreviewRoom": "Preview",
     "noNameRoom": "Name of accommodation not updated",
     "numberGuest": "guest(s)",
@@ -17,5 +18,7 @@
     "locked": "Locked",
     "byMonth": "Monthly",
     "rentType": "Instant book",
-    "policy": "Cancellation policy"
+    "policy": "Cancellation policy",
+    "leaseTypeLongTerm": "Long-term",
+    "leaseTypeShortTerm": "Homestay"
 }

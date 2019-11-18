@@ -2,9 +2,25 @@ import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Me
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { Grid, Breadcrumbs, Link, Typography, Theme, AppBar, Box, withStyles, Tabs, Tab } from '@material-ui/core';
+import {
+  Grid,
+  Breadcrumbs,
+  Link,
+  Typography,
+  Theme,
+  AppBar,
+  Box,
+  withStyles,
+  Tabs,
+  Tab
+} from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import ShortTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList';
+import LongTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/LongTermBookingList';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { useSelector, useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -31,18 +47,6 @@ const AntTab = withStyles((theme: Theme) =>
       padding: 0,
       fontWeight: theme.typography.fontWeightBold,
       marginRight: theme.spacing(6),
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"'
-      ].join(','),
       fontSize: 20,
       '&:hover': {
         color: '#40a9ff',
@@ -63,7 +67,7 @@ const AntTab = withStyles((theme: Theme) =>
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
 export const TabPanel = (props: TabPanelProps) => {
-    const { children, value, index, ...other } = props;
+  const { children, value, index, ...other } = props;
 
   return (
     <Typography
@@ -74,7 +78,9 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0} mt={3}>{children}</Box>
+      <Box p={0} mt={3}>
+        {children}
+      </Box>
     </Typography>
   );
 };
@@ -89,7 +95,7 @@ export const a11yProps = (index: any) => {
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
-        marginTop: 16
+      marginTop: 16
     },
     custom_link_bread: {
       color: '#1d8df7'
@@ -109,9 +115,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const BookingList: NextPage = (props) => {
   const classes = useStyles(props);
+  const dispatch = useDispatch<Dispatch<BookingListReducerAction>>();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    dispatch({ type: 'SET_CURRENT_TAB', payload: newValue });
   };
   return (
     <Fragment>
@@ -134,16 +142,16 @@ const BookingList: NextPage = (props) => {
                 aria-label="ant example"
                 variant="scrollable"
                 scrollButtons="off">
-                <AntTab label="Đặt phòng ngắn hạn" {...a11yProps(0)} />
-                <AntTab label="Đặt phòng dài hạn" {...a11yProps(1)} />
+                <AntTab label="Đặt phòng dài hạn" {...a11yProps(0)} />
+                <AntTab label="Đặt phòng ngắn hạn" {...a11yProps(1)} />
               </AntTabs>
               <Typography className={classes.padding} />
             </AppBar>
             <TabPanel value={value} index={0}>
-              <ShortTermBookingList />
+              <LongTermBookingList />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Dài hạn
+              <ShortTermBookingList />
             </TabPanel>
           </Grid>
         </Grid>

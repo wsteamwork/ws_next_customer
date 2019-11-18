@@ -2,12 +2,11 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { updateRouter } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
 import { cleanAccents } from '@/utils/mixins';
-import { Button, Grid, Hidden, Theme } from '@material-ui/core';
+import { Button, Grid, Theme } from '@material-ui/core';
 import GpsFixed from '@material-ui/icons/GpsFixedRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import Router from 'next/router';
@@ -28,10 +27,16 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     btnPlace: {
+      color: '#fff',
+      background: 'linear-gradient(to right, #bf9ee0, #7b8ee4);',
       margin: '8px 16px 8px 0',
       boxShadow: '0 2px 9px -2px rgba(132,135,138,.2)',
       textTransform: 'initial',
       backgroundColor: '#fff'
+    },
+    overFlowChip: {
+      overflow: 'auto',
+      whiteSpace: 'nowrap'
     }
   })
 );
@@ -54,7 +59,6 @@ const SearchHomeLT: FC<IProps> = (props) => {
 
   const applySearch = () => {
     closeModal && closeModal();
-
     dispatchGlobal({ type: 'setOverlay', payload: false });
     const pushQuery: ParsedUrlQueryInput = {
       name: city_id === undefined && district_id === undefined ? searchText : '',
@@ -72,8 +76,8 @@ const SearchHomeLT: FC<IProps> = (props) => {
   };
 
   const locationRoom = (cityId: number) => {
-    updateRouter('/long-term-rooms', true, 'name', cityId);
     dispatchSearch({ type: 'SET_SEARCH_CITY', city_id: cityId })
+    applySearch();
   };
 
   let numRecommend: number;
@@ -96,32 +100,32 @@ const SearchHomeLT: FC<IProps> = (props) => {
           <SearchAutoSuggestion />
         </Grid>
         <Grid item xs={12} md={3}>
-          <ButtonGlobal padding="0px" width="100%" height={width === 'xs' ? 40 : 50} onClick={applySearch}>
+          <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" height={width === 'xs' ? 40 : 50} onClick={applySearch}>
             {t('home:searchComponent:search')}
           </ButtonGlobal>
         </Grid>
         {showPlaces && (
           <Fragment>
-            <Hidden xsDown>
-              <Grid item xs={12} sm={12} md={11} lg={11} xl={9}>
-                <Button variant="contained" className={classes.btnPlace}>
-                  <GpsFixed style={{ marginRight: 8, color: 'tomato' }} />
-                  {t('home:yourLocation')}
-                </Button>
+            {/* <Hidden xsDown> */}
+            <Grid item xs={12} sm={12} md={11} lg={11} xl={9} className={classes.overFlowChip}>
+              <Button variant="contained" className={classes.btnPlace}>
+                <GpsFixed style={{ marginRight: 8, color: '#673ab7' }} />
+                {t('home:yourLocation')}
+              </Button>
 
-                {cities ? cities.map((o, i) => (
-                  i < numRecommend ? (
-                    // <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
-                    //   {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
-                    // </Button>
-                    <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.city_id)}>
-                      {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city}
-                    </Button>
-                  ) : null
-                )) : ''}
-              </Grid>
-              <Grid item xs />
-            </Hidden>
+              {cities ? cities.map((o, i) => (
+                i < numRecommend ? (
+                  // <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
+                  //   {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
+                  // </Button>
+                  <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.city_id)}>
+                    {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city}
+                  </Button>
+                ) : null
+              )) : ''}
+            </Grid>
+            <Grid item xs />
+            {/* </Hidden> */}
           </Fragment>
         )}
       </Grid>

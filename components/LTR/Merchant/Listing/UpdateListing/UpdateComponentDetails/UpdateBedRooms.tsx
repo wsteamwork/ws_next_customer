@@ -17,7 +17,7 @@ interface IProps { }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     margin: {
-      marginBottom: theme.spacing(4)
+      marginTop: theme.spacing(3)
     },
   })
 );

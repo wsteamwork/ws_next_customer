@@ -6,7 +6,7 @@ import { CardActions, createStyles, Grid, makeStyles, TextField, Theme, Tooltip,
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import React, { ChangeEvent, FC, Fragment, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -20,6 +20,7 @@ interface IProps {
   typeUpload: { type: any };
   type_txt?: string;
   allowRemove?: boolean;
+  onUpdateImage?: boolean | false;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -68,7 +69,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const CardImageCaption: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
-  const { label, subLabel, arrImage, typeImage, typeUpload, type_txt, allowRemove } = props;
+  const { label, subLabel, arrImage, typeImage, typeUpload, type_txt, allowRemove, onUpdateImage } = props;
   const dispatch = useDispatch<Dispatch<ImageReducerAction>>();
   const [values, setValues] = useState(arrImage);
   const handleBlur = () => {
@@ -89,6 +90,16 @@ const CardImageCaption: FC<IProps> = (props) => {
   };
   useEffect(() => {
     setValues(arrImage)
+  }, [arrImage]);
+
+  const imageExists = useMemo(() => (image_url: string) => {
+    if (onUpdateImage) {
+      let http = new XMLHttpRequest();
+      http.open('GET', image_url, false);
+      http.setRequestHeader("Accept", 'application/json');
+      http.send();
+      return http.status != 404;
+    }
   }, [arrImage]);
 
   return (
@@ -127,7 +138,7 @@ const CardImageCaption: FC<IProps> = (props) => {
               <Card>
                 <CardMedia
                   className={classes.media}
-                  image={IMAGE_STORAGE_LG + img.name}
+                  image={onUpdateImage ? (imageExists(IMAGE_STORAGE_LG + img.name) ? IMAGE_STORAGE_LG + img.name : '') : IMAGE_STORAGE_LG + img.name}
                   title="Image"
                 />
                 <CardContent className={classes.cardContent}>

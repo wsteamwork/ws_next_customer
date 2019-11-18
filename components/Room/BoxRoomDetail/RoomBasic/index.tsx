@@ -1,11 +1,10 @@
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import { faBath, faBed, faDoorOpen, faHeart, faRulerCombined, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {

@@ -154,6 +154,7 @@ const styles = (theme: Theme) =>
 
 const NavHeader: FunctionComponent<IProps> = (props) => {
   const { classes, cookies, hiddenListCitySearch, isSticky } = props;
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const { t }: UseTranslationResponse = useTranslation();
   const [menuStatus, setMenuStatus] = useState<boolean>(false);
@@ -215,6 +216,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               <Logo />
               <div className={classes.grow} />
               <ButtonGlobal
+                background={leaseTypeGlobal ? 'linear-gradient(to right, #667eea, #764ba2);' : ''}
                 href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
                 // color = 'inherit'
                 padding="0px 20px"
@@ -292,11 +294,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                         {t('home:supportHost')}: 0917 041 849
                       </MenuItem>
                       <Divider />
-                      <MenuItem onClick={() => Hotline('mailto:info@westay.org')}>
+                      <MenuItem onClick={() => Hotline('mailto:info@westay.vn')}>
                         <ListItemIcon>
                           <EmailIcon />
                         </ListItemIcon>
-                        Email: info@westay.org
+                        Email: info@westay.vn
                       </MenuItem>
                     </MenuList>
                   </Paper>

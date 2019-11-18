@@ -147,9 +147,9 @@ const Footer: FC<IProps> = (props) => {
                     <Link
                       color="inherit"
                       style={{ marginLeft: '7px' }}
-                      href="mailto:info@westay.org"
+                      href="mailto:info@westay.vn"
                       target="_blank">
-                      info@westay.org
+                      info@westay.vn
                     </Link>
                   </li>
                   <li style={{ marginBottom: 8 }}>

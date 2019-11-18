@@ -35,6 +35,9 @@ const RentAndRoomType: FC<IProps> = (props) => {
   const openUpdate = () => {
     router.push(`/host/update-listing/${id}/rent-and-roomtype`);
   };
+  const openLongTermRoomProcess = () => {
+    router.push(`/host/create-listing/${id}/process`);
+  };
   return (
     <Fragment>
       {listing ? (
@@ -49,7 +52,9 @@ const RentAndRoomType: FC<IProps> = (props) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               Dài hạn:{' '}
-              <span className={classes.rentType}>{listing.long_term_rent_type.rent_type_txt}</span>
+              {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b style={{ cursor: 'pointer' }} onClick={openLongTermRoomProcess}>Cập nhật thông tin</b> : (
+                <span className={classes.rentType}>{listing.long_term_rent_type.rent_type_txt}</span>
+              )}
             </Grid>
           </Grid>
         </CardWrapperItem>

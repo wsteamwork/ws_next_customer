@@ -1,14 +1,14 @@
 import CheckboxCustom from '@/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom';
-import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { Checkbox, FormControl, FormControlLabel, InputAdornment, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import { Formik, FormikActions, FormikProps } from 'formik';
-import React, { ChangeEvent, Dispatch, FC, useEffect, useState } from 'react';
+import { Formik, FormikProps } from 'formik';
+import React, { ChangeEvent, Dispatch, FC, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 interface FormValues {
-  lease_type: number;
+  lease_type: string[];
   accommodation_type: number;
   stay_with_host: number;
   total_area: number;
@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Basic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { accommodationType, stayWithHost, disableSubmit, totalArea } = useSelector<
+  const { accommodationType, stayWithHost, disableSubmit, totalArea, listing } = useSelector<
     ReducersList,
     CreateListingState
   >((state) => state.createListing);
   const [isStayWithHost, setStayWithHost] = useState<boolean>(!!stayWithHost);
-
-  // const [roomType, setRoomType] = useState<number>(accommodationType);
+  const { router } = useContext(GlobalContext);
+  const id = router.query.id;
   const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
@@ -51,7 +51,15 @@ const Basic: FC<IProps> = (props) => {
 
   useEffect(() => {
     getRoomType(setRoomTypesData);
+    // console.log(listing);
   }, []);
+
+  const checkLeaseType = (listing: any) => {
+    let arrayLeaseType = [];
+    if (listing.long_term_rent_type.rent_type == 1) arrayLeaseType.push('longterm');
+    if (listing.short_term_rent_type.rent_type) arrayLeaseType.push('shortterm');
+    return arrayLeaseType;
+  };
 
   const handleChangeCheckBox = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setStayWithHost(checked);
@@ -65,10 +73,10 @@ const Basic: FC<IProps> = (props) => {
   }, [isStayWithHost]);
 
   const initFormValue: FormValues = {
-    lease_type: null,
+    lease_type: !!id ? checkLeaseType(listing) : ['shortterm'],
     accommodation_type: accommodationType,
-    stay_with_host: null,
-    total_area: totalArea
+    stay_with_host: !!id ? listing.stay_with_host : null,
+    total_area: !!id ? listing.total_area : totalArea
   };
 
   const validationForm = Yup.object().shape({
@@ -78,7 +86,7 @@ const Basic: FC<IProps> = (props) => {
     total_area: Yup.string().required('Area Required')
   });
 
-  const handleFormSubmit = (values: FormValues, actions: FormikActions<FormValues>) => {
+  const handleFormSubmit = (values: FormValues) => {
     const data: any = {
       lease_type: values.lease_type,
       accommodation_type: values.accommodation_type,
@@ -86,13 +94,6 @@ const Basic: FC<IProps> = (props) => {
       total_area: values.total_area
     };
   };
-
-  // const callBackOnChange = (value: string) => {
-  //   dispatch({
-  //     type: 'SET_ACCOMMODATION_TYPE',
-  //     payload: parseInt(value)
-  //   });
-  // };
 
   return (
     <div>
@@ -103,8 +104,8 @@ const Basic: FC<IProps> = (props) => {
       <Formik
         initialValues={initFormValue}
         validationSchema={validationForm}
-        onSubmit={handleFormSubmit}
-        render={({
+        onSubmit={handleFormSubmit}>
+        {({
           values,
           handleSubmit,
           initialValues,
@@ -122,7 +123,12 @@ const Basic: FC<IProps> = (props) => {
           return (
             <form onSubmit={handleSubmit}>
               {/* onSubmit={handleSubmit} */}
-              <CheckboxCustom />
+              <CheckboxCustom
+                name="lease_type"
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              />
 
               <Grid item xs={10} md={8} style={{ marginBottom: 32 }}>
                 {/* <h3>Loại Căn hộ: </h3> */}
@@ -162,6 +168,7 @@ const Basic: FC<IProps> = (props) => {
                   <OutlinedInput
                     name="total_area"
                     placeholder="Nhập diện tích"
+                    type="number"
                     value={values.total_area}
                     onChange={(e) => {
                       setFieldValue('total_area', parseInt(e.target.value));
@@ -200,7 +207,7 @@ const Basic: FC<IProps> = (props) => {
             </form>
           );
         }}
-      />
+      </Formik>
     </div>
   );
 };

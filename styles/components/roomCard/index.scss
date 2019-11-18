@@ -71,6 +71,9 @@
         .instantBookIcon {
           color: #fa991c;
         }
+        .instantBookIconLT {
+          color: #673ab7;
+        }
 
         .info {
           .price {
@@ -84,6 +87,15 @@
 
           .roomCard__type {
             color: #fa991c !important;
+
+            text-transform: uppercase !important;
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
+
+            font-size: 12px !important;
+            font-weight: 700 !important;
+          }
+          .roomCard__type__LT {
+            color: #673ab7 !important;
 
             text-transform: uppercase !important;
             font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;

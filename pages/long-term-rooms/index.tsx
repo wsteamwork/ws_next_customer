@@ -6,22 +6,35 @@ import BottomNav from '@/components/Rooms/BottomNav';
 import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import NavHeader from '@/components/Toolbar/NavHeader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
 import { NextContextPage } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid, Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useReducer, useState } from 'react';
+import React, { Fragment, useContext, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
+// import LazyLoad from 'react-lazyload';
+import { useDispatch } from 'react-redux';
 import { Sticky, StickyContainer } from 'react-sticky';
-
+import { Dispatch } from 'redux';
 const LongtermRooms: NextPage = () => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const { isMapOpen } = state;
   const [hideSearchBar, setHideSearchBar] = useState<boolean>(false);
+  const { router } = useContext(GlobalContext);
+  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
+  if (router.pathname.includes('/long-term-rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 1,
+      leaseTypePathName: router.pathname.includes('/long-term-rooms') ? '/long-term-rooms' : '/rooms'
+    });
+  }
   return (
     <Fragment>
       <NextHead
@@ -94,7 +107,9 @@ const LongtermRooms: NextPage = () => {
                 </Grid>
               </GridContainer>
               <FilterActions showBookByHour={false} />
+              {/* <LazyLoad offset={100}> */}
               <MapAndListing />
+              {/* </LazyLoad> */}
               <BottomNav />
             </Hidden>
           </div>

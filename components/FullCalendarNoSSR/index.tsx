@@ -1,6 +1,6 @@
+import '@/styles/FullCalendar/index.scss';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import '@/styles/FullCalendar/index.scss';
 
 let CalendarComponent;
 export default function FullCalendarNoSSR(props) {
@@ -13,9 +13,9 @@ export default function FullCalendarNoSSR(props) {
         dayGridPlugin: import('@fullcalendar/daygrid'),
         timeGridPlugin: import('@fullcalendar/timegrid'),
         interactionPlugin: import('@fullcalendar/interaction'),
-        momentPlugin : import('@fullcalendar/moment'),
+        momentPlugin: import('@fullcalendar/moment'),
       }),
-      render: (props:any, { calendar: Calendar, ...plugins }) => (
+      render: (props: any, { calendar: Calendar, ...plugins }) => (
         <Calendar {...props} plugins={Object.values(plugins)} ref={props.myRef} />
       ),
       ssr: false
@@ -23,7 +23,7 @@ export default function FullCalendarNoSSR(props) {
     setCalendarLoaded(true)
   });
   let showCalendar = (props) => {
-    if ( !calendarLoaded ) return <div>Loading ...</div>;
+    if (!calendarLoaded) return <div>Loading ...</div>;
     return (
       <CalendarComponent {...props} />
     )

@@ -74,7 +74,7 @@ const PaymentInfo: FC = () => {
                         xs={6}
                         className={'fontLow'}
                         justify="flex-end">{`${formatMoney(
-                          LTDataInvoice!.price_and_contract[0].price_original
+                          LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
                         )}đ`}</Grid>
                     </Grid>
                     <Grid container item xs={12}>
@@ -128,7 +128,7 @@ const PaymentInfo: FC = () => {
                       </Grid>
                       <Grid container item xs={6} className={'fontLow'} justify="flex-end">
                         <Typography variant="h6">{`${formatMoney(
-                          LTDataInvoice!.price_and_contract[0].price_with_fee
+                          LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
                         )}đ`}</Typography>
                       </Grid>
                     </Grid>

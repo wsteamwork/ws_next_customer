@@ -12,6 +12,7 @@
         "close": "Close",
         "apply": "Apply"
     },
+    "home": "Home",
     "signUp": "Sign up",
     "signIn": "Sign in",
     "logout": "Logout",
@@ -20,7 +21,7 @@
     "merchantChannel": "Become a host",
     "contact" : "Contact",
     "notification" : "Notification",
-    "supportHost" : "Support host",
+    "supportHost" : "For host",
     "currency" : "USD",
     "review": "Reviews",
     "searchComponent": {

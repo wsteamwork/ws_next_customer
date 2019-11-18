@@ -37,14 +37,14 @@ const BottomNavigation: FC<IProps> = (props) => {
   );
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
 
-  useEffect(() => {
-    let step = localStorage.getItem('currentStep');
-    if (window.performance) {
-      if (!(performance.navigation.type == 1) && step === currentActiveStep) {
-        localStorage.setItem('currentTab', '0');
-      }
-    }
-  }, [currentActiveStep]);
+  // useEffect(() => {
+  //   let step = localStorage.getItem('currentStep');
+  //   if (window.performance) {
+  //     if (!(performance.navigation.type == 1) && step === currentActiveStep) {
+  //       localStorage.setItem('currentTab', '0');
+  //     }
+  //   }
+  // }, [currentActiveStep]);
 
   const handleFinish = async () => {
     try {
@@ -66,7 +66,7 @@ const BottomNavigation: FC<IProps> = (props) => {
             Router.push(nextLink);
           } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            localStorage.setItem('currentTab', String(activeStep + 1));
+            // localStorage.setItem('currentTab', String(activeStep + 1));
           }
         }
       } else {
@@ -81,7 +81,7 @@ const BottomNavigation: FC<IProps> = (props) => {
       Router.back();
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-      localStorage.setItem('currentTab', String(activeStep - 1));
+      // localStorage.setItem('currentTab', String(activeStep - 1));
     }
   };
 

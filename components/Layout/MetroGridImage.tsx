@@ -42,6 +42,8 @@ const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const renderCity = (city: NumberRoomCity) => (
     <div className={classes.paddingGrid}>
@@ -57,7 +59,7 @@ const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   );
 
   const locationRoom = (nameCity: string) => {
-    updateRouter('/rooms', true, 'name', nameCity);
+    updateRouter(`${leaseTypeGlobal} ? '/long-term-rooms' : '/rooms'`, true, 'name', nameCity);
     updateSearchText(nameCity)
   };
 

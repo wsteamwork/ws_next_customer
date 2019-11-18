@@ -75,6 +75,7 @@ const ProcessListing: FC<IProps> = (props) => {
                 <Typography variant="subtitle1" component="p" className={classes.marginTitle}>
                   Hình thức thuê, loại căn hộ, phòng ngủ, phòng tắm, địa chỉ
                 </Typography>
+                {/* <Link href={`/host/create-listing/${id}/basic`} className={classes.sizeBtn}> */}
                 <Link href={`/host/create-listing/${id}/basic`} className={classes.sizeBtn}>
                   Cập nhật
                 </Link>

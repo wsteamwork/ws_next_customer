@@ -1,32 +1,19 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { getDataImages, ImageReducerAction, ImageReducerState } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
+import { Button, Dialog, Theme, useMediaQuery, useTheme } from '@material-ui/core';
+import MuiDialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid/Grid';
-import React, {
-  FC,
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-  SyntheticEvent,
-  useMemo,
-  MouseEvent
-} from 'react';
+import { createStyles, makeStyles, withStyles } from '@material-ui/styles';
+import React, { FC, Fragment, MouseEvent, SyntheticEvent, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CardWrapperUpdate from '../CardWrapperUpdate';
-import {
-  ImageReducerAction,
-  getDataImages,
-  ImageReducerState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
-import { ReducersList } from '@/store/Redux/Reducers';
-import UppyImage from '../../CreateListing/UploadImage/UppyImage';
-import { useTranslation } from 'react-i18next';
 import CardImageCaption from '../../CreateListing/UploadImage/CardImageCaption';
-import { withStyles, makeStyles, createStyles } from '@material-ui/styles';
-import { useTheme, useMediaQuery, Dialog, Button, Theme } from '@material-ui/core';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-interface IProps {}
+import UppyImage from '../../CreateListing/UploadImage/UppyImage';
+import CardWrapperUpdate from '../CardWrapperUpdate';
+interface IProps { }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     wrapperBtn: {
@@ -166,6 +153,7 @@ const UpdateKitchenImage: FC<IProps> = (props) => {
                 Thêm ảnh
               </Button>
               <CardImageCaption
+                onUpdateImage={true}
                 label={t('details:images:labelKitchens')}
                 subLabel="Thêm chú thích cho ảnh"
                 typeUpload={{ type: 'setKitchensImage' }}
@@ -175,8 +163,8 @@ const UpdateKitchenImage: FC<IProps> = (props) => {
             </Grid>
           </Fragment>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </CardWrapperUpdate>
     </Fragment>
   );

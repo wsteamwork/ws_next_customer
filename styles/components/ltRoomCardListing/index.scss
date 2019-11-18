@@ -4,6 +4,11 @@
   border: 1px solid #ebebeb;
   border-radius: 16px !important;
   margin-top: 24px;
+  transition: all 300ms !important;
+  transition-property: all !important;
+  transition-duration: 0.4s !important;
+  transition-timing-function: ease !important;
+  transition-delay: 0s !important;
 
   @include xs {
     height: 100%;
@@ -18,6 +23,7 @@
   }
 
   &:hover {
+    transform: scale(1.025);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
   }
 
@@ -94,24 +100,29 @@
       -webkit-animation: fadein 0.5s ease-in-out;
       animation: 500ms ease-in-out 0ms 1 normal none running fadein;
     }
-    .imgSizeInMap{
+
+    .imgSizeInMap {
       position: relative;
       object-fit: cover;
       height: 180px;
       vertical-align: middle;
       border-radius: 16px 16px 0 0;
       width: 100%;
+
       @include xs {
         height: 200px;
       }
+
       @keyframes fadein {
         from {
           opacity: 0;
         }
+
         to {
           opacity: 1;
         }
       }
+
       -webkit-animation: fadein 0.5s ease-in-out;
       animation: 500ms ease-in-out 0ms 1 normal none running fadein;
     }
@@ -185,11 +196,12 @@
               }
 
               .svgQuick {
+                color: #673ab7;
                 position: relative;
                 top: 7px;
                 margin-right: 8px;
-                -webkit-filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
-                filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
+                // -webkit-filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
+                // filter: drop-shadow(2px 3px 2px rgba(246, 116, 57, .4));
               }
             }
 
@@ -197,7 +209,7 @@
               text-transform: uppercase;
               font-size: 12px;
               font-weight: 600;
-              color: #fa991c;
+              color: #673ab7;
               display: inline-block;
               margin-right: 3px;
             }
@@ -260,7 +272,7 @@
 
             .totalReviewText {
               margin-left: 10px;
-              color: #fa991c;
+              color: #673ab7;
               font-weight: 500;
             }
 
@@ -273,7 +285,8 @@
             margin-top: 12px;
 
             .priceBasic {
-              font-weight: 700;
+              font-weight: 500;
+              color: #484848;
             }
 
             .priceContainer {
@@ -301,7 +314,7 @@
             .priceText {
               font-size: 15px;
               margin-left: 20px;
-              color: #fa991c;
+              color: #673ab7;
               font-weight: 700;
             }
 

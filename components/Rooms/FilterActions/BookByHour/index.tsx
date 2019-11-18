@@ -2,13 +2,13 @@ import CustomPopper from '@/components/CustomPopper';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { updateRouter } from '@/store/Context/utility';
-import { ReducersType } from '@/store/Redux/Reducers';
+import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import React, { FC, useContext, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
 
@@ -24,6 +24,7 @@ const BookByHour: FC<IProps> = (props) => {
   const { dispatch, state } = useContext(RoomIndexContext);
   const { router } = useContext(GlobalContext);
   const { query } = router;
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   useEffect(() => {
     if (!!query.rent_type) {
@@ -54,9 +55,11 @@ const BookByHour: FC<IProps> = (props) => {
         }>
         <Grid
           onClick={handleClick}
-          className={classNames('chooseRoomGuest', 'flex_columCenter', {
-            haveResult: bookingType === 1
-          })}>
+          className={classNames('chooseRoomGuest', 'flex_columCenter', leaseTypeGlobal ? {
+            haveResultLT: bookingType === 1
+          } : {
+              haveResult: bookingType === 1
+            })}>
           <span className="flex_columCenter chooseRoomGuest__actions">
             {/* <FontAwesomeIcon icon={faClock} size="1x"></FontAwesomeIcon>&nbsp;&nbsp; */}
             <p>{t('rooms:searchRooms:bookByHour')}</p>

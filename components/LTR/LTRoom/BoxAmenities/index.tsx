@@ -1,13 +1,16 @@
 import DialogFullAmenities from '@/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { Theme } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Orange from '@material-ui/core/colors/orange';
+// import deepPurple from '@material-ui/core/colors/deepPurple';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+// import Grow from '@material-ui/core/Grow';
 
 interface IProps {
   classes?: any,
@@ -45,7 +48,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 700,
     },
     button: {
-      color: Orange[500],
+      // color: deepPurple[500],
       margin: '30px 0 16px',
       '&:hover': {
         backgroundColor: '#fff'
@@ -63,7 +66,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     readLess: {
-      color: Orange[500],
+      // color: deepPurple[500],
       '&:hover': {
         backgroundColor: '#fff'
       },
@@ -97,7 +100,8 @@ const BoxAmenities: FC<IProps> = (props) => {
   const { facilities, bedrooms, kitchens, bathrooms, livingrooms, common, entertainment, others, outdoors } = props;
   const { t } = useTranslation();
   const [openFullAmen, setOpenFullAmen] = useState<boolean>(false);
-
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  console.log(leaseTypeGlobal)
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpenFullAmen(!openFullAmen);
@@ -171,14 +175,15 @@ const BoxAmenities: FC<IProps> = (props) => {
             </Grid>
           )}
       </div>
-      <Button onClick={toggle} className={classes.button} size='small'>
+      <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7 !important' : '#ff9800'}` }} size='small'>
         &#8230; {t('rooms:readMore')}
       </Button>
-
+      {/* <Grow in={openFullAmen}> */}
       <DialogFullAmenities open={openFullAmen} handleClose={() => setOpenFullAmen(false)}
         facilities={facilities} kitchens={kitchens} bedrooms={bedrooms}
         bathrooms={bathrooms} common={common} livingrooms={livingrooms}
         entertainment={entertainment} others={others} outdoors={outdoors} />
+      {/* </Grow> */}
     </Fragment>
   );
 };

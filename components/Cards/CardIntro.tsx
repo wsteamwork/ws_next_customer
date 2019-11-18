@@ -6,8 +6,8 @@ import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import classNames from 'classnames';
 import React, { FunctionComponent, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import Cookies from 'universal-cookie';
 import LazyLoad from 'react-lazyload';
+import Cookies from 'universal-cookie';
 
 interface IProps extends ICardIntro {
   classes?: any;
@@ -25,11 +25,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     imgSize: {
       maxHeight: '100%',
-      height: '100%',
+      // height: '200px',
       width: '100%',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      objectFit: 'cover',
+      backgroundSize: 'cover',
+      // backgroundPosition: 'center',
+      // objectFit: 'cover',
       borderRadius: 4,
       MozTransition: 'all 0.5s',
       WebkitTransition: 'all 0.5s',
@@ -150,7 +150,8 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
   const imgStyles = useMemo<CSSProperties>(
     () => ({
       maxHeight: imgHeight,
-      height: imgHeight ? imgHeight : undefined
+      height: imgHeight ? imgHeight : undefined,
+      backgroundImage: `url("${imgSrc}")`,
     }),
     [imgHeight]
   );
@@ -164,12 +165,13 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
             : classNames(classes.imgGradientLeftBottom, classes.imgGradientToTop, title === '' ? classes.noneBG : '')
         }>
         <LazyLoad>
-          <img
+          <div className={classNames(classes.imgSize, customClasses.image)} style={imgStyles}></div>
+          {/* <img
             src={imgSrc}
             alt={imgAlt}
             style={imgStyles}
             className={classNames(classes.imgSize, customClasses.image)}
-          />
+          /> */}
         </LazyLoad>
         <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>

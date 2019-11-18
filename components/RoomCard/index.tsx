@@ -73,11 +73,14 @@ const RoomCard: FC<Iprops> = (props) => {
                 <Link href={linkRoom} target="_blank">
                   <Grid className="mediaWrapper">
                     {/* <LazyLoad> */}
-                    <img
+                    <div className="media" style={{ backgroundImage: `url("${avatarImg}")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+
+                    </div>
+                    {/* <img
                       src={`${avatarImg}`}
                       className="media"
                       alt={``}
-                    />
+                    /> */}
                     {/* </LazyLoad> */}
                   </Grid>
                 </Link>
@@ -87,9 +90,9 @@ const RoomCard: FC<Iprops> = (props) => {
           <Grid className="infoContainer">
             <Link href={linkRoom} target="_blank" className="infoLink">
               <Grid className="info">
-                <Typography variant="subtitle1" className="roomCard__type">
+                <Typography variant="subtitle1" className={leaseTypeGlobal ? "roomCard__type__LT" : "roomCard__type"}>
                   {showIcon && (
-                    <FontAwesomeIcon className={classes.icon} icon={faHome} />
+                    <FontAwesomeIcon className={classes.icon} icon={faHome} style={{ color: leaseTypeGlobal ? '#673ab7 !important' : '#fa991c' }} />
                   )}
                   {roomType}
                   {showAddress && <span> &#8226; {city}</span>}
@@ -102,7 +105,7 @@ const RoomCard: FC<Iprops> = (props) => {
                         classes={{ tooltip: 'tooltip' }}
                         title={t('book:bookingForm:instantBook')}
                         placement="top">
-                        <QuickBookIcon className="instantBookIcon" />
+                        <QuickBookIcon className={leaseTypeGlobal ? "instantBookIconLT" : "instantBookIcon"} />
                       </Tooltip>
                     </div>
                   )}
