@@ -77,6 +77,8 @@ const SearchHomeLT: FC<IProps> = (props) => {
 
   const locationRoom = (cityId: number) => {
     dispatchSearch({ type: 'SET_SEARCH_CITY', city_id: cityId })
+    dispatchSearch({ type: 'SET_SEARCH_DISTRICT', district_id: undefined })
+    dispatchSearch({ type: 'SET_SEARCH_TEXT', searchText: '' })
     applySearch();
   };
 
