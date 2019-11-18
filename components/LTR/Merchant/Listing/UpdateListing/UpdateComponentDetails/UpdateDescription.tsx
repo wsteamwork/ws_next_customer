@@ -74,7 +74,7 @@ const UpdateDescription: FC<IProps> = (props) => {
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
   const lang = useSelector<ReducersList, string>((state) => state.description.lang);
-  const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
+  // const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
   const disable_save = useSelector<ReducersList, boolean>(
     (state) => state.listingdetails.disable_save
   );
@@ -109,7 +109,13 @@ const UpdateDescription: FC<IProps> = (props) => {
           lang: lang,
           note: rules
         },
-        en: detail_en
+        en: {
+          name_en: name,
+          description_en: description,
+          space_en: space,
+          lang_en: lang,
+          note_en: rules
+        }
       }
     });
     if(res) {
