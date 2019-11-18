@@ -133,24 +133,24 @@ const Description: FC<IProps> = (props) => {
                     sub_label={t('details:subName')}
                     value={values.name.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(values.name.length < 10 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
-                    show_error={!!(values.name.length < 10 && touched!.name && errors.name)}
+                    show_error={!!(values.name.length < 10 && touched!.name)}
                     error_message={errors.name ? errors.name : t('details:defaultError')}
                     rows={1}
                     rowsMax={1}
                     max_char={100}
                     multiline={true}
                     classMaxChar={
-                      !!(values.name.length < 10 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name)
                         ? 'error_char'
                         : 'remain_char'
                     }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(values.name.length < 10 && touched!.name && errors.name)
+                        notchedOutline: !!(values.name.length < 10 && touched!.name)
                           ? classes.notchedOutline
                           : ''
                       }
@@ -161,12 +161,10 @@ const Description: FC<IProps> = (props) => {
                       handleChange(e)
                       dispatchDescription({ type: 'setName' }, e.currentTarget.value);
                     }}
-                  // handleBlur={(e) => {
-                  //   handleBlur(e);
-                  //   // if (e.currentTarget.value.length > 9) {
-                  //   dispatchDescription({ type: 'setName' }, e.currentTarget.value);
-                  //   // }
-                  // }}
+                    handleBlur={(e) => {
+                      handleBlur(e);
+                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                    }}
                   />
 
                   <Divider className={classes.normal_divider} />
@@ -178,12 +176,12 @@ const Description: FC<IProps> = (props) => {
                     // value={values.description.replace(/\s+/g, ' ')}
                     value={values.description}
                     classTextField={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
                     show_error={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                     }
                     error_message={
                       values.description.length < 50 ? errors.description : t('details:defaultError')
@@ -200,7 +198,7 @@ const Description: FC<IProps> = (props) => {
                     max_char={500}
                     multiline={true}
                     classMaxChar={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                         ? 'error_char'
                         : 'remain_char'
                     }

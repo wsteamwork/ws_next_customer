@@ -11,12 +11,11 @@ import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'react';
 // import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
-import StandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-
+import SearchPlaceCustom from './SearchPlaceCustom';
 interface IProps { }
 
 interface Coordinate {
@@ -235,30 +234,12 @@ const Location: FC<IProps> = (props) => {
                     <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
                       <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
                       <div data-standalone-searchbox="">
-                        <StandaloneSearchBox
-                          ref={onSearchBoxMounted}
-                          // bounds={}
-                          onPlacesChanged={onPlacesChanged}>
-                          <OutlinedInput
-                            placeholder="Nhập địa chỉ"
-                            // id="tandalone-search-box"
-                            inputProps={{ id: 'standalone-search-box' }}
-                            value={addressInput}
-                            onChange={(e) => {
-                              // console.log('currentValue' + e.target.value);
-                              setAddress(e.target.value)
-                            }}
-                            // onBlur={(e: any) => {
-                            //   handleBlur(e);
-                            //   dispatch({
-                            //     type: 'SET_ADDRESS',
-                            //     payload: e.target.value
-                            //   });
-                            // }}
-                            labelWidth={0}
-                            fullWidth
-                          />
-                        </StandaloneSearchBox>
+                        <SearchPlaceCustom
+                          setCoordinateMarker={setCoordinateMarker}
+                          setDefaultCenter={setDefaultCenter}
+                          setAddress={setAddress}
+                          addressInput={addressInput}
+                        />
                       </div>
                     </Grid>
                     {/* {touched.address && <InputFeedback error={errors.address} />} */}
