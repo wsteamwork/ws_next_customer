@@ -59,7 +59,7 @@ const MetroGridImage: FC<Iprops> = (props: Iprops) => {
   );
 
   const locationRoom = (nameCity: string) => {
-    updateRouter(`${leaseTypeGlobal} ? '/long-term-rooms' : '/rooms'`, true, 'name', nameCity);
+    updateRouter(`${leaseTypeGlobal ? '/long-term-rooms' : '/rooms'}`, true, 'name', nameCity);
     updateSearchText(nameCity)
   };
 
