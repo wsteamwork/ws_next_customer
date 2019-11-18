@@ -145,7 +145,7 @@ const ServiceFee: FC<IProps> = (props) => {
   };
   const handleChangeServices = (id: number) => (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      console.log('included_fee1', included_fee)
+      // console.log('included_fee1', included_fee)
       setServiceOtp([...serviceOpt, id]);
       let newObj = {
         id: id,

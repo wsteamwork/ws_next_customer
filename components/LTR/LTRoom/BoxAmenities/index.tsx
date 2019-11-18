@@ -101,7 +101,7 @@ const BoxAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const [openFullAmen, setOpenFullAmen] = useState<boolean>(false);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-  console.log(leaseTypeGlobal)
+  // console.log(leaseTypeGlobal)
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
     setOpenFullAmen(!openFullAmen);

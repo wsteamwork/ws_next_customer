@@ -262,7 +262,7 @@ export const getDataLTCreateListingID = async (
   const { id } = query;
   try {
     const res = await getLTRoom(id, initLanguage);
-    console.log(res);
+    // console.log(res);
     dispatch({ type: 'SET_LISTING', payload: res });
     dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: res.accommodation_type });
     dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });
