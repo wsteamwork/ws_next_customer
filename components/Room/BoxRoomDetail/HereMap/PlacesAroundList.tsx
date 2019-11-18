@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, withStyles } from '@material-ui/styles';
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ItemAroundList from './ItemAroundList';
 
 interface IProps {
@@ -122,6 +123,7 @@ function a11yProps(index: any) {
 const PlacesAroundList: FC<IProps> = (props) => {
   const { latitude, longitude } = props;
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const [value, setValue] = useState(0);
   const [nearby, setNearby] = useState([]);
   const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
@@ -140,7 +142,7 @@ const PlacesAroundList: FC<IProps> = (props) => {
             app_id: your_app_id,
             app_code: your_app_code,
             at: `${parseFloat(latitude)},${parseFloat(longitude)}`,
-            cat: item.name,
+            cat_id: item.name,
             pretty: true,
             size: item.size
           }
@@ -160,7 +162,7 @@ const PlacesAroundList: FC<IProps> = (props) => {
   return (
     <Grid>
       <Typography variant="h5" className={classes.title}>
-        Xung quanh căn hộ
+        {t('room:nearbyPlaces')}
       </Typography>
       {latitude && longitude ? (
         <Grid className={classes.rootTab}>
@@ -171,12 +173,12 @@ const PlacesAroundList: FC<IProps> = (props) => {
             onChange={handleChange}
             aria-label="Vertical tabs example"
             className={classes.tabs}>
-            <AntTab label="Địa điểm nổi tiếng" {...a11yProps(0)} />
-            <AntTab label="Ẩm thực" {...a11yProps(1)} />
-            <AntTab label="Mua sắm" {...a11yProps(2)} />
-            <AntTab label="Giải trí" {...a11yProps(3)} />
-            <AntTab label="Y tế" {...a11yProps(4)} />
-            <AntTab label="Tòa nhà xung quanh" {...a11yProps(5)} />
+            <AntTab label={t('room:neutralGeographic')} {...a11yProps(0)} />
+            <AntTab label={t('room:restaurant')} {...a11yProps(1)} />
+            <AntTab label={t('room:shopping')} {...a11yProps(2)} />
+            <AntTab label={t('room:entertainment')} {...a11yProps(3)} />
+            <AntTab label={t('room:medical')} {...a11yProps(4)} />
+            <AntTab label={t('room:building')} {...a11yProps(5)} />
           </AntTabs>
           <TabPanel value={value} index={0}>
             <ItemAroundList itemList={nearby[0]} />

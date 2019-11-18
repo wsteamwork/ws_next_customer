@@ -45,7 +45,7 @@ const LongTermBook: NextPage = (props) => {
             container
             spacing={xsMode ? 0 : 8}
             className={'marginContainer'}
-            direction={isWide ? 'row' : 'column-reverse'}>
+            direction={isWide ? 'row' : 'column'}>
             <Grid item xl={8} lg={8} md={7} xs={12} className="formBooking">
               {/* <SettingDetails /> */}
               {/* <RoomHotBook></RoomHotBook> */}

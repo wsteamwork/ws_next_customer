@@ -56,5 +56,13 @@
     "surchargeLateCheckout" : "Late checkout surcharge (per 1 hour)",
     "surchargeHours" : "Surcharge after 4 hours early (rent by the hour)",
     "feeList": "Fee list",
-    "lang": "en"
+    "lang": "en",
+    "nearbyPlaces": "Nearby places",
+    "neutralGeographic": "Neutral Traction",
+    "restaurant": "Restaurant",
+    "shopping": "Shopping",
+    "entertainment": "Entertainment",
+    "medical": "Medical center",
+    "building": "Office building"
+
 }

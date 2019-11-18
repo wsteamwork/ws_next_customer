@@ -152,7 +152,7 @@ const BookingForm: FC = () => {
     try {
       const res = await createLTBooking(data);
 
-      if (ltroom && ltroom.instant_book === 0) {
+      if (ltroom && ltroom.instant_book && ltroom.instant_book === 0) {
         setOpenDialog(true);
       } else if (res) {
         // console.log(values.paymentMethod);

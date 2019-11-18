@@ -57,5 +57,22 @@
         "choosePayment": "Chọn 1 phương thức thanh toán",
         "transferMoney": "Chuyển khoản qua",
         "directTransfer": "Chuyển khoản trực tiếp"
+    },
+    "calendarLT": {
+        "moveInRange": "Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay",
+        "moveInValid": "Chọn ở tối thiểu 1 tháng(30 ngày)",
+        "resetDate": "Chọn lại ngày",
+        "days": "ngày",
+        "detailPrices": "Giá chi tiết",
+        "priceSpecification": "Chi tiết giá",
+        "originalPrice": "Giá gốc",
+        "depositFee": "Đặt cọc",
+        "totalPrice": "Tổng cộng",
+        "loginToContinue": "Đăng nhập để tiếp tục",
+        "createBooking": "Đặt phòng",
+        "guests": "Khách",
+        "moveIn": "Ngày tới ở",
+        "moveOut": "Ngày dời đi"
+
     }
 }

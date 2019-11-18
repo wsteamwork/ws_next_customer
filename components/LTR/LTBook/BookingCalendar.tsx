@@ -107,18 +107,19 @@ const BookingCalendar: FC<Iprops> = (props) => {
               {focusedInput === 'startDate' && !!date.endDate
                 ? `${moment(movein).format('MMM Do')} - ${moment(moveout).format('MMM Do')}`
                 : focusedInput === 'endDate'
-                ? 'Check Out'
-                : 'Check In'}
+                ? t('book:calendarLT:moveOut')
+                : t('book:calendarLT:moveIn')}
             </Typography>
             {focusedInput === 'endDate'
-              ? 'Chọn ở tối thiểu 1 tháng - 30 ngày'
+              ? t('book:calendarLT:moveInValid')
               : focusedInput === 'startDate' && !!date.endDate
-              ? `${moment(moveout).diff(moment(movein), 'days')} ngày `
-              : 'Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay'}
+              ? `${moment(moveout).diff(moment(movein), 'days')} ${t('book:calendarLT:days')} `
+                : t('book:calendarLT:moveInRange')
+            }
 
             <Grid className="box-button-clear-dates">
               <Button onClick={onClearDates} variant="outlined" className="button-clear-dates">
-                Chọn lại ngày
+                {t('book:calendarLT:resetDate')}
               </Button>
             </Grid>
           </Grid>
@@ -139,7 +140,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
               <QuantityButtons
                 number={guest}
                 setNumber={setGuest}
-                title={'Khách'}></QuantityButtons>
+                title={t('book:calendarLT:guests')}></QuantityButtons>
               <Hidden lgUp>
                 <Grid container spacing={2} className="mobile-box-price">
                   <Grid item xs className="mobile-price-show">
@@ -147,9 +148,9 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <Fragment>
                         <Typography className="price">
                           {formatMoney(LTBookingPriceCalculate.price_with_fee)}đ/
-                          {LTBookingPriceCalculate.range_stay} ngày
+                          {LTBookingPriceCalculate.range_stay} {t('book:calendarLT:days')}
                         </Typography>
-                        <a onClick={handleOpenMobilePriceDetail}>Giá chi tiết</a>
+                        <a onClick={handleOpenMobilePriceDetail}>{t('book:calendarLT:detailPrices')}</a>
                         <Dialog
                           fullScreen
                           open={openMobilePriceDetail}
@@ -174,15 +175,15 @@ const BookingCalendar: FC<Iprops> = (props) => {
                           </Grid>
                           {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                             <Grid className="mobile-box-price-detail">
-                              <h3 className="price-title">Chi tiết giá</h3>
+                              <h3 className="price-title">{t('book:calendarLT:priceSpecification')}</h3>
                               <Grid className="box-price-sub">
-                                <Grid className="price-subtitle">Giá gốc</Grid>
+                                <Grid className="price-subtitle">{t('book:calendarLT:originalPrice')}</Grid>
                                 <Grid className="sub-price">
                                   {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
                                 </Grid>
                               </Grid>
                               <Grid className="box-price-sub">
-                                <Grid className="price-subtitle">Giá đặt cọc</Grid>
+                                <Grid className="price-subtitle">{t('book:calendarLT:depositFee')}</Grid>
                                 <Grid className="sub-price">{`${formatMoney(
                                   LTBookingPriceCalculate.deposit
                                 )}đ`}</Grid>
@@ -190,7 +191,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
 
                               <Divider style={{ margin: ' 16px 0 28px' }} />
                               <Grid className="box-price-sub">
-                                <h3 className="price-title">Tổng cộng</h3>
+                                <h3 className="price-title">{t('book:calendarLT:totalPrice')}</h3>
                                 <Grid className="price-title">{`${formatMoney(
                                   LTBookingPriceCalculate.price_with_fee
                                 )}đ`}</Grid>
@@ -236,16 +237,16 @@ const BookingCalendar: FC<Iprops> = (props) => {
               <Hidden mdDown>
                 {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                   <Fragment>
-                    <h3 className="price-title">Chi tiết giá</h3>
+                    <h3 className="price-title">{t('book:calendarLT:priceSpecification')}</h3>
                     <Grid item xs={11}>
                     <Grid className="box-price-sub">
-                      <Grid className="price-subtitle">Giá gốc</Grid>
+                        <Grid className="price-subtitle">{t('book:calendarLT:originalPrice')}</Grid>
                       <Grid className="sub-price">
                         {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
                       </Grid>
                     </Grid>
                     <Grid className="box-price-sub">
-                      <Grid className="price-subtitle">Giá đặt cọc</Grid>
+                        <Grid className="price-subtitle">{t('book:calendarLT:depositFee')}</Grid>
                       <Grid className="sub-price">{`${formatMoney(
                         LTBookingPriceCalculate.deposit
                         )}đ`}
@@ -254,7 +255,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
 
                     <Divider style={{ margin: ' 16px 0 28px' }} />
                     <Grid className="box-price-sub">
-                      <h3 className="price-title">Tổng cộng</h3>
+                        <h3 className="price-title">{t('book:calendarLT:totalPrice')}</h3>
                       <Grid className="price-title">{`${formatMoney(
                         LTBookingPriceCalculate.price_with_fee
                         )}đ`}
@@ -267,7 +268,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                   ''
                 )}
                 <ButtonGlobal style={{cursor: 'pointer', color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit}>
-                  {isLogin ? 'Đặt phòng' : 'Đăng nhập để tiếp tục'}
+                  {isLogin ? t('book:calendarLT:createBooking') : t('book:calendarLT:loginToContinue')}
                 </ButtonGlobal>
               </Hidden>
             </Grid>

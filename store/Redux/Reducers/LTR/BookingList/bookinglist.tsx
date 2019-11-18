@@ -87,7 +87,8 @@ export const getBookingListST = async (dispatch: Dispatch<BookingListReducerActi
       date_start: dataFilter ? dataFilter.date_start : '',
       date_end: dataFilter ? dataFilter.date_end : '',
       status: dataFilter ? dataFilter.status : '',
-      room_id: dataFilter ? dataFilter.room_id: '',
+      room_id: dataFilter ? dataFilter.room_id : '',
+      booking_code: dataFilter ? dataFilter.booking_cde : '',
       page: params.page
     };
     const url = `bookings?${qs.stringify(query)}`;
@@ -112,8 +113,8 @@ export const getBookingListLT = async (dispatch: Dispatch<BookingListReducerActi
       date_start: dataFilter ? dataFilter.date_start : '',
       date_end: dataFilter ? dataFilter.date_end : '',
       status: dataFilter ? dataFilter.status : '',
-      room_id: dataFilter ? dataFilter.room_id: '',
-      booking_code: dataFilter ? dataFilter.booking_code :'',
+      room_id: dataFilter ? dataFilter.room_id : '',
+      booking_code: dataFilter ? dataFilter.booking_code : '',
       page: params.page
     };
     const url = `long-term-bookings?${qs.stringify(query)}`;

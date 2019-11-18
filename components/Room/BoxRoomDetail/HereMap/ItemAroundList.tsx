@@ -52,7 +52,7 @@ const ItemAroundList: FC<IProps> = (props) => {
     );
   });
   return (
-    <Grid container item xs={12} spacing={width !== 'xs' ? 5 : 0}>
+    <Grid container item xs={12} spacing={width !== 'xs' ? 2 : 0}>
       {itemsPlaces}
     </Grid>
   );
