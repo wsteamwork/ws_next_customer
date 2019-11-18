@@ -29,7 +29,7 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(10, t('details:name15Character'))
+      .min(10, t('details:name10Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))
@@ -157,13 +157,16 @@ const Description: FC<IProps> = (props) => {
                     }}
                     autoFocus={true}
                     inputProps={{ maxLength: 100 }}
-                    handleChange={handleChange}
-                    handleBlur={(e) => {
-                      handleBlur(e);
-                      if (e.currentTarget.value.length > 9) {
-                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
-                      }
+                    handleChange={(e) => {
+                      handleChange(e)
+                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
                     }}
+                  // handleBlur={(e) => {
+                  //   handleBlur(e);
+                  //   // if (e.currentTarget.value.length > 9) {
+                  //   dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                  //   // }
+                  // }}
                   />
 
                   <Divider className={classes.normal_divider} />
@@ -217,9 +220,9 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 30) {
-                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
-                      }
+                      // if (e.currentTarget.value.length > 30) {
+                      dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                      // }
                     }}
                   />
 

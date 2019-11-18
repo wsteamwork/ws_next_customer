@@ -21,7 +21,7 @@
     "rulesExample2": "- No smoking",
     "rulesExample3": "- Keep silent after 11pm,...",
     "requiredName": "Warning ! Name is required.",
-    "name15Character": "Warning ! The name must be at least 15 characters",
+    "name10Character": "Warning ! The name must be at least 10 characters",
     "name100Character": "Warning ! The name must not exceed 100 characters",
     "requiredDes": "Warning ! Description is required.",
     "des50Character": "Warning ! The description must be at least 50 characters",

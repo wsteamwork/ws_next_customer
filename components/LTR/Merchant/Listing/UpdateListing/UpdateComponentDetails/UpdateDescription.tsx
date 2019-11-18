@@ -28,7 +28,7 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(15, t('details:name15Character'))
+      .min(15, t('details:name10Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))

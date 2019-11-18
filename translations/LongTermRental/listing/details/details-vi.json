@@ -19,7 +19,7 @@
     "rulesExample2":"- Không được hút thuốc trong căn hộ",
     "rulesExample3":"- Giữ trật tự chung sau 23h,...",
     "requiredName": "Chú ý ! Tên căn hộ là bắt buộc.",
-    "name15Character": "Chú ý ! Tên phải có ít nhất 15 kí tự.",
+    "name10Character": "Chú ý ! Tên phải có ít nhất 10 kí tự.",
     "name100Character": "Chú ý ! Tên không quá 100 kí tự",
     "requiredDes": "Chú ý ! Mô tả về căn hộ là bắt buộc.",
     "des50Character": "Chú ý ! Mô tả phải có ít nhất 50 kí tự.",
