@@ -142,7 +142,7 @@ const PlacesAroundList: FC<IProps> = (props) => {
             app_id: your_app_id,
             app_code: your_app_code,
             at: `${parseFloat(latitude)},${parseFloat(longitude)}`,
-            cat_id: item.name,
+            cat: item.name,
             pretty: true,
             size: item.size
           }
