@@ -413,7 +413,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
         </AppBar>
         {/*{props.animation.isLoginFormOpen && <LoginForm />}*/}
         {/*{props.animation.isSignUpFormOpen && <SignUpForm />}*/}
-        {/*{props.animation.isForgetPasswordFormOpen && <ForgetPasswordForm />}*/}
+        {/*{props.animation.isForgetPasswordFormOpen && <  />}*/}
       </GridContainer>
     </Fragment>
   );

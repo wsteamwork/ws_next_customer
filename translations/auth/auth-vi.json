@@ -21,5 +21,8 @@
     "privatePoli": "Chính sách quyền riêng tư",
     "ofWstay": "của Westay.",
     "and": "và",
-    "birthday": "Ngày sinh"
+    "birthday": "Ngày sinh",
+    "forgetPassword": "Quên mật khẩu?",
+    "sendForgetPassword": "Xác nhận",
+    "forgetPasswordInfo": "Nhập Email bạn đã đăng ký với Westay"
 }

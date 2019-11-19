@@ -1,61 +1,50 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { LoginRequest } from '@/types/Requests/Account/AccountRequests';
-import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
-import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import { ForgetPasswordReq } from '@/types/Requests/Account/AccountRequests';
+import { FormControl, FormHelperText, Grid, Snackbar, TextField, Typography } from '@material-ui/core';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
-import Router from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // import ButtonLoginSocial from '../../Signup/ButtonLoginSocial';
 import * as Yup from 'yup';
-import { loginAccount } from './context';
+// import { useCookies } from 'react-cookie';
+import { sendForgetPassword } from './context';
 interface MyFormValues {
   email: string;
-  password: string;
 }
 
-const FormSignin = () => {
-  const [cookies, setCookie] = useCookies(['_token']);
+const FormForgetPassword = () => {
+  // const [cookies, setCookie] = useCookies(['_token']);
+  const [open, setOpen] = useState(false);
+  const [forgetMessage, setForgetMessage] = useState('');
 
-  useEffect(() => {
-    if (!!cookies._token) {
-      router.back();
-    }
-  }, [cookies]);
-
-  const { router } = useContext(GlobalContext);
+  // const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [error, setError] = useState<string>('');
-
+  const handleClose = () => {
+    setOpen(false);
+  };
   const FormValidationSchema = Yup.object().shape({
     email: Yup.string()
       .required(t('book:bookingForm:enterEmail'))
-      .email(t('book:bookingForm:invalidEmail')),
-    password: Yup.string()
-      .required(t('auth:enterPassword'))
-      .min(6, t('auth:min6Characters'))
-      .max(50, t('auth:max50Characters'))
+      .email(t('book:bookingForm:invalidEmail'))
   });
 
   const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
-    const body: LoginRequest = {
-      username: values.email,
-      password: values.password
+    const body: ForgetPasswordReq = {
+      email: values.email
     };
-
     try {
-      const res = await loginAccount(body);
-      setCookie('_token', res.access_token, { maxAge: 2147483647, path: '/' });
-      actions.setSubmitting(false);
-      Router.push('/')
+      const res = await sendForgetPassword(body);
+      if (res) {
+        setForgetMessage(res.data.message);
+        setOpen(true);
+      }
     } catch (error) {
       actions.setSubmitting(false);
-      const result: AxiosErrorCustom<{ errors: string[] }> = error;
-      setError(result.response.data.data.errors[0]);
+      setError(error.response.data.data.error);
     }
   };
 
@@ -65,7 +54,7 @@ const FormSignin = () => {
         enableReinitialize={false}
         validateOnChange={false}
         validationSchema={FormValidationSchema}
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: '' }}
         onSubmit={handleSubmitForm}
         render={({
           values,
@@ -79,7 +68,7 @@ const FormSignin = () => {
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Typography variant="h6">{t('auth:loginInfo')}</Typography>
+                  <Typography variant="h6">{t('auth:forgetPasswordInfo')}</Typography>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -100,27 +89,10 @@ const FormSignin = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <FormControl error={!!(errors.password && touched.password)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      // id="email-booking"
-                      type="password"
-                      name="password"
-                      label={t('auth:password')}
-                      placeholder={t('auth:password')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                    />
-                    <FormHelperText>{touched.password ? errors.password : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12}>
                   <FormControl fullWidth error={!!error}>
                     <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
                       {!isSubmitting ? (
-                        t('auth:singin')
+                        t('auth:sendForgetPassword')
                       ) : (
                           <SimpleLoader height="45px" width="100%"></SimpleLoader>
                         )}
@@ -132,13 +104,6 @@ const FormSignin = () => {
                 <Grid item xs={12} container justify="center">
                   <FormControl fullWidth>
                     <p className="noAccount">
-                      <Link href="/auth/forget-password">
-                        <a>{t('auth:forgetPassword')}</a>
-                      </Link>
-                    </p>
-                  </FormControl>
-                  <FormControl fullWidth>
-                    <p className="noAccount">
                       {t('auth:noAccount')}{' '}
                       <Link href="/auth/signup">
                         <a>{t('auth:signup')}</a>
@@ -146,14 +111,35 @@ const FormSignin = () => {
                       {t('auth:now')}
                     </p>
                   </FormControl>
+                  <FormControl fullWidth>
+                    <p className="haveAccount">
+                      {t('auth:haveAccount')}{' '}
+                      <Link href="/auth/signin">
+                        <a>{t('auth:singin')}</a>
+                      </Link>
+                    </p>
+                  </FormControl>
                 </Grid>
-
+                <Snackbar
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={open}
+                  autoHideDuration={2000}
+                  onClose={handleClose}>
+                  <MySnackbarContentWrapper
+                    variant="success"
+                    message={forgetMessage}
+                    onClose={handleClose}></MySnackbarContentWrapper>
+                </Snackbar>
                 {/* <ButtonLoginSocial></ButtonLoginSocial> */}
               </Grid>
             </form>
           )}></Formik>
+
     </Grid>
   );
 };
 
-export default FormSignin;
+export default FormForgetPassword;

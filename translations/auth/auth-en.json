@@ -21,5 +21,8 @@
     "privatePoli": "Privacy policy",
     "ofWstay": "of Westay.",
     "and": "and",
-    "birthday": "Birthday"
+    "birthday": "Birthday",
+    "forgetPassword": "Forget your password?",
+    "sendForgetPassword": "Submit",
+    "forgetPasswordInfo": "Enter your email to reset password"
 }
