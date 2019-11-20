@@ -1,6 +1,6 @@
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
-import { ButtonBase, Grid, Theme } from '@material-ui/core';
+import { ButtonBase, Grid, Hidden, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, MouseEvent, useState } from 'react';
@@ -26,12 +26,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       margin: '1rem 0 0.35rem 0'
     },
     marginImage: {
-      margin: '16px 0 0'
+      // margin: '16px 0 0'
     },
     images: {
       width: '100%',
       borderRadius: 4,
       cursor: 'pointer',
+      [theme.breakpoints.down('xs')]: {
+        maxHeight: 70,
+        height: 70,
+      },
       maxHeight: 150,
       height: 150,
       objectFit: 'cover',
@@ -43,7 +47,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       position: 'relative',
       borderRadius: 4,
       overflow: 'hidden',
-      verticalAlign: 'initial',
+      // verticalAlign: 'initial',
       [theme.breakpoints.down('xs')]: {
         width: '100% !important', // Overrides inline-style
       },
@@ -99,6 +103,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         padding: '12px 8px'
       },
     },
+    maxWidthImage: {
+      maxWidth: '20% !important'
+    },
     imageMarked: {
       height: 3,
       width: 18,
@@ -124,93 +131,46 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      <Typography variant='h5' className={classes.name}>
+      {/* <Typography variant='h5' className={classes.name}>
         {t('longtermroom:discover')}
       </Typography>
       <Typography variant='subtitle2' gutterBottom>
         {t('longtermroom:discoverSubTitle')}
-      </Typography>
+      </Typography> */}
 
-      <Grid container spacing={2} alignItems='center'>
+      <Grid container spacing={1} alignItems='center'>
         {livingrooms.images && livingrooms.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3} className={classes.maxWidthImage}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + livingrooms.images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:livingrooms')}
-              </Typography>
+                className={classes.images} />
             </div>
           </Grid>
         ) : <Fragment />}
 
         {bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3} className={classes.maxWidthImage}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:bedrooms')}
-              </Typography>
+                className={classes.images} />
             </div>
           </Grid>
         ) : <Fragment />}
-
-        {bathrooms['bathroom_1'] && bathrooms[`bathroom_1`].images && bathrooms['bathroom_1'].images.length ? (
-          <Grid item xs={6} sm={3}>
-            <div className={classes.marginImage} onClick={toggle}>
-              <div
-                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:bathrooms')}
-              </Typography>
-            </div>
-          </Grid>
-        ) : <Fragment />}
-
-        {kitchens.images && kitchens.images.length ? (
-          <Grid item xs={6} sm={3}>
-            <div className={classes.marginImage} onClick={toggle}>
-              <div
-                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + kitchens.images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:kitchens')}
-              </Typography>
-            </div>
-          </Grid>
-        ) : <Fragment />}
-
-        {furnitures.images && furnitures.images.length ? (
-          <Grid item xs={6} sm={3}>
-            <div className={classes.marginImage} onClick={toggle}>
-              <div
-                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + furnitures.images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:furnitures')}
-              </Typography>
-            </div>
-          </Grid>
-        ) : <Fragment />}
-
-        {outdoors.images && outdoors.images.length ? (
-          <Grid item xs={6} sm={3}>
-            <div className={classes.marginImage} onClick={toggle}>
-              <div
-                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + outdoors.images[0].name}')` }}
-                className={classes.images}/>
-              <Typography variant='subtitle2'>
-                {t('longtermroom:outdoors')}
-              </Typography>
-            </div>
-          </Grid>
-        ) : <Fragment />}
+        <Hidden smDown>
+          {kitchens.images && kitchens.images.length ? (
+            <Grid item xs={4} sm={3} className={classes.maxWidthImage}>
+              <div className={classes.marginImage} onClick={toggle}>
+                <div
+                  style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + kitchens.images[0].name}')` }}
+                  className={classes.images} />
+              </div>
+            </Grid>
+          ) : <Fragment />}
+        </Hidden>
         {cover_photo.images && cover_photo.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3} className={classes.maxWidthImage}>
             <ButtonBase
               onClick={toggle}
               focusRipple
@@ -221,7 +181,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
               }}
             >
               <div
-                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + cover_photo.images[0].name}')` }} className={classes.images}/>
+                style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + cover_photo.images[0].name}')` }} className={classes.images} />
 
               <span
                 className={classes.imageSrc}
@@ -241,12 +201,12 @@ const BoxListImageRoom: FC<IProps> = (props) => {
             </ButtonBase>
           </Grid>
         ) : (
-          <Grid item xs={12}>
-            <Typography variant='subtitle2' gutterBottom>
-              {t('room:notFoundContent')}
-            </Typography>
-          </Grid>
-        )}
+            <Grid item xs={12}>
+              <Typography variant='subtitle2' gutterBottom>
+                {t('room:notFoundContent')}
+              </Typography>
+            </Grid>
+          )}
       </Grid>
 
       <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}

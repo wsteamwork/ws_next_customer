@@ -112,9 +112,9 @@ const BoxAmenities: FC<IProps> = (props) => {
       <Typography variant='h5' className={classes.name}>
         {t('rooms:amenities')}
       </Typography>
-      <Typography variant='subtitle2' className={classes.subName} gutterBottom>
+      {/* <Typography variant='subtitle2' className={classes.subName} gutterBottom>
         {t('longtermroom:amenitiesOfRoom')}
-      </Typography>
+      </Typography> */}
 
       <div>
         <Typography variant='subtitle1' className={classes.roomName}>

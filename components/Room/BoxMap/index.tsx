@@ -2,13 +2,13 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import { faMapSigns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Theme, Grid } from '@material-ui/core';
+import { Grid, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
+import HPlatform, { HMap, HMapCircle } from 'react-here-map';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import HPlatform, { HMap, HMapCircle } from 'react-here-map';
 
 interface IProps {
   classes?: any;

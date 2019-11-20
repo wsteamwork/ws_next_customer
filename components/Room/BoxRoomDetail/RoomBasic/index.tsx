@@ -1,3 +1,4 @@
+import { ReducersList } from '@/store/Redux/Reducers';
 import { faBath, faBed, faDoorOpen, faHeart, faRulerCombined, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from '@material-ui/core';
@@ -6,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   name: string,
@@ -31,8 +33,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 700
     },
     roomId: {
-      marginTop: '-10px',
-      fontSize: '0.80rem'
+      marginTop: '-4px',
+      fontSize: '0.875rem'
     },
     iconHeartBlue: {
       color: '#08C299',
@@ -49,6 +51,7 @@ const RoomBasic: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { name, id, max_guest, max_additional_guest, number_bed, number_room, bathroom, totalComforts, avg_rating, avg_rating_txt, showBed, total_area, isPreviewPage, district, city } = props;
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const arrMenuItem = (x: number): any[] => {
     let i = 1;
@@ -90,17 +93,21 @@ const RoomBasic: FC<IProps> = (props) => {
             </Typography>
           </Grid>
         </Grid>
+        {
+          leaseTypeGlobal ? '' : (
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <div>
+                  <span>{arrMenuItem(avg_rating)}</span>
+                  <span>
+                    {avg_rating} &#8208; {avg_rating_txt}
+                  </span>
+                </div>
+              </Grid>
+            </Grid>
+          )
+        }
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <div>
-              <span>{arrMenuItem(avg_rating)}</span>
-              <span>
-                {avg_rating} &#8208; {avg_rating_txt}
-              </span>
-            </div>
-          </Grid>
-        </Grid>
-        <Grid container spacing={1}>
           <Grid item xs={6} sm={6} md={3} lg xl={3}>
             <Grid container alignItems='center'>
               <Grid item xs={2} sm={2}>

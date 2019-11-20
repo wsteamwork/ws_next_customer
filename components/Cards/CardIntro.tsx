@@ -36,9 +36,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       transition: 'all 0.5s',
       cursor: 'pointer',
       '&:hover': {
-        MsTransform: 'scale(1.1)' /* IE 9 */,
-        WebkitTransform: 'scale(1.1)' /* Safari 3-8 */,
-        transform: 'scale(1.1)'
+        MsTransform: 'scale(1.05)' /* IE 9 */,
+        WebkitTransform: 'scale(1.05)' /* Safari 3-8 */,
+        transform: 'scale(1.05)'
       },
       overflow: 'hidden'
     },
@@ -165,13 +165,13 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
             : classNames(classes.imgGradientLeftBottom, classes.imgGradientToTop, title === '' ? classes.noneBG : '')
         }>
         <LazyLoad>
-          <div className={classNames(classes.imgSize, customClasses.image)} style={imgStyles}></div>
-          {/* <img
+          {/* <div className={classNames(classes.imgSize, customClasses.image)} style={imgStyles}></div> */}
+          <img
             src={imgSrc}
             alt={imgAlt}
             style={imgStyles}
             className={classNames(classes.imgSize, customClasses.image)}
-          /> */}
+          />
         </LazyLoad>
         <div className={classNames(classes.boxTitle, customClasses.boxTitle)}>
           <Typography variant="h5" className={classNames(classes.title, customClasses.title)}>
