@@ -10,6 +10,7 @@ import _ from 'lodash';
 // import ScrollAnim from 'rc-scroll-anim';
 import 'rc-scroll-anim/assets/index.css';
 import React, { FC, Fragment, Ref } from 'react';
+import Masonry from 'react-masonry-css';
 
 interface IProps {
   classes?: any,
@@ -108,6 +109,13 @@ const DialogFullImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName, refKit } = props;
   // console?
+
+  const breakpointColumnsObj = {
+    default: 2,
+    1100: 2,
+    700: 2,
+    500: 1
+  };
   return (
     <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
       <DialogTitle className={classes.dialogTitle} disableTypography>
@@ -139,20 +147,23 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
                         {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + livingrooms.images[0].name}")` }}></div> */}
                       </Grid>
 
-                      {livingrooms.images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
+                      <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="my-masonry-grid"
+                        columnClassName="my-masonry-grid_column"
+                      >
+                        {livingrooms.images.map((o, i) => {
+                          if (i > 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                            {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-                          </Grid>
-                        )
-                      })}
+                          )
+                        })}
+                      </Masonry>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -170,20 +181,22 @@ const DialogFullImage: FC<IProps> = (props) => {
                   {
                     bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
                       <Grid item xs={12} sm={12} md={10}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1}>
                           <Grid item xs={12}>
                             <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
                             {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name}")` }}></div> */}
                           </Grid>
-
-                          {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
-                            if (i > 0) return (
-                              <Grid item xs={12} sm={6} key={i}>
+                          <Masonry
+                            breakpointCols={breakpointColumnsObj}
+                            className="my-masonry-grid"
+                            columnClassName="my-masonry-grid_column"
+                          >
+                            {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
+                              if (i > 0) return (
                                 <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                                {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-                              </Grid>
-                            )
-                          })}
+                              )
+                            })}
+                          </Masonry>
                         </Grid>
                       </Grid>) : ''
                   }
@@ -203,20 +216,22 @@ const DialogFullImage: FC<IProps> = (props) => {
                   {
                     bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
                       <Grid item xs={12} sm={12} md={10}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1}>
                           <Grid item xs={12}>
                             <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
-                            {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name}")` }}></div> */}
                           </Grid>
 
-                          {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
-                            if (i > 0) return (
-                              <Grid item xs={12} sm={6} key={i}>
+                          <Masonry
+                            breakpointCols={breakpointColumnsObj}
+                            className="my-masonry-grid"
+                            columnClassName="my-masonry-grid_column"
+                          >
+                            {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
+                              if (i > 0) return (
                                 <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                                {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-                              </Grid>
-                            )
-                          })}
+                              )
+                            })}
+                          </Masonry>
                         </Grid>
                       </Grid>) : ''
                   }
@@ -234,21 +249,21 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
-                        {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + kitchens.images[0].name}")` }}></div> */}
-
                       </Grid>
-
-                      {kitchens.images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
+                      <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="my-masonry-grid"
+                        columnClassName="my-masonry-grid_column"
+                      >
+                        {kitchens.images.map((o, i) => {
+                          if (i > 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                            {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-                          </Grid>
-                        )
-                      })}
+                          )
+                        })}
+                      </Masonry>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -264,23 +279,21 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
-                        {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + furnitures.images[0].name}")` }}></div> */}
-
-
                       </Grid>
-
-                      {furnitures.images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
+                      <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="my-masonry-grid"
+                        columnClassName="my-masonry-grid_column"
+                      >
+                        {furnitures.images.map((o, i) => {
+                          if (i > 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                            {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-
-                          </Grid>
-                        )
-                      })}
+                          )
+                        })}
+                      </Masonry>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -296,22 +309,21 @@ const DialogFullImage: FC<IProps> = (props) => {
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={1}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
-                        {/* <div className={classes.bigImage} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + outdoors.images[0].name}")` }}></div> */}
-
                       </Grid>
-
-                      {outdoors.images.map((o, i) => {
-                        if (i > 0) return (
-                          <Grid item xs={12} sm={6} key={i}>
+                      <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="my-masonry-grid"
+                        columnClassName="my-masonry-grid_column"
+                      >
+                        {outdoors.images.map((o, i) => {
+                          if (i > 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                            {/* <div className={classes.images} style={{ backgroundImage: `url("${IMAGE_STORAGE_LG + o.name}")` }}></div> */}
-
-                          </Grid>
-                        )
-                      })}
+                          )
+                        })}
+                      </Masonry>
                     </Grid>
                   </Grid>
                 </Grid>
