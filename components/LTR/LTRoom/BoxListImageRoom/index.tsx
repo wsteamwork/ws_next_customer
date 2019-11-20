@@ -104,7 +104,15 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       },
     },
     maxWidthImage: {
-      maxWidth: '20% !important'
+      [theme.breakpoints.down('xs')]: {
+        maxWidth: '33% !important'
+      },
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: '23% !important'
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: '25% !important'
+      }
     },
     imageMarked: {
       height: 3,
@@ -140,7 +148,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
 
       <Grid container spacing={1} alignItems='center'>
         {livingrooms.images && livingrooms.images.length ? (
-          <Grid item xs={4} sm={3} className={classes.maxWidthImage}>
+          <Grid item xs={4} sm={3} md={3} className={classes.maxWidthImage}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + livingrooms.images[0].name}')` }}

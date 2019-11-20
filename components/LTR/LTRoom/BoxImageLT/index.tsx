@@ -113,6 +113,7 @@ const BoxImageLT: FC<IProps> = (props) => {
             <Grid container direction="column">
               <Grid item className={classes.paddingGrid}>
                 <CardIntro
+                  onClickCard={() => console.log('clicked')}
                   imgSrc={livingrooms.images && livingrooms.images.length ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
                   imgHeight={width === 'xl' ? 576 : 280}
                 />
@@ -127,6 +128,7 @@ const BoxImageLT: FC<IProps> = (props) => {
             <Grid container direction="column">
               <Grid item className={classes.paddingGrid}>
                 <CardIntro
+                  onClickCard={() => console.log('clicked')}
                   imgSrc={livingrooms.images && livingrooms.images.length ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
                   imgHeight={width === 'xl' ? 576 : 504}
                 />
@@ -137,6 +139,7 @@ const BoxImageLT: FC<IProps> = (props) => {
             <Grid container item xs={12}>
               <Grid item xs={12} className={classes.paddingGrid}>
                 <CardIntro
+                  onClickCard={() => console.log('clicked')}
                   imgSrc={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}
                   imgHeight={width === 'xl' ? 284 : 250}
                 />
