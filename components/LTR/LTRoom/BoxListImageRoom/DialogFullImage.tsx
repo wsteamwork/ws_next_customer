@@ -59,13 +59,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     images: {
       width: '100%',
-      backgroundSize: 'contain',
-      backgroundRepeat: 'no-repeat',
       borderRadius: 4,
       [theme.breakpoints.up('md')]: {
-        height: 320,
+        // height: 320,
       },
-      maxHeight: 320,
+      // maxHeight: 320,
       objectFit: 'cover'
     },
     bigImage: {
@@ -135,12 +133,12 @@ const DialogFullImage: FC<IProps> = (props) => {
             {livingrooms && livingrooms.images && livingrooms.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi} >
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Phòng khách</Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={9}>
+                  <Grid item xs={12} sm={12} md={10}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
@@ -164,14 +162,14 @@ const DialogFullImage: FC<IProps> = (props) => {
             {_.times(bedrooms.number_bedroom, (i) => (
               <li className={classes.listSection} key={i}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Phòng ngủ {i + 1}</Typography>
                     </div>
                   </Grid>
                   {
                     bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
-                      <Grid item xs={12} sm={12} md={9}>
+                      <Grid item xs={12} sm={12} md={10}>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
                             <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
@@ -196,7 +194,7 @@ const DialogFullImage: FC<IProps> = (props) => {
             {_.times(bathrooms.number_bathroom, (i) => (
               <li className={classes.listSection} key={i}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Phòng tắm {i + 1}</Typography>
                     </div>
@@ -204,7 +202,7 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                   {
                     bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
-                      <Grid item xs={12} sm={12} md={9}>
+                      <Grid item xs={12} sm={12} md={10}>
                         <Grid container spacing={2}>
                           <Grid item xs={12}>
                             <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
@@ -230,12 +228,12 @@ const DialogFullImage: FC<IProps> = (props) => {
             {kitchens && kitchens.images && kitchens.images.length ? (
               <li className={classes.listSection} ref={refKit}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Phòng bếp</Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={9}>
+                  <Grid item xs={12} sm={12} md={10}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
@@ -260,12 +258,12 @@ const DialogFullImage: FC<IProps> = (props) => {
             {furnitures && furnitures.images && furnitures.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Nội thất</Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={9}>
+                  <Grid item xs={12} sm={12} md={10}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
@@ -292,12 +290,12 @@ const DialogFullImage: FC<IProps> = (props) => {
             {outdoors && outdoors.images && outdoors.images.length ? (
               <li className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={3} className={classes.stikyMobi}>
+                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
                       <Typography variant='h5'>Môi trường xung quanh</Typography>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={12} md={9}>
+                  <Grid item xs={12} sm={12} md={10}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
