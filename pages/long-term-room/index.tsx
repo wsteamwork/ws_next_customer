@@ -73,7 +73,7 @@ const LongtermRoom: NextPage = () => {
             } ngay tại ${ltroom.district.data.name}, ${
             ltroom.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
-          url={`https://westay.vn/ltroom/${ltroom.id}`}
+          url={`https://westay.vn/long-term-room/${ltroom.id}`}
           ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
         />
       )}
