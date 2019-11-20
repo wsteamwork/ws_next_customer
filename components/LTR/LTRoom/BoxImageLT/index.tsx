@@ -137,7 +137,7 @@ const BoxImageLT: FC<IProps> = (props) => {
             <Grid container item xs={12}>
               <Grid item xs={12} className={classes.paddingGrid}>
                 <CardIntro
-                  imgSrc={cover_photo.images && cover_photo.images.length ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}
+                  imgSrc={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}
                   imgHeight={width === 'xl' ? 284 : 250}
                 />
               </Grid>

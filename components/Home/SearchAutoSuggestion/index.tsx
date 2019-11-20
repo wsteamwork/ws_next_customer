@@ -244,13 +244,13 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               ))}
             </div>
           </Grid>
-          <Grid item xs={5} md={5} className={classes.right}>
+          {/* <Grid item xs={5} md={5} className={classes.right}>
             {suggestion.number_room !== 0 && suggestion.number_room! && (
               <p>
                 {suggestion.number_room} {t('home:SearchAutocomplete:accommodation')}
               </p>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
       </MenuItem>
     );
