@@ -24,7 +24,7 @@ interface IProps {
   showBed?: boolean,
   isPreviewPage?: boolean,
   district?: string,
-  city?: string,
+  city?: string
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>

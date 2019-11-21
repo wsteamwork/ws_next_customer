@@ -91,40 +91,39 @@ const BoxTablePrices: FC<IProps> = (props) => {
               )}
           </TableBody>
 
-          {included_services && included_services.length ? (
-            <Fragment>
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>{t('longtermroom:otherFee')}</StyledTableCell>
-                  <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {included_fee.map((o, i) => {
-                  if (o.included == 1) {
-                    return (
-                      <StyledTableRow key={i}>
-                        <StyledTableCell component="th" scope="row">
-                          {o.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{`${t('longtermroom:feeIncluded')}`}</StyledTableCell>
-                        {/* <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell> */}
-                      </StyledTableRow>
-                    )
-                  } else {
-                    return (
-                      <StyledTableRow key={i}>
-                        <StyledTableCell component="th" scope="row">
-                          {o.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{o.calculate_function == 3 || o.calculate_function == 6 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</StyledTableCell>
-                      </StyledTableRow>
-                    )
-                  }
-                })}
-              </TableBody>
-            </Fragment>
-          ) : (<Fragment />)}
+          {/* {included_services && included_services.length ? ( */}
+          <Fragment>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>{t('longtermroom:otherFee')}</StyledTableCell>
+                <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {included_fee.map((o, i) => {
+                if (o.included == 1) {
+                  return (
+                    <StyledTableRow key={i}>
+                      <StyledTableCell component="th" scope="row">
+                        {o.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{`${t('longtermroom:feeIncluded')}`}</StyledTableCell>
+                    </StyledTableRow>
+                  )
+                } else {
+                  return (
+                    <StyledTableRow key={i}>
+                      <StyledTableCell component="th" scope="row">
+                        {o.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">{o.calculate_function == 3 || o.calculate_function == 6 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</StyledTableCell>
+                    </StyledTableRow>
+                  )
+                }
+              })}
+            </TableBody>
+          </Fragment>
+          {/* ) : (<Fragment />)} */}
         </Table>
       </Paper>
     </Fragment>

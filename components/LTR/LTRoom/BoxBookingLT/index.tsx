@@ -16,7 +16,6 @@ interface IProps {
   included_services?: Array<string>;
   not_included_services?: Array<string>;
   handleOpenBookingDialog?: any;
-
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -53,9 +52,6 @@ const BoxBookingLT: FC<IProps> = (props) => {
     not_included_services
   } = props;
   const { t } = useTranslation();
-  console.log(included_services.map((value, index) => {
-    console.log(value);
-  }));
   return (
     <div className={classes.boxContainer}>
       <Typography variant="h6">{formatMoney(priceBasic)} {t('longtermroom:currency')}</Typography>
