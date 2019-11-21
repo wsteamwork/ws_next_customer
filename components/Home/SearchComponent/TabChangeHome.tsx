@@ -16,9 +16,17 @@ interface testTab {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
-      top: '-7vh',
-      [theme.breakpoints.up('lg')]: {
-        top: '-9vh',
+      [theme.breakpoints.only('lg')]: {
+        top: '-8vh',
+      },
+      [theme.breakpoints.only('xl')]: {
+        top: '-8vh',
+      },
+      [theme.breakpoints.only('md')]: {
+        top: '-6vh',
+      },
+      [theme.breakpoints.down('sm')]: {
+        top: '-6vh',
       },
       position: 'absolute'
     },

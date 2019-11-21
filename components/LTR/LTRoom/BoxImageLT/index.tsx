@@ -89,8 +89,8 @@ const BoxImageLT: FC<IProps> = (props) => {
                 <img
                   src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
                   style={{
-                    height: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 344 : 504,
-                    maxHeight: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 344 : 504,
+                    height: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 404 : 504,
+                    maxHeight: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 404 : 504,
                   }}
                   className={classNames(classes.imgSize)}
                 />
@@ -104,8 +104,8 @@ const BoxImageLT: FC<IProps> = (props) => {
                 <img
                   src={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}
                   style={{
-                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 170 : 250,
-                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 170 : 250,
+                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
+                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
                   }}
                   className={classNames(classes.imgSize)}
                 />
@@ -114,8 +114,8 @@ const BoxImageLT: FC<IProps> = (props) => {
                 <img
                   src={kitchens.images && kitchens.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + kitchens.images[0].name}` : '/static/images/image-room-default.png'}
                   style={{
-                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 170 : 250,
-                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 170 : 250,
+                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
+                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
                   }}
                   className={classNames(classes.imgSize)}
                 />

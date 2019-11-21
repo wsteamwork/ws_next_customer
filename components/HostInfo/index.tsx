@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: (props) => props.borderRadius || '0.5rem',
       cursor: 'pointer',
       overflow: 'hidden',
-      backgroundColor: '#f7f9ff',
+      backgroundColor: '#fff',
       boxShadow: 'none',
       [theme.breakpoints.down('xs')]: {
         maxWidth: 'none !important',
@@ -116,7 +116,7 @@ const HostInfo: FC<IProps> = (props) => {
             <Grid item xs={3} sm={4} md={4} lg={4} xl={3} style={{ position: 'relative' }}>
               <Avatar
                 alt={avatar}
-                src={avatar_url !== '' ? avatar_url : '/static/images/avatar_default.png'}
+                src={avatar_url !== '' ? avatar_url : '/static/images/user.png'}
                 className={classes.avatar}
               />
             </Grid>

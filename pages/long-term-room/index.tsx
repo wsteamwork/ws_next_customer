@@ -108,6 +108,8 @@ const LongtermRoom: NextPage = () => {
                       avatar_url={ltroom.merchant.data.avatar_url}
                       name={ltroom.merchant.data.name}
                       number_room={ltroom.merchant.data.number_room}
+                      included_services={ltroom.included_services}
+                      not_included_services={ltroom.not_included_services}
                       handleOpenBookingDialog={handleOpenBookingDialog}
                     />
                     {/* </LazyLoad> */}

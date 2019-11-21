@@ -4,6 +4,7 @@
     "currency": "VNĐ",
     "priceByTerm": "Giá theo kỳ hạn",
     "priceIncludedFee": "Giá thuê phòng đã bao gồm",
+    "priceNotIncludedFee": "Giá thuê KHÔNG bao gồm",
     "viewSchedule": "Kiểm tra lịch",
     "amenitiesOfRoom": "Tiện nghi trong căn hộ",
     "amenitiesCommon": "Tiện nghi chung",
@@ -18,5 +19,6 @@
     "allImages": "Tất cả ảnh",
     "priceBasic": "Mỗi tháng cho kỳ hạn 1 - 2 tháng",
     "priceBasicMobile": "/tháng",
-    "notFoundData": "Chưa có dữ liệu!"
+    "notFoundData": "Chưa có dữ liệu!",
+    "depositFee": "Giá chưa bao gồm tiền đặt cọc cho những hư hỏng, mất mát phát sinh"
 }

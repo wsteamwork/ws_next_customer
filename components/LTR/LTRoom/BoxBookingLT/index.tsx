@@ -1,7 +1,7 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import HostInfo from '@/components/HostInfo';
 import { formatMoney } from '@/utils/mixins';
-import { Divider, Theme, Typography } from '@material-ui/core';
+import { Divider, Grid, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,8 @@ interface IProps {
   avatar_url: string;
   name: string;
   number_room: number;
+  included_services?: Array<string>;
+  not_included_services?: Array<string>;
   handleOpenBookingDialog?: any;
 
 }
@@ -27,6 +29,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     rowMargin: {
       margin: '16px 0'
+    },
+    notifyText: {
+      color: '#484848'
+    },
+    textMarginBottom: {
+      marginBottom: '32px'
     }
   })
 );
@@ -41,16 +49,20 @@ const BoxBookingLT: FC<IProps> = (props) => {
     number_room,
     priceBasic,
     handleOpenBookingDialog,
+    included_services,
+    not_included_services
   } = props;
   const { t } = useTranslation();
-
+  console.log(included_services.map((value, index) => {
+    console.log(value);
+  }));
   return (
     <div className={classes.boxContainer}>
       <Typography variant="h6">{formatMoney(priceBasic)} {t('longtermroom:currency')}</Typography>
-      <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
+      <Typography className={classes.textMarginBottom} variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
 
       <div className={classes.rowMargin}>
-        <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" onClick={handleOpenBookingDialog}>
+        <ButtonGlobal height={50} background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" onClick={handleOpenBookingDialog}>
           <p className="flex_center" style={{ color: '#ffffff' }}>
             {/* <OfflineBoltRounded /> */}
             &nbsp;&nbsp;{t('longtermroom:viewSchedule')}
@@ -58,6 +70,38 @@ const BoxBookingLT: FC<IProps> = (props) => {
         </ButtonGlobal>
       </div>
 
+      <Grid container spacing={1} className={classes.rowMargin}>
+        <Grid item xs={12}>
+          <span className={classes.notifyText}>
+            <img width="17" style={{ marginRight: '5px' }} src="/static/electronics.svg" />
+            {t('longtermroom:depositFee')}
+          </span>
+        </Grid>
+        {included_services.length ? (
+          <Grid item xs={12}>
+            <span className={classes.notifyText}>
+              <img width="17" style={{ marginRight: '5px' }} src="/static/electronics.svg" />
+              {t('longtermroom:priceIncludedFee')} : {
+                included_services.map((value, index) => (
+                  <span key={index}>{value}{included_services.length !== (index + 1) ? ', ' : ''} </span>
+                ))
+              }
+            </span>
+          </Grid>
+        ) : ''}
+        {not_included_services.length ? (
+          <Grid item xs={12}>
+            <span className={classes.notifyText}>
+              <img width="17" style={{ marginRight: '5px' }} src="/static/electronics.svg" />
+              {t('longtermroom:priceNotIncludedFee')} : {
+                not_included_services.map((value, index) => (
+                  <span key={index}>{value}{not_included_services.length !== (index + 1) ? ', ' : ''} </span>
+                ))
+              }
+            </span>
+          </Grid>
+        ) : ''}
+      </Grid>
       <Divider className={classes.rowMargin} />
 
       <HostInfo

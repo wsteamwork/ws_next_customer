@@ -3,7 +3,8 @@
     "otherFee": "Other fee",
     "currency": "VND",
     "priceByTerm": "Price by lease term",
-    "priceIncludedFee": "Following fee is included in rent prices",
+    "priceIncludedFee": "This rent costs include all of the following",
+    "priceNotIncludedFee": "This rent costs NOT include following fee",
     "viewSchedule": "Check availablility",
     "amenitiesOfRoom": "All amenities included in this accommodation",
     "amenitiesCommon": "Amenities common",
@@ -18,5 +19,6 @@
     "allImages": "All Photos",
     "priceBasic": "Each month for 1-2 months term",
     "priceBasicMobile": "/month",
-    "notFoundData": "Not found data!"
+    "notFoundData": "Not found data!",
+    "depositFee": "Only furnitures guarantees deposit"
 }
