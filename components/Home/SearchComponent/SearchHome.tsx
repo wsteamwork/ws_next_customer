@@ -5,22 +5,23 @@ import NavHeaderHome from '@/components/Toolbar/NavHeaderHome';
 import { TabPanel } from '@/pages/host/update-listing/[id]';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { axios } from '@/utils/axiosInstance';
 import { Grid } from '@material-ui/core';
-import React, { useMemo, useState } from 'react';
+import Fade from '@material-ui/core/Fade';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import SearchComponent from '.';
 import CheckboxList from '../CheckboxList/index';
-import Fade from '@material-ui/core/Fade';
 
 const SearchHome = () => {
   const { t } = useTranslation();
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
   const [indexTab, setIndexTab] = useState<number>(leaseTypeGlobal);
+  const [data, setData] = useState<number>();
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const changeLeaseTypeGlobal = (i: 0 | 1) => {
-    // console.log(i);
     setIndexTab(i);
     dispatch({
       type: 'setLeaseTypeGlobal',
@@ -28,6 +29,15 @@ const SearchHome = () => {
       leaseTypePathName: i ? '/long-term-rooms' : '/rooms'
     });
   };
+  const getDataLongTermRoom = async (): Promise<any> => {
+    const res = await axios.get(`count-long-term-rooms`);
+    setData(res.data.data.total_room);
+    console.log(data);
+  };
+
+  useEffect(() => {
+    getDataLongTermRoom();
+  }, [data])
 
   return useMemo(
     () => (
@@ -60,7 +70,7 @@ const SearchHome = () => {
               <Fade in={indexTab == 1} timeout={100}>
                 <GridContainer xs={11} md={11}>
                   <Grid className='searchHome__title'>
-                    <h3>{t('home:searchComponent:sloganLongterm')}</h3>
+                    <h3>{t('home:searchComponent:sloganLongtermFirstHalf')} {data} {t('home:searchComponent:sloganLongtermSecondHalf')}</h3>
                   </Grid>
 
                   <div className="searchHome__content">
@@ -73,7 +83,7 @@ const SearchHome = () => {
         </div>
       </GridContainer>
     ),
-    [t, indexTab]
+    [t, indexTab, data]
   );
 };
 

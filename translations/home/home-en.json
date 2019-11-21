@@ -26,7 +26,8 @@
     "review": "Reviews",
     "searchComponent": {
         "enjoy": "Book and Enjoy",
-        "sloganLongterm": "More than 160 apartments for long-term lease across the country",
+        "sloganLongtermFirstHalf": "More than",
+        "sloganLongtermSecondHalf": "apartments for long-term lease across the country",
         "search": "Search",
         "guestUpper": "Guest(s)",
         "guest": "guest(s)",

@@ -17,6 +17,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
       top: '-7vh',
+      [theme.breakpoints.up('lg')]: {
+        top: '-9vh',
+      },
       position: 'absolute'
     },
     indicator: {
