@@ -107,13 +107,13 @@ const BookingCalendar: FC<Iprops> = (props) => {
               {focusedInput === 'startDate' && !!date.endDate
                 ? `${moment(movein).format('MMM Do')} - ${moment(moveout).format('MMM Do')}`
                 : focusedInput === 'endDate'
-                ? t('book:calendarLT:moveOut')
-                : t('book:calendarLT:moveIn')}
+                  ? t('book:calendarLT:moveOut')
+                  : t('book:calendarLT:moveIn')}
             </Typography>
             {focusedInput === 'endDate'
               ? t('book:calendarLT:moveInValid')
               : focusedInput === 'startDate' && !!date.endDate
-              ? `${moment(moveout).diff(moment(movein), 'days')} ${t('book:calendarLT:days')} `
+                ? `${moment(moveout).diff(moment(movein), 'days')} ${t('book:calendarLT:days')} `
                 : t('book:calendarLT:moveInRange')
             }
 
@@ -155,7 +155,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                           fullScreen
                           open={openMobilePriceDetail}
                           onClose={handleCloseMobilePriceDetail}
-                          // TransitionComponent={Transition}
+                        // TransitionComponent={Transition}
                         >
                           <Grid
                             style={{
@@ -199,26 +199,26 @@ const BookingCalendar: FC<Iprops> = (props) => {
                               <Divider style={{ margin: ' 28px 0 16px' }} />
                             </Grid>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                         </Dialog>
                       </Fragment>
                     ) : ltroom ? (
-                        <Fragment>
-                          {/* <div>
+                      <Fragment>
+                        {/* <div>
                             <Typography className={'price'}>
                               {numeral(priceBasic).format('0,0')} {t('longtermroom:currency')}
                             </Typography>
                             <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
                           </div> */}
-                          <Typography className="price">
-                            {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
-                          </Typography>
-                          <Typography variant="body2" style={{fontSize: '0.75rem'}}>{ltroom.prices.prices[0].term}</Typography>
+                        <Typography className="price">
+                          {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
+                        </Typography>
+                        <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{ltroom.prices.prices[0].term}</Typography>
                       </Fragment>
                     ) : (
-                      ''
-                    )}
+                          ''
+                        )}
                   </Grid>
                   <Grid item xs={isLogin ? 4 : 5} sm={3}>
                     <ButtonGlobal
@@ -227,47 +227,47 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       width="100%"
                       onClick={handleSubmit}
                       disabled={!disableBooking}
-                      style={{color: '#fff'}}
+                      style={{ color: '#fff' }}
                       className="btBook">
-                      {isLogin ? 'Đặt phòng' : 'Đăng nhập'}
+                      {!isLogin ? `${t('book:loginToContinue')}` : `${t('book:createBooking')}`}
                     </ButtonGlobal>
-                </Grid> 
-                </Grid> 
+                  </Grid>
+                </Grid>
               </Hidden>
               <Hidden mdDown>
                 {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                   <Fragment>
                     <h3 className="price-title">{t('book:calendarLT:priceSpecification')}</h3>
                     <Grid item xs={11}>
-                    <Grid className="box-price-sub">
+                      <Grid className="box-price-sub">
                         <Grid className="price-subtitle">{t('book:calendarLT:originalPrice')}</Grid>
-                      <Grid className="sub-price">
-                        {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                        <Grid className="sub-price">
+                          {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid className="box-price-sub">
+                      <Grid className="box-price-sub">
                         <Grid className="price-subtitle">{t('book:calendarLT:depositFee')}</Grid>
-                      <Grid className="sub-price">{`${formatMoney(
-                        LTBookingPriceCalculate.deposit
+                        <Grid className="sub-price">{`${formatMoney(
+                          LTBookingPriceCalculate.deposit
                         )}đ`}
+                        </Grid>
                       </Grid>
-                    </Grid>
 
-                    <Divider style={{ margin: ' 16px 0 28px' }} />
-                    <Grid className="box-price-sub">
+                      <Divider style={{ margin: ' 16px 0 28px' }} />
+                      <Grid className="box-price-sub">
                         <h3 className="price-title">{t('book:calendarLT:totalPrice')}</h3>
-                      <Grid className="price-title">{`${formatMoney(
-                        LTBookingPriceCalculate.price_with_fee
+                        <Grid className="price-title">{`${formatMoney(
+                          LTBookingPriceCalculate.price_with_fee
                         )}đ`}
+                        </Grid>
                       </Grid>
-                    </Grid>
                       <Divider style={{ margin: ' 0px 0 16px' }} />
                     </Grid>
                   </Fragment>
                 ) : (
-                  ''
-                )}
-                <ButtonGlobal style={{cursor: 'pointer', color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit}>
+                    ''
+                  )}
+                <ButtonGlobal style={{ cursor: 'pointer', color: '#fff' }} background={!disableBooking ? 'linear-gradient(to right, #667eea, #764ba2);' : 'linear-gradient(to right, rgb(163, 171, 208), rgb(172, 125, 220));'} onClick={handleSubmit}>
                   {isLogin ? t('book:calendarLT:createBooking') : t('book:calendarLT:loginToContinue')}
                 </ButtonGlobal>
               </Hidden>

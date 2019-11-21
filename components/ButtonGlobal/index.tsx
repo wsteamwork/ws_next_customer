@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: 600,
       fontSize: (props) => props.fontSize || '16px',
       color: (props) => (props.textColor ? props.textColor : 'white'),
-      height: (props) => props.height || '45px',
+      height: (props) => props.height || '38px',
       width: (props) => props.width || 'auto',
       padding: (props) => props.padding || '0px 20px'
     }

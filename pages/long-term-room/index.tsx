@@ -78,7 +78,7 @@ const LongtermRoom: NextPage = () => {
         />
       )}
 
-      <NavHeader />
+      <NavHeader isDetailPage={true} />
 
       {useMemo(
         () => (

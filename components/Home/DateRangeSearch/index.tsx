@@ -13,9 +13,9 @@ import enGB from 'rc-calendar/lib/locale/en_GB';
 import viVN from 'rc-calendar/lib/locale/vi_VN';
 import DatePicker from 'rc-calendar/lib/Picker';
 import React, { Dispatch, FC, memo, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
-import { useTranslation } from 'react-i18next';
 
 interface IProps {
   isDisablePastDay?: boolean;
@@ -86,7 +86,7 @@ const DateRangeSearch: FC<IProps> = (props) => {
     //   return startValue.diff(moment(), 'days') <= -1;
     // }
     // return endValue.diff(startValue, 'days') <= 0;
-    if(isDisablePastDay) {
+    if (isDisablePastDay) {
       return startValue.diff(moment(), 'days') <= -1;
     }
   };

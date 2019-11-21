@@ -14,11 +14,13 @@ interface IProps {
   isFooter?: boolean;
   onlyImg?: boolean;
   href?: string;
+  isDetailPage?: boolean;
 }
 
 const styles: any = (theme: Theme) =>
   createStyles({
     img: {
+      marginRight: '3rem !important',
       cursor: 'pointer',
       [theme!.breakpoints!.up!('md')]: {
         height: 45
@@ -36,8 +38,7 @@ const styles: any = (theme: Theme) =>
   });
 
 const Logo: FunctionComponent<IProps> = (props) => {
-  const { classes, isFooter, onlyImg, href } = props;
-
+  const { classes, isFooter, onlyImg, href, isDetailPage } = props;
   return (
     <Fragment>
       <Link href={href}>

@@ -102,7 +102,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
           <SearchAutoSuggestion />
         </Grid>
         <Grid item xs={12} md={3}>
-          <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" height={width === 'xs' ? 40 : 50} onClick={applySearch}>
+          <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" height={width === 'xs' ? 40 : 45} onClick={applySearch}>
             {t('home:searchComponent:search')}
           </ButtonGlobal>
         </Grid>

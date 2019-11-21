@@ -67,6 +67,12 @@
     "coffeeTea": "Coffee Shop",
     "transport": "Transportation",
     "petrolStation": "Petrol Station",
-    "atmBankExchange": "Bank and ATM"
+    "atmBankExchange": "Bank and ATM",
+    "aroundAccommodationImg": "Outdoor",
+    "furnituresImg": "Furnitures",
+    "kitchensImg": "Kitchen",
+    "bedroomsImg": "Bedroom",
+    "bathroomsImg": "Bathroom",
+    "livingroomsImg": "Livingroom" 
 
 }

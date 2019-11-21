@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
 
-interface Iprops {
+interface IProps {
   classes?: any;
   filter: SearchFilterState;
   updateSearchText: (searchText: string) => void;
@@ -31,17 +31,20 @@ interface Iprops {
 // - Make component customizable
 // - Refactor refactor
 
-const styles: any = (theme: Theme) =>
+const styles: any = (theme: Theme, props: IProps) =>
   createStyles({
     container: {
+      border: '1px solid #afafaf !important',
+      background: '#fff !important',
       margin: '0 auto',
       height: '100%',
       borderRadius: 4,
-      background: '#f5f5f5',
+      // background: '#f5f5f5',
       position: 'relative',
       alignItems: 'center',
       justifyContent: 'center',
       display: 'flex'
+
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -56,11 +59,9 @@ const styles: any = (theme: Theme) =>
     },
     textFieldRoot: {
       color: '#fff',
-      height: '45px',
+      height: '43px',
+      // height: '45px',
       justifyContent: 'center'
-      // [theme.breakpoints.down!('sm')]: {
-      //   padding: '8px 0'
-      // }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -119,7 +120,7 @@ const styles: any = (theme: Theme) =>
     }
   });
 
-const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
+const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
   const { classes, updateSearchText, updateSearchDistrict, updateSearchCity, filter } = props;
   const [searchText, setSearchText] = useState<string>(filter.searchText);
   const [data, setData] = useState<SearchSuggestData[]>([]);

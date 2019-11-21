@@ -1,7 +1,6 @@
 import GridContainer from '@/components/Layout/Grid/Container';
 import { TransitionCustom } from '@/components/Rooms/BottomNav';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
-// import ScrollableAnchor from 'react-scrollable-anchor';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, DialogContent, Divider, Grid, IconButton, List, Tab, Tabs, Theme, Typography } from '@material-ui/core';
@@ -9,9 +8,9 @@ import AppBar from "@material-ui/core/AppBar";
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-// import ScrollAnim from 'rc-scroll-anim';
 import 'rc-scroll-anim/assets/index.css';
 import React, { FC, Fragment, Ref, useContext, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
 interface IProps {
   classes?: any,
@@ -29,9 +28,6 @@ interface IProps {
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    dialogTitle: {
-      borderBottom: '1px solid #eee'
-    },
     dialogContent: {
       padding: 0,
     },
@@ -40,8 +36,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       background: '#000'
     },
     btClose: {
-      // marginLeft: 16,
-      // padding: 8,
       display: 'flex',
       justifyContent: 'flex-end'
     },
@@ -50,34 +44,19 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       width: '1.6rem',
       height: '1.6rem',
     },
-    roomName: {
-      textAlign: 'right',
-      margin: '0 auto',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1.125rem',
-      },
-    },
     root: {
       width: '100%',
       backgroundColor: theme.palette.background.paper,
       position: 'relative'
     },
-    ul: {
-      padding: 0,
-      backgroundColor: '#fff',
-    },
     images: {
       width: '100%',
       borderRadius: 4,
       [theme.breakpoints.up('md')]: {
-        // height: 320,
       },
-      // maxHeight: 320,
       objectFit: 'cover'
     },
     bigImage: {
-      // backgroundRepeat: 'no-repeat',
-      // backgroundSize: 'cover',
       width: '100%',
       borderRadius: 4,
       maxHeight: 500,
@@ -91,11 +70,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       backgroundColor: '#fff',
       margin: '64px 0'
     },
-    subHeader: {
-      top: '-2%',
-      fontSize: '1.6rem',
-      marginBottom: 16,
-    },
     titleSticky: {
       position: 'sticky',
       top: '5%',
@@ -107,17 +81,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         top: '-1.1%',
       }
     },
-    topbarActionButton: {
-      [theme.breakpoints.up('md')]: {
-        justifyContent: 'space-evenly',
-      },
-      justifyContent: 'flex-start',
-      overflow: 'auto',
-      whiteSpace: 'nowrap'
-    },
-    buttonMinWidth: {
-      minWidth: 'auto'
-    },
     appBar: {
       position: "relative"
     },
@@ -125,13 +88,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 
 const scrollToRef = (ref) => {
-  console.log(ref, ref.current.offsetTop);
   window.document.getElementById('full_image_dialog_openned').scrollTo(0, ref.current.offsetTop)
 }
 
 const DialogFullImage: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { open, handleClose, livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo, roomName } = props;
+  const { open, handleClose, livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms } = props;
   const livingroomRef = useRef(null);
   const bedroomRef = useRef(null);
   const bathroomRef = useRef(null);
@@ -140,6 +102,7 @@ const DialogFullImage: FC<IProps> = (props) => {
   const furnitureRef = useRef(null);
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const [value, setValue] = useState<number>(0);
+  const { t } = useTranslation();
 
   const handleChange = (event: unknown, newValue: number) => {
     setValue(newValue);
@@ -164,7 +127,6 @@ const DialogFullImage: FC<IProps> = (props) => {
             <CloseIcon className={classes.iconClose} />
           </IconButton>
         </Grid>
-        {/* <Toolbar variant="dense"> */}
         <Tabs
           value={value}
           onChange={handleChange}
@@ -180,9 +142,7 @@ const DialogFullImage: FC<IProps> = (props) => {
           <Tab label="Furniture" onClick={() => scrollToRef(furnitureRef)} {...a11yProps(4)} />
           <Tab label="Outdoor" onClick={() => scrollToRef(outdoorRef)} {...a11yProps(5)} />
         </Tabs>
-        {/* </Toolbar> */}
         <Divider />
-
 
       </AppBar>
 
@@ -195,7 +155,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
-                      <Typography variant='h5'>Phòng khách</Typography>
+                      <Typography variant='h5'>{t('room:livingroomsImg')}</Typography>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
@@ -226,7 +186,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                       <div className={classes.titleSticky}>
-                        <Typography variant='h5'>Phòng ngủ {i + 1}</Typography>
+                        <Typography variant='h5'>{t('room:bedroomsImg')} {i + 1}</Typography>
                       </div>
                     </Grid>
                     {
@@ -260,7 +220,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                       <div className={classes.titleSticky}>
-                        <Typography variant='h5'>Phòng tắm {i + 1}</Typography>
+                        <Typography variant='h5'>{t('room:bathroomsImg')} {i + 1}</Typography>
                       </div>
                     </Grid>
 
@@ -296,7 +256,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
-                      <Typography variant='h5'>Phòng bếp</Typography>
+                      <Typography variant='h5'>{t('room:kitchensImg')}</Typography>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
@@ -326,7 +286,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
-                      <Typography variant='h5'>Nội thất</Typography>
+                      <Typography variant='h5'>{t('room:furnituresImg')}</Typography>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>
@@ -356,7 +316,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
                     <div className={classes.titleSticky}>
-                      <Typography variant='h5'>Môi trường xung quanh</Typography>
+                      <Typography variant='h5'>{t('room:aroundAccommodationImg')}</Typography>
                     </div>
                   </Grid>
                   <Grid item xs={12} sm={12} md={10}>

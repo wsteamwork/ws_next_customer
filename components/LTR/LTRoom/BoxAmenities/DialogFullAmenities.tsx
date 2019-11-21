@@ -2,7 +2,7 @@ import { TransitionCustom } from '@/components/Rooms/BottomNav';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { Dialog, DialogContent, DialogTitle, Grid, IconButton, Theme, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
+import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,17 +29,24 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       }
     },
     dialogTitle: {
+      padding: '0px 24px',
       borderBottom: '1px solid #eee',
       position: 'sticky',
       top: 0,
       backgroundColor: '#fff'
     },
-    closeButton: {
-      marginRight: 16,
-      padding: 8,
+    btnIconClose: {
+      borderRadius: 'unset',
+      background: '#000'
     },
-    closeButtonRoot: {
-
+    btClose: {
+      display: 'flex',
+      justifyContent: 'flex-end'
+    },
+    iconClose: {
+      color: '#fff',
+      width: '1.6rem',
+      height: '1.6rem',
     },
     title: {
       fontWeight: 700,
@@ -69,18 +76,14 @@ const DialogFullAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Dialog scroll='body' fullWidth fullScreen={width === 'xs'}
+    <Dialog scroll='paper' fullWidth fullScreen={width === 'xs'}
       aria-labelledby="scroll-dialog-title" open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
-      <DialogTitle id="scroll-dialog-title" disableTypography className={classes.dialogTitle}>
-        <IconButton
-          className={classes.closeButton}
-          onClick={handleClose}
-          classes={{
-            root: classes.closeButtonRoot
-          }}>
-          <CloseIcon style={{ fontSize: '2rem' }} />
+      <Grid item className={classes.btClose}>
+        <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>
+          <CloseIcon className={classes.iconClose} />
         </IconButton>
-
+      </Grid>
+      <DialogTitle id="scroll-dialog-title" disableTypography className={classes.dialogTitle}>
         <Typography variant="h6" className={classes.title}>
           {t('longtermroom:amenitiesOfRoom')}
         </Typography>

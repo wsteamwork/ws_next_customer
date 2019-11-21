@@ -17,5 +17,6 @@
     "outdoors": "Outdoor",
     "allImages": "All Photos",
     "priceBasic": "Each month for 1-2 months term",
+    "priceBasicMobile": "/month",
     "notFoundData": "Not found data!"
 }

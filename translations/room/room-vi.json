@@ -16,7 +16,8 @@
         "chargeAddGuest": "Phí thu thêm người",
         "chargeAddHour": "Phí thu thêm giờ",
         "setByHour": "Đặt theo giờ",
-        "average": "Trung bình"
+        "average": "Trung bình",
+        "checkSchedule": "Đặt phòng"
     },
     "map": "Bản đồ",
     "changeSearch": "Thay đổi tìm kiếm",
@@ -67,5 +68,11 @@
     "coffeeTea": "Tiệm cafe",
     "transport": "Phương tiện công cộng",
     "petrolStation": "Trạm xăng",
-    "atmBankExchange": "ATM & Ngân hàng"
+    "atmBankExchange": "ATM & Ngân hàng",
+    "aroundAccommodationImg": "Khu vực bên ngoài",
+    "furnituresImg": "Nội thất",
+    "kitchensImg": "Khu bếp",
+    "bedroomsImg": "Phòng ngủ",
+    "bathroomsImg": "Phòng tắm",
+    "livingroomsImg": "Phòng khách" 
 }

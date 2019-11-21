@@ -33,19 +33,19 @@ const BoxBottomBooking: FC<IProps> = (props) => {
                       <Typography className={'price'}>
                         {numeral(priceBasic).format('0,0')} {t('longtermroom:currency')}
                       </Typography>
-                      <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
+                      <Typography variant="subtitle2">{t('longtermroom:priceBasicMobile')}</Typography>
                     </div>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={4} sm={3}>
+              <Grid item xs={5} sm={3}>
                 <ButtonGlobal
                   background="linear-gradient(to right, #667eea, #764ba2);"
                   padding="0px"
                   width="100%"
                   onClick={handleOpenBookingDialog}
                   className="btBook">
-                  {t('room:boxBooking:bookNow')}
+                  {t('longtermroom:viewSchedule')}
                 </ButtonGlobal>
               </Grid>
             </Grid>

@@ -26,7 +26,9 @@ const CustomInput = withStyles((theme: Theme) =>
       position: 'relative',
       fontSize: '16px !important',
       padding: '10px 26px 10px 12px !important',
-      backgroundColor: '#f5f5f5 !important',
+      // backgroundColor: '#f5f5f5 !important',
+      backgroundColor: '#fff !important',
+      border: '1px solid #afafaf',
       height: 'calc(100% - 20px) !important',
       alignItems: 'center',
       display: 'flex !important',
@@ -40,7 +42,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     select: {
       width: '100%',
-      height: '100%'
+      height: '100%',
+      border: '1px solid #afafaf !important',
+      borderRadius: '4px'
     },
     customMenuItem: {
       width: '100%'

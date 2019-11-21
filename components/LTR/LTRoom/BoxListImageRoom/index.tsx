@@ -36,6 +36,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         maxHeight: 70,
         height: 70,
       },
+      [theme.breakpoints.up('md')]: {
+        maxHeight: 95,
+        height: 95,
+      },
+      [theme.breakpoints.up('lg')]: {
+        maxHeight: 110,
+        height: 110,
+      },
+      [theme.breakpoints.up('xl')]: {
+        maxHeight: 150,
+        height: 150,
+      },
       maxHeight: 150,
       height: 150,
       objectFit: 'cover',
