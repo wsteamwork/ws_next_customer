@@ -68,7 +68,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     listSection: {
       backgroundColor: '#fff',
-      margin: '64px 0'
+      // margin: '64px 0'
+      margin: '8px 0'
     },
     titleSticky: {
       position: 'sticky',
@@ -120,7 +121,7 @@ const DialogFullImage: FC<IProps> = (props) => {
     500: 1
   };
   return (
-    <Dialog fullScreen={width === 'xs' ? true : false} fullWidth={true} maxWidth="xl" open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
+    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
       <AppBar className={classes.appBar} color="inherit" elevation={0}>
         <Grid item className={classes.btClose}>
           <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>

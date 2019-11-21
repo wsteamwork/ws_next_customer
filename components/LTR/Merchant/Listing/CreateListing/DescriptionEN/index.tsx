@@ -280,7 +280,7 @@ const DescriptionEN: FC<IProps> = (props) => {
 
                   <Grid item className={classes.margin_top}>
                     <CardTextarea
-                      name="rules"
+                      name="rules_en"
                       label={t('details:listingRules')}
                       sub_textarea={true}
                       sub_label={t('details:subRules')}
