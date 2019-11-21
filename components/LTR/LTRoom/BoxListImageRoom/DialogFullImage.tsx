@@ -136,12 +136,24 @@ const DialogFullImage: FC<IProps> = (props) => {
           textColor="inherit"
           aria-label="action tabs example"
         >
-          <Tab label="Livingroom" onClick={() => scrollToRef(livingroomRef)} {...a11yProps(0)} />
-          <Tab label="Bedroom" onClick={() => scrollToRef(bedroomRef)} {...a11yProps(1)} />
-          <Tab label="Bathroom" onClick={() => scrollToRef(bathroomRef)} {...a11yProps(2)} />
-          <Tab label="Kitchen" onClick={() => scrollToRef(kitchenRef)} {...a11yProps(3)} />
-          <Tab label="Furniture" onClick={() => scrollToRef(furnitureRef)} {...a11yProps(4)} />
-          <Tab label="Outdoor" onClick={() => scrollToRef(outdoorRef)} {...a11yProps(5)} />
+          {
+            livingrooms && livingrooms.images && <Tab label={t('longtermroom:livingrooms')} onClick={() => scrollToRef(livingroomRef)} {...a11yProps(0)} />
+          }
+          {
+            bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length && <Tab label={t('longtermroom:bedrooms')} onClick={() => scrollToRef(bedroomRef)} {...a11yProps(1)} />
+          }
+          {
+            bathrooms[`bathroom_1`] && bathrooms[`bathroom_1`].images && bathrooms[`bathroom_1`].images.length && <Tab label={t('longtermroom:bathrooms')} onClick={() => scrollToRef(bathroomRef)} {...a11yProps(2)} />
+          }
+          {
+            kitchens && kitchens.images && kitchens.images.length && <Tab label={t('longtermroom:kitchens')} onClick={() => scrollToRef(kitchenRef)} {...a11yProps(3)} />
+          }
+          {
+            furnitures && furnitures.images && furnitures.images.length && <Tab label={t('longtermroom:furnitures')} onClick={() => scrollToRef(furnitureRef)} {...a11yProps(4)} />
+          }
+          {
+            outdoors && outdoors.images && outdoors.images.length && <Tab label={t('longtermroom:outdoors')} onClick={() => scrollToRef(outdoorRef)} {...a11yProps(5)} />
+          }
         </Tabs>
         <Divider />
 
