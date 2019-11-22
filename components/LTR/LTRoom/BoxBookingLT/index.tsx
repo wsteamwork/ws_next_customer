@@ -54,7 +54,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
   const { t } = useTranslation();
   return (
     <div className={classes.boxContainer}>
-      <Typography variant="h6">{formatMoney(priceBasic)} {t('longtermroom:currency')}</Typography>
+      <Typography variant="h6">{t('longtermroom:currency')}{formatMoney(priceBasic)}</Typography>
       <Typography className={classes.textMarginBottom} variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
 
       <div className={classes.rowMargin}>

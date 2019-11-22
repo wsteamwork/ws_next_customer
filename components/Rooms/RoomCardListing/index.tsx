@@ -77,9 +77,6 @@ export const settingSliderRoomCard = {
     dynamicBullets: true
   },
   loop: true,
-  // getSwiper: (swiper: SwiperInstance) => {
-  //   swiper.update();
-  // }
 };
 
 const RoomCardListing: FC<Iprops> = (props) => {
@@ -87,15 +84,8 @@ const RoomCardListing: FC<Iprops> = (props) => {
   const { t }: UseTranslationResponse = useTranslation();
   const { width } = useContext<IGlobalContext>(GlobalContext);
   const cookies = new Cookies();
-  // const dispatch = useDispatch<Dispatch<CompareRoomsActions>>();
-  // const comparisonList = useSelector<ReducersList, RoomIndexRes[]>(
-  //   (state) => state.compareRooms.compareRooms
-  // );
-
-
   const typoVariant: ThemeStyle = width === 'sm' || width === 'xs' ? 'subtitle2' : 'h6';
-  // const totalComfort = room.comforts.data.length - 4;
-  // console.log(room)
+
   const avatarImg = room.media && room.media.data.length ? IMAGE_STORAGE_SM + room.media.data[0].image : room.avatar_image ? IMAGE_STORAGE_SM + room.avatar_image : './static/images/westay-avatar.jpg';
   return (
     <Paper elevation={0} className="roomCardListing">
@@ -243,6 +233,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                       <Grid className="dayPrice">
                         {room.is_discount === 1 ? (
                           <span className="discountPriceText">
+                            {t('shared:currency')}
                             {numeral(room.price_day).format('0,0')}
                             {t('shared:dayPrice')}
                           </span>
@@ -250,6 +241,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                             ''
                           )}
                         <Typography className="priceText" variant={typoVariant}>
+                          {t('shared:currency')}
                           {numeral(
                             room.is_discount === 1 ? room.price_day_discount : room.price_day
                           ).format('0,0')}
@@ -265,6 +257,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         <Grid className="hourPrice">
                           {room.is_discount === 1 ? (
                             <span className="discountPriceText">
+                              {t('shared:currency')}
                               {numeral(room.price_hour).format('0,0')}
                               {t('shared:hourPrice')}
                             </span>
@@ -272,6 +265,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                               ''
                             )}
                           <Typography className="priceText" variant={typoVariant}>
+                            {t('shared:currency')}
                             {numeral(
                               room.is_discount === 1 ? room.price_hour_discount : room.price_hour
                             ).format('0,0')}

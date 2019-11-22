@@ -68,7 +68,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
           <TableHead>
             <TableRow>
               <StyledTableCell> {t('longtermroom:priceByTerm')}</StyledTableCell>
-              <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
+              <StyledTableCell align="right">{t('longtermroom:currency')}</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,7 +78,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
                   <StyledTableCell component="th" scope="row">
                     {o.term}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
+                  <StyledTableCell align="right">{t('longtermroom:currency')}{`${formatMoney(o.price)}`}</StyledTableCell>
                 </StyledTableRow>
               ))
             ) : (
@@ -96,7 +96,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
             <TableHead>
               <TableRow>
                 <StyledTableCell>{t('longtermroom:otherFee')}</StyledTableCell>
-                <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
+                <StyledTableCell align="right">{t('longtermroom:currency')}</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

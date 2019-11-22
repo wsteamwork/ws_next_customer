@@ -84,6 +84,12 @@
       width: 100%;
 
       @include xs {
+        height: 190px;
+      }
+      @include sm {
+        height: 200px;
+      }
+      @include md {
         height: 200px;
       }
 

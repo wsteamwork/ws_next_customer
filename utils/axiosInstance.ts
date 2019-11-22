@@ -8,6 +8,7 @@ export const MERCHANT_URL = process.env.API_URL + 'merchant-api/';
 
 const cookies = new Cookies();
 
+console.log(cookies.get('initLanguage'));
 const headers = {
   Accept: 'application/json',
   'Accept-Language': cookies.get('initLanguage') || 'vi',

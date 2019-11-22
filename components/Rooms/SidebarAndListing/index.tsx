@@ -43,7 +43,7 @@ const SidebarAndListing: FC = (props) => {
   };
 
   return (
-    <GridContainer xs={11} md={11} lg={10} xl={9}>
+    <GridContainer xs={11} md={10} lg={9} xl={8}>
       <Grid
         container
         justify="center"
@@ -51,7 +51,7 @@ const SidebarAndListing: FC = (props) => {
         spacing={4}
         style={{ marginTop: width === 'xs' || width === 'sm' ? '8px' : '48px' }}>
         {meta && !isLoading ? (
-          <Hidden smDown>
+          <Hidden mdDown>
             <Grid item sm={4} lg={3}>
               <Paper
                 elevation={0}
@@ -69,14 +69,14 @@ const SidebarAndListing: FC = (props) => {
             </Grid>
           </Hidden>
         ) : (
-            <Hidden smDown>
+            <Hidden mdDown>
               <Grid item sm={4} lg={3}>
                 <LoadingSkeleton type={'sideBar'} />
               </Grid>
             </Hidden>
           )}
 
-        <Grid item lg={9} md={8} sm={12} xs={12}>
+        <Grid item lg={9} md={11} sm={12} xs={12}>
           <RoomListing usingInMap={false} rooms={rooms} />
         </Grid>
       </Grid>

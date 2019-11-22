@@ -212,7 +212,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                             <Typography variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
                           </div> */}
                         <Typography className="price">
-                          {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
+                          {t('longtermroom:currency')}{formatMoney(ltroom.prices.prices[0].price)}
                         </Typography>
                         <Typography variant="body2" style={{ fontSize: '0.75rem' }}>{ltroom.prices.prices[0].term}</Typography>
                       </Fragment>

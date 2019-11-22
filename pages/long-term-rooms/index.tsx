@@ -107,9 +107,7 @@ const LongtermRooms: NextPage = () => {
                 </Grid>
               </GridContainer>
               <FilterActions showBookByHour={false} />
-              {/* <LazyLoad offset={100}> */}
               <MapAndListing />
-              {/* </LazyLoad> */}
               <BottomNav />
             </Hidden>
           </div>

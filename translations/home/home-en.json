@@ -22,7 +22,8 @@
     "contact" : "Contact",
     "notification" : "Notification",
     "supportHost" : "For host",
-    "currency" : "USD",
+    "currency" : "$",
+    "langSwitcher": "English",
     "review": "Reviews",
     "searchComponent": {
         "enjoy": "Book and Enjoy",

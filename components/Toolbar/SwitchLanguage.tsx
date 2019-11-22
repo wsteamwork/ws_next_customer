@@ -108,7 +108,7 @@ const SwitchLanguage: FunctionComponent<IProps> = (props) => {
               className={classes.img}
             />
           }
-          label={t('home:currency')}
+          label={t('home:langSwitcher')}
           // onDelete={handleSwitch}
           // deleteIcon={<IconLanguage />}
           className={classes.chip}

@@ -18,11 +18,11 @@
   }
 
   @include smUp {
-    height: 200px;
+    height: 190px;
   }
 
   @include md {
-    height: 230px;
+    height: 200px;
   }
 
   &:hover {
@@ -160,8 +160,9 @@
 
             .roomName {
               overflow: hidden;
-              font-size: 15px;
-              font-weight: 700;
+              // font-size: 15px;
+              font-size: 1.1rem;
+              font-weight: 600;
               overflow-wrap: break-word;
               text-overflow: ellipsis;
               color: #484848;
@@ -170,6 +171,7 @@
               margin-bottom: 6px;
 
               @include xs {
+                font-size: 1rem;
                 margin-bottom: 10px;
               }
             }
@@ -282,17 +284,21 @@
             }
 
             .priceText {
-              font-size: 14px;
+              // font-size: 16px;
+              font-size: 1.0675rem;
               margin-left: 20px;
               color: #fa991c;
-              font-weight: 700;
+              font-weight: 600;
+              @include xs {
+                font-size: 1rem;
+              }
             }
 
             .discountPriceText {
               font-size: 13px;
               color: #7d7d7db3;
               text-decoration: line-through;
-              font-weight: 700;
+              font-weight: 600;
             }
 
             .discountPriceBadge {

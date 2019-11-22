@@ -9,8 +9,9 @@
         "conf": "Confirm cancellation",
         "success": "Cancel the room successfully!"
     },
-    "dayPrice": "VND/night",
-    "hourPrice": "VND/4 hours",
+    "currency": "$",
+    "dayPrice": "/night",
+    "hourPrice": "/4hrs",
     "facilities": "Facilities",
     "bedrooms": "Bedroom",
     "kitchens": "Kitchen",

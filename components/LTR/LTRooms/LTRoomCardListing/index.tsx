@@ -26,7 +26,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
-  const price = room.price_display ? `${formatMoney(room.price_display)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
+  const price = room.price_display ? `${t('rooms:currency')}${formatMoney(room.price_display)}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
   // const price = room.price_display ? `${(room.price_display / 1000000)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
 
   return (

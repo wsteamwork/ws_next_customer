@@ -1,7 +1,7 @@
 {
     "feeIncluded":"Fee included in rent price",
     "otherFee": "Other fee",
-    "currency": "VND",
+    "currency": "$",
     "priceByTerm": "Price by lease term",
     "priceIncludedFee": "This rent costs include all of the following",
     "priceNotIncludedFee": "This rent costs NOT include following fee",
