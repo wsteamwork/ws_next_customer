@@ -48,10 +48,10 @@ const BookingInfoDetail: FC = () => {
                       </Grid>
                       <Grid container item xs={12}>
                         <Grid item xs={6} className={'fontLowTitle'}>
-                          Số ngày ở
+                          {t('book:bookingForm:rangeStay')}
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          {LTBookingPriceCalculate.range_stay} ngày
+                          {LTBookingPriceCalculate.range_stay} {t('book:calendarLT:days')}
                         </Grid>
                       </Grid>
                       <Grid container item xs={12}>
@@ -68,16 +68,16 @@ const BookingInfoDetail: FC = () => {
                       <Grid container item xs={12}>
                         <Grid item xs={6} className={'fontLowTitle'}>
                           {/* {t('book:bookingInfoDetail:price')} */}
-                          Giá gốc
+                          {t('book:calendarLT:originalPrice')}
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                          {t('longtermroom:currency')}{`${formatMoney(LTBookingPriceCalculate.price_original)}`}
                         </Grid>
                       </Grid>
                       <Grid container item xs={12}>
                         <Grid item xs={6} className={'fontLowTitle'}>
                           {/* {t('book:bookingInfoDetail:serviceFee')} */}
-                          Giá đặt cọc
+                          {t('book:calendarLT:depositFee')}
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
                           {/* {`${formatMoney(
@@ -85,7 +85,7 @@ const BookingInfoDetail: FC = () => {
                               dataCalculate.charge_additional_guest +
                               dataCalculate.charge_additional_hour
                           )}đ`} */}
-                          {`${formatMoney(LTBookingPriceCalculate.deposit)}đ`}
+                          {t('longtermroom:currency')}{`${formatMoney(LTBookingPriceCalculate.deposit)}`}
                         </Grid>
                       </Grid>
                     </Grid>
@@ -96,9 +96,9 @@ const BookingInfoDetail: FC = () => {
                           <Typography variant="h6">{t('book:bookingInfoDetail:total')}</Typography>
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          <Typography variant="h6">{`${formatMoney(
+                          <Typography variant="h6">{t('longtermroom:currency')}{`${formatMoney(
                             LTBookingPriceCalculate.price_with_fee
-                          )}đ`}</Typography>
+                          )}`}</Typography>
                         </Grid>
                       </Grid>
                     </Grid>

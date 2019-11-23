@@ -56,13 +56,14 @@
         "submit": "Submit",
         "choosePayment": "Choose 1 payment method",
         "transferMoney": "Transfer money via",
-        "directTransfer": "Direct transfer"
-    }   ,
+        "directTransfer": "Direct transfer",
+        "rangeStay": "Số ngày ở"
+    },
     "calendarLT": {
         "moveInRange": "Move-in date must be within 30 days from now",
         "moveInValid": "We only accept booking atleast 30 days",
         "resetDate": "Reset",
-        "days": "day",
+        "days": "days",
         "detailPrices": "Price detail",
         "priceSpecification": "Price detail",
         "originalPrice": "Original price",

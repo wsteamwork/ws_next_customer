@@ -147,8 +147,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                     {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                       <Fragment>
                         <Typography className="price">
-                          {formatMoney(LTBookingPriceCalculate.price_with_fee)}đ/
-                          {LTBookingPriceCalculate.range_stay} {t('book:calendarLT:days')}
+                          {t('longtermroom:currency')}{formatMoney(LTBookingPriceCalculate.price_with_fee)}/{LTBookingPriceCalculate.range_stay} {t('book:calendarLT:days')}
                         </Typography>
                         <a onClick={handleOpenMobilePriceDetail}>{t('book:calendarLT:detailPrices')}</a>
                         <Dialog
@@ -179,22 +178,22 @@ const BookingCalendar: FC<Iprops> = (props) => {
                               <Grid className="box-price-sub">
                                 <Grid className="price-subtitle">{t('book:calendarLT:originalPrice')}</Grid>
                                 <Grid className="sub-price">
-                                  {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                                  {t('longtermroom:currency')}{`${formatMoney(LTBookingPriceCalculate.price_original)}`}
                                 </Grid>
                               </Grid>
                               <Grid className="box-price-sub">
                                 <Grid className="price-subtitle">{t('book:calendarLT:depositFee')}</Grid>
-                                <Grid className="sub-price">{`${formatMoney(
+                                <Grid className="sub-price">{t('longtermroom:currency')}{`${formatMoney(
                                   LTBookingPriceCalculate.deposit
-                                )}đ`}</Grid>
+                                )}`}</Grid>
                               </Grid>
 
                               <Divider style={{ margin: ' 16px 0 28px' }} />
                               <Grid className="box-price-sub">
                                 <h3 className="price-title">{t('book:calendarLT:totalPrice')}</h3>
-                                <Grid className="price-title">{`${formatMoney(
+                                <Grid className="price-title">{t('longtermroom:currency')}{`${formatMoney(
                                   LTBookingPriceCalculate.price_with_fee
-                                )}đ`}</Grid>
+                                )}`}</Grid>
                               </Grid>
                               <Divider style={{ margin: ' 28px 0 16px' }} />
                             </Grid>
@@ -242,23 +241,23 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       <Grid className="box-price-sub">
                         <Grid className="price-subtitle">{t('book:calendarLT:originalPrice')}</Grid>
                         <Grid className="sub-price">
-                          {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                          {t('longtermroom:currency')}{`${formatMoney(LTBookingPriceCalculate.price_original)}`}
                         </Grid>
                       </Grid>
                       <Grid className="box-price-sub">
                         <Grid className="price-subtitle">{t('book:calendarLT:depositFee')}</Grid>
-                        <Grid className="sub-price">{`${formatMoney(
+                        <Grid className="sub-price">{t('longtermroom:currency')}{`${formatMoney(
                           LTBookingPriceCalculate.deposit
-                        )}đ`}
+                        )}`}
                         </Grid>
                       </Grid>
 
                       <Divider style={{ margin: ' 16px 0 28px' }} />
                       <Grid className="box-price-sub">
                         <h3 className="price-title">{t('book:calendarLT:totalPrice')}</h3>
-                        <Grid className="price-title">{`${formatMoney(
+                        <Grid className="price-title">{t('longtermroom:currency')}{`${formatMoney(
                           LTBookingPriceCalculate.price_with_fee
-                        )}đ`}
+                        )}`}
                         </Grid>
                       </Grid>
                       <Divider style={{ margin: ' 0px 0 16px' }} />
