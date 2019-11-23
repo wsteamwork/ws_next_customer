@@ -136,7 +136,7 @@
   }
 
   .boxSave {
-    position: absolute;
+    // position: absolute;
     right: -16px;
     bottom: -12px;
     width: 60px;
@@ -166,6 +166,9 @@
     .cardWrapper {
       height: 100%;
       padding: 8px 16px;
+      @include md {
+        padding: 8px 8px;
+      }
       box-sizing: border-box;
 
       .cardContainer {
@@ -189,11 +192,12 @@
               overflow-wrap: break-word;
               color: #484848;
               line-height: 24px;
-              margin-bottom: 6px;
+              // margin-bottom: 6px;
               display: -webkit-box;
               max-height: 52px;
-              height: 52px;
-              -webkit-line-clamp: 2;
+              // height: 52px;
+              // -webkit-line-clamp: 2;
+              -webkit-line-clamp: 1;
               text-overflow: ellipsis;
               -webkit-box-orient: vertical;
 
@@ -211,10 +215,14 @@
               }
             }
 
+            .roomSubtitle {
+              font-size: 12px;
+            }
+
             .roomType {
               text-transform: uppercase;
               font-size: 12px;
-              font-weight: 600;
+              font-weight: 500;
               color: #673ab7;
               display: inline-block;
               margin-right: 3px;
@@ -287,11 +295,18 @@
             }
           }
 
-          .boxPrice {
-            margin-top: 12px;
+          .boxPriceContainer{
+            display: flex;
+            justify-content: flex-end;
+          }
 
+          .boxPrice {
+            // margin-top: 12px;
+            font-size: 11px;
+            margin-top: 4px;
+            text-align: right;
             .priceBasic {
-              font-weight: 500;
+              font-weight: 700;
               color: #484848;
             }
 

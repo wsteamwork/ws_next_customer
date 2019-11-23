@@ -56,7 +56,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
   }, [longtermRooms, isLoading]);
 
   return (
-    <GridContainer xs={11} md={11} lg={10}>
+    <GridContainer xs={11} md={9} lg={10}>
       {longtermRooms.length > 0 && !isLoading ? (
         <Fragment>
           {meta && (
@@ -73,7 +73,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
               render={renderRooms}
               usingInMap={usingInMap}
               hoverAction={hoverAction}
-              xs={12} sm={6} md={4} lg={4} xl={3}
+              xs={12} sm={6} md={6} lg={4} xl={3}
               xsMap={12} smMap={6}
             />
           </LazyLoad>

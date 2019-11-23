@@ -2,7 +2,7 @@
     "boxBooking": {
         "bookNow": "Đặt ngay",
         "guest": "khách",
-        "day": "ngày",
+        "day": "đêm",
         "hours": "giờ",
         "cancellationPolicy": "Chính sách hủy phòng",
         "details": "Chi tiết",
@@ -74,5 +74,6 @@
     "kitchensImg": "Khu bếp",
     "bedroomsImg": "Phòng ngủ",
     "bathroomsImg": "Phòng tắm",
-    "livingroomsImg": "Phòng khách" 
+    "livingroomsImg": "Phòng khách",
+    "currency": "đ"
 }

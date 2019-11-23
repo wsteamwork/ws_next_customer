@@ -83,8 +83,9 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
               gutters: classes.listItemGutters
             }}
             button
-            onClick={() => setOpen(false)}
-            href="/profile">
+            onClick={() => {
+              router.push('/profile');
+            }}>
             <Avatar alt='Profile' src={'@/../../../static/images/room_demo.jpg'}
               className={classes.bigAvatar} />
           </ListItem>
@@ -94,8 +95,9 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
               gutters: classes.listItemGutters
             }}
             button
-            onClick={() => setOpen(false)}
-            href="/">
+            onClick={() => {
+              router.push('/');
+            }}>
             <ListItemText
               primary={t('home:home')}
               classes={{
@@ -109,8 +111,9 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
               gutters: classes.listItemGutters
             }}
             button
-            onClick={() => setOpen(false)}
-            href="/profile">
+            onClick={() => {
+              router.push('/profile');
+            }}>
             <ListItemText
               primary={t('home:profile')}
               classes={{
@@ -123,8 +126,10 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
               gutters: classes.listItemGutters
             }}
             button
-            onClick={() => setOpen(false)}
-            href="/host/booking-list">
+            onClick={() => {
+              router.push('/host/booking-list');
+            }}
+          >
             <ListItemText
               primary={'Danh sách booking'}
               classes={{
@@ -150,10 +155,14 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
 
           <Collapse in={openItem} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button className={classes.nested} href="/host/room-list">
+              <ListItem button className={classes.nested} onClick={() => {
+                router.push('/host/room-list');
+              }}>
                 <ListItemText primary="Danh sách phòng" />
               </ListItem>
-              <ListItem button className={classes.nested} href="/host/create-listing/basic">
+              <ListItem button className={classes.nested} onClick={() => {
+                router.push('/host/create-listing/basic');
+              }}>
                 <ListItemText primary="Đăng phòng" />
               </ListItem>
             </List>
@@ -192,8 +201,9 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
           <ListItem
             button
             component="a"
-            onClick={() => setOpen(false)}
-            href="/terms-and-conditions"
+            onClick={() => {
+              router.push('/terms-and-conditions');
+            }}
             classes={{
               gutters: classes.listItemGutters
             }}>

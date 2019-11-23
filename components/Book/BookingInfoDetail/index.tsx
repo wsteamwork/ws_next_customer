@@ -61,7 +61,7 @@ const BookingInfoDetail: FC = (props) => {
                           {t('book:bookingInfoDetail:price')}
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          {`${formatMoney(dataCalculate.price_original)}đ`}
+                          {t('room:currency')}{`${formatMoney(dataCalculate.price_original)}`}
                         </Grid>
                       </Grid>
                       <Grid container item xs={12}>
@@ -69,11 +69,11 @@ const BookingInfoDetail: FC = (props) => {
                           {t('book:bookingInfoDetail:serviceFee')}
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          {`${formatMoney(
+                          {t('room:currency')}{`${formatMoney(
                             dataCalculate.service_fee +
                             dataCalculate.charge_additional_guest +
                             dataCalculate.charge_additional_hour
-                          )}đ`}
+                          )}`}
                         </Grid>
                       </Grid>
                     </Grid>
@@ -84,9 +84,9 @@ const BookingInfoDetail: FC = (props) => {
                           <Typography variant="h6">{t('book:bookingInfoDetail:total')}</Typography>
                         </Grid>
                         <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                          <Typography variant="h6">{`${formatMoney(
+                          <Typography variant="h6">{t('room:currency')}{`${formatMoney(
                             dataCalculate.total_fee
-                          )}đ`}</Typography>
+                          )}`}</Typography>
                         </Grid>
                       </Grid>
                     </Grid>

@@ -2,7 +2,7 @@
     "boxBooking": {
         "bookNow": "Book Now",
         "guest": "guest(s)",
-        "day": "day",
+        "day": "night",
         "hours": "hours",
         "cancellationPolicy": "Cancellation policy",
         "details": "Details",
@@ -73,6 +73,7 @@
     "kitchensImg": "Kitchen",
     "bedroomsImg": "Bedroom",
     "bathroomsImg": "Bathroom",
-    "livingroomsImg": "Livingroom" 
+    "livingroomsImg": "Livingroom",
+    "currency": "$"
 
 }

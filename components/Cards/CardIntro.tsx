@@ -186,7 +186,7 @@ const CardIntro: FunctionComponent<IProps> = (props) => {
         {showPrice ? (
           <div className={classes.boxPrice}>
             <Typography variant="subtitle2" className={classes.price}>
-              {t('home:fromPrice')} <br /> {recommendedPrice}/{t('home:night')}
+              {t('home:fromPrice')} <br /> {t('home:currency')}{recommendedPrice}/{t('home:night')}
             </Typography>
           </div>
         ) : (

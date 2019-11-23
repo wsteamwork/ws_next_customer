@@ -100,7 +100,7 @@ const TablePrices: FC<IProps> = (props) => {
           <TableHead>
             <TableRow>
               <StyledTableCell>{t('room:surchargeList')}</StyledTableCell>
-              <StyledTableCell align="right">{t('room:surcharge')} (VND)</StyledTableCell>
+              <StyledTableCell align="right">{t('room:surcharge')} ({t('room:currency')})</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
