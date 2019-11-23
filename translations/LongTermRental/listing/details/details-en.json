@@ -1,11 +1,19 @@
 {
-    "listingName": "Name your place",
+    "listingName": "Name your place (in Vietnamese)",    
+    "listingNameEN": "Name your place (in English)",
+
+    "listingDesEN": "Describe your place to guests (in English)",
+
+    "listingSpaceEN": "Describe your accommodation spaces (in English)",
+
+    "listingRulesEN": "Which rules your guests need to know (in English)",
+
     "subName": "Named will attract customers to pay attention to your place.",
-    "listingDes": "Describe your place to guests",
+    "listingDes": "Describe your place to guests (in Vietnamese)",
     "subDes": "Write a short description helps customers know the highlights that only in your place.",
-    "listingSpace": "Your space",
+    "listingSpace": "Describe your accommodation spaces (in Vietnamese)",
     "subSpace": "Write more information like bedroom, living room, parking area, outdoor relaxation space.",
-    "listingRules": "Your rules",
+    "listingRules": "Which rules your guests need to know (in Vietnamese)",
     "subRules": "Some rules that guests need to follow when staying at your place.",
     "addMoreInfo":"Want to add more info? (optional)",
     "subAddMore":"Use the field below to share more information about your place",

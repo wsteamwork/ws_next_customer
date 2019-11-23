@@ -128,7 +128,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                 <Grid item xs={11}>
                   <CardTextarea
                     name="name_en"
-                    label={t('details:listingName')}
+                    label={t('details:listingNameEN')}
                     sub_label={t('details:subName')}
                     value={values.name_en.replace(/\s+/g, ' ')}
                     classTextField={
@@ -169,7 +169,7 @@ const DescriptionEN: FC<IProps> = (props) => {
 
                   <CardTextarea
                     name="description_en"
-                    label={t('details:listingDes')}
+                    label={t('details:listingDesEN')}
                     sub_label={t('details:subDes')}
                     // value={values.description_en.replace(/\s+/g, ' ')}
                     value={values.description_en}
@@ -234,7 +234,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                   <Grid item className={classes.margin_top}>
                     <CardTextarea
                       name="space_en"
-                      label={t('details:listingSpace')}
+                      label={t('details:listingSpaceEN')}
                       sub_textarea={true}
                       sub_label={t('details:subSpace')}
                       value={values.space_en}
@@ -281,7 +281,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                   <Grid item className={classes.margin_top}>
                     <CardTextarea
                       name="rules_en"
-                      label={t('details:listingRules')}
+                      label={t('details:listingRulesEN')}
                       sub_textarea={true}
                       sub_label={t('details:subRules')}
                       value={values.rules_en}
