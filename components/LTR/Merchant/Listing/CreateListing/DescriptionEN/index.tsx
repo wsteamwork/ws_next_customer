@@ -273,7 +273,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                       handleBlur={(e) => {
                         handleBlur(e);
                         // console.log(e.currentTarget.value);
-                        dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                        dispatchDescription({ type: 'setSpaceEN' }, e.currentTarget.value);
                       }}
                     />
                   </Grid>
