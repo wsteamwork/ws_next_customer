@@ -33,9 +33,9 @@ const useValidatation = () => {
     description: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(500, t('details:des500Character')),
+      .max(5000, t('details:des500Character')),
     space: Yup.string().max(1000, t('details:space1000Character')),
-    rules: Yup.string().max(500, t('details:rules500Character'))
+    rules: Yup.string().max(5000, t('details:rules500Character'))
   });
 
   return FormValidationSchema;
@@ -241,7 +241,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={500}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={
                         !!(
@@ -263,7 +263,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 500 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                       handleChange={handleChange}
                       handleBlur={(e) => {
@@ -353,7 +353,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                         }
                         rows={4}
                         rowsMax={9}
-                        max_char={500}
+                        max_char={5000}
                         multiline={true}
                         classMaxChar={
                           !!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'
@@ -365,7 +365,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                               : ''
                           }
                         }}
-                        inputProps={{ maxLength: 500 }}
+                        inputProps={{ maxLength: 5000 }}
                         placeholder={
                           width !== 'xl' && width !== 'lg'
                             ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`
