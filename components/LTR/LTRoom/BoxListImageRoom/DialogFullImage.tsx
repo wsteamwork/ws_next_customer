@@ -54,6 +54,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 4,
       [theme.breakpoints.up('md')]: {
       },
+      maxHeight: 400,
       objectFit: 'cover'
     },
     bigImage: {
@@ -69,22 +70,35 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     listSection: {
       backgroundColor: '#fff',
       // margin: '64px 0'
+      marginBottom: 64,
       margin: '8px 0'
     },
-    titleSticky: {
-      position: 'sticky',
-      top: '5%',
-    },
+    // titleSticky: {
+    //   position: 'sticky',
+    //   [theme.breakpoints.down('sm')]: {
+    //     top: '2%',
+    //   },
+    //   top: '5%',
+    // },
     stikyMobi: {
       backgroundColor: '#fff',
       [theme.breakpoints.down('sm')]: {
         position: 'sticky',
         top: '-1.1%',
-      }
+      },
+      position: 'sticky',
+      // [theme.breakpoints.down('sm')]: {
+      //   top: '0%',
+      // },
+      top: '0%',
     },
     appBar: {
       position: "relative"
     },
+    subtitleRoomType: {
+      marginBottom: 8,
+      color: '#767676'
+    }
   })
 );
 
@@ -160,30 +174,31 @@ const DialogFullImage: FC<IProps> = (props) => {
       </AppBar>
 
       <DialogContent classes={{ root: classes.dialogContent }} id="full_image_dialog_openned">
-        <GridContainer xs={11} sm={11} md={11} lg={11} xl={10}>
+        <GridContainer xs={11} sm={11} md={9} lg={9} xl={9}>
           <List className={classes.root} subheader={<li />}>
 
             {livingrooms && livingrooms.images && livingrooms.images.length ? (
               <li ref={livingroomRef} className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                    <div className={classes.titleSticky}>
-                      <Typography variant='h5'>{t('room:livingroomsImg')}</Typography>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={10}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
-                      </Grid>
 
+                  <Grid item xs={12} sm={12} md={12}>
+                    <Grid container spacing={1}>
+                      {/* <Grid item xs={12}>
+                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
+                      </Grid> */}
+                      <Grid item xs={12} className={classes.stikyMobi}>
+                        <div className={classes.titleSticky}>
+                          <Typography variant='h5'>{t('room:livingroomsImg')}</Typography>
+                          <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:livingroomsImgSubtitle')}</Typography>
+                        </div>
+                      </Grid>
                       <Masonry
                         breakpointCols={breakpointColumnsObj}
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
                         {livingrooms.images.map((o, i) => {
-                          if (i > 0) return (
+                          if (i >= 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                           )
                         })}
@@ -197,25 +212,27 @@ const DialogFullImage: FC<IProps> = (props) => {
               {_.times(bedrooms.number_bedroom, (i) => (
                 <li className={classes.listSection} key={i}>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                      <div className={classes.titleSticky}>
-                        <Typography variant='h5'>{t('room:bedroomsImg')} {i + 1}</Typography>
-                      </div>
-                    </Grid>
+
                     {
                       bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
-                        <Grid item xs={12} sm={12} md={10}>
+                        <Grid item xs={12} sm={12} md={12}>
                           <Grid container spacing={1}>
-                            <Grid item xs={12}>
-                              <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            <Grid item xs={12} className={classes.stikyMobi}>
+                              <div className={classes.titleSticky}>
+                                <Typography variant='h4' className={classes.titleRoomType}>{t('room:bedroomsImg')} {i + 1}</Typography>
+                                <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bedroomsImgSubtitle')}</Typography>
+                              </div>
                             </Grid>
+                            {/* <Grid item xs={12}>
+                              <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            </Grid> */}
                             <Masonry
                               breakpointCols={breakpointColumnsObj}
                               className="my-masonry-grid"
                               columnClassName="my-masonry-grid_column"
                             >
                               {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
-                                if (i > 0) return (
+                                if (i >= 0) return (
                                   <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                                 )
                               })}
@@ -231,19 +248,21 @@ const DialogFullImage: FC<IProps> = (props) => {
               {_.times(bathrooms.number_bathroom, (i) => (
                 <li className={classes.listSection} key={i}>
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                      <div className={classes.titleSticky}>
-                        <Typography variant='h5'>{t('room:bathroomsImg')} {i + 1}</Typography>
-                      </div>
-                    </Grid>
 
                     {
                       bathrooms[`bathroom_${i + 1}`] && bathrooms[`bathroom_${i + 1}`].images && bathrooms[`bathroom_${i + 1}`].images.length ? (
-                        <Grid item xs={12} sm={12} md={10}>
+                        <Grid item xs={12} sm={12} md={12}>
                           <Grid container spacing={1}>
-                            <Grid item xs={12}>
-                              <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            <Grid item xs={12} className={classes.stikyMobi}>
+                              <div className={classes.titleSticky}>
+                                <Typography variant='h5'>{t('room:bathroomsImg')} {i + 1}</Typography>
+                                <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bathroomsImgSubtitle')}</Typography>
+
+                              </div>
                             </Grid>
+                            {/* <Grid item xs={12}>
+                              <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
+                            </Grid> */}
 
                             <Masonry
                               breakpointCols={breakpointColumnsObj}
@@ -251,7 +270,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                               columnClassName="my-masonry-grid_column"
                             >
                               {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
-                                if (i > 0) return (
+                                if (i >= 0) return (
                                   <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                                 )
                               })}
@@ -267,15 +286,17 @@ const DialogFullImage: FC<IProps> = (props) => {
             {kitchens && kitchens.images && kitchens.images.length ? (
               <li ref={kitchenRef} className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                    <div className={classes.titleSticky}>
-                      <Typography variant='h5'>{t('room:kitchensImg')}</Typography>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={10}>
+
+                  <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
+                      </Grid> */}
+                      <Grid item xs={12} className={classes.stikyMobi}>
+                        <div className={classes.titleSticky}>
+                          <Typography variant='h5'>{t('room:kitchensImg')}</Typography>
+                          <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:kitchensImgSubtitle')}</Typography>
+                        </div>
                       </Grid>
                       <Masonry
                         breakpointCols={breakpointColumnsObj}
@@ -283,7 +304,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         columnClassName="my-masonry-grid_column"
                       >
                         {kitchens.images.map((o, i) => {
-                          if (i > 0) return (
+                          if (i >= 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                           )
                         })}
@@ -297,15 +318,18 @@ const DialogFullImage: FC<IProps> = (props) => {
             {furnitures && furnitures.images && furnitures.images.length ? (
               <li ref={furnitureRef} className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                    <div className={classes.titleSticky}>
-                      <Typography variant='h5'>{t('room:furnituresImg')}</Typography>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={10}>
+
+                  <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
+                      </Grid> */}
+                      <Grid item xs={12} className={classes.stikyMobi}>
+                        <div className={classes.titleSticky}>
+                          <Typography variant='h5'>{t('room:furnituresImg')}</Typography>
+                          <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:furnituresImgSubtitle')}</Typography>
+
+                        </div>
                       </Grid>
                       <Masonry
                         breakpointCols={breakpointColumnsObj}
@@ -313,7 +337,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         columnClassName="my-masonry-grid_column"
                       >
                         {furnitures.images.map((o, i) => {
-                          if (i > 0) return (
+                          if (i >= 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                           )
                         })}
@@ -327,15 +351,18 @@ const DialogFullImage: FC<IProps> = (props) => {
             {outdoors && outdoors.images && outdoors.images.length ? (
               <li ref={outdoorRef} className={classes.listSection}>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={12} md={2} className={classes.stikyMobi}>
-                    <div className={classes.titleSticky}>
-                      <Typography variant='h5'>{t('room:aroundAccommodationImg')}</Typography>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={10}>
+
+                  <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
                         <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
+                      </Grid> */}
+                      <Grid item xs={12} className={classes.stikyMobi}>
+                        <div className={classes.titleSticky}>
+                          <Typography variant='h5'>{t('room:aroundAccommodationImg')}</Typography>
+                          <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:aroundAccommodationImgSubtitle')}</Typography>
+
+                        </div>
                       </Grid>
                       <Masonry
                         breakpointCols={breakpointColumnsObj}
@@ -343,7 +370,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         columnClassName="my-masonry-grid_column"
                       >
                         {outdoors.images.map((o, i) => {
-                          if (i > 0) return (
+                          if (i >= 0) return (
                             <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
                           )
                         })}

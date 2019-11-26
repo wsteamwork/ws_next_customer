@@ -43,7 +43,7 @@ const languageDetector = {
   detect: async (callback) => {
     const savedDataJSON = cookies.get('initLanguage');
     const lng = savedDataJSON ? savedDataJSON : null;
-    const selectLanguage = lng || 'vi';
+    const selectLanguage = lng || 'en';
     callback(selectLanguage);
   },
   cacheUserLanguage: () => {}

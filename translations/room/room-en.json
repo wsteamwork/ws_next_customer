@@ -74,6 +74,12 @@
     "bedroomsImg": "Bedroom",
     "bathroomsImg": "Bathroom",
     "livingroomsImg": "Livingroom",
-    "currency": "$"
+    "currency": "$",
+    "aroundAccommodationImgSubtitle": "Outdoors",
+    "furnituresImgSubtitle": "Full furnitures",
+    "kitchensImgSubtitle": "Full kitchen amenities, microwave, stove",
+    "bedroomsImgSubtitle": "Bed, En suite bathroom, Air conditioning,..",
+    "bathroomsImgSubtitle": "All bath facilities",
+    "livingroomsImgSubtitle": "Television, tables, xofa..."
 
 }

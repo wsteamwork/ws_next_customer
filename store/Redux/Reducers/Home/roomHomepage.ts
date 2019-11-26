@@ -60,7 +60,7 @@ export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
   }
 };
 
-export const getRoomHot = async (initLanguage: string = 'vi'): Promise<RoomIndexRes[]> => {
+export const getRoomHot = async (initLanguage: string = 'en'): Promise<RoomIndexRes[]> => {
   const query: Partial<RoomIndexGetParams> = {
     include: 'city,district',
     hot: 1,
@@ -75,7 +75,7 @@ export const getRoomHot = async (initLanguage: string = 'vi'): Promise<RoomIndex
   return res.data.data;
 };
 
-export const getRoomCity = async (initLanguage: string = 'vi'): Promise<NumberRoomCity[]> => {
+export const getRoomCity = async (initLanguage: string = 'en'): Promise<NumberRoomCity[]> => {
   const query: Partial<RoomIndexGetParams> = {
     hot: 1
   };
@@ -86,7 +86,7 @@ export const getRoomCity = async (initLanguage: string = 'vi'): Promise<NumberRo
   return res.data.data;
 };
 
-// export const getRoomNew = async (initLanguage: string = 'vi'): Promise<RoomIndexRes[]> => {
+// export const getRoomNew = async (initLanguage: string = 'en'): Promise<RoomIndexRes[]> => {
 //   const query: Partial<RoomIndexGetParams> = {
 //     include: 'details,media,city,district',
 //     limit: 10
@@ -100,7 +100,7 @@ export const getRoomCity = async (initLanguage: string = 'vi'): Promise<NumberRo
 //   return res.data.data;
 // };
 
-export const getApartments = async (initLanguage: string = 'vi'): Promise<TypeApartment[]> => {
+export const getApartments = async (initLanguage: string = 'en'): Promise<TypeApartment[]> => {
   const url = `rooms/room-type-homepage`;
 
   const res: AxiosRes<TypeApartment[]> = await axios.get(url, {
@@ -110,7 +110,7 @@ export const getApartments = async (initLanguage: string = 'vi'): Promise<TypeAp
   return res.data.data;
 };
 
-// export const getCollections = async (initLanguage: string = 'vi'): Promise<Collections[]> => {
+// export const getCollections = async (initLanguage: string = 'en'): Promise<Collections[]> => {
 //   const url = `collections?include=details,rooms`;
 
 //   const res: AxiosRes<Collections[]> = await axios.get(url, {
@@ -123,7 +123,7 @@ export const getApartments = async (initLanguage: string = 'vi'): Promise<TypeAp
 // export const getCollectionById = async (
 //   id: any,
 //   dispatch: Dispatch<ReducresActions>,
-//   initLanguage: string = 'vi'
+//   initLanguage: string = 'en'
 // ): Promise<Collections> => {
 //   const url = `collections/${id}?include=details,rooms.media,rooms.details,rooms.city,rooms.district`;
 
@@ -139,7 +139,7 @@ export const getApartments = async (initLanguage: string = 'vi'): Promise<TypeAp
 // @ts-ignore
 export const getRoomsHomepage = async (
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ): Promise<Omit<RoomHomepageState, 'collectionById'>> => {
   const res = await Promise.all([
     getRoomHot(initLanguage),
