@@ -1,6 +1,7 @@
 /*global google*/
-import { OutlinedInput } from '@material-ui/core';
-import React, { FC, Fragment, useRef } from 'react';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import { OutlinedInput, Snackbar } from '@material-ui/core';
+import React, { FC, Fragment, SyntheticEvent, useRef, useState } from 'react';
 
 interface IProps {
   setCoordinateMarker: any;
@@ -14,7 +15,13 @@ let autocomplete = null;
 const SearchPlaceCustom: FC<IProps> = (props) => {
   const { setCoordinateMarker, setDefaultCenter, setAddress, addressInput } = props;
   const loaded = useRef(false);
-
+  const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
   const handleScriptLoad = () => {
     const inputEl = document.getElementById('standalone-search-box');
     if (typeof google === 'object' && typeof google.maps === 'object') {
@@ -65,6 +72,10 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
   return (
     <Fragment>
       <OutlinedInput
+        onPaste={(e) => {
+          setOpenSnack(true);
+          e.preventDefault()
+        }}
         type="text"
         placeholder="Nhập địa chỉ"
         // id="standalone-search-box"
@@ -76,6 +87,22 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
         labelWidth={0}
         fullWidth
       />
+      <Snackbar
+        style={{
+          zIndex: 100000
+        }}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        open={openSnack}
+        autoHideDuration={3000}
+      >
+        <MySnackbarContentWrapper
+          variant={'warning'}
+          message={'Copy/Paste không có hiệu lực cho mục này'}
+          onClose={handleCloseSnack}></MySnackbarContentWrapper>
+      </Snackbar>
     </Fragment>
   );
 };

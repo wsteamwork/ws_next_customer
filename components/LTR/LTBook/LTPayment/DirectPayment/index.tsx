@@ -229,7 +229,7 @@ const DirectPayment: FC = () => {
               <p>
                 Thanh toán mã booking{' '}
                 <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span> số tiền:{' '}
-                {numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}đ
+                {t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}
               </p>
             </Grid>
           </Grid>
@@ -250,7 +250,7 @@ const DirectPayment: FC = () => {
               </p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.price_and_contract[0].price_original).format('0,0')}đ</p>
+              <p>{t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_original).format('0,0')}</p>
             </Grid>
           </Grid>
           {/* <Grid container>
@@ -266,7 +266,7 @@ const DirectPayment: FC = () => {
               <p>{t('payment:directPayment:totalRevenue')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}đ</p>
+              <p>{t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>

@@ -73,9 +73,9 @@ const PaymentInfo: FC = () => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(
+                        justify="flex-end">{t('payment:currency')}{`${formatMoney(
                           LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
-                        )}đ`}</Grid>
+                        )}`}</Grid>
                     </Grid>
                     <Grid container item xs={12}>
                       <Grid item xs={6} className={'fontLow'}>
@@ -86,7 +86,7 @@ const PaymentInfo: FC = () => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(LTDataInvoice!.additional_fee)}đ`}</Grid>
+                        justify="flex-end">{t('payment:currency')}{`${formatMoney(LTDataInvoice!.additional_fee)}`}</Grid>
                     </Grid>
                     {LTDataInvoice!.coupon && (
                       <Grid container item xs={12}>
@@ -98,9 +98,9 @@ const PaymentInfo: FC = () => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(
+                          justify="flex-end">{t('payment:currency')}{`${formatMoney(
                             LTDataInvoice!.coupon_discount
-                          )}đ`}</Grid>
+                          )}`}</Grid>
                       </Grid>
                     )}
 
@@ -114,9 +114,9 @@ const PaymentInfo: FC = () => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(
+                          justify="flex-end">{t('payment:currency')}{`${formatMoney(
                             LTDataInvoice!.price_discount
-                          )}đ`}</Grid>
+                          )}`}</Grid>
                       </Grid>
                     )}
                   </Grid>
@@ -127,9 +127,9 @@ const PaymentInfo: FC = () => {
                         <Typography variant="h6">{t('payment:invoice:total')}</Typography>
                       </Grid>
                       <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                        <Typography variant="h6">{`${formatMoney(
+                        <Typography variant="h6">{t('payment:currency')}{`${formatMoney(
                           LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
-                        )}đ`}</Typography>
+                        )}`}</Typography>
                       </Grid>
                     </Grid>
                   </Grid>

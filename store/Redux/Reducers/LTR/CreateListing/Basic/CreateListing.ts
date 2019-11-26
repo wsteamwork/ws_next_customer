@@ -59,7 +59,7 @@ export type CreateListingActions =
 const init: CreateListingState = {
   leaseType: 3,
   accommodationType: 2,
-  totalArea: null,
+  totalArea: 0,
   stayWithHost: 0,
   bedRooms: null,
   bedsNumber: 1,
@@ -136,7 +136,7 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
 export const handleCreateRoom = async (
   data: any,
   dispatch: any,
-  uid: any,
+  uid?: any,
   initLanguage: string = 'vi'
 ) => {
   const cookies = new Cookies();
@@ -178,8 +178,8 @@ export const handleCreateRoom = async (
       }
     }
   };
-
-  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body, headers);
+  const url = uid && uid !== null ? `long-term/room/create?uid=${uid}` : 'long-term/room/create';
+  const response = await axios_merchant.post(url, body, headers);
 
   dispatch({
     type: 'SET_LISTING',
