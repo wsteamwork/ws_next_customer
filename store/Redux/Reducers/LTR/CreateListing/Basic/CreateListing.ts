@@ -137,7 +137,7 @@ export const handleCreateRoom = async (
   data: any,
   dispatch: any,
   uid?: any,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ) => {
   const cookies = new Cookies();
   const token = cookies.get('_token');
@@ -193,7 +193,7 @@ export const handleUpdateStep1 = async (
   data: any,
   dispatch: any,
   uid: any,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ) => {
   const cookies = new Cookies();
   const token = cookies.get('_token');
@@ -257,7 +257,7 @@ export const countBedsNumberFromBedRoomList = (bedRoomsList: BedRoomReq) => {
 export const getDataLTCreateListingID = async (
   dispatch: Dispatch<CreateListingActions>,
   query: ParsedUrlQuery,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ): Promise<any> => {
   const { id } = query;
   try {

@@ -97,14 +97,13 @@ const SwitchLanguage: FunctionComponent<IProps> = (props) => {
     //reload browser
     process.browser && location.reload();
   };
-
   return (
     <Fragment>
       <Button onClick={handleSwitch} className={classes.btnSwitch}>
         <Chip
           avatar={
             <Avatar
-              src={cookiesLanguage.initLanguage === 'en' ? flagEN : flagVN}
+              src={!cookiesLanguage.initLanguage || cookiesLanguage.initLanguage === 'en' ? flagEN : flagVN}
               className={classes.img}
             />
           }
