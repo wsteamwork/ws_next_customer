@@ -1,27 +1,27 @@
-import React, { FC, Fragment, useState, useContext } from 'react';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import { TAB_LIST } from '@/components/Rooms/BottomNav';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateObject } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import Button from '@material-ui/core/Button/Button';
+import DialogActions from '@material-ui/core/DialogActions/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import { Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import Router from 'next/router';
+import React, { FC, Fragment, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import AmentitesMobile from './AmentitesMobile/index';
+import BookingTypeMobile from './BookingTypeMobile/index';
+import DistrictsMobile from './DistrictsMobile/index';
+import InstantBookMobile from './InstantBookMobile/index';
 import PriceRangeMobile from './PriceRangeMobile/index';
 import RoomTypeMobile from './RoomTypeMobile/index';
-import AmentitesMobile from './AmentitesMobile/index';
-import DistrictsMobile from './DistrictsMobile/index';
-import BookingTypeMobile from './BookingTypeMobile/index';
-import InstantBookMobile from './InstantBookMobile/index';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import Button from '@material-ui/core/Button/Button';
-import { updateObject } from '@/store/Context/utility';
-import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import Router from 'next/router';
-import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
@@ -109,7 +109,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const query = {
     type_room: dataRoomType.join(','),
     amenities: dataAmentites.join(','),
-    districts: dataDistricts,
+    districts: dataDistricts.join(','),
     rent_type: booking_type,
     instant_book: instant_book,
     price_day_from: price_day_from,
@@ -119,7 +119,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const queryLT = {
     accommodation_type: dataRoomType.join(','),
     comfort_lists: dataAmentites.join(','),
-    district_id: dataDistricts,
+    district_id: dataDistricts.join(','),
     instant_book: instant_book,
     min_price: price_day_from,
     max_price: price_day_to
