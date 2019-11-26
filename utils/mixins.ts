@@ -77,7 +77,7 @@ export const formatPrice = (price: number): string | number => {
     if (price >= 1000000) {
       format = (price / 1000000).toFixed(1) + 'tr';
     }
-    return lang === 'vi' ? format : `$${price}`;
+    return lang && lang === 'vi' ? format : `$${price}`;
   } catch (e) {
     console.error(e);
   }

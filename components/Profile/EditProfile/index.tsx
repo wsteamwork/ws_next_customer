@@ -55,6 +55,9 @@ interface FormikProfileValues {
   description: string | null;
   job: string | null;
   emergency_contact: string | null;
+  account_number: string | null;
+  account_holder: string | null;
+  account_branch: string | null;
   avatar_url: string | undefined;
   city_id?: number | null;
   district_id?: number | null;
@@ -85,6 +88,9 @@ const EditProfile: FC = (props) => {
       description: profile.description ? profile.description : '',
       job: profile.job ? profile.job : '',
       emergency_contact: profile.emergency_contact ? profile.emergency_contact : '',
+      account_number: profile.account_number ? profile.account_number : '',
+      account_holder: profile.account_holder ? profile.account_holder : '',
+      account_branch: profile.account_branch ? profile.account_branch : '',
       avatar_url: profile.avatar_url ? profile.avatar_url : '',
       city_id: profile.city_id ? profile.city_id : null,
       district_id: profile.district_id ? profile.district_id : null
@@ -121,7 +127,10 @@ const EditProfile: FC = (props) => {
       phone: values.phone,
       description: values.description,
       job: values.job,
-      emergency_contact: values.emergency_contact
+      emergency_contact: values.emergency_contact,
+      account_number: values.account_number,
+      account_branch: values.account_branch,
+      account_holder: values.account_holder
     };
 
     try {
@@ -614,6 +623,72 @@ const EditProfile: FC = (props) => {
                           classes={{ root: 'helperText' }}
                           id="emergencyContact-helper-text">
                           {t('profile:editProfile:note5')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_number"
+                          value={values.account_number ? values.account_number : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountNumber')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_branch"
+                          value={values.account_branch ? values.account_branch : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountBranch')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_holder"
+                          value={values.account_holder ? values.account_holder : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountHolder')}
                         </FormHelperText>
                       </FormControl>
                     </Grid>
