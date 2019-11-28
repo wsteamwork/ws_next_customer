@@ -283,32 +283,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                 <ClickAwayListener onClickAway={handleClose}>
                   <Paper>
                     <MenuList>
-                      <MenuItem onClick={() => Hotline('tel:0916374057')} component="li">
-                        <ListItemIcon>
-                          <PhoneIcon />
-                        </ListItemIcon>
-                        Hotline 1: 0916 374 057
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem onClick={() => Hotline('tel:0946746417')} component={'li'}>
-                        <ListItemIcon>
-                          <PhoneIcon />
-                        </ListItemIcon>
-                        Hotline 2: 0946 746 417
-                      </MenuItem>
-                      <Divider />
                       <MenuItem onClick={() => Hotline('tel:0917041849')}>
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
                         {t('home:supportHost')}: 0917 041 849
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem onClick={() => Hotline('mailto:info@westay.vn')}>
-                        <ListItemIcon>
-                          <EmailIcon />
-                        </ListItemIcon>
-                        Email: info@westay.vn
                       </MenuItem>
                     </MenuList>
                   </Paper>

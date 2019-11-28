@@ -179,14 +179,17 @@ export const handleCreateRoom = async (
     }
   };
   const url = uid && uid !== null ? `long-term/room/create?uid=${uid}` : 'long-term/room/create';
-  const response = await axios_merchant.post(url, body, headers);
+  try {
+    const response = await axios_merchant.post(url, body, headers);
 
-  dispatch({
-    type: 'SET_LISTING',
-    payload: response.data.data
-  });
-
-  return response;
+    dispatch({
+      type: 'SET_LISTING',
+      payload: response.data.data
+    });
+    return response;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const handleUpdateStep1 = async (
