@@ -23,14 +23,14 @@ const HeaderNav: FC<IProps> = (props) => {
             <span className="title">{title}</span>
           </Grid>
         </Grid>
-        <Grid className="box-title">
-          <Grid className="box-title-wrapper">
-            <SwitchLanguage />
-            <Hidden smDown>
+        <Hidden smDown>
+          <Grid className="box-title">
+            <Grid className="box-title-wrapper">
+              <SwitchLanguage />
               <span onClick={() => Hotline('tel:0917041849')} style={{ marginRight: 32 }}>Contact us: 0917 041 849</span>
-            </Hidden>
+            </Grid>
           </Grid>
-        </Grid>
+        </Hidden>
       </Grid>
     </Grid>
   );
