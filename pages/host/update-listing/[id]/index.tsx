@@ -3,6 +3,7 @@ import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/List
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
+import OtherSetting from '@/components/LTR/Merchant/Listing/UpdateListing/OtherSetting';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -207,6 +208,7 @@ const UpdateListing: FC<IProps> = (props) => {
                   <AntTab label="Giá phòng" {...a11yProps(2)} />
                   <AntTab label="Chế độ đặt phòng" {...a11yProps(3)} />
                   <AntTab label="Lịch trống phòng" {...a11yProps(4)} />
+                  <AntTab label="Cài đặt khác" {...a11yProps(5)} />
                 </AntTabs>
                 <Typography className={classes.padding} />
               </AppBar>
@@ -224,6 +226,9 @@ const UpdateListing: FC<IProps> = (props) => {
               </TabPanel>
               <TabPanel value={value} index={4}>
                 <CalendarManagement idRoom={listing.room_id} />
+              </TabPanel>
+              <TabPanel value={value} index={5}>
+                <OtherSetting />
               </TabPanel>
             </Grid>
           </Grid>
