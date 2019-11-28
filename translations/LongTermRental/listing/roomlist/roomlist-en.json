@@ -3,6 +3,7 @@
     "contentNotFound": "The current room list is not displayed, please wait a moment", 
     "tooltipUpdateRoom": "Edit",
     "tooltipUpdateRoomLongTerm": "Long Term Room Edit",
+    "duplicateListing": "Duplicate listing",
     "tooltipPreviewRoom": "Preview",
     "noNameRoom": "Name of accommodation not updated",
     "numberGuest": "guest(s)",

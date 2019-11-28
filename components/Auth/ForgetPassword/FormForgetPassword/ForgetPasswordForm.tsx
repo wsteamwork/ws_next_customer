@@ -7,20 +7,15 @@ import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-// import ButtonLoginSocial from '../../Signup/ButtonLoginSocial';
 import * as Yup from 'yup';
-// import { useCookies } from 'react-cookie';
 import { sendForgetPassword } from './context';
 interface MyFormValues {
   email: string;
 }
 
 const FormForgetPassword = () => {
-  // const [cookies, setCookie] = useCookies(['_token']);
   const [open, setOpen] = useState(false);
   const [forgetMessage, setForgetMessage] = useState('');
-
-  // const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [error, setError] = useState<string>('');
   const handleClose = () => {
@@ -133,7 +128,6 @@ const FormForgetPassword = () => {
                     message={forgetMessage}
                     onClose={handleClose}></MySnackbarContentWrapper>
                 </Snackbar>
-                {/* <ButtonLoginSocial></ButtonLoginSocial> */}
               </Grid>
             </form>
           )}></Formik>

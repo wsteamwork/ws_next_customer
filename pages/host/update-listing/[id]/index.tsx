@@ -10,7 +10,6 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { getListingDetails, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { AppBar, Box, Breadcrumbs, createStyles, Grid, Tab, Tabs, Theme, withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -170,7 +169,8 @@ const UpdateListing: FC<IProps> = (props) => {
           title={`${listing.about_room.name} | Westay - Đặt phòng dài hạn trực tuyến`}
           description={`Cập nhật căn hộ`}
           url={`https://westay.vn/host/update-listing/${listing.id}`}
-          ogImage={`${IMAGE_STORAGE_SM}${listing.avatar.images[0].name}`}
+          // ogImage={`${listing.avatar.images ? `${IMAGE_STORAGE_SM} ${listing.avatar.images[0].name}` : '/static/images/Bg_home.4023648f.jpg'}`}
+          ogImage={`'/static/images/Bg_home.4023648f.jpg'}`}
         /> : ''}
       <NavHeader_Merchant />
       {listing ? (
