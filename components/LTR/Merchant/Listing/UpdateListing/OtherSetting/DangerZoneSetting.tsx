@@ -1,12 +1,13 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { Button, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
-import React, { FC, Fragment, useContext, useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, FC, Fragment, useContext, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 interface IProps {
@@ -41,6 +42,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     alertText: {
       marginBottom: 16
+    },
+    confirmError: {
+      marginTop: 8,
+      color: '#EB465A'
     }
   })
 );
@@ -51,22 +56,24 @@ const DangerZoneSetting: FC<IProps> = (props) => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const [open, setOpen] = useState(false);
+  const [confirmError, setConfirmError] = useState(false);
   const [confirmText, setConfirmText] = useState<string>('');
 
   function handleClose() {
     setOpen(false);
   }
-  const openUpdate = () => {
-    router.push(`/host/update-listing/${id}/setting`);
-  };
 
   const handleChangeConfirmText = (event: ChangeEvent<HTMLInputElement>) => {
     setConfirmText(event.target.value);
   };
 
-  const deleteRoomConfirmed = (id: number, confirmText) => {
+  const deleteRoomConfirmed = (roomId: number, confirmText) => {
     if (confirmText === 'XOAVINHVIEN') {
-      console.log('deleted')
+      axios_merchant.put(`long-term/room/delete-room/${roomId}`).then(res => {
+        router.push(`/host/room-list`);
+      })
+    } else {
+      setConfirmError(true);
     }
   }
 
@@ -106,12 +113,19 @@ const DangerZoneSetting: FC<IProps> = (props) => {
                 value={confirmText}
                 fullWidth
               />
+              {
+                confirmError ?
+                  <Typography variant="subtitle2" className={classes.confirmError}>
+                    Thông tin nhập không chính xác, vui lòng kiểm tra lại
+                  </Typography>
+                  : ''
+              }
             </DialogContent>
             <DialogActions>
               <Button variant="outlined" onClick={handleClose} color="primary" className={classes.cancelDelete}>
                 Đóng
               </Button>
-              <Button variant="outlined" onClick={() => deleteRoomConfirmed(listing.id, confirmText)} color="primary" className={classes.buttonDelete}>
+              <Button variant="outlined" onClick={() => deleteRoomConfirmed(listing.room_id, confirmText)} color="primary" className={classes.buttonDelete}>
                 Xoá phòng
               </Button>
             </DialogActions>
