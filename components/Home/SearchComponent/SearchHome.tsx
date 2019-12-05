@@ -32,7 +32,7 @@ const SearchHome = () => {
   const getDataLongTermRoom = async (): Promise<any> => {
     const res = await axios.get(`count-long-term-rooms`);
     setData(res.data.data.total_room);
-    console.log(data);
+    // console.log(data);
   };
 
   useEffect(() => {

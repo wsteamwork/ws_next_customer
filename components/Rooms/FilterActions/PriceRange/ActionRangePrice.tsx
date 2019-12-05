@@ -146,7 +146,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
         <Grid container item lg={6} sm={6}>
           <FormControl>
             <InputLabel shrink htmlFor="min-price-filter">
-              Tối thiểu
+              {t('shared:priceRangeMin')}
             </InputLabel>
             <InputBase
               readOnly
@@ -160,7 +160,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
               }}
               startAdornment={
                 <InputAdornment position="start" className={classes.adornment}>
-                  đ
+                  {t('shared:currency')}
                 </InputAdornment>
               }
             />
@@ -169,7 +169,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
         <Grid container item lg={6} sm={6}>
           <FormControl>
             <InputLabel shrink htmlFor="max-price-filter">
-              Tối đa
+              {t('shared:priceRangeMax')}
             </InputLabel>
             <InputBase
               readOnly
@@ -183,7 +183,7 @@ const ActionRangePrice: FC<IProps> = (props) => {
               }}
               startAdornment={
                 <InputAdornment position="start" className={classes.adornment}>
-                  đ
+                  {t('shared:currency')}
                 </InputAdornment>
               }
             />

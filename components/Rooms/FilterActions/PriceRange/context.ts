@@ -12,7 +12,9 @@ import {
   useMemo,
   useState
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 type ReturnUsePriceRange = {
   open: boolean;
@@ -27,7 +29,10 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useContext(RoomFilterContext);
   const { router } = useContext(GlobalContext);
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
   const { query } = router;
+  const { t } = useTranslation();
   const { price_day_from, price_day_to } = state;
   const leaseTypePathName = useSelector<ReducersList, string>(
     (state) => state.searchFilter.leaseTypePathName
@@ -45,9 +50,15 @@ export const usePriceRange = (): ReturnUsePriceRange => {
     if (price_day_from === MIN_PRICE && price_day_to === MAX_PRICE) {
       return '';
     } else if (price_day_to !== MIN_PRICE && price_day_from === MIN_PRICE) {
-      return `đ 0 - ${numeral(price_day_to).format('0,0')}`;
+      return `${t('shared:currency')} 0 - ${numeral(
+        lang && lang === 'vi' ? price_day_to : price_day_to / 23500
+      ).format('0,0')}`;
     } else if (price_day_from !== MIN_PRICE && price_day_to > price_day_from) {
-      return `đ ${numeral(price_day_from).format('0,0')} - ${numeral(price_day_to).format('0,0')}`;
+      return `${t('shared:currency')} ${numeral(
+        lang && lang === 'vi' ? price_day_from : price_day_from / 23500
+      ).format('0,0')} - ${numeral(
+        lang && lang === 'vi' ? price_day_to : price_day_to / 23500
+      ).format('0,0')}`;
     }
 
     return '';

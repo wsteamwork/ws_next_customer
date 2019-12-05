@@ -7,10 +7,14 @@ import _ from 'lodash';
 import { ComfortIndexGetParams } from '@/types/Requests/Comforts/ComfortRequests';
 import { ComfortIndexRes } from '@/types/Requests/Comforts/ComfortResponses';
 import { AxiosResponse } from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+const lang = cookies.get('initLanguage');
 
 export const MIN_PRICE = 0;
-export const MAX_PRICE = 50000000;
-export const STEP_PRICE = 100000;
+export const MAX_PRICE = lang && lang == 'vi' ? 50000000 : 5000;
+export const STEP_PRICE = lang && lang == 'vi' ? 100000 : 100;
 
 export const RoomFilterContext = createContext<IRoomFilterContext>(null as IRoomFilterContext);
 
