@@ -1,41 +1,20 @@
 import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import FooterComponent from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
-import MetroGridImage from '@/components/Layout/MetroGridImage';
-import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
-import RoomCard from '@/components/RoomCard';
-import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
+import HomepageST from './homepage/HomepageST';
 import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
-  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-    (state) => state.roomHomepage.roomsHot
-  );
-  const renderRoom = (room) => <RoomCard city={room.city.data.name}
-    district={room.district.data.name}
-    instantbook={room.instant_book}
-    roomID={room.id}
-    roomName={room.room_name}
-    roomNumber={room.number_room}
-    roomType={room.room_type_txt}
-    roomImage={room.avatar_image}
-    price_day={room.price_day}
-    price_hour={room.price_hour}
-    total_review={room.total_review}
-    avg_rating={room.avg_rating}
-    isHomepage={true} />;
-  const { t } = useTranslation();
-  // const { width } = useContext<IGlobalContext>(GlobalContext);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
   forceCheck();
   return (
     <Fragment>
@@ -51,32 +30,16 @@ const Home: NextPage = () => {
         <LazyLoad>
           <SearchHome />
         </LazyLoad>
-        {/* {width === 'lg' || width === 'xl' || width === 'md' ? ( */}
         <Hidden smDown implementation="css">
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            <LazyLoad offset="150">
-              <SliderTypeApartment />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <MetroGridImage />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <ListRoom
-                roomData={roomsHot}
-                usingSlider={true}
-                title={t('home:editorChoice')}
-                render={renderRoom}
-              />
-
-            </LazyLoad>
+            {
+              leaseTypeGlobal ? (
+                <HomepageLT />
+              ) :
+                <HomepageST />
+            }
           </GridContainer>
         </Hidden>
-        {/* ) : ''} */}
-        {/* <HostBecome /> */}
-
-        {/* <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-          <BlogContainer />
-        </GridContainer> */}
       </GridContainer>
       <LazyLoad offset="150">
         <FooterComponent />
