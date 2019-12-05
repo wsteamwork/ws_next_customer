@@ -1,22 +1,22 @@
 // import DialogFullImage from '../BoxListImageRoom/DialogFullImage';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { IMAGE_STORAGE_LG, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { Grid, Hidden, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { FC, Fragment, useContext, useState } from 'react';
 import 'react-animated-slider/build/horizontal.css';
+import ProgressiveImage from 'react-progressive-image';
 import '/styles/pages/LTR/room/index.scss';
-
 interface IProps {
   classes?: any,
-  livingrooms: ImagesRes | any,
-  cover_photo: ImagesRes | any,
+  livingrooms?: ImagesRes | any,
+  cover_photo?: ImagesRes | any,
   furnitures?: ImagesRes | any,
   kitchens?: ImagesRes | any,
-  bedrooms: any,
-  bathrooms: any,
+  bedrooms?: any,
+  bathrooms?: any,
   isPreviewPage?: boolean,
 }
 
@@ -29,12 +29,12 @@ interface IArrayImage {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
-      margin: '10px 0 8px',
+      margin: '10px 5px 8px 5px',
       [theme.breakpoints.down('sm')]: {
         margin: '5px 0 4px',
       },
       paddingGrid: {
-        padding: 2
+        padding: 1
       }
     },
     imgSize: {
@@ -58,7 +58,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { livingrooms, bedrooms, isPreviewPage, kitchens } = props;
+  const { livingrooms, bedrooms, isPreviewPage, kitchens, cover_photo, bathrooms } = props;
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
   const { width } = useContext(GlobalContext);
   return (
@@ -68,14 +68,18 @@ const BoxImageLT: FC<IProps> = (props) => {
           <Grid item xs={12}>
             <Grid container direction="column">
               <Grid item className={classes.paddingGrid}>
-                <img
-                  src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
-                  style={{
-                    height: 280,
-                    maxHeight: 280,
-                  }}
-                  className={classNames(classes.imgSize)}
-                />
+                <ProgressiveImage src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'} placeholder={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: 280,
+                        maxHeight: 280,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
               </Grid>
             </Grid>
           </Grid>
@@ -83,45 +87,88 @@ const BoxImageLT: FC<IProps> = (props) => {
       </Hidden>
       <Hidden smDown>
         <Grid container spacing={1} className={classes.boxContainer}>
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <Grid container direction="column">
               <Grid item className={classes.paddingGrid}>
-                <img
-                  src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
-                  style={{
-                    height: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 404 : 504,
-                    maxHeight: width === 'xl' ? 576 : width === 'md' ? 304 : width === 'lg' ? 404 : 504,
-                  }}
-                  className={classNames(classes.imgSize)}
-                />
+                <ProgressiveImage src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'} placeholder={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={livingrooms.images && livingrooms.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + livingrooms.images[0].name}` : '/static/images/image-room-default.png'}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: width === 'xl' ? 464 : width === 'md' ? 304 : width === 'lg' ? 334 : 504,
+                        maxHeight: width === 'xl' ? 464 : width === 'md' ? 304 : width === 'lg' ? 334 : 504,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
 
               </Grid>
             </Grid>
           </Grid>
-          <Grid container item xs={4}>
+          <Grid container item xs={3}>
             <Grid container item xs={12}>
               <Grid item xs={12} className={classes.paddingGrid}>
-                <img
-                  src={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}
-                  style={{
-                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
-                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
-                  }}
-                  className={classNames(classes.imgSize)}
-                />
+                <ProgressiveImage src={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'} placeholder={bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + bedrooms['bedroom_1'].images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                        maxHeight: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
               </Grid>
               <Grid item xs={12} className={classes.paddingGrid}>
-                <img
-                  src={kitchens.images && kitchens.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + kitchens.images[0].name}` : '/static/images/image-room-default.png'}
-                  style={{
-                    height: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
-                    maxHeight: width === 'xl' ? 284 : width === 'md' ? 150 : width === 'lg' ? 200 : 250,
-                  }}
-                  className={classNames(classes.imgSize)}
-                />
+                <ProgressiveImage src={kitchens.images && kitchens.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + kitchens.images[0].name}` : '/static/images/image-room-default.png'} placeholder={kitchens.images && kitchens.images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + kitchens.images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                        maxHeight: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
               </Grid>
             </Grid>
-
+          </Grid>
+          <Grid container item xs={3}>
+            <Grid container item xs={12}>
+              <Grid item xs={12} className={classes.paddingGrid}>
+                <ProgressiveImage src={bathrooms[`bathroom_1`] && bathrooms[`bathroom_1`].images && bathrooms[`bathroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name}` : '/static/images/image-room-default.png'} placeholder={bathrooms[`bathroom_1`] && bathrooms[`bathroom_1`].images && bathrooms[`bathroom_1`].images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + bathrooms['bathroom_1'].images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                        maxHeight: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
+              </Grid>
+              <Grid item xs={12} className={classes.paddingGrid}>
+                <ProgressiveImage src={cover_photo.images && cover_photo.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + cover_photo.images[0].name}` : '/static/images/image-room-default.png'} placeholder={cover_photo.images && cover_photo.images.length && !isPreviewPage ? `${IMAGE_STORAGE_XS + cover_photo.images[0].name}` : '/static/images/image-room-default.png'}>
+                  {(src, loading) => (
+                    <img
+                      src={cover_photo.images && cover_photo.images.length && !isPreviewPage ? `${IMAGE_STORAGE_LG + cover_photo.images[0].name}` : '/static/images/image-room-default.png'}
+                      style={{
+                        opacity: loading ? 0.1 : 1,
+                        height: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                        maxHeight: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
+                      }}
+                      className={classNames(classes.imgSize)}
+                    />)}
+                </ProgressiveImage>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Hidden>

@@ -2,7 +2,7 @@ import GridContainer from '@/components/Layout/Grid/Container';
 import { TransitionCustom } from '@/components/Rooms/BottomNav';
 import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { IMAGE_STORAGE_LG } from '@/utils/store/global';
+import { IMAGE_STORAGE_LG, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { Dialog, DialogContent, Divider, Grid, IconButton, List, Tab, Tabs, Theme, Typography } from '@material-ui/core';
 import AppBar from "@material-ui/core/AppBar";
 import CloseIcon from '@material-ui/icons/Close';
@@ -12,6 +12,8 @@ import 'rc-scroll-anim/assets/index.css';
 import React, { FC, Fragment, Ref, useContext, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
+import ProgressiveImage from 'react-progressive-image';
+
 interface IProps {
   classes?: any,
   open: boolean,
@@ -135,7 +137,7 @@ const DialogFullImage: FC<IProps> = (props) => {
     500: 1
   };
   return (
-    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
+    <Dialog fullWidth maxWidth={'lg'} fullScreen={width === 'sm' || width === 'xs' ? true : false} open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
       <AppBar className={classes.appBar} color="inherit" elevation={0}>
         <Grid item className={classes.btClose}>
           <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>
@@ -183,9 +185,6 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                   <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      {/* <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + livingrooms.images[0].name} alt={livingrooms.images[0].caption} className={classes.bigImage} />
-                      </Grid> */}
                       <Grid item xs={12} className={classes.stikyMobi}>
                         <div className={classes.titleSticky}>
                           <Typography variant='h5'>{t('room:livingroomsImg')}</Typography>
@@ -199,7 +198,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                       >
                         {livingrooms.images.map((o, i) => {
                           if (i >= 0) return (
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
+                            <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                              {(src, loading) => (
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                              )}
+                            </ProgressiveImage>
                           )
                         })}
                       </Masonry>
@@ -223,9 +226,6 @@ const DialogFullImage: FC<IProps> = (props) => {
                                 <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bedroomsImgSubtitle')}</Typography>
                               </div>
                             </Grid>
-                            {/* <Grid item xs={12}>
-                              <img src={IMAGE_STORAGE_LG + bedrooms[`bedroom_${i + 1}`].images[0].name} alt={bedrooms[`bedroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
-                            </Grid> */}
                             <Masonry
                               breakpointCols={breakpointColumnsObj}
                               className="my-masonry-grid"
@@ -233,8 +233,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                             >
                               {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
                                 if (i >= 0) return (
-                                  <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                                )
+                                  <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                                    {(src, loading) => (
+                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                    )}
+                                  </ProgressiveImage>)
                               })}
                             </Masonry>
                           </Grid>
@@ -260,9 +263,6 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                               </div>
                             </Grid>
-                            {/* <Grid item xs={12}>
-                              <img src={IMAGE_STORAGE_LG + bathrooms[`bathroom_${i + 1}`].images[0].name} alt={bathrooms[`bathroom_${i + 1}`].images[0].caption} className={classes.bigImage} />
-                            </Grid> */}
 
                             <Masonry
                               breakpointCols={breakpointColumnsObj}
@@ -271,8 +271,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                             >
                               {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
                                 if (i >= 0) return (
-                                  <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                                )
+                                  <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                                    {(src, loading) => (
+                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                    )}
+                                  </ProgressiveImage>)
                               })}
                             </Masonry>
                           </Grid>
@@ -289,9 +292,6 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                   <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      {/* <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + kitchens.images[0].name} alt={kitchens.images[0].caption} className={classes.bigImage} />
-                      </Grid> */}
                       <Grid item xs={12} className={classes.stikyMobi}>
                         <div className={classes.titleSticky}>
                           <Typography variant='h5'>{t('room:kitchensImg')}</Typography>
@@ -305,8 +305,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                       >
                         {kitchens.images.map((o, i) => {
                           if (i >= 0) return (
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                          )
+                            <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                              {(src, loading) => (
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                              )}
+                            </ProgressiveImage>)
                         })}
                       </Masonry>
                     </Grid>
@@ -321,9 +324,6 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                   <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      {/* <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + furnitures.images[0].name} alt={furnitures.images[0].caption} className={classes.bigImage} />
-                      </Grid> */}
                       <Grid item xs={12} className={classes.stikyMobi}>
                         <div className={classes.titleSticky}>
                           <Typography variant='h5'>{t('room:furnituresImg')}</Typography>
@@ -338,8 +338,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                       >
                         {furnitures.images.map((o, i) => {
                           if (i >= 0) return (
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                          )
+                            <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                              {(src, loading) => (
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                              )}
+                            </ProgressiveImage>)
                         })}
                       </Masonry>
                     </Grid>
@@ -354,9 +357,6 @@ const DialogFullImage: FC<IProps> = (props) => {
 
                   <Grid item xs={12} sm={12} md={12}>
                     <Grid container spacing={1}>
-                      {/* <Grid item xs={12}>
-                        <img src={IMAGE_STORAGE_LG + outdoors.images[0].name} alt={outdoors.images[0].caption} className={classes.bigImage} />
-                      </Grid> */}
                       <Grid item xs={12} className={classes.stikyMobi}>
                         <div className={classes.titleSticky}>
                           <Typography variant='h5'>{t('room:aroundAccommodationImg')}</Typography>
@@ -371,8 +371,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                       >
                         {outdoors.images.map((o, i) => {
                           if (i >= 0) return (
-                            <img src={IMAGE_STORAGE_LG + o.name} alt={o.caption} className={classes.images} />
-                          )
+                            <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                              {(src, loading) => (
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                              )}
+                            </ProgressiveImage>)
                         })}
                       </Masonry>
                     </Grid>

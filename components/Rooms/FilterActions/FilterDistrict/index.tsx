@@ -1,12 +1,12 @@
 import CustomPopper from '@/components/CustomPopper';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { Grid } from '@material-ui/core';
 import classNames from 'classnames';
 import React, { FC, memo, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import ActionFilter from './ActionFilter';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
+import ActionFilter from './ActionFilter';
 
 const FilterRoom: FC = () => {
     const [open, setOpen] = useState(false);
