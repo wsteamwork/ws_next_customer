@@ -9,11 +9,11 @@ import { Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-import HomepageST from './homepage/HomepageST';
 import { useSelector } from 'react-redux';
+import HomepageST from './homepage/HomepageST';
 
 const Home: NextPage = () => {
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  // const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   forceCheck();
   return (
@@ -32,12 +32,12 @@ const Home: NextPage = () => {
         </LazyLoad>
         <Hidden smDown implementation="css">
           <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            {
+            {/* {
               leaseTypeGlobal ? (
                 <HomepageLT />
-              ) :
-                <HomepageST />
-            }
+              ) : */}
+            <HomepageST />
+            {/* } */}
           </GridContainer>
         </Hidden>
       </GridContainer>
