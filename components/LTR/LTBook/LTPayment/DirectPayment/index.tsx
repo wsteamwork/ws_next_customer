@@ -218,7 +218,7 @@ const DirectPayment: FC = () => {
               <p>{t('payment:directPayment:accountHolder')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>Lưu Thị Linh Trang</p>
+              <p>Luu Thi Linh Trang</p>
             </Grid>
           </Grid>
           <Grid container>
@@ -227,9 +227,10 @@ const DirectPayment: FC = () => {
             </Grid>
             <Grid item xs={7} className="textRight">
               <p>
-                Thanh toán mã booking{' '}
-                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span> số tiền:{' '}
-                {t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}
+                {t('shared:paymentTransferContent')}{' '}
+                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span>
+                <span>{t('shared:amountMoney')}:{' '}</span>
+                {t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}
               </p>
             </Grid>
           </Grid>
@@ -250,7 +251,7 @@ const DirectPayment: FC = () => {
               </p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_original).format('0,0')}</p>
+              <p>{t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].price_original).format('0,0')}</p>
             </Grid>
           </Grid>
           {/* <Grid container>
@@ -266,7 +267,7 @@ const DirectPayment: FC = () => {
               <p>{t('payment:directPayment:totalRevenue')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{t('payment:currency')}{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}</p>
+              <p>{t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>

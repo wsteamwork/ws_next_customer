@@ -15,6 +15,7 @@ import {
   useState
 } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 export type ResDataFilter = ReturnType<typeof changeDataWithEntries>;
 
@@ -22,8 +23,11 @@ export const getDataFilter = async (
   setData: Dispatch<SetStateAction<ResDataFilter>>,
   city_id: string | string[]
 ): Promise<ResDataFilter> => {
-  const res: AxiosRes<DistrictRes[]> = await axios.get(`districts?city_id=${city_id}`);
-  //   console.log(res);
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage') || 'en';
+  const res: AxiosRes<DistrictRes[]> = await axios.get(`districts?city_id=${city_id}`, {
+    headers: { 'Accept-Language': lang }
+  });
   const resChangeWithReducer = changeDataWithReduce(res.data.data);
   const resChangeWithEntries = changeDataWithEntries(resChangeWithReducer);
   setData(resChangeWithEntries);
@@ -72,6 +76,7 @@ export const useFilterRoom = (
   const city_id = router.query.city_id ? router.query.city_id : undefined;
   const { query } = router;
   const { districts } = state;
+
   const leaseTypePathName = useSelector<ReducersList, string>(
     (state) => state.searchFilter.leaseTypePathName
   );

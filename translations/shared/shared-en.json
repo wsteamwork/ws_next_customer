@@ -24,5 +24,7 @@
     "success": "Successfully",
     "lang": "en",
     "priceRangeMin": "Min price",
-    "priceRangeMax": "Max price"
+    "priceRangeMax": "Max price",
+    "paymentTransferContent": "Payment for booking id",
+    "amountMoney": "Amount to transfer:"
 }
