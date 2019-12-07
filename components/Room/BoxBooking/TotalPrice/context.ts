@@ -58,7 +58,7 @@ export const useCalculatePrice = (): ReturnCalculate => {
   const getcalculatePrice = async () => {
     setLoading(true);
     const cookies = new Cookies();
-    const lang = cookies.get('initLanguage') || 'vi';
+    const lang = cookies.get('initLanguage') || 'en';
     const body: BookingPriceCalculatorReq = {
       room_id: parseInt(router.query.id as string, 10),
       checkin:

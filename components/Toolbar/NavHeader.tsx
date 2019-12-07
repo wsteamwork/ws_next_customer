@@ -183,11 +183,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   };
 
   const loginButtonClick = () => {
-    router.push('/auth/signin');
+    router.push('/auth');
   };
 
   const signUpButtonClick = () => {
-    router.push('/auth/signup');
+    router.push('/auth');
   };
 
   const handleClose = () => {
@@ -227,7 +227,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
               <div className={classes.grow} />
               <ButtonGlobal
                 background={leaseTypeGlobal ? 'linear-gradient(to right, #667eea, #764ba2);' : ''}
-                href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
+                href={cookies.get('_token') ? `/host/room-list` : `/auth`}
                 // color = 'inherit'
                 padding="0px 20px"
                 className={classes.buttonMerchantSite}
@@ -357,9 +357,9 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                       {t('home:signIn')}
                     </Button>
 
-                    {/* <Link href="/auth/signup"> */}
+                    {/* <Link href="/auth"> */}
                     <Button
-                      href="/auth/signup"
+                      href="/auth"
                       name="sign-up"
                       color="inherit"
                       className={classes.button}

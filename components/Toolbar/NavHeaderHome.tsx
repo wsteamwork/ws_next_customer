@@ -169,11 +169,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   };
 
   const loginButtonClick = () => {
-    router.push('/auth/signin');
+    router.push('/auth');
   };
 
   const signUpButtonClick = () => {
-    router.push('/auth/signup');
+    router.push('/auth');
   };
 
   const handleClose = () => {
@@ -198,7 +198,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                 leaseTypeGlobal ? (
                   <ButtonGlobal
                     background={'linear-gradient(to right, #667eea, #764ba2);'}
-                    href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
+                    href={cookies.get('_token') ? `/host/room-list` : `/auth`}
                     padding="0px 20px"
                     className={classes.buttonMerchantSite}
                     name="merchant-site"
@@ -207,7 +207,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                   </ButtonGlobal>
                 ) : (
                     <ButtonGlobal
-                      href={cookies.get('_token') ? `/host/room-list` : `/auth/signin`}
+                      href={cookies.get('_token') ? `/host/room-list` : `/auth`}
                       padding="0px 20px"
                       className={classes.buttonMerchantSite}
                       name="merchant-site"

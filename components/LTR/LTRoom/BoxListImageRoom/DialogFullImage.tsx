@@ -200,7 +200,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                           if (i >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1, height: i%3 == 0 ? '50%' : '100%' }} src={src} alt={o.caption} className={classes.images} />
                               )}
                             </ProgressiveImage>
                           )
