@@ -5,6 +5,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { Moment } from 'moment';
 import React, { FC, Fragment, useContext, useMemo } from 'react';
 import { changeDataPriceByDay } from './context';
+import Cookies from 'universal-cookie';
 
 interface Iprops {
   day: Moment;
@@ -21,7 +22,8 @@ const RenderDay: FC<Iprops> = (props) => {
   const dataPriceByDay = priceByDay
     ? useMemo(() => changeDataPriceByDay(priceByDay), [priceByDay])
     : null;
-
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
   const date = day.format(DEFAULT_DATE_FORMAT);
   return (
     <Grid className="dayContents">
@@ -31,7 +33,7 @@ const RenderDay: FC<Iprops> = (props) => {
 
       {dataPriceByDay && dataPriceByDay[date] ? (
         <Fragment>
-          <span className="dayContents__price">{dataPriceByDay[date].price_day / 1000000}TR</span>
+          <span className="dayContents__price">{lang === 'vi' ? `${dataPriceByDay[date].price_day / 1000000}TR}` : `$${dataPriceByDay[date].price_day}`}</span>
         </Fragment>
       ) : (
           ''

@@ -37,7 +37,7 @@ const DetailsPriceDay: FC<IProps> = (props) => {
                     <p>{item.date}</p>
                   </Grid>
                   <Grid item xs={5} className="totalPriceRoom__textRight">
-                    <p>{numeral(item.price_day).format('0,0')}đ</p>
+                    <p>{numeral(item.price_day).format('0,0')}{t('shared:currency')}</p>
                   </Grid>
                 </Grid>
               ))
@@ -47,7 +47,7 @@ const DetailsPriceDay: FC<IProps> = (props) => {
                     <p>{t('room:boxBooking:avgDay')}</p>
                   </Grid>
                   <Grid item xs={4} className="totalPriceRoom__textRight">
-                    <p>{numeral(dataCalculate.avg_price).format('0,0')}đ</p>
+                    <p>{numeral(dataCalculate.avg_price).format('0,0')}{t('shared:currency')}</p>
                   </Grid>
                 </Grid>
               )}
