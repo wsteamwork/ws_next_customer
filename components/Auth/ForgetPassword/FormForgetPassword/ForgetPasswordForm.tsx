@@ -4,7 +4,6 @@ import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackba
 import { ForgetPasswordReq } from '@/types/Requests/Account/AccountRequests';
 import { FormControl, FormHelperText, Grid, Snackbar, TextField, Typography } from '@material-ui/core';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
@@ -44,7 +43,7 @@ const FormForgetPassword = () => {
   };
 
   return (
-    <Grid className="formSignin">
+    <Grid item xs={12} md={7} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
       <Formik
         enableReinitialize={false}
         validateOnChange={false}
@@ -96,25 +95,6 @@ const FormForgetPassword = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} container justify="center">
-                  <FormControl fullWidth>
-                    <p className="noAccount">
-                      {t('auth:noAccount')}{' '}
-                      <Link href="/auth/signup">
-                        <a>{t('auth:signup')}</a>
-                      </Link>{' '}
-                      {t('auth:now')}
-                    </p>
-                  </FormControl>
-                  <FormControl fullWidth>
-                    <p className="haveAccount">
-                      {t('auth:haveAccount')}{' '}
-                      <Link href="/auth/signin">
-                        <a>{t('auth:singin')}</a>
-                      </Link>
-                    </p>
-                  </FormControl>
-                </Grid>
                 <Snackbar
                   anchorOrigin={{
                     vertical: 'top',
