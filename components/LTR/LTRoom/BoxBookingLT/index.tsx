@@ -16,6 +16,7 @@ interface IProps {
   included_services?: Array<string>;
   not_included_services?: Array<string>;
   handleOpenBookingDialog?: any;
+  roomId?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -49,7 +50,8 @@ const BoxBookingLT: FC<IProps> = (props) => {
     priceBasic,
     handleOpenBookingDialog,
     included_services,
-    not_included_services
+    not_included_services,
+    roomId
   } = props;
   const { t } = useTranslation();
 
@@ -62,7 +64,7 @@ const BoxBookingLT: FC<IProps> = (props) => {
         </Grid>
         <Grid item xs={4} container justify="center">
           <Typography variant="subtitle2" className={classes.roomId}>
-            <a target="_blank" href={`/room/${id}`}>
+            <a target="_blank" href={`/room/${roomId}`}>
               {t('shared:viewDailyPrice')}
             </a>
           </Typography>

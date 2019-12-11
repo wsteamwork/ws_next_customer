@@ -111,6 +111,7 @@ const LongtermRoom: NextPage = () => {
                       included_services={ltroom.included_services}
                       not_included_services={ltroom.not_included_services}
                       handleOpenBookingDialog={handleOpenBookingDialog}
+                      roomId={ltroom.id}
                     />
                     {/* </LazyLoad> */}
                   </Grid>
