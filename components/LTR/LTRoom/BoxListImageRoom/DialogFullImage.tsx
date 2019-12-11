@@ -210,8 +210,8 @@ const DialogFullImage: FC<IProps> = (props) => {
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
-                        {livingrooms.images.map((o, i) => {
-                          if (i >= 0) return (
+                        {livingrooms.images.map((o, j) => {
+                          if (j >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
                                 <img src={src} alt={o.caption} className={livingrooms.images.length == 1 ? classes.onlyOneImage : classes.images} />
@@ -226,40 +226,42 @@ const DialogFullImage: FC<IProps> = (props) => {
               </li>
             ) : <Fragment />}
             <div ref={bedroomRef}>
-              {_.times(bedrooms.number_bedroom, (i) => (
-                <li className={classes.listSection} key={i}>
-                  <Grid container spacing={2}>
+              {_.times(bedrooms.number_bedroom, (i) => {
+                console.log(bedrooms.number_bedroom);
+                return (
+                  <li className={classes.listSection} key={i}>
+                    <Grid container spacing={2}>
 
-                    {
-                      bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
-                        <Grid item xs={12} sm={12} md={12}>
-                          <Grid container spacing={1}>
-                            <Grid item xs={12} className={classes.stikyMobi}>
-                              <div className={classes.titleSticky}>
-                                <Typography variant='h4' className={classes.titleRoomType}>{t('room:bedroomsImg')} {i + 1}</Typography>
-                                <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bedroomsImgSubtitle')}</Typography>
-                              </div>
+                      {
+                        bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images && bedrooms[`bedroom_${i + 1}`].images.length ? (
+                          <Grid item xs={12} sm={12} md={12}>
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} className={classes.stikyMobi}>
+                                <div className={classes.titleSticky}>
+                                  <Typography variant='h4' className={classes.titleRoomType}>{t('room:bedroomsImg')} {i + 1}</Typography>
+                                  <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bedroomsImgSubtitle')}</Typography>
+                                </div>
+                              </Grid>
+                              <Masonry
+                                breakpointCols={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
+                                className="my-masonry-grid"
+                                columnClassName="my-masonry-grid_column"
+                              >
+                                {bedrooms[`bedroom_${i + 1}`].images.map((o, j) => {
+                                  if (j >= 0) return (
+                                    <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
+                                      {(src, loading) => (
+                                        <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? classes.onlyOneImage : classes.images} />
+                                      )}
+                                    </ProgressiveImage>)
+                                })}
+                              </Masonry>
                             </Grid>
-                            <Masonry
-                              breakpointCols={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
-                              className="my-masonry-grid"
-                              columnClassName="my-masonry-grid_column"
-                            >
-                              {bedrooms[`bedroom_${i + 1}`].images.map((o, i) => {
-                                if (i >= 0) return (
-                                  <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
-                                    {(src, loading) => (
-                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? classes.onlyOneImage : classes.images} />
-                                    )}
-                                  </ProgressiveImage>)
-                              })}
-                            </Masonry>
-                          </Grid>
-                        </Grid>) : ''
-                    }
-                  </Grid>
-                </li>
-              ))}
+                          </Grid>) : ''
+                      }
+                    </Grid>
+                  </li>)
+              })}
             </div>
             <div ref={bathroomRef}>
               {_.times(bathrooms.number_bathroom, (i) => (
@@ -283,8 +285,8 @@ const DialogFullImage: FC<IProps> = (props) => {
                               className="my-masonry-grid"
                               columnClassName="my-masonry-grid_column"
                             >
-                              {bathrooms[`bathroom_${i + 1}`].images.map((o, i) => {
-                                if (i >= 0) return (
+                              {bathrooms[`bathroom_${i + 1}`].images.map((o, j) => {
+                                if (j >= 0) return (
                                   <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                                     {(src, loading) => (
                                       <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={bathrooms[`bathroom_${i + 1}`].images.length == 1 ? classes.onlyOneImage : classes.images} />
@@ -317,8 +319,8 @@ const DialogFullImage: FC<IProps> = (props) => {
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
-                        {kitchens.images.map((o, i) => {
-                          if (i >= 0) return (
+                        {kitchens.images.map((o, j) => {
+                          if (j >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
                                 <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={kitchens.images.length == 1 ? classes.onlyOneImage : classes.images} />
@@ -350,11 +352,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
-                        {furnitures.images.map((o, i) => {
-                          if (i >= 0) return (
+                        {furnitures.images.map((o, j) => {
+                          if (j >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={furnitures.images.length == 1? classes.onlyOneImage : classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={furnitures.images.length == 1 ? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>)
                         })}
@@ -383,11 +385,11 @@ const DialogFullImage: FC<IProps> = (props) => {
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
-                        {outdoors.images.map((o, i) => {
-                          if (i >= 0) return (
+                        {outdoors.images.map((o, j) => {
+                          if (j >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={outdoors.images.length == 1  ? classes.onlyOneImage : classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={outdoors.images.length == 1 ? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>)
                         })}

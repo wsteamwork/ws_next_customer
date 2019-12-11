@@ -18,7 +18,6 @@ import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
-// import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -26,9 +25,7 @@ const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
-  // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
-  // forceCheck();
   if (router.pathname.includes('/long-term-room')) {
     dispatchLeaseType({
       type: 'setLeaseTypeGlobal',

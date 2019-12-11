@@ -106,7 +106,7 @@ const TablePrices: FC<IProps> = (props) => {
           <TableBody>
             <StyledTableRow key={room.id}>
               <StyledTableCell component="th" scope="row">
-                {t('shared:viewMonthyPrice')}
+                {t('shared:viewMonthlyPrice')}
               </StyledTableCell>
               <StyledTableCell align="right">
                 <a target="_blank" href={`/long-term-room/${room.id}`}>
