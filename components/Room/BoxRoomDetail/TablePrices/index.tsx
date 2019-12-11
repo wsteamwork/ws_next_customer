@@ -104,6 +104,16 @@ const TablePrices: FC<IProps> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
+            <StyledTableRow key={room.id}>
+              <StyledTableCell component="th" scope="row">
+                {t('shared:viewMonthyPrice')}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                <a target="_blank" href={`/long-term-room/${room.id}`}>
+                  {t('shared:viewDetails')}
+                </a>
+              </StyledTableCell>
+            </StyledTableRow>
             {rows.map(row => (
               <StyledTableRow key={row.name}>
                 <StyledTableCell component="th" scope="row">

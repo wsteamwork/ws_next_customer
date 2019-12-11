@@ -56,7 +56,7 @@ i18n
   .use(languageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'vi',
+    fallbackLng: 'en',
     resources: {
       en: {
         home: home_en,

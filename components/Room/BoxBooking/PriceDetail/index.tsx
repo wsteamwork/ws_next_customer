@@ -1,7 +1,7 @@
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import numeral from 'numeral';
 import React, { FC, memo, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +25,7 @@ const PriceDetail: FC = () => {
             </Grid>
           ) : (
               <Grid container>
-                <Grid item xs={6} className="priceDetail__priceDay flex_center">
+                <Grid item xs={room.price_hour !== 0 && room.rent_type !== 2 ? 4 : 6} className="priceDetail__priceDay flex_center">
                   <p>
                     {t('room:currency')}{numeral(
                       room.is_discount === 1 ? room.price_day_discount : room.price_day
@@ -33,8 +33,9 @@ const PriceDetail: FC = () => {
                     /{t('room:boxBooking:day')}
                   </p>
                 </Grid>
+
                 {room.price_hour !== 0 && room.rent_type !== 2 && (
-                  <Grid item xs={6} className="priceDetail__priceHour flex_center">
+                  <Grid item xs={4} className="priceDetail__priceHour flex_center">
                     <p>
                       {t('room:currency')}{numeral(
                         room.is_discount === 1 ? room.price_hour_discount : room.price_hour
@@ -42,6 +43,13 @@ const PriceDetail: FC = () => {
                     </p>
                   </Grid>
                 )}
+                <Grid item xs={room.price_hour !== 0 && room.rent_type !== 2 ? 4 : 6} className="priceDetail__priceDay flex_center">
+                  <Typography variant="subtitle2">
+                    <a target="_blank" href={`/long-term-room/${room.id}`}>
+                      {t('shared:viewMonthlyPrice')}
+                    </a>
+                  </Typography>
+                </Grid>
               </Grid>
             )}
         </Grid>

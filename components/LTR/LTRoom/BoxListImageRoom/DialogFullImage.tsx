@@ -56,8 +56,19 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: 4,
       [theme.breakpoints.up('md')]: {
       },
-      maxHeight: 400,
+      maxHeight: 600,
       objectFit: 'cover'
+    },
+    onlyOneImage: {
+      width: '100%',
+      borderRadius: 4,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      [theme.breakpoints.up('md')]: {
+      },
+      maxHeight: 800,
+      objectFit: 'contain'
     },
     bigImage: {
       width: '100%',
@@ -136,8 +147,11 @@ const DialogFullImage: FC<IProps> = (props) => {
     700: 2,
     500: 1
   };
+  const breakpointOnlyOneImage = {
+    default: 1
+  };
   return (
-    <Dialog fullWidth maxWidth={'lg'} fullScreen={width === 'sm' || width === 'xs' ? true : false} open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
+    <Dialog fullWidth maxWidth={'xl'} fullScreen={width === 'sm' || width === 'xs' ? true : false} open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
       <AppBar className={classes.appBar} color="inherit" elevation={0}>
         <Grid item className={classes.btClose}>
           <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>
@@ -176,7 +190,7 @@ const DialogFullImage: FC<IProps> = (props) => {
       </AppBar>
 
       <DialogContent classes={{ root: classes.dialogContent }} id="full_image_dialog_openned">
-        <GridContainer xs={11} sm={11} md={9} lg={9} xl={9}>
+        <GridContainer xs={11} sm={11} md={9} lg={10} xl={10}>
           <List className={classes.root} subheader={<li />}>
 
             {livingrooms && livingrooms.images && livingrooms.images.length ? (
@@ -192,7 +206,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         </div>
                       </Grid>
                       <Masonry
-                        breakpointCols={breakpointColumnsObj}
+                        breakpointCols={livingrooms.images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
@@ -200,7 +214,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                           if (i >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1, height: i%3 == 0 ? '50%' : '100%' }} src={src} alt={o.caption} className={classes.images} />
+                                <img src={src} alt={o.caption} className={livingrooms.images.length == 1 ? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>
                           )
@@ -227,7 +241,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                               </div>
                             </Grid>
                             <Masonry
-                              breakpointCols={breakpointColumnsObj}
+                              breakpointCols={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                               className="my-masonry-grid"
                               columnClassName="my-masonry-grid_column"
                             >
@@ -235,7 +249,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                                 if (i >= 0) return (
                                   <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                                     {(src, loading) => (
-                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={bedrooms[`bedroom_${i + 1}`].images.length == 1 ? classes.onlyOneImage : classes.images} />
                                     )}
                                   </ProgressiveImage>)
                               })}
@@ -265,7 +279,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                             </Grid>
 
                             <Masonry
-                              breakpointCols={breakpointColumnsObj}
+                              breakpointCols={bathrooms[`bathroom_${i + 1}`].images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                               className="my-masonry-grid"
                               columnClassName="my-masonry-grid_column"
                             >
@@ -273,7 +287,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                                 if (i >= 0) return (
                                   <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                                     {(src, loading) => (
-                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                      <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={bathrooms[`bathroom_${i + 1}`].images.length == 1 ? classes.onlyOneImage : classes.images} />
                                     )}
                                   </ProgressiveImage>)
                               })}
@@ -299,7 +313,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         </div>
                       </Grid>
                       <Masonry
-                        breakpointCols={breakpointColumnsObj}
+                        breakpointCols={kitchens.images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
@@ -307,7 +321,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                           if (i >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={kitchens.images.length == 1 ? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>)
                         })}
@@ -332,7 +346,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         </div>
                       </Grid>
                       <Masonry
-                        breakpointCols={breakpointColumnsObj}
+                        breakpointCols={furnitures.images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
@@ -340,7 +354,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                           if (i >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={furnitures.images.length == 1? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>)
                         })}
@@ -365,7 +379,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                         </div>
                       </Grid>
                       <Masonry
-                        breakpointCols={breakpointColumnsObj}
+                        breakpointCols={outdoors.images.length == 1 ? breakpointOnlyOneImage : breakpointColumnsObj}
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                       >
@@ -373,7 +387,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                           if (i >= 0) return (
                             <ProgressiveImage src={IMAGE_STORAGE_LG + o.name} placeholder={IMAGE_STORAGE_XS + o.name}>
                               {(src, loading) => (
-                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={classes.images} />
+                                <img style={{ opacity: loading ? 0.1 : 1 }} src={src} alt={o.caption} className={outdoors.images.length == 1  ? classes.onlyOneImage : classes.images} />
                               )}
                             </ProgressiveImage>)
                         })}

@@ -9,6 +9,7 @@ import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
+// import BuildingList from '@/components/LTR/Merchant/Listing/BuildingList';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -48,6 +49,7 @@ const RoomList: NextPage = (props) => {
         </Grid>
       </Grid>
       {!!cookies._token ? (
+        // <BuildingList />
         <RoomListHost />
       ) : ''}
 

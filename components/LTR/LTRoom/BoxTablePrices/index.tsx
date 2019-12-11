@@ -18,6 +18,7 @@ interface IProps {
   included_fee: typeService[],
   included_services: string[],
   not_included_services: string[],
+  ltRoomId?: number
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -45,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxTablePrices: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { prices, included_fee, not_included_services, included_services } = props;
+  const { ltRoomId, prices, included_fee, not_included_services, included_services } = props;
   const { t } = useTranslation();
 
   return (
@@ -72,6 +73,16 @@ const BoxTablePrices: FC<IProps> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
+            <StyledTableRow key={ltRoomId}>
+              <StyledTableCell component="th" scope="row">
+                {t('shared:viewDailyPrice')}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                <a target="_blank" href={`/room/${ltRoomId}`}>
+                  {t('shared:viewDetails')}
+                </a>
+              </StyledTableCell>
+            </StyledTableRow>
             {prices && prices.length ? (
               prices.map((o, i) => (
                 <StyledTableRow key={i}>

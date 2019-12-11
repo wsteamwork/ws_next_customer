@@ -1,16 +1,14 @@
-import { RoomIndexRes, RoomScheduleRes } from '@/types/Requests/Rooms/RoomResponses';
+import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { BodyRequestPriceByDayRes, PriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { RoomIndexRes, RoomScheduleRes } from '@/types/Requests/Rooms/RoomResponses';
 import { axios } from '@/utils/axiosInstance';
-import _ from 'lodash';
-import { NextRouter } from 'next/router';
-import { PriceByDayRes, BodyRequestPriceByDayRes } from '@/types/Requests/Rooms/PriceByDay';
+import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import moment from 'moment';
 import qs from 'query-string';
-import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
-import { updateObject } from '@/store/Context/utility';
-import { ReducresActions } from '..';
-import { Reducer, Dispatch } from 'redux';
 import { ParsedUrlQuery } from 'querystring';
+import { Dispatch, Reducer } from 'redux';
+import { ReducresActions } from '..';
 // import Cookies from 'universal-cookie';
 export type RoomReducerState = {
   readonly room: RoomIndexRes | null;
@@ -60,10 +58,10 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
 
 export const getRoom = async (idRoom: any, initLanguage: string = 'en'): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
-    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user,prices`,
+    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,reviews.user,prices`,
     { headers: { 'Accept-Language': initLanguage } }
   );
-
+  // console.log(res.data.data);
   return res.data.data;
 };
 

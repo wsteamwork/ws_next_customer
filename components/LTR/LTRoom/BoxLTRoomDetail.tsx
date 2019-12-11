@@ -115,6 +115,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
                   <BoxTablePrices
+                    ltRoomId={room.id}
                     prices={checkPrice ? [] : room.prices.prices}
                     included_fee={checkPrice ? [] : room.prices.included_fee}
                     included_services={checkPrice ? [] : room.included_services}

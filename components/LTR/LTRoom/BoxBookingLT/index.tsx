@@ -52,10 +52,22 @@ const BoxBookingLT: FC<IProps> = (props) => {
     not_included_services
   } = props;
   const { t } = useTranslation();
+
   return (
     <div className={classes.boxContainer}>
-      <Typography variant="h6">{t('longtermroom:currency')}{formatMoney(priceBasic)}</Typography>
-      <Typography className={classes.textMarginBottom} variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
+      <Grid container>
+        <Grid item xs={8}>
+          <Typography variant="h6">{t('longtermroom:currency')}{formatMoney(priceBasic)}</Typography>
+          <Typography className={classes.textMarginBottom} variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
+        </Grid>
+        <Grid item xs={4} container justify="center">
+          <Typography variant="subtitle2" className={classes.roomId}>
+            <a target="_blank" href={`/room/${id}`}>
+              {t('shared:viewDailyPrice')}
+            </a>
+          </Typography>
+        </Grid>
+      </Grid>
 
       <div className={classes.rowMargin}>
         <ButtonGlobal height={50} background="linear-gradient(to right, #667eea, #764ba2);" padding="0px" width="100%" onClick={handleOpenBookingDialog}>
