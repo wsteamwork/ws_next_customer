@@ -1,5 +1,4 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import Logo from '@/components/Toolbar/Logo';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
@@ -13,7 +12,6 @@ import Orange from '@material-ui/core/colors/orange';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
-import EmailIcon from '@material-ui/icons/Email';
 import IconMenu from '@material-ui/icons/Menu';
 import NotificationsOutlined from '@material-ui/icons/NotificationsOutlined';
 import People from '@material-ui/icons/PersonRounded';
@@ -217,12 +215,12 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
             <Hidden smDown>
               <Grid container item md={width === 'lg' || width === 'xl' ? 6 : 2}>
                 <Logo isDetailPage={isDetailPage} />
-                {
+                {/* {
                   isDetailPage && (width === 'lg' || width === 'xl') &&
                   <Grid item md={6}>
                     <SearchAutoSuggestion />
                   </Grid>
-                }
+                } */}
               </Grid>
               <div className={classes.grow} />
               <ButtonGlobal

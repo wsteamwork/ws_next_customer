@@ -27,7 +27,7 @@
     "priceRangeMax": "Max price",
     "paymentTransferContent": "Payment for booking id",
     "amountMoney": "Amount to transfer:",
-    "viewMonthyPrice":"Check monthly price",
+    "viewMonthlyPrice":"Check monthly price",
     "viewDailyPrice":"Check daily price",
     "viewDetails": "View details"
 }

@@ -81,7 +81,7 @@
         height: 95%;
       }
 
-      padding-top: 126px;
+      padding-top: 150px;
       height: 800px;
       margin: 0px;
     }
@@ -119,13 +119,13 @@
   }
 
   .box-price {
-    position: absolute;
     // position: fixed;
     padding-bottom: 15px;
     align-items: center;
 
     @include lgUp {
-      top: 200px;
+      // top: 200px;
+      top: 20px;
       width: 328px;
       right: 0px;
     }
@@ -138,6 +138,9 @@
       // padding: 0 24px;
       padding: 0 8px;
       // position: fixed;
+    }
+    @include smDown {
+      position: absolute;
     }
 
     .price-title {

@@ -124,8 +124,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid className="booking-calendar__box-main">
-          <Grid container className="box-main__wrapper">
+        <Grid container className="booking-calendar__box-main">
+          <Grid container item xs={12} lg={11} className="box-main__wrapper">
             <Grid item xs={12} lg={7} xl={6} className="calendar-picker">
               <DateRangeVerticalLT
                 focusedInput={focusedInput}
@@ -136,7 +136,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
               />
             </Grid>
 
-            <Grid item xs={12} lg={5} xl={6} className="box-price">
+            <Grid item xs={12} lg={5} xl={4} className="box-price">
               <QuantityButtons
                 number={guest}
                 setNumber={setGuest}
@@ -151,7 +151,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
                         </Typography>
                         <a onClick={handleOpenMobilePriceDetail}>{t('book:calendarLT:detailPrices')}</a>
                         <Dialog
-                          fullScreen
+                          maxWidth="lg"
                           open={openMobilePriceDetail}
                           onClose={handleCloseMobilePriceDetail}
                         // TransitionComponent={Transition}

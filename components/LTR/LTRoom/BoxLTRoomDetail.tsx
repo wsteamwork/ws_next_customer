@@ -2,7 +2,6 @@ import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
 import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
 import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
-import PlacesAroundList from '@/components/Room/BoxRoomDetail/HereMap/PlacesAroundList';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
 import RoomDescription from '@/components/Room/BoxRoomDetail/RoomDescription';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -130,10 +129,10 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
-                  <PlacesAroundList
+                  {/* <PlacesAroundList
                     latitude={room ? room.latitude : '0'}
                     longitude={room ? room.longitude : '0'}
-                  />
+                  /> */}
                   <HereMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
 
                   {/* </LazyLoad> */}
