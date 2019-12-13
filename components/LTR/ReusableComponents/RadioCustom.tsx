@@ -9,13 +9,14 @@ interface IProps {
   descr?: ReactNode,
   value: string,
   className?: string;
+  border?: boolean
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     checkboxItemWrapper: {
       padding: '5px 15px 10px',
-      border: '1px solid lightgray',
+      border: (props) => props.border ? '1px solid lightgray' : 'none',
       borderRadius: 4,
       minHeight: 120,
     },
