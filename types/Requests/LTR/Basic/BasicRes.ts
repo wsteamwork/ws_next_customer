@@ -38,8 +38,8 @@ export interface Listing {
   instant_book: number;
   instant_book_txt: string;
   display: number;
-  stay_with_host;
-  stay_with_host_txt;
+  stay_with_host: number;
+  stay_with_host_txt: string;
   short_term_room: {
     price_day: number;
     price_hour: number;

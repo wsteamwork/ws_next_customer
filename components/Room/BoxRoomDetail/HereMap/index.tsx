@@ -56,7 +56,7 @@ const HereMap: FC<IProps> = (props) => {
     fetchData();
   }, []);
   return (
-    <HPlatform app_id={your_app_id} app_code={your_app_code} useCIT useHTTPS includeUI interactive>
+    <HPlatform app_id={your_app_id} app_code={your_app_code} useCIT useHTTPS includeUI>
       <HMap
         style={{
           height: '400px',

@@ -53,7 +53,6 @@ interface IProps {
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { description, note, space, isPreviewPage } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
