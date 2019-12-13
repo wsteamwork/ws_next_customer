@@ -2,172 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/Home/DateRangeSearch/DateSearchBooking.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/LTBook/DateRangeVerticalLT.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/BookingCardItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/LongTermBookingList.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/PriceRange/ActionRangePriceLT.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/host/create-listing/[id]/basic.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/accept-contract.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/cancel-contract.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/contract-current.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/contract-list.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/debit-card.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/edit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/new.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/pages/book/bookingCalendar/LTDatePicker.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/host/create-listing/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/apartment.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/img_intro.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/studio.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Auth/Signin/FormSignin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Auth/Signin/FormSignin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Auth/Signup/FormSignup/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Auth/Signup/FormSignup/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Book/BookingForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Book/BookingForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Cards/CardIntro.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Cards/CardIntro.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Custom/SvgCustom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Custom/SvgCustom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CustomPopper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CustomPopper/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/ChooseGuestRoom/ActionChoose.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/ChooseGuestRoom/ActionChoose.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/DateRangeSearch/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/DateRangeSearch/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/SearchComponent/SearchHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/SearchComponent/SearchHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Home/SearchComponent/TabChangeHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Home/SearchComponent/TabChangeHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTBook/BookingCalendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTBook/BookingCalendar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTBook/BookingForm/TooltipPayment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTBook/BookingForm/TooltipPayment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTBook/BookingForm/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTBook/BookingForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTBook/LTPayment/PaymentInfo/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTBook/LTPayment/PaymentInfo/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTHome/SearchHomeLT.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTHome/SearchHomeLT.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/DialogFullImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRooms/LTRoomCardListing/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/FilterBookingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/FilterBookingList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Description/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Room/AddBedRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Room/AddBedRoom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/AdditionalServiceFee/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/CardImageCaption.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/CardImageCaption.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/ImageCaption.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/UppyImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/UploadImage/UppyImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/BottomNavigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/StepperProgress.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/RoomCardItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/RoomCardItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingDetails/RentAndRoomType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingDetails/RentAndRoomType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/AvatarImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/AvatarImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/BathImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/BathImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/BedImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/BedImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/CoverPhoto.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/CoverPhoto.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Furnitures.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Furnitures.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Kitchens.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Kitchens.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/LivingRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/LivingRooms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Outdoors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/Outdoors.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingImage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/IncludedFee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/IncludedFee.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/PriceLongTerm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/PriceLongTerm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/WeekdayPrice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/ListingPrice/WeekdayPrice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateAddBedRoom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateAddBedRoom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateBedRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateBedRooms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateLocation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateLocation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateRentAndRoomType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateRentAndRoomType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateAvatarImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateAvatarImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateBathRoomImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateBathRoomImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateBedRoomImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateBedRoomImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateCoverPhoto.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateCoverPhoto.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateFurnitureImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateFurnitureImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateKitchenImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateKitchenImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateLivingRoomImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateLivingRoomImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateOutdoorImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentImages/UpdateOutdoorImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentPrices/UpdateIncludedFee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentPrices/UpdateIncludedFee.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Layout/FooterComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout/FooterComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Layout/MetroGridImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Layout/MetroGridImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/NextHead.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/NextHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Notifications/NotificationItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Notifications/NotificationItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Profile/EditProfile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Profile/EditProfile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ReusableComponents/QuantityButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ReusableComponents/QuantityButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxMap/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/RoomCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/RoomCard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/BottomNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/BottomNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/BookByHour/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/BookByHour/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/ChooseRoomGuest/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/ChooseRoomGuest/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FastBooking/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FastBooking/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/ActionFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/ActionFilter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/context.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterDistrict/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterRoom/ActionFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterRoom/ActionFilter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterRoom/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/FilterRoom/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/PriceRange/ActionRangePrice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/PriceRange/ActionRangePrice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/PriceRange/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/PriceRange/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/RoomType/ActionSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/RoomType/ActionSelect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/RoomType/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/RoomType/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterActions/SwitchMap/IOSSwitch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterActions/SwitchMap/IOSSwitch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Rooms/FilterDrawerMobile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Rooms/FilterDrawerMobile/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Slider/HomePage/SliderTypeApartment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Slider/HomePage/SliderTypeApartment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Toolbar/NavHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toolbar/NavHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Toolbar/NavHeaderHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toolbar/NavHeaderHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Toolbar/SideDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Toolbar/SideDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/booking-cancel/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/booking-cancel/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/booking-list/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/booking-list/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/[id]/detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/[id]/detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/[id]/process.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/[id]/process.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/create-listing/basic.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/create-listing/basic.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/update-listing/[id]/location.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/update-listing/[id]/location.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/rooms/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/rooms/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/terms-and-conditions/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/terms-and-conditions/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Context/utility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Context/utility.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/BookingList/bookinglist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/BookingList/bookinglist.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step2/details.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step2/details.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/RoomList/roomlist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/RoomList/roomlist.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/UpdateListing/updateDetails.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/UpdateListing/updateDetails.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Airbnb/datepicker.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Airbnb/datepicker.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/FullCalendar/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/FullCalendar/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/chooseGuestRoom/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/chooseGuestRoom/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/dateRangeSearch/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/dateRangeSearch/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/components/roomCard/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/components/roomCard/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/constants/colors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/styles/constants/colors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/book/bookingCalendar/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/book/bookingCalendar/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/home/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/home/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/profile/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/profile/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/room/navBottomBook/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/room/navBottomBook/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/rooms/chooseRoomGuest.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/rooms/chooseRoomGuest.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/pages/rooms/pagination.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/pages/rooms/pagination.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/shared/colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/shared/colors.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-vi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/book/book-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/book/book-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/home/home-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/home/home-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Interfaces/Formik.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Interfaces/Formik.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Requests/Booking/BookingResponses.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/Booking/BookingResponses.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/mixins.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mixins.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -181,81 +22,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+        <entry file="file://$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="229" column="75" selection-start-line="229" selection-start-column="75" selection-end-line="229" selection-end-column="75" />
+            <state relative-caret-position="1495">
+              <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
               <folding>
-                <element signature="e#0#63#0" expanded="true" />
-                <element signature="e#3038#3338#0" />
-                <element signature="e#3392#3685#0" />
-                <element signature="e#3745#3961#0" />
-                <element signature="e#4015#4229#0" />
-                <element signature="e#5419#6211#0" />
+                <element signature="e#0#86#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="784">
+              <caret line="263" column="23" selection-start-line="263" selection-start-column="23" selection-end-line="263" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#88#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking.tsx">
+        <entry file="file://$PROJECT_DIR$/pages/host/create-listing/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="132" column="21" lean-forward="true" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="21" />
+            <state relative-caret-position="214">
+              <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
               <folding>
-                <element signature="e#0#77#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="877">
-              <caret line="157" column="76" selection-start-line="157" selection-start-column="76" selection-end-line="157" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="628" column="37" selection-start-line="628" selection-start-column="37" selection-end-line="628" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#97#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/Profile/BookingProfile/DialogBookingDetails.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#65#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/Requests/Booking/BookingResponses.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="4" column="32" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/Profile/CardBooking/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4071">
-              <caret line="185" column="47" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -272,9 +78,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>test</find>
-      <find>isLoading</find>
-      <find>next</find>
       <find>isLoaded</find>
       <find>setIsLoaded</find>
       <find>reloaded</find>
@@ -302,6 +105,9 @@
       <find>wrapperPaymentXs</find>
       <find>LazyLoad</find>
       <find>divider</find>
+      <find>backgroundImage</find>
+      <find>'@/static</find>
+      <find>&lt;img src=</find>
     </findStrings>
     <dirStrings>
       <dir>D:\VNP\ws_next_customer\node_modules</dir>
@@ -318,8 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pages/rooms/index.tsx" />
-        <option value="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" />
         <option value="$PROJECT_DIR$/styles/pages/rooms/index.scss" />
         <option value="$PROJECT_DIR$/components/Rooms/MapMobile/index.tsx" />
         <option value="$PROJECT_DIR$/components/Toolbar/NavHeader.tsx" />
@@ -329,7 +133,6 @@
         <option value="$PROJECT_DIR$/components/Room/BoxImage/index.tsx" />
         <option value="$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx" />
         <option value="$PROJECT_DIR$/store/Context/Room/RoomListContext.ts" />
-        <option value="$PROJECT_DIR$/routes/index.ts" />
         <option value="$PROJECT_DIR$/pages/preview-room/index.tsx" />
         <option value="$PROJECT_DIR$/pages/room/index.tsx" />
         <option value="$PROJECT_DIR$/components/HostInfo/index.tsx" />
@@ -369,6 +172,9 @@
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking.tsx" />
+        <option value="$PROJECT_DIR$/routes/index.ts" />
+        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx" />
+        <option value="$PROJECT_DIR$/pages/host/create-listing/index.tsx" />
       </list>
     </option>
   </component>
@@ -404,93 +210,12 @@
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="ButtonGlobal" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-              <item name="BookingList" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-              <item name="CalendarManagement" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Profile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Profile" type="462c0819:PsiDirectoryNode" />
-              <item name="BookingProfile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="preview-room" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="types" type="462c0819:PsiDirectoryNode" />
-              <item name="Requests" type="462c0819:PsiDirectoryNode" />
-              <item name="Booking" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -526,7 +251,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
     <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -541,11 +266,11 @@
       <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\static\images" />
       <recent name="D:\VNP\ws_next_customer\components\LTR\Merchant\Listing\CalendarManagement" />
       <recent name="D:\VNP\ws_next_customer\styles\components\LTRoomCardListing" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchAutoSuggestion" />
       <recent name="D:\VNP\ws_next_customer\components\LTR" />
-      <recent name="D:\VNP\ws_next_customer\components\Home\SearchComponent" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -671,6 +396,10 @@
       <workItem from="1573866793637" duration="6669000" />
       <workItem from="1573904682909" duration="8343000" />
       <workItem from="1574042527584" duration="11300000" />
+      <workItem from="1575614614927" duration="1161000" />
+      <workItem from="1576047114652" duration="8268000" />
+      <workItem from="1576117020323" duration="13746000" />
+      <workItem from="1576203244360" duration="3593000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -844,13 +573,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1563851000" />
+    <option name="totallyTimeSpent" value="1590619000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.20895523" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.21748401" />
       <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -866,7 +595,7 @@
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.15830547" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5063966" side_tool="true" weight="0.13600892" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3277592" />
-      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="12" sideWeight="0.4936034" visible="true" weight="0.13377926" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="12" sideWeight="0.4936034" visible="true" weight="0.15496098" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -942,120 +671,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="fullcalendar final #2" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/types/Requests/ResponseTemplate.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/colors/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Button/Button.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/MenuItem/MenuItem.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#78#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/FilterBookingList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1219">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/LTBooking/ltbooking.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2852">
-          <caret line="140" column="7" selection-start-line="140" selection-start-column="7" selection-end-line="140" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/MySnackbarContentWrapper.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/home/home-en.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/layout/layout-en.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/profile/profile-en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/promotion/promotion-en.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/reviews/reviews-en.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/room/room-en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="58" column="4" lean-forward="true" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/room/room-vi.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-764" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/user/user-en.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/shared/shared-vi.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/shared/shared-en.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -1131,16 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-663">
-          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#88#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/mixins.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2438">
@@ -1193,13 +798,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue" />
     <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -1231,29 +830,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Profile/CardBooking/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4071">
-          <caret line="185" column="47" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/Profile/BookingProfile/DialogBookingDetails.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="82" column="53" lean-forward="true" selection-start-line="82" selection-start-column="53" selection-end-line="82" selection-end-column="53" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4922">
+          <caret line="229" column="58" selection-start-line="229" selection-start-column="58" selection-end-line="229" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3358">
+          <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13823">
+          <caret line="628" column="37" selection-start-line="628" selection-start-column="37" selection-end-line="628" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Profile/BookingProfile/DialogBookingDetails.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1265,44 +884,158 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+    <entry file="file://$PROJECT_DIR$/components/Profile/CardBooking/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="229" column="75" selection-start-line="229" selection-start-column="75" selection-end-line="229" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-            <element signature="e#3038#3338#0" />
-            <element signature="e#3392#3685#0" />
-            <element signature="e#3745#3961#0" />
-            <element signature="e#4015#4229#0" />
-            <element signature="e#5419#6211#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="877">
-          <caret line="157" column="76" selection-start-line="157" selection-start-column="76" selection-end-line="157" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="628" column="37" selection-start-line="628" selection-start-column="37" selection-end-line="628" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#97#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="4071">
+          <caret line="185" column="47" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="132" column="21" lean-forward="true" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="21" />
+        <state relative-caret-position="468">
+          <caret line="132" column="21" selection-start-line="132" selection-start-column="21" selection-end-line="132" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-booking/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="943">
+          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
           <folding>
-            <element signature="e#0#77#0" expanded="true" />
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTBook/BookingForm/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10925">
+          <caret line="493" column="37" selection-start-line="493" selection-start-column="37" selection-end-line="493" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-booking/payment/direct.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="48" column="23" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTBook/LTPayment/DirectPayment/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/CheckboxCustom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-582">
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Basic/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="125" column="24" lean-forward="true" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/basic.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Toolbar/Logo.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/accept-contract.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/westay-avatar.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/Logo-westay.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/logo-image-only.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/images/img_intro.png" />
+    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1495">
+          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="263" column="23" selection-start-line="263" selection-start-column="23" selection-end-line="263" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="37" column="10" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/RadioCustom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
