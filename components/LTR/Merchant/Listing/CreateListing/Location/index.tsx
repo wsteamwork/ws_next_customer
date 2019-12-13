@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'react';
-// import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
@@ -27,12 +26,10 @@ interface Coordinate {
 interface GoogleMapProps extends WithGoogleMapProps {
   defaultCenter: Coordinate | null;
   coordinate: Coordinate;
-  // onClickMap: (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => void;
   handleDragEnd: (e: google.maps.MouseEvent) => void;
 }
 
 interface FormValues {
-  // address: string;
   city: string;
   building: string;
   district: string;
@@ -42,7 +39,6 @@ const useValidatation = () => {
   const { t } = useTranslation();
 
   const FormValidationSchema = Yup.object().shape({
-    // address: Yup.string().required(t('basic:addressRequired')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
 
@@ -141,7 +137,6 @@ const Location: FC<IProps> = (props) => {
     });
   };
   const initFormValue: FormValues = {
-    // address: address,
     city: '',
     building: building,
     district: ''
@@ -180,7 +175,6 @@ const Location: FC<IProps> = (props) => {
           const hasChanged = !deepEqual(values, initialValues);
           const hasErrors = Object.keys(errors).length > 0;
           setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
-          // console.log('value city', values.city)
           return (
             <form onSubmit={handleSubmit}>
               <Grid container style={{ display: 'flex' }}>
