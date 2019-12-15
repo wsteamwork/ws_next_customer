@@ -3,7 +3,7 @@ import { ReducresActions } from '@/store/Redux/Reducers';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { LTRoomAvailableRes } from '@/types/Requests/Rooms/RoomResponses';
-import { axios } from '@/utils/axiosInstance';
+import { axios, axios_merchant } from '@/utils/axiosInstance';
 import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import moment from 'moment';
 import { ParsedUrlQuery } from 'querystring';
@@ -52,6 +52,18 @@ export const getLTRoom = async (
   initLanguage: string = 'en'
 ): Promise<LTRoomIndexRes> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
+    `long-term-rooms/${idRoom}?include=city,district,merchant`,
+    { headers: { 'Accept-Language': initLanguage } }
+  );
+
+  return res.data.data;
+};
+
+export const getLTRoomOfMerchant = async (
+  idRoom: any,
+  initLanguage: string = 'en'
+): Promise<LTRoomIndexRes> => {
+  const res: AxiosRes<LTRoomIndexRes> = await axios_merchant.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
     { headers: { 'Accept-Language': initLanguage } }
   );

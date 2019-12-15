@@ -4,7 +4,7 @@ import { Theme, Box, Typography, Grid, RadioGroup, Collapse, TextField, FormHelp
 import GridContainer from '@/components/Layout/Grid/Container';
 import FormControl from '@material-ui/core/FormControl';
 import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
-import { axios_merchant, axios } from '@/utils/axiosInstance';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { InputFeedback } from '@/components/LTR/Merchant/Listing/CreateListing/Location';
@@ -12,13 +12,11 @@ import { FormikProps, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { ProfileInfoReq } from '@/types/Requests/Profile/ProfileReq';
-import moment from '@/components/Profile/EditProfile';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
 import { RoomWithinBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 
 interface IProps {
   classes?: any
@@ -51,6 +49,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
   const [haveBuilding, setHaveBuilding] = useState<number>(0);
   const [buildings, setBuildings]       = useState<ApartmentBuildingsRes[]>([]);
   const { t }                           = useTranslation();
+  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
 
   const initFormValue: FormValues = {
     apartment_building_id: 0,
@@ -83,9 +82,13 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
       .post('long-term/room-within-building/create', data)
       .then((res) => {
         const idNewRoom = res.data.data.id;
+        dispatch({
+          type: 'SET_LISTING',
+          payload: res.data.data
+        });
         router.push(`/host/create-listing/${idNewRoom}/basic`);
       })
-      .catch((error) => {
+      .catch(() => {
         actions.setSubmitting(false);
       });
   };
@@ -111,8 +114,6 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
       .then((res) => {
         setBuildings(res.data);
       })
-      .catch((err) => {
-      });
   }, []);
 
   return (
@@ -178,8 +179,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                       handleChange,
                       handleBlur,
                       isSubmitting,
-                      setFieldTouched,
-                      setFieldValue
+                      setFieldTouched
                     }: FormikProps<FormValues>) => {
                     // const hasErrors = Object.keys(errors).length > 0;
                     return (
