@@ -78,6 +78,7 @@ const CreateApartment: FC<IProps> = (props) => {
     if (res) {
       setOpenSnack(true);
       setMessageSnack('Tạo mới tòa nhà thành công !');
+      router.push(`/host/building-list`);
     } else {
       setOpenSnack(true);
       setStatusSnack('error');
