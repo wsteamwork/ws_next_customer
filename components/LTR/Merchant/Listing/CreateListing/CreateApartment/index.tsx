@@ -99,12 +99,12 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
   const FormValidationSchema = useValidatation();
 
   useMemo(() => {
-    if (avatar.length < 1 || address.length < 1 || !district_id || !city_id || name.length < 10 || name_en.length < 10) {
+    if (avatar.length < 1 || address.length < 1 || !district_id || !city_id || name.length < 10 || name_en.length < 10 || !coordinateState) {
       dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
     } else {
       dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
     }
-  }, [avatar, address, district_id, city_id, name, name_en]);
+  }, [avatar, address, district_id, city_id, name, name_en, coordinateState]);
   
   useEffect(() => {
     dispatch({
