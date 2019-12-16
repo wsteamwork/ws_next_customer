@@ -11,10 +11,13 @@ import Typography from '@material-ui/core/Typography';
 import AddIconOutlined from '@material-ui/icons/AddOutlined';
 import EditIconOutlined from '@material-ui/icons/EditOutlined';
 import FileCopyIconOutlined from '@material-ui/icons/FileCopyOutlined';
+import ApartmentRoundedIcon from '@material-ui/icons/LocationCityRounded';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import LazyLoad from 'react-lazyload';
+import DialogAddRoomToBuilding from '@/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding';
 
 interface IProps {
   classes?: any;
@@ -244,10 +247,11 @@ const RoomCardItem: FC<IProps> = (props) => {
   const { room } = props;
   const { router } = useContext(GlobalContext);
   const [open, setOpen] = useState(false);
+  const [openById, setOpenById] = useState(false);
   const [message, setMessage] = useState('');
   const [snackStatus, setSnackStatus] = useState('success');
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
     setTimeout(location.reload.bind(location), 1000);
   };
   const BorderLinearProgress = withStyles({
@@ -284,10 +288,9 @@ const RoomCardItem: FC<IProps> = (props) => {
       setOpen(true);
       setSnackStatus('success');
 
-    }).catch(error => {
-      console.log(error)
+    }).catch(() => {
     })
-  }
+  };
   const openLongTermRoomUpdateFirstTime = (room_id: number) => {
     window.open(`/host/create-listing/${room_id}/process`, `_blank`);
   };
@@ -338,6 +341,20 @@ const RoomCardItem: FC<IProps> = (props) => {
                             aria-label="Edit"
                             onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
                             <EditIconOutlined className={classes.sizeButton} />
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip
+                          title={t('roomlist:addToBuilding')}
+                          placement="bottom"
+                          classes={{ tooltip: 'tooltip' }}>
+                          <IconButton
+                            color="primary"
+                            className={classes.IconButton}
+                            aria-label="Edit"
+                            onClick={() => setOpenById(!openById)}>
+                            <ApartmentRoundedIcon className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
                       </Grid>
@@ -418,6 +435,20 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </Grid>
                             <Grid item>
                               <Tooltip
+                                title={t('roomlist:addToBuilding')}
+                                placement="bottom"
+                                classes={{ tooltip: 'tooltip' }}>
+                                <IconButton
+                                  color="primary"
+                                  className={classes.IconButton}
+                                  aria-label="Edit"
+                                  onClick={() => setOpenById(!openById)}>
+                                  <ApartmentRoundedIcon className={classes.sizeButton} />
+                                </IconButton>
+                              </Tooltip>
+                            </Grid>
+                            <Grid item>
+                              <Tooltip
                                 title={t('roomlist:duplicateListing')}
                                 placement="bottom"
                                 classes={{ tooltip: 'tooltip' }}>
@@ -456,7 +487,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faDoorOpen}></FontAwesomeIcon>
+                                  icon={faDoorOpen}/>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
@@ -470,7 +501,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faUserFriends}></FontAwesomeIcon>
+                                  icon={faUserFriends}/>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
@@ -488,11 +519,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faBed}></FontAwesomeIcon>
+                                  icon={faBed}/>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bedrooms.number_bedroom} {t('roomlist:numberBedroom')}
+                                  {room.bedrooms ? room.bedrooms.number_bedroom : '0' } {t('roomlist:numberBedroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -502,11 +533,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faBath}></FontAwesomeIcon>
+                                  icon={faBath}/>
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bathrooms.number_bathroom} {t('roomlist:numberBathroom')}
+                                  {room.bathrooms ? room.bathrooms.number_bathroom : '0'} {t('roomlist:numberBathroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -775,8 +806,11 @@ const RoomCardItem: FC<IProps> = (props) => {
         <MySnackbarContentWrapper
           variant="success"
           message={message}
-          onClose={handleClose}></MySnackbarContentWrapper>
+          onClose={handleClose}/>
       </Snackbar>
+      <LazyLoad>
+        <DialogAddRoomToBuilding open={openById} handleClose={()=>setOpenById(false)} roomID={room.id}/>
+      </LazyLoad>
     </Fragment>
   );
 };

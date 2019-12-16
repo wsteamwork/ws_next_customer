@@ -90,7 +90,7 @@ const BottomAction: FC<IProps> = (props) => {
       <Grid container>
         <Grid
           item
-          xs={11}
+          xs={10}
           sm={11}
           md={widthMd}
           lg={widthLg}

@@ -43,7 +43,7 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
       ? options.map((item, i) => {
           return (
             <option key={i} value={unit ? item : item.id}>
-              {unit ? item + unit : item.value}
+              {unit ? item + unit : item.value || item.name}
             </option>
           );
         })
