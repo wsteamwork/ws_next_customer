@@ -5,8 +5,8 @@ import { axios_merchant } from '@/utils/axiosInstance';
 import _ from 'lodash';
 import { ParsedUrlQuery } from 'querystring';
 import { Dispatch, Reducer } from 'redux';
-import { getLTRoomOfMerchant } from '../../LTRoom/ltroomReducer';
 import Cookies from 'universal-cookie';
+import { getLTRoomOfMerchant } from '../../LTRoom/ltroomReducer';
 
 export interface Coordinate {
   lat: number;
@@ -267,7 +267,10 @@ export const getDataLTCreateListingID = async (
     const res = await getLTRoomOfMerchant(id, initLanguage);
     // console.log(res);
     dispatch({ type: 'SET_LISTING', payload: res });
-    dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: res.apartment_building_id ? 2 : res.accommodation_type });
+    dispatch({
+      type: 'SET_ACCOMMODATION_TYPE',
+      payload: res.apartment_building_id ? 2 : res.accommodation_type
+    });
     dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });
     dispatch({ type: 'SET_STAY_WITH_HOST', payload: res.stay_with_host });
     dispatch({ type: 'SET_GUEST_RECOMMENDATION', payload: res.guests.recommendation });

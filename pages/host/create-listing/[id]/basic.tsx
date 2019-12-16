@@ -6,10 +6,7 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  handleUpdateStep1, getDataLTCreateListingID, CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState, getDataLTCreateListingID, handleUpdateStep1 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { getCookieFromReq } from '@/utils/mixins';
 import React, { Fragment, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,7 +46,7 @@ const RoomCreateListingID = () => {
     bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms),
     address: isExist ? listing.address : useSelector<ReducersList, string>((state) => state.createListing.address),
     building: isExist ? listing.apartment_building : useSelector<ReducersList, string>((state) => state.createListing.building),
-    coordinate: isExist ? {lat: listing.latitude, lng: listing.longitude} : useSelector<ReducersList, any>((state) => state.createListing.coordinate),
+    coordinate: isExist ? { lat: listing.latitude, lng: listing.longitude } : useSelector<ReducersList, any>((state) => state.createListing.coordinate),
     city_id: isExist ? listing.city_id : useSelector<ReducersList, any>((state) => state.createListing.city_id),
     district_id: isExist ? listing.district_id : useSelector<ReducersList, any>((state) => state.createListing.district_id)
   };
@@ -78,12 +75,12 @@ const RoomCreateListingID = () => {
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/host/create-listing"
-        ogImage="/static/images/Bg_home.4023648f.jpg"/>
+        ogImage="/static/images/Bg_home.4023648f.jpg" />
       <Layout
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={`/host/create-listing/${idListing}/proccess`}
+        nextLink={`/host/create-listing/${idListing}/detail`}
         handleAPI={() => handleUpdateStep1(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}
