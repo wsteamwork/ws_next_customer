@@ -41,5 +41,15 @@
     "building": "Toà nhà",
     "buildingPlaceholder": "Thông tin về số căn hộ, toà nhà",
     "mapAddressTitle": "Đây đã phải là địa chỉ đúng chưa?",
-    "mapAddressSubTitle": "Nếu căn hộ của bạn không thể định vị trên bản đồ, vui lòng liên hệ với chúng tôi để nhận được trợ giúp"
+    "mapAddressSubTitle": "Nếu căn hộ của bạn không thể định vị trên bản đồ, vui lòng liên hệ với chúng tôi để nhận được trợ giúp",
+    "buildingTitle": "Thông tin toàn nhà",
+    "provideBuiding": "Cung cấp thông tin liên quan đến tòa nhà (ảnh đại diện, tên, địa chỉ,...)",
+    "imageAvatar": "Ảnh đại diện toàn nhà",
+    "subTitleAvatar": "Vui lòng đăng 1 ảnh đại diện",
+    "changeAvatar": "Thay đổi",
+    "addAvatar": "Thêm",
+    "buildingName": "Tên tòa nhà (Tiếng Việt)",
+    "buildingEnName": "Tên tòa nhà (Tiếng Anh)",
+    "back": "Quay lại",
+    "save": "Lưu"
 }

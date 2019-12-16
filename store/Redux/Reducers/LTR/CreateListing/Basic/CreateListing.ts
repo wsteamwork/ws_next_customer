@@ -8,7 +8,7 @@ import { Dispatch, Reducer } from 'redux';
 import { getLTRoom } from '../../LTRoom/ltroomReducer';
 import Cookies from 'universal-cookie';
 
-interface Coordinate {
+export interface Coordinate {
   lat: number;
   lng: number;
 }

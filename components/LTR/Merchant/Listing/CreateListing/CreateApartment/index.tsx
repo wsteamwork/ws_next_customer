@@ -2,11 +2,8 @@
 import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { FormControl, OutlinedInput, Theme, Typography } from '@material-ui/core';
+import { Coordinate } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { Theme, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
@@ -20,12 +17,20 @@ import SearchPlaceCustom from '../Location/SearchPlaceCustom';
 import CardTextarea from '../Description/CardTextarea';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import classNames from 'classnames';
+import {
+  CreateApartmentState,
+  CreateApartmentActions
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateApartment';
+import UploadAvatar from './UploadAvatar';
 interface IProps {}
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     normal_divider: {
       margin: theme.spacing(3, 0)
+    },
+    marginRoot: {
+      marginBottom: 150
     },
     margin_top: {
       marginTop: '32px !important'
@@ -35,13 +40,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       '&:focus': {
         border: 'none'
       }
+    },
+    customTitle: {
+      marginBottom: '10px !important'
     }
   })
 );
-interface Coordinate {
-  lat: number;
-  lng: number;
-}
 
 interface GoogleMapProps extends WithGoogleMapProps {
   defaultCenter: Coordinate | null;
@@ -53,7 +57,6 @@ interface FormValues {
   name: string;
   name_en: string;
   city: string;
-  building: string;
   district: string;
 }
 
@@ -80,16 +83,12 @@ export const InputFeedback = ({ error }) =>
 
 const CreateApartmentForListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {
-    address,
-    building,
-    disableSubmit,
-    coordinate: coordinateState,
-    district_id,
-    city_id
-  } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
+  const { avatar, address, disableSubmit, coordinate: coordinateState, district_id, city_id, name, name_en } = useSelector<
+    ReducersList,
+    CreateApartmentState
+  >((state) => state.createApartment);
   const [addressInput, setAddress] = useState<string>(address);
-  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  const dispatch = useDispatch<Dispatch<CreateApartmentActions>>();
   const [coordinateMarker, setCoordinateMarker] = useState<Coordinate>(coordinateState);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(coordinateState);
   const [district, setDistrict] = useState<number>(district_id);
@@ -97,20 +96,16 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const { t } = useTranslation();
-  let refStandaloneBox: any = null;
-  const onSearchBoxMounted = (ref) => {
-    refStandaloneBox = ref;
-  };
-
   const FormValidationSchema = useValidatation();
 
-  useEffect(() => {
-    dispatch({
-      type: 'SET_DISABLE_SUBMIT',
-      payload: disableSubmitForm
-    });
-  }, [disableSubmitForm]);
-
+  useMemo(() => {
+    if (avatar.length < 1 || address.length < 1 || !district_id || !city_id || name.length < 10 || name_en.length < 10) {
+      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
+    } else {
+      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
+    }
+  }, [avatar, address, district_id, city_id, name, name_en]);
+  
   useEffect(() => {
     dispatch({
       type: 'SET_COORDINATE',
@@ -124,6 +119,10 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
       payload: addressInput
     });
   }, [addressInput]);
+
+  const dispatchName = (typeAction, value) => {
+    dispatch({ type: typeAction.type, payload: value });
+  };
 
   const handleDragEnd = (e: google.maps.MouseEvent) => {
     const lat = e.latLng.lat();
@@ -157,7 +156,6 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
     name: '',
     name_en: '',
     city: '',
-    building: building,
     district: ''
   };
 
@@ -166,10 +164,15 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
   };
 
   return (
-    <div className="step1-tab3-location">
+    <div className={classNames(classes.marginRoot, 'step1-tab3-location')}>
       <Grid className="createListing-location">
-        <Grid className="createListing-heading-1">{t('host:address')}</Grid>
-        <Grid className="createListing-subTitle">{t('host:provideAddress')}</Grid>
+        <Grid className="createListing-heading-1">{t('host:buildingTitle')}</Grid>
+        <Grid className="createListing-subTitle">{t('host:provideBuiding')}</Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <Grid item xs={12} md={8} lg={6}>
+          <UploadAvatar />
+        </Grid>
       </Grid>
       <Formik
         enableReinitialize={true}
@@ -196,11 +199,12 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
             <form onSubmit={handleSubmit}>
               <Grid container style={{ display: 'flex' }}>
                 <Grid item xs={12}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={10} lg={6}>
                     <Grid style={{ marginBottom: 32 }}>
                       <CardTextarea
+                        sub_textarea={true}
                         name="name"
-                        label={t('details:listingName')}
+                        label={t('host:buildingName')}
                         sub_label={t('details:subName')}
                         value={values.name.replace(/\s+/g, ' ')}
                         classTextField={
@@ -229,17 +233,21 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                         autoFocus={true}
                         inputProps={{ maxLength: 100 }}
                         handleChange={handleChange}
-                        handleBlur={handleBlur}
+                        handleBlur={(e) => {
+                          handleBlur(e);
+                          dispatchName({ type: 'SET_NAME' }, e.currentTarget.value);
+                        }}
                       />
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={10} lg={6}>
                     <Grid style={{ marginBottom: 32 }}>
                       <CardTextarea
+                        sub_textarea={true}
                         name="name_en"
-                        label={t('details:listingNameEN')}
+                        label={t('host:buildingEnName')}
                         sub_label={t('details:subName')}
                         value={values.name_en.replace(/\s+/g, ' ')}
                         classTextField={
@@ -268,15 +276,18 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                         autoFocus={true}
                         inputProps={{ maxLength: 100 }}
                         handleChange={handleChange}
-                        handleBlur={handleBlur}
+                        handleBlur={(e) => {
+                          handleBlur(e);
+                          dispatchName({ type: 'SET_NAME_EN' }, e.currentTarget.value);
+                        }}
                       />
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={10} lg={6}>
                     <Grid style={{ marginBottom: 32 }}>
-                      <Typography variant="h1" gutterBottom className="label main_label">
+                      <Typography variant="h1" gutterBottom className={classNames(classes.customTitle, 'label sub_label')}>
                         {t('host:city')}
                       </Typography>
 
@@ -297,10 +308,10 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                   <Typography
                     variant="h1"
                     gutterBottom
-                    className={classNames(classes.customTitle, 'label main_label')}>
+                    className={classNames(classes.customTitle, 'label sub_label')}>
                     {t('host:district')}
                   </Typography>
-                  <Grid item xs={6}>
+                  <Grid item xs={12} md={10} lg={6}>
                     <SelectCustom
                       onChange={(e) => {
                         handleChange(e);
@@ -319,9 +330,9 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                 <Grid container>
                   <LazyLoad>
                     <Grid item xs={12}>
-                      <Grid item xs={6}>
-                        <Grid item style={{ margin: '20px 0' }}>
-                          <Typography variant="h1" gutterBottom className="label main_label">
+                      <Grid item xs={12} md={10} lg={6}>
+                        <Grid item style={{ margin: '30px 0' }}>
+                          <Typography variant="h1" gutterBottom className={classNames(classes.customTitle, 'label sub_label')}>
                             {t('host:addressSpecific')}
                           </Typography>
                           <div data-standalone-searchbox="">
@@ -332,29 +343,6 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                               addressInput={addressInput}
                             />
                           </div>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Grid item xs={6}>
-                        <Grid item style={{ margin: '20px 0' }}>
-                          <Typography variant="h1" gutterBottom className="label main_label">
-                            {t('host:building')}
-                          </Typography>
-                          <FormControl fullWidth variant="outlined">
-                            <OutlinedInput
-                              placeholder={t('host:buildingPlaceholder')}
-                              id="component-outlined"
-                              value={values.building}
-                              onChange={(e) => {
-                                setFieldValue('building', e.target.value);
-                              }}
-                              onBlur={(e: any) => {
-                                handleBlur(e);
-                              }}
-                              labelWidth={0}
-                            />
-                          </FormControl>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -369,23 +357,27 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
       />
       {addressInput ? (
         <Fragment>
-          <Grid className="createListing-heading-2">
-            <Typography variant="h1" gutterBottom className="label main_label">
-              {t('host:mapAddressTitle')}
-            </Typography>
+          <Grid item xs={12}>
+            <Grid item xs={12} md={10} lg={6}>
+              <Grid className="createListing-heading-2">
+                <Grid item className="normal_text">
+                  {t('host:mapAddressTitle')}
+                </Grid>
+              </Grid>
+              <Grid item className="normal_text">
+                {t('host:mapAddressSubTitle')}
+              </Grid>
+              {defaultCenter && (
+                <MapWithAMarker
+                  containerElement={<div style={{ height: `350px` }} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                  defaultCenter={defaultCenter}
+                  coordinate={coordinateMarker}
+                  handleDragEnd={handleDragEnd}
+                />
+              )}
+            </Grid>
           </Grid>
-          <Typography variant="h1" gutterBottom className="label sub_label">
-            {t('host:mapAddressSubTitle')}
-          </Typography>
-          {defaultCenter && (
-            <MapWithAMarker
-              containerElement={<div style={{ height: `350px` }} />}
-              mapElement={<div style={{ height: `100%` }} />}
-              defaultCenter={defaultCenter}
-              coordinate={coordinateMarker}
-              handleDragEnd={handleDragEnd}
-            />
-          )}
         </Fragment>
       ) : (
         ''
