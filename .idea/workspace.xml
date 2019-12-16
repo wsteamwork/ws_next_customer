@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/host/building-list/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/building_demo.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/ReusableComponents/NavHeader_Merchant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/ReusableComponents/NavHeader_Merchant.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/host/room-list/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/host/room-list/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/listing/roomlist/roomlist-vi.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
+            <state relative-caret-position="489">
+              <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
               <folding>
                 <element signature="e#0#65#0" expanded="true" />
               </folding>
@@ -51,10 +40,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+            <state relative-caret-position="397">
+              <caret line="194" column="25" lean-forward="true" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
               <folding>
                 <element signature="e#0#77#0" expanded="true" />
+                <element signature="e#1620#1775#0" />
+                <element signature="e#1670#1802#0" />
               </folding>
             </state>
           </provider>
@@ -81,8 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>house</find>
-      <find>axios.get</find>
       <find>number_bed</find>
       <find>node</find>
       <find>values.phone</find>
@@ -111,6 +100,8 @@
       <find>titleName</find>
       <find>src=</find>
       <find>long-term-rooms?</find>
+      <find>roomData</find>
+      <find>setRoomData</find>
     </findStrings>
     <dirStrings>
       <dir>D:\VNP\ws_next_customer\node_modules</dir>
@@ -460,7 +451,7 @@
       <workItem from="1576288430189" duration="12058000" />
       <workItem from="1576377807305" duration="3803000" />
       <workItem from="1576417947804" duration="15320000" />
-      <workItem from="1576460543646" duration="11138000" />
+      <workItem from="1576460543646" duration="15280000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -651,11 +642,18 @@
       <option name="project" value="LOCAL" />
       <updated>1576434815381</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="test them nhieu phong vao 1 toa nha">
+      <created>1576471910364</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1576471910364</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1669038000" />
+    <option name="totallyTimeSpent" value="1673180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -729,7 +727,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="duy PaymentContext" />
     <MESSAGE value="Component Card Intro + navHeader" />
     <MESSAGE value="Component GridMeotro" />
     <MESSAGE value="Layout HomePage" />
@@ -754,7 +751,8 @@
     <MESSAGE value="test tao phong" />
     <MESSAGE value="test tao phong , toa nha" />
     <MESSAGE value="test them phong vao toa nha" />
-    <option name="LAST_COMMIT_MESSAGE" value="test them phong vao toa nha" />
+    <MESSAGE value="test them nhieu phong vao 1 toa nha" />
+    <option name="LAST_COMMIT_MESSAGE" value="test them nhieu phong vao 1 toa nha" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/OriginalListing/ChooseTypeAccommodation.tsx">
@@ -1156,16 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="60" column="35" selection-start-line="60" selection-start-column="35" selection-end-line="60" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1173,12 +1161,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="63" column="24" lean-forward="true" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+        <state relative-caret-position="397">
+          <caret line="194" column="25" lean-forward="true" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
           <folding>
             <element signature="e#0#77#0" expanded="true" />
+            <element signature="e#1620#1775#0" />
+            <element signature="e#1670#1802#0" />
           </folding>
         </state>
       </provider>
