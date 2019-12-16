@@ -3,6 +3,7 @@ export interface ApartmentBuildingsRes {
   name: string,
   name_en: string,
   address: string,
+  avatar: string,
   latitude: string,
   longitude: string,
   created_at: string,

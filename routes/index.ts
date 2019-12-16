@@ -35,4 +35,5 @@ routes
   .add('create-original-listing', 'host/create-listing')
   .add('update-listing', 'host/update-listing/:id')
   .add('room-list', 'host/room-list')
+  .add('building-list', 'host/building-list')
   .add('booking-list', 'host/booking-list');

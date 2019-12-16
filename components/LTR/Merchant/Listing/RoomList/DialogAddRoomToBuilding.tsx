@@ -36,7 +36,6 @@ interface IProps {
 
 interface FormValues {
   apartment_building_id: number;
-  list_long_term_room_id: number[];
   room_number: string;
   floor: string;
 }
@@ -75,7 +74,8 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
   const [openSnack, setOpenSnack]       = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>('');
   const [statusSnack, setStatusSnack]   = useState<any>('success');
-  const getBuildings                    = async () => {
+
+  const getBuildings = async () => {
     try {
       const res = await axios_merchant.get(`apartment-buildings`);
       return res.data;
@@ -92,7 +92,6 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
 
   const initFormValue: FormValues = {
     apartment_building_id: 0,
-    list_long_term_room_id: [roomID],
     room_number: '',
     floor: ''
   };
@@ -114,9 +113,11 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
 
     const data: AddToBuildingReq = {
       apartment_building_id: values.apartment_building_id,
-      list_long_term_room_id: [roomID],
-      room_number: values.room_number,
-      floor: values.floor
+      list_long_term_room: [{
+        id: roomID,
+        room_number: values.room_number,
+        floor: values.floor
+      }],
     };
 
     axios_merchant
@@ -125,10 +126,11 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
         setStatusSnack('success');
         setMessageSnack('Bạn đã thêm phòng vào tòa nhà thành công!');
         setOpenSnack(true);
+        handleClose();
       })
       .catch(() => {
         setStatusSnack('error');
-        setMessageSnack('Không thành công!');
+        setMessageSnack('Opps, có gì đó sai rồi!');
         setOpenSnack(true);
         actions.setSubmitting(false);
       });

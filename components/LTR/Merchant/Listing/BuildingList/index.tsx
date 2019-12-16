@@ -1,51 +1,82 @@
-import { FC, Fragment } from "react";
-import Swiper from 'react-id-swiper';
+import React, { FC, Fragment, useState, useEffect } from 'react';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { Grid, makeStyles, Theme, createStyles, Box, Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
+import { axios_merchant } from '@/utils/axiosInstance';
+import GridContainer from '@/components/Layout/Grid/Container';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import DialogInfoBuildingAndAddRooms
+  from '@/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms';
 
-interface IProps { };
+interface IProps {
+};
 
-const useStyles = makeStyles<Theme>((theme: Theme) =>
+const useStyles                    = makeStyles<Theme>((theme: Theme) =>
   createStyles({
-    itemContainer: {
-      backgroundColor: 'red',
-      height: 100,
-      width: 100
+    imgBuilding: {
+      width: '100%',
+      borderRadius: 8
     }
   })
 );
-const BuildingList: FC<IProps> = (props) => {
-  const classes = useStyles(props);
-  const params = {
-    slidesPerView: 3,
-    spaceBetween: 30,
-    freeMode: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
+const BuildingListHost: FC<IProps> = (props) => {
+  const classes                   = useStyles(props);
+  const { t }                     = useTranslation();
+  const [buildings, setBuildings] = useState<ApartmentBuildingsRes[]>([]);
+  const [openDialog, setOpenDialog] = useState<number>(0);
+
+  const getBuildings = async () => {
+    try {
+      const res = await axios_merchant.get(`apartment-buildings`);
+      return res.data;
+    } catch (error) {
     }
-  }
+  };
+
+  useEffect(() => {
+    getBuildings()
+      .then((res) => {
+        setBuildings(res.data);
+      });
+  }, []);
 
   return (
     <Fragment>
-      <Grid container spacing={2}>
-
-        <Swiper {...params}>
-          <Grid item xs={3} className={classes.itemContainer}>
-
-          </Grid>
-          <Grid item xs={3} className={classes.itemContainer}>
-
-          </Grid>
-          <Grid item xs={3} className={classes.itemContainer}>
-
-          </Grid>
-          <Grid item xs={3} className={classes.itemContainer}>
-
-          </Grid>
-        </Swiper>
-      </Grid>
+      <GridContainer xs = {11} sm = {11} md = {10} lg = {8}>
+        <Box mt = {3}>
+          <Typography variant = 'h5' align = 'center'>{t('roomlist:titleNameBuilding')}</Typography>
+        </Box>
+        {buildings ? (
+          <Box my = {8}>
+            <Grid container spacing = {2}>
+              {buildings.map((o, i) => (
+                <Fragment key = {i}>
+                  <Grid item xs = {3}>
+                    <Box onClick={()=>setOpenDialog(o.id)} style={{cursor:'pointer'}}>
+                      <img src = {o.avatar ? `${IMAGE_STORAGE_SM + o.avatar}` : '/static/images/building_demo.jpg'}
+                           alt = {o.name} className = {classes.imgBuilding} />
+                      <Typography variant = 'subtitle2'>
+                        {o.name}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <DialogInfoBuildingAndAddRooms open={openDialog} handleClose={()=>setOpenDialog(0)}
+                                                 buildingID={o.id}
+                                                 name={o.name}
+                  />
+                </Fragment>
+              ))}
+            </Grid>
+          </Box>
+        ) : (
+          <Box>
+            chua co phong nao
+          </Box>
+        )}
+      </GridContainer>
     </Fragment>
-  )
-}
-export default BuildingList;
+  );
+};
+
+export default BuildingListHost;

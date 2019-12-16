@@ -1,5 +1,6 @@
 {
     "titleName": "Danh sách phòng",
+    "titleNameBuilding": "Danh sách tòa nhà",
     "contentNotFound": "Danh sách phòng hiện tại chưa hiển thị, vui lòng đợi trong giây lát",
     "tooltipUpdateRoom": "Cập nhật phòng",
     "tooltipUpdateRoomLongTerm": "Bổ sung thông tin dài hạn",
