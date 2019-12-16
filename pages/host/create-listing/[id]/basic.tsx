@@ -83,7 +83,7 @@ const RoomCreateListingID = () => {
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={`/host/create-listing/${idListing}/proccess`}
+        nextLink={`/host/create-listing/${idListing}/detail`}
         handleAPI={() => handleUpdateStep1(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}
