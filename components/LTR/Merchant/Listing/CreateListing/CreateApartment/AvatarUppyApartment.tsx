@@ -37,13 +37,13 @@ const AvatarUppyApartment: FC<IProps> = (props) => {
   const { label, subLabel, initImg, height, maxImage } = props;
   const dispatch = useDispatch<Dispatch<CreateApartmentActions>>();
 
-  useEffect(() => {
-    if (initImg.length < 1) {
-      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
-    } else {
-      dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
-    }
-  }, [initImg]);
+  // useEffect(() => {
+  //   if (initImg.length < 1) {
+  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
+  //   } else {
+  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
+  //   }
+  // }, [initImg]);
 
   const initImage = async (initImg) => {
     let img = `${IMAGE_STORAGE_LG}` + initImg;
