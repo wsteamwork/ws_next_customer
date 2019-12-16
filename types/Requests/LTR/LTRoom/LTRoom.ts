@@ -32,6 +32,9 @@ export interface LTRoomIndexRes {
   long_term_rent_type: detailRentType;
   short_term_rent_type: detailRentType;
   building: string;
+  apartment_building: string;
+  apartment_building_id: number;
+  room_same_apartment_building: number;
   latitude: string;
   longitude: string;
   accommodation_type: number;

@@ -93,6 +93,7 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
+import { CreateApartmentState, CreateApartmentActions, createApartmentReducer } from './LTR/CreateListing/Basic/CreateApartment';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;
@@ -113,6 +114,7 @@ export type ReducersType = {
   images: Reducer<ImageReducerState, ImageReducerAction>;
   details: Reducer<DetailsReducerState, DetailsReducerAction>;
   createListing: Reducer<CreateListingState, CreateListingActions>;
+  createApartment: Reducer<CreateApartmentState, CreateApartmentActions>;
   priceTerm: Reducer<PriceTermState, PriceTermActions>;
   stepPrice: Reducer<StepPricesState, StepPricesActions>;
   process: Reducer<ProcessReducerState, ProcessReducerAction>;
@@ -141,6 +143,7 @@ export type ReducersList = {
   images: ImageReducerState;
   details: DetailsReducerState;
   createListing: CreateListingState;
+  createApartment: CreateApartmentState;
   priceTerm: PriceTermState;
   stepPrice: StepPricesState;
   process: ProcessReducerState;
@@ -169,6 +172,7 @@ export type ReducresActions =
   | ImageReducerAction
   | DetailsReducerAction
   | CreateListingActions
+  | CreateApartmentActions
   | PriceTermActions
   | StepPricesActions
   | ProcessReducerAction
@@ -197,6 +201,7 @@ const reducers: ReducersType = {
   images: imageReducer,
   details: detailsReducer,
   createListing: createListingReducer,
+  createApartment: createApartmentReducer,
   priceTerm: PriceTermReducer,
   stepPrice: stepPricesReducer,
   process: processReducer,

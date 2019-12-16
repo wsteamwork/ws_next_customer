@@ -41,5 +41,16 @@
     "building": "Building",
     "buildingPlaceholder": "More information about the building, room number...",
     "mapAddressTitle": "Is this your property location?",
-    "mapAddressSubTitle": "If the map not show or your property location not correct, please contact us."
+    "mapAddressSubTitle": "If the map not show or your property location not correct, please contact us.",
+    "buildingTitle": "Building Infomation",
+    "provideBuiding": "Provide information related to the building (image, name, address,...)",
+    "imageAvatar": "Building's avatar image",
+    "subTitleAvatar": "Please upload one avatar image",
+    "changeAvatar": "Change",
+    "addAvatar": "Add",
+    "buildingName": "Name your building (in Vietnames)",
+    "buildingEnName": "Name your building (in English)",
+    "back": "Back",
+    "save": "Save"
+
 }
