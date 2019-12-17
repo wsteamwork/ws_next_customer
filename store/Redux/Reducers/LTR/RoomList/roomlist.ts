@@ -38,7 +38,7 @@ export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerActio
 export const getRoomList = async (
   dispatch: Dispatch<RoomListReducerAction>,
   initLanguage: string = 'en',
-  token?: string
+  token?: string,
 ): Promise<any> => {
   const headers = token && {
     headers: {
@@ -51,7 +51,7 @@ export const getRoomList = async (
       size: 10,
       page: params.page
     };
-    const url = `long-term-rooms?${qs.stringify(query)}`;
+    const url = `long-term-rooms?${qs.stringify(query)}?include=city,district`;
     const res: AxiosRes<any> = await axios_merchant.get(url, headers);
     const roomlist = res.data.data;
     if (roomlist) {

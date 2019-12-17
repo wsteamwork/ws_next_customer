@@ -74,6 +74,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   const getCities = async () => {
     try {
       const res = await axios.get(`/cities`);
+      console.log(res);
       return res;
     } catch (error) { }
   };
