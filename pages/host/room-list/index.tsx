@@ -48,7 +48,6 @@ const RoomList: NextPage = (props) => {
         </Grid>
       </Grid>
       {!!cookies._token ? (
-        // <BuildingList />
         <RoomListHost />
       ) : ''}
 

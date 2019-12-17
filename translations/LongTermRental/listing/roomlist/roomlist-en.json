@@ -23,5 +23,6 @@
     "rentType": "Instant book",
     "policy": "Cancellation policy",
     "leaseTypeLongTerm": "Long-term",
-    "leaseTypeShortTerm": "Homestay"
+    "leaseTypeShortTerm": "Homestay",
+    "buildingTitle": "Building"
 }

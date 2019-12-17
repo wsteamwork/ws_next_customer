@@ -4,7 +4,23 @@ import { axios_merchant } from '@/utils/axiosInstance';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Snackbar, Theme } from '@material-ui/core';
+import {
+  createStyles,
+  Divider,
+  Grid,
+  Hidden,
+  IconButton,
+  Link,
+  Paper,
+  Snackbar,
+  Theme,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  FormControl,
+  Button,
+  DialogActions
+} from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +34,7 @@ import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 import DialogAddRoomToBuilding from '@/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding';
-
+import { TransitionCustom } from '@/components/LTR/LTBook/BookingForm';
 interface IProps {
   classes?: any;
   room: any;
@@ -238,18 +254,50 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     percent: {
       fontWeight: 600
-    }
+    },
+    button: {
+      width: 79.58,
+      boxShadow: 'none',
+      marginTop: 5,
+      color: '#ffffff',
+      textTransform: 'initial',
+      backgroundColor: '#1d8df7',
+      '&:hover': {
+        color: '#ffffff',
+        textTransform: 'initial',
+        backgroundColor: '#1d8df7'
+      }
+    },
+    buttonCancel: {
+      width: 79.58,
+      boxShadow: 'none',
+      marginTop: 8,
+      color: '#ffffff',
+      textTransform: 'initial',
+      backgroundColor: '#3B4350',
+      '&:hover': {
+        color: '#ffffff',
+        textTransform: 'initial',
+        backgroundColor: '#3B4350'
+      },
+      [theme.breakpoints.down('xs')]: {
+        marginTop: 5,
+        marginLeft: 10
+      }
+    },
   })
 );
 const RoomCardItem: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { room } = props;
-  const { router } = useContext(GlobalContext);
   const [open, setOpen] = useState(false);
   const [openById, setOpenById] = useState(false);
   const [message, setMessage] = useState('');
   const [snackStatus, setSnackStatus] = useState('success');
+  const [openDuplicate, setOpenDuplicate] = useState(0);
+  console.log(openDuplicate);
+  const { width } = useContext(GlobalContext);
   const handleClose = () => {
     setOpen(false);
     setTimeout(location.reload.bind(location), 1000);
@@ -266,7 +314,12 @@ const RoomCardItem: FC<IProps> = (props) => {
       backgroundColor: '#43cab8'
     }
   })(LinearProgress);
-  const openUpdateRoom = (room_id: number, percent_longterm: number, lease_type: number, percent_shortterm: number) => {
+  const openUpdateRoom = (
+    room_id: number,
+    percent_longterm: number,
+    lease_type: number,
+    percent_shortterm: number
+  ) => {
     if (lease_type !== 1) {
       if (percent_longterm == 100) {
         window.open(`/host/update-listing/${room_id}`, `_blank`);
@@ -283,22 +336,35 @@ const RoomCardItem: FC<IProps> = (props) => {
   };
 
   const duplicateListing = (id: number) => {
-    axios_merchant.get(`long-term-rooms/duplicate-listing/${id}`).then((res) => {
-      setMessage(`Đã nhân đôi, phòng mới  nằm trên cùng danh sách!}`);
-      setOpen(true);
-      setSnackStatus('success');
-
-    }).catch(() => {
-    })
+    axios_merchant
+      .get(`long-term-rooms/duplicate-listing/${id}`)
+      .then((res) => {
+        setMessage(`Đã nhân đôi, phòng mới  nằm trên cùng danh sách!}`);
+        setOpen(true);
+        setSnackStatus('success');
+        handleCloseDuplicate();
+      })
+      .catch(() => {});
   };
   const openLongTermRoomUpdateFirstTime = (room_id: number) => {
     window.open(`/host/create-listing/${room_id}/process`, `_blank`);
   };
   const openPreviewRoomShortTerm = (room_id: number, status: number) => {
-    status != 1 ? window.open(`/preview-room/${room_id}`, `_blank`) : window.open(`/room/${room_id}`, `_blank`)
+    status != 1
+      ? window.open(`/preview-room/${room_id}`, `_blank`)
+      : window.open(`/room/${room_id}`, `_blank`);
   };
   const openPreviewRoomLongTerm = (room_id: number, status: number) => {
-    status != 1 ? window.open(`/preview-long-term-room/${room_id}`, `_blank`) : window.open(`/long-term-room/${room_id}`, `_blank`);
+    status != 1
+      ? window.open(`/preview-long-term-room/${room_id}`, `_blank`)
+      : window.open(`/long-term-room/${room_id}`, `_blank`);
+  };
+  const handleOpenDuplicate = (i: number) => {
+    console.log(1);
+    setOpenDuplicate(i);
+  };
+  const handleCloseDuplicate = () => {
+    setOpenDuplicate(0);
   };
 
   return (
@@ -318,16 +384,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
-                        <Grid className={classes.wrapperImage}>
-                          <img
-                            src={'/static/images/camera.svg'}
-                            alt="Camera"
-                            className={classes.imgDefault}
-                          />
-                        </Grid>
+                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <Grid className={classes.wrapperImage}>
+                        <img
+                          src={'/static/images/camera.svg'}
+                          alt="Camera"
+                          className={classes.imgDefault}
+                        />
                       </Grid>
-                    )}
+                    </Grid>
+                  )}
                   <Hidden smUp>
                     <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>
@@ -339,7 +405,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                             color="primary"
                             className={classes.IconButton}
                             aria-label="Edit"
-                            onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
+                            onClick={() =>
+                              openUpdateRoom(
+                                room.id,
+                                room.percent,
+                                room.lease_type,
+                                room.short_term_room.percent
+                              )
+                            }>
                             <EditIconOutlined className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
@@ -367,7 +440,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             color="primary"
                             className={classes.IconButton}
                             aria-label="Edit"
-                            onClick={() => duplicateListing(room.id)}>
+                            onClick={() => handleOpenDuplicate(room.id)}>
                             <FileCopyIconOutlined className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
@@ -387,7 +460,9 @@ const RoomCardItem: FC<IProps> = (props) => {
                             </IconButton>
                           </Tooltip>
                         </Grid>
-                      ) : ''}
+                      ) : (
+                        ''
+                      )}
                     </Grid>
                   </Hidden>
                   <Grid item xs={12} sm={9} md={9} lg={10}>
@@ -412,8 +487,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   />
                                 </Tooltip>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                             </Link>
                           </span>
                         </Grid>
@@ -428,7 +503,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   color="primary"
                                   className={classes.IconButton}
                                   aria-label="Edit"
-                                  onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
+                                  onClick={() =>
+                                    openUpdateRoom(
+                                      room.id,
+                                      room.percent,
+                                      room.lease_type,
+                                      room.short_term_room.percent
+                                    )
+                                  }>
                                   <EditIconOutlined className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
@@ -456,7 +538,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   color="primary"
                                   className={classes.IconButton}
                                   aria-label="Edit"
-                                  onClick={() => duplicateListing(room.id)}>
+                                  onClick={() => handleOpenDuplicate(room.id)}>
                                   <FileCopyIconOutlined className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
@@ -476,18 +558,30 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   </IconButton>
                                 </Tooltip>
                               </Grid>
-                            ) : ''}
+                            ) : (
+                              ''
+                            )}
                           </Grid>
                         </Hidden>
                       </Grid>
+                      {room.apartment_building_id && (
+                        <Grid className={classes.price}>
+                          <Grid container item xs={12} sm={12} lg={10}>
+                            <Typography variant="body1" className={classes.priceAll}>
+                              {t('roomlist:buildingTitle')}: {room.apartment_building},{' '}
+                              {room.address}
+                              {room.district ? ', ' + room.district.data.name + ',' : ''}{' '}
+                              {room.city ? ', ' + room.city.data.name + ',' : ''}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      )}
                       <Grid className={classes.price}>
                         <Grid container item xs={12} sm={12} lg={10} spacing={1}>
                           <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
-                                <FontAwesomeIcon
-                                  className={classes.customIcon}
-                                  icon={faDoorOpen}/>
+                                <FontAwesomeIcon className={classes.customIcon} icon={faDoorOpen} />
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
@@ -501,7 +595,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                               <Grid item xs={2} className={classes.spanIcon}>
                                 <FontAwesomeIcon
                                   className={classes.customIcon}
-                                  icon={faUserFriends}/>
+                                  icon={faUserFriends}
+                                />
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
@@ -517,13 +612,12 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
-                                <FontAwesomeIcon
-                                  className={classes.customIcon}
-                                  icon={faBed}/>
+                                <FontAwesomeIcon className={classes.customIcon} icon={faBed} />
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bedrooms ? room.bedrooms.number_bedroom : '0' } {t('roomlist:numberBedroom')}
+                                  {room.bedrooms ? room.bedrooms.number_bedroom : '0'}{' '}
+                                  {t('roomlist:numberBedroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
@@ -531,19 +625,19 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <Grid item xs={6} sm={3} lg={6} xl={4} className={classes.wrapperIcon}>
                             <Grid container>
                               <Grid item xs={2} className={classes.spanIcon}>
-                                <FontAwesomeIcon
-                                  className={classes.customIcon}
-                                  icon={faBath}/>
+                                <FontAwesomeIcon className={classes.customIcon} icon={faBath} />
                               </Grid>
                               <Grid className={classes.nameIcon} item xs={10}>
                                 <Typography variant="subtitle1" className={classes.priceDay}>
-                                  {room.bathrooms ? room.bathrooms.number_bathroom : '0'} {t('roomlist:numberBathroom')}
+                                  {room.bathrooms ? room.bathrooms.number_bathroom : '0'}{' '}
+                                  {t('roomlist:numberBathroom')}
                                 </Typography>
                               </Grid>
                             </Grid>
                           </Grid>
                         </Grid>
                       </Grid>
+
                       <Grid container>
                         <Grid item xs={12} lg={8} className={classes.infoRoomName}>
                           {room.short_term_room.rent_type === 3 ? (
@@ -551,42 +645,44 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
+                                  {t('roomlist:onePerMonth')} &#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
                                   {t('roomlist:onePerDay')}
-                                  &nbsp; &#8226;
+                                  &nbsp;&#8226;
                                 </span>
-                              ) : ''}
+                              ) : (
+                                ''
+                              )}
                               {room.short_term_room.rent_type !== 2 ? (
-
                                 <span>
                                   &nbsp;
                                   {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
                                   {t('roomlist:onePerHour')}
                                 </span>
-                              ) : ''}
-
+                              ) : (
+                                ''
+                              )}
                             </Typography>
                           ) : (
-                              ''
-                            )}
+                            ''
+                          )}
                           {room.short_term_room.rent_type === 2 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
+                                  {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               <span>
                                 &nbsp;
                                 {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
@@ -594,18 +690,18 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </span>
                             </Typography>
                           ) : (
-                              ''
-                            )}
+                            ''
+                          )}
                           {room.short_term_room.rent_type === 1 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
                                   {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
-                                  {t('roomlist:onePerMonth')} &nbsp; &#8226;
+                                  {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
-                                  ''
-                                )}
+                                ''
+                              )}
                               <span>
                                 &nbsp;
                                 {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
@@ -613,24 +709,27 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </span>
                             </Typography>
                           ) : (
-                              ''
-                            )}
-                        </Grid>
-                        {room.lease_type !== 1 ? (room.percent < 100 ? (
-                          <Grid container item xs={12} lg={4}>
-                            <Grid item xs={12} className={classes.process}>
-                              <BorderLinearProgress
-                                className={classes.marginProcess}
-                                variant="determinate"
-                                color="secondary"
-                                value={room.percent}
-                              />
-                              <span className={classes.percent}> {room.percent}%</span>
-                            </Grid>
-                          </Grid>
-                        ) : (
                             ''
-                          )) : room.lease_type !== 2 && room.lease_type !== 3 ? (room.short_term_room.percent < 100 ? (
+                          )}
+                        </Grid>
+                        {room.lease_type !== 1 ? (
+                          room.percent < 100 ? (
+                            <Grid container item xs={12} lg={4}>
+                              <Grid item xs={12} className={classes.process}>
+                                <BorderLinearProgress
+                                  className={classes.marginProcess}
+                                  variant="determinate"
+                                  color="secondary"
+                                  value={room.percent}
+                                />
+                                <span className={classes.percent}> {room.percent}%</span>
+                              </Grid>
+                            </Grid>
+                          ) : (
+                            ''
+                          )
+                        ) : room.lease_type !== 2 && room.lease_type !== 3 ? (
+                          room.short_term_room.percent < 100 ? (
                             <Grid container item xs={12} lg={4}>
                               <Grid item xs={12} className={classes.process}>
                                 <BorderLinearProgress
@@ -639,10 +738,18 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   color="secondary"
                                   value={room.short_term_room.percent}
                                 />
-                                <span className={classes.percent}> {room.short_term_room.percent}%</span>
+                                <span className={classes.percent}>
+                                  {' '}
+                                  {room.short_term_room.percent}%
+                                </span>
                               </Grid>
                             </Grid>
-                          ) : '') : ''}
+                          ) : (
+                            ''
+                          )
+                        ) : (
+                          ''
+                        )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -689,8 +796,9 @@ const RoomCardItem: FC<IProps> = (props) => {
                         <Typography
                           variant="subtitle1"
                           className={classes.priceDay}
-                          onClick={() => openPreviewRoomShortTerm(room.room_id, room.short_term_room.status)}>
-
+                          onClick={() =>
+                            openPreviewRoomShortTerm(room.room_id, room.short_term_room.status)
+                          }>
                           {t('roomlist:shortTerm')}
                           <img
                             src={'/static/preview.svg'}
@@ -803,14 +911,46 @@ const RoomCardItem: FC<IProps> = (props) => {
         open={open}
         autoHideDuration={2000}
         onClose={handleClose}>
-        <MySnackbarContentWrapper
-          variant="success"
-          message={message}
-          onClose={handleClose}/>
+        <MySnackbarContentWrapper variant="success" message={message} onClose={handleClose} />
       </Snackbar>
       <LazyLoad>
-        <DialogAddRoomToBuilding open={openById} handleClose={()=>setOpenById(false)} roomID={room.id}/>
+        <DialogAddRoomToBuilding
+          open={openById}
+          handleClose={() => setOpenById(false)}
+          roomID={room.id}
+        />
       </LazyLoad>
+      <Dialog
+        fullScreen={width === 'xs'}
+        maxWidth="sm"
+        open={openDuplicate === room.id}
+        TransitionComponent={TransitionCustom}
+        onClose={handleCloseDuplicate}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+        <DialogTitle id="alert-dialog-title">
+          <span className={classes.customerName}>Bạn chắc chắn muốn nhân bản phòng này</span>
+        </DialogTitle>
+        <DialogContent>
+          <Grid item xs={12}></Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleCloseDuplicate}
+            className={classes.buttonCancel}
+            color="primary"
+            autoFocus>
+            Quay lại
+          </Button>
+          <Button
+            onClick={() => duplicateListing(room.id)}
+            className={classes.button}
+            color="primary"
+            autoFocus>
+            Đồng ý
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Fragment>
   );
 };

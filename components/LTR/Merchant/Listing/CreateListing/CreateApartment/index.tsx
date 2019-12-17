@@ -57,7 +57,7 @@ interface FormValues {
   name: string;
   name_en: string;
   city: string;
-  district: string;
+  district: number;
 }
 
 const useValidatation = () => {
@@ -83,7 +83,7 @@ export const InputFeedback = ({ error }) =>
 
 const CreateApartmentForListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { avatar, address, disableSubmit, coordinate: coordinateState, district_id, city_id, name, name_en } = useSelector<
+  const { avatar, address, disableSubmit, coordinate: coordinateState, district_id, city_id, name, name_en, city_name, district_name } = useSelector<
     ReducersList,
     CreateApartmentState
   >((state) => state.createApartment);
@@ -105,7 +105,6 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
       dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
     }
   }, [avatar, address, district_id, city_id, name, name_en, coordinateState]);
-  
   useEffect(() => {
     dispatch({
       type: 'SET_COORDINATE',
@@ -152,12 +151,14 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
       payload: parseInt(value)
     });
   };
-  const initFormValue: FormValues = {
-    name: '',
-    name_en: '',
-    city: '',
-    district: ''
-  };
+  const initFormValue: FormValues = useMemo<FormValues>(() => {
+    return {
+      name: name,
+      name_en: name_en,
+      city: '',
+      district: district_id,
+    };
+  }, [name, name_en, city_name, district_id]);
 
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     return {};
@@ -290,7 +291,6 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                       <Typography variant="h1" gutterBottom className={classNames(classes.customTitle, 'label sub_label')}>
                         {t('host:city')}
                       </Typography>
-
                       <CitiesList
                         onChange={setFieldValue}
                         valueCity={values.city}
