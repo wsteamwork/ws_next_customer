@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -16,46 +13,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="93" column="8" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="65" column="62" selection-start-line="65" selection-start-column="62" selection-end-line="65" selection-end-column="62" />
-              <folding>
-                <element signature="e#0#65#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="194" column="25" lean-forward="true" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
+            <state relative-caret-position="-828">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
               <folding>
                 <element signature="e#0#77#0" expanded="true" />
-                <element signature="e#1620#1775#0" />
-                <element signature="e#1670#1802#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="14" selection-start-line="14" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -216,74 +181,6 @@
               <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-              <item name="BuildingList" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="LTR" type="462c0819:PsiDirectoryNode" />
-              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
-              <item name="Listing" type="462c0819:PsiDirectoryNode" />
-              <item name="RoomList" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="host" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="host" type="462c0819:PsiDirectoryNode" />
-              <item name="building-list" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="not-found-resource" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -306,18 +203,18 @@
     <property name="ts.external.directory.path" value="D:\VNP\ws_next_customer\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\VNP\ws_next_customer\components\LTR\Merchant\Listing\CreateListing" />
-      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
-      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
-      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\VNP\ws_next_customer\static\images" />
       <recent name="D:\VNP\ws_next_customer\components\LTR\Merchant\Listing\CalendarManagement" />
       <recent name="D:\VNP\ws_next_customer\styles\components\LTRoomCardListing" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchAutoSuggestion" />
       <recent name="D:\VNP\ws_next_customer\components\LTR" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\components\LTR\Merchant\Listing\CreateListing" />
+      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
+      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
+      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -653,13 +550,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1673180000" />
+    <option name="totallyTimeSpent" value="1676796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.22814499" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.23081024" />
       <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -675,7 +572,7 @@
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.15830547" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50692964" side_tool="true" weight="0.31772575" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3277592" />
-      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="12" sideWeight="0.49307036" visible="true" weight="0.13043478" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="12" sideWeight="0.49307036" visible="true" weight="0.29208472" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -755,36 +652,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="test them nhieu phong vao 1 toa nha" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/OriginalListing/ChooseTypeAccommodation.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="59" column="18" lean-forward="true" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/host/create-listing/[id]/price.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/profile/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/Profile/MenuProfile.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="598">
@@ -1171,14 +1038,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/ListRoom/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#0#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="194" column="25" lean-forward="true" selection-start-line="194" selection-start-column="25" selection-end-line="194" selection-end-column="25" />
+        <state relative-caret-position="-828">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="e#0#77#0" expanded="true" />
-            <element signature="e#1620#1775#0" />
-            <element signature="e#1670#1802#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="55" column="1" selection-start-line="55" selection-start-column="1" selection-end-line="55" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
