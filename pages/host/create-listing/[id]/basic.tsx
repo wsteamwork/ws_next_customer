@@ -94,7 +94,6 @@ RoomCreateListingID.getInitialProps = async ({ store, query, req }: NextContextP
   const initLanguage = getCookieFromReq(req, 'initLanguage');
 
   const data = await getDataLTCreateListingID(store.dispatch, query, initLanguage);
-  // console.log(data)
   return {};
 };
 

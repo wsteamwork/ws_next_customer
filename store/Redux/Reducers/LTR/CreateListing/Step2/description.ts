@@ -2,6 +2,7 @@ import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Dispatch, Reducer } from 'redux';
+import axios from 'axios';
 
 export type DescriptionReducerState = {
   room_id: number;
@@ -213,5 +214,26 @@ export const getDetailDescriptionEN = async (
     return detail_room_en;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
+  }
+};
+
+export const handleTranslateToEnglish = async (text: string) => {
+  let fromLang = 'vi';
+  let toLang = 'en';
+  let API_KEY = process.env.GOOGLE_TRANSLATE_API_KEY;
+  let url = 'https://translation.googleapis.com/language/translate/v2';
+  try {
+    const res = await axios
+      .get(url, {
+        params: {
+          key: API_KEY,
+          q: text,
+          source: fromLang,
+          target: toLang,
+        }
+      })
+    return res.data.data.translations[0].translatedText;
+  } catch (error) {
+    console.log('There was an error with the translation request: ', error);
   }
 };
