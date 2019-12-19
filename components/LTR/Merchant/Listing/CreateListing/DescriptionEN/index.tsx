@@ -1,6 +1,6 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { DescriptionReducerAction, getDetailDescriptionEN, getDetailDescription } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
+import { DescriptionReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
@@ -158,7 +158,6 @@ const DescriptionEN: FC<IProps> = (props) => {
                     name="description_en"
                     label={t('details:listingDesEN')}
                     sub_label={t('details:subDes')}
-                    // value={values.description_en.replace(/\s+/g, ' ')}
                     value={values.description_en}
                     classTextField={
                       !!(values.description_en.length < 50 && touched!.description_en)
@@ -203,9 +202,9 @@ const DescriptionEN: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      // if (e.currentTarget.value.length > 30) {
+                      if (e.currentTarget.value.length > 30) {
                       dispatchDescription({ type: 'setDescriptionEN' }, e.currentTarget.value);
-                      // }
+                      }
                     }}
                   />
 
@@ -259,7 +258,6 @@ const DescriptionEN: FC<IProps> = (props) => {
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        // console.log(e.currentTarget.value);
                         dispatchDescription({ type: 'setSpaceEN' }, e.currentTarget.value);
                       }}
                     />
