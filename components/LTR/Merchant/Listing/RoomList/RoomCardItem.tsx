@@ -296,7 +296,6 @@ const RoomCardItem: FC<IProps> = (props) => {
   const [message, setMessage] = useState('');
   const [snackStatus, setSnackStatus] = useState('success');
   const [openDuplicate, setOpenDuplicate] = useState(0);
-  console.log(openDuplicate);
   const { width } = useContext(GlobalContext);
   const handleClose = () => {
     setOpen(false);
@@ -360,7 +359,6 @@ const RoomCardItem: FC<IProps> = (props) => {
       : window.open(`/long-term-room/${room_id}`, `_blank`);
   };
   const handleOpenDuplicate = (i: number) => {
-    console.log(1);
     setOpenDuplicate(i);
   };
   const handleCloseDuplicate = () => {

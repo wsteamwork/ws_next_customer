@@ -74,7 +74,6 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   const getCities = async () => {
     try {
       const res = await axios.get(`/cities`);
-      console.log(res);
       return res;
     } catch (error) { }
   };
@@ -88,7 +87,6 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   useEffect(() => {
     getDistricts()
       .then((res) => {
-        // console.log(res.data)
         return setDistrictList(
           res.data.data.map((district) => {
             let obj = {};
@@ -191,12 +189,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
 
   const handleChange = (name) => (event, { newValue }) => {
     setDisabledDistrictField(true);
-    // setState({
-    //   ...state,
-    //   [name]: newValue
-    // });
     onChange(name, newValue);
-    // console.log(valueCity);
   };
   function getSuggestionValue(suggestion) {
     setCityId(suggestion.id);

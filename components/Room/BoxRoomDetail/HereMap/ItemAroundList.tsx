@@ -47,7 +47,6 @@ const ItemAroundList: FC<IProps> = (props) => {
             {item.distance > 100 ? (`${(item.distance / 1000).toFixed(2)} km`) : `${item.distance} m`}
           </Typography>
         </Grid>
-        {/* <Divider className={classes.divider} /> */}
       </Grid>
     );
   });

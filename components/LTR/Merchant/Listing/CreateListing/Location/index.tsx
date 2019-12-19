@@ -155,7 +155,7 @@ const Location: FC<IProps> = (props) => {
           {t('host:provideAddress')}
         </Grid>
       </Grid>
-      {listing.apartment_building_id ? (
+      {listing && listing.apartment_building_id ? (
         <Box>
           <Typography variant='subtitle1' gutterBottom>
             Địa chỉ của bạn sẽ được lấy theo địa chỉ của tòa nhà mà bạn đã chọn trước đó.
