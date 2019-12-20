@@ -29,11 +29,14 @@ import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackba
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface IProps {
   classes?: any;
   open: boolean;
   roomID: number;
+  room: LTRoomIndexRes;
+  isDuplicate: boolean;
   handleClose: () => void;
 }
 
@@ -86,7 +89,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const DialogAddRoomToBuilding: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { open, handleClose, roomID } = props;
+  const { open, handleClose, roomID, room, isDuplicate } = props;
   const { width } = useContext(GlobalContext);
   const [buildings, setBuildings] = useState<ApartmentBuildingsRes[]>([]);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
@@ -105,31 +108,32 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     getBuildings().then((res) => {
       let itemCancel = {
         id: 999999,
-        name: 'Bỏ chọn tòa nhà hiện tại',
+        name: 'Bỏ chọn tòa nhà hiện tại'
       };
       let newBuildings = [itemCancel, ...res.data];
-      setBuildings(newBuildings);
+      isDuplicate ? setBuildings(res.data) : setBuildings(newBuildings);
     });
   }, []);
 
   const initFormValue: FormValues = {
-    apartment_building_id: 0,
-    room_number: '',
-    floor: ''
+    apartment_building_id:
+      !isDuplicate && room.apartment_building_id ? room.apartment_building_id : 0,
+    room_number: !isDuplicate && room.room_number ? room.room_number : '',
+    floor: !isDuplicate && room.floor ? room.floor : ''
   };
 
-  const validationForm = 
-    Yup.object().shape({
+  const validationForm = Yup.object().shape({
     apartment_building_id: Yup.string()
       .required('At least one checkbox is required')
       .test('checkNotChoose', 'Please select an option', (value) => value != 0),
     room_number: idBuilding != 999999 ? Yup.string().required('Required') : null,
-    floor: idBuilding != 999999 ?  Yup.string().required('Required') : null
+    floor: idBuilding != 999999 ? Yup.string().required('Required') : null
   });
 
   const onSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     const data: AddToBuildingReq = {
-      apartment_building_id: values.apartment_building_id != 999999 ? values.apartment_building_id : null,
+      apartment_building_id:
+        values.apartment_building_id != 999999 ? values.apartment_building_id : null,
       list_long_term_room: [
         {
           id: roomID,
@@ -144,6 +148,30 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
       .then((res) => {
         setStatusSnack('success');
         setMessageSnack('Bạn đã thêm phòng vào tòa nhà thành công!');
+        setOpenSnack(true);
+        handleClose();
+        getRoomList(dispatch);
+      })
+      .catch(() => {
+        setStatusSnack('error');
+        setMessageSnack('Opps, có gì đó sai rồi!');
+        setOpenSnack(true);
+        actions.setSubmitting(false);
+      });
+  };
+
+  const onDuplicate = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    const data: any = {
+      apartment_building_id: Number(values.apartment_building_id),
+      room_number: values.room_number,
+      floor: values.floor
+    };
+    axios_merchant
+      .post(`long-term-rooms/duplicate-listing/${roomID}`, data)
+      .then((res) => {
+        console.log(res);
+        setStatusSnack('success');
+        setMessageSnack('Đã nhân đôi, phòng mới nằm trên cùng danh sách!');
         setOpenSnack(true);
         handleClose();
         getRoomList(dispatch);
@@ -177,7 +205,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
         <DialogTitle disableTypography className={classes.boxTitle}>
           <Grid item xs={12} justify="center" alignContent="center">
             <Typography variant="h1" gutterBottom className="label main_label">
-              Thông tin tòa nhà
+              {isDuplicate ? 'Bạn muốn nhân bản căn hộ này ?' : 'Thông tin tòa nhà'}
             </Typography>
           </Grid>
           <IconButton aria-label="close" onClick={handleClose}>
@@ -189,7 +217,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
             <Formik
               initialValues={initFormValue}
               validationSchema={validationForm}
-              onSubmit={onSubmit}>
+              onSubmit={isDuplicate ? onDuplicate : onSubmit}>
               {({
                 values,
                 handleSubmit,
@@ -223,7 +251,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                         )}
                       </FormControl>
                     </Box>
-                   <Box my={4}>
+                    <Box my={4}>
                       <Typography variant="subtitle1" className={classes.title}>
                         Mã phòng trong tòa nhà?
                       </Typography>
@@ -279,16 +307,31 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                       </FormControl>
                     </Box>
                     <Box my={1} textAlign="center">
-                      <ButtonGlobal
-                        className={classes.customBtn}
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        type="submit"
-                        width="auto"
-                        disabled={isSubmitting}>
-                        {values.apartment_building_id != 999999 ? 'Thêm phòng vào tòa nhà' : 'Bỏ chọn tòa nhà hiện tại'}
-                      </ButtonGlobal>
+                      {!isDuplicate ? (
+                        <ButtonGlobal
+                          className={classes.customBtn}
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          type="submit"
+                          width="auto"
+                          disabled={isSubmitting}>
+                          {values.apartment_building_id != 999999
+                            ? 'Thêm phòng vào tòa nhà'
+                            : 'Bỏ chọn tòa nhà hiện tại'}
+                        </ButtonGlobal>
+                      ) : (
+                        <ButtonGlobal
+                          className={classes.customBtn}
+                          variant="contained"
+                          color="primary"
+                          size="large"
+                          type="submit"
+                          width="auto"
+                          disabled={isSubmitting}>
+                          Nhân bản ngay
+                        </ButtonGlobal>
+                      )}
                     </Box>
                   </form>
                 );
