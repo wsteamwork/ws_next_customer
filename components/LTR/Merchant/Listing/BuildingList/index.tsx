@@ -1,6 +1,7 @@
-import React, { FC, Fragment, useState, useEffect, useContext } from 'react';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import { Grid, makeStyles, Theme, createStyles, Box, Typography, Button } from '@material-ui/core';
+import React, { FC, Fragment, useState, useEffect } from 'react';
+import 'swiper/swiper.scss';
+import { Grid, makeStyles, Theme, createStyles, Box, Typography } from '@material-ui/core';
+// import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import { useTranslation } from 'react-i18next';
 import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
 import { axios_merchant } from '@/utils/axiosInstance';
@@ -9,7 +10,7 @@ import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import DialogInfoBuildingAndAddRooms from '@/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 
-interface IProps {}
+interface IProps { }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -42,7 +43,7 @@ const BuildingListHost: FC<IProps> = (props) => {
     try {
       const res = await axios_merchant.get(`apartment-buildings`);
       return res.data;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -99,8 +100,8 @@ const BuildingListHost: FC<IProps> = (props) => {
             </Grid>
           </Box>
         ) : (
-          <Box>chua co phong nao</Box>
-        )}
+            <Box>chua co phong nao</Box>
+          )}
       </GridContainer>
     </Fragment>
   );

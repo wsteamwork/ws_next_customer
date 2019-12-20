@@ -8,7 +8,7 @@ import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { axios } from '@/utils/axiosInstance';
 import { Grid } from '@material-ui/core';
 import Fade from '@material-ui/core/Fade';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -22,6 +22,7 @@ const SearchHome = () => {
   const [data, setData] = useState<number>();
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const changeLeaseTypeGlobal = (i: 0 | 1) => {
+    console.log(i);
     setIndexTab(i);
     dispatch({
       type: 'setLeaseTypeGlobal',
@@ -46,7 +47,8 @@ const SearchHome = () => {
         <div className="searchHomeLayer">
           <GridContainer xs={11} sm={11} md={11} lg={10} classNameItem='searchHome__opa' >
             <TabChangeHome value={indexTab}
-              onChange={(e, i) => changeLeaseTypeGlobal(i)}
+              //@ts-ignore
+              onChange={(e: ChangeEvent<{}>, i) => changeLeaseTypeGlobal(i)}
               tab={[
                 { label: `${t('home:shortTermTab')}` },
                 { label: `${t('home:longTermTab')}` }

@@ -59,13 +59,13 @@ interface MyFormValues {
   lastName: string;
   email: string;
   phone: string;
-  country: number;
-  guestName: string;
-  isSomeOneElse: boolean;
-  additionalNote: string;
-  additionalServices: Array<number>;
-  isWork: boolean;
-  paymentMethod: PaymentMethod;
+  country?: number;
+  guestName?: string;
+  isSomeOneElse?: boolean;
+  additionalNote?: string;
+  additionalServices?: Array<number>;
+  isWork?: boolean;
+  paymentMethod?: PaymentMethod;
 }
 
 const useValidata = () => {

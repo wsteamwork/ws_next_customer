@@ -5,7 +5,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import 'swiper/swiper.scss';
 
 interface IProps {
   classes?: any;
