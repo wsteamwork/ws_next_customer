@@ -14,19 +14,22 @@ export type LTRoomReducerState = {
   readonly error: boolean;
   readonly availableDates: LTRoomAvailableRes;
   readonly places?: any;
+  readonly roomSameBuilding: any[];
 };
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
   | { type: 'setErrorSSRLTRoompage'; payload: boolean }
   | { type: 'setAvailableDates'; payload: LTRoomAvailableRes }
-  | { type: 'setDataPlaces'; payload: any };
+  | { type: 'setDataPlaces'; payload: any }
+  | { type: 'setRoomSameBuilding'; payload: any[] };
 
 export const init: LTRoomReducerState = {
   room: null,
   error: false,
   availableDates: null,
-  places: null
+  places: null,
+  roomSameBuilding: []
 };
 
 export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
@@ -42,6 +45,8 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
       return updateObject(state, { availableDates: action.payload });
     case 'setDataPlaces':
       return updateObject<any>(state, { places: action.payload });
+    case 'setRoomSameBuilding':
+      return updateObject(state, { roomSameBuilding: action.payload });
     default:
       return state;
   }
@@ -87,6 +92,14 @@ export const getRoomAvailableDate = async (
   );
   return res.data.data;
 };
+
+export const getRoomSameBuilding = async (
+  buildingId: any
+  // initLanguage: string = 'en'
+): Promise<any> => {
+  const res: AxiosRes<any> = await axios.get(`long-term-rooms?building_id=${buildingId}`);
+  return res.data;
+};
 //
 // export const getPriceByDay = async (
 //   idRoom: any,
@@ -111,7 +124,7 @@ export const getDataLTRoom = async (
   dispatch: Dispatch<ReducresActions>,
   query: ParsedUrlQuery,
   initLanguage: string = 'en'
-): Promise<Omit<LTRoomReducerState, 'error'>> => {
+): Promise<Omit<LTRoomReducerState, 'error' | 'roomSameBuilding'>> => {
   const { id } = query;
   try {
     const res = await Promise.all([

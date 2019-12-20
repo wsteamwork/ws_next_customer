@@ -21,13 +21,14 @@ const SearchHome = () => {
   const [indexTab, setIndexTab] = useState<number>(leaseTypeGlobal);
   const [data, setData] = useState<number>();
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-  const changeLeaseTypeGlobal = (i: 0 | 1) => {
-    setIndexTab(i);
-    dispatch({
-      type: 'setLeaseTypeGlobal',
-      leaseTypeGlobal: i,
-      leaseTypePathName: i ? '/long-term-rooms' : '/rooms'
-    });
+  const changeLeaseTypeGlobal = (e?:React.ChangeEvent<{}>) => {
+    // setIndexTab(e);
+    // dispatch({
+    //   type: 'setLeaseTypeGlobal',
+    //   leaseTypeGlobal: i,
+    //   leaseTypePathName: i ? '/long-term-rooms' : '/rooms'
+    // });
+    console.log(e);
   };
   const getDataLongTermRoom = async (): Promise<any> => {
     const res = await axios.get(`count-long-term-rooms`);
@@ -46,7 +47,7 @@ const SearchHome = () => {
         <div className="searchHomeLayer">
           <GridContainer xs={11} sm={11} md={11} lg={10} classNameItem='searchHome__opa' >
             <TabChangeHome value={indexTab}
-              onChange={(e, i) => changeLeaseTypeGlobal(i)}
+              onChange={()=>changeLeaseTypeGlobal()}
               tab={[
                 { label: `${t('home:shortTermTab')}` },
                 { label: `${t('home:longTermTab')}` }

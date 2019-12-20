@@ -18,7 +18,7 @@ import StarIcon from '@material-ui/icons/StarRounded';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import 'swiper/swiper.scss';
 import LazyLoad from 'react-lazyload';
 import Cookies from 'universal-cookie';
 

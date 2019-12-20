@@ -10,6 +10,7 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import BoxRoomSameBuilding from './BoxRoomSameBuilding';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 
 // import LazyLoad, { forceCheck } from 'react-lazyload';
@@ -30,12 +31,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     rowMargin: {
       marginTop: theme.spacing(4)
-    },
+    }
   })
 );
 
 interface IProps {
-  room: LTRoomIndexRes,
+  room: LTRoomIndexRes;
 }
 
 const BoxLTRoomDetail: FC<IProps> = (props) => {
@@ -63,7 +64,8 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   kitchens={isPreviewPage && !room.kitchens ? [] : room.kitchens}
                   bedrooms={isPreviewPage && !room.bedrooms ? [] : room.bedrooms}
                   bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms}
-                  roomName={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name} />
+                  roomName={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
+                />
               </Grid>
             </Grid>
             <Grid container spacing={1}>
@@ -91,9 +93,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                 <div className={classes.rowMargin}>
                   <RoomDescription
                     isPreviewPage={isPreviewPage}
-                    description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
+                    description={
+                      checkAboutRoom ? t('room:notFoundContent') : room.about_room.description
+                    }
                     space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
-                    note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
+                    note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note}
+                  />
                 </div>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
@@ -109,7 +114,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     kitchens={checkComfort ? undefined : room.comforts.kitchens}
                   />
                   {/* </LazyLoad> */}
-
                 </div>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
@@ -121,11 +125,21 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     not_included_services={checkPrice ? [] : room.not_included_services}
                   />
                   {/* </LazyLoad> */}
-
                 </div>
               </Grid>
             </Grid>
-            <Grid container spacing={1} justify='center'>
+
+            {/* Rooms Same Building */}
+
+            <Grid container spacing={1} justify="center">
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className={classes.rowMargin}>
+                  <BoxRoomSameBuilding />
+                </div>
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   {/* <LazyLoad offset={100}> */}
@@ -133,10 +147,14 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     latitude={room ? room.latitude : '0'}
                     longitude={room ? room.longitude : '0'}
                   /> */}
-                  <HereMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+                  <HereMap
+                    city={room.city.data.name}
+                    district={room.district.data.name}
+                    latitude={room.latitude}
+                    longitude={room.longitude}
+                  />
 
                   {/* </LazyLoad> */}
-
                 </div>
               </Grid>
             </Grid>

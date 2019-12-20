@@ -41,9 +41,9 @@ const cookies = new Cookies();
 
 const languageDetector = {
   init: Function.prototype,
-  type: 'languageDetector',
+  type: "languageDetector",
   async: true, // flags below detection to be async
-  detect: async (callback) => {
+    detect: async (callback) => {
     const savedDataJSON = cookies.get('initLanguage');
     const lng = savedDataJSON ? savedDataJSON : null;
     const selectLanguage = lng || 'en';
@@ -52,7 +52,10 @@ const languageDetector = {
   cacheUserLanguage: () => {}
 };
 
+// languageDetector.type = 'languageDetector'
+
 i18n
+  //@ts-ignore
   .use(languageDetector)
   .use(initReactI18next)
   .init({
