@@ -44,7 +44,6 @@ const HereMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { district, city, latitude, longitude } = props;
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   return (

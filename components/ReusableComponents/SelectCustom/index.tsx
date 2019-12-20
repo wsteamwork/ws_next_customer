@@ -66,7 +66,7 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
           onChange={onChange}
           value={value}
           onBlur={handleBlur}
-          // defaultValue={null}
+          // defaultValue={value}
           input={
             <OutlinedInput
               name="term-rental"

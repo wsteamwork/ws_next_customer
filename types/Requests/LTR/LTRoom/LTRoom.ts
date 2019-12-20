@@ -34,6 +34,8 @@ export interface LTRoomIndexRes {
   building: string;
   apartment_building: string;
   apartment_building_id: number;
+  room_number: string;
+  floor: string;
   room_same_apartment_building: number;
   latitude: string;
   longitude: string;

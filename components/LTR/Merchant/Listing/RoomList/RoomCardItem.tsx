@@ -293,11 +293,8 @@ const RoomCardItem: FC<IProps> = (props) => {
   const { room } = props;
   const [open, setOpen] = useState(false);
   const [openById, setOpenById] = useState(false);
+  const [openDuplicate, setOpenDuplicate] = useState(false);
   const [message, setMessage] = useState('');
-  const [snackStatus, setSnackStatus] = useState('success');
-  const [openDuplicate, setOpenDuplicate] = useState(0);
-  console.log(openDuplicate);
-  const { width } = useContext(GlobalContext);
   const handleClose = () => {
     setOpen(false);
     setTimeout(location.reload.bind(location), 1000);
@@ -334,18 +331,7 @@ const RoomCardItem: FC<IProps> = (props) => {
       }
     }
   };
-
-  const duplicateListing = (id: number) => {
-    axios_merchant
-      .get(`long-term-rooms/duplicate-listing/${id}`)
-      .then((res) => {
-        setMessage(`Đã nhân đôi, phòng mới  nằm trên cùng danh sách!}`);
-        setOpen(true);
-        setSnackStatus('success');
-        handleCloseDuplicate();
-      })
-      .catch(() => {});
-  };
+ 
   const openLongTermRoomUpdateFirstTime = (room_id: number) => {
     window.open(`/host/create-listing/${room_id}/process`, `_blank`);
   };
@@ -358,13 +344,6 @@ const RoomCardItem: FC<IProps> = (props) => {
     status != 1
       ? window.open(`/preview-long-term-room/${room_id}`, `_blank`)
       : window.open(`/long-term-room/${room_id}`, `_blank`);
-  };
-  const handleOpenDuplicate = (i: number) => {
-    console.log(1);
-    setOpenDuplicate(i);
-  };
-  const handleCloseDuplicate = () => {
-    setOpenDuplicate(0);
   };
 
   return (
@@ -439,8 +418,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <IconButton
                             color="primary"
                             className={classes.IconButton}
-                            aria-label="Edit"
-                            onClick={() => handleOpenDuplicate(room.id)}>
+                            aria-label="dupicate"
+                            onClick={() => setOpenDuplicate(true)}>
                             <FileCopyIconOutlined className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
@@ -468,7 +447,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={9} md={9} lg={10}>
                     <Grid className={classes.content}>
                       <Grid container>
-                        <Grid item xs={12} sm={9} className={classes.infoRoomName}>
+                        <Grid item xs={12} sm={8} className={classes.infoRoomName}>
                           <span>
                             <Link
                               href={`/room/${room.room_id}`}
@@ -493,7 +472,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </span>
                         </Grid>
                         <Hidden xsDown>
-                          <Grid container item xs={3} justify="flex-end">
+                          <Grid container item xs={4} justify="flex-end">
                             <Grid item>
                               <Tooltip
                                 title={t('roomlist:tooltipUpdateRoom')}
@@ -537,8 +516,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 <IconButton
                                   color="primary"
                                   className={classes.IconButton}
-                                  aria-label="Edit"
-                                  onClick={() => handleOpenDuplicate(room.id)}>
+                                  aria-label="duplicate"
+                                  onClick={() => setOpenDuplicate(true)}>
                                   <FileCopyIconOutlined className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
@@ -570,8 +549,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <Typography variant="body1" className={classes.priceAll}>
                               {t('roomlist:buildingTitle')}: {room.apartment_building},{' '}
                               {room.address}
-                              {room.district ? ', ' + room.district.data.name + ',' : ''}{' '}
-                              {room.city ? ', ' + room.city.data.name + ',' : ''}
+                              {room.district_name ? ', ' + room.district_name + ',' : ''}{' '}
+                              {room.city_name ? room.city_name : ''}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -915,42 +894,22 @@ const RoomCardItem: FC<IProps> = (props) => {
       </Snackbar>
       <LazyLoad>
         <DialogAddRoomToBuilding
+          isDuplicate={false}
+          room={room}
           open={openById}
           handleClose={() => setOpenById(false)}
           roomID={room.id}
         />
       </LazyLoad>
-      <Dialog
-        fullScreen={width === 'xs'}
-        maxWidth="sm"
-        open={openDuplicate === room.id}
-        TransitionComponent={TransitionCustom}
-        onClose={handleCloseDuplicate}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">
-          <span className={classes.customerName}>Bạn chắc chắn muốn nhân bản phòng này</span>
-        </DialogTitle>
-        <DialogContent>
-          <Grid item xs={12}></Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseDuplicate}
-            className={classes.buttonCancel}
-            color="primary"
-            autoFocus>
-            Quay lại
-          </Button>
-          <Button
-            onClick={() => duplicateListing(room.id)}
-            className={classes.button}
-            color="primary"
-            autoFocus>
-            Đồng ý
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <LazyLoad>
+        <DialogAddRoomToBuilding
+          isDuplicate={true}
+          room={room}
+          open={openDuplicate}
+          handleClose={() => setOpenDuplicate(false)}
+          roomID={room.id}
+        />
+      </LazyLoad>
     </Fragment>
   );
 };

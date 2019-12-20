@@ -1,5 +1,4 @@
 /*global google*/
-import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { Coordinate } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
@@ -22,6 +21,7 @@ import {
   CreateApartmentActions
 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateApartment';
 import UploadAvatar from './UploadAvatar';
+import CitiesList from './CitiesList';
 interface IProps {}
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -83,34 +83,59 @@ export const InputFeedback = ({ error }) =>
 
 const CreateApartmentForListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { avatar, address, disableSubmit, coordinate: coordinateState, district_id, city_id, name, name_en, city_name, district_name } = useSelector<
-    ReducersList,
-    CreateApartmentState
-  >((state) => state.createApartment);
+  const {
+    avatar,
+    address,
+    disableSubmit,
+    coordinate: coordinateState,
+    district_id,
+    city_id,
+    name,
+    name_en,
+    city_name,
+    district_name
+  } = useSelector<ReducersList, CreateApartmentState>((state) => state.createApartment);
   const [addressInput, setAddress] = useState<string>(address);
   const dispatch = useDispatch<Dispatch<CreateApartmentActions>>();
-  const [coordinateMarker, setCoordinateMarker] = useState<Coordinate>(coordinateState);
+  const [coordinateMarker, setCoordinateMarker] = useState<Coordinate | null>(coordinateState);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(coordinateState);
   const [district, setDistrict] = useState<number>(district_id);
-  const [districtList, setDistrictList] = useState<any[]>(null);
+  const [districtList, setDistrictList] = useState<any[]>([]);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const { t } = useTranslation();
   const FormValidationSchema = useValidatation();
 
   useMemo(() => {
-    if (avatar.length < 1 || address.length < 1 || !district_id || !city_id || name.length < 10 || name_en.length < 10 || !coordinateState) {
+    if (
+      avatar.length < 1 ||
+      address.length < 1 ||
+      !district_id ||
+      !city_id ||
+      name.length < 10 ||
+      name_en.length < 10 ||
+      !coordinateState
+    ) {
       dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
     } else {
       dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
     }
   }, [avatar, address, district_id, city_id, name, name_en, coordinateState]);
+
   useEffect(() => {
     dispatch({
       type: 'SET_COORDINATE',
       payload: coordinateMarker
     });
   }, [coordinateMarker]);
+
+  useEffect(() => {
+    setCoordinateMarker(coordinateState);
+  }, [coordinateState]);
+
+  useEffect(() => {
+    setAddress(address);
+  }, [address]);
 
   useEffect(() => {
     dispatch({
@@ -155,8 +180,8 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
     return {
       name: name,
       name_en: name_en,
-      city: '',
-      district: district_id,
+      city: city_name,
+      district: district_id
     };
   }, [name, name_en, city_name, district_id]);
 
@@ -288,10 +313,14 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                 <Grid item xs={12}>
                   <Grid item xs={12} md={10} lg={6}>
                     <Grid style={{ marginBottom: 32 }}>
-                      <Typography variant="h1" gutterBottom className={classNames(classes.customTitle, 'label sub_label')}>
+                      <Typography
+                        variant="h1"
+                        gutterBottom
+                        className={classNames(classes.customTitle, 'label sub_label')}>
                         {t('host:city')}
                       </Typography>
                       <CitiesList
+                        cityID={city_id}
                         onChange={setFieldValue}
                         valueCity={values.city}
                         onBlur={setFieldTouched}
@@ -304,6 +333,7 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
+
                 <Grid item xs={12}>
                   <Typography
                     variant="h1"
@@ -332,7 +362,10 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                     <Grid item xs={12}>
                       <Grid item xs={12} md={10} lg={6}>
                         <Grid item style={{ margin: '30px 0' }}>
-                          <Typography variant="h1" gutterBottom className={classNames(classes.customTitle, 'label sub_label')}>
+                          <Typography
+                            variant="h1"
+                            gutterBottom
+                            className={classNames(classes.customTitle, 'label sub_label')}>
                             {t('host:addressSpecific')}
                           </Typography>
                           <div data-standalone-searchbox="">
@@ -355,7 +388,7 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
           );
         }}
       />
-      {addressInput ? (
+      {address ? (
         <Fragment>
           <Grid item xs={12}>
             <Grid item xs={12} md={10} lg={6}>
@@ -367,12 +400,12 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
               <Grid item className="normal_text">
                 {t('host:mapAddressSubTitle')}
               </Grid>
-              {defaultCenter && (
+              {coordinateState && coordinateState.lat && (
                 <MapWithAMarker
                   containerElement={<div style={{ height: `350px` }} />}
                   mapElement={<div style={{ height: `100%` }} />}
-                  defaultCenter={defaultCenter}
-                  coordinate={coordinateMarker}
+                  defaultCenter={coordinateState}
+                  coordinate={coordinateState}
                   handleDragEnd={handleDragEnd}
                 />
               )}

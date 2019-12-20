@@ -145,6 +145,7 @@ export const getDataBuilding = async (
     dispatch({ type: 'SET_DISTRICT', payload: cleanAccents(building.district.data.name.trim()) });
     dispatch({ type: 'SET_DISTRICT_ID', payload:  building.district.data.id });
     dispatch({ type: 'SET_CITY', payload: cleanAccents(building.city.data.name.trim()) });
+    dispatch({ type: 'SET_CITY_ID', payload: building.city.data.id });
     dispatch({ type: 'SET_AVATAR', payload: building.avatar });
     dispatch({ type: 'SET_COORDINATE', payload: { lat: parseFloat(building.latitude), lng: parseFloat(building.longitude)}});
     return building;

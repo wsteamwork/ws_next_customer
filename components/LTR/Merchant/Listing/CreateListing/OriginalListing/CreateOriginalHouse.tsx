@@ -108,7 +108,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
     } catch (error) {
     }
   };
-
+  
   useEffect(() => {
     getBuildings()
       .then((res) => {
@@ -181,7 +181,6 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                       isSubmitting,
                       setFieldTouched
                     }: FormikProps<FormValues>) => {
-                    // const hasErrors = Object.keys(errors).length > 0;
                     return (
                       <form onSubmit = {handleSubmit}>
                         <FormControl
