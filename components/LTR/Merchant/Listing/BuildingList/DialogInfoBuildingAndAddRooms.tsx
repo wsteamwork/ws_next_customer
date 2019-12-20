@@ -20,7 +20,7 @@ import { axios_merchant } from '@/utils/axiosInstance';
 interface IProps {
   classes?: any,
   open: number,
-  handleClose: () => void
+  handleClose: () => void,
   buildingID: number,
   name: string,
 }
@@ -124,9 +124,8 @@ const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
               <div
                 key={i}
                 className={classes.tag}
-
               >
-                {o.about_room.name}
+                {o.about_room && o.about_room.name ? o.about_room.name : 'chua co thong tin'}
               </div>
             ))}
           </div>

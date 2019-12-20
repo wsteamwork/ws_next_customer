@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     }
   })
 );
-const RoomListHost: NextPage = (props) => {
+const RoomListHost: NextPage<IProps> = (props) => {
   const { t } = useTranslation();
   const { router } = useContext(GlobalContext);
   const classes = useStyles(props);

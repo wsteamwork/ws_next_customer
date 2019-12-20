@@ -7,7 +7,7 @@ import Link from 'next/link';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Swiper from 'react-id-swiper';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import 'swiper/swiper.scss';
 
 interface IProps {
   classes?: any

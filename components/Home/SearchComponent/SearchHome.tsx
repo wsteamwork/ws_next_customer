@@ -46,6 +46,7 @@ const SearchHome = () => {
         <div className="searchHomeLayer">
           <GridContainer xs={11} sm={11} md={11} lg={10} classNameItem='searchHome__opa' >
             <TabChangeHome value={indexTab}
+              // @ts-ignore
               onChange={(e, i) => changeLeaseTypeGlobal(i)}
               tab={[
                 { label: `${t('home:shortTermTab')}` },

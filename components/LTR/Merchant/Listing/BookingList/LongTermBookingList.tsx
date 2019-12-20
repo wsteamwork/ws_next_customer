@@ -17,19 +17,9 @@ import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import BookingCardItem from './BookingCardItem';
 import FilterBookingList from './FilterBookingList';
-interface IProps {
-  classes?: any;
-}
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
-  createStyles({
-    title: {
-      margin: theme.spacing(3, 0)
-    }
-  })
-);
-const LongTermBookingList: NextPage = (props) => {
+
+const LongTermBookingList: NextPage = () => {
   const { t } = useTranslation();
-  const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);
   const {

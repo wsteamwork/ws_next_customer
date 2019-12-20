@@ -161,7 +161,7 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
   }, [name, name_en, city_name, district_id]);
 
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    return {};
+    return null;
   };
 
   return (

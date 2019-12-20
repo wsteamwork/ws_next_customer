@@ -22,7 +22,7 @@ import { DayPickerRangeController } from 'react-dates';
 import 'react-dates/initialize';
 import { useTranslation } from 'react-i18next';
 import Swiper from 'react-id-swiper';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import 'swiper/swiper.scss';
 import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
 
