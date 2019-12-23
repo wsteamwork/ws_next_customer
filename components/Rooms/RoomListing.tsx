@@ -10,6 +10,10 @@ import ListRoom from '../ListRoom';
 import LoadingSkeleton from '../Loading/LoadingSkeleton';
 import NotFound from './Lotte/NotFound';
 import RoomCardListing from './RoomCardListing';
+import Cookies from 'universal-cookie';
+
+import localeInfoUS from 'rc-pagination/lib/locale/en_US';
+import localeInfoVN from 'rc-pagination/lib/locale/vi_VN';
 
 interface IProps {
   classes?: any;
@@ -25,6 +29,8 @@ const RoomListing: FC<IProps> = (props) => {
   const { meta, isLoading } = state;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
 
   const changePage = (current: number) => {
     setCurrentPage(current);
@@ -64,6 +70,7 @@ const RoomListing: FC<IProps> = (props) => {
             pageSize={meta.pagination.per_page}
             current={currentPage}
             onChange={changePage}
+            locale={lang === 'vi' ? localeInfoVN : localeInfoUS}
           />
         </Fragment>
       ) : !isEmpty ? (

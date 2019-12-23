@@ -173,7 +173,7 @@ const Footer: FC<IProps> = () => {
       <div className={'itemMobile'}>
         <GridContainer xs={11} className="textCenter">
           <Grid style={{ marginBottom: 12 }}>
-            <Logo isFooter={true} />
+            <Logo isTextLogo={true} />
           </Grid>
 
           <Grid>

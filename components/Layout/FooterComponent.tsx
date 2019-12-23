@@ -10,7 +10,7 @@ import { faPhoneVolume, faEnvelope, faMapMarkedAlt } from '@fortawesome/free-sol
 import { useTranslation } from 'react-i18next';
 import Logo from '../Toolbar/Logo';
 
-interface IProps { }
+interface IProps {}
 const facebookUrl = 'https://www.facebook.com/westay.vn/';
 const instagramUrl = 'https://www.instagram.com/westay_stayhappytogether/';
 
@@ -24,7 +24,7 @@ const Footer: FC<IProps> = (props) => {
           <GridContainer xs={11}>
             <Grid container>
               <Grid item xs={12} sm={4} md={4} className={'linksList'}>
-                <h5 className={'linksListGroupTitle'}>{t('layout:footer:help')}</h5>
+                {/* <h5 className={'linksListGroupTitle'}>{t('layout:footer:help')}</h5> */}
 
                 <ul className={'linksListGroupList'}>
                   <p>
@@ -39,15 +39,7 @@ const Footer: FC<IProps> = (props) => {
                     {t('layout:footer:ecommerce')}
                   </p>{' '}
                   <p className="padding_top">
-                    <Link
-                      color="inherit"
-                      href="http://online.gov.vn/HomePage/WebsiteDisplay.aspx?DocId=41005"
-                      target="_blank">
-                      <img
-                        alt="https://westay.vn"
-                        src="http://online.gov.vn/seals/dlxOBO9dxLmirYHstOPHmA==.jpgx"
-                      />
-                    </Link>
+                    <Logo isTextLogo={true} />
                   </p>
                 </ul>
               </Grid>
@@ -63,7 +55,8 @@ const Footer: FC<IProps> = (props) => {
                   </Link>
                 </ul>
 
-                <div className="padding_top">
+                {/* Blog Not Working anymore so comment it for later */}
+                {/* <div className="padding_top">
                   <h5 className="linksListGroupTitle">
                     <Link
                       color="inherit"
@@ -110,7 +103,7 @@ const Footer: FC<IProps> = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </Grid>
               <Grid item xs={12} sm={4} md={4} className={'linksList'}>
                 <h5 className={'linksListGroupTitle'}> {t('layout:footer:contactUs')}</h5>
@@ -203,7 +196,7 @@ const Footer: FC<IProps> = (props) => {
         <div className={'itemMobile'}>
           <GridContainer xs={11} className="textCenter">
             <Grid style={{ marginBottom: 12 }}>
-              <Logo isFooter={true} />
+              <Logo isTextLogo={true} />
             </Grid>
 
             <Grid style={{ fontSize: 16 }}>
