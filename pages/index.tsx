@@ -2,14 +2,13 @@ import SearchHome from '@/components/Home/SearchComponent/SearchHome';
 import FooterComponent from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NextHead from '@/components/NextHead';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import LazyLoad, { forceCheck } from 'react-lazyload';
-import { useSelector } from 'react-redux';
 import HomepageST from './homepage/HomepageST';
 
 const Home: NextPage = () => {
@@ -41,7 +40,7 @@ const Home: NextPage = () => {
           </GridContainer>
         </Hidden>
       </GridContainer>
-      <LazyLoad offset="150">
+      <LazyLoad>
         <FooterComponent />
       </LazyLoad>
     </Fragment>

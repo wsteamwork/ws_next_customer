@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxRoomSameBuilding: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const { t } = useTranslation();
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const dispatch = useDispatch<Dispatch<LTRoomReducerAction>>();
@@ -50,7 +50,6 @@ const BoxRoomSameBuilding: FC<IProps> = (props) => {
       });
   }, [ltroom.apartment_building_id]);
   const renderRoomSameBuilding = (room) => {
-    console.log(room);
     return (
       <BusinessTripCard
         room={room}
@@ -82,8 +81,8 @@ const BoxRoomSameBuilding: FC<IProps> = (props) => {
           itemRender={renderRoomSameBuilding}
         />
       ) : (
-        <Fragment></Fragment>
-      )}
+          <Fragment></Fragment>
+        )}
     </Fragment>
   );
 };

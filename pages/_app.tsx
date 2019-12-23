@@ -5,7 +5,7 @@ import ProviderGlobal from '@/utils/ProviderGlobal';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import withRedux, { NextJSContext } from 'next-redux-wrapper';
-import App, { AppContext, AppProps, Container } from 'next/app';
+import App, { AppContext, AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import React from 'react';

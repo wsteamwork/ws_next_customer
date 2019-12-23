@@ -64,6 +64,7 @@
     "results": "kết quả tìm kiếm",
     "contactForPrice": "Giá liên hệ",
     "currency": "",
-    "month": "tháng"
+    "month": "tháng",
+    "showNumberRoomSameBuilding": "phòng cùng toà nhà"
 
 }

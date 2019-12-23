@@ -18,8 +18,8 @@ import StarIcon from '@material-ui/icons/StarRounded';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation, UseTranslationResponse } from 'react-i18next';
-import 'swiper/swiper.scss';
 import LazyLoad from 'react-lazyload';
+import 'swiper/swiper.scss';
 import Cookies from 'universal-cookie';
 
 interface Iprops {

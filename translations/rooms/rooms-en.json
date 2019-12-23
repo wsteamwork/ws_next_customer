@@ -62,5 +62,7 @@
     "results": "results",
     "contactForPrice": "Contact for price",
     "currency": "$",
-    "month": "month"
+    "month": "month",
+            "showNumberRoomSameBuilding": "rooms have same building"
+
 }

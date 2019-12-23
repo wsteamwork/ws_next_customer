@@ -6,7 +6,7 @@ import { Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 
@@ -68,12 +68,19 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                       {room.bedrooms.number_bedroom} {t('rooms:rooms')}
                       <span className='dotAmenties'>.</span>
                       {room.bathrooms.number_bathroom} {t('rooms:bathrooms')}
-                      <span className='dotAmenties'>.</span>
                       {room.total_area && room.total_area > 0 ? (
-                        <span>{room.total_area ? room.total_area : '?'} m<sup>2</sup></span>
+                        <Fragment>
+
+                          <span className='dotAmenties'>.</span>
+                          <span>{room.total_area ? room.total_area : '?'} m<sup>2</sup></span>
+                        </Fragment>
                       ) : ''
                       }
                     </Grid>
+                    {room.room_same_apartment_building && <Grid item xs={12} className='collectionAmenities'>
+                      {room.room_same_apartment_building} {t('rooms:showNumberRoomSameBuilding')}
+                    </Grid>}
+
                   </Grid>
                   <Grid item xs={3} className="boxPriceContainer">
                     <Grid className='boxPrice'>
