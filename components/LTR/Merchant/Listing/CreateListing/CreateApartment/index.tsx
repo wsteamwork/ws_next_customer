@@ -1,9 +1,12 @@
 /*global google*/
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { CreateApartmentActions, CreateApartmentState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateApartment';
 import { Coordinate } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { Theme, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'react';
@@ -12,17 +15,11 @@ import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
-import SearchPlaceCustom from '../Location/SearchPlaceCustom';
 import CardTextarea from '../Description/CardTextarea';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import classNames from 'classnames';
-import {
-  CreateApartmentState,
-  CreateApartmentActions
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateApartment';
-import UploadAvatar from './UploadAvatar';
+import SearchPlaceCustom from '../Location/SearchPlaceCustom';
 import CitiesList from './CitiesList';
-interface IProps {}
+import UploadAvatar from './UploadAvatar';
+interface IProps { }
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -205,6 +202,7 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
         validateOnChange={true}
         validationSchema={FormValidationSchema}
         initialValues={initFormValue}
+        //@ts-ignore
         onSubmit={handleFormSubmit}
         render={({
           values,
@@ -382,8 +380,8 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                   </LazyLoad>
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </form>
           );
         }}
@@ -413,8 +411,8 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
           </Grid>
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </div>
   );
 };

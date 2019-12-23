@@ -1,26 +1,9 @@
+import DialogAddRoomToBuilding from '@/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { axios_merchant } from '@/utils/axiosInstance';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  createStyles,
-  Divider,
-  Grid,
-  Hidden,
-  IconButton,
-  Link,
-  Paper,
-  Snackbar,
-  Theme,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  FormControl,
-  Button,
-  DialogActions
-} from '@material-ui/core';
+import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Snackbar, Theme } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
@@ -30,11 +13,8 @@ import FileCopyIconOutlined from '@material-ui/icons/FileCopyOutlined';
 import ApartmentRoundedIcon from '@material-ui/icons/LocationCityRounded';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
-import React, { FC, Fragment, useContext, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import LazyLoad from 'react-lazyload';
-import DialogAddRoomToBuilding from '@/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding';
-import { TransitionCustom } from '@/components/LTR/LTBook/BookingForm';
 interface IProps {
   classes?: any;
   room: any;
@@ -331,7 +311,7 @@ const RoomCardItem: FC<IProps> = (props) => {
       }
     }
   };
- 
+
   const openLongTermRoomUpdateFirstTime = (room_id: number) => {
     window.open(`/host/create-listing/${room_id}/process`, `_blank`);
   };
@@ -363,16 +343,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
-                      <Grid className={classes.wrapperImage}>
-                        <img
-                          src={'/static/images/camera.svg'}
-                          alt="Camera"
-                          className={classes.imgDefault}
-                        />
+                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                        <Grid className={classes.wrapperImage}>
+                          <img
+                            src={'/static/images/camera.svg'}
+                            alt="Camera"
+                            className={classes.imgDefault}
+                          />
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  )}
+                    )}
                   <Hidden smUp>
                     <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>
@@ -440,8 +420,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </Tooltip>
                         </Grid>
                       ) : (
-                        ''
-                      )}
+                          ''
+                        )}
                     </Grid>
                   </Hidden>
                   <Grid item xs={12} sm={9} md={9} lg={10}>
@@ -466,8 +446,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   />
                                 </Tooltip>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                             </Link>
                           </span>
                         </Grid>
@@ -538,8 +518,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 </Tooltip>
                               </Grid>
                             ) : (
-                              ''
-                            )}
+                                ''
+                              )}
                           </Grid>
                         </Hidden>
                       </Grid>
@@ -627,8 +607,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
@@ -637,8 +617,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   &nbsp;&#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               {room.short_term_room.rent_type !== 2 ? (
                                 <span>
                                   &nbsp;
@@ -646,12 +626,12 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerHour')}
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                           {room.short_term_room.rent_type === 2 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -660,8 +640,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               <span>
                                 &nbsp;
                                 {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
@@ -669,8 +649,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </span>
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                           {room.short_term_room.rent_type === 1 ? (
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
@@ -679,8 +659,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
-                                ''
-                              )}
+                                  ''
+                                )}
                               <span>
                                 &nbsp;
                                 {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
@@ -688,8 +668,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </span>
                             </Typography>
                           ) : (
-                            ''
-                          )}
+                              ''
+                            )}
                         </Grid>
                         {room.lease_type !== 1 ? (
                           room.percent < 100 ? (
@@ -705,8 +685,8 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           ) : (
-                            ''
-                          )
+                              ''
+                            )
                         ) : room.lease_type !== 2 && room.lease_type !== 3 ? (
                           room.short_term_room.percent < 100 ? (
                             <Grid container item xs={12} lg={4}>
@@ -724,11 +704,11 @@ const RoomCardItem: FC<IProps> = (props) => {
                               </Grid>
                             </Grid>
                           ) : (
-                            ''
-                          )
+                              ''
+                            )
                         ) : (
-                          ''
-                        )}
+                              ''
+                            )}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -892,24 +872,20 @@ const RoomCardItem: FC<IProps> = (props) => {
         onClose={handleClose}>
         <MySnackbarContentWrapper variant="success" message={message} onClose={handleClose} />
       </Snackbar>
-      <LazyLoad>
-        <DialogAddRoomToBuilding
-          isDuplicate={false}
-          room={room}
-          open={openById}
-          handleClose={() => setOpenById(false)}
-          roomID={room.id}
-        />
-      </LazyLoad>
-      <LazyLoad>
-        <DialogAddRoomToBuilding
-          isDuplicate={true}
-          room={room}
-          open={openDuplicate}
-          handleClose={() => setOpenDuplicate(false)}
-          roomID={room.id}
-        />
-      </LazyLoad>
+      <DialogAddRoomToBuilding
+        isDuplicate={false}
+        room={room}
+        open={openById}
+        handleClose={() => setOpenById(false)}
+        roomID={room.id}
+      />
+      <DialogAddRoomToBuilding
+        isDuplicate={true}
+        room={room}
+        open={openDuplicate}
+        handleClose={() => setOpenDuplicate(false)}
+        roomID={room.id}
+      />
     </Fragment>
   );
 };

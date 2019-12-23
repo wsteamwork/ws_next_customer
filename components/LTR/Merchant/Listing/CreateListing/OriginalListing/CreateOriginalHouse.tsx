@@ -1,22 +1,22 @@
-import React, { FC, useState, useEffect, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Box, Typography, Grid, RadioGroup, Collapse, TextField, FormHelperText } from '@material-ui/core';
-import GridContainer from '@/components/Layout/Grid/Container';
-import FormControl from '@material-ui/core/FormControl';
-import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
-import { axios_merchant } from '@/utils/axiosInstance';
-import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
-import SelectCustom from '@/components/ReusableComponents/SelectCustom';
-import { InputFeedback } from '@/components/LTR/Merchant/Listing/CreateListing/Location';
-import { FormikProps, Formik, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
-import { useTranslation } from 'react-i18next';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { RoomWithinBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
+import GridContainer from '@/components/Layout/Grid/Container';
+import { InputFeedback } from '@/components/LTR/Merchant/Listing/CreateListing/Location';
+import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
+import { RoomWithinBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { Box, Collapse, FormHelperText, Grid, RadioGroup, TextField, Theme, Typography } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import * as Yup from 'yup';
 
 interface IProps {
   classes?: any
@@ -30,7 +30,7 @@ interface FormValues {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    title:{
+    title: {
       paddingBottom: 8,
       overflowWrap: 'break-word',
       fontSize: 16,
@@ -43,12 +43,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 
 const CreateOriginalHouse: FC<IProps> = (props) => {
-  const classes                         = useStyles(props);
-  const {}                              = props;
-  const {router}                              = useContext(GlobalContext);
+  const classes = useStyles(props);
+  const { } = props;
+  const { router } = useContext(GlobalContext);
   const [haveBuilding, setHaveBuilding] = useState<number>(0);
-  const [buildings, setBuildings]       = useState<ApartmentBuildingsRes[]>([]);
-  const { t }                           = useTranslation();
+  const [buildings, setBuildings] = useState<ApartmentBuildingsRes[]>([]);
+  const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
 
   const initFormValue: FormValues = {
@@ -108,7 +108,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
     } catch (error) {
     }
   };
-  
+
   useEffect(() => {
     getBuildings()
       .then((res) => {
@@ -117,42 +117,42 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
   }, []);
 
   return (
-    <Box p = {4}>
-      <Box mb = {4}>
-        <Typography variant = 'h4' style = {{ fontWeight: 'bold' }}>Hãy bắt đầu từ những điều cơ bản</Typography>
+    <Box p={4}>
+      <Box mb={4}>
+        <Typography variant='h4' style={{ fontWeight: 'bold' }}>Hãy bắt đầu từ những điều cơ bản</Typography>
       </Box>
-      <GridContainer xl = {10}>
-        <Box mt = {2} mb = {4}>
-          <Box mb = {2}>
-            <Typography variant = 'h5'>
+      <GridContainer xl={10}>
+        <Box mt={2} mb={4}>
+          <Box mb={2}>
+            <Typography variant='h5'>
               Căn hộ này có thuộc tòa nhà nào không ?
             </Typography>
           </Box>
-          <Grid container className = {classes.container} justify = 'center'>
-            <Grid item xs = {12}>
-              <FormControl component = 'fieldset' fullWidth>
-                <RadioGroup value = {String(haveBuilding)} onChange = {handleChange} row>
-                  <Grid container spacing = {4}>
-                    <Grid item xs = {6}>
+          <Grid container className={classes.container} justify='center'>
+            <Grid item xs={12}>
+              <FormControl component='fieldset' fullWidth>
+                <RadioGroup value={String(haveBuilding)} onChange={handleChange} row>
+                  <Grid container spacing={4}>
+                    <Grid item xs={12} md={6}>
                       <RadioCustom
-                        label = 'Không, nó không thuộc tòa nhà nào.'
-                        descr = {
+                        label='Không, nó không thuộc tòa nhà nào.'
+                        descr={
                           <Typography>
                             Ưu tiên lựa chọn này khi bạn có căn hộ/ phòng riêng biệt.
                           </Typography>
                         }
-                        value = {String(0)}
+                        value={String(0)}
                       />
                     </Grid>
-                    <Grid item xs = {6}>
+                    <Grid item xs={12} md={6}>
                       <RadioCustom
-                        label = 'Có, nó có thuộc một tòa nhà.'
-                        descr = {
+                        label='Có, nó có thuộc một tòa nhà.'
+                        descr={
                           <Typography>
                             Lựa chọn này là cần thiết khi bạn có nhiều căn hộ trong cùng một tòa nhà.
                           </Typography>
                         }
-                        value = {String(1)}
+                        value={String(1)}
                       />
                     </Grid>
                   </Grid>
@@ -162,64 +162,64 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
           </Grid>
         </Box>
 
-        <Collapse in = {!!haveBuilding}>
+        <Collapse in={!!haveBuilding}>
           <Box>
-            <Typography variant = 'h5' gutterBottom>Thông tin tòa nhà</Typography>
+            <Typography variant='h5' gutterBottom>Thông tin tòa nhà</Typography>
             {buildings ? (
-              <Box mt = {2}>
+              <Box mt={2}>
                 <Formik
-                  initialValues = {initFormValue}
-                  validationSchema = {validationForm}
-                  onSubmit = {onSubmit}>
+                  initialValues={initFormValue}
+                  validationSchema={validationForm}
+                  onSubmit={onSubmit}>
                   {({
-                      values,
-                      handleSubmit,
-                      touched,
-                      errors,
-                      handleChange,
-                      handleBlur,
-                      isSubmitting,
-                      setFieldTouched
-                    }: FormikProps<FormValues>) => {
+                    values,
+                    handleSubmit,
+                    touched,
+                    errors,
+                    handleChange,
+                    handleBlur,
+                    isSubmitting,
+                    setFieldTouched
+                  }: FormikProps<FormValues>) => {
                     return (
-                      <form onSubmit = {handleSubmit}>
+                      <form onSubmit={handleSubmit}>
                         <FormControl
-                          error = {!!errors.apartment_building_id && touched.apartment_building_id}
+                          error={!!errors.apartment_building_id && touched.apartment_building_id}
                         >
                           <SelectCustom
-                            name = 'apartment_building_id'
-                            onChange = {(e) => {
+                            name='apartment_building_id'
+                            onChange={(e) => {
                               handleChange(e);
                             }}
-                            defaultDisabledOption = {'Tòa nhà của bạn'}
-                            value = {values.apartment_building_id}
-                            title = 'Lựa chọn tòa nhà'
-                            options = {buildings}
-                            onBlurTouched = {setFieldTouched}
+                            defaultDisabledOption={'Tòa nhà của bạn'}
+                            value={values.apartment_building_id}
+                            title='Lựa chọn tòa nhà'
+                            options={buildings}
+                            onBlurTouched={setFieldTouched}
                           />
                           {touched.apartment_building_id && (
-                            <InputFeedback error = {errors.apartment_building_id} />
+                            <InputFeedback error={errors.apartment_building_id} />
                           )}
                         </FormControl>
-
-                        <Box my = {4}>
-                          <Typography variant = 'subtitle1' className={classes.title}>
+                        <Box my={4}>
+                          <Typography variant='subtitle1' className={classes.title}>
                             Mã phòng trong tòa nhà?
                           </Typography>
                           <FormControl
-                            aria-describedby = 'room_number-helper-text'
+                            aria-describedby='room_number-helper-text'
                             required
-                            error = {!!errors.room_number}>
+                            error={!!errors.room_number}>
                             <TextField
-                              name = 'room_number'
-                              value = {values.room_number}
-                              onChange = {handleChange}
-                              onBlur = {handleBlur}
-                              placeholder = 'Vd: 101, A202,...'
-                              inputProps = {{
+                              fullWidth
+                              name='room_number'
+                              value={values.room_number}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              placeholder='Vd: 101, A202,...'
+                              inputProps={{
                                 className: 'outlineInput'
                               }}
-                              variant = 'outlined'
+                              variant='outlined'
                             />
                             {!!errors.room_number ? (
                               touched.room_number && <FormHelperText>{errors.room_number}</FormHelperText>
@@ -227,24 +227,25 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                           </FormControl>
                         </Box>
 
-                        <Box my = {4}>
-                          <Typography variant = 'subtitle1' className={classes.title}>
+                        <Box my={4}>
+                          <Typography variant='subtitle1' className={classes.title}>
                             Căn hộ trên tầng mấy?
                           </Typography>
                           <FormControl
-                            aria-describedby = 'floor-helper-text'
+                            aria-describedby='floor-helper-text'
                             required
-                            error = {!!errors.floor}>
+                            error={!!errors.floor}>
                             <TextField
-                              name = 'floor'
-                              value = {values.floor}
-                              onChange = {handleChange}
-                              onBlur = {handleBlur}
-                              placeholder = 'Vd: 12'
-                              inputProps = {{
+                              fullWidth
+                              name='floor'
+                              value={values.floor}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              placeholder='Vd: 12'
+                              inputProps={{
                                 className: 'outlineInput'
                               }}
-                              variant = 'outlined'
+                              variant='outlined'
                             />
                             {!!errors.floor ? (
                               touched.floor && <FormHelperText>{errors.floor}</FormHelperText>
@@ -253,12 +254,12 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                         </Box>
                         <Box my={1} textAlign='center'>
                           <ButtonGlobal
-                            variant = 'contained'
-                            color = 'primary'
-                            size = 'large'
-                            type = 'submit'
-                            width = '20%'
-                            disabled = {isSubmitting}>
+                            variant='contained'
+                            color='primary'
+                            size='large'
+                            type='submit'
+                            width='120'
+                            disabled={isSubmitting}>
                             Tạo phòng
                           </ButtonGlobal>
                         </Box>
@@ -268,23 +269,23 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                 </Formik>
               </Box>
             ) : (
-              <Box mt = {2}>
-                <Typography variant = 'subtitle2'>Bạn chưa có tòa nhà nào, hãy
-                  <a href = {'/host/create-listing/apartment'}> tạo tòa nhà</a>
-                </Typography>
-              </Box>
-            )}
+                <Box mt={2}>
+                  <Typography variant='subtitle2'>Bạn chưa có tòa nhà nào, hãy
+                  <a href={'/host/create-listing/apartment'}> tạo tòa nhà</a>
+                  </Typography>
+                </Box>
+              )}
           </Box>
         </Collapse>
 
-        <Collapse in = {!haveBuilding}>
+        <Collapse in={!haveBuilding}>
           <Box my={1} textAlign='center'>
             <ButtonGlobal
-              variant = 'contained'
-              color = 'primary'
-              size = 'large'
-              type = 'submit'
-              width = '20%'
+              variant='contained'
+              color='primary'
+              size='large'
+              type='submit'
+              width='120'
               onClick={createNewRoom}
             >
               Tạo phòng

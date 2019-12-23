@@ -161,7 +161,12 @@ const SlideDrawerMerchant: FC<IProps> = (props) => {
                 <ListItemText primary="Danh sách phòng" />
               </ListItem>
               <ListItem button className={classes.nested} onClick={() => {
-                router.push('/host/create-listing/basic');
+                router.push('/host/building-list');
+              }}>
+                <ListItemText primary="Danh sách toà nhà" />
+              </ListItem>
+              <ListItem button className={classes.nested} onClick={() => {
+                router.push('/host/create-listing/');
               }}>
                 <ListItemText primary="Đăng phòng" />
               </ListItem>

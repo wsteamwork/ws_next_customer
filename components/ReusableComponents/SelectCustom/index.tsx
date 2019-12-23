@@ -41,12 +41,12 @@ const SelectCustom = <T extends any>(props: IProps<T>) => {
   const optionsRender = () => {
     return options && !disabled
       ? options.map((item, i) => {
-          return (
-            <option key={i} value={unit ? item : item.id}>
-              {unit ? item + unit : item.value || item.name}
-            </option>
-          );
-        })
+        return (
+          <option key={i} value={unit ? item : item.id}>
+            {unit ? item + unit : item.value || item.name}
+          </option>
+        );
+      })
       : null;
   };
 

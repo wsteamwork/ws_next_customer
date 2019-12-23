@@ -1,35 +1,23 @@
-import React, { Fragment, FC, useContext, useState, useEffect, SyntheticEvent } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  Dialog,
-  DialogTitle,
-  Typography,
-  IconButton,
-  DialogContent,
-  Box,
-  TextField,
-  FormHelperText,
-  Snackbar,
-  Grid
-} from '@material-ui/core';
 import { TransitionCustom } from '@/components/Book/BookingForm';
-import CloseIcon from '@material-ui/icons/Close';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { FormikProps, Formik, FormikHelpers } from 'formik';
-import FormControl from '@material-ui/core/FormControl';
-import SelectCustom from '@/components/ReusableComponents/SelectCustom';
-import { InputFeedback } from '@/components/LTR/Merchant/Listing/CreateListing/Location';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import * as Yup from 'yup';
-import { AddToBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
-import { axios_merchant } from '@/utils/axiosInstance';
-import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
+import { InputFeedback } from '@/components/LTR/Merchant/Listing/CreateListing/Location';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { getRoomList, RoomListReducerAction } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
+import { AddToBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { Box, Dialog, DialogContent, DialogTitle, FormHelperText, Grid, IconButton, Snackbar, TextField, Theme, Typography } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import CloseIcon from '@material-ui/icons/Close';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import * as Yup from 'yup';
 
 interface IProps {
   classes?: any;
@@ -63,7 +51,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       padding: '16px 24px',
       borderRadius: 16,
-      minWidth: 500
+      // minWidth: 500
     },
     boxContent: {
       minHeight: 64,
@@ -101,14 +89,14 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     try {
       const res = await axios_merchant.get(`apartment-buildings`);
       return res.data;
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
     getBuildings().then((res) => {
       let itemCancel = {
-        id: 999999,
-        name: 'Bỏ chọn tòa nhà hiện tại'
+        id: 0,
+        name: 'Không thuộc toà nhà nào'
       };
       let newBuildings = [itemCancel, ...res.data];
       isDuplicate ? setBuildings(res.data) : setBuildings(newBuildings);
@@ -126,14 +114,14 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     apartment_building_id: Yup.string()
       .required('At least one checkbox is required')
       .test('checkNotChoose', 'Please select an option', (value) => value != 0),
-    room_number: idBuilding != 999999 ? Yup.string().required('Required') : null,
-    floor: idBuilding != 999999 ? Yup.string().required('Required') : null
+    room_number: idBuilding != 0 ? Yup.string().required('Required') : null,
+    floor: idBuilding != 0 ? Yup.string().required('Required') : null
   });
 
   const onSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     const data: AddToBuildingReq = {
       apartment_building_id:
-        values.apartment_building_id != 999999 ? values.apartment_building_id : null,
+        values.apartment_building_id != 0 ? values.apartment_building_id : null,
       list_long_term_room: [
         {
           id: roomID,
@@ -169,7 +157,6 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     axios_merchant
       .post(`long-term-rooms/duplicate-listing/${roomID}`, data)
       .then((res) => {
-        console.log(res);
         setStatusSnack('success');
         setMessageSnack('Đã nhân đôi, phòng mới nằm trên cùng danh sách!');
         setOpenSnack(true);
@@ -197,13 +184,14 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
         aria-labelledby="dialog-add-to-building"
         scroll="body"
         maxWidth={'sm'}
+        fullWidth
         TransitionComponent={TransitionCustom}
         fullScreen={width === 'xs'}
         onClose={handleClose}
         open={open}
         classes={{ paper: classes.root }}>
         <DialogTitle disableTypography className={classes.boxTitle}>
-          <Grid item xs={12} justify="center" alignContent="center">
+          <Grid container item xs={12} justify="center" alignContent="center">
             <Typography variant="h1" gutterBottom className="label main_label">
               {isDuplicate ? 'Bạn muốn nhân bản căn hộ này ?' : 'Thông tin tòa nhà'}
             </Typography>
@@ -261,7 +249,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                         required
                         error={!!errors.room_number}>
                         <TextField
-                          disabled={values.apartment_building_id == 999999}
+                          disabled={values.apartment_building_id == 0}
                           name="room_number"
                           value={values.room_number}
                           onChange={handleChange}
@@ -274,8 +262,8 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                         />
                         {!!errors.room_number
                           ? touched.room_number && (
-                              <FormHelperText>{errors.room_number}</FormHelperText>
-                            )
+                            <FormHelperText>{errors.room_number}</FormHelperText>
+                          )
                           : ''}
                       </FormControl>
                     </Box>
@@ -290,7 +278,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                         required
                         error={!!errors.floor}>
                         <TextField
-                          disabled={values.apartment_building_id == 999999}
+                          disabled={values.apartment_building_id == 0}
                           name="floor"
                           value={values.floor}
                           onChange={handleChange}
@@ -316,22 +304,22 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                           type="submit"
                           width="auto"
                           disabled={isSubmitting}>
-                          {values.apartment_building_id != 999999
+                          {values.apartment_building_id != 0
                             ? 'Thêm phòng vào tòa nhà'
                             : 'Bỏ chọn tòa nhà hiện tại'}
                         </ButtonGlobal>
                       ) : (
-                        <ButtonGlobal
-                          className={classes.customBtn}
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                          type="submit"
-                          width="auto"
-                          disabled={isSubmitting}>
-                          Nhân bản ngay
+                          <ButtonGlobal
+                            className={classes.customBtn}
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            type="submit"
+                            width="auto"
+                            disabled={isSubmitting}>
+                            Nhân bản ngay
                         </ButtonGlobal>
-                      )}
+                        )}
                     </Box>
                   </form>
                 );

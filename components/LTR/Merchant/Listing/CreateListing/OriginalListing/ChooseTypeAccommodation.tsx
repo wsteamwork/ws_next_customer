@@ -1,11 +1,11 @@
-import React, { Fragment, FC, useState, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Box, Typography, RadioGroup, Grid } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
-import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
-import classNames from 'classnames';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Box, Grid, RadioGroup, Theme, Typography } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
+import React, { FC, useContext, useState } from 'react';
 
 interface IProps {
   classes?: any
@@ -40,10 +40,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 
 const ChooseTypeAccommodation: FC<IProps> = (props) => {
-  const classes                                   = useStyles(props);
-  const {}                                        = props;
+  const classes = useStyles(props);
+  const { } = props;
   const [typeAccommodation, setTypeAccommodation] = useState<number>(null);
-  const { router }                                = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTypeAccommodation(parseInt((event.target as HTMLInputElement).value));
@@ -62,50 +62,50 @@ const ChooseTypeAccommodation: FC<IProps> = (props) => {
   };
 
   return (
-    <Box p = {4}>
-      <Box mb = {4}>
-        <Typography variant = 'h4' style = {{ fontWeight: 'bold' }}>Bạn muốn bắt đầu như thế nào?</Typography>
+    <Box p={4}>
+      <Box mb={4}>
+        <Typography variant='h4' style={{ fontWeight: 'bold' }}>Bạn muốn bắt đầu như thế nào?</Typography>
       </Box>
-      <FormControl component = 'fieldset' fullWidth>
-        <RadioGroup value = {String(typeAccommodation)} onChange = {handleChange} row>
-          <Grid container spacing = {2} justify = 'center'>
-            <Grid item xl = {10}>
+      <FormControl component='fieldset' fullWidth>
+        <RadioGroup value={String(typeAccommodation)} onChange={handleChange} row>
+          <Grid container spacing={2} justify='center'>
+            <Grid item xl={10} xs={12}>
               <RadioCustom
                 noneBorder
-                label = 'Tạo mới một tòa nhà'
-                descr = {
+                label='Tạo mới một tòa nhà'
+                descr={
                   <div>
-                    <Typography variant = 'subtitle1' gutterBottom>Điều này là cần thiết khi bạn sở hữu nhiều căn hộ
+                    <Typography variant='subtitle1' gutterBottom>Điều này là cần thiết khi bạn sở hữu nhiều căn hộ
                                                                    trong cùng một tòa nhà</Typography>
-                    <img src = '../../../static/images/apartment.jpg' alt = 'westay.vn'
-                         onClick = {() => imageChange(0)}
-                         className = {classNames(classes.imgType, typeAccommodation
-                                                                  === null ? '' : typeAccommodation ? '' : classes.chooseType)} />
+                    <img src='../../../static/images/apartment.jpg' alt='westay.vn'
+                      onClick={() => imageChange(0)}
+                      className={classNames(classes.imgType, typeAccommodation
+                        === null ? '' : typeAccommodation ? '' : classes.chooseType)} />
                   </div>
                 }
-                value = {String(0)}
+                value={String(0)}
               />
             </Grid>
-            <Grid item xl = {10}>
+            <Grid item xl={10} xs={12}>
               <RadioCustom
                 noneBorder
-                label = 'Tạo mới căn hộ'
-                descr = {
+                label='Tạo mới căn hộ'
+                descr={
                   <div>
-                    <Typography variant = 'subtitle1' gutterBottom>Lựa chọn điều này khi bạn có những căn hộ riêng
+                    <Typography variant='subtitle1' gutterBottom>Lựa chọn điều này khi bạn có những căn hộ riêng
                                                                    biệt hoặc đã tạo sẵn các tòa nhà trước đó.</Typography>
-                    <img src = '../../../static/images/studio.jpg' alt = 'westay.vn'
-                         onClick = {() => imageChange(1)}
-                         className = {classNames(classes.imgType, typeAccommodation ? classes.chooseType : '')} />
+                    <img src='../../../static/images/studio.jpg' alt='westay.vn'
+                      onClick={() => imageChange(1)}
+                      className={classNames(classes.imgType, typeAccommodation ? classes.chooseType : '')} />
                   </div>
                 }
-                value = {String(1)}
+                value={String(1)}
               />
             </Grid>
 
-            <Grid item xl = {6}>
-              <Box mt = {5} textAlign='right'>
-                <ButtonGlobal disabled = {typeAccommodation === null} onClick = {handleSubmit}>
+            <Grid item xl={6}>
+              <Box mt={5} textAlign='right'>
+                <ButtonGlobal disabled={typeAccommodation === null} onClick={handleSubmit}>
                   Khởi tạo
                 </ButtonGlobal>
               </Box>

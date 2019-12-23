@@ -85,17 +85,17 @@ class MyApp extends App<IProps> {
     const { Component, pageProps, isServer, store } = this.props;
 
     return (
-      <Container>
-        <ProviderGlobal>
-          <Provider store={store}>
-            <PersistGate
-              persistor={store.__persistor}
-              loading={!process.browser ? <Component {...pageProps} /> : null}>
-              <Component {...pageProps} />
-            </PersistGate>
-          </Provider>
-        </ProviderGlobal>
-      </Container>
+      // <Container>
+      <ProviderGlobal>
+        <Provider store={store}>
+          <PersistGate
+            persistor={store.__persistor}
+            loading={!process.browser ? <Component {...pageProps} /> : null}>
+            <Component {...pageProps} />
+          </PersistGate>
+        </Provider>
+      </ProviderGlobal>
+      // </Container>
     );
   }
 }

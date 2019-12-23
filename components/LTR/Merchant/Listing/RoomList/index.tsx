@@ -30,6 +30,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomListHost: NextPage = (props) => {
   const { t } = useTranslation();
   const { router } = useContext(GlobalContext);
+  //@ts-ignore
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
   const meta = useSelector<ReducersList, any>((state) => state.roomlist.meta);

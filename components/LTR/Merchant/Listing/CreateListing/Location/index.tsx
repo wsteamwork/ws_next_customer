@@ -187,6 +187,7 @@ const Location: FC<IProps> = (props) => {
               validateOnChange={true}
               validationSchema={FormValidationSchema}
               initialValues={initFormValue}
+              //@ts-ignore
               onSubmit={handleFormSubmit}
               render={({
                 values,

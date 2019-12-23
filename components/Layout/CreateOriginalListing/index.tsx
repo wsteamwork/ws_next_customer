@@ -1,15 +1,16 @@
-import React, { Fragment, FC, useState, useContext } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid } from '@material-ui/core';
+import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
+import { Grid, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, useContext } from 'react';
 interface IProps {
   classes?: any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    boxImgIntro:{
+    boxImgIntro: {
       backgroundImage: `url('../../../static/images/img_intro.jpg')`,
-      width:'100%',
+      width: '100%',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       height: '100vh',
@@ -21,18 +22,21 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CreateOriginalListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
+  const { width } = useContext<IGlobalContext>(GlobalContext);
 
   return (
     <Grid container>
-      <Grid item xs={4}>
-        <div className={classes.boxImgIntro}>
-          <a href = '/'>
-            <img src = '../../../static/images/Logo-westay.png' alt = 'westay.vn' width={150}/>
-          </a>
-        </div>
-      </Grid>
-      <Grid item xs={8}>
+      {width !== 'xs' && width !== 'sm' ? (
+        <Grid item md={4}>
+          <div className={classes.boxImgIntro}>
+            <a href='/'>
+              <img src='../../../static/images/Logo-westay.png' alt='westay.vn' width={150} />
+            </a>
+          </div>
+        </Grid>
+      ) : ''}
+      <Grid item xs={12} md={8}>
         {props.children}
       </Grid>
     </Grid>

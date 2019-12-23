@@ -217,6 +217,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     <Autosuggest
       {...autosuggestProps}
       inputProps={{
+        //@ts-ignore
         classes,
         id: 'react-autosuggest-sksimple',
         name: 'city',

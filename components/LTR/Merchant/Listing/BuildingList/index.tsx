@@ -1,14 +1,14 @@
-import React, { FC, Fragment, useState, useEffect } from 'react';
-import 'swiper/swiper.scss';
-import { Grid, makeStyles, Theme, createStyles, Box, Typography } from '@material-ui/core';
-// import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import { useTranslation } from 'react-i18next';
-import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
-import { axios_merchant } from '@/utils/axiosInstance';
 import GridContainer from '@/components/Layout/Grid/Container';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import DialogInfoBuildingAndAddRooms from '@/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
+import { axios_merchant } from '@/utils/axiosInstance';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { Box, Button, createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+// import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import { useTranslation } from 'react-i18next';
+import 'swiper/swiper.scss';
 
 interface IProps { }
 
