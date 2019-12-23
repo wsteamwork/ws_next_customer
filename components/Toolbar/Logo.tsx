@@ -11,7 +11,7 @@ import { compose } from 'recompose';
 
 interface IProps {
   classes?: any;
-  isFooter?: boolean;
+  isTextLogo?: boolean;
   onlyImg?: boolean;
   href?: string;
   isDetailPage?: boolean;
@@ -38,13 +38,13 @@ const styles: any = (theme: Theme) =>
   });
 
 const Logo: FunctionComponent<IProps> = (props) => {
-  const { classes, isFooter, onlyImg, href, isDetailPage } = props;
+  const { classes, isTextLogo, onlyImg, href, isDetailPage } = props;
   return (
     <Fragment>
       <Link href={href}>
         <img
           src={onlyImg ? logoOnlyImg : logo}
-          className={onlyImg ? classes.onlyImgClass : isFooter ? classes.footer : classes.img}
+          className={onlyImg ? classes.onlyImgClass : isTextLogo ? classes.footer : classes.img}
           alt="Westay.vn"
         />
       </Link>
