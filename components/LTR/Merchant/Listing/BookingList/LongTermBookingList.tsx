@@ -29,6 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 const LongTermBookingList: NextPage = (props) => {
   const { t } = useTranslation();
+  //@ts-ignore
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);

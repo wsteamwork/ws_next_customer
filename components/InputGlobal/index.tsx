@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import TextField, { BaseTextFieldProps } from '@material-ui/core/TextField';
 import { Theme } from '@material-ui/core';
+import TextField, { BaseTextFieldProps } from '@material-ui/core/TextField';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -16,12 +16,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
   })
 );
-interface IProps extends BaseTextFieldProps {}
+interface IProps extends BaseTextFieldProps { }
 
 const InputGlobal: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const {
     label,
+    //@ts-ignore
     onChange,
     value,
     placeholder,
