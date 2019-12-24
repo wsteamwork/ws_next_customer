@@ -75,10 +75,10 @@ const SearchHomeLT: FC<IProps> = (props) => {
     });
   };
 
-  const locationRoom = (cityId: number) => {
+  const locationRoom = (cityId: number, cityName: string = '') => {
     dispatchSearch({ type: 'SET_SEARCH_CITY', city_id: cityId })
     dispatchSearch({ type: 'SET_SEARCH_DISTRICT', district_id: undefined })
-    dispatchSearch({ type: 'SET_SEARCH_TEXT', searchText: '' })
+    dispatchSearch({ type: 'SET_SEARCH_TEXT', searchText: cityName })
     applySearch();
   };
 
@@ -120,7 +120,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
                   // <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.name_city)}>
                   //   {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city} ({o.total_rooms})
                   // </Button>
-                  <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.city_id)}>
+                  <Button key={i} variant="contained" className={classes.btnPlace} onClick={() => locationRoom(o.city_id, o.name_city)}>
                     {cookies.get('initLanguage') == 'en' ? cleanAccents(o.name_city) : o.name_city}
                   </Button>
                 ) : null

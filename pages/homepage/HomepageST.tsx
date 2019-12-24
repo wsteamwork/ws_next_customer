@@ -33,13 +33,13 @@ const HomepageST: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <LazyLoad offset="150">
+      <LazyLoad>
         <SliderTypeApartment />
       </LazyLoad>
-      <LazyLoad offset="150">
+      <LazyLoad>
         <MetroGridImage />
       </LazyLoad>
-      <LazyLoad offset="150">
+      <LazyLoad>
         <ListRoom
           roomData={roomsHot}
           usingSlider={true}

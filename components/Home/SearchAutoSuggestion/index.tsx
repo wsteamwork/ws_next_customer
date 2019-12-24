@@ -162,6 +162,9 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
 
   const handleEmptyText = () => {
     setSearchText('');
+    updateSearchText('');
+    updateSearchCity(undefined);
+    updateSearchDistrict(undefined);
   };
 
   const handleSuggestionSelected = (
