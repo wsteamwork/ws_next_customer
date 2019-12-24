@@ -29,6 +29,7 @@ import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackba
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any;
@@ -88,6 +89,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, roomID } = props;
   const { width } = useContext(GlobalContext);
+  const { t } = useTranslation();
   const [buildings, setBuildings] = useState<ApartmentBuildingsRes[]>([]);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>('');
@@ -105,7 +107,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     getBuildings().then((res) => {
       let itemCancel = {
         id: 999999,
-        name: 'Bỏ chọn tòa nhà hiện tại',
+        name: t('roomlist:deselectBuilding'),
       };
       let newBuildings = [itemCancel, ...res.data];
       setBuildings(newBuildings);
@@ -118,11 +120,11 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
     floor: ''
   };
 
-  const validationForm = 
+  const validationForm =
     Yup.object().shape({
     apartment_building_id: Yup.string()
-      .required('At least one checkbox is required')
-      .test('checkNotChoose', 'Please select an option', (value) => value != 0),
+      .required(t('roomlist:atLeastOneRequired'))
+      .test('checkNotChoose', t('roomlist:atLeastOneRequired'), (value) => value != 0),
     room_number: idBuilding != 999999 ? Yup.string().required('Required') : null,
     floor: idBuilding != 999999 ?  Yup.string().required('Required') : null
   });
@@ -143,14 +145,14 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
       .put('long-term/room/add-to-building', data)
       .then((res) => {
         setStatusSnack('success');
-        setMessageSnack('Bạn đã thêm phòng vào tòa nhà thành công!');
+        setMessageSnack(t('roomlist:addedToBuildingSucsses'));
         setOpenSnack(true);
         handleClose();
         getRoomList(dispatch);
       })
       .catch(() => {
         setStatusSnack('error');
-        setMessageSnack('Opps, có gì đó sai rồi!');
+        setMessageSnack(t('roomlist:addedToBuildingError'));
         setOpenSnack(true);
         actions.setSubmitting(false);
       });
@@ -175,9 +177,9 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
         open={open}
         classes={{ paper: classes.root }}>
         <DialogTitle disableTypography className={classes.boxTitle}>
-          <Grid item xs={12} justify="center" alignContent="center">
+          <Grid item xs={12}>
             <Typography variant="h1" gutterBottom className="label main_label">
-              Thông tin tòa nhà
+              {t('roomlist:buildingInfo')}
             </Typography>
           </Grid>
           <IconButton aria-label="close" onClick={handleClose}>
@@ -212,9 +214,9 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                             handleChange(e);
                             setIdBuilding(e.target.value);
                           }}
-                          defaultDisabledOption={'Tòa nhà của bạn'}
+                          defaultDisabledOption={t('roomlist:yourBuilding')}
                           value={values.apartment_building_id}
-                          title="Lựa chọn tòa nhà"
+                          title={t('roomlist:chooseABuilding')}
                           options={buildings}
                           onBlurTouched={setFieldTouched}
                         />
@@ -225,7 +227,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                     </Box>
                    <Box my={4}>
                       <Typography variant="subtitle1" className={classes.title}>
-                        Mã phòng trong tòa nhà?
+                        {t('roomlist:roomCodeInBuilding')}
                       </Typography>
                       <FormControl
                         fullWidth
@@ -254,7 +256,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
 
                     <Box my={4}>
                       <Typography variant="subtitle1" className={classes.title}>
-                        Căn hộ trên tầng mấy?
+                        {t('roomlist:whichFloor')}
                       </Typography>
                       <FormControl
                         fullWidth
@@ -287,7 +289,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
                         type="submit"
                         width="auto"
                         disabled={isSubmitting}>
-                        {values.apartment_building_id != 999999 ? 'Thêm phòng vào tòa nhà' : 'Bỏ chọn tòa nhà hiện tại'}
+                        {values.apartment_building_id != 999999 ? t('basic:addRoomtoBuilding') : t('roomlist:deselectBuilding')}
                       </ButtonGlobal>
                     </Box>
                   </form>

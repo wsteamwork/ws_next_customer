@@ -10,18 +10,18 @@ import {
   Card,
   CardHeader,
   CardMedia,
-  CardContent, CardActions, IconButton, Tooltip
+  CardContent,
+  CardActions,
+  IconButton,
+  Tooltip
 } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
 import { axios_merchant } from '@/utils/axiosInstance';
 import GridContainer from '@/components/Layout/Grid/Container';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import DialogInfoBuildingAndAddRooms
-  from '@/components/LTR/Merchant/Listing/BuildingList/DialogInfoBuildingAndAddRooms';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import CreateIcon from '@material-ui/icons/CreateRounded';
-import AssignmentIcon from '@material-ui/icons/AssignmentRounded';
 
 interface IProps {
 }
@@ -34,10 +34,14 @@ const useStyles                    = makeStyles<Theme>((theme: Theme) =>
     },
     card: {
       maxWidth: 345,
-      boxShadow: '0 10px 15px rgba(0, 0, 0, 0.1)'
+      boxShadow: '0 10px 15px rgba(0, 0, 0, 0.1)',
+      '&:hover': {
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
+      }
     },
     media: {
       height: 0,
+      cursor: 'pointer',
       paddingTop: '56.25%' // 16:9
     },
     txtRoomName: {
@@ -48,7 +52,8 @@ const useStyles                    = makeStyles<Theme>((theme: Theme) =>
       WebkitLineClamp: 2,
       textOverflow: 'ellipsis',
       WebkitBoxOrient: 'vertical',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      cursor: 'pointer'
     },
     txtSubName: {
       overflowWrap: 'break-word',
@@ -72,12 +77,12 @@ const useStyles                    = makeStyles<Theme>((theme: Theme) =>
   })
 );
 const BuildingListHost: FC<IProps> = (props) => {
-  const classes                     = useStyles(props);
-  const { t }                       = useTranslation();
-  const [buildings, setBuildings]   = useState<ApartmentBuildingsRes[]>([]);
-  const [openDialog, setOpenDialog] = useState<number>(0);
-  const { router }                  = useContext(GlobalContext);
-  const getBuildings                = async () => {
+  const classes                   = useStyles(props);
+  const { t }                     = useTranslation();
+  const [buildings, setBuildings] = useState<ApartmentBuildingsRes[]>([]);
+  const { router }                = useContext(GlobalContext);
+
+  const getBuildings = async () => {
     try {
       const res = await axios_merchant.get(`apartment-buildings`);
       return res.data;
@@ -90,8 +95,11 @@ const BuildingListHost: FC<IProps> = (props) => {
       setBuildings(res.data);
     });
   }, []);
-  const openUpdate = (id) => {
+  const openUpdate  = (id) => {
     router.push(`/host/create-listing/${id}/apartment`);
+  };
+  const openDetails = (id) => {
+    router.push(`/host/building-list/${id}/building-detail`);
   };
 
   return (
@@ -120,11 +128,13 @@ const BuildingListHost: FC<IProps> = (props) => {
                           variant: 'h6',
                           gutterBottom: true
                         }}
+                        onClick = {() => openDetails(o.id)}
                       />
                       <CardMedia
                         className = {classes.media}
                         image = {o.avatar ? `${IMAGE_STORAGE_SM + o.avatar}` : '/static/images/building_demo.jpg'}
                         title = {o.name}
+                        onClick = {() => openDetails(o.id)}
                       />
                       <CardContent>
                         <Typography variant = 'body2' component = 'p' className = {classes.txtAddress}>
@@ -132,31 +142,20 @@ const BuildingListHost: FC<IProps> = (props) => {
                         </Typography>
                       </CardContent>
                       <CardActions disableSpacing>
-                        <Tooltip title = 'Setting'>
-                          <IconButton aria-label = 'Management building'>
-                            <AssignmentIcon />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title = 'Edit building'>
-                          <IconButton aria-label = 'Edit-building' onClick={()=>openUpdate(o.id)}>
+                        <Tooltip title = {t('basic:editBuilding')}>
+                          <IconButton aria-label = 'Edit-building' onClick = {() => openUpdate(o.id)}>
                             <CreateIcon />
                           </IconButton>
                         </Tooltip>
                       </CardActions>
                     </Card>
                   </Grid>
-                  <DialogInfoBuildingAndAddRooms
-                    open = {openDialog}
-                    handleClose = {() => setOpenDialog(0)}
-                    buildingID = {o.id}
-                    name = {o.name}
-                  />
                 </Fragment>
               ))}
             </Grid>
           </Box>
         ) : (
-          <Box>chua co phong nao</Box>
+          <Box>{t('basic:notFoundBuilding')}</Box>
         )}
       </GridContainer>
     </Fragment>
