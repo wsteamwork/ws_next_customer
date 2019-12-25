@@ -69,51 +69,54 @@ const ChooseTypeAccommodation: FC<IProps> = (props) => {
       <FormControl component='fieldset' fullWidth>
         <RadioGroup value={String(typeAccommodation)} onChange={handleChange} row>
           <Grid container spacing={2} justify='center'>
-            <Grid item xl={10} xs={12}>
-              <RadioCustom
-                noneBorder
-                label='Tạo mới một tòa nhà'
-                descr={
-                  <div>
-                    <Typography variant='subtitle1' gutterBottom>Điều này là cần thiết khi bạn sở hữu nhiều căn hộ
-                                                                   trong cùng một tòa nhà</Typography>
-                    <img src='../../../static/images/apartment.jpg' alt='westay.vn'
-                      onClick={() => imageChange(0)}
-                      className={classNames(classes.imgType, typeAccommodation
-                        === null ? '' : typeAccommodation ? '' : classes.chooseType)} />
-                  </div>
-                }
-                value={String(0)}
-              />
+            <Grid item xs={12}>
+              <Grid item xl={8} lg={9} xs={12}>
+                <RadioCustom
+                  noneBorder
+                  label='Tạo mới toà căn hộ / toà nhà'
+                  descr={
+                    <div>
+                      <Typography variant='subtitle1' gutterBottom>Nếu bạn ở hữu một toà căn hộ dịch vụ hay có nhiều căn hộ khác nhau trong cùng một toà nhà/ nhà, sẽ tốt nhất nếu bạn tạo mới một toà nhà sau đó thêm từng phòng/căn hộ vào toà nhà đó</Typography>
+                      <img src='../../../static/images/apartment.jpg' alt='westay.vn'
+                        onClick={() => imageChange(0)}
+                        className={classNames(classes.imgType, typeAccommodation
+                          === null ? '' : typeAccommodation ? '' : classes.chooseType)} />
+                    </div>
+                  }
+                  value={String(0)}
+                />
+              </Grid>
             </Grid>
-            <Grid item xl={10} xs={12}>
-              <RadioCustom
-                noneBorder
-                label='Tạo mới căn hộ'
-                descr={
-                  <div>
-                    <Typography variant='subtitle1' gutterBottom>Lựa chọn điều này khi bạn có những căn hộ riêng
-                                                                   biệt hoặc đã tạo sẵn các tòa nhà trước đó.</Typography>
-                    <img src='../../../static/images/studio.jpg' alt='westay.vn'
-                      onClick={() => imageChange(1)}
-                      className={classNames(classes.imgType, typeAccommodation ? classes.chooseType : '')} />
-                  </div>
-                }
-                value={String(1)}
-              />
+            <Grid item xs={12}>
+              <Grid item xl={8} lg={9} xs={12}>
+                <RadioCustom
+                  noneBorder
+                  label='Tạo mới phòng / căn hộ'
+                  descr={
+                    <div>
+                      <Typography variant='subtitle1' gutterBottom>Bạn đã tạo toà nhà và muốn thêm từng căn hộ/phòng vào đó hoặc bạn muốn tạo những căn hộ riêng rẽ không thuộc một toà nhà/ toà căn hộ dịch vụ nào</Typography>
+                      <img src='../../../static/images/studio.jpg' alt='westay.vn'
+                        onClick={() => imageChange(1)}
+                        className={classNames(classes.imgType, typeAccommodation ? classes.chooseType : '')} />
+                    </div>
+                  }
+                  value={String(1)}
+                />
+              </Grid>
             </Grid>
-
-            <Grid item xl={6}>
-              <Box mt={5} textAlign='right'>
-                <ButtonGlobal disabled={typeAccommodation === null} onClick={handleSubmit}>
-                  Khởi tạo
+            <Grid item xs={12}>
+              <Grid item xs={10}>
+                <Box mt={5} textAlign='right'>
+                  <ButtonGlobal disabled={typeAccommodation === null} onClick={handleSubmit}>
+                    Tiếp tục
                 </ButtonGlobal>
-              </Box>
+                </Box>
+              </Grid>
             </Grid>
           </Grid>
         </RadioGroup>
       </FormControl>
-    </Box>
+    </Box >
   );
 };
 

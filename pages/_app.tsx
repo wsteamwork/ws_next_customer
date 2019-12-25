@@ -85,7 +85,6 @@ class MyApp extends App<IProps> {
     const { Component, pageProps, isServer, store } = this.props;
 
     return (
-      // <Container>
       <ProviderGlobal>
         <Provider store={store}>
           <PersistGate
@@ -95,7 +94,6 @@ class MyApp extends App<IProps> {
           </PersistGate>
         </Provider>
       </ProviderGlobal>
-      // </Container>
     );
   }
 }

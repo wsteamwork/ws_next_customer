@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import React, { Fragment, ReactNode, useMemo } from 'react';
 import Swiper from 'react-id-swiper';
-import 'swiper/src/swiper.scss';
+import 'swiper/swiper.scss';
 import { SwiperOptions } from 'swiper';
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';

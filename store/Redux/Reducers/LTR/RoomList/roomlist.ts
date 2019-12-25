@@ -48,9 +48,11 @@ export const getRoomList = async (
   try {
     let params = Router.query;
     let query = {
+      building_id: params.building_id,
       size: 10,
       page: params.page
     };
+
     const url = `long-term-rooms?${qs.stringify(query)}?include=city,district`;
     const res: AxiosRes<any> = await axios_merchant.get(url, headers);
     const roomlist = res.data.data;
