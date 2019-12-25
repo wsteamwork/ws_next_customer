@@ -55,7 +55,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '16px 24px',
       margin: 30,
       borderRadius: 16,
-      minWidth: 500
+      [theme.breakpoints.down('xs')]: {
+        minWidth: 'auto'
+      },
+      minWidth: 550
     },
     boxContent: {
       minHeight: 64,
