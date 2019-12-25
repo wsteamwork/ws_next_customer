@@ -1,6 +1,4 @@
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { axios_merchant } from '@/utils/axiosInstance';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,12 +12,6 @@ import {
   Paper,
   Snackbar,
   Theme,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  FormControl,
-  Button,
-  DialogActions
 } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -30,11 +22,10 @@ import FileCopyIconOutlined from '@material-ui/icons/FileCopyOutlined';
 import ApartmentRoundedIcon from '@material-ui/icons/LocationCityRounded';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
-import React, { FC, Fragment, useContext, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 import DialogAddRoomToBuilding from '@/components/LTR/Merchant/Listing/RoomList/DialogAddRoomToBuilding';
-import { TransitionCustom } from '@/components/LTR/LTBook/BookingForm';
 interface IProps {
   classes?: any;
   room: any;
@@ -355,7 +346,7 @@ const RoomCardItem: FC<IProps> = (props) => {
               <Grid item xs={12}>
                 <Grid container>
                   {room.avatar && room.avatar.images.length ? (
-                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                       <img
                         className={classes.img}
                         src={IMAGE_STORAGE_LG + room.avatar.images[0].name}

@@ -30,7 +30,6 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RoomListReducerAction, getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-
 interface IProps {
   classes?: any;
   open: boolean;
@@ -63,7 +62,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       padding: '16px 24px',
       borderRadius: 16,
-      minWidth: 500
+      minWidth: 500,
+      [theme.breakpoints.down('xs')]: {
+        minWidth: 'auto'
+      }
     },
     boxContent: {
       minHeight: 64,
@@ -203,7 +205,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
         open={open}
         classes={{ paper: classes.root }}>
         <DialogTitle disableTypography className={classes.boxTitle}>
-          <Grid item xs={12} justify="center" alignContent="center">
+          <Grid container item xs={12} justify="center" alignContent="center">
             <Typography variant="h1" gutterBottom className="label main_label">
               {isDuplicate ? 'Bạn muốn nhân bản căn hộ này ?' : 'Thông tin tòa nhà'}
             </Typography>
