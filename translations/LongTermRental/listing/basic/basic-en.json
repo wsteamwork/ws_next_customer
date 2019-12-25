@@ -37,5 +37,12 @@
     "tab1": "Descriptions",
     "tab2": "Amenities",
     "tab3": "Post Images",
-    "tab4": "Images Caption"
+    "tab4": "Images Caption",
+    "fieldRequierd": "This field is required",
+    "buildingList": "Building list",
+    "editBuilding": "Edit building",
+    "addRoomtoBuilding": "Add room(s) to building",
+    "notFoundBuilding": "You have not any building",
+    "notHaveInfo": "Not have infomation",
+    "searchForYourApartment": "Search for your apartment"
 }

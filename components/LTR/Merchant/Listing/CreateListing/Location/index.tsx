@@ -144,7 +144,7 @@ const Location: FC<IProps> = (props) => {
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    return {};
+    return null;
   };
 
   return (

@@ -24,5 +24,15 @@
     "policy": "Cancellation policy",
     "leaseTypeLongTerm": "Long-term",
     "leaseTypeShortTerm": "Homestay",
-    "buildingTitle": "Building"
+    "buildingTitle": "Building",
+    "addedToBuildingSucsses": "You have successfully added a room to the building!",
+    "addedToBuildingError": "Opps, something's wrong!",
+    "buildingInfo": "Building information",
+    "idRoom": "Room ID",
+    "whichFloor": "Which floor?",
+    "deselectBuilding": "Deselect current building",
+    "atLeastOneRequired": "Please select an option",
+    "chooseABuilding": "Choose a building",
+    "yourBuilding": "Your building",
+    "roomCodeInBuilding": "Room code in the building?"
 }

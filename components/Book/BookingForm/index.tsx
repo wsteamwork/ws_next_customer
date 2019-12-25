@@ -1,47 +1,24 @@
-import React, { FC, forwardRef, useState, useContext } from 'react';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import {
-  Paper,
-  Grid,
-  Typography,
-  FormControl,
-  TextField,
-  FormHelperText,
-  FormControlLabel,
-  Checkbox,
-  Collapse,
-  Button,
-  Dialog,
-  Slide,
-  DialogContent,
-  RadioGroup,
-  Radio
-} from '@material-ui/core';
-import * as Yup from 'yup';
-import { CheckboxProps } from '@material-ui/core/Checkbox';
-import { Remove, Add } from '@material-ui/icons';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import Link from 'next/link';
-import { BookingCreateReq } from '@/types/Requests/Booking/BookingRequests';
-import moment from 'moment';
-import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
-import {
-  DEFAULT_DATE_TIME_FORMAT,
-  INTERNET_BANKING,
-  PENDING,
-  WEBSITE_SRC,
-  AVAILABLE,
-  ONLINE
-} from '@/utils/store/global';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import SimpleLoader from '@/components/Loading/SimpleLoader';
-import { SlideProps } from '@material-ui/core/Slide';
 import CheckSuccess from '@/components/Loading/CheckSuccess';
-import { useTranslation } from 'react-i18next';
+import SimpleLoader from '@/components/Loading/SimpleLoader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { createBooking } from '@/store/Redux/Reducers/Book/book';
+import { BookingCreateReq } from '@/types/Requests/Booking/BookingRequests';
+import { BookingPriceCalculatorRes } from '@/types/Requests/Booking/BookingResponses';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import { AVAILABLE, DEFAULT_DATE_TIME_FORMAT, INTERNET_BANKING, ONLINE, PENDING, WEBSITE_SRC } from '@/utils/store/global';
+import { Button, Checkbox, Collapse, Dialog, DialogContent, FormControl, FormControlLabel, FormHelperText, Grid, Paper, Radio, RadioGroup, Slide, TextField, Typography } from '@material-ui/core';
+import { CheckboxProps } from '@material-ui/core/Checkbox';
+import { SlideProps } from '@material-ui/core/Slide';
+import { Add, Remove } from '@material-ui/icons';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import moment from 'moment';
+import Link from 'next/link';
+import React, { FC, forwardRef, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import * as Yup from 'yup';
 import TooltipPayment from './TooltipPayment';
 
 type PaymentMethod = 'payment1' | 'payment2';
@@ -65,7 +42,7 @@ interface MyFormValues {
   additionalNote?: string;
   additionalServices?: Array<number>;
   isWork?: boolean;
-  paymentMethod?: PaymentMethod;
+  paymentMethod: PaymentMethod;
 }
 
 const useValidata = () => {

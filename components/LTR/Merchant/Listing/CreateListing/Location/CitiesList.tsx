@@ -65,11 +65,6 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   const [stateSuggestions, setStateSuggestions] = useState<any[]>([]);
   const [suggestionsList, setSuggestionsList] = useState<any[]>([]);
   const [city_id, setCityId] = useState<number>(null);
-  const [state, setState] = React.useState({
-    city: '',
-    district: '',
-    city_id: null
-  });
 
   const getCities = async () => {
     try {
@@ -132,9 +127,6 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
             ref(node);
             inputRef(node);
           },
-          classes: {
-            input: classes.input
-          }
         }}
         {...other}
         labelWidth={0}

@@ -24,6 +24,15 @@
     "policy": "Chính sách hủy",
     "leaseTypeLongTerm": "Thuê dài hạn",
     "leaseTypeShortTerm": "Homestay",
-    "buildingTitle": "Tòa nhà"
-
+    "buildingTitle": "Tòa nhà",
+    "addedToBuildingSucsses": "Bạn đã thêm phòng vào tòa nhà thành công!",
+    "addedToBuildingError": "Opps, có gì đó sai rồi!",
+    "buildingInfo": "Thông tin tòa nhà",
+    "idRoom": "Mã phòng",
+    "whichFloor": "Tầng mấy?",
+    "deselectBuilding": "Bỏ chọn tòa nhà hiện tại",
+    "atLeastOneRequired": "Bạn cần lựa chọn một giá trị",
+    "chooseABuilding": "Lựa chọn tòa nhà",
+    "yourBuilding": "Tòa nhà của bạn",
+    "roomCodeInBuilding": "Mã phòng trong tòa nhà?"
 }

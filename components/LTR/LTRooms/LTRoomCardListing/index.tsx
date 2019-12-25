@@ -6,7 +6,7 @@ import { Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useContext, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 
@@ -83,16 +83,25 @@ const LTRoomCardListing: FC<IProps> = (props) => {
 
                   </Grid>
                   <Grid item xs={3} className="boxPriceContainer">
-                    <Grid className='boxPrice'>
-                      <Typography variant='subtitle1' className='priceBasic'>
-                        {price}
-                      </Typography>
-                      /{t('rooms:month')}
+                    <Grid container>
+                      <Grid item xs={12} className='boxPrice'>
+                        <Typography variant='subtitle1' className='priceBasic'>
+                          {price}
+                        </Typography>
+                        /{t('rooms:month')}
+                      </Grid>
+                      <Grid item xs={12} className='boxPrice'>
+                        <Typography variant='subtitle1' className='priceBasic'>
+                          {price}
+                        </Typography>
+                        /{t('rooms:month')}
+                      </Grid>
                     </Grid>
                     {/* <Grid className='boxSave'>
                       <FavoriteAnimation />
                     </Grid> */}
                   </Grid>
+
                 </Grid>
               </Link>
             </Grid>

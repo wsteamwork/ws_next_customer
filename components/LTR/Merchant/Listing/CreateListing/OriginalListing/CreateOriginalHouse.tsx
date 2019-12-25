@@ -125,7 +125,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
         <Box mt={2} mb={4}>
           <Box mb={2}>
             <Typography variant='h5'>
-              Căn hộ này có thuộc tòa nhà nào không ?
+              Căn hộ này có thuộc tòa nhà/ toà căn hộ nào không ?
             </Typography>
           </Box>
           <Grid container className={classes.container} justify='center'>
@@ -149,7 +149,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                         label='Có, nó có thuộc một tòa nhà.'
                         descr={
                           <Typography>
-                            Lựa chọn này là cần thiết khi bạn có nhiều căn hộ trong cùng một tòa nhà.
+                            Lựa chọn mục này khi nó là căn hộ thuộc toà nhà mà bạn đã tạo trước đó
                           </Typography>
                         }
                         value={String(1)}
