@@ -1,34 +1,18 @@
-import React, { Fragment, FC, useContext, useState, useEffect, SyntheticEvent } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import {
-  Theme,
-  DialogTitle,
-  Typography,
-  IconButton,
-  DialogContent,
-  Box,
-  Dialog,
-  InputBase,
-  fade,
-  Grid,
-  Button, Snackbar, Divider
-} from '@material-ui/core';
 import { TransitionCustom } from '@/components/Book/BookingForm';
-import CloseIcon from '@material-ui/icons/Close';
+import ButtonGlobal from '@/components/ButtonGlobal';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { AddToBuildingReq, RoomToBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { Autocomplete } from '@material-ui/lab';
+import { Box, Button, Dialog, DialogContent, DialogTitle, Divider, fade, Grid, IconButton, InputBase, Snackbar, Theme, Typography } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import { Autocomplete } from '@material-ui/lab';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  RoomToBuildingReq,
-  AddToBuildingReq
-} from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
-import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 
 interface IProps {
   classes?: any,
@@ -110,9 +94,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { open, handleClose, buildingID } = props;
-  const { width }                     = useContext(GlobalContext);
+  const { width } = useContext(GlobalContext);
   const [choosedRoom, setChoosedRoom] = useState<LTRoomIndexRes[]>([]);
-  const [roomList, setRoomList]       = useState<LTRoomIndexRes[]>([]);
+  const [roomList, setRoomList] = useState<LTRoomIndexRes[]>([]);
   const [pendingValue, setPendingValue] = useState<LTRoomIndexRes[]>([]);
   const [dataRoomObject, setDataRoomObject] = useState<RoomToBuildingReq[]>([]);
   const [openInput, setOpenInput] = useState(false);
@@ -144,10 +128,10 @@ const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
   };
 
   const handleCloseSearch = () => {
-    const objRoom:RoomToBuildingReq[] = [];
+    const objRoom: RoomToBuildingReq[] = [];
 
     setChoosedRoom(pendingValue);
-    pendingValue.map((o,i)=>{
+    pendingValue.map((o, i) => {
       objRoom.push({
         id: o.id,
         room_number: dataRoomObject.length == 0 ? '' : dataRoomObject[i] ? dataRoomObject[i].room_number : '',
@@ -158,7 +142,7 @@ const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
     setOpenInput(false);
   };
 
-  const handleChange = (i:number, filed: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (i: number, filed: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     dataRoomObject[i][filed] = event.target.value;
     let newdata = [...dataRoomObject];
     setDataRoomObject(newdata);
@@ -188,22 +172,22 @@ const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Dialog aria-labelledby = 'dialog-info-and-add-to-building'
-              scroll = 'body'
-              maxWidth = {'md'} fullWidth={ width === 'xs' }
-              TransitionComponent = {TransitionCustom}
-              fullScreen = {width === 'xs'}
-              onClose = {handleClose}
-              open = {open}
-              classes = {{ paper: classes.root }}
+      <Dialog aria-labelledby='dialog-info-and-add-to-building'
+        scroll='body'
+        maxWidth={'md'} fullWidth={width === 'xs'}
+        TransitionComponent={TransitionCustom}
+        fullScreen={width === 'xs'}
+        onClose={handleClose}
+        open={open}
+        classes={{ paper: classes.root }}
       >
-        <DialogTitle disableTypography className = {classes.boxTitle}>
-          <Typography variant = 'h6'>{t('roomlist:buildingInfo')}</Typography>
-          <IconButton aria-label = 'close' onClick = {handleClose}>
+        <DialogTitle disableTypography className={classes.boxTitle}>
+          <Typography variant='h6'>{t('roomlist:buildingInfo')}</Typography>
+          <IconButton aria-label='close' onClick={handleClose}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent className = {classes.boxContent}>
+        <DialogContent className={classes.boxContent}>
           <Grid container alignItems='center'>
             <Grid item xs={8} sm={9}>
               <Autocomplete
@@ -271,54 +255,54 @@ const DialogInfoBuildingAndAddRooms: FC<IProps> = (props) => {
             </Grid>
           </Grid>
 
-          <Divider/>
+          <Divider />
 
           <Box p={2}>
             <ValidatorForm onSubmit={handleSubmit}>
-            {choosedRoom.map((o: LTRoomIndexRes, i) => (
-              <Box key={i} my={4}>
-                <Grid container spacing={1} alignItems='center'>
-                  <Grid item xs={12} sm={6}>
-                    <Typography variant='subtitle2'>
-                      {o.about_room && o.about_room.name ? o.about_room.name : t('basic:notHaveInfo')}
-                    </Typography>
+              {choosedRoom.map((o: LTRoomIndexRes, i) => (
+                <Box key={i} my={4}>
+                  <Grid container spacing={1} alignItems='center'>
+                    <Grid item xs={12} sm={6}>
+                      <Typography variant='subtitle2'>
+                        {o.about_room && o.about_room.name ? o.about_room.name : t('basic:notHaveInfo')}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                      <TextValidator
+                        label={t('roomlist:idRoom')}
+                        validators={['required']}
+                        errorMessages={[
+                          t('basic:fieldRequierd')
+                        ]}
+                        variant="outlined"
+                        value={dataRoomObject[i].room_number}
+                        onChange={handleChange(i, 'room_number')}
+                        size='small'
+                        InputProps={{
+                          placeholder: "Exp: 101, A202,...",
+                          // defaultValue: dataRoomObject[i].room_number
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                      <TextValidator
+                        label={t('roomlist:whichFloor')}
+                        validators={['required']}
+                        errorMessages={[
+                          t('basic:fieldRequierd')
+                        ]}
+                        variant="outlined"
+                        value={dataRoomObject[i].floor}
+                        onChange={handleChange(i, 'floor')}
+                        size='small'
+                        InputProps={{
+                          placeholder: "Exp: 10, 12 tòa A",
+                        }}
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6} sm={3}>
-                    <TextValidator
-                      label={t('roomlist:idRoom')}
-                      validators={['required']}
-                      errorMessages={[
-                        t('basic:fieldRequierd')
-                      ]}
-                      variant="outlined"
-                      value={dataRoomObject[i].room_number}
-                      onChange={handleChange(i,'room_number')}
-                      size='small'
-                      InputProps={{
-                        placeholder: "Exp: 101, A202,...",
-                        // defaultValue: dataRoomObject[i].room_number
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm={3}>
-                    <TextValidator
-                      label={t('roomlist:whichFloor')}
-                      validators={['required']}
-                      errorMessages={[
-                        t('basic:fieldRequierd')
-                      ]}
-                      variant="outlined"
-                      value={dataRoomObject[i].floor}
-                      onChange={handleChange(i,'floor')}
-                      size='small'
-                      InputProps={{
-                        placeholder: "Exp: 10, 12 tòa A",
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-            ))}
+                </Box>
+              ))}
               {choosedRoom.length ? (
                 <Box my={1} textAlign="center">
                   <ButtonGlobal

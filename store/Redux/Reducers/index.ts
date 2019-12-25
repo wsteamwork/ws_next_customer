@@ -44,6 +44,11 @@ import {
   BookingListReducerState
 } from './LTR/BookingList/bookinglist';
 import {
+  CreateApartmentActions,
+  createApartmentReducer,
+  CreateApartmentState
+} from './LTR/CreateListing/Basic/CreateApartment';
+import {
   processReducer,
   ProcessReducerAction,
   ProcessReducerState
@@ -93,7 +98,6 @@ import { UserProfileActions, userProfileReducer, UserProfileState } from './Prof
 import { PomotionActions, PomotionState, promotionReducer } from './promotion';
 import { roomReducer, RoomReducerAction, RoomReducerState } from './Room/roomReducer';
 import { VisitedRoomActions, visitedRoomReducer, VisitedRoomState } from './Room/visitedRoom';
-import { CreateApartmentState, CreateApartmentActions, createApartmentReducer } from './LTR/CreateListing/Basic/CreateApartment';
 
 export type ReducersType = {
   searchFilter: Reducer<SearchFilterState, SearchFilterAction>;

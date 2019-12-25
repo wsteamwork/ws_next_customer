@@ -97,7 +97,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
   useEffect(() => {
     getBuildings().then((res) => {
       let itemCancel = {
-        id: 999999,
+        id: 0,
         name: t('roomlist:deselectBuilding'),
       };
       let newBuildings = [itemCancel, ...res.data];
@@ -117,8 +117,8 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
       apartment_building_id: Yup.string()
         .required(t('roomlist:atLeastOneRequired'))
         .test('checkNotChoose', t('roomlist:atLeastOneRequired'), (value) => value != 0),
-      room_number: idBuilding != 999999 ? Yup.string().required('Required') : null,
-      floor: idBuilding != 999999 ? Yup.string().required('Required') : null
+      room_number: idBuilding != 0 ? Yup.string().required('Required') : null,
+      floor: idBuilding != 0 ? Yup.string().required('Required') : null
     });
 
   const onSubmit = async (values: FormValues, actions: FormikHelpers<FormValues>) => {

@@ -165,7 +165,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
         <Collapse in={!!haveBuilding}>
           <Box>
             <Typography variant='h5' gutterBottom>Thông tin tòa nhà</Typography>
-            {buildings ? (
+            {buildings && buildings.length > 0 ? (
               <Box mt={2}>
                 <Formik
                   initialValues={initFormValue}
