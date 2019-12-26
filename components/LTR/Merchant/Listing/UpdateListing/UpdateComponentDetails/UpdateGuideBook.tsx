@@ -18,6 +18,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     boxLeft: {
       marginBottom: 100,
+      justifyContent: 'center',
       [theme.breakpoints.up('md')]: {
         display: 'flex'
       },
@@ -29,7 +30,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       marginTop: 32
     },
     alignCenter: {
-      textAlign: 'center'
+      textAlign: 'center',
+      marginBottom: 20
     }
   })
 );
@@ -73,21 +75,22 @@ const UpdateGuideBook: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      <Grid container>
-        <Grid item md={12} className={classes.boxLeft}>
-          <Grid item xs={12} sm={12} md={6}>
-            <Grid item xs={12} md={11} className={classes.wrapper}>
-              <Grid item xs={12} sm={11} md={11} className={classes.alignCenter}>
+      <Grid container justify="center" alignItems="center">
+        <Grid item xs={12} md={10} className={classes.boxLeft}>
+          <Grid item xs={12} sm={12} md={7} style={{ display: 'flex', justifyContent: 'center' }}>
+            {/* <Grid item xs={12} md={10} className={classes.wrapper}>
+              
+            </Grid> */}
+            <Grid item container xs={12} sm={11} md={11} className={classes.wrapper}>
+              <Grid item xs={12} sm={12} md={12} lg={12} className={classes.alignCenter}>
                 <Typography variant="h1" gutterBottom className="label main_label">
-                  Thêm đề xuất địa điểm hoặc chỉnh sửa những địa điểm hiện có
+                  Bổ sung địa điểm xung quanh căn hộ
                 </Typography>
                 <Typography variant="h6" className="normal_text">
-                  Khách du lịch quan tâm đến những địa điểm này đấy.
+                  Dưới đây là bộ địa điểm được người dùng quan tâm nhiều nhất, để bổ sung địa điểm, vui lòng click vào nhóm điạ điểm tương ứng
                 </Typography>
               </Grid>
-            </Grid>
-            <Grid item xs={12} sm={11} md={11} className={classes.wrapper}>
-              <Grid container item xs={12} sm={10} md={11} lg={10} className={classes.boxLeft}>
+              <Grid container item xs={12} sm={12} md={12} lg={12} className={classes.boxLeft}>
                 {guidebooks.length > 0
                   ? guidebooks.map((o, i) => (
                     <Grid key={i} item xs={4} className={i > 2 ? classes.marginTop : ''}>
@@ -103,8 +106,8 @@ const UpdateGuideBook: FC<IProps> = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={12} md={6} className={classes.wrapper}>
-            <Grid item xs={11} sm={8} md={8}>
+          <Grid item xs={12} sm={12} md={5} className={classes.wrapper}>
+            <Grid item xs={11} sm={9} md={9}>
               <GuideBookPlacesList />
             </Grid>
           </Grid>

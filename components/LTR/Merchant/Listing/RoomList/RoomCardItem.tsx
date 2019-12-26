@@ -612,7 +612,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ{' '}
                                   {t('roomlist:onePerDay')}
                                   &nbsp;&#8226;
                                 </span>
@@ -622,7 +622,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.short_term_room.rent_type !== 2 ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
                                   {t('roomlist:onePerHour')}
                                 </span>
                               ) : (

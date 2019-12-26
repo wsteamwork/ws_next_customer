@@ -30,11 +30,10 @@ const GuideBook: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      <CardWrapperItem title="Đề xuất địa điểm xung quanh căn hộ" onClick={openUpdate}>
+      <CardWrapperItem title="Xung quanh căn hộ" onClick={openUpdate}>
         <Grid container>
           <Grid item xs={12} className={classes.marginBottom}>
-            Chủ nhà có sách hướng dẫn có xu hướng nhận được nhiều đặt phòng hơn. Giành được khách
-            tiềm năng với bạn.
+            Để giúp khách hàng hiểu rõ hơn về căn hộ, vui lòng cập nhật thêm các địa diểm lân cận của căn hộ này.
           </Grid>
         </Grid>
       </CardWrapperItem>
