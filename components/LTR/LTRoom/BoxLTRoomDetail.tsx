@@ -11,14 +11,11 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import BoxRoomSameBuilding from './BoxRoomSameBuilding';
-// import LazyLoad, { forceCheck } from 'react-lazyload';
 
-// import LazyLoad, { forceCheck } from 'react-lazyload';
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       boxShadow: 'none',
-      // marginBottom: theme.spacing(10),
       padding: '0 32px 0 8px',
       [theme.breakpoints.down('md')]: {
         padding: '0 8px'
@@ -40,7 +37,6 @@ interface IProps {
 }
 
 const BoxLTRoomDetail: FC<IProps> = (props) => {
-  // forceCheck();
   const classes = useStyles(props);
   const { room } = props;
   const { router } = useContext(GlobalContext);
@@ -101,7 +97,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   />
                 </div>
                 <div className={classes.rowMargin}>
-                  {/* <LazyLoad offset={100}> */}
+
                   <BoxAmenities
                     facilities={checkComfort ? undefined : room.comforts.facilities}
                     bedrooms={checkComfort ? undefined : room.comforts.bedrooms}
@@ -113,10 +109,10 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     common={checkComfort ? undefined : room.comforts.common}
                     kitchens={checkComfort ? undefined : room.comforts.kitchens}
                   />
-                  {/* </LazyLoad> */}
+
                 </div>
                 <div className={classes.rowMargin}>
-                  {/* <LazyLoad offset={100}> */}
+
                   <BoxTablePrices
                     ltRoomId={room.id}
                     prices={checkPrice ? [] : room.prices.prices}
@@ -124,7 +120,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     included_services={checkPrice ? [] : room.included_services}
                     not_included_services={checkPrice ? [] : room.not_included_services}
                   />
-                  {/* </LazyLoad> */}
+
                 </div>
               </Grid>
             </Grid>
@@ -134,6 +130,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
+                  {/* <ListRoomSameBuilding /> */}
                   <BoxRoomSameBuilding />
                 </div>
               </Grid>
@@ -142,19 +139,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
-                  {/* <LazyLoad offset={100}> */}
-                  {/* <PlacesAroundList
-                    latitude={room ? room.latitude : '0'}
-                    longitude={room ? room.longitude : '0'}
-                  /> */}
                   <HereMap
                     city={room.city.data.name}
                     district={room.district.data.name}
                     latitude={room.latitude}
                     longitude={room.longitude}
                   />
-
-                  {/* </LazyLoad> */}
                 </div>
               </Grid>
             </Grid>

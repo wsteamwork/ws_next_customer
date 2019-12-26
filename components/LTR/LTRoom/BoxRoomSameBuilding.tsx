@@ -44,7 +44,6 @@ const BoxRoomSameBuilding: FC<IProps> = (props) => {
   useEffect(() => {
     if (ltroom.apartment_building_id)
       getRoomSameBuilding(ltroom.apartment_building_id).then((res) => {
-        console.log(res);
         dispatch({ type: 'setRoomSameBuilding', payload: res.data });
         setDataRoomSameBuilding(res.data);
       });

@@ -1,10 +1,11 @@
-import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
+import { cleanAccents, formatMoney, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { Grid, Paper, Theme, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import ProgressiveImage from 'react-progressive-image';
 import Cookies from 'universal-cookie';
@@ -28,7 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     imgSize: {
       height: (props) => (props.imgHeight ? props.imgHeight : 220),
       width: (props) => (props.imgWidth ? props.imgWidth : 220),
-      maxHeight: 70,
+      maxHeight: 90,
     },
     roomName: {
       WebkitLineClamp: (props) => (props.lineClamp ? props.lineClamp : 1)
@@ -41,6 +42,10 @@ const BusinessTripCard: FC<IProps> = (props) => {
   const { room, imgHeight, isRoomSameBulding } = props;
   const { t } = useTranslation();
   const cookies = new Cookies();
+  const { width } = useContext<IGlobalContext>(GlobalContext);
+
+  const price = room.price_display ? `${width === 'sm' || width === 'xs' ? formatPrice(room.price_display) : t('rooms:currency') + formatMoney(room.price_display)}` : `${t('rooms:contactForPrice')}}`;
+
   const imgRoomSM =
     room.avatar && room.avatar.images.length
       ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
@@ -99,7 +104,7 @@ const BusinessTripCard: FC<IProps> = (props) => {
                         </Typography>
                       </Grid>
 
-                      <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
                         {room.total_area && room.total_area > 0 ? (
                           <span>
                             {room.total_area ? room.total_area : '0'} m<sup>2</sup>
@@ -109,6 +114,9 @@ const BusinessTripCard: FC<IProps> = (props) => {
                               ? m<sup>2</sup>
                             </span>
                           )}
+                      </Grid> */}
+                      <Grid item xs={12}>
+                        <span>{price}</span>
                       </Grid>
                       {!isRoomSameBulding && (
                         <Fragment>
