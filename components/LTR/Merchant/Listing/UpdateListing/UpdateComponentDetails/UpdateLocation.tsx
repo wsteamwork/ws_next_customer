@@ -65,7 +65,6 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
   const [coordi, setCoordinate] = useState<Coordinate>(coordinate);
-  // console.log(coordi);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate>({
     lat: 21.027895,
     lng: 105.833896

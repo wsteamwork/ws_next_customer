@@ -4,6 +4,7 @@ import { AxiosRes } from './../../../../../types/Requests/ResponseTemplate';
 import { updateObject } from '@/store/Context/utility';
 import { Dispatch, Reducer } from 'redux';
 import { axios_merchant } from '@/utils/axiosInstance';
+import { guidebookRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface Coordinate {
   lat: number;
@@ -33,6 +34,8 @@ export type UpdateDetailsState = {
   readonly rent_type: number;
   readonly checkin: string;
   readonly checkout: string;
+  readonly placesList: any;
+  readonly guidebooks: guidebookRes[];
   readonly error: boolean;
 };
 
@@ -59,6 +62,8 @@ export type UpdateDetailsActions =
   | { type: 'SET_RENT_TYPE'; payload: number }
   | { type: 'SET_CHECKIN'; payload: string }
   | { type: 'SET_CHECKOUT'; payload: string }
+  | { type: 'SET_PLACES'; payload: any }
+  | { type: 'SET_GUIDEBOOKS'; payload: guidebookRes[] }
   | { type: 'SET_ERROR'; payload: boolean };
 
 const init: UpdateDetailsState = {
@@ -84,6 +89,8 @@ const init: UpdateDetailsState = {
   rent_type: 1,
   checkin: '14:00:00',
   checkout: '12:00:00',
+  placesList: null,
+  guidebooks: [],
   error: false
 };
 
@@ -136,6 +143,10 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { checkin: action.payload });
     case 'SET_CHECKOUT':
       return updateObject<UpdateDetailsState>(state, { checkout: action.payload });
+    case 'SET_PLACES':
+      return updateObject<UpdateDetailsState>(state, { placesList: action.payload });
+    case 'SET_GUIDEBOOKS':
+      return updateObject<UpdateDetailsState>(state, { guidebooks: action.payload });
     case 'SET_ERROR':
       return updateObject(state, { error: action.payload });
     default:
@@ -189,6 +200,44 @@ export const getDataUpdateListing = async (
       }
     });
     return listing;
+  } catch (error) {
+    dispatch({ type: 'SET_ERROR', payload: true });
+  }
+};
+
+export const getDataPlacesListing = async (
+  id: any,
+  dispatch: Dispatch<UpdateDetailsActions>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}?include=places`);
+    const listing = res.data.data;
+    const room_id = listing.room_id;
+
+    dispatch({ type: 'SET_ROOM_ID', payload: room_id });
+    dispatch({ type: 'SET_PLACES', payload: listing.places.data });
+    dispatch({
+      type: 'SET_COORDINATE',
+      payload: {
+        lat: Number(listing.latitude),
+        lng: Number(listing.longitude)
+      }
+    });
+    return listing;
+  } catch (error) {
+    dispatch({ type: 'SET_ERROR', payload: true });
+  }
+};
+
+export const getGuideBookList = async (
+  dispatch: Dispatch<UpdateDetailsActions>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`guidebookcategories`);
+    const guidebooks = res.data.data;
+
+    dispatch({ type: 'SET_GUIDEBOOKS', payload: guidebooks });
+    return guidebooks;
   } catch (error) {
     dispatch({ type: 'SET_ERROR', payload: true });
   }

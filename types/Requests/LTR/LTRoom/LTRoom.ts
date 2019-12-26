@@ -141,3 +141,22 @@ export interface detailcomforts {
   facilities: AmenitiesIndexRes[];
   outdoors: AmenitiesIndexRes[];
 }
+
+export interface detailplaces {
+  id: number;
+  name:string;
+  distance: number;
+  description: string;
+  latitude: number | string | null;
+  longitude: number | string | null;
+  status: number;
+  status_txt: string;
+  guidebook_category_id: number;
+}
+
+export interface guidebookRes {
+  id: number;
+  name: string;
+  icon: string;
+  lang: string;
+}
