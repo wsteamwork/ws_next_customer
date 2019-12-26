@@ -90,12 +90,12 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                         </Typography>
                         /{t('rooms:month')}
                       </Grid>
-                      <Grid item xs={12} className='boxPrice'>
+                      {/* <Grid item xs={12} className='boxPrice'>
                         <Typography variant='subtitle1' className='priceBasic'>
                           {price}
                         </Typography>
                         /{t('rooms:month')}
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                     {/* <Grid className='boxSave'>
                       <FavoriteAnimation />
