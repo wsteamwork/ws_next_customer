@@ -2,7 +2,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, IS_SEARCH_ROOM, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { axios } from '@/utils/axiosInstance';
 import { Fade, Grid, IconButton, InputAdornment, MenuItem, Paper, TextField } from '@material-ui/core';
 import { createStyles, Theme } from '@material-ui/core/styles';
@@ -236,7 +236,7 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
     const parts = parse(suggestion.name, matches);
     return (
       <MenuItem selected={isHighlighted} component="div" classes={{ gutters: classes.gutters }}>
-        <Grid container>
+        <Grid container style={{ minHeight: 35 }} justify="flex-start" alignItems="center">
           <Grid item xs={7} md={7} className={classes.left}>
             <div>
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
@@ -249,6 +249,17 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (
                 <span key={index}>{part.text}</span>
               ))}
+              {
+                suggestion.type == IS_SEARCH_CITY ?
+                  (<span>, {suggestion.country}</span>) : <span></span>
+              }
+              {
+                suggestion.type == IS_SEARCH_DISTRICT ?
+                  (<span>, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+              }
+              {
+                suggestion.type == IS_SEARCH_ROOM ? (<span>{suggestion.district ? `, ${suggestion.district}` : ''}, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+              }
             </div>
           </Grid>
           {/* <Grid item xs={5} md={5} className={classes.right}>
@@ -259,7 +270,7 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
             )}
           </Grid> */}
         </Grid>
-      </MenuItem>
+      </MenuItem >
     );
   };
 
