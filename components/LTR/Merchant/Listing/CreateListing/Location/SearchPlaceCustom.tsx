@@ -17,7 +17,7 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
   const { setCoordinateMarker, setDefaultCenter, setAddress, addressInput, startAdornment } = props;
   const loaded = useRef(false);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
-  const [addresStemp, setAddresStemp] = useState<string>('');
+  const [addresStemp, setAddressTemp] = useState<string>(addressInput);
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -41,7 +41,8 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
       autocomplete.addListener('place_changed', () => {
         const placeInfo = autocomplete.getPlace();
         const location = placeInfo.geometry.location;
-        setAddress(placeInfo.name);
+        setAddressTemp(placeInfo.formatted_address)
+        setAddress(placeInfo.formatted_address);
         setCoordinateMarker({
           lat: location.lat(),
           lng: location.lng()
@@ -90,9 +91,9 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
         inputProps={{ id: 'standalone-search-box' }}
         value={addresStemp}
         onChange={(e) => {
-          setAddresStemp(e.target.value);
+          setAddressTemp(e.target.value);
         }}
-        onBlur={() => setAddress(addresStemp)}
+        // onBlur={() => setAddress(addresStemp)}
         labelWidth={0}
         fullWidth
       />

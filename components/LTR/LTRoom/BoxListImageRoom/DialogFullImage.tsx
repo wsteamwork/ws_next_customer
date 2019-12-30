@@ -227,7 +227,7 @@ const DialogFullImage: FC<IProps> = (props) => {
             ) : <Fragment />}
             <div ref={bedroomRef}>
               {_.times(bedrooms.number_bedroom, (i) => {
-                console.log(bedrooms.number_bedroom);
+                // console.log(bedrooms.number_bedroom);
                 return (
                   <li className={classes.listSection} key={i}>
                     <Grid container spacing={2}>

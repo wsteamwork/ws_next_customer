@@ -22,7 +22,7 @@ const SearchHome = () => {
   const [data, setData] = useState<number>();
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const changeLeaseTypeGlobal = (i: 0 | 1) => {
-    console.log(i);
+    // console.log(i);
     setIndexTab(i);
     dispatch({
       type: 'setLeaseTypeGlobal',

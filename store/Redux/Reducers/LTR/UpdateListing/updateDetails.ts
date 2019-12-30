@@ -27,6 +27,8 @@ export type UpdateDetailsState = {
   readonly building: string;
   readonly city_id: number;
   readonly district_id: number;
+  readonly city_name: string;
+  readonly district_name: string;
   readonly instant_book: number;
   readonly no_booking_cancel: number;
   readonly coordinate: Coordinate;
@@ -55,6 +57,8 @@ export type UpdateDetailsActions =
   | { type: 'SET_BUILDING'; payload: string }
   | { type: 'SET_CITY_ID'; payload: number }
   | { type: 'SET_DISTRICT_ID'; payload: number }
+  | { type: 'SET_CITY_NAME'; payload: string }
+  | { type: 'SET_DISTRICT_NAME'; payload: string }
   | { type: 'SET_COORDINATE'; payload: Coordinate }
   | { type: 'SET_DISABLE_SUBMIT'; payload: boolean }
   | { type: 'SET_INSTANT_BOOK'; payload: number }
@@ -82,6 +86,8 @@ const init: UpdateDetailsState = {
   building: '',
   city_id: null,
   district_id: null,
+  city_name: '',
+  district_name: '',
   coordinate: null,
   disableSubmit: false,
   instant_book: 0,
@@ -129,6 +135,10 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { city_id: action.payload });
     case 'SET_DISTRICT_ID':
       return updateObject<UpdateDetailsState>(state, { district_id: action.payload });
+    case 'SET_CITY_NAME':
+      return updateObject<UpdateDetailsState>(state, { city_name: action.payload });
+    case 'SET_DISTRICT_NAME':
+      return updateObject<UpdateDetailsState>(state, { district_name: action.payload });
     case 'SET_COORDINATE':
       return updateObject<UpdateDetailsState>(state, { coordinate: action.payload });
     case 'SET_DISABLE_SUBMIT':
@@ -178,6 +188,8 @@ export const getDataUpdateListing = async (
     dispatch({ type: 'SET_BUILDING', payload: listing.building });
     dispatch({ type: 'SET_CITY_ID', payload: listing.city_id });
     dispatch({ type: 'SET_DISTRICT_ID', payload: listing.district_id });
+    dispatch({ type: 'SET_CITY_NAME', payload: listing.city_name });
+    dispatch({ type: 'SET_DISTRICT_NAME', payload: listing.district_name });
     dispatch({ type: 'SET_INSTANT_BOOK', payload: listing.short_term_room.instant_book });
     dispatch({
       type: 'SET_BOOKING_CANCEL',
@@ -229,9 +241,7 @@ export const getDataPlacesListing = async (
   }
 };
 
-export const getGuideBookList = async (
-  dispatch: Dispatch<UpdateDetailsActions>
-): Promise<any> => {
+export const getGuideBookList = async (dispatch: Dispatch<UpdateDetailsActions>): Promise<any> => {
   try {
     const res: AxiosRes<any> = await axios_merchant.get(`guidebookcategories`);
     const guidebooks = res.data.data;

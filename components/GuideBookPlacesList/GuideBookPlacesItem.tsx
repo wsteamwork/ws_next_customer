@@ -60,7 +60,7 @@ const GuideBookPlacesItem: FC<IProps> = (props) => {
         (item) => item.guidebook_category_id === guidebook_category_id
       );
       setPlacesListSort(filters);
-      console.log(placesList);
+      // console.log(placesList);
     }
   }, [placesList]);
   const handleCloseMap = () => {
