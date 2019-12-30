@@ -149,7 +149,13 @@ const Description: FC<IProps> = (props) => {
                     }}
                     autoFocus={true}
                     inputProps={{ maxLength: 100 }}
-                    handleChange={handleChange}
+                    handleChange={(e) => {
+                      handleChange(e)
+                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                      handleTranslateToEnglish(e.currentTarget.value).then((res) => {
+                        dispatchDescription({ type: 'setNameEN' }, res);
+                      });
+                    }}
                     handleBlur={(e) => {
                       handleBlur(e);
                       dispatchDescription({ type: 'setName' }, e.currentTarget.value);
@@ -203,7 +209,12 @@ const Description: FC<IProps> = (props) => {
                     }}
                     inputProps={{ maxLength: 5000 }}
                     placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
-                    handleChange={handleChange}
+                    handleChange={(e) => {
+                      dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                      handleTranslateToEnglish(e.currentTarget.value).then((res) => {
+                        dispatchDescription({ type: 'setDescriptionEN' }, res);
+                      });
+                    }}
                     handleBlur={(e) => {
                       handleBlur(e);
                       dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
