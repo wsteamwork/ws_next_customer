@@ -3,11 +3,15 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { Grid, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { RoomReducerState } from '@/store/Redux/Reducers/Room/roomReducer';
 interface IProps {
   classes?: any;
   itemList?: any;
+  guidebook_category_id: number;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -36,15 +40,27 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const ItemAroundList: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { itemList } = props;
+  const { guidebook_category_id } = props;
+  const { placesList } = useSelector<ReducersList, RoomReducerState>((state) => state.roomPage);
+  const [placesListSort, setPlacesListSort] = useState<any>(placesList);
+  useEffect(() => {
+    if (placesList.length) {
+      let filters = placesList.filter(
+        (item) => item.guidebook_category_id === guidebook_category_id
+      );
+      setPlacesListSort(filters);
+    }
+  }, [placesList]);
   const { width } = useContext(GlobalContext);
-  const itemsPlaces = _.map(itemList, (item, i) => {
+  const itemsPlaces = _.map(placesListSort, (item, i) => {
     return (
       <Grid container item xs={12} sm={6} key={i} className={classes.root}>
         <Grid item xs={12} className={classes.wrapper}>
-          <Typography variant="subtitle2" className={classes.name}>{item.title}</Typography>
+          <Typography variant="subtitle2" className={classes.name}>
+            {item.name}
+          </Typography>
           <Typography variant="subtitle2" className={classes.distance}>
-            {item.distance > 100 ? (`${(item.distance / 1000).toFixed(2)} km`) : `${item.distance} m`}
+            {item.distance > 100 ? `${(item.distance / 1000).toFixed(2)} km` : `${item.distance} m`}
           </Typography>
         </Grid>
       </Grid>

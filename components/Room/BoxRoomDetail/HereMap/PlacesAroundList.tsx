@@ -1,19 +1,23 @@
-import { placeNearTypeList } from '@/utils/mixins';
 import { Grid, Theme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, withStyles } from '@material-ui/styles';
-import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import ItemAroundList from './ItemAroundList';
+import {
+  getGuideBookList,
+  RoomReducerAction,
+  RoomReducerState
+} from '@/store/Redux/Reducers/Room/roomReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   classes?: any;
-  latitude?: string;
-  longitude?: string;
 }
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -112,7 +116,7 @@ const TabPanel: FC<TabPanelProps> = (props) => {
       <Box p={3}>{children}</Box>
     </Typography>
   );
-}
+};
 function a11yProps(index: any) {
   return {
     id: `vertical-tab-${index}`,
@@ -121,91 +125,51 @@ function a11yProps(index: any) {
 }
 
 const PlacesAroundList: FC<IProps> = (props) => {
-  const { latitude, longitude } = props;
   const classes = useStyles(props);
   const { t } = useTranslation();
   const [value, setValue] = useState(0);
-  const [nearby, setNearby] = useState([]);
-  const your_app_id = 'nfVrIaYJrNrOsBPg8An7';
-  const your_app_code = '54vN9paKcbDlrQ_E4R4jqw';
+  const { guidebooks, placesList } = useSelector<ReducersList, RoomReducerState>(
+    (state) => state.roomPage
+  );
+  const dispatch = useDispatch<Dispatch<RoomReducerAction>>();
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-
-  const fetchData = async () => {
-    let newData = [];
-    for (let i = 0; i < placeNearTypeList.length; i++) {
-      let item = placeNearTypeList[i];
-      await axios
-        .get(`https://places.cit.api.here.com/places/v1/discover/around`, {
-          params: {
-            app_id: your_app_id,
-            app_code: your_app_code,
-            at: `${parseFloat(latitude)},${parseFloat(longitude)}`,
-            cat: item.name,
-            pretty: true,
-            size: item.size
-          }
-        })
-        .then((res) => {
-          newData = [...newData, res.data.results.items];
-          setNearby(newData)
-        })
-        .catch((err) => console.error(err));
-    }
-    // dispatch({ type: 'setDataPlaces', payload: newData });
-  };
   useEffect(() => {
-    fetchData();
+    getGuideBookList(dispatch);
   }, []);
 
   return (
     <Grid>
-      <Typography variant="h5" className={classes.title}>
-        {t('room:nearbyPlaces')}
-      </Typography>
-      {latitude && longitude ? (
-        <Grid className={classes.rootTab}>
-          <AntTabs
-            orientation="vertical"
-            variant="scrollable"
-            value={value}
-            onChange={handleChange}
-            aria-label="Vertical tabs example"
-            className={classes.tabs}>
-            <AntTab label={t('room:naturalAttraction')} {...a11yProps(0)} />
-            <AntTab label={t('room:restaurant')} {...a11yProps(1)} />
-            <AntTab label={t('room:shopping')} {...a11yProps(2)} />
-            <AntTab label={t('room:entertainment')} {...a11yProps(3)} />
-            <AntTab label={t('room:medical')} {...a11yProps(4)} />
-            <AntTab label={t('room:building')} {...a11yProps(5)} />
-            <AntTab label={t('room:coffeeTea')} {...a11yProps(6)} />
-            <AntTab label={t('room:transport')} {...a11yProps(7)} />
-            <AntTab label={t('room:petrolStation')} {...a11yProps(8)} />
-            <AntTab label={t('room:atmBankExchange')} {...a11yProps(9)} />
-          </AntTabs>
-          <TabPanel value={value} index={0}>
-            <ItemAroundList itemList={nearby[0]} />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <ItemAroundList itemList={nearby[1]} />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <ItemAroundList itemList={nearby[2]} />
-          </TabPanel>
-          <TabPanel value={value} index={3}>
-            <ItemAroundList itemList={nearby[3]} />
-          </TabPanel>
-          <TabPanel value={value} index={4}>
-            <ItemAroundList itemList={nearby[4]} />
-          </TabPanel>
-          <TabPanel value={value} index={5}>
-            <ItemAroundList itemList={nearby[5]} />
-          </TabPanel>
-        </Grid>
+      {placesList.length ? (
+        <Fragment>
+          <Typography variant="h5" className={classes.title}>
+            {t('room:nearbyPlaces')}
+          </Typography>
+          <Grid className={classes.rootTab}>
+            <AntTabs
+              orientation="vertical"
+              variant="scrollable"
+              value={value}
+              onChange={handleChange}
+              aria-label="Vertical tabs example"
+              className={classes.tabs}>
+              {guidebooks.length > 0
+                ? guidebooks.map((o, i) => <AntTab key={i} label={t(o.name)} {...a11yProps(i)} />)
+                : ''}
+            </AntTabs>
+            {guidebooks.length > 0
+              ? guidebooks.map((o, i) => (
+                  <TabPanel value={value} index={i}>
+                    <ItemAroundList guidebook_category_id={o.id} />
+                  </TabPanel>
+                ))
+              : ''}
+          </Grid>
+        </Fragment>
       ) : (
-          ''
-        )}
+        ''
+      )}
     </Grid>
   );
 };

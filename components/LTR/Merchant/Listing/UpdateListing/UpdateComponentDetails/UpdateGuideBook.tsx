@@ -78,9 +78,6 @@ const UpdateGuideBook: FC<IProps> = (props) => {
       <Grid container justify="center" alignItems="center">
         <Grid item xs={12} md={10} className={classes.boxLeft}>
           <Grid item xs={12} sm={12} md={7} style={{ display: 'flex', justifyContent: 'center' }}>
-            {/* <Grid item xs={12} md={10} className={classes.wrapper}>
-              
-            </Grid> */}
             <Grid item container xs={12} sm={11} md={11} className={classes.wrapper}>
               <Grid item xs={12} sm={12} md={12} lg={12} className={classes.alignCenter}>
                 <Typography variant="h1" gutterBottom className="label main_label">
