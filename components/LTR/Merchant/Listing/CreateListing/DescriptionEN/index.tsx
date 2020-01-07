@@ -203,7 +203,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                     handleBlur={(e) => {
                       handleBlur(e);
                       if (e.currentTarget.value.length > 30) {
-                      dispatchDescription({ type: 'setDescriptionEN' }, e.currentTarget.value);
+                        dispatchDescription({ type: 'setDescriptionEN' }, e.currentTarget.value);
                       }
                     }}
                   />

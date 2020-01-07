@@ -78,9 +78,9 @@ const Description: FC<IProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(name);
     dispatch_detail({ type: 'setDisableNext', payload: name.length < 5 });
-  }, [name]);
+    dispatch_detail({ type: 'setDisableNext', payload: description.length < 50 });
+  }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
