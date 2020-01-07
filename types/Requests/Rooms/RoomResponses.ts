@@ -67,7 +67,7 @@ export interface RoomIndexRes {
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
   merchant: TransformerInclude<Merchant>;
-  places: TransformerInclude<PlaceIndexResponse[]>;
+  places: Places;
   reviews: TransformerInclude<RoomReviewIndexResponse[]>;
   prices: TransformerInclude<PriceSpecialDays[]>;
   room_name: string;
@@ -112,6 +112,9 @@ export interface Collections {
   new: number;
   details: TransformerInclude<CollectionsDetail[]>;
   rooms: TransformerInclude<RoomIndexRes[]>;
+}
+export interface Places {
+  data: TransformerInclude<PlaceIndexResponse[]>;
 }
 
 export interface CollectionsDetail {

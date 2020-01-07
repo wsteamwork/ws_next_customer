@@ -9,21 +9,25 @@ import qs from 'query-string';
 import { ParsedUrlQuery } from 'querystring';
 import { Dispatch, Reducer } from 'redux';
 import { ReducresActions } from '..';
-// import Cookies from 'universal-cookie';
+import { guidebookRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 export type RoomReducerState = {
   readonly room: RoomIndexRes | null;
   readonly roomRecommend: RoomIndexRes[];
   readonly schedule: string[];
   readonly priceByDay: PriceByDayRes[];
   readonly error: boolean;
+  readonly guidebooks?: guidebookRes[];
+  readonly placesList: any;
 };
 
 export type RoomReducerAction =
   | { type: 'setRoom'; payload: RoomIndexRes }
+  | { type: 'setGuideBooks'; payload: guidebookRes[] }
   | { type: 'setRoomRecommend'; payload: RoomIndexRes[] }
   | { type: 'setSchedule'; payload: string[] }
   | { type: 'setPriceByDay'; payload: PriceByDayRes[] }
   | { type: 'addPriceByDay'; payload: PriceByDayRes[] }
+  | { type: 'setPlaces'; payload: any }
   | { type: 'setErrorSSRRoompage'; payload: boolean };
 
 export const init: RoomReducerState = {
@@ -31,6 +35,8 @@ export const init: RoomReducerState = {
   roomRecommend: [],
   schedule: [],
   priceByDay: [],
+  guidebooks: [],
+  placesList: null,
   error: false
 };
 
@@ -49,6 +55,10 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
       return updateObject(state, { priceByDay: action.payload });
     case 'addPriceByDay':
       return updateObject(state, { priceByDay: [...state.priceByDay, ...action.payload] });
+    case 'setGuideBooks':
+      return updateObject(state, { guidebooks: action.payload });
+      case 'setPlaces':
+      return updateObject(state, { placesList: action.payload });
     case 'setErrorSSRRoompage':
       return updateObject(state, { error: action.payload });
     default:
@@ -58,10 +68,9 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
 
 export const getRoom = async (idRoom: any, initLanguage: string = 'en'): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
-    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,reviews.user,prices`,
+    `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,reviews.user,prices,places`,
     { headers: { 'Accept-Language': initLanguage } }
   );
-  // console.log(res.data.data);
   return res.data.data;
 };
 
@@ -106,6 +115,13 @@ export const getPriceByDay = async (
   return res.data.data;
 };
 
+export const getGuideBookList = async (dispatch: Dispatch<RoomReducerAction>): Promise<any> => {
+    const res: AxiosRes<any> = await axios.get(`guidebookcategories`);
+    const guidebooks = res.data.data;
+    dispatch({ type: 'setGuideBooks', payload: guidebooks });
+    return guidebooks;
+};
+
 export const getDataRoom = async (
   dispatch: Dispatch<ReducresActions>,
   query: ParsedUrlQuery,
@@ -117,20 +133,23 @@ export const getDataRoom = async (
       getRoom(id, initLanguage),
       getRoomRecommend(id, initLanguage),
       getRoomSchedule(id, initLanguage),
-      getPriceByDay(id, undefined, undefined, initLanguage)
+      getPriceByDay(id, undefined, undefined, initLanguage),
     ]);
 
-    const [room, roomRecommend, schedule, priceByDay] = res;
+    const [room, roomRecommend, schedule, priceByDay ] = res;
+    const placesList = room.places.data;
 
     dispatch({ type: 'setRoom', payload: room });
     dispatch({ type: 'setRoomRecommend', payload: roomRecommend });
     dispatch({ type: 'setSchedule', payload: schedule });
     dispatch({ type: 'setPriceByDay', payload: priceByDay });
+    dispatch({ type: 'setPlaces', payload: room.places.data });
     dispatch({ type: 'setErrorSSRRoompage', payload: false });
 
-    return { room, schedule, priceByDay, roomRecommend };
+    return { room, schedule, priceByDay, roomRecommend, placesList};
   } catch (error) {
     dispatch({ type: 'setErrorSSRRoompage', payload: true });
-    // console.log(error.response);
   }
 };
+
+

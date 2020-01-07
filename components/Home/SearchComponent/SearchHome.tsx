@@ -22,7 +22,6 @@ const SearchHome = () => {
   const [data, setData] = useState<number>();
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const changeLeaseTypeGlobal = (i: 0 | 1) => {
-    // console.log(i);
     setIndexTab(i);
     dispatch({
       type: 'setLeaseTypeGlobal',
@@ -33,7 +32,6 @@ const SearchHome = () => {
   const getDataLongTermRoom = async (): Promise<any> => {
     const res = await axios.get(`count-long-term-rooms`);
     setData(res.data.data.total_room);
-    // console.log(data);
   };
 
   useEffect(() => {

@@ -19,7 +19,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       boxShadow: 'none',
-      // marginBottom: theme.spacing(10),
       padding: '0 32px 0 8px',
       [theme.breakpoints.down('md')]: {
         padding: '0 8px'
@@ -123,10 +122,7 @@ const BoxRoomDetail: FC<IProps> = (props) => {
                 </div>
                 <div className={classes.rowMargin}>
                   <LazyLoad offset={150}>
-                    <PlacesAroundList
-                      latitude={room ? room.latitude : '0'}
-                      longitude={room ? room.longitude : '0'}
-                    />
+                    <PlacesAroundList />
                   </LazyLoad>
                 </div>
                 <div className={classes.rowMargin}>
