@@ -57,7 +57,7 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
       return updateObject(state, { priceByDay: [...state.priceByDay, ...action.payload] });
     case 'setGuideBooks':
       return updateObject(state, { guidebooks: action.payload });
-      case 'setPlaces':
+    case 'setPlaces':
       return updateObject(state, { placesList: action.payload });
     case 'setErrorSSRRoompage':
       return updateObject(state, { error: action.payload });
