@@ -62,7 +62,7 @@ const RoomCreateListingID = () => {
       case 2:
         return <Bathroom />;
       case 3:
-        return <UpdateLocation />;
+        return <Location />;
       default:
         return 'Unknown step';
     }
