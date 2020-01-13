@@ -11,7 +11,7 @@ import { getCookieFromReq } from '@/utils/mixins';
 import React, { Fragment, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import UpdateLocation from '@/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateLocation';
+// import UpdateLocation from '@/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateLocation';
 
 const RoomCreateListingID = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
