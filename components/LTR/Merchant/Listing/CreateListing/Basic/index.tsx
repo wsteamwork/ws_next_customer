@@ -54,7 +54,8 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType(setRoomTypesData);
+    getRoomType().then(res => { setRoomTypesData(res) })
+    // getRoomType(setRoomTypesData);
   }, []);
 
   const checkLeaseType = (listing: any) => {
@@ -63,7 +64,7 @@ const Basic: FC<IProps> = (props) => {
     else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
       setArrayLeaseType([])
     }
-    console.log(arrayLeaseType);
+    // console.log(arrayLeaseType);
     return arrayLeaseType;
   };
 

@@ -1,10 +1,10 @@
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import CardWrapperItem from '../CardWrapperItem';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -36,7 +36,7 @@ const PriceLongTerm: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      {listing ? (
+      {listing && listing.prices ? (
         <CardWrapperItem title="Giá thuê dài hạn" onClick={openUpdate}>
           {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b>Chưa cập nhật</b> : (
             <Grid item xs={12}>
