@@ -59,11 +59,13 @@ const Basic: FC<IProps> = (props) => {
   }, []);
 
   const checkLeaseType = (listing: any) => {
-    // let arrayLeaseType = [];
-    if (listing.long_term_rent_type.rent_type == 1) { setArrayLeaseType(['shortterm', 'longterm']) }
-    else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
-      setArrayLeaseType([])
-    }
+    let arrayLeaseType = [];
+    if (listing.long_term_rent_type.rent_type == 1) arrayLeaseType.push('longterm')
+    if (listing.long_term_rent_type.rent_type) arrayLeaseType.push('shortterm')
+    // if (listing.long_term_rent_type.rent_type == 1) { setArrayLeaseType(['shortterm', 'longterm']) }
+    // else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
+    //   setArrayLeaseType([])
+    // }
     // console.log(arrayLeaseType);
     return arrayLeaseType;
   };
