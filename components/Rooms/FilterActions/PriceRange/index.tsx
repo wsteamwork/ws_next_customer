@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import React, { FC, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import ActionRangePrice from './ActionRangePrice';
+import ActionRangePriceLT from './ActionRangePriceLT';
 import { usePriceRange } from './context';
-import ActionRangePriceLT from './ActionRangePriceLT'
-import ActionRangePrice from './ActionRangePrice'
 const PriceRange: FC = () => {
   const { t } = useTranslation();
   const { open, onHide, checkPrice, setOpen, hanldeOpen, handleRemove } = usePriceRange();
