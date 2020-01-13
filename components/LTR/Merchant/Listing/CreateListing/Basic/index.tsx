@@ -54,8 +54,8 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType().then(res => { setRoomTypesData(res) })
-    // getRoomType(setRoomTypesData);
+    // getRoomType().then(res => { setRoomTypesData(res) })
+    getRoomType(setRoomTypesData);
   }, []);
 
   const checkLeaseType = (listing: any) => {

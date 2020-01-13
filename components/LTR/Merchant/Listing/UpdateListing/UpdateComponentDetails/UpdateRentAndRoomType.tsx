@@ -106,8 +106,8 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
   useEffect(() => {
-    getRoomType().then(res => setRoomTypesData(res));
-    // getRoomType(setRoomTypesData);
+    // getRoomType().then(res => setRoomTypesData(res));
+    getRoomType(setRoomTypesData);
   }, []);
 
   useEffect(() => {
