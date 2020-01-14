@@ -3,7 +3,7 @@ import SimpleLoader from '@/components/Loading/SimpleLoader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RegisterReq } from '@/types/Requests/Account/AccountRequests';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
-import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
+import { FormControl, FormHelperText, Grid, TextField, Typography, Link } from '@material-ui/core';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { useCookies } from 'react-cookie';
@@ -252,6 +252,14 @@ const FormSignup: FC = () => {
                       {touched.password_confirmation ? errors.password_confirmation : ''}
                     </FormHelperText>
                   </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant='body2'>
+                    {t('auth:statementConfirm')}
+                    <Link color={'primary'} href="/terms-and-conditions" className={'textTerms'}>
+                      {t('layout:footer:termsOfUse')}
+                    </Link> {t('auth:statementConfirmTail')}
+                  </Typography>
                 </Grid>
 
                 <Grid item xs={12}>
