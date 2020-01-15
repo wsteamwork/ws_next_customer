@@ -41,7 +41,7 @@ class MyApp extends App<IProps> {
 
     if (windowExist) {
       if ((navigator.userAgent.match(/(iphone)|(ipod)|(ipad)|(android)|(blackberry)|(windows phone)|(symbian)/i))) {
-        location.replace("https://m.westay.vn");
+        location.replace("https://m.westay.vn" + window.location.pathname);
       }
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(registration => {
