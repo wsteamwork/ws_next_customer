@@ -119,7 +119,8 @@ const RoomCard: FC<Iprops> = (props) => {
                 )}
 
                 <Grid className="price">
-                  {isFormatPrice ? t('home:currency')+formatPrice(price_day) : t('home:currency')+numeral(price_day).format('0,0')}/{t('room:night')}
+                  {isFormatPrice ? t('home:currency') + formatPrice(price_day) : t('home:currency') + numeral(price_day).format('0,0')}
+                  {leaseTypeGlobal ? t('longtermroom:priceBasicMobile') : t('room:pernight')}
                   {!isHomepage && price_hour > 0 ? (
                     <Typography className="hourPrice">
                       &#10072;{' '}
