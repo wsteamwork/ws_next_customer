@@ -33,7 +33,7 @@ const IncludedFee: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      {!!listing ? (
+      {!!listing && listing.prices ? (
         <CardWrapperItem title="Phí dịch vụ dài hạn" onClick={openUpdate}>
           {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b>Chưa cập nhật</b> : (
             <Grid container>

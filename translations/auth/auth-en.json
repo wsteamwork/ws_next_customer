@@ -4,9 +4,9 @@
     "max50Characters": "Up to 50 characters",
     "loginInfo": "Login information",
     "password": "Password",
-    "singin": "Signin",
+    "singin": "SIGN IN",
     "noAccount": "Don't have a Westay account yet?",
-    "signup": "Signup",
+    "signup": "SIGN UP",
     "now": "now",
     "withFacebook": "Login with Facebook",
     "withGoogle": "Login with Google",
@@ -24,5 +24,7 @@
     "birthday": "Birthday",
     "forgetPassword": "Forgot your password?",
     "sendForgetPassword": "Submit",
-    "forgetPasswordInfo": "Enter your email to reset password"
+    "forgetPasswordInfo": "Enter your email to reset password",
+    "statementConfirm": "By click Sign Up, you agreed with ",
+    "statementConfirmTail": " of WeStay"
 }
