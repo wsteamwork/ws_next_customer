@@ -5,6 +5,7 @@ import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import BoxRoomAgoda from '@/components/LTR/LTRoom/BoxRoomAgoda';
 import NextHead from '@/components/NextHead';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import NavHeader from '@/components/Toolbar/NavHeader';
@@ -95,7 +96,6 @@ const LongtermRoom: NextPage = () => {
                   <Grid item xs={12} lg={8} xl={9}>
                     <BoxLTRoomDetail room={ltroom} />
                   </Grid>
-
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
                     {/* <LazyLoad> */}
                     <BoxBookingLT
@@ -111,6 +111,16 @@ const LongtermRoom: NextPage = () => {
                       roomId={ltroom.id}
                     />
                     {/* </LazyLoad> */}
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Grid container spacing={1} justify="center">
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                        <div style={{ marginTop: 8 }}>
+                          <BoxRoomAgoda />
+                        </div>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid container className="roomPage__boxBookingMoblie">
