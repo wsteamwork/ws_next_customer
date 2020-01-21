@@ -48,9 +48,9 @@ const BoxRoomAgoda: FC<IProps> = (props) => {
     );
   };
 
-  useEffect(() => {
-    console.log(dataRoomSameBuilding)
-  }, [dataRoomSameBuilding]);
+  // useEffect(() => {
+  //   console.log(dataRoomSameBuilding)
+  // }, [dataRoomSameBuilding]);
 
   return (
     <Fragment>
