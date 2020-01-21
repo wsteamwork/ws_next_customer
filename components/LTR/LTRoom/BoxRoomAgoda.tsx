@@ -5,16 +5,19 @@ import { getRoomSameBuilding, LTRoomReducerAction } from "@/store/Redux/Reducers
 import { LTRoomIndexRes } from "@/types/Requests/LTR/LTRoom/LTRoom";
 import { Grid, Theme, Typography } from "@material-ui/core";
 import { createStyles, makeStyles } from '@material-ui/styles';
-import { FC, Fragment, useContext, useEffect, useState } from "react";
+import { FC, Fragment, useContext, useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import _ from 'lodash';
 
 interface IProps { };
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-
+    title: {
+      paddingBottom: 12
+    }
   })
 );
 const BoxRoomAgoda: FC<IProps> = (props) => {
@@ -33,25 +36,35 @@ const BoxRoomAgoda: FC<IProps> = (props) => {
         setDataRoomSameBuilding(res.data);
       });
   }, [ltroom.apartment_building_id]);
-
-  const renderAgodaRoomCard = () => {
+  const renderAgodaRoomCard = (ltroom) => {
     return (
-      <AgodaRoomCard
-        room={ltroom}
-      />
+      <Grid>
+        <Grid>
+          <AgodaRoomCard
+            room={ltroom}
+          />
+        </Grid>
+      </Grid>
     );
   };
+
+  useEffect(() => {
+    console.log(dataRoomSameBuilding)
+  }, [dataRoomSameBuilding]);
 
   return (
     <Fragment>
       <Grid className={classes.title}>
-        <Typography variant="h5" className={classes.name} gutterBottom>
+        <Typography variant="h6" className={classes.name} gutterBottom>
           {t('room:roomSameBuilding')}
         </Typography>
         {t('room:buildingName') + ltroom.apartment_building}
       </Grid>
-
-      {renderAgodaRoomCard()}
+      {
+        _.map(dataRoomSameBuilding, (room, index) => (
+          renderAgodaRoomCard(room)
+        ))
+      }
     </Fragment>
   )
 }

@@ -16,7 +16,7 @@
     "description" : "Description",
     "amenities": "Amenities",
     "amenitiesLower" : "amenities",
-    "guests" : "guest(s)",
+    "guests" : " guests",
     "rooms" : "room(s)",
     "bathrooms" : "bathroom(s)",
     "beds" : "bed(s)",

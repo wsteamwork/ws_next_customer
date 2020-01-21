@@ -1,5 +1,4 @@
 import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
-import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
 import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
@@ -10,8 +9,6 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import BoxRoomSameBuilding from './BoxRoomSameBuilding';
-import BoxRoomAgoda from './BoxRoomAgoda';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -67,7 +64,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
             </Grid>
             <Grid container spacing={1}>
               <Grid item xs={11} className={classes.rowMargin}>
-                {/* <RoomBasic
+                <RoomBasic
                   isPreviewPage={isPreviewPage}
                   showBed={false}
                   name={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
@@ -82,23 +79,23 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   avg_rating_txt={room.rating.avg_avg_rating_txt}
                   city={room.city.data.name}
                   district={room.district.data.name}
-                /> */}
+                />
               </Grid>
             </Grid>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
                 <div className={classes.rowMargin}>
-                  {/* <RoomDescription
+                  <RoomDescription
                     isPreviewPage={isPreviewPage}
                     description={
                       checkAboutRoom ? t('room:notFoundContent') : room.about_room.description
                     }
                     space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
                     note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note}
-                  /> */}
+                  />
                 </div>
                 <div className={classes.rowMargin}>
-                  {/* <BoxAmenities
+                  <BoxAmenities
                     facilities={checkComfort ? undefined : room.comforts.facilities}
                     bedrooms={checkComfort ? undefined : room.comforts.bedrooms}
                     bathrooms={checkComfort ? undefined : room.comforts.bathrooms}
@@ -108,7 +105,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     livingrooms={checkComfort ? undefined : room.comforts.livingrooms}
                     common={checkComfort ? undefined : room.comforts.common}
                     kitchens={checkComfort ? undefined : room.comforts.kitchens}
-                  /> */}
+                  />
 
                 </div>
                 <div className={classes.rowMargin}>
