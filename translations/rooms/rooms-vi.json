@@ -16,7 +16,7 @@
     "description" : "Thông tin căn hộ",
     "amenities" : "Tiện ích",
     "amenitiesLower" : "tiện ích",
-    "guests" : "khách",
+    "guests" : " khách",
     "rooms" : "phòng ngủ",
     "bathrooms" : "phòng tắm",
     "beds" : "giường",
@@ -65,6 +65,6 @@
     "contactForPrice": "Giá liên hệ",
     "currency": "",
     "month": "tháng",
-    "showNumberRoomSameBuilding": "phòng cùng toà nhà"
+    "showNumberRoomSameBuilding": "phòng tương tự"
 
 }

@@ -8,6 +8,7 @@
     "basicInformation": "Thông tin cơ bản",
     "propertyType": "Loại căn hộ *",
     "totalArea": "Diện tích *",
+    "number_of_listing": "Số phòng có thông tin thương tự *",
     "stayWithHost": "Tôi sẽ ở 1 phòng trong căn hộ",
     "numberOfGuest": "Số khách và phòng ngủ",
     "maxAdditionalGuest": "Số khách tối đa có thể thêm",

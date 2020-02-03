@@ -8,6 +8,7 @@
     "basicInformation": "Basic information",
     "propertyType": "Property type *",
     "totalArea": "Total area *",
+    "number_of_listing": "Number of similar listing *",
     "stayWithHost": "I'll use a room and share some common space with guests",
     "numberOfGuest": "Guest and Bedrooms",
     "maxAdditionalGuest": "Max additional guests",

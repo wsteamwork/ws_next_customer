@@ -77,8 +77,8 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                       ) : ''
                       }
                     </Grid>
-                    {room.room_same_apartment_building && <Grid item xs={12} className='collectionAmenities'>
-                      {room.room_same_apartment_building} {t('rooms:showNumberRoomSameBuilding')}
+                    {room.number_of_listing && <Grid item xs={12} className='collectionAmenities'>
+                      {room.number_of_listing} {t('rooms:showNumberRoomSameBuilding')}
                     </Grid>}
 
                   </Grid>

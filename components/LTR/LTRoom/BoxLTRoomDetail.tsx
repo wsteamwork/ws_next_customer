@@ -1,5 +1,4 @@
 import BoxAmenities from '@/components/LTR/LTRoom/BoxAmenities';
-import BoxListImageRoom from '@/components/LTR/LTRoom/BoxListImageRoom';
 import BoxTablePrices from '@/components/LTR/LTRoom/BoxTablePrices';
 import HereMap from '@/components/Room/BoxRoomDetail/HereMap';
 import RoomBasic from '@/components/Room/BoxRoomDetail/RoomBasic';
@@ -10,7 +9,6 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import BoxRoomSameBuilding from './BoxRoomSameBuilding';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -52,7 +50,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           <Grid item md={12} lg={12}>
             <Grid container spacing={1}>
               <Grid item xs={11}>
-                <BoxListImageRoom
+                {/* <BoxListImageRoom
                   livingrooms={isPreviewPage && !room.livingrooms ? [] : room.livingrooms}
                   outdoors={isPreviewPage && !room.outdoors ? [] : room.outdoors}
                   furnitures={isPreviewPage && !room.furnitures ? [] : room.furnitures}
@@ -61,7 +59,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   bedrooms={isPreviewPage && !room.bedrooms ? [] : room.bedrooms}
                   bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms}
                   roomName={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
-                />
+                /> */}
               </Grid>
             </Grid>
             <Grid container spacing={1}>
@@ -97,7 +95,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   />
                 </div>
                 <div className={classes.rowMargin}>
-
                   <BoxAmenities
                     facilities={checkComfort ? undefined : room.comforts.facilities}
                     bedrooms={checkComfort ? undefined : room.comforts.bedrooms}
@@ -112,7 +109,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
 
                 </div>
                 <div className={classes.rowMargin}>
-
                   <BoxTablePrices
                     ltRoomId={room.id}
                     prices={checkPrice ? [] : room.prices.prices}
@@ -120,21 +116,20 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                     included_services={checkPrice ? [] : room.included_services}
                     not_included_services={checkPrice ? [] : room.not_included_services}
                   />
-
                 </div>
               </Grid>
             </Grid>
 
             {/* Rooms Same Building */}
 
-            <Grid container spacing={1} justify="center">
+            {/* <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
-                  {/* <ListRoomSameBuilding /> */}
                   <BoxRoomSameBuilding />
+                  <BoxRoomAgoda />
                 </div>
               </Grid>
-            </Grid>
+            </Grid> */}
 
             <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

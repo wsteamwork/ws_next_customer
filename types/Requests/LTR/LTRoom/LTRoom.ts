@@ -42,6 +42,7 @@ export interface LTRoomIndexRes {
   accommodation_type: number;
   accommodation_type_txt: string;
   total_area: number | null;
+  number_of_listing: number | null;
   guests: detailguest | null;
   rating: detailrating;
   instant_book: number;
@@ -144,7 +145,7 @@ export interface detailcomforts {
 
 export interface detailplaces {
   id: number;
-  name:string;
+  name: string;
   distance: number;
   description: string;
   latitude: number | string | null;

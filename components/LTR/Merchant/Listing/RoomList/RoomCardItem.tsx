@@ -596,7 +596,35 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </Grid>
                         </Grid>
                       </Grid>
-
+                      <Grid className={classes.price}>
+                        <Grid container item xs={12} sm={12} lg={10} spacing={1}>
+                          <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}>
+                            <Grid container>
+                              <Grid item xs={8} className={classes.spanIcon}>
+                                Total Listing:
+                              </Grid>
+                              <Grid className={classes.nameIcon} item xs={4}>
+                                <Typography variant="subtitle1" className={classes.priceDay}>
+                                  {room.number_of_listing}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          {/* <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}>
+                            <Grid container>
+                              <Grid item xs={8} className={classes.spanIcon}>
+                                Available Listing:
+                              </Grid>
+                              <Grid className={classes.nameIcon} item xs={4}>
+                                <Typography variant="subtitle1" className={classes.priceDay}>
+                                  {room.number_of_listing}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid> */}
+                          <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}></Grid>
+                        </Grid>
+                      </Grid>
                       <Grid container>
                         <Grid item xs={12} lg={8} className={classes.infoRoomName}>
                           {room.short_term_room.rent_type === 3 ? (
@@ -619,7 +647,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               ) : (
                                   ''
                                 )}
-                              {room.short_term_room.rent_type !== 2 ? (
+                              {(room.short_term_room.rent_type !== 2 && room.short_term_room.price_hour !== 0) ? (
                                 <span>
                                   &nbsp;
                                   {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
