@@ -31,7 +31,7 @@
     "guests": "Guest(s)",
     "rooms": "Room(s)",
     "room": "Room",
-    "roomSameBuilding": "Room Same Building",
+    "roomSameBuilding": "Other rooms of this building",
     "bathrooms": "Bathroom(s)",
     "beds": "Bed(s)",
     "space": "The space",

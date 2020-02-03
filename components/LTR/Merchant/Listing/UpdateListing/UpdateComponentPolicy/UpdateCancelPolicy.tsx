@@ -1,26 +1,14 @@
+import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import {
-  getDataUpdateListing,
-  UpdateDetailsActions,
-  UpdateDetailsState
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import { Grid, Typography, FormControl, RadioGroup } from '@material-ui/core';
+import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { FormControl, Grid, RadioGroup, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React, {
-  FC,
-  Fragment,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  SyntheticEvent
-} from 'react';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
-import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
 interface IProps {
   classes?: any;
 }

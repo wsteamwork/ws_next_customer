@@ -8,6 +8,7 @@ import { createStyles, makeStyles } from "@material-ui/styles";
 import { FC, Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ButtonGlobal from "../ButtonGlobal";
+
 interface IProps {
   room: LTRoomIndexRes;
 };
@@ -65,6 +66,25 @@ const AgodaRoomCard: FC<IProps> = (props) => {
       }
     })
   }
+
+  const redirectToRoom = (ltRoomId) => {
+    // Router.push(`/long-term-room/${ltRoomId}`)
+    window.open(`/long-term-room/${ltRoomId}`)
+  }
+
+  const _numberOfListing = () => {
+    let total: Array<any> = [];
+    let i;
+    for (i = 0; i < room.number_of_listing; i++) {
+      total.push(
+        <MenuItem value={i}>
+          {i}
+        </MenuItem>
+      )
+    }
+    return total;
+  }
+
   const _filterSmoking = () => {
     room.comforts.others.filter(item => {
       if (item.id === 87) {
@@ -105,7 +125,7 @@ const AgodaRoomCard: FC<IProps> = (props) => {
               </Grid>
               <Grid item xs={12} style={{ padding: 4 }}>
                 <Grid style={{ paddingBottom: 8 }}>
-                  <Typography style={{ fontSize: 11, color: '#5392f9' }}>Room photos and details</Typography>
+                  <Typography style={{ fontSize: 11, color: '#5392f9' }}><a href={`/long-term-room/${room.id}`} target={'_blank'}>Room photos and details</a></Typography>
                 </Grid>
                 <Grid style={{ paddingBottom: 8 }}>
                   {wifiFree ?
@@ -128,6 +148,12 @@ const AgodaRoomCard: FC<IProps> = (props) => {
                   <Grid style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', display: 'flex' }}>
                     <img src={'/static/icons/area.svg'} width={20} height={20} />
                     <Typography variant={'body2'} style={{ paddingLeft: 12 }}>Room size: {room.total_area} m<sup>2</sup></Typography>
+                  </Grid>
+                </Grid>
+                <Grid style={{ paddingBottom: 8 }}>
+                  <Grid style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', display: 'flex' }}>
+                    <img src={'/static/images/house.svg'} width={20} height={20} />
+                    <Typography variant={'body2'} style={{ paddingLeft: 12, color: '#41C9BC' }}>Remaining rooms: {room.number_of_listing}</Typography>
                   </Grid>
                 </Grid>
                 <Grid style={{ paddingBottom: 8 }}>
@@ -216,7 +242,7 @@ const AgodaRoomCard: FC<IProps> = (props) => {
             </Grid>
             <Grid style={{ display: 'flex', justifyContent: 'flex-end', color: '#767676' }}>
               <Typography style={{ alignSelf: 'flex-end', paddingRight: 3, fontSize: 11, paddingBottom: 4 }}>
-                {'Price per night as low as'}
+                {'Price per month as low as'}
               </Typography>
             </Grid>
           </Grid>
@@ -236,18 +262,10 @@ const AgodaRoomCard: FC<IProps> = (props) => {
                     classes: { paper: classes.menuSelect }
                   }}
                 >
-                  <MenuItem value={0}>
-                    0
-                </MenuItem>
-                  <MenuItem value={1}>
-                    1
-                </MenuItem>
-                  <MenuItem value={2}>
-                    2
-                </MenuItem>
-                  <MenuItem value={3}>
-                    3
-                </MenuItem>
+                  {
+                    _numberOfListing()
+                  }
+
                 </Select>
 
               </Grid>
@@ -256,9 +274,9 @@ const AgodaRoomCard: FC<IProps> = (props) => {
           {/* Booking reservation */}
           <Grid item container style={{ flex: 1.92, border: 'solid', borderWidth: 0.5, borderColor: '#dcdcdcaf' }}>
             <Grid item xs={12} style={{ padding: 12 }}>
-              <ButtonGlobal padding="0px" width="100%" height={40}>
-                Reserve
-            </ButtonGlobal>
+              <ButtonGlobal onClick={() => redirectToRoom(room.id)} padding="0px" width="100%" height={40} background="linear-gradient(to right, #667eea, #764ba2);">
+                View detail
+              </ButtonGlobal>
             </Grid>
           </Grid>
         </Grid>

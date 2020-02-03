@@ -39,11 +39,9 @@ const BoxRoomAgoda: FC<IProps> = (props) => {
   const renderAgodaRoomCard = (ltroom) => {
     return (
       <Grid>
-        <Grid>
-          <AgodaRoomCard
-            room={ltroom}
-          />
-        </Grid>
+        <AgodaRoomCard
+          room={ltroom}
+        />
       </Grid>
     );
   };
