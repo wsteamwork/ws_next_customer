@@ -9,6 +9,7 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import BoxListImageRoom from './BoxListImageRoom';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
