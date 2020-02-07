@@ -50,7 +50,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           <Grid item md={12} lg={12}>
             <Grid container spacing={1}>
               <Grid item xs={11}>
-                {/* <BoxListImageRoom
+                <BoxListImageRoom
                   livingrooms={isPreviewPage && !room.livingrooms ? [] : room.livingrooms}
                   outdoors={isPreviewPage && !room.outdoors ? [] : room.outdoors}
                   furnitures={isPreviewPage && !room.furnitures ? [] : room.furnitures}
@@ -59,7 +59,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   bedrooms={isPreviewPage && !room.bedrooms ? [] : room.bedrooms}
                   bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms}
                   roomName={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
-                /> */}
+                />
               </Grid>
             </Grid>
             <Grid container spacing={1}>
