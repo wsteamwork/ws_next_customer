@@ -178,7 +178,7 @@ const BoxImageLT: FC<IProps> = (props) => {
                       className={classNames(classes.imgSize)}
                     />)}
                 </ProgressiveImage>
-                <div className={classes.insideParalax}>
+                {/* <div className={classes.insideParalax}>
                   <Button variant="contained" className={classes.button}>
 
                     {width === 'sm' || width === 'xs' ? t('room:imageRoom') :
@@ -191,7 +191,7 @@ const BoxImageLT: FC<IProps> = (props) => {
 
                     {width === 'sm' || width === 'xs' ? '' : t('room:viewPhotos')}
                   </Button>
-                </div>
+                </div> */}
               </Grid>
             </Grid>
           </Grid>
