@@ -39,7 +39,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     btClose: {
       display: 'flex',
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
+      justifyItems: 'flex-end'
     },
     iconClose: {
       color: '#fff',
@@ -106,6 +107,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       top: '0%',
     },
     appBar: {
+      width: '100%',
+      flexDirection: 'row',
       position: "relative"
     },
     subtitleRoomType: {
@@ -153,11 +156,6 @@ const DialogFullImage: FC<IProps> = (props) => {
   return (
     <Dialog fullWidth maxWidth={'xl'} fullScreen={width === 'sm' || width === 'xs' ? true : false} open={open} onClose={handleClose} TransitionComponent={TransitionCustom} scroll="paper">
       <AppBar className={classes.appBar} color="inherit" elevation={0}>
-        <Grid item className={classes.btClose}>
-          <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>
-            <CloseIcon className={classes.iconClose} />
-          </IconButton>
-        </Grid>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -165,6 +163,7 @@ const DialogFullImage: FC<IProps> = (props) => {
           indicatorColor="primary"
           textColor="inherit"
           aria-label="action tabs example"
+          style={{width: '100%'}}
         >
           {
             livingrooms && livingrooms.images && <Tab label={t('longtermroom:livingrooms')} onClick={() => scrollToRef(livingroomRef)} {...a11yProps(0)} />
@@ -185,6 +184,11 @@ const DialogFullImage: FC<IProps> = (props) => {
             outdoors && outdoors.images && outdoors.images.length && <Tab label={t('longtermroom:outdoors')} onClick={() => scrollToRef(outdoorRef)} {...a11yProps(5)} />
           }
         </Tabs>
+        <Grid item className={classes.btClose}>
+          <IconButton classes={{ root: classes.btnIconClose }} size="small" aria-label="Close" onClick={handleClose}>
+            <CloseIcon className={classes.iconClose} />
+          </IconButton>
+        </Grid>
         <Divider />
 
       </AppBar>
@@ -238,7 +242,7 @@ const DialogFullImage: FC<IProps> = (props) => {
                             <Grid container spacing={1}>
                               <Grid item xs={12} className={classes.stikyMobi}>
                                 <div className={classes.titleSticky}>
-                                  <Typography variant='h4' className={classes.titleRoomType}>{t('room:bedroomsImg')} {i + 1}</Typography>
+                                  <Typography variant='h5' className={classes.titleRoomType}>{t('room:bedroomsImg')} {i + 1}</Typography>
                                   <Typography variant='subtitle2' className={classes.subtitleRoomType}>{t('room:bedroomsImgSubtitle')}</Typography>
                                 </div>
                               </Grid>

@@ -2,7 +2,7 @@ import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
+import { Grid, Paper, Theme, Tooltip, Typography, Divider } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
@@ -17,7 +17,32 @@ interface IProps {
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
-  createStyles({})
+  createStyles({
+    apartmentContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: '1.2rem',
+      paddingBottom: '1.2rem'
+    },
+    apartmentName: {
+      overflow: 'hidden',
+      overflowWrap: 'break-word',
+      display: '-webkit-box',
+      WebkitLineClamp: 1,
+      textOverflow: 'ellipsis',
+      WebkitBoxOrient: 'vertical',
+      fontWeight: 700,
+      color: 'tomato',
+      fontSize: '1.2rem',
+      justifyContent: 'center',
+      alignItems: 'center',
+      right: 0,
+      // display: 'flex',
+      // paddingTop: '1.2rem !important',
+      // paddingBottom: '1.1rem !important'
+    }
+  })
 );
 
 const LTRoomCardListing: FC<IProps> = (props) => {
@@ -80,7 +105,6 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                     {room.number_of_listing && <Grid item xs={12} className='collectionAmenities'>
                       {room.number_of_listing} {t('rooms:showNumberRoomSameBuilding')}
                     </Grid>}
-
                   </Grid>
                   <Grid item xs={3} className="boxPriceContainer">
                     <Grid container>
@@ -97,11 +121,13 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                         /{t('rooms:month')}
                       </Grid> */}
                     </Grid>
-                    {/* <Grid className='boxSave'>
-                      <FavoriteAnimation />
-                    </Grid> */}
                   </Grid>
-
+                  {/* <Grid item xs={12} className={classes.apartmentContainer}>
+                    <Divider />
+                    {room.apartment_building && <Grid item xs={12} className={classes.apartmentName}>
+                      {room.apartment_building}
+                    </Grid>}
+                  </Grid> */}
                 </Grid>
               </Link>
             </Grid>

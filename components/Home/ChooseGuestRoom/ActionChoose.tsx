@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import React, { Dispatch, FC, memo, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateRouter } from '@/store/Context/utility';
 
 const QuantityButtons = dynamic(() => import('@/components/ReusableComponents/QuantityButtons'));
 
@@ -25,6 +26,7 @@ const ActionChoose: FC<IProps> = (props) => {
   const [guest, setGuest] = useState(numberGuest);
   const [room, setRoom] = useState(numberRoom);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
 
   useEffect(() => {
     !open && handleClose();
@@ -40,6 +42,7 @@ const ActionChoose: FC<IProps> = (props) => {
     setOpen(false);
     dispatch({ type: 'SET_NUMBER_ROOM', roomsCount: room });
     dispatch({ type: 'SET_NAV_GUESTS', guestsCount: guest });
+    updateRouter(leaseTypePathName, true, 'bedrooms', room, 'number_guest', guest);
   };
 
   return (

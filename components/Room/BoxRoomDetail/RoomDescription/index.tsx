@@ -37,8 +37,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontSize: '15px'
     },
     title: {
-      fontWeight: 700,
-      margin: '8px 0',
+      fontWeight: 600,
+      margin: '12px 0',
+      fontSize: '1.2rem'
     }
   })
 );
