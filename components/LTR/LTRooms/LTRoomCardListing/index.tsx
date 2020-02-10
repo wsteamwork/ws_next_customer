@@ -122,12 +122,12 @@ const LTRoomCardListing: FC<IProps> = (props) => {
                       </Grid> */}
                     </Grid>
                   </Grid>
-                  {/* <Grid item xs={12} className={classes.apartmentContainer}>
+                  <Grid item xs={12} className={classes.apartmentContainer}>
                     <Divider />
                     {room.apartment_building && <Grid item xs={12} className={classes.apartmentName}>
                       {room.apartment_building}
                     </Grid>}
-                  </Grid> */}
+                  </Grid>
                 </Grid>
               </Link>
             </Grid>

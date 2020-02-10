@@ -176,22 +176,10 @@ const BoxImageLT: FC<IProps> = (props) => {
                         maxHeight: width === 'xl' ? 230 : width === 'md' ? 150 : width === 'lg' ? 165 : 250,
                       }}
                       className={classNames(classes.imgSize)}
-                    />)}
+                    />
+                  )}
                 </ProgressiveImage>
-                <div className={classes.insideParalax}>
-                  <Button variant="contained" className={classes.button}>
 
-                    {width === 'sm' || width === 'xs' ? t('room:imageRoom') :
-                      <img
-                        src="../../../static/images/telescope.svg"
-                        alt="iconScope"
-                        className={classes.iconScope}
-                      />
-                    }
-
-                    {width === 'sm' || width === 'xs' ? '' : t('room:viewPhotos')}
-                  </Button>
-                </div>
               </Grid>
             </Grid>
           </Grid>
@@ -207,7 +195,7 @@ const BoxImageLT: FC<IProps> = (props) => {
         furnitures={furnitures}
         roomName={roomName}
       />
-    </Fragment>
+    </Fragment >
   );
 };
 
