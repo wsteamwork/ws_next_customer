@@ -54,7 +54,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
     (state) => state.searchFilter
   );
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
-  const { searchText, city_id, district_id, guestsCount, roomsCount } = filter;
+  const { searchText, city_id, district_id, guestsCount, roomsCount, onlyApartmentBuilding } = filter;
   const dispatchSearch = useDispatch<Dispatch<SearchFilterAction>>();
 
   const applySearch = () => {
@@ -66,6 +66,7 @@ const SearchHomeLT: FC<IProps> = (props) => {
       district_id: district_id ? district_id : '',
       bedrooms: roomsCount,
       number_guest: guestsCount,
+      only_apartment_building: onlyApartmentBuilding
       // discount:''
     };
 

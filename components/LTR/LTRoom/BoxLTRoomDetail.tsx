@@ -9,7 +9,8 @@ import { Grid, Paper, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import BoxListImageRoom from './BoxListImageRoom';
+import BoxRoomAgoda from './BoxRoomAgoda';
+// import BoxListImageRoom from './BoxListImageRoom';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -51,7 +52,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           <Grid item md={12} lg={12}>
             <Grid container spacing={1}>
               <Grid item xs={11}>
-                <BoxListImageRoom
+                {/* <BoxListImageRoom
                   livingrooms={isPreviewPage && !room.livingrooms ? [] : room.livingrooms}
                   outdoors={isPreviewPage && !room.outdoors ? [] : room.outdoors}
                   furnitures={isPreviewPage && !room.furnitures ? [] : room.furnitures}
@@ -60,7 +61,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
                   bedrooms={isPreviewPage && !room.bedrooms ? [] : room.bedrooms}
                   bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms}
                   roomName={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
-                />
+                /> */}
               </Grid>
             </Grid>
             <Grid container spacing={1}>
@@ -84,7 +85,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
               </Grid>
             </Grid>
             <Grid container spacing={1}>
-              <Grid item xs={12} sm={12} md={12} lg={10} xl={10}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
                   <RoomDescription
                     isPreviewPage={isPreviewPage}
@@ -126,7 +127,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
             {/* <Grid container spacing={1} justify="center">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className={classes.rowMargin}>
-                  <BoxRoomSameBuilding />
                   <BoxRoomAgoda />
                 </div>
               </Grid>

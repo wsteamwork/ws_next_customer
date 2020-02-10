@@ -59,13 +59,18 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     nameIcon: {
       display: 'flex',
       alignItems: 'center',
-      color: '#323232'
+      color: '#323232',
+      justifyContent: 'flex-start'
     },
     roomAmenitiesIcon: {
       verticalAlign: 'bottom',
       width: 24,
       height: 24
     },
+    nameAmenities: {
+      fontSize: '1rem',
+      fontWeight: 400
+    }
   })
 );
 
@@ -101,16 +106,16 @@ const DialogFullAmenities: FC<IProps> = (props) => {
               <Grid container spacing={2}>
                 {facilities.map((o, i) => (
                   <Fragment key={i}>
-                    <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                    <Grid item container xs={6} sm={4}>
+                      {/* <Grid item >
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -131,15 +136,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {livingrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -160,15 +165,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {bedrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -189,15 +194,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {bathrooms.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -218,15 +223,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {kitchens.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -247,15 +252,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {entertainment.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -276,15 +281,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {outdoors.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -305,15 +310,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {common.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>
@@ -334,15 +339,15 @@ const DialogFullAmenities: FC<IProps> = (props) => {
                 {others.map((o, i) => (
                   <Fragment key={i}>
                     <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item >
+                      {/* <Grid item>
                         <img
                           src={o.icon}
                           alt={o.type_txt}
                           className={classes.roomAmenitiesIcon}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
+                        <Typography variant={'body2'} className={classes.nameAmenities}>{o.comfort_trans[0].name}</Typography>
                       </Grid>
                     </Grid>
                   </Fragment>

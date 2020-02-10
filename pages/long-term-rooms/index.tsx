@@ -79,12 +79,12 @@ const LongtermRooms: NextPage = () => {
                           </GridContainer>
                         </HeadRoom>
 
-                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
+                        <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} showServiceApartment />
                       </header>
                     )}
                   </Sticky>
                 ) : (
-                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} />
+                    <FilterActions hideSearchBar={hideSearchBar} showBookByHour={false} showServiceApartment />
                   )}
 
                 <MapAndListing />
@@ -106,7 +106,7 @@ const LongtermRooms: NextPage = () => {
                   </Grid>
                 </Grid>
               </GridContainer>
-              <FilterActions showBookByHour={false} />
+              <FilterActions showBookByHour={false} showServiceApartment />
               <MapAndListing />
               <BottomNav />
             </Hidden>

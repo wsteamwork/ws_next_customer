@@ -40,6 +40,7 @@ export type RoomIndexAction =
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoading'; isLoading: boolean }
   | { type: 'setMapOpen'; isMapOpen: boolean }
+  | { type: 'setServiceApartment'; isServiceApartment: boolean }
   | { type: 'setCoords'; payload: MapCoords | null };
 
 export type RoomIndexState = {
@@ -48,6 +49,7 @@ export type RoomIndexState = {
   readonly meta: Pagination | null;
   readonly isLoading: boolean;
   readonly isMapOpen: boolean;
+  readonly isServiceApartment: boolean;
   readonly coords: MapCoords | null;
 };
 
@@ -57,6 +59,7 @@ export const RoomIndexStateInit: RoomIndexState = {
   meta: null,
   isLoading: false,
   isMapOpen: false,
+  isServiceApartment: false,
   coords: null
 };
 
@@ -81,6 +84,8 @@ export const RoomIndexReducer: Reducer<RoomIndexState, RoomIndexAction> = (
       return updateObject<RoomIndexState>(state, { isLoading: action.isLoading });
     case 'setMapOpen':
       return updateObject<RoomIndexState>(state, { isMapOpen: action.isMapOpen });
+    case 'setServiceApartment':
+      return updateObject<RoomIndexState>(state, { isServiceApartment: action.isServiceApartment });
     case 'setCoords':
       return updateObject<RoomIndexState>(state, { coords: action.payload });
     default:
@@ -168,6 +173,7 @@ export const getLTRooms = async (
     min_price: params.min_price,
     max_price: params.max_price,
     accommodation_type: params.accommodation_type,
+    only_apartment_building: params.only_apartment_building,
     comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
     discount: params.discount === null ? 1 : undefined, // 0,1
     instant_book: params.instant_book, // 1,2

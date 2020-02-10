@@ -5,11 +5,11 @@ import { getRoomSameBuilding, LTRoomReducerAction } from "@/store/Redux/Reducers
 import { LTRoomIndexRes } from "@/types/Requests/LTR/LTRoom/LTRoom";
 import { Grid, Theme, Typography } from "@material-ui/core";
 import { createStyles, makeStyles } from '@material-ui/styles';
-import { FC, Fragment, useContext, useEffect, useState, useMemo } from "react";
+import _ from 'lodash';
+import { FC, Fragment, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
-import _ from 'lodash';
 
 interface IProps { };
 

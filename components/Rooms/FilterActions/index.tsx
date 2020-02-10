@@ -10,13 +10,15 @@ import FilterRoom from './FilterRoom';
 import PriceRange from './PriceRange';
 import RoomType from './RoomType';
 import SwitchMap from './SwitchMap/index';
+// import SwitchToServiceApartment from './SwitchToServiceApartment';
 interface Iprops {
   hideSearchBar?: boolean;
   showBookByHour?: boolean;
+  showServiceApartment?: boolean;
 }
 
 const FilterActions: FC<Iprops> = (props) => {
-  const { hideSearchBar, showBookByHour } = props;
+  const { hideSearchBar, showBookByHour, showServiceApartment } = props;
   const { state } = useContext(RoomIndexContext);
   const { isMapOpen } = state;
   return (
@@ -53,6 +55,13 @@ const FilterActions: FC<Iprops> = (props) => {
           <Grid item className="displayWebkit filterRooms__filterRoom">
             <FilterDistrict />
           </Grid>
+          {/* {
+            showServiceApartment && (
+              <Grid item className="displayWebkit filterRooms__filterRoom">
+                <SwitchToServiceApartment />
+              </Grid>
+            )
+          } */}
         </Grid>
 
         <Grid item xs={2} container justify="flex-end">
@@ -64,7 +73,8 @@ const FilterActions: FC<Iprops> = (props) => {
 };
 
 FilterActions.defaultProps = {
-  showBookByHour: true
+  showBookByHour: true,
+  showServiceApartment: false
 };
 
 export default FilterActions;
