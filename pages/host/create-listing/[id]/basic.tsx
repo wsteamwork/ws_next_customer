@@ -44,6 +44,9 @@ const RoomCreateListingID = () => {
     number_bathroom: useSelector<ReducersList, number>(
       (state) => state.createListing.bathroomNumber
     ),
+    number_of_listing: useSelector<ReducersList, number>(
+      (state) => state.createListing.number_of_listing
+    ),
     bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms),
     address: isExist ? listing.address : useSelector<ReducersList, string>((state) => state.createListing.address),
     building: isExist ? listing.apartment_building : useSelector<ReducersList, string>((state) => state.createListing.building),
