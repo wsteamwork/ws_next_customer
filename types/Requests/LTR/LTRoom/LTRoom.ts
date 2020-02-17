@@ -6,6 +6,7 @@ import { typeService } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFe
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { TransformerInclude } from '@/types/Requests/ResponseTemplate';
 import { Merchant } from '@/types/Requests/Rooms/RoomResponses';
+import { BuildingListRes } from '../../Building/Building';
 
 export interface LTRoomIndexRes {
   id: number;
@@ -67,6 +68,8 @@ export interface LTRoomIndexRes {
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
   merchant: TransformerInclude<Merchant>;
+  // places: TransformerInclude<PlaceIndexResponse[]>;
+  parentBuilding: TransformerInclude<BuildingListRes>;
 }
 
 export type LTRoomScheduleRes = {

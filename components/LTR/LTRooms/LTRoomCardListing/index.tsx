@@ -2,7 +2,7 @@ import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Paper, Theme, Tooltip, Typography, Divider } from '@material-ui/core';
+import { Divider, Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
@@ -14,6 +14,7 @@ interface IProps {
   classes?: any,
   room?: LTRoomIndexRes,
   usingInMap?: boolean;
+  isBuilding?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -28,7 +29,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     apartmentName: {
       overflow: 'hidden',
       overflowWrap: 'break-word',
-      display: '-webkit-box',
+      // display: '-webkit-box',
       WebkitLineClamp: 1,
       textOverflow: 'ellipsis',
       WebkitBoxOrient: 'vertical',
@@ -38,7 +39,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       right: 0,
-      // display: 'flex',
+      display: 'flex',
       // paddingTop: '1.2rem !important',
       // paddingBottom: '1.1rem !important'
     }
@@ -53,6 +54,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
   const price = room.price_display ? `${width === 'sm' || width === 'xs' ? formatPrice(room.price_display) : t('rooms:currency') + formatMoney(room.price_display)}` : `${t('rooms:contactForPrice')}}`;
+
   // const price = room.price_display ? `${(room.price_display / 1000000)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
 
   return (
