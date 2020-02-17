@@ -5,11 +5,13 @@ import LTRoomCardListing from '@/components/LTR/LTRooms/LTRoomCardListing';
 import NotFound from '@/components/Rooms/Lotte/NotFound';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { updateRouter } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { Grid, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import Pagination from 'rc-pagination';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 interface IProps {
   classes?: any,
@@ -33,12 +35,12 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const { state: stateIndexRoom } = useContext(RoomIndexContext);
   const { longtermRooms, meta, isLoading } = stateIndexRoom;
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  // const { width } = useContext(GlobalContext);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const filterOnlyApartment = useSelector<ReducersList, number>((state) => state.searchFilter.onlyApartmentBuilding);
 
   const renderRooms = (room) => (
-    <LTRoomCardListing room={room} usingInMap={usingInMap} />
+    <LTRoomCardListing room={room} usingInMap={usingInMap} isBuilding={filterOnlyApartment == 1} />
   );
 
   const changePage = (current: number) => {

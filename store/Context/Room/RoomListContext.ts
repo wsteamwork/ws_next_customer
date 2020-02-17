@@ -155,7 +155,6 @@ export const fetchRoomType = async () => {
 };
 
 // Long term
-
 export const getLTRooms = async (
   router: NextRouter,
   coords?: MapCoords

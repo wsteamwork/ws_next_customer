@@ -10,7 +10,7 @@ import FilterRoom from './FilterRoom';
 import PriceRange from './PriceRange';
 import RoomType from './RoomType';
 import SwitchMap from './SwitchMap/index';
-// import SwitchToServiceApartment from './SwitchToServiceApartment';
+import SwitchToServiceApartment from './SwitchToServiceApartment';
 interface Iprops {
   hideSearchBar?: boolean;
   showBookByHour?: boolean;
@@ -55,13 +55,13 @@ const FilterActions: FC<Iprops> = (props) => {
           <Grid item className="displayWebkit filterRooms__filterRoom">
             <FilterDistrict />
           </Grid>
-          {/* {
+          {
             showServiceApartment && (
               <Grid item className="displayWebkit filterRooms__filterRoom">
                 <SwitchToServiceApartment />
               </Grid>
             )
-          } */}
+          }
         </Grid>
 
         <Grid item xs={2} container justify="flex-end">

@@ -1,16 +1,10 @@
-import React, {
-  Fragment,
-  useContext,
-  useState,
-  useEffect, FC
-} from 'react';
-import _ from 'lodash';
-import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import MapMarker from '../Map/MapMarker';
-import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { min } from 'moment';
+import { MapCoords } from '@/types/Requests/Rooms/RoomRequests';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
+import GoogleMap, { ChangeEventValue, Coords } from 'google-map-react';
+import _ from 'lodash';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import MapMarker from '../Map/MapMarker';
 
 interface IProps {
   rooms: any;

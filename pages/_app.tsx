@@ -40,9 +40,9 @@ class MyApp extends App<IProps> {
     Router.events.on('routeChangeError', this.handleRouteChangeEnd);
 
     if (windowExist) {
-      if ((navigator.userAgent.match(/(iphone)|(ipod)|(ipad)|(android)|(blackberry)|(windows phone)|(symbian)/i))) {
-        location.replace("https://m.westay.vn" + window.location.pathname);
-      }
+      // if ((navigator.userAgent.match(/(iphone)|(ipod)|(ipad)|(android)|(blackberry)|(windows phone)|(symbian)/i))) {
+      //   location.replace("https://m.westay.vn" + window.location.pathname);
+      // }
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister();
