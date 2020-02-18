@@ -342,7 +342,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                         alt="Westay - Homestay cho người việt"
                       />
                     </Grid>
-                  ) : room.short_term_room.avatar ? (
+                  ) : (room.short_term_room.avatar ? (
                     <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                       <img
                         className={classes.img}
@@ -351,16 +351,16 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                        <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
-                          <Grid className={classes.wrapperImage}>
-                            <img
-                              src={'/static/images/camera.svg'}
-                              alt="Camera"
-                              className={classes.imgDefault}
-                            />
-                          </Grid>
+                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                        <Grid className={classes.wrapperImage}>
+                          <img
+                            src={'/static/images/camera.svg'}
+                            alt="Camera"
+                            className={classes.imgDefault}
+                          />
                         </Grid>
-                      )}
+                      </Grid>
+                    ))}
                   <Hidden smUp>
                     <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>
