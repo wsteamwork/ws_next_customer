@@ -1,6 +1,8 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import HostInfo from '@/components/HostInfo';
 import { formatMoney } from '@/utils/mixins';
+import { faCheckCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Divider, Grid, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
@@ -17,6 +19,7 @@ interface IProps {
   not_included_services?: Array<string>;
   handleOpenBookingDialog?: any;
   roomId?: number;
+  verified_prices?: 0 | 1;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -35,7 +38,31 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     textMarginBottom: {
       marginBottom: '32px'
-    }
+    },
+    icon: {
+      color: '#08C299',
+      marginLeft: 5,
+      paddingRight: 3,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '1rem !important'
+      },
+      [theme.breakpoints.down('xs')]: {
+        paddingRight: 5,
+        marginLeft: 15
+      }
+    },
+    iconRed: {
+      color: 'tomato',
+      marginLeft: 5,
+      paddingRight: 3,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '1rem !important'
+      },
+      [theme.breakpoints.down('xs')]: {
+        paddingRight: 5,
+        marginLeft: 15
+      }
+    },
   })
 );
 
@@ -51,7 +78,8 @@ const BoxBookingLT: FC<IProps> = (props) => {
     handleOpenBookingDialog,
     included_services,
     not_included_services,
-    roomId
+    roomId,
+    verified_prices
   } = props;
   const { t } = useTranslation();
 
@@ -59,7 +87,19 @@ const BoxBookingLT: FC<IProps> = (props) => {
     <div className={classes.boxContainer}>
       <Grid container>
         <Grid item xs={8}>
-          <Typography variant="h6">{t('longtermroom:currency')}{formatMoney(priceBasic)}</Typography>
+          <Typography variant="h6">{t('longtermroom:currency')}{formatMoney(priceBasic)}
+            {
+              verified_prices == 0 ? (
+                <FontAwesomeIcon
+                  className={classes.iconRed}
+                  icon={faQuestionCircle} />
+              ) : (
+                  <FontAwesomeIcon
+                    className={classes.icon}
+                    icon={faCheckCircle} />
+                )
+            }
+          </Typography>
           <Typography className={classes.textMarginBottom} variant="subtitle2">{t('longtermroom:priceBasic')}</Typography>
         </Grid>
         <Grid item xs={4} container justify="center">
