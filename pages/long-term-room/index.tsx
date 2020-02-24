@@ -101,6 +101,7 @@ const LongtermRoom: NextPage = () => {
                   <Grid item sm={12} md={11} lg={4} xl={4} className="roomPage__boxBooking">
                     {/* <LazyLoad> */}
                     <BoxBookingLT
+                      verified_prices={ltroom.verified_prices}
                       priceBasic={ltroom.price_display}
                       id={ltroom.merchant.data.id}
                       avatar={ltroom.merchant.data.avatar}

@@ -342,6 +342,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                         alt="Westay - Homestay cho người việt"
                       />
                     </Grid>
+                  ) : (room.short_term_room.avatar ? (
+                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <img
+                        className={classes.img}
+                        src={IMAGE_STORAGE_LG + room.short_term_room.avatar}
+                        alt="Westay - Homestay cho người việt"
+                      />
+                    </Grid>
                   ) : (
                       <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                         <Grid className={classes.wrapperImage}>
@@ -352,7 +360,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           />
                         </Grid>
                       </Grid>
-                    )}
+                    ))}
                   <Hidden smUp>
                     <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>

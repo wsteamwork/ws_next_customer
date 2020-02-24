@@ -10,6 +10,7 @@ import { BuildingListRes } from '../../Building/Building';
 
 export interface LTRoomIndexRes {
   id: number;
+  verified_prices: 0 | 1;
   room_id: number;
   prices: pricesLT;
   discount_prices: number | null;
