@@ -52,6 +52,12 @@
     "buildingName": "Name your building (in Vietnames)",
     "buildingEnName": "Name your building (in English)",
     "back": "Back",
-    "save": "Save"
+    "save": "Save",
+    
+    "bookingList": "Booking Management",
+    "roomList": "Room Management",
+    "createListing": "Create listing",
+    "buildingList": "Building Management",
+    "homepage": "Home"
 
 }
