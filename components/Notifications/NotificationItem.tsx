@@ -6,6 +6,7 @@ import numeral from 'numeral';
 import { NotificationIndexRes } from '@/types/Requests/Notification/NotificationResponse';
 import { getFirstLetterOfName } from '@/utils/mixins';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
   notification: NotificationIndexRes;
@@ -65,6 +66,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NotificationItem: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { notification } = props;
+  const { t } = useTranslation();
+
   const timeBook = (checkin: string, checkout: string, booking_type: number = 1) => {
     if (booking_type === 1) {
       let diffHours = Math.abs(new Date(checkout).getHours() - new Date(checkin).getHours());
@@ -161,7 +164,7 @@ const NotificationItem: FC<IProps> = (props) => {
                   </Typography>
                   <Typography className={classes.priceBooking}>
                     {notification.data.total_fee
-                      ? numeral(notification.data.total_fee).format('0,0') + ' vnđ'
+                      ? numeral(notification.data.total_fee).format('0,0') + `${t('shared:currency')}`
                       : ''}
                   </Typography>
                 </Fragment>

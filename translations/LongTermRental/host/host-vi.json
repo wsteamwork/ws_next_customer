@@ -52,5 +52,11 @@
     "buildingName": "Tên tòa nhà (Tiếng Việt)",
     "buildingEnName": "Tên tòa nhà (Tiếng Anh)",
     "back": "Quay lại",
-    "save": "Lưu"
+    "save": "Lưu",
+
+    "bookingList": "Quản lý đặt phòng",
+    "roomList": "Quản lý phòng",
+    "createListing": "Đăng phòng",
+    "buildingList": "Quản lý toà nhà",
+    "homepage": "Trang chủ"
 }
