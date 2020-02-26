@@ -29,5 +29,6 @@
     "amountMoney": "Số tiền",
     "viewMonthlyPrice":"Xem giá theo tháng",
     "viewDailyPrice":"Xem giá theo ngày",
-    "viewDetails": "Chi tiết"
+    "viewDetails": "Chi tiết",
+    "useCurrencyUSD": "Đăng giá phòng theo USD"
 }

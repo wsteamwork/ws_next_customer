@@ -29,5 +29,6 @@
     "amountMoney": "Amount to transfer:",
     "viewMonthlyPrice":"Check monthly price",
     "viewDailyPrice":"Check daily price",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "useCurrencyUSD": "Use USD as currency"
 }
