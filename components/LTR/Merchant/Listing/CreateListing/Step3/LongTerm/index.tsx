@@ -173,13 +173,13 @@ const LongTerm: FC<IProps> = (props) => {
           price.term_3_month &&
           price.term_6_month &&
           price.term_12_month
-        ))) || (useUSD && !priceLongUSD || !(
+        ))) || (useUSD && (!priceLongUSD || !(
           priceUSD.term_1_month &&
           priceUSD.term_2_month &&
           priceUSD.term_3_month &&
           priceUSD.term_6_month &&
           priceUSD.term_12_month
-        ))
+        )))
     ) {
       dispatchStep({ type: 'setDisableNext', payload: true });
     } else {
